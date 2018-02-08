@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support Projects", "Support Projects", "{1DFA65CE-5978-49F9-83BA-CFBD0C7A1814}"
 EndProject
@@ -442,6 +442,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetNuke.Providers.AspNetClientCapabilityProvider", "DNN Platform\Providers\ClientCapabilityProviders\Provider.AspNetClientCapabilityProvider\DotNetNuke.Providers.AspNetClientCapabilityProvider.csproj", "{A3B3F1E8-6C1A-4E35-A5B4-51ECC5A43AF7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DNN.Integration.Test.Framework", "DNN Platform\Tests\DNN.Integration.Test.Framework\DNN.Integration.Test.Framework.csproj", "{8F727796-7C6C-4F42-B385-67B06ECD358E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetNuke.Web.Mvc.RazorPages", "DNN Platform\DotNetNuke.Web.Mvc.RazorPages\DotNetNuke.Web.Mvc.RazorPages.csproj", "{BDB508B9-04AD-4F63-B374-C7FE57D223DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1171,6 +1173,22 @@ Global
 		{8F727796-7C6C-4F42-B385-67B06ECD358E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F727796-7C6C-4F42-B385-67B06ECD358E}.Release|x86.ActiveCfg = Release|Any CPU
 		{8F727796-7C6C-4F42-B385-67B06ECD358E}.Release|x86.Build.0 = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Debug|x86.ActiveCfg = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Debug|x86.Build.0 = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Release|x86.ActiveCfg = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Cloud_Release|x86.Build.0 = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Debug|x86.Build.0 = Debug|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Release|x86.ActiveCfg = Release|Any CPU
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1260,5 +1278,9 @@ Global
 		{F4AAB2C9-8B8B-441B-8623-9347B62884A1} = {4248BC91-5EAC-489B-929F-6494F805B24E}
 		{A3B3F1E8-6C1A-4E35-A5B4-51ECC5A43AF7} = {C3D4B15B-0AAA-494C-AAF5-5CC806B42A34}
 		{8F727796-7C6C-4F42-B385-67B06ECD358E} = {7E98CA08-903E-45F7-BD83-853763D5E15B}
+		{BDB508B9-04AD-4F63-B374-C7FE57D223DC} = {29273BE6-1AA8-4970-98A0-41BFFEEDA67B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FA0BC1D-B74C-4F82-A7E3-6A936872DCE5}
 	EndGlobalSection
 EndGlobal
