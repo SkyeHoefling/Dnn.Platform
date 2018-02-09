@@ -90,55 +90,60 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
             AddVersionHeader(RequestContext.HttpContext);
             RemoveOptionalRoutingParameters();
 
-            var controllerName = RequestContext.RouteData.GetRequiredString("controller");
+            var controllerName = "Index";// RequestContext.RouteData.GetRequiredString("model");
 
             //Construct the controller using the ControllerFactory
-            var controller = ControllerFactory.CreateController(RequestContext, controllerName);
+            //var controller = ControllerFactory.CreateController(RequestContext, controllerName);
+            var instance = Activator.CreateInstance("MVCModule1", "DNNSummit.MVCModule1.Pages.IndexModel");
+            dynamic pageModel = instance.Unwrap();
             try
             {
                 // Check if the controller supports IDnnController
-                var moduleController = controller as IDnnController;
+                //var moduleController = controller as IDnnController;
 
                 // If we couldn't adapt it, we fail.  We can't support IController implementations directly :(
                 // Because we need to retrieve the ActionResult without executing it, IController won't cut it
-                if (moduleController == null)
+                if (pageModel == null)
                 {
                     throw new InvalidOperationException("Could Not Construct Controller");
                 }
 
-                moduleController.ValidateRequest = false;
+                pageModel.ValidateRequest = false;
 
-                moduleController.DnnPage = context.DnnPage;
+                pageModel.Page = context.DnnPage;
 
-                moduleController.ModuleContext = context.ModuleContext;
+                pageModel.ModuleContext = context.ModuleContext;
 
-                moduleController.LocalResourceFile = String.Format("~/DesktopModules/MVC/{0}/{1}/{2}.resx",
+                pageModel.LocalResourceFile = String.Format("~/DesktopModules/MVC/{0}/{1}/{2}.resx",
                                                     context.ModuleContext.Configuration.DesktopModule.FolderName,
                                                     Localization.LocalResourceDirectory,
                                                     controllerName);
 
-                moduleController.ViewEngineCollectionEx = ViewEngines;
+                pageModel.ViewEngineCollectionEx = ViewEngines;
+                pageModel.PageContext = new ControllerContext(RequestContext, new HackDnnController());
                 // Execute the controller and capture the result
                 // if our ActionFilter is executed after the ActionResult has triggered an Exception the filter
                 // MUST explicitly flip the ExceptionHandled bit otherwise the view will not render
-                moduleController.Execute(RequestContext);
-                var result = moduleController.ResultOfLastExecute;
+                //moduleController.Execute(RequestContext);
+                dynamic result = pageModel.ResultOfLastExecute;
 
                 // Return the final result
                 return new ModuleRequestResult
-                                {
-                                    ActionResult = result,
-                                    ControllerContext = moduleController.ControllerContext,
-                                    ModuleActions = moduleController.ModuleActions,
-                                    ModuleContext = context.ModuleContext,
-                                    ModuleApplication = this
-                                };
+                {
+                    ActionResult = result,
+                    ControllerContext = pageModel.PageContext,
+                    ModuleActions = pageModel.ModuleActions,
+                    ModuleContext = context.ModuleContext,
+                    ModuleApplication = this
+                };
             }
             finally
             {
-                ControllerFactory.ReleaseController(controller);
+                //ControllerFactory.ReleaseController(controller);
             }
         }
+
+        private class HackDnnController : DnnController { }
 
         protected internal virtual void Init()
         {

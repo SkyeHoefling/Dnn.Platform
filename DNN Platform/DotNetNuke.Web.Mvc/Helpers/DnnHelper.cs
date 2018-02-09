@@ -34,14 +34,14 @@ namespace DotNetNuke.Web.Mvc.Helpers
             HtmlHelper = htmlHelper;
 
             var controller = htmlHelper.ViewContext.Controller as IDnnController;
-
+            
             if (controller == null)
             {
                 throw new InvalidOperationException("The DnnHelper class can only be used in Views that inherit from DnnWebViewPage");
             }
-
+            
             DnnPage = controller.DnnPage;
-
+            
             ModuleContext = controller.ModuleContext;
             LocalResourceFile = controller.LocalResourceFile;
         }

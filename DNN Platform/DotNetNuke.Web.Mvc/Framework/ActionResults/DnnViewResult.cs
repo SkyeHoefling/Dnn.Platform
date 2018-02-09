@@ -24,7 +24,8 @@ namespace DotNetNuke.Web.Mvc.Framework.ActionResults
 
             if (View == null)
             {
-                result = ViewEngineCollection.FindView(context, ViewName, MasterName);
+                //result = ViewEngineCollection.FindView(context, ViewName, MasterName);
+                result = new ViewEngineResult(new RazorView(context, "~/DesktopModules/MVC/MVCModule1/Pages/Index.cshtml", null, false, null), new RazorViewEngine());
                 View = result.View;
             }
 

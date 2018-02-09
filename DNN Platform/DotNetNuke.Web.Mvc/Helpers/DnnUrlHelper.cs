@@ -41,12 +41,12 @@ namespace DotNetNuke.Web.Mvc.Helpers
             _viewContext = viewContext;
 
             _controller = viewContext.Controller as IDnnController;
-
+            
             if (_controller == null)
             {
                 throw new InvalidOperationException("The DnnUrlHelper class can only be used in Views that inherit from DnnWebViewPage");
             }
-
+            
             ModuleContext = _controller.ModuleContext;
         }
 
