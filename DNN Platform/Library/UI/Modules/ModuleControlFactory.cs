@@ -62,6 +62,13 @@ namespace DotNetNuke.UI.Modules
                         controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
                     }
                     break;
+                case ".razorpages":
+                    factoryType = Reflection.CreateType("DotNetNuke.Web.Mvc.RazorPages.MvcModuleControlFactory");
+                    if (factoryType != null)
+                    {
+                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                    }
+                    break;
                 default:
                     controlFactory = new ReflectedModuleControlFactory();
                     break;

@@ -32,19 +32,18 @@ namespace DotNetNuke.Common.Internal
         public static void RegisterServiceRoutes()
         {
             const string unableToRegisterServiceRoutes = "Unable to register service routes";
+            Action<string, string, string> registerRoute = (assembly, @class, entryMethod) =>
+            {
+                var instance = Activator.CreateInstance(assembly, @class);
+                var method = instance.Unwrap().GetType().GetMethod(entryMethod);
+                method.Invoke(instance.Unwrap(), new object[0]);
+            };
 
             try
             {
-                //new ServicesRoutingManager().RegisterRoutes();
-                var instance = Activator.CreateInstance("DotNetNuke.Web", "DotNetNuke.Web.Api.Internal.ServicesRoutingManager");
-
-                var method = instance.Unwrap().GetType().GetMethod("RegisterRoutes");
-                method.Invoke(instance.Unwrap(), new object[0]);
-
-                var instanceMvc = Activator.CreateInstance("DotNetNuke.Web.Mvc", "DotNetNuke.Web.Mvc.Routing.MvcRoutingManager");
-
-                var methodMvc = instanceMvc.Unwrap().GetType().GetMethod("RegisterRoutes");
-                methodMvc.Invoke(instanceMvc.Unwrap(), new object[0]);
+                registerRoute("DotNetNuke.Web", "DotNetNuke.Web.Api.Internal.ServicesRoutingManager", "RegisterRoutes");
+                registerRoute("DotNetNuke.Web.Mvc", "DotNetNuke.Web.Mvc.Routing.MvcRoutingManager", "RegisterRoutes");
+                registerRoute("DotNetNuke.Web.Mvc.RazorPages", "DotNetNuke.Web.Mvc.RazorPages.MvcRoutingManager", "RegisterRoutes");
             }
             catch (Exception e)
             {
