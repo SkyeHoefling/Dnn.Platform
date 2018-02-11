@@ -42,7 +42,7 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
 
         public virtual void ExecuteModuleResult(ModuleRequestResult moduleResult, TextWriter writer)
         {
-            var result = moduleResult.ActionResult as IDnnViewResult;
+            var result = moduleResult.ActionResult as DotNetNuke.Web.Mvc.Framework.ActionResults.IDnnViewResult;
             if (result != null)
             {
                 result.ExecuteResult(moduleResult.ControllerContext, writer);
