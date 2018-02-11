@@ -31,7 +31,7 @@ namespace DotNetNuke.Web.Mvc.Framework.Modules
         private bool _initialized;
         private readonly object _lock = new object();
 
-        public ModuleApplication():this(null, false)
+        public ModuleApplication() : this(null, false)
         {
         }
         public ModuleApplication(bool disableMvcResponseHeader) : this(null, disableMvcResponseHeader)
@@ -90,71 +90,64 @@ namespace DotNetNuke.Web.Mvc.Framework.Modules
             AddVersionHeader(RequestContext.HttpContext);
             RemoveOptionalRoutingParameters();
 
-            var controllerName = "Index";// RequestContext.RouteData.GetRequiredString("model");
+            var controllerName = RequestContext.RouteData.GetRequiredString("controller");
 
             //Construct the controller using the ControllerFactory
-            //var controller = ControllerFactory.CreateController(RequestContext, controllerName);
-            var instance = Activator.CreateInstance("MVCModule1", "DNNSummit.MVCModule1.Pages.IndexModel");
-            dynamic pageModel = instance.Unwrap();
+            var controller = ControllerFactory.CreateController(RequestContext, controllerName);
             try
             {
                 // Check if the controller supports IDnnController
-                //var moduleController = controller as IDnnController;
+                var moduleController = controller as IDnnController;
 
                 // If we couldn't adapt it, we fail.  We can't support IController implementations directly :(
                 // Because we need to retrieve the ActionResult without executing it, IController won't cut it
-                if (pageModel == null)
+                if (moduleController == null)
                 {
                     throw new InvalidOperationException("Could Not Construct Controller");
                 }
 
-                pageModel.ValidateRequest = false;
+                moduleController.ValidateRequest = false;
 
-                pageModel.Page = context.DnnPage;
+                moduleController.DnnPage = context.DnnPage;
 
-                pageModel.ModuleContext = context.ModuleContext;
+                moduleController.ModuleContext = context.ModuleContext;
 
-                pageModel.LocalResourceFile = String.Format("~/DesktopModules/MVC/{0}/{1}/{2}.resx",
+                moduleController.LocalResourceFile = String.Format("~/DesktopModules/MVC/{0}/{1}/{2}.resx",
                                                     context.ModuleContext.Configuration.DesktopModule.FolderName,
                                                     Localization.LocalResourceDirectory,
                                                     controllerName);
 
-                pageModel.ViewEngineCollectionEx = ViewEngines;
-                pageModel.PageContext = new ControllerContext(RequestContext, new HackDnnController());
+                moduleController.ViewEngineCollectionEx = ViewEngines;
                 // Execute the controller and capture the result
-                // if our ActionFilter is executed after the ActionResult has triggered an Exception the filter
-                // MUST explicitly flip the ExceptionHandled bit otherwise the view will not render
-                //moduleController.Execute(RequestContext);
-                dynamic result = pageModel.ResultOfLastExecute;
+                moduleController.Execute(RequestContext);
+                var result = moduleController.ResultOfLastExecute;
 
                 // Return the final result
                 return new ModuleRequestResult
-                                {
-                                    ActionResult = result,
-                                    ControllerContext = pageModel.PageContext,
-                                    ModuleActions = pageModel.ModuleActions,
-                                    ModuleContext = context.ModuleContext,
-                                    ModuleApplication = this
-                                };
+                {
+                    ActionResult = result,
+                    ControllerContext = moduleController.ControllerContext,
+                    ModuleActions = moduleController.ModuleActions,
+                    ModuleContext = context.ModuleContext,
+                    ModuleApplication = this
+                };
             }
             finally
             {
-                //ControllerFactory.ReleaseController(controller);
+                ControllerFactory.ReleaseController(controller);
             }
         }
-
-        private class HackDnnController : DnnController { }
 
         protected internal virtual void Init()
         {
             var prefix = NormalizeFolderPath(FolderPath);
             string[] masterFormats =
-            { 
+            {
                 string.Format(CultureInfo.InvariantCulture, ControllerMasterFormat, prefix),
                 string.Format(CultureInfo.InvariantCulture, SharedMasterFormat, prefix)
             };
             string[] viewFormats =
-            { 
+            {
                 string.Format(CultureInfo.InvariantCulture, ControllerViewFormat, prefix),
                 string.Format(CultureInfo.InvariantCulture, SharedViewFormat, prefix),
                 string.Format(CultureInfo.InvariantCulture, ControllerPartialFormat, prefix),
@@ -162,11 +155,11 @@ namespace DotNetNuke.Web.Mvc.Framework.Modules
             };
 
             ViewEngines.Add(new RazorViewEngine
-                                    {
-                                        MasterLocationFormats = masterFormats,
-                                        ViewLocationFormats = viewFormats,
-                                        PartialViewLocationFormats = viewFormats
-                                    });
+            {
+                MasterLocationFormats = masterFormats,
+                ViewLocationFormats = viewFormats,
+                PartialViewLocationFormats = viewFormats
+            });
         }
 
         protected static string NormalizeFolderPath(string path)

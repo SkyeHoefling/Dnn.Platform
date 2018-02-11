@@ -130,7 +130,6 @@
     <Compile Include="Framework\Controllers\IDnnController.cs" />
     <Compile Include="HttpConfigurationExtensions.cs" />
     <Compile Include="HttpContextExtensions.cs" />
-    <Compile Include="PageModel.cs" />
     <Compile Include="Routing\HttpRequestExtensions.cs" />
     <Compile Include="ITabAndModuleInfoProvider.cs" />
     <Compile Include="Routing\ConstraintValidation.cs" />
