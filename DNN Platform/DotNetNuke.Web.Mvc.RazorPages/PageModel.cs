@@ -18,7 +18,7 @@ namespace DotNetNuke.Web.Mvc.RazorPages
         {
             get
             {
-                var result = new DotNetNuke.Web.Mvc.Framework.ActionResults.DnnViewResult
+                var result = new DnnViewResult
                 {
                     ViewName = "Index",
                     ViewData = new ViewDataDictionary(this)

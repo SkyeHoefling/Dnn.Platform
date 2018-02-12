@@ -143,7 +143,7 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
             }
         }
 
-        private class HackDnnController : DotNetNuke.Web.Mvc.Framework.Controllers.DnnController { }
+        private class HackDnnController : DnnController { }
 
         protected internal virtual void Init()
         {

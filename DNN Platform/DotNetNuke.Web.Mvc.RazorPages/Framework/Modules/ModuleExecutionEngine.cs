@@ -19,10 +19,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
-using System.IO;
 using DotNetNuke.Common;
 using DotNetNuke.Web.Mvc.RazorPages.Framework.ActionResults;
+using System.IO;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
 {
@@ -42,7 +41,7 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
 
         public virtual void ExecuteModuleResult(ModuleRequestResult moduleResult, TextWriter writer)
         {
-            var result = moduleResult.ActionResult as DotNetNuke.Web.Mvc.Framework.ActionResults.IDnnViewResult;
+            var result = moduleResult.ActionResult as IDnnViewResult;
             if (result != null)
             {
                 result.ExecuteResult(moduleResult.ControllerContext, writer);
