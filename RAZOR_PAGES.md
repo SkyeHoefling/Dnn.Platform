@@ -44,4 +44,106 @@ Porting ASP.NET Core Razor Pages to DNN Platform now provides a migration path f
 ## Implementation Strategy ##
 To support Razor Pages in DNN Platform we can leverage the existing codebase that implements Razor Syntax and Model Binding to Razor Pages, this is available through the DNN MVC implementation. 
 
-* TODO: Finish razor pages documentation
+### DNN Platform ###
+
+### DNN vNext (dotnet core) ###
+As we transition from DNN Platform to DNN vNext we will remove ported classes and reference the RazorPages assemblies/NuGets where applicable. This *should* not change anything as far as a DNN Razor Page is concerned since it will still be using the same API.
+
+## Specification ##
+(this should probably be moved to some design document in the future)
+
+A DNN Razor Pages module will contain the following required files and folders
+* Pages Folder
+	* Index.cshtml (view)
+	* IndexModel.cs (code behind)
+* DNN Manifest File
+	* A `moduleControl.controlSrc` specifying the index razor page in the following format: `Module/Index.razorpages`
+
+### Pages ###
+The Pages folder follows the Microsoft Convention that all of the razor files `.cshtml` and code behind files `.cs` files are located inside of the Pages folder. 
+
+*Index.cshtml*
+To define a DNN Razor Pages razor file you will specify the following markup at the top of your file:
+
+ASP.NET Core Razor Pages
+```cshtml
+@page
+@model MyModule.Pages.IndexModel
+
+<div>@Model.WelcomeMessage</div>
+```
+
+DNN Razor Pages
+```cshtml
+@inherits DotNetNuke.Web.Mvc.RazorPages.Framework.DnnWebViewPage<MyModule.Pages.IndexModel>
+
+<div>@Model.WelcomeMessage</div>
+```
+
+*IndexModel.cs*
+As far as the developer is concerned the DNN Razor Pages and the ASP.NET Core Razor Pages code behind is identical except where the PageModel object comes from. See code sample below:
+
+ASP.NET Core Razor Pages
+```c#
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+
+namespace MyModule.Pages
+{
+	public class IndexModel : PageModel
+	{
+		public string WelcomeMessage => "Hello World";
+	}
+}
+```
+
+DNN Razor Pages
+```c#
+using DotNetNuke.Web.Mvc.RazorPages;
+using System;
+
+namespace MyModule.Pages
+{
+	public class IndexModel : PageModel
+	{
+		public string WelcomeMessage => "Hello World";
+	}
+}
+```
+
+### DNN Manifest File ###
+The Manifest file requires the pages be configured using the `.razorpages` extension.
+
+*XML Node*
+all items except required DNN Razor Pages nodes/attributes are ommitted
+
+```xml
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package>
+      <component type="Module">
+        <desktopModule>
+	      <moduleDefinitions>
+            <moduleDefinition>
+              <moduleControls>
+			    <!-- BEGIN DNN Razor Page moduleControl -->
+                <moduleControl>				  
+                  <controlKey />
+                  <controlSrc>MyModule/Index.razorpages</controlSrc>
+                  <supportsPartialRendering>False</supportsPartialRendering>
+                  <controlTitle />
+                  <controlType>View</controlType>
+                  <iconFile />
+                  <helpUrl />
+                  <viewOrder>0</viewOrder>
+                </moduleControl>
+				<!-- END DNN Razor Page moduleControl -->
+              </moduleControls>
+            </moduleDefinition>
+          </moduleDefinitions>
+        </desktopModule>
+      </component>
+    </package>
+  </packages>
+</dotnetnuke>
+```
