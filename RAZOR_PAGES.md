@@ -62,8 +62,7 @@ A DNN Razor Pages module will contain the following required files and folders
 ### Pages ###
 The Pages folder follows the Microsoft Convention that all of the razor files `.cshtml` and code behind files `.cs` files are located inside of the Pages folder. 
 
-*Index.cshtml*
-
+#### Index.cshtml ####
 To define a DNN Razor Pages razor file you will specify the following markup at the top of your file:
 
 ASP.NET Core Razor Pages
@@ -81,8 +80,7 @@ DNN Razor Pages
 <div>@Model.WelcomeMessage</div>
 ```
 
-*IndexModel.cs*
-
+#### IndexModel.cs ####
 As far as the developer is concerned the DNN Razor Pages and the ASP.NET Core Razor Pages code behind is identical except where the PageModel object comes from. See code sample below:
 
 ASP.NET Core Razor Pages
@@ -116,8 +114,7 @@ namespace MyModule.Pages
 ### DNN Manifest File ###
 The Manifest file requires the pages be configured using the `.razorpages` extension.
 
-*XML Node*
-
+#### XML Node ####
 all items except required DNN Razor Pages nodes/attributes are ommitted
 
 ```xml
