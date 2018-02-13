@@ -45,6 +45,38 @@ Porting ASP.NET Core Razor Pages to DNN Platform now provides a migration path f
 To support Razor Pages in DNN Platform we can leverage the existing codebase that implements Razor Syntax and Model Binding to Razor Pages, this is available through the DNN MVC implementation. 
 
 ### DNN Platform ###
+DNN Razor Pages will follow a similar implementation strategy as the DNN MVC Platform with the following high level additions
+
+* Module Factory Pipeline
+* Route Registration
+* Route Handler
+* View Page/Renderer
+
+#### Pipeline ####
+When a page loads it executes the `DotNetNuke.UI.Modules.ModuleControlFactory.GetModuleControlFactory()` which determines the appropriate DNN Module Platform to load:
+
+* Web Forms
+* Html5
+* Razor
+* MVC
+* Razor Pages
+
+Remember Razor or Razor Syntax != Razor Page, please refer to terminology document that desccribes the differences bewteen the two.
+
+#### Route Registration ####
+This one needs more documentation and it is really just following the DNN MVC platform. 
+
+* Added new route registration in `DotNetNuke.Commong.Internal.ServiceRoutingManager.REgisterServiceRoutes()`
+
+#### Route Handler ####
+On each module page request we will build the Page/PageModel by convention of files located in the `Pages` folder. See the `Specification` section for detailed examples of how the convention will work. The basic idea is each page/pagemodel will follow this example:
+* `Index.cshtml`
+* `IndexModel.cs`
+
+The `Index.cshtml` will get built via an `ActionResult` that exists in the PageModel which is following a pattern from the MVC Platform. The PageModel gets added to it and then renders the page.
+
+#### View Page/Renderer ####
+When rendering a DNN Razor Page we can utilize the Microsoft Razor Engine with will take in the razor page and model and all of the heavy lifting is handled for us.
 
 ### DNN vNext (dotnet core) ###
 As we transition from DNN Platform to DNN vNext we will remove ported classes and reference the RazorPages assemblies/NuGets where applicable. This *should* not change anything as far as a DNN Razor Page is concerned since it will still be using the same API.
