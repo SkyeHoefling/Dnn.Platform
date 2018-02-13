@@ -90,10 +90,10 @@ using System;
 
 namespace MyModule.Pages
 {
-	public class IndexModel : PageModel
-	{
-		public string WelcomeMessage => "Hello World";
-	}
+    public class IndexModel : PageModel
+    {
+        public string WelcomeMessage => "Hello World";
+    }
 }
 ```
 
@@ -104,10 +104,10 @@ using System;
 
 namespace MyModule.Pages
 {
-	public class IndexModel : PageModel
-	{
-		public string WelcomeMessage => "Hello World";
-	}
+    public class IndexModel : PageModel
+    {
+        public string WelcomeMessage => "Hello World";
+    }
 }
 ```
 
