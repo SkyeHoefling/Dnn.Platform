@@ -123,10 +123,10 @@ all items except required DNN Razor Pages nodes/attributes are ommitted
     <package>
       <component type="Module">
         <desktopModule>
-	      <moduleDefinitions>
+          <moduleDefinitions>
             <moduleDefinition>
               <moduleControls>
-			    <!-- BEGIN DNN Razor Page moduleControl -->
+                <!-- BEGIN DNN Razor Page moduleControl -->
                 <moduleControl>				  
                   <controlKey />
                   <controlSrc>MyModule/Index.razorpages</controlSrc>
@@ -137,7 +137,7 @@ all items except required DNN Razor Pages nodes/attributes are ommitted
                   <helpUrl />
                   <viewOrder>0</viewOrder>
                 </moduleControl>
-				<!-- END DNN Razor Page moduleControl -->
+                <!-- END DNN Razor Page moduleControl -->
               </moduleControls>
             </moduleDefinition>
           </moduleDefinitions>
