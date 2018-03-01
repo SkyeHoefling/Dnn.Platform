@@ -90,12 +90,13 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
             AddVersionHeader(RequestContext.HttpContext);
             RemoveOptionalRoutingParameters();
 
-            var controllerName = "Index";// RequestContext.RouteData.GetRequiredString("model");
-
-            //Construct the controller using the ControllerFactory
-            //var controller = ControllerFactory.CreateController(RequestContext, controllerName);
-            var instance = Activator.CreateInstance("MVCModule1", "DNNSummit.MVCModule1.Pages.IndexModel");
+            var pageName = RequestContext.RouteData.GetRequiredString("page");
+            var moduleName = RequestContext.RouteData.GetRequiredString("module");
+            var assemblyName = RequestContext.RouteData.GetRequiredString("assembly");
+            
+            var instance = Activator.CreateInstance(assemblyName, $"{moduleName}.Pages.{pageName}Model");
             dynamic pageModel = instance.Unwrap();
+
             try
             {
                 // Check if the controller supports IDnnController
@@ -117,7 +118,7 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
                 pageModel.LocalResourceFile = String.Format("~/DesktopModules/MVC/{0}/{1}/{2}.resx",
                                                     context.ModuleContext.Configuration.DesktopModule.FolderName,
                                                     Localization.LocalResourceDirectory,
-                                                    controllerName);
+                                                    pageName);
 
                 pageModel.ViewEngineCollectionEx = ViewEngines;
                 pageModel.PageContext = new ControllerContext(RequestContext, new HackDnnController());

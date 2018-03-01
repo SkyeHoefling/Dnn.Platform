@@ -62,28 +62,31 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Routing
 
         public override RouteData GetRouteData(HttpContextBase httpContext, ModuleControlInfo moduleControl)
         {
-            var segments = moduleControl.ControlSrc.Replace(".mvc", "").Split('/');
+            var assemblyName = moduleControl.ControlTitle;
+            var segments = moduleControl.ControlSrc.Replace(".razorpages", "").Split('/');
             string routeNamespace = String.Empty;
-            string routeControllerName;
-            string routeActionName;
+            string routeModuleName;
+            string routePageName;
             if (segments.Length == 3)
             {
                 routeNamespace = segments[0];
-                routeControllerName = segments[1];
-                routeActionName = segments[2];
+                routeModuleName = segments[1];
+                routePageName = segments[2];
             }
             else
             {
-                routeControllerName = segments[0];
-                routeActionName = segments[1];
+                routeModuleName = segments[0];
+                routePageName = segments[1];
             }
 
-            var actionName = (httpContext == null) ? routeActionName : httpContext.Request.QueryString.GetValueOrDefault("action", routeActionName);
-            var controllerName = (httpContext == null) ? routeControllerName : httpContext.Request.QueryString.GetValueOrDefault("controller", routeControllerName);
+            var pageName = (httpContext == null) ? routePageName : httpContext.Request.QueryString.GetValueOrDefault("action", routePageName);
+            var moduleName = (httpContext == null) ? routeModuleName : httpContext.Request.QueryString.GetValueOrDefault("controller", routeModuleName);
 
             var routeData = new RouteData();
-            routeData.Values.Add("controller", controllerName);
-            routeData.Values.Add("action", actionName);
+            routeData.Values.Add("module", moduleName);
+            routeData.Values.Add("page", pageName);
+            // todo - add this to manifest
+            routeData.Values.Add("assembly", "MVCModule1");
 
             if (httpContext != null)
             {
