@@ -40,6 +40,7 @@
     <UseGlobalApplicationHostFile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -3132,6 +3133,7 @@
     </None>
     <None Include="Portals\_default\Templates\Default.page.template" />
     <None Include="Portals\_default\Templates\UserProfile.page.template" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Providers\DataProviders\SqlDataProvider\01.00.00.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\01.00.01.SqlDataProvider" />
     <None Include="Providers\DataProviders\SqlDataProvider\01.00.02.SqlDataProvider" />
