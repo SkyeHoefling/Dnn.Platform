@@ -25,7 +25,7 @@ using System.Web.Mvc;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
-using DotNetNuke.Web.Mvc.RazorPages.Framework.Controllers;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework.ActionFilters
 {

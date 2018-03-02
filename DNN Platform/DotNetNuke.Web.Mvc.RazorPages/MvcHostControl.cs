@@ -33,6 +33,7 @@ using DotNetNuke.UI.Modules;
 using DotNetNuke.Web.Mvc.RazorPages.Common;
 using DotNetNuke.Web.Mvc.RazorPages.Framework.Modules;
 using DotNetNuke.Web.Mvc.RazorPages.Routing;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.Routing;
 
 namespace DotNetNuke.Web.Mvc.RazorPages
 {

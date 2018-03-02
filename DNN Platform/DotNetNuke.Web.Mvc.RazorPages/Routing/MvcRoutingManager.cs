@@ -28,6 +28,7 @@ using DotNetNuke.Services.Localization;
 using DotNetNuke.Instrumentation;
 using DotNetNuke.Web.Mvc.RazorPages.Common;
 using System.Web.Http;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.Helpers;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Routing
 {

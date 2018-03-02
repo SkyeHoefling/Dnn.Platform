@@ -6,12 +6,12 @@ using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Routing;
 using DotNetNuke.Services.Localization;
-using DotNetNuke.Web.Mvc.RazorPages.Framework.Controllers;
 using System.Web;
 using System.Reflection;
 using DotNetNuke.Web.Mvc.RazorPages.Common;
 using Microsoft.Web.Infrastructure.DynamicValidationHelper;
 using DotNetNuke.Web.Mvc.RazorPages.SDK;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
 {

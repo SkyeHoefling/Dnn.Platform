@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Framework;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using DotNetNuke.Framework;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Caching;
 using System.Web.Mvc;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.Web.Mvc.RazorPages.Framework.Controllers;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework
 {

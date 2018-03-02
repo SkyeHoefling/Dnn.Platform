@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using DotNetNuke.UI.Modules;
 using DotNetNuke.Web.Mvc.RazorPages.Routing;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.Helpers;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.Routing;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Helpers
 {

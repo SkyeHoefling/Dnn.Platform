@@ -22,7 +22,7 @@
 using System;
 using System.Web.Mvc;
 using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Web.Mvc.RazorPages.Framework.Controllers;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework.ActionFilters
 {

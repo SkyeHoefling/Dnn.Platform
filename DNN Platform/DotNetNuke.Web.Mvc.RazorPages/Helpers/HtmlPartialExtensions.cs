@@ -1,5 +1,6 @@
 ﻿// Copyright (c) DNN Software. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.Helpers;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
