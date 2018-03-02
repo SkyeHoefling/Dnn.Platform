@@ -21,6 +21,7 @@
 
 using DotNetNuke.Common;
 using DotNetNuke.Web.Mvc.RazorPages.Framework.ActionResults;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework;
 using System.IO;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules

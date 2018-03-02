@@ -11,6 +11,7 @@ using System.Web;
 using System.Reflection;
 using DotNetNuke.Web.Mvc.RazorPages.Common;
 using Microsoft.Web.Infrastructure.DynamicValidationHelper;
+using DotNetNuke.Web.Mvc.RazorPages.SDK;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
 {
@@ -96,6 +97,11 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
             
             var instance = Activator.CreateInstance(assemblyName, $"{moduleName}.Pages.{pageName}Model");
             dynamic pageModel = instance.Unwrap();
+
+            if (!pageModel.GetType().IsSubclassOf(typeof(DnnPageModel)))
+            {
+                throw new Exception("Invalid page model, make sure your model inherits from type `DnnPageModel`");
+            }
 
             try
             {

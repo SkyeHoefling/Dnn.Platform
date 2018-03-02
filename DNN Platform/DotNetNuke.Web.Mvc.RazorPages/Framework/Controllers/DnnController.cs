@@ -16,6 +16,7 @@ using DotNetNuke.UI.Modules;
 using DotNetNuke.Web.Mvc.RazorPages.Framework.ActionResults;
 using DotNetNuke.Web.Mvc.RazorPages.Framework.Modules;
 using DotNetNuke.Web.Mvc.RazorPages.Helpers;
+using DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework;
 
 namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Controllers
 {
