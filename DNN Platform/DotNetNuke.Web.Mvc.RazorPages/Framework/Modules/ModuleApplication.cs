@@ -90,10 +90,10 @@ namespace DotNetNuke.Web.Mvc.RazorPages.Framework.Modules
             }
             AddVersionHeader(RequestContext.HttpContext);
             RemoveOptionalRoutingParameters();
-
+            
             var pageName = RequestContext.RouteData.GetRequiredString("page");
             var moduleName = RequestContext.RouteData.GetRequiredString("module");
-            var assemblyName = RequestContext.RouteData.GetRequiredString("assembly");
+            var assemblyName = RequestContext.RouteData.GetRequiredString("assembly");            
             
             var instance = Activator.CreateInstance(assemblyName, $"{moduleName}.Pages.{pageName}Model");
             dynamic pageModel = instance.Unwrap();
