@@ -4,13 +4,15 @@
   <Target Name="DebugProject">
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\DotNetNuke.Web.Mvc.RazorPages.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\DotNetNuke.Web.Mvc.RazorPages.pdb" DestinationFolder="..\..\Website\bin\" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Web.Mvc.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\DotNetNuke.Web.Mvc.RazorPages.SDK.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.dll" DestinationFolder="..\..\Website\bin\" />
+    <!--<Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Web.Mvc.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Web.Razor.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Web.WebPages.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Web.WebPages.Deployment.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Web.WebPages.Razor.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Web.Helpers.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Web.Infrastructure.dll" DestinationFolder="..\..\Website\bin\" />
-    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Web.Helpers.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Web.Helpers.dll" DestinationFolder="..\..\Website\bin\" />-->
   </Target>
 </Project>

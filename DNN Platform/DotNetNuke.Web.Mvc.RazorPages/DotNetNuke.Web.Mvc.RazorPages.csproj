@@ -37,10 +37,10 @@
       <HintPath>..\Library\bin\DotNetNuke.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web.Mvc.RazorPages.SDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DotNetNuke.Web.Mvc.RazorPages.SDK.Platform.1.0.27\lib\net45\DotNetNuke.Web.Mvc.RazorPages.SDK.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Web.Mvc.RazorPages.SDK.Platform.1.0.32\lib\net45\DotNetNuke.Web.Mvc.RazorPages.SDK.dll</HintPath>
     </Reference>
     <Reference Include="DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\DotNetNuke.Web.Mvc.RazorPages.SDK.Platform.1.0.27\lib\net45\DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.dll</HintPath>
+      <HintPath>..\..\packages\DotNetNuke.Web.Mvc.RazorPages.SDK.Platform.1.0.32\lib\net45\DotNetNuke.Web.Mvc.RazorPages.SDK.NETFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNet.WebHelpers.3.1.1\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
