@@ -17,8 +17,10 @@
 // DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Configuration;
 using System.IO;
 using System.Web.UI;
+using System.Linq;
 
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
@@ -38,6 +40,9 @@ namespace DotNetNuke.UI.Modules
 
             IModuleControlFactory controlFactory = null;
             Type factoryType;
+
+            bool.TryParse(ConfigurationManager.AppSettings["Experimental.RazorPages"], out bool isRazorPages);
+
             switch (extension)
             {
                 case ".ascx":
@@ -48,11 +53,33 @@ namespace DotNetNuke.UI.Modules
                     controlFactory = new Html5ModuleControlFactory();
                     break;
                 case ".cshtml":
-                case ".vbhtml":
-                    factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
-                    if (factoryType != null)
+                    if (isRazorPages)
                     {
-                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        // todo - load razor pages factory
+                        factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
+                        if (factoryType != null)
+                        {
+                            controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        }
+                    }
+                    else
+                    {
+                        // todo - consider including project and using strong types instead of string reflection
+                        factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
+                        if (factoryType != null)
+                        {
+                            controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        }
+                    }
+                    break;
+                case ".vbhtml":
+                    if (!isRazorPages)
+                    {
+                        factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
+                        if (factoryType != null)
+                        {
+                            controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        }
                     }
                     break;
                 case ".mvc":
