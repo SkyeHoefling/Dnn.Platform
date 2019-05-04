@@ -41,7 +41,7 @@ namespace DotNetNuke.UI.Modules
             IModuleControlFactory controlFactory = null;
             Type factoryType;
 
-            bool.TryParse(ConfigurationManager.AppSettings["Experimental.RazorPages"], out bool isRazorPages);
+            bool.TryParse(ConfigurationManager.AppSettings["Experimental:RazorPages"], out bool isRazorPages);
 
             switch (extension)
             {
@@ -55,8 +55,7 @@ namespace DotNetNuke.UI.Modules
                 case ".cshtml":
                     if (isRazorPages)
                     {
-                        // todo - load razor pages factory
-                        factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
+                        factoryType = Reflection.CreateType("DotNetNuke.Web.Mvc.RazorPages.RazorPagesModuleControlFactory");
                         if (factoryType != null)
                         {
                             controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
