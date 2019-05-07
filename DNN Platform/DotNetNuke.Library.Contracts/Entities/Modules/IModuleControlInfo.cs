@@ -2,7 +2,7 @@
 
 namespace DotNetNuke.Library.Contracts.Entities.Modules
 {
-    public interface IModuleControlInfo
+    public interface IModuleControlInfo : IControlInfo
     {
         string ControlTitle { get; set; }
         SecurityAccessLevel ControlType { get; set; }
