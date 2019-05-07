@@ -25,6 +25,7 @@ using System.Data;
 using System.Xml;
 
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Contracts;
 
 #endregion
 
@@ -40,7 +41,7 @@ namespace DotNetNuke.Entities.Modules
     /// </summary>
     /// -----------------------------------------------------------------------------
     [Serializable]
-    public abstract class ControlInfo : BaseEntityInfo
+    public abstract class ControlInfo : BaseEntityInfo, IControlInfo
     {
         protected ControlInfo()
         {

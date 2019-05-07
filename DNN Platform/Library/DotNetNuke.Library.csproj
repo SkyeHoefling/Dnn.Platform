@@ -1828,6 +1828,10 @@
       <Project>{ca056730-5759-41f8-a6c1-420f9c0c63e7}</Project>
       <Name>CountryListBox</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DotNetNuke.Contracts\DotNetNuke.Contracts.csproj">
+      <Project>{8ae37084-d53e-44ed-941c-cf3e7b16b1be}</Project>
+      <Name>DotNetNuke.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotNetNuke.Instrumentation\DotNetNuke.Instrumentation.csproj">
       <Project>{ddf18e36-41a0-4ca7-a098-78ca6e6f41c1}</Project>
       <Name>DotNetNuke.Instrumentation</Name>

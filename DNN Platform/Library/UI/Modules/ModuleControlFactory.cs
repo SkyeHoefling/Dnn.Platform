@@ -32,11 +32,11 @@ namespace DotNetNuke.UI.Modules
     {
         private static readonly ILog TracelLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
 
-        private static IModuleControlFactory GetModuleControlFactory(string controlSrc)
+        private static Contracts.IModuleControlFactory GetModuleControlFactory(string controlSrc)
         {
             string extension = Path.GetExtension(controlSrc.ToLowerInvariant());
 
-            IModuleControlFactory controlFactory = null;
+            Contracts.IModuleControlFactory controlFactory = null;
             Type factoryType;
             switch (extension)
             {
@@ -52,14 +52,14 @@ namespace DotNetNuke.UI.Modules
                     factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
                     if (factoryType != null)
                     {
-                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        controlFactory = Reflection.CreateObject(factoryType) as Contracts.IModuleControlFactory;
                     }
                     break;
                 case ".mvc":
                     factoryType = Reflection.CreateType("DotNetNuke.Web.Mvc.MvcModuleControlFactory");
                     if (factoryType != null)
                     {
-                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        controlFactory = Reflection.CreateObject(factoryType) as Contracts.IModuleControlFactory;
                     }
                     break;
                 default:
@@ -107,7 +107,7 @@ namespace DotNetNuke.UI.Modules
             if (TracelLogger.IsDebugEnabled)
                 TracelLogger.Debug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             Control control = null;
-            IModuleControlFactory controlFactory = GetModuleControlFactory(moduleConfiguration.ModuleControl.ControlSrc);
+            Contracts.IModuleControlFactory controlFactory = GetModuleControlFactory(moduleConfiguration.ModuleControl.ControlSrc);
 
             if (controlFactory != null)
             {
