@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Data;
 using DotNetNuke.Library.Contracts.Security.Permissions;
 using DotNetNuke.Library.Contracts.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Content;
 
 namespace DotNetNuke.Library.Contracts.Entities.Tabs
 {
-    public interface ITabInfo
+    public interface ITabInfo : IContentItem
     {
         ArrayList BreadCrumbs { get; set; }
         string ContainerPath { get; set; }

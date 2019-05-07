@@ -36,7 +36,10 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Instrumentation;
-using DotNetNuke.Security;
+using DotNetNuke.Library.Contracts.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Modules.Definitions;
+using DotNetNuke.Library.Contracts.Entities.Tabs;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.ModuleCache;
@@ -57,20 +60,20 @@ namespace DotNetNuke.Entities.Modules
     /// -----------------------------------------------------------------------------
     [XmlRoot("module", IsNullable = false)]
     [Serializable]
-    public class ModuleInfo : ContentItem, IPropertyAccess
+    public class ModuleInfo : ContentItem, IPropertyAccess, IModuleInfo
     {
     	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleInfo));
         private string _authorizedEditRoles;
         private string _authorizedViewRoles;
         private string _cultureCode;
         private Guid _defaultLanguageGuid;
-        private ModuleInfo _defaultLanguageModule;
+        private IModuleInfo _defaultLanguageModule;
         private DesktopModuleInfo _desktopModule;
-        private Dictionary<string, ModuleInfo> _localizedModules;
+        private Dictionary<string, IModuleInfo> _localizedModules;
         private Guid _localizedVersionGuid;
-        private ModuleControlInfo _moduleControl;
-        private ModuleDefinitionInfo _moduleDefinition;
-        private ModulePermissionCollection _modulePermissions;
+        private IModuleControlInfo _moduleControl;
+        private IModuleDefinitionInfo _moduleDefinition;
+        private IModulePermissionCollection _modulePermissions;
         private TabInfo _parentTab;
         private Hashtable _moduleSettings;
         private Hashtable _tabModuleSettings;
@@ -145,7 +148,7 @@ namespace DotNetNuke.Entities.Modules
         /// <returns>An Integer</returns>
         /// -----------------------------------------------------------------------------
         [XmlIgnore]
-        public DesktopModuleInfo DesktopModule
+        public IDesktopModuleInfo DesktopModule
         {
             get {
                 return _desktopModule ??
@@ -229,7 +232,7 @@ namespace DotNetNuke.Entities.Modules
         [XmlIgnore]
         public DateTime LastContentModifiedOnDate { get; set; }
 
-        public ModuleControlInfo ModuleControl
+        public IModuleControlInfo ModuleControl
         {
             get {
                 return _moduleControl ??
@@ -258,7 +261,7 @@ namespace DotNetNuke.Entities.Modules
         /// <returns>A ModuleDefinitionInfo</returns>
         /// -----------------------------------------------------------------------------
         [XmlIgnore]
-        public ModuleDefinitionInfo ModuleDefinition
+        public IModuleDefinitionInfo ModuleDefinition
         {
             get {
                 return _moduleDefinition ??
@@ -279,7 +282,7 @@ namespace DotNetNuke.Entities.Modules
         /// </remarks>
         /// </summary>
         [XmlArray("modulepermissions"), XmlArrayItem("permission")]
-        public ModulePermissionCollection ModulePermissions
+        public IModulePermissionCollection ModulePermissions
         {
             get
             {
@@ -369,7 +372,7 @@ namespace DotNetNuke.Entities.Modules
         public Guid VersionGuid { get; set; }
 
         [XmlElement("visibility")]
-        public VisibilityState Visibility { get; set; }
+        public Library.Contracts.Entities.Modules.VisibilityState Visibility { get; set; }
 
         [XmlElement("websliceexpirydate")]
         public DateTime WebSliceExpiryDate { get; set; }
@@ -409,7 +412,7 @@ namespace DotNetNuke.Entities.Modules
         }
 
         [XmlIgnore]
-        public ModuleInfo DefaultLanguageModule
+        public IModuleInfo DefaultLanguageModule
         {
             get
             {
@@ -468,19 +471,19 @@ namespace DotNetNuke.Entities.Modules
         }
 
         [XmlIgnore]
-        public Dictionary<string, ModuleInfo> LocalizedModules
+        public Dictionary<string, IModuleInfo> LocalizedModules
         {
             get
             {
                 if (_localizedModules == null && (DefaultLanguageGuid.Equals(Null.NullGuid)) && ParentTab != null && ParentTab.LocalizedTabs != null)
                 {
                     //Cycle through all localized tabs looking for this module
-                    _localizedModules = new Dictionary<string, ModuleInfo>();
+                    _localizedModules = new Dictionary<string, IModuleInfo>();
                     foreach (TabInfo t in ParentTab.LocalizedTabs.Values)
                     {
-                        foreach (ModuleInfo m in t.ChildModules.Values)
+                        foreach (IModuleInfo m in t.ChildModules.Values)
                         {
-                            ModuleInfo tempModuleInfo;
+                            IModuleInfo tempModuleInfo;
                             if (m.DefaultLanguageGuid == UniqueId && !m.IsDeleted && !_localizedModules.TryGetValue(m.CultureCode, out tempModuleInfo))
                             {
                                 _localizedModules.Add(m.CultureCode, m);
@@ -509,7 +512,7 @@ namespace DotNetNuke.Entities.Modules
 
         #region Tab Properties
 
-        public TabInfo ParentTab
+        public ITabInfo ParentTab
         {
             get
             {
@@ -591,20 +594,20 @@ namespace DotNetNuke.Entities.Modules
                 int visible = Null.SetNullInteger(dr["Visibility"]);
                 if (visible == Null.NullInteger)
                 {
-                    Visibility = VisibilityState.Maximized;
+                    Visibility = Library.Contracts.Entities.Modules.VisibilityState.Maximized;
                 }
                 else
                 {
                     switch (visible)
                     {
                         case 0:
-                            Visibility = VisibilityState.Maximized;
+                            Visibility = Library.Contracts.Entities.Modules.VisibilityState.Maximized;
                             break;
                         case 1:
-                            Visibility = VisibilityState.Minimized;
+                            Visibility = Library.Contracts.Entities.Modules.VisibilityState.Minimized;
                             break;
                         case 2:
-                            Visibility = VisibilityState.None;
+                            Visibility = Library.Contracts.Entities.Modules.VisibilityState.None;
                             break;
                     }
                 }
@@ -971,7 +974,7 @@ namespace DotNetNuke.Entities.Modules
 
         #endregion
 
-        public ModuleInfo Clone()
+        public IModuleInfo Clone()
         {
             var objModuleInfo = new ModuleInfo
                                     {
@@ -1065,7 +1068,7 @@ namespace DotNetNuke.Entities.Modules
             Border = Null.NullString;
             IconFile = Null.NullString;
             AllTabs = Null.NullBoolean;
-            Visibility = VisibilityState.Maximized;
+            Visibility = Library.Contracts.Entities.Modules.VisibilityState.Maximized;
             IsDeleted = Null.NullBoolean;
             Header = Null.NullString;
             Footer = Null.NullString;

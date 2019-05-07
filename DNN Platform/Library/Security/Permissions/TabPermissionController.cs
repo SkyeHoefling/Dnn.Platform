@@ -28,6 +28,7 @@ using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Library.Contracts.Entities.Tabs;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Log.EventLog;
 
@@ -259,7 +260,7 @@ namespace DotNetNuke.Security.Permissions
         /// </summary>
         /// <param name="tab">The page</param>
         /// <returns>A flag indicating whether the user has permission</returns>
-        public static bool CanViewPage(TabInfo tab)
+        public static bool CanViewPage(ITabInfo tab)
         {
             return _provider.CanViewPage(tab);
         }

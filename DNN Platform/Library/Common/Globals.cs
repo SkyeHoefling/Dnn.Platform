@@ -58,6 +58,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Framework.Providers;
 using DotNetNuke.Instrumentation;
+using DotNetNuke.Library.Contracts.Entities.Modules;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
@@ -1559,7 +1560,7 @@ namespace DotNetNuke.Common
         public static string ImportFile(int PortalId, string url)
         {
             string strUrl = url;
-            if (GetURLType(url) == TabType.File)
+            if (GetURLType(url) == Library.Contracts.Entities.Tabs.TabType.File)
             {
                 var fileName = Path.GetFileName(url);
 
@@ -2722,25 +2723,25 @@ namespace DotNetNuke.Common
         /// <param name="URL">The url</param>
         /// <returns>The url type</returns>
         /// -----------------------------------------------------------------------------
-        public static TabType GetURLType(string URL)
+        public static Library.Contracts.Entities.Tabs.TabType GetURLType(string URL)
         {
             if (String.IsNullOrEmpty(URL))
             {
-                return TabType.Normal;
+                return Library.Contracts.Entities.Tabs.TabType.Normal;
             }
             if (URL.ToLowerInvariant().StartsWith("mailto:") == false && URL.IndexOf("://") == -1 && URL.StartsWith("~") == false && URL.StartsWith("\\\\") == false && URL.StartsWith("/") == false)
             {
                 if (NumberMatchRegex.IsMatch(URL))
                 {
-                    return TabType.Tab;
+                    return Library.Contracts.Entities.Tabs.TabType.Tab;
                 }
                 if (URL.ToLowerInvariant().StartsWith("userid="))
                 {
-                    return TabType.Member;
+                    return Library.Contracts.Entities.Tabs.TabType.Member;
                 }
-                return TabType.File;
+                return Library.Contracts.Entities.Tabs.TabType.File;
             }
-            return TabType.Url;
+            return Library.Contracts.Entities.Tabs.TabType.Url;
         }
 
         /// <summary>
@@ -2755,12 +2756,12 @@ namespace DotNetNuke.Common
         public static string ImportUrl(int ModuleId, string url)
         {
             string strUrl = url;
-            TabType urlType = GetURLType(url);
+            Library.Contracts.Entities.Tabs.TabType urlType = GetURLType(url);
             int intId = -1;
             PortalSettings portalSettings = GetPortalSettings();
             switch (urlType)
             {
-                case TabType.File:
+                case Library.Contracts.Entities.Tabs.TabType.File:
                     if (Int32.TryParse(url.Replace("FileID=", ""), out intId))
                     {
                         var objFile = FileManager.Instance.GetFile(intId);
@@ -2776,7 +2777,7 @@ namespace DotNetNuke.Common
                         strUrl = "";
                     }
                     break;
-                case TabType.Member:
+                case Library.Contracts.Entities.Tabs.TabType.Member:
                     if (Int32.TryParse(url.Replace("UserID=", ""), out intId))
                     {
                         if (UserController.GetUserById(portalSettings.PortalId, intId) == null)
@@ -2791,7 +2792,7 @@ namespace DotNetNuke.Common
                         strUrl = "";
                     }
                     break;
-                case TabType.Tab:
+                case Library.Contracts.Entities.Tabs.TabType.Tab:
                     if (Int32.TryParse(url, out intId))
                     {
                         if (TabController.Instance.GetTab(intId, portalSettings.PortalId, false) == null)
@@ -3366,12 +3367,12 @@ namespace DotNetNuke.Common
         public static string LinkClick(string Link, int TabID, int ModuleID, bool TrackClicks, bool ForceDownload, int PortalId, bool EnableUrlLanguage, string portalGuid)
         {
             string strLink = "";
-            TabType UrlType = GetURLType(Link);
-            if (UrlType == TabType.Member)
+            Library.Contracts.Entities.Tabs.TabType UrlType = GetURLType(Link);
+            if (UrlType == Library.Contracts.Entities.Tabs.TabType.Member)
             {
                 strLink = UserProfileURL(Convert.ToInt32(UrlUtils.GetParameterValue(Link)));
             }
-            else if (TrackClicks || ForceDownload || UrlType == TabType.File)
+            else if (TrackClicks || ForceDownload || UrlType == Library.Contracts.Entities.Tabs.TabType.File)
             {
                 //format LinkClick wrapper
                 if (Link.StartsWith("fileid=", StringComparison.InvariantCultureIgnoreCase))
@@ -3416,7 +3417,7 @@ namespace DotNetNuke.Common
             {
                 switch (UrlType)
                 {
-                    case TabType.Tab:
+                    case Library.Contracts.Entities.Tabs.TabType.Tab:
                         strLink = NavigateURL(int.Parse(Link));
                         break;
                     default:
@@ -3523,7 +3524,7 @@ namespace DotNetNuke.Common
         public static string GetHelpText(int moduleControlId)
         {
             string helpText = Null.NullString;
-            ModuleControlInfo objModuleControl = ModuleControlController.GetModuleControl(moduleControlId);
+            IModuleControlInfo objModuleControl = ModuleControlController.GetModuleControl(moduleControlId);
             if (objModuleControl != null)
             {
                 string FileName = Path.GetFileName(objModuleControl.ControlSrc);

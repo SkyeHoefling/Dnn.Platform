@@ -29,6 +29,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Library.Contracts.Entities.Modules.Definitions;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Search.Entities;
 
@@ -110,7 +111,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// </summary>
         /// <param name="moduleDefID">The ID of the Module Definition</param>
         /// -----------------------------------------------------------------------------
-        public static ModuleDefinitionInfo GetModuleDefinitionByID(int moduleDefID)
+        public static IModuleDefinitionInfo GetModuleDefinitionByID(int moduleDefID)
         {
             return (from kvp in GetModuleDefinitions()
                     where kvp.Value.ModuleDefID == moduleDefID
@@ -125,7 +126,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
 		/// </summary>
 		/// <param name="friendlyName">The friendly name</param>
 		/// -----------------------------------------------------------------------------
-		public static ModuleDefinitionInfo GetModuleDefinitionByFriendlyName(string friendlyName)
+		public static IModuleDefinitionInfo GetModuleDefinitionByFriendlyName(string friendlyName)
         {
             Requires.NotNullOrEmpty("friendlyName", friendlyName);
 
@@ -143,7 +144,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// <param name="friendlyName">The friendly name</param>
         /// <param name="desktopModuleID">The ID of the Dekstop Module</param>
         /// -----------------------------------------------------------------------------
-        public static ModuleDefinitionInfo GetModuleDefinitionByFriendlyName(string friendlyName, int desktopModuleID)
+        public static IModuleDefinitionInfo GetModuleDefinitionByFriendlyName(string friendlyName, int desktopModuleID)
         {
             Requires.NotNullOrEmpty("friendlyName", friendlyName);
             Requires.NotNegative("desktopModuleID", desktopModuleID);
@@ -159,9 +160,9 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// GetModuleDefinitions gets a Dictionary of Module Definitions.
         /// </summary>
         /// -----------------------------------------------------------------------------
-        public static Dictionary<int, ModuleDefinitionInfo> GetModuleDefinitions()
+        public static Dictionary<int, IModuleDefinitionInfo> GetModuleDefinitions()
         {
-            return CBO.GetCachedObject<Dictionary<int, ModuleDefinitionInfo>>(new CacheItemArgs(DataCache.ModuleDefinitionCacheKey, 
+            return CBO.GetCachedObject<Dictionary<int, IModuleDefinitionInfo>>(new CacheItemArgs(DataCache.ModuleDefinitionCacheKey, 
                                                                                         DataCache.ModuleDefinitionCachePriority),
                                                                               GetModuleDefinitionsCallBack);
         }
@@ -173,7 +174,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// </summary>
         /// <param name="desktopModuleID">The ID of the Desktop Module</param>
         /// -----------------------------------------------------------------------------
-        public static Dictionary<string, ModuleDefinitionInfo> GetModuleDefinitionsByDesktopModuleID(int desktopModuleID)
+        public static Dictionary<string, IModuleDefinitionInfo> GetModuleDefinitionsByDesktopModuleID(int desktopModuleID)
         {
             //Iterate through cached Dictionary to get all Module Definitions with the correct DesktopModuleID
             return GetModuleDefinitions().Where(kvp => kvp.Value.DesktopModuleID == desktopModuleID)
@@ -186,7 +187,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// <param name="definitionName">The defintion name</param>
         /// <param name="desktopModuleID">The ID of the Dekstop Module</param>
         /// <returns>A ModuleDefinition or null if not found</returns>
-        public static ModuleDefinitionInfo GetModuleDefinitionByDefinitionName(string definitionName, int desktopModuleID)
+        public static IModuleDefinitionInfo GetModuleDefinitionByDefinitionName(string definitionName, int desktopModuleID)
         {
             Requires.NotNullOrEmpty("definitionName", definitionName);
             Requires.NotNegative("desktopModuleID", desktopModuleID);

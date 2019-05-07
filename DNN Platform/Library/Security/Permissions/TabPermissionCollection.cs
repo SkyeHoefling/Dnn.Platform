@@ -27,6 +27,7 @@ using System.Linq;
 using System.Xml.Serialization;
 
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 
 #endregion
 
@@ -44,7 +45,7 @@ namespace DotNetNuke.Security.Permissions
     /// -----------------------------------------------------------------------------
     [Serializable]
     [XmlRoot("tabpermissions")]
-    public class TabPermissionCollection : CollectionBase
+    public class TabPermissionCollection : CollectionBase, ITabPermissionCollection
     {
         public TabPermissionCollection()
         {
@@ -71,11 +72,11 @@ namespace DotNetNuke.Security.Permissions
             }
         }
 
-        public TabPermissionInfo this[int index]
+        public ITabPermissionInfo this[int index]
         {
             get
             {
-                return (TabPermissionInfo) List[index];
+                return (ITabPermissionInfo) List[index];
             }
             set
             {
@@ -83,12 +84,12 @@ namespace DotNetNuke.Security.Permissions
             }
         }
 
-        public int Add(TabPermissionInfo value)
+        public int Add(ITabPermissionInfo value)
         {
             return List.Add(value);
         }
 
-        public int Add(TabPermissionInfo value, bool checkForDuplicates)
+        public int Add(ITabPermissionInfo value, bool checkForDuplicates)
         {
             int id = Null.NullInteger;
 
@@ -99,7 +100,7 @@ namespace DotNetNuke.Security.Permissions
             else
             {
                 bool isMatch = false;
-                foreach (PermissionInfoBase permission in List)
+                foreach (IPermissionInfoBase permission in List)
                 {
                     if (permission.PermissionID == value.PermissionID && permission.UserID == value.UserID && permission.RoleID == value.RoleID)
                     {
@@ -118,23 +119,23 @@ namespace DotNetNuke.Security.Permissions
 
         public void AddRange(ArrayList tabPermissions)
         {
-            foreach (TabPermissionInfo permission in tabPermissions)
+            foreach (ITabPermissionInfo permission in tabPermissions)
             {
                 Add(permission);
             }
         }
 
-        public void AddRange(IEnumerable<TabPermissionInfo> tabPermissions)
+        public void AddRange(IEnumerable<ITabPermissionInfo> tabPermissions)
         {
-            foreach (TabPermissionInfo permission in tabPermissions)
+            foreach (ITabPermissionInfo permission in tabPermissions)
             {
                 Add(permission);
             }
         }
 
-        public void AddRange(TabPermissionCollection tabPermissions)
+        public void AddRange(ITabPermissionCollection tabPermissions)
         {
-            foreach (TabPermissionInfo permission in tabPermissions)
+            foreach (ITabPermissionInfo permission in tabPermissions)
             {
                 Add(permission);
             }
@@ -162,29 +163,29 @@ namespace DotNetNuke.Security.Permissions
             return true;
         }
 
-        public bool Contains(TabPermissionInfo value)
+        public bool Contains(ITabPermissionInfo value)
         {
             return List.Contains(value);
         }
 
-        public int IndexOf(TabPermissionInfo value)
+        public int IndexOf(ITabPermissionInfo value)
         {
             return List.IndexOf(value);
         }
 
-        public void Insert(int index, TabPermissionInfo value)
+        public void Insert(int index, ITabPermissionInfo value)
         {
             List.Insert(index, value);
         }
 
-        public void Remove(TabPermissionInfo value)
+        public void Remove(ITabPermissionInfo value)
         {
             List.Remove(value);
         }
 
         public void Remove(int permissionID, int roleID, int userID)
         {
-            foreach (PermissionInfoBase permission in List)
+            foreach (IPermissionInfoBase permission in List)
             {
                 if (permission.PermissionID == permissionID && permission.UserID == userID && permission.RoleID == roleID)
                 {
@@ -194,10 +195,10 @@ namespace DotNetNuke.Security.Permissions
             }
         }
 
-        public List<PermissionInfoBase> ToList()
+        public List<IPermissionInfoBase> ToList()
         {
-            var list = new List<PermissionInfoBase>();
-            foreach (PermissionInfoBase permission in List)
+            var list = new List<IPermissionInfoBase>();
+            foreach (IPermissionInfoBase permission in List)
             {
                 list.Add(permission);
             }
@@ -209,7 +210,7 @@ namespace DotNetNuke.Security.Permissions
             return PermissionController.BuildPermissions(List, key);
         }
 
-        public IEnumerable<TabPermissionInfo> Where(Func<TabPermissionInfo, bool> predicate)
+        public IEnumerable<ITabPermissionInfo> Where(Func<ITabPermissionInfo, bool> predicate)
         {
             return this.Cast<TabPermissionInfo>().Where(predicate);
         }

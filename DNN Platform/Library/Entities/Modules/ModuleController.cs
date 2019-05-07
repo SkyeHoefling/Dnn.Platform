@@ -45,6 +45,7 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
 using DotNetNuke.Instrumentation;
+using DotNetNuke.Library.Contracts.Entities.Modules;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
@@ -72,7 +73,7 @@ namespace DotNetNuke.Entities.Modules
         }
         #region Private Methods
 
-        private static void AddContent(XmlNode nodeModule, ModuleInfo module)
+        private static void AddContent(XmlNode nodeModule, IModuleInfo module)
         {
             if (!String.IsNullOrEmpty(module.DesktopModule.BusinessControllerClass) && module.DesktopModule.IsPortable)
             {
@@ -123,7 +124,7 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-        private void AddModuleInternal(ModuleInfo module)
+        private void AddModuleInternal(IModuleInfo module)
         {
             // add module
             if (Null.IsNull(module.ModuleID))
@@ -160,9 +161,9 @@ namespace DotNetNuke.Entities.Modules
             EventManager.Instance.OnModuleCreated(new ModuleEventArgs { Module = module });
         }
 
-        private static void AddModulePermission(ref ModuleInfo module, int portalId, string roleName, PermissionInfo permission, string permissionKey)
+        private static void AddModulePermission(ref IModuleInfo module, int portalId, string roleName, PermissionInfo permission, string permissionKey)
         {
-            var perm = module.ModulePermissions.Where(tp => tp.RoleName == roleName && tp.PermissionKey == permissionKey).SingleOrDefault();
+            var perm = ((ModulePermissionCollection)module.ModulePermissions).Where(tp => tp.RoleName == roleName && tp.PermissionKey == permissionKey).SingleOrDefault();
             if (permission != null && perm == null)
             {
                 var modulePermission = new ModulePermissionInfo(permission);
@@ -179,7 +180,7 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-		private ModulePermissionInfo AddModulePermission(ModuleInfo module, PermissionInfo permission, int roleId, int userId, bool allowAccess)
+		private ModulePermissionInfo AddModulePermission(IModuleInfo module, PermissionInfo permission, int roleId, int userId, bool allowAccess)
         {
             var modulePermission = new ModulePermissionInfo
             {
@@ -241,7 +242,7 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-        private void CopyTabModuleSettingsInternal(ModuleInfo fromModule, ModuleInfo toModule)
+        private void CopyTabModuleSettingsInternal(IModuleInfo fromModule, IModuleInfo toModule)
         {
             //Copy each setting to the new TabModule instance
             foreach (DictionaryEntry setting in fromModule.TabModuleSettings)
@@ -250,10 +251,10 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-        private static ModuleInfo DeserializeModule(XmlNode nodeModule, XmlNode nodePane, int portalId, int tabId, int moduleDefId)
+        private static IModuleInfo DeserializeModule(XmlNode nodeModule, XmlNode nodePane, int portalId, int tabId, int moduleDefId)
         {
             //Create New Module
-            var module = new ModuleInfo
+            var module = new IModuleInfo
             {
                 PortalID = portalId,
                 TabID = tabId,
@@ -318,7 +319,7 @@ namespace DotNetNuke.Entities.Modules
             return module;
         }
 
-        private static void DeserializeModulePermissions(XmlNodeList nodeModulePermissions, int portalId, ModuleInfo module)
+        private static void DeserializeModulePermissions(XmlNodeList nodeModulePermissions, int portalId, IModuleInfo module)
         {
             var permissionController = new PermissionController();
             foreach (XmlNode node in nodeModulePermissions)
@@ -379,7 +380,7 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-        private static void DeserializeModuleSettings(XmlNodeList nodeModuleSettings, ModuleInfo objModule)
+        private static void DeserializeModuleSettings(XmlNodeList nodeModuleSettings, IModuleInfo objModule)
         {
             foreach (XmlNode moduleSettingNode in nodeModuleSettings)
             {
@@ -389,7 +390,7 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-        private static void DeserializeTabModuleSettings(XmlNodeList nodeTabModuleSettings, ModuleInfo objModule)
+        private static void DeserializeTabModuleSettings(XmlNodeList nodeTabModuleSettings, IModuleInfo objModule)
         {
             foreach (XmlNode tabModuleSettingNode in nodeTabModuleSettings)
             {
@@ -417,7 +418,7 @@ namespace DotNetNuke.Entities.Modules
 
         private static void GetModuleContent(XmlNode nodeModule, int ModuleId, int TabId, int PortalId)
         {
-            ModuleInfo module = Instance.GetModule(ModuleId, TabId, true);
+            IModuleInfo module = Instance.GetModule(ModuleId, TabId, true);
             if (nodeModule != null)
             {
                 // ReSharper disable PossibleNullReferenceException
@@ -469,7 +470,7 @@ namespace DotNetNuke.Entities.Modules
             ModuleDefinitionInfo moduleDefinition = null;
 
             //Templates prior to v4.3.5 only have the <definition> node to define the Module Type
-            //This <definition> node was populated with the DesktopModuleInfo.ModuleName property
+            //This <definition> node was populated with the DesktopIModuleInfo.ModuleName property
             //Thus there is no mechanism to determine to which module definition the module belongs.
             //
             //Template from v4.3.5 on also have the <moduledefinition> element that is populated
@@ -575,7 +576,7 @@ namespace DotNetNuke.Entities.Modules
             return (tabModuleSettings.ContainsKey(tabmoduleId)) ? tabModuleSettings[tabmoduleId] : new Hashtable();
         }
 
-        private int LocalizeModuleInternal(ModuleInfo sourceModule)
+        private int LocalizeModuleInternal(IModuleInfo sourceModule)
         {
             int moduleId = Null.NullInteger;
 
@@ -772,7 +773,7 @@ namespace DotNetNuke.Entities.Modules
             ClearModuleSettingsCache(moduleId);
         }
 
-        private void UpdateModuleSettings(ModuleInfo updatedModule)
+        private void UpdateModuleSettings(IModuleInfo updatedModule)
         {
             foreach (string key in updatedModule.ModuleSettings.Keys)
             {
@@ -782,7 +783,7 @@ namespace DotNetNuke.Entities.Modules
             UpdateTabModuleVersionsByModuleID(updatedModule.ModuleID);
         }
 
-        private void UpdateTabModuleSettings(ModuleInfo updatedTabModule)
+        private void UpdateTabModuleSettings(IModuleInfo updatedTabModule)
         {
             foreach (string sKey in updatedTabModule.TabModuleSettings.Keys)
             {
@@ -798,60 +799,60 @@ namespace DotNetNuke.Entities.Modules
         private void UpdateTabModuleVersionsByModuleID(int moduleID)
         {
             // Update the version guid of each TabModule linked to the updated module
-            foreach (ModuleInfo modInfo in GetAllTabsModulesByModuleID(moduleID))
+            foreach (IModuleInfo modInfo in GetAllTabsModulesByModuleID(moduleID))
             {
                 ClearCache(modInfo.TabID);
             }
             dataProvider.UpdateTabModuleVersionByModule(moduleID);
         }
 
-        private bool HasModuleOrderOrPaneChanged(ModuleInfo module)
+        private bool HasModuleOrderOrPaneChanged(IModuleInfo module)
         {
-            var storedModuleInfo = GetTabModule(module.TabModuleID);
-            return storedModuleInfo == null || storedModuleInfo.ModuleOrder != module.ModuleOrder || storedModuleInfo.PaneName != module.PaneName;
+            var storedIModuleInfo = GetTabModule(module.TabModuleID);
+            return storedIModuleInfo == null || storedIModuleInfo.ModuleOrder != module.ModuleOrder || storedIModuleInfo.PaneName != module.PaneName;
         }
 
         private void UncopyModule(int tabId, int moduleId, bool softDelete, int originalTabId)
         {
-            ModuleInfo moduleInfo = GetModule(moduleId, tabId, false);            
-            DeleteTabModuleInternal(moduleInfo, softDelete, true);
+            IModuleInfo IModuleInfo = GetModule(moduleId, tabId, false);            
+            DeleteTabModuleInternal(IModuleInfo, softDelete, true);
             var userId = UserController.Instance.GetCurrentUserInfo().UserID;
-            TabChangeTracker.Instance.TrackModuleUncopy(moduleInfo, Null.NullInteger, originalTabId, userId);            
+            TabChangeTracker.Instance.TrackModuleUncopy(IModuleInfo, Null.NullInteger, originalTabId, userId);            
         }
 
-        private void DeleteTabModuleInternal(ModuleInfo moduleInfo, bool softDelete, bool uncopy = false)
+        private void DeleteTabModuleInternal(IModuleInfo IModuleInfo, bool softDelete, bool uncopy = false)
         {
-            //save moduleinfo
+            //save IModuleInfo
 
-            if (moduleInfo != null)
+            if (IModuleInfo != null)
             {
                 //delete the module instance for the tab
-                dataProvider.DeleteTabModule(moduleInfo.TabID, moduleInfo.ModuleID, softDelete, UserController.Instance.GetCurrentUserInfo().UserID);
+                dataProvider.DeleteTabModule(IModuleInfo.TabID, IModuleInfo.ModuleID, softDelete, UserController.Instance.GetCurrentUserInfo().UserID);
                 var log = new LogInfo { LogTypeKey = EventLogController.EventLogType.TABMODULE_DELETED.ToString() };
-                log.LogProperties.Add(new LogDetailInfo("tabId", moduleInfo.TabID.ToString(CultureInfo.InvariantCulture)));
-                log.LogProperties.Add(new LogDetailInfo("moduleId", moduleInfo.ModuleID.ToString(CultureInfo.InvariantCulture)));
+                log.LogProperties.Add(new LogDetailInfo("tabId", IModuleInfo.TabID.ToString(CultureInfo.InvariantCulture)));
+                log.LogProperties.Add(new LogDetailInfo("moduleId", IModuleInfo.ModuleID.ToString(CultureInfo.InvariantCulture)));
                 LogController.Instance.AddLog(log);
 
                 //reorder all modules on tab
                 if (!uncopy)
                 {
-                    UpdateTabModuleOrder(moduleInfo.TabID);
+                    UpdateTabModuleOrder(IModuleInfo.TabID);
                     //ModuleRemove is only raised when doing a soft delete of the module
                     if (softDelete)
                     { 
-                        EventManager.Instance.OnModuleRemoved(new ModuleEventArgs { Module = moduleInfo });
+                        EventManager.Instance.OnModuleRemoved(new ModuleEventArgs { Module = IModuleInfo });
                     }
                 }
 
                 //check if all modules instances have been deleted
-                if (GetModule(moduleInfo.ModuleID, Null.NullInteger, true).TabID == Null.NullInteger)
+                if (GetModule(IModuleInfo.ModuleID, Null.NullInteger, true).TabID == Null.NullInteger)
                 {
                     //hard delete the module
-                    DeleteModule(moduleInfo.ModuleID);
+                    DeleteModule(IModuleInfo.ModuleID);
                 }
                 
-                DataCache.RemoveCache(string.Format(DataCache.SingleTabModuleCacheKey, moduleInfo.TabModuleID));
-                ClearCache(moduleInfo.TabID);
+                DataCache.RemoveCache(string.Format(DataCache.SingleTabModuleCacheKey, IModuleInfo.TabModuleID));
+                ClearCache(IModuleInfo.TabID);
             }
         }
 
@@ -859,7 +860,7 @@ namespace DotNetNuke.Entities.Modules
         /// Update content item when the module title changed.
         /// </summary>
         /// <param name="module"></param>
-        private void UpdateContentItem(ModuleInfo module)
+        private void UpdateContentItem(IModuleInfo module)
         {
             IContentController contentController = Util.GetContentController();
             if (module.Content != module.ModuleTitle)
@@ -874,11 +875,11 @@ namespace DotNetNuke.Entities.Modules
         #region Public Methods
 
         /// <summary>
-        /// Check if a ModuleInfo belongs to the referenced Tab or not
+        /// Check if a IModuleInfo belongs to the referenced Tab or not
         /// </summary>
-        /// <param name="module">A ModuleInfo object to be checked</param>
+        /// <param name="module">A IModuleInfo object to be checked</param>
         /// <returns>True is TabId points to a different tab from initial Tab where the module was added. Otherwise, False</returns>
-        public bool IsSharedModule(ModuleInfo module)
+        public bool IsSharedModule(IModuleInfo module)
         {
             var contentController = Util.GetContentController();
             var content = contentController.GetContentItem(module.ContentItemId);
@@ -888,9 +889,9 @@ namespace DotNetNuke.Entities.Modules
         /// <summary>
         /// Get the Tab ID corresponding to the initial Tab where the module was added
         /// </summary>
-        /// <param name="module">A ModuleInfo object to be checked</param>
+        /// <param name="module">A IModuleInfo object to be checked</param>
         /// <returns>The Tab Id from initial Tab where the module was added</returns>
-        public int GetMasterTabId(ModuleInfo module)
+        public int GetMasterTabId(IModuleInfo module)
         {
             var contentController = Util.GetContentController();
             var content = contentController.GetContentItem(module.ContentItemId);
@@ -900,9 +901,9 @@ namespace DotNetNuke.Entities.Modules
         /// <summary>
         /// add a module to a page
         /// </summary>
-        /// <param name="module">moduleInfo for the module to create</param>
+        /// <param name="module">IModuleInfo for the module to create</param>
         /// <returns>ID of the created module</returns>
-        public int AddModule(ModuleInfo module)
+        public int AddModule(IModuleInfo module)
         {
             //add module
             AddModuleInternal(module);
@@ -910,7 +911,7 @@ namespace DotNetNuke.Entities.Modules
             var currentUser = UserController.Instance.GetCurrentUserInfo();
 
             //Lets see if the module already exists
-            ModuleInfo tmpModule = GetModule(module.ModuleID, module.TabID, false);
+            IModuleInfo tmpModule = GetModule(module.ModuleID, module.TabID, false);
             if (tmpModule != null)
             {
                 //Module Exists already
@@ -1017,12 +1018,12 @@ namespace DotNetNuke.Entities.Modules
         /// <param name="destinationTab">The destination tab.</param>
         /// <param name="toPaneName">Name of to pane.</param>
         /// <param name="includeSettings">if set to <c>true</c> include settings.</param>
-        public void CopyModule(ModuleInfo sourceModule, TabInfo destinationTab, string toPaneName, bool includeSettings)
+        public void CopyModule(IModuleInfo sourceModule, TabInfo destinationTab, string toPaneName, bool includeSettings)
         {
             PortalInfo portal = PortalController.Instance.GetPortal(destinationTab.PortalID);
 
             //Clone Module
-            ModuleInfo destinationModule = sourceModule.Clone();
+            IModuleInfo destinationModule = sourceModule.Clone();
             if (!String.IsNullOrEmpty(toPaneName))
             {
                 destinationModule.PaneName = toPaneName;
@@ -1055,7 +1056,7 @@ namespace DotNetNuke.Entities.Modules
             {
                 if (sourceModule.DefaultLanguageModule != null && destinationTab.DefaultLanguageTab != null)
                 {
-                    ModuleInfo defaultLanguageModule = GetModule(sourceModule.DefaultLanguageModule.ModuleID, destinationTab.DefaultLanguageTab.TabID, false);
+                    IModuleInfo defaultLanguageModule = GetModule(sourceModule.DefaultLanguageModule.ModuleID, destinationTab.DefaultLanguageTab.TabID, false);
 
                     if (defaultLanguageModule != null)
                     {
@@ -1142,9 +1143,9 @@ namespace DotNetNuke.Entities.Modules
         /// <param name="includeAllTabsMobules">if set to <c>true</c> will include modules which shown on all pages, this is used when create localized copy.</param>
         public void CopyModules(TabInfo sourceTab, TabInfo destinationTab, bool asReference, bool includeAllTabsMobules)
         {
-            foreach (KeyValuePair<int, ModuleInfo> kvp in GetTabModules(sourceTab.TabID))
+            foreach (KeyValuePair<int, IModuleInfo> kvp in GetTabModules(sourceTab.TabID))
             {
-                ModuleInfo sourceModule = kvp.Value;
+                IModuleInfo sourceModule = kvp.Value;
 
                 // if the module shows on all pages does not need to be copied since it will
                 // be already added to this page
@@ -1172,7 +1173,7 @@ namespace DotNetNuke.Entities.Modules
         /// <param name = "module"></param>
         /// <remarks>
         /// </remarks>
-        public void CreateContentItem(ModuleInfo module)
+        public void CreateContentItem(IModuleInfo module)
         {
             ContentType contentType  = ContentType.Module;
             //This module does not have a valid ContentItem
@@ -1204,7 +1205,7 @@ namespace DotNetNuke.Entities.Modules
         ///	<param name="deleteBaseModule">A flag to indicate whether to delete the Module itself</param>
         public void DeleteAllModules(int moduleId, int tabId, List<TabInfo> fromTabs, bool softDelete, bool includeCurrent, bool deleteBaseModule)
         {
-            var moduleInfo = GetModule(moduleId, tabId, false); 
+            var IModuleInfo = GetModule(moduleId, tabId, false); 
 
             //Iterate through collection deleting the module from each Tab (except the current)
             foreach (TabInfo objTab in fromTabs)
@@ -1227,7 +1228,7 @@ namespace DotNetNuke.Entities.Modules
                 //ModuleRemove is only raised when doing a soft delete of the module
                 if (softDelete)
                 {
-                    EventManager.Instance.OnModuleRemoved(new ModuleEventArgs { Module = moduleInfo });
+                    EventManager.Instance.OnModuleRemoved(new ModuleEventArgs { Module = IModuleInfo });
                 }
             }
         }
@@ -1239,7 +1240,7 @@ namespace DotNetNuke.Entities.Modules
         public void DeleteModule(int moduleId)
         {
             //Get the module
-            ModuleInfo module = GetModule(moduleId, Null.NullInteger, true);
+            IModuleInfo module = GetModule(moduleId, Null.NullInteger, true);
             //Delete Module
             dataProvider.DeleteModule(moduleId);
 
@@ -1290,12 +1291,12 @@ namespace DotNetNuke.Entities.Modules
         /// <param name="softDelete">A flag that determines whether the instance should be soft-deleted</param>
         public void DeleteTabModule(int tabId, int moduleId, bool softDelete)
         {
-            ModuleInfo moduleInfo = GetModule(moduleId, tabId, false);            
-            DeleteTabModuleInternal(moduleInfo, softDelete);
+            IModuleInfo IModuleInfo = GetModule(moduleId, tabId, false);            
+            DeleteTabModuleInternal(IModuleInfo, softDelete);
             var userId = UserController.Instance.GetCurrentUserInfo().UserID;
             if (softDelete)
             {
-                TabChangeTracker.Instance.TrackModuleDeletion(moduleInfo, Null.NullInteger, userId);
+                TabChangeTracker.Instance.TrackModuleDeletion(IModuleInfo, Null.NullInteger, userId);
             }
         }
 
@@ -1323,14 +1324,14 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <param name="sourceModule">The source module.</param>
         /// <returns>new module id</returns>
-        public int DeLocalizeModule(ModuleInfo sourceModule)
+        public int DeLocalizeModule(IModuleInfo sourceModule)
         {
             int moduleId = Null.NullInteger;
 
             if (sourceModule != null && sourceModule.DefaultLanguageModule != null)
             {
                 // clone the module object ( to avoid creating an object reference to the data cache )
-                ModuleInfo newModule = sourceModule.Clone();
+                IModuleInfo newModule = sourceModule.Clone();
 
                 //Get the Module ID of the default language instance
                 newModule.ModuleID = sourceModule.DefaultLanguageModule.ModuleID;
@@ -1395,11 +1396,11 @@ namespace DotNetNuke.Entities.Modules
         /// <summary>
         /// get info of all modules in any portal of the installation
         /// </summary>
-        /// <returns>moduleInfo of all modules</returns>
+        /// <returns>IModuleInfo of all modules</returns>
         /// <remarks>created for upgrade purposes</remarks>
         public ArrayList GetAllModules()
         {
-            return CBO.FillCollection(dataProvider.GetAllModules(), typeof(ModuleInfo));
+            return CBO.FillCollection(dataProvider.GetAllModules(), typeof(IModuleInfo));
         }
 
         /// <summary>
@@ -1407,30 +1408,30 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <param name="portalID">ID of the portal</param>
         /// <param name="allTabs">specify, whether to return modules to be shown on all tabs or those to be shown on specified tabs</param>
-        /// <returns>ArrayList of TabModuleInfo objects</returns>
+        /// <returns>ArrayList of TabIModuleInfo objects</returns>
         public ArrayList GetAllTabsModules(int portalID, bool allTabs)
         {
-            return CBO.FillCollection(dataProvider.GetAllTabsModules(portalID, allTabs), typeof(ModuleInfo));
+            return CBO.FillCollection(dataProvider.GetAllTabsModules(portalID, allTabs), typeof(IModuleInfo));
         }
 
         /// <summary>
         ///   get TabModule objects that are linked to a particular ModuleID
         /// </summary>
         /// <param name = "moduleID">ID of the module</param>
-        /// <returns>ArrayList of TabModuleInfo objects</returns>
+        /// <returns>ArrayList of TabIModuleInfo objects</returns>
         public ArrayList GetAllTabsModulesByModuleID(int moduleID)
         {
-            return CBO.FillCollection(dataProvider.GetAllTabsModulesByModuleID(moduleID), typeof(ModuleInfo));
+            return CBO.FillCollection(dataProvider.GetAllTabsModulesByModuleID(moduleID), typeof(IModuleInfo));
         }
 
         /// <summary>
         /// get a Module object
         /// </summary>
         /// <param name="moduleID">ID of the module</param>
-        /// <returns>ModuleInfo object</returns>
+        /// <returns>IModuleInfo object</returns>
         /// <remarks>This overload ignores any cached values and always retrieves the latest data
         /// from the database.</remarks>
-        public ModuleInfo GetModule(int moduleID)
+        public IModuleInfo GetModule(int moduleID)
         {
             return GetModule(moduleID, Null.NullInteger, true);
         }
@@ -1440,8 +1441,8 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <param name="moduleID">ID of the module</param>
         /// <param name="tabID">ID of the page</param>
-        /// <returns>ModuleInfo object</returns>
-        public ModuleInfo GetModule(int moduleID, int tabID)
+        /// <returns>IModuleInfo object</returns>
+        public IModuleInfo GetModule(int moduleID, int tabID)
         {
             return GetModule(moduleID, tabID, false);
         }
@@ -1452,10 +1453,10 @@ namespace DotNetNuke.Entities.Modules
         /// <param name="moduleID">ID of the module</param>
         /// <param name="tabID">ID of the page</param>
         /// <param name="ignoreCache">flag, if data shall not be taken from cache</param>
-        /// <returns>ModuleInfo object</returns>
-        public ModuleInfo GetModule(int moduleID, int tabID, bool ignoreCache)
+        /// <returns>IModuleInfo object</returns>
+        public IModuleInfo GetModule(int moduleID, int tabID, bool ignoreCache)
         {
-            ModuleInfo modInfo = null;
+            IModuleInfo modInfo = null;
             bool bFound = false;
             if (!ignoreCache)
             {
@@ -1465,7 +1466,7 @@ namespace DotNetNuke.Entities.Modules
             }
             if (ignoreCache || !bFound)
             {
-                modInfo = CBO.FillObject<ModuleInfo>(dataProvider.GetModule(moduleID, tabID));
+                modInfo = CBO.FillObject<IModuleInfo>(dataProvider.GetModule(moduleID, tabID));
             }
             return modInfo;
         }
@@ -1477,13 +1478,13 @@ namespace DotNetNuke.Entities.Modules
         /// <param name = "tabid">ID of the tab</param>
         /// <param name = "portalId">ID of the portal</param>
         /// <param name = "locale">The wanted locale</param>
-        /// <returns>ModuleInfo associated to submitted locale</returns>
-        public ModuleInfo GetModuleByCulture(int ModuleId, int tabid, int portalId, Locale locale)
+        /// <returns>IModuleInfo associated to submitted locale</returns>
+        public IModuleInfo GetModuleByCulture(int ModuleId, int tabid, int portalId, Locale locale)
         {
-            ModuleInfo localizedModule = null;
+            IModuleInfo localizedModule = null;
 
             //Get Module specified by Id
-            ModuleInfo originalModule = GetModule(ModuleId, tabid, false);
+            IModuleInfo originalModule = GetModule(ModuleId, tabid, false);
 
             if (locale != null && originalModule != null)
             {
@@ -1522,22 +1523,22 @@ namespace DotNetNuke.Entities.Modules
         }
 
         /// <summary>
-        /// Get ModuleInfo object of first module instance with a given name of the module definition
+        /// Get IModuleInfo object of first module instance with a given name of the module definition
         /// </summary>
         /// <param name="portalId">ID of the portal, where to look for the module</param>
         /// <param name="definitionName">The name of module definition (NOTE: this looks at <see cref="ModuleDefinitionInfo.DefinitionName"/>, not <see cref="ModuleDefinitionInfo.FriendlyName"/>)</param>
-        /// <returns>ModuleInfo of first module instance</returns>
+        /// <returns>IModuleInfo of first module instance</returns>
         /// <remarks>preferably used for admin and host modules</remarks>
-        public ModuleInfo GetModuleByDefinition(int portalId, string definitionName)
+        public IModuleInfo GetModuleByDefinition(int portalId, string definitionName)
         {
             //declare return object
-            ModuleInfo module;
+            IModuleInfo module;
 
             //format cache key
             string key = string.Format(DataCache.ModuleCacheKey, portalId);
 
             //get module dictionary from cache
-            var modules = DataCache.GetCache<Dictionary<string, ModuleInfo>>(key) ?? new Dictionary<string, ModuleInfo>();
+            var modules = DataCache.GetCache<Dictionary<string, IModuleInfo>>(key) ?? new Dictionary<string, IModuleInfo>();
             if (modules.ContainsKey(definitionName))
             {
                 module = modules[definitionName];
@@ -1545,8 +1546,8 @@ namespace DotNetNuke.Entities.Modules
             else
             {
                 //clone the dictionary so that we have a local copy
-                var clonemodules = new Dictionary<string, ModuleInfo>();
-                foreach (ModuleInfo m in modules.Values)
+                var clonemodules = new Dictionary<string, IModuleInfo>();
+                foreach (IModuleInfo m in modules.Values)
                 {
                     clonemodules[m.ModuleDefinition.DefinitionName] = m;
                 }
@@ -1555,7 +1556,7 @@ namespace DotNetNuke.Entities.Modules
                 try
                 {
                     //hydrate object
-                    module = CBO.FillObject<ModuleInfo>(dr);
+                    module = CBO.FillObject<IModuleInfo>(dr);
                 }
                 finally
                 {
@@ -1587,19 +1588,19 @@ namespace DotNetNuke.Entities.Modules
         /// <returns></returns>
         /// <remarks>
         /// </remarks>
-        public ModuleInfo GetModuleByUniqueID(Guid uniqueID)
+        public IModuleInfo GetModuleByUniqueID(Guid uniqueID)
         {
-            return CBO.FillObject<ModuleInfo>(dataProvider.GetModuleByUniqueID(uniqueID));
+            return CBO.FillObject<IModuleInfo>(dataProvider.GetModuleByUniqueID(uniqueID));
         }
 
         /// <summary>
         /// get all Module objects of a portal
         /// </summary>
         /// <param name="portalID">ID of the portal</param>
-        /// <returns>ArrayList of ModuleInfo objects</returns>
+        /// <returns>ArrayList of IModuleInfo objects</returns>
         public ArrayList GetModules(int portalID)
         {
-            return CBO.FillCollection(dataProvider.GetModules(portalID), typeof(ModuleInfo));
+            return CBO.FillCollection(dataProvider.GetModules(portalID), typeof(IModuleInfo));
         }
 
         /// <summary>
@@ -1610,7 +1611,7 @@ namespace DotNetNuke.Entities.Modules
         /// <returns>module collection</returns>
         public ArrayList GetModulesByDefinition(int portalID, string definitionName)
         {
-            return CBO.FillCollection(DataProvider.Instance().GetModuleByDefinition(portalID, definitionName), typeof(ModuleInfo));
+            return CBO.FillCollection(DataProvider.Instance().GetModuleByDefinition(portalID, definitionName), typeof(IModuleInfo));
         }
 
         /// <summary>
@@ -1638,44 +1639,44 @@ namespace DotNetNuke.Entities.Modules
         /// either by inheriting from ModuleSearchBase or implementing the older ISearchable interface.
         /// </summary>
         /// <param name="portalID">ID of the portal to be searched</param>
-        /// <returns>Arraylist of ModuleInfo for modules supporting search.</returns>
+        /// <returns>Arraylist of IModuleInfo for modules supporting search.</returns>
         public ArrayList GetSearchModules(int portalID)
         {
-            return CBO.FillCollection(dataProvider.GetSearchModules(portalID), typeof(ModuleInfo));
+            return CBO.FillCollection(dataProvider.GetSearchModules(portalID), typeof(IModuleInfo));
         }
 
         /// <summary>
         ///   get a Module object
         /// </summary>
         /// <param name = "tabModuleID">ID of the tabmodule</param>
-        /// <returns>An ModuleInfo object</returns>
-        public ModuleInfo GetTabModule(int tabModuleID)
+        /// <returns>An IModuleInfo object</returns>
+        public IModuleInfo GetTabModule(int tabModuleID)
         {
             var cacheKey = string.Format(DataCache.SingleTabModuleCacheKey, tabModuleID);
-            return CBO.GetCachedObject<ModuleInfo>(
+            return CBO.GetCachedObject<IModuleInfo>(
                 new CacheItemArgs(cacheKey, DataCache.TabModuleCacheTimeOut, DataCache.TabModuleCachePriority),
-                    c => CBO.FillObject<ModuleInfo>(dataProvider.GetTabModule(tabModuleID)));
+                    c => CBO.FillObject<IModuleInfo>(dataProvider.GetTabModule(tabModuleID)));
         }
 
         /// <summary>
         /// Get all Module references on a tab
         /// </summary>
         /// <param name="tabId"></param>
-        /// <returns>Dictionary of ModuleID and ModuleInfo</returns>
-        public Dictionary<int, ModuleInfo> GetTabModules(int tabId)
+        /// <returns>Dictionary of ModuleID and IModuleInfo</returns>
+        public Dictionary<int, IModuleInfo> GetTabModules(int tabId)
         {
             var cacheKey = string.Format(DataCache.TabModuleCacheKey, tabId);
-            return CBO.GetCachedObject<Dictionary<int, ModuleInfo>>(new CacheItemArgs(cacheKey,
+            return CBO.GetCachedObject<Dictionary<int, IModuleInfo>>(new CacheItemArgs(cacheKey,
                                                                             DataCache.TabModuleCacheTimeOut,
                                                                             DataCache.TabModuleCachePriority),
                                                                     c => GetModulesCurrentPage(tabId));
         }
 
-        private Dictionary<int, ModuleInfo> GetModulesCurrentPage(int tabId)
+        private Dictionary<int, IModuleInfo> GetModulesCurrentPage(int tabId)
         {
-            var modules = CBO.FillCollection<ModuleInfo>(DataProvider.Instance().GetTabModules(tabId));
+            var modules = CBO.FillCollection<IModuleInfo>(DataProvider.Instance().GetTabModules(tabId));
             
-            var dictionary = new Dictionary<int, ModuleInfo>();
+            var dictionary = new Dictionary<int, IModuleInfo>();
             foreach (var module in modules)
             {
                 dictionary[module.ModuleID] = module;
@@ -1687,13 +1688,13 @@ namespace DotNetNuke.Entities.Modules
         ///   Get a list of all TabModule references of a module instance
         /// </summary>
         /// <param name = "moduleID">ID of the Module</param>
-        /// <returns>ArrayList of ModuleInfo</returns>
-        public IList<ModuleInfo> GetTabModulesByModule(int moduleID)
+        /// <returns>ArrayList of IModuleInfo</returns>
+        public IList<IModuleInfo> GetTabModulesByModule(int moduleID)
         {
-            return CBO.FillCollection<ModuleInfo>(dataProvider.GetModule(moduleID, Null.NullInteger));
+            return CBO.FillCollection<IModuleInfo>(dataProvider.GetModule(moduleID, Null.NullInteger));
         }
 
-        public void InitialModulePermission(ModuleInfo module, int tabId, int permissionType)
+        public void InitialModulePermission(IModuleInfo module, int tabId, int permissionType)
         {
             var tabPermissions = TabPermissionController.GetTabPermissions(tabId, module.PortalID);
             var permissionController = new PermissionController();
@@ -1753,18 +1754,18 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-        public void LocalizeModule(ModuleInfo sourceModule, Locale locale)
+        public void LocalizeModule(IModuleInfo sourceModule, Locale locale)
         {
             try
             {
                 // we could be working from a single culture page that is not in the default language, 
                 // so we need to test whether or not the module is going to be localized for the default locale
                 var defaultLocale = LocaleController.Instance.GetDefaultLocale(sourceModule.PortalID);
-                ModuleInfo defaultModule = locale.Code == defaultLocale.Code ? sourceModule : sourceModule.DefaultLanguageModule;
+                IModuleInfo defaultModule = locale.Code == defaultLocale.Code ? sourceModule : sourceModule.DefaultLanguageModule;
 
                 if (defaultModule != null)
                 {
-                    ModuleInfo localizedModule;
+                    IModuleInfo localizedModule;
                     var alreadyLocalized = defaultModule.LocalizedModules.TryGetValue(locale.Code, out localizedModule)
                                             && localizedModule.ModuleID != defaultModule.ModuleID;
                     var tabModules = GetTabModulesByModule(defaultModule.ModuleID);
@@ -1776,11 +1777,11 @@ namespace DotNetNuke.Entities.Modules
                         var newModuleId = alreadyLocalized ? localizedModule.ModuleID : LocalizeModuleInternal(sourceModule);
 
                         //Update Reference Copies
-                        foreach (ModuleInfo tm in tabModules)
+                        foreach (IModuleInfo tm in tabModules)
                         {
                             if (tm.IsDefaultLanguage)
                             {
-                                ModuleInfo localModule;
+                                IModuleInfo localModule;
                                 if (tm.LocalizedModules.TryGetValue(locale.Code, out localModule))
                                 {
                                     localModule.ModuleID = newModuleId;
@@ -1825,7 +1826,7 @@ namespace DotNetNuke.Entities.Modules
         /// Restores the module.
         /// </summary>
         /// <param name="objModule">The module.</param>
-        public void RestoreModule(ModuleInfo objModule)
+        public void RestoreModule(IModuleInfo objModule)
         {
             dataProvider.RestoreTabModule(objModule.TabID, objModule.ModuleID);
             var userId = UserController.Instance.GetCurrentUserInfo().UserID;
@@ -1834,10 +1835,10 @@ namespace DotNetNuke.Entities.Modules
         }
 
         /// <summary>
-        /// Update module settings and permissions in database from ModuleInfo
+        /// Update module settings and permissions in database from IModuleInfo
         /// </summary>
-        /// <param name="module">ModuleInfo of the module to update</param>
-        public void UpdateModule(ModuleInfo module)
+        /// <param name="module">IModuleInfo of the module to update</param>
+        public void UpdateModule(IModuleInfo module)
         {
             //Update ContentItem If neccessary
             if (module.ModuleID != Null.NullInteger)
@@ -1959,7 +1960,7 @@ namespace DotNetNuke.Entities.Modules
                     foreach (KeyValuePair<int, TabInfo> tabPair in TabController.Instance.GetTabsByPortal(module.PortalID))
                     {
                         TabInfo tab = tabPair.Value;
-                        foreach (KeyValuePair<int, ModuleInfo> modulePair in GetTabModules(tab.TabID))
+                        foreach (KeyValuePair<int, IModuleInfo> modulePair in GetTabModules(tab.TabID))
                         {
                             var targetModule = modulePair.Value;
                             targetModule.VersionGuid = Guid.NewGuid();
@@ -2001,7 +2002,7 @@ namespace DotNetNuke.Entities.Modules
                 }
             }
             //Clear Cache for all TabModules
-            foreach (ModuleInfo tabModule in GetTabModulesByModule(module.ModuleID))
+            foreach (IModuleInfo tabModule in GetTabModulesByModule(module.ModuleID))
             {
                 ClearCache(tabModule.TabID);
             }
@@ -2018,8 +2019,8 @@ namespace DotNetNuke.Entities.Modules
         /// <param name="paneName">name of the pane, the module is placed in on the page</param>
         public void UpdateModuleOrder(int tabId, int moduleId, int moduleOrder, string paneName)
         {
-            ModuleInfo moduleInfo = GetModule(moduleId, tabId, false);
-            if (moduleInfo != null)
+            IModuleInfo IModuleInfo = GetModule(moduleId, tabId, false);
+            if (IModuleInfo != null)
             {
                 //adding a module to a new pane - places the module at the bottom of the pane 
                 if (moduleOrder == -1)
@@ -2092,9 +2093,9 @@ namespace DotNetNuke.Entities.Modules
 
                             if (!isDeleted)
                             {
-                                var moduleInfo = GetModule(moduleId, tabId, true);
+                                var IModuleInfo = GetModule(moduleId, tabId, true);
                                 var userInfo = UserController.Instance.GetCurrentUserInfo();
-                                TabChangeTracker.Instance.TrackModuleModification(moduleInfo, Null.NullInteger,
+                                TabChangeTracker.Instance.TrackModuleModification(IModuleInfo, Null.NullInteger,
                                     userInfo.UserID);
                             }
                         }
@@ -2171,7 +2172,7 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <param name="localizedModule">The localized module.</param>
         /// <param name="isTranslated">if set to <c>true</c> will mark the module as translated].</param>
-        public void UpdateTranslationStatus(ModuleInfo localizedModule, bool isTranslated)
+        public void UpdateTranslationStatus(IModuleInfo localizedModule, bool isTranslated)
         {
             if (isTranslated && (localizedModule.DefaultLanguageModule != null))
             {
@@ -2195,10 +2196,10 @@ namespace DotNetNuke.Entities.Modules
         /// Deserializes the module.
         /// </summary>
         /// <param name="nodeModule">The node module.</param>
-        /// <param name="module">ModuleInfo of current module</param>
+        /// <param name="module">IModuleInfo of current module</param>
         /// <param name="portalId">The portal id.</param>
         /// <param name="tabId">The tab id.</param>
-        public static void DeserializeModule(XmlNode nodeModule, ModuleInfo module, int portalId, int tabId)
+        public static void DeserializeModule(XmlNode nodeModule, IModuleInfo module, int portalId, int tabId)
         {
             var moduleDefinition = GetModuleDefinition(nodeModule);
 
@@ -2206,8 +2207,8 @@ namespace DotNetNuke.Entities.Modules
             var docPane = new XmlDocument { XmlResolver = null };
             docPane.LoadXml(String.Format("<pane><name>{0}</name></pane>", module.PaneName));
 
-            // Create ModuleInfo of Xml
-            ModuleInfo sourceModule = DeserializeModule(nodeModule, docPane.DocumentElement, portalId, tabId, moduleDefinition.ModuleDefID);
+            // Create IModuleInfo of Xml
+            IModuleInfo sourceModule = DeserializeModule(nodeModule, docPane.DocumentElement, portalId, tabId, moduleDefinition.ModuleDefID);
 
             // Copy properties from sourceModule to given (actual) module
             module.ModuleTitle = sourceModule.ModuleTitle;
@@ -2291,7 +2292,7 @@ namespace DotNetNuke.Entities.Modules
                 //If Mode is Merge Check if Module exists
                 if (!FindModule(nodeModule, tabId, mergeTabs))
                 {
-                    ModuleInfo module = DeserializeModule(nodeModule, nodePane, portalId, tabId, moduleDefinition.ModuleDefID);
+                    IModuleInfo module = DeserializeModule(nodeModule, nodePane, portalId, tabId, moduleDefinition.ModuleDefID);
                     //if the module is marked as show on all tabs, then check whether the module is exist in current website and it also
                     //still marked as shown on all tabs, this action will make sure there is no duplicate modules created on new tab.
                     if (module.AllTabs)
@@ -2358,11 +2359,11 @@ namespace DotNetNuke.Entities.Modules
         /// SerializeModule
         /// </summary>
         /// <param name="xmlModule">The Xml Document to use for the Module</param>
-        /// <param name="module">The ModuleInfo object to serialize</param>
+        /// <param name="module">The IModuleInfo object to serialize</param>
         /// <param name="includeContent">A flak that determines whether the content of the module is serialised.</param>
-        public static XmlNode SerializeModule(XmlDocument xmlModule, ModuleInfo module, bool includeContent)
+        public static XmlNode SerializeModule(XmlDocument xmlModule, IModuleInfo module, bool includeContent)
         {
-            var serializer = new XmlSerializer(typeof(ModuleInfo));
+            var serializer = new XmlSerializer(typeof(IModuleInfo));
             var sw = new StringWriter();
             serializer.Serialize(sw, module);
             xmlModule.LoadXml(sw.GetStringBuilder().ToString());
@@ -2443,7 +2444,7 @@ namespace DotNetNuke.Entities.Modules
         public static void SynchronizeModule(int moduleID)
         {
             var modules = Instance.GetTabModulesByModule(moduleID);
-            foreach (ModuleInfo module in modules)
+            foreach (IModuleInfo module in modules)
             {
                 Hashtable tabSettings = TabController.Instance.GetTabSettings(module.TabID);
                 if (tabSettings["CacheProvider"] != null && tabSettings["CacheProvider"].ToString().Length > 0)

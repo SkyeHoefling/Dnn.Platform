@@ -21,6 +21,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using DotNetNuke.Library.Contracts.Entities.Tabs;
 
 namespace DotNetNuke.Entities.Tabs
 {
@@ -70,16 +71,16 @@ namespace DotNetNuke.Entities.Tabs
             return seqNum;
         }
 
-        public static TabUrlInfo FindByAliasId(this List<TabUrlInfo> redirects, int portalAliasId)
+        public static ITabUrlInfo FindByAliasId(this List<ITabUrlInfo> redirects, int portalAliasId)
         {
             return redirects.FirstOrDefault(redirect => redirect.PortalAliasId == portalAliasId && portalAliasId != 0);
         }
 
-        public static TabUrlInfo CurrentUrl(this List<TabUrlInfo> redirects, string cultureCode)
+        public static ITabUrlInfo CurrentUrl(this List<ITabUrlInfo> redirects, string cultureCode)
         {
-            TabUrlInfo result = null;
-            TabUrlInfo lastSystemUrl = null;
-            TabUrlInfo lastCustomUrl = null;
+            ITabUrlInfo result = null;
+            ITabUrlInfo lastSystemUrl = null;
+            ITabUrlInfo lastCustomUrl = null;
             foreach (var redirect in redirects)
             {
                 if (redirect.HttpStatus == "200" && redirect.CultureCode == cultureCode)

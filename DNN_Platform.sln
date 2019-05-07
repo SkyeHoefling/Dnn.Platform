@@ -449,7 +449,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DNN.Integration.Test.Framew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.GoogleAnalyticsConnector", "DNN Platform\Connectors\GoogleAnalytics\Dnn.GoogleAnalyticsConnector.csproj", "{ADB57FFD-677C-4C30-9723-6EE0A475315B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetNuke.Library.Contracts", "DNN Platform\DotNetNuke.Library.Contracts\DotNetNuke.Library.Contracts.csproj", "{30FDE113-22C7-48D5-9F72-3D7472D9DA97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetNuke.Library.Contracts", "DNN Platform\DotNetNuke.Library.Contracts\DotNetNuke.Library.Contracts.csproj", "{30FDE113-22C7-48D5-9F72-3D7472D9DA97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

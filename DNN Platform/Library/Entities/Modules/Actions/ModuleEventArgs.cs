@@ -19,12 +19,13 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
+using DotNetNuke.Library.Contracts.Entities.Modules;
 using System;
 
 namespace DotNetNuke.Entities.Modules.Actions
 {
     public class ModuleEventArgs : EventArgs
     {
-        public ModuleInfo Module { get; internal set; }
+        public IModuleInfo Module { get; internal set; }
     }
 }

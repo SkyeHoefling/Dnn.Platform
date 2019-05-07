@@ -32,6 +32,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Content;
 using DotNetNuke.Services.FileSystem;
 
 #endregion
@@ -79,7 +80,7 @@ namespace DotNetNuke.Entities.Content
 	/// </code>
 	/// </example>
 	[Serializable]
-    public class ContentItem : BaseEntityInfo, IHydratable
+    public class ContentItem : BaseEntityInfo, IHydratable, IContentItem
     {
         private NameValueCollection _metadata;
 

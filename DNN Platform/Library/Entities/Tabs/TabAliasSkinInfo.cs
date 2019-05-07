@@ -28,6 +28,7 @@ using System.Data;
 
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Tabs;
 
 #endregion
 
@@ -37,7 +38,7 @@ namespace DotNetNuke.Entities.Tabs
     ///Class to represent a TabAliasSkinInfo object
     ///</summary>
     [Serializable]
-    public class TabAliasSkinInfo : BaseEntityInfo, IHydratable
+    public class TabAliasSkinInfo : BaseEntityInfo, IHydratable, ITabAliasSkinInfo
     {
         #region Public Properties
 

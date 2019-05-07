@@ -30,6 +30,7 @@ using DotNetNuke.Data;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Library.Contracts.Entities.Modules;
 using DotNetNuke.Security.Roles;
 
 #endregion
@@ -208,7 +209,7 @@ namespace DotNetNuke.Security.Permissions
         /// </summary>
         /// <param name="module">The Module to update</param>
         /// -----------------------------------------------------------------------------
-        public static void SaveModulePermissions(ModuleInfo module)
+        public static void SaveModulePermissions(IModuleInfo module)
         {
             _provider.SaveModulePermissions(module);
             DataCache.ClearModulePermissionsCache(module.TabID);

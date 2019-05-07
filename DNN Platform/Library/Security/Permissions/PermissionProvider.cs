@@ -32,6 +32,9 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Library.Contracts.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Tabs;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Exceptions;
@@ -338,7 +341,7 @@ namespace DotNetNuke.Security.Permissions
             //&& !PortalSecurity.IsDenied(folder.FolderPermissions.ToString(AdminFolderPermissionKey));
         }
 
-        private bool HasPagePermission(TabInfo tab, string permissionKey)
+        private bool HasPagePermission(ITabInfo tab, string permissionKey)
         {
             return (PortalSecurity.IsInRoles(tab.TabPermissions.ToString(permissionKey))
                     || PortalSecurity.IsInRoles(tab.TabPermissions.ToString(AdminPagePermissionKey)))
@@ -368,7 +371,7 @@ namespace DotNetNuke.Security.Permissions
             return isDenied;
         }
 
-        private bool IsDeniedTabPermission(TabPermissionCollection tabPermissions, string permissionKey)
+        private bool IsDeniedTabPermission(ITabPermissionCollection tabPermissions, string permissionKey)
         {
             bool isDenied = Null.NullBoolean;
             if (permissionKey.Contains(","))
@@ -472,21 +475,21 @@ namespace DotNetNuke.Security.Permissions
 
         #region Protected Methods
 
-        protected bool HasModulePermission(ModuleInfo moduleConfiguration, string permissionKey)
+        protected bool HasModulePermission(IModuleInfo moduleConfiguration, string permissionKey)
         {
             return CanViewModule(moduleConfiguration) &&
-                                (HasModulePermission(moduleConfiguration.ModulePermissions, permissionKey)
-                                 || HasModulePermission(moduleConfiguration.ModulePermissions, "EDIT"));
+                                (HasModulePermission((ModulePermissionCollection)moduleConfiguration.ModulePermissions, permissionKey)
+                                 || HasModulePermission((ModulePermissionCollection)moduleConfiguration.ModulePermissions, "EDIT"));
         }
 
-        protected bool IsDeniedModulePermission(ModuleInfo moduleConfiguration, string permissionKey)
+        protected bool IsDeniedModulePermission(IModuleInfo moduleConfiguration, string permissionKey)
         {
-            return IsDeniedModulePermission(moduleConfiguration.ModulePermissions, "VIEW")
-                        || IsDeniedModulePermission(moduleConfiguration.ModulePermissions, permissionKey)
-                        || IsDeniedModulePermission(moduleConfiguration.ModulePermissions, "EDIT");
+            return IsDeniedModulePermission((ModulePermissionCollection)moduleConfiguration.ModulePermissions, "VIEW")
+                        || IsDeniedModulePermission((ModulePermissionCollection)moduleConfiguration.ModulePermissions, permissionKey)
+                        || IsDeniedModulePermission((ModulePermissionCollection)moduleConfiguration.ModulePermissions, "EDIT");
         }
 
-        protected bool IsDeniedTabPermission(TabInfo tab, string permissionKey)
+        protected bool IsDeniedTabPermission(ITabInfo tab, string permissionKey)
         {
             return IsDeniedTabPermission(tab.TabPermissions, "VIEW")
                         || IsDeniedTabPermission(tab.TabPermissions, permissionKey)
@@ -799,12 +802,12 @@ namespace DotNetNuke.Security.Permissions
         /// </summary>
         /// <param name="module">The page</param>
         /// <returns>A flag indicating whether the user has permission</returns>
-        public virtual bool CanViewModule(ModuleInfo module)
+        public virtual bool CanViewModule(IModuleInfo module)
         {
             bool canView;
             if (module.InheritViewPermissions)
             {
-                TabInfo objTab = TabController.Instance.GetTab(module.TabID, module.PortalID, false);
+                ITabInfo objTab = TabController.Instance.GetTab(module.TabID, module.PortalID, false);
                 canView = TabPermissionController.CanViewPage(objTab);
             }
             else
@@ -971,7 +974,7 @@ namespace DotNetNuke.Security.Permissions
             if (module.ModulePermissions != null)
             {
                 ModulePermissionCollection modulePermissions = ModulePermissionController.GetModulePermissions(module.ModuleID, module.TabID);
-                if (!modulePermissions.CompareTo(module.ModulePermissions))
+                if (!modulePermissions.CompareTo((ModulePermissionCollection)module.ModulePermissions))
                 {
                     dataProvider.DeleteModulePermissionsByModuleID(module.ModuleID, module.PortalID);
 
@@ -1095,7 +1098,7 @@ namespace DotNetNuke.Security.Permissions
         /// </summary>
         /// <param name="tab">The page</param>
         /// <returns>A flag indicating whether the user has permission</returns>
-        public virtual bool CanManagePage(TabInfo tab)
+        public virtual bool CanManagePage(ITabInfo tab)
         {
             return HasPagePermission(tab, ManagePagePermissionKey);
         }
@@ -1105,7 +1108,7 @@ namespace DotNetNuke.Security.Permissions
         /// </summary>
         /// <param name="tab">The page</param>
         /// <returns>A flag indicating whether the user has permission</returns>
-        public virtual bool CanNavigateToPage(TabInfo tab)
+        public virtual bool CanNavigateToPage(ITabInfo tab)
         {
             return HasPagePermission(tab, NavigatePagePermissionKey) || HasPagePermission(tab, ViewPagePermissionKey);
         }
@@ -1115,7 +1118,7 @@ namespace DotNetNuke.Security.Permissions
         /// </summary>
         /// <param name="tab">The page</param>
         /// <returns>A flag indicating whether the user has permission</returns>
-        public virtual bool CanViewPage(TabInfo tab)
+        public virtual bool CanViewPage(ITabInfo tab)
         {
             return HasPagePermission(tab, ViewPagePermissionKey);
         }
@@ -1195,7 +1198,7 @@ namespace DotNetNuke.Security.Permissions
         public virtual void SaveTabPermissions(TabInfo tab)
         {
             TabPermissionCollection objCurrentTabPermissions = GetTabPermissions(tab.TabID, tab.PortalID);
-            if (!objCurrentTabPermissions.CompareTo(tab.TabPermissions))
+            if (!objCurrentTabPermissions.CompareTo((TabPermissionCollection)tab.TabPermissions))
             {
                 var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
                 var userId = UserController.Instance.GetCurrentUserInfo().UserID;
@@ -1206,7 +1209,7 @@ namespace DotNetNuke.Security.Permissions
                     EventLogController.Instance.AddLog(tab, portalSettings, userId, "", EventLogController.EventLogType.TABPERMISSION_DELETED);
                 }
 
-                if (tab.TabPermissions != null && tab.TabPermissions.Count > 0)
+                if (tab.TabPermissions != null && ((TabPermissionCollection)tab.TabPermissions).Count > 0)
                 {
                     foreach (TabPermissionInfo objTabPermission in tab.TabPermissions)
                     {

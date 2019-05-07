@@ -43,6 +43,9 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs.TabVersions;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Library.Contracts.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Tabs;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
@@ -55,16 +58,16 @@ namespace DotNetNuke.Entities.Tabs
 {
     [XmlRoot("tab", IsNullable = false)]
     [Serializable]
-    public class TabInfo : ContentItem, IPropertyAccess
+    public class TabInfo : ContentItem, IPropertyAccess, ITabInfo
     {
         #region Private Members
 
         private string _administratorRoles;
         private string _authorizedRoles;
-        private TabInfo _defaultLanguageTab;
+        private ITabInfo _defaultLanguageTab;
         private bool _isSuperTab;
-        private Dictionary<string, TabInfo> _localizedTabs;
-        private TabPermissionCollection _permissions;
+        private Dictionary<string, ITabInfo> _localizedTabs;
+        private ITabPermissionCollection _permissions;
         private Hashtable _settings;
         private string _skinDoctype;
         private bool _superTabIdSet = Null.NullBoolean;
@@ -73,9 +76,9 @@ namespace DotNetNuke.Entities.Tabs
         private string _iconFile;
         private string _iconFileLarge;
 
-        private List<TabAliasSkinInfo> _aliasSkins;
+        private List<ITabAliasSkinInfo> _aliasSkins;
         private Dictionary<string, string> _customAliases;
-        private List<TabUrlInfo> _tabUrls;
+        private List<ITabUrlInfo> _tabUrls;
         private ArrayList _modules;
 
 
@@ -267,7 +270,7 @@ namespace DotNetNuke.Entities.Tabs
         #region Public Properties
 
         [XmlIgnore]
-        public Dictionary<int, ModuleInfo> ChildModules
+        public Dictionary<int, IModuleInfo> ChildModules
         {
             get
             {
@@ -276,7 +279,7 @@ namespace DotNetNuke.Entities.Tabs
         }
 
         [XmlIgnore]
-        public TabInfo DefaultLanguageTab
+        public ITabInfo DefaultLanguageTab
         {
             get
             {
@@ -453,7 +456,7 @@ namespace DotNetNuke.Entities.Tabs
         }
 
         [XmlIgnore]
-        public Dictionary<string, TabInfo> LocalizedTabs
+        public Dictionary<string, ITabInfo> LocalizedTabs
         {
             get
             {
@@ -490,7 +493,7 @@ namespace DotNetNuke.Entities.Tabs
         }
 
         [XmlArray("tabpermissions"), XmlArrayItem("permission")]
-        public TabPermissionCollection TabPermissions
+        public ITabPermissionCollection TabPermissions
         {
             get
             {
@@ -508,7 +511,7 @@ namespace DotNetNuke.Entities.Tabs
         }
 
         [XmlIgnore]
-        public TabType TabType
+        public Library.Contracts.Entities.Tabs.TabType TabType
         {
             get
             {
@@ -521,11 +524,11 @@ namespace DotNetNuke.Entities.Tabs
         #region Url Properties
 
         [XmlIgnore]
-        public List<TabAliasSkinInfo> AliasSkins
+        public List<ITabAliasSkinInfo> AliasSkins
         {
             get
             {
-                return _aliasSkins ?? (_aliasSkins = (TabID == Null.NullInteger) ? new List<TabAliasSkinInfo>() : TabController.Instance.GetAliasSkins(TabID, PortalID));
+                return _aliasSkins ?? (_aliasSkins = (TabID == Null.NullInteger) ? new List<ITabAliasSkinInfo>() : TabController.Instance.GetAliasSkins(TabID, PortalID));
             }
         }
 
@@ -558,19 +561,19 @@ namespace DotNetNuke.Entities.Tabs
                     {
                         switch (TabType)
                         {
-                            case TabType.Normal:
+                            case Library.Contracts.Entities.Tabs.TabType.Normal:
                                 //normal tab
                                 fullUrl = TestableGlobals.Instance.NavigateURL(TabID, IsSuperTab);
                                 break;
-                            case TabType.Tab:
+                            case Library.Contracts.Entities.Tabs.TabType.Tab:
                                 //alternate tab url
                                 fullUrl = TestableGlobals.Instance.NavigateURL(Convert.ToInt32(Url));
                                 break;
-                            case TabType.File:
+                            case Library.Contracts.Entities.Tabs.TabType.File:
                                 //file url
                                 fullUrl = TestableGlobals.Instance.LinkClick(Url, TabID, Null.NullInteger);
                                 break;
-                            case TabType.Url:
+                            case Library.Contracts.Entities.Tabs.TabType.Url:
                                 //external url
                                 fullUrl = Url;
                                 break;
@@ -597,11 +600,11 @@ namespace DotNetNuke.Entities.Tabs
         }
 
         [XmlIgnore]
-        public List<TabUrlInfo> TabUrls
+        public List<ITabUrlInfo> TabUrls
         {
             get
             {
-                return _tabUrls ?? (_tabUrls = (TabID == Null.NullInteger) ? new List<TabUrlInfo>() : TabController.Instance.GetTabUrls(TabID, PortalID));
+                return _tabUrls ?? (_tabUrls = (TabID == Null.NullInteger) ? new List<ITabUrlInfo>() : TabController.Instance.GetTabUrls(TabID, PortalID));
             }
         }
 
@@ -894,7 +897,7 @@ namespace DotNetNuke.Entities.Tabs
 
         #region Public Methods
 
-        public TabInfo Clone()
+        public ITabInfo Clone()
         {
             var clonedTab = new TabInfo(_localizedTabNameDictionary, _fullUrlDictionary)
             {
@@ -1006,7 +1009,7 @@ namespace DotNetNuke.Entities.Tabs
             string url = null;
             if (_tabUrls != null && _tabUrls.Count > 0)
             {
-                TabUrlInfo tabUrl = _tabUrls.CurrentUrl(cultureCode);
+                ITabUrlInfo tabUrl = _tabUrls.CurrentUrl(cultureCode);
                 if (tabUrl != null)
                 {
                     url = tabUrl.Url;

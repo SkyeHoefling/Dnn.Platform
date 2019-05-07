@@ -23,6 +23,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Tabs;
+using DotNetNuke.Library.Contracts.Entities.Modules;
 using DotNetNuke.Services.Localization;
 
 namespace DotNetNuke.Entities.Modules
@@ -226,7 +227,7 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <param name="tabId"></param>
         /// <returns>Dictionary of ModuleID and ModuleInfo</returns>
-        Dictionary<int, ModuleInfo> GetTabModules(int tabId);
+        Dictionary<int, IModuleInfo> GetTabModules(int tabId);
 
         /// <summary>
         ///   Get a list of all TabModule references of a module instance

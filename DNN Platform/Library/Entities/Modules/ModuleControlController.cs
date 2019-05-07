@@ -29,6 +29,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Library.Contracts.Entities.Modules;
 
 #endregion
 
@@ -54,9 +55,9 @@ namespace DotNetNuke.Entities.Modules
         /// the Cache.
         /// </summary>
         /// -----------------------------------------------------------------------------
-        private static Dictionary<int, ModuleControlInfo> GetModuleControls()
+        private static Dictionary<int, IModuleControlInfo> GetModuleControls()
         {
-            return CBO.GetCachedObject<Dictionary<int, ModuleControlInfo>>(new CacheItemArgs(DataCache.ModuleControlsCacheKey, 
+            return CBO.GetCachedObject<Dictionary<int, IModuleControlInfo>>(new CacheItemArgs(DataCache.ModuleControlsCacheKey, 
                                                                                     DataCache.ModuleControlsCacheTimeOut, 
                                                                                     DataCache.ModuleControlsCachePriority), 
                                                                             GetModuleControlsCallBack);
@@ -104,7 +105,7 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <param name="moduleControlID">The ID of the Module Control to fetch</param>
         /// -----------------------------------------------------------------------------
-        public static ModuleControlInfo GetModuleControl(int moduleControlID)
+        public static IModuleControlInfo GetModuleControl(int moduleControlID)
         {           
             return (from kvp in GetModuleControls()
                     where kvp.Key == moduleControlID
@@ -118,7 +119,7 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <param name="moduleDefID">The ID of the Module Definition</param>
         /// -----------------------------------------------------------------------------
-        public static Dictionary<string, ModuleControlInfo> GetModuleControlsByModuleDefinitionID(int moduleDefID)
+        public static Dictionary<string, IModuleControlInfo> GetModuleControlsByModuleDefinitionID(int moduleDefID)
         {
             return GetModuleControls().Where(kvp => kvp.Value.ModuleDefID == moduleDefID)
                    .ToDictionary(kvp => kvp.Value.ControlKey, kvp => kvp.Value);
@@ -131,7 +132,7 @@ namespace DotNetNuke.Entities.Modules
         /// <param name="controlKey">The key for the control</param>
         /// <param name="moduleDefID">The ID of the Module Definition</param>
         /// -----------------------------------------------------------------------------
-        public static ModuleControlInfo GetModuleControlByControlKey(string controlKey, int moduleDefID)
+        public static IModuleControlInfo GetModuleControlByControlKey(string controlKey, int moduleDefID)
         {
             return (from kvp in GetModuleControls()
                     where kvp.Value.ControlKey.Equals(controlKey, StringComparison.InvariantCultureIgnoreCase)

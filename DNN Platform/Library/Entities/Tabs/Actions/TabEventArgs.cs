@@ -19,12 +19,13 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
+using DotNetNuke.Library.Contracts.Entities.Tabs;
 using System;
 
 namespace DotNetNuke.Entities.Tabs.Actions
 {
     public class TabEventArgs : EventArgs
     {
-        public TabInfo Tab { get; internal set; }
+        public ITabInfo Tab { get; internal set; }
     }
 }

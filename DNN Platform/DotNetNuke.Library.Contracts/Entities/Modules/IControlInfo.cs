@@ -4,5 +4,6 @@
     {
         string ControlKey { get; set; }
         string ControlSrc { get; set; }
+        bool SupportsPartialRendering { get; set; }
     }
 }

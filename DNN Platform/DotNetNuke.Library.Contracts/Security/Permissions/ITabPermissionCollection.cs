@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DotNetNuke.Library.Contracts.Security.Permissions
 {
-    public interface ITabPermissionCollection
+    public interface ITabPermissionCollection : IEnumerable
     {
         ITabPermissionInfo this[int index] { get; set; }
         int Add(ITabPermissionInfo value);
@@ -12,7 +12,7 @@ namespace DotNetNuke.Library.Contracts.Security.Permissions
         void AddRange(ArrayList tabPermissions);
         void AddRange(IEnumerable<ITabPermissionInfo> tabPermissions);
         void AddRange(ITabPermissionCollection tabPermissions);
-        bool CompareTo(ITabPermissionCollection objTabPermissionCollection);
+        //bool CompareTo(ITabPermissionCollection objTabPermissionCollection);
         bool Contains(ITabPermissionInfo value);
         int IndexOf(ITabPermissionInfo value);
         void Insert(int index, ITabPermissionInfo value);

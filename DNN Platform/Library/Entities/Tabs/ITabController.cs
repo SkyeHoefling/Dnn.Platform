@@ -24,6 +24,7 @@ using System.Collections.Generic;
 
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
+using DotNetNuke.Library.Contracts.Entities.Tabs;
 using DotNetNuke.Services.Localization;
 
 namespace DotNetNuke.Entities.Tabs
@@ -170,7 +171,7 @@ namespace DotNetNuke.Entities.Tabs
         /// <param name="tabId">the tab id</param>
         /// <param name="portalId">the portal id</param>
         /// <returns>list of TabAliasSkinInfo</returns>
-        List<TabAliasSkinInfo> GetAliasSkins(int tabId, int portalId);
+        List<ITabAliasSkinInfo> GetAliasSkins(int tabId, int portalId);
 
         /// <summary>
         /// Get the list of custom aliases associated with a page (tab)
@@ -278,7 +279,7 @@ namespace DotNetNuke.Entities.Tabs
         /// <param name="tabId">the tab id</param>
         /// <param name="portalId">the portal id</param>
         /// <returns>list of urls associated with a tab</returns>
-        List<TabUrlInfo> GetTabUrls(int tabId, int portalId);
+        List<ITabUrlInfo> GetTabUrls(int tabId, int portalId);
 
         /// <summary>
         /// Gives the translator role edit rights.

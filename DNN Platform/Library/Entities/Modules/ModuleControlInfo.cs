@@ -27,7 +27,8 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Security;
+using DotNetNuke.Library.Contracts.Entities.Modules;
+using DotNetNuke.Library.Contracts.Security;
 
 #endregion
 
@@ -43,7 +44,7 @@ namespace DotNetNuke.Entities.Modules
 	/// </summary>
 	/// -----------------------------------------------------------------------------
     [Serializable]
-    public class ModuleControlInfo : ControlInfo, IXmlSerializable, IHydratable
+    public class ModuleControlInfo : ControlInfo, IXmlSerializable, IHydratable, IModuleControlInfo
     {
         public ModuleControlInfo()
         {

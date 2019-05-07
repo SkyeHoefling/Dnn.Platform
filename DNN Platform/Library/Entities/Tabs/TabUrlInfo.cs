@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DotNetNuke.Library.Contracts.Entities.Tabs;
+using System;
 
 namespace DotNetNuke.Entities.Tabs
 {
@@ -6,13 +7,13 @@ namespace DotNetNuke.Entities.Tabs
     ///Class to represent a TabUrl object
     ///</summary>
     [Serializable] //584 support sql session state
-    public class TabUrlInfo
+    public class TabUrlInfo : ITabUrlInfo
     {
         #region Constructors
 
         public TabUrlInfo()
         {
-            PortalAliasUsage = PortalAliasUsageType.Default;
+            PortalAliasUsage = Library.Contracts.Entities.Tabs.PortalAliasUsageType.Default;
         }
 
         #endregion
@@ -23,7 +24,7 @@ namespace DotNetNuke.Entities.Tabs
         public string HttpStatus { get; set; }
         public bool IsSystem { get; set; }
         public int PortalAliasId { get; set; }
-        public PortalAliasUsageType PortalAliasUsage { get; set; }
+        public Library.Contracts.Entities.Tabs.PortalAliasUsageType PortalAliasUsage { get; set; }
         public string QueryString { get; set; }
         public int SeqNum { get; set; }
         public int TabId { get; set; }

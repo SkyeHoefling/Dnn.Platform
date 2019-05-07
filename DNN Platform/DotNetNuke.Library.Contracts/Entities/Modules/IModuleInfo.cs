@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Library.Contracts.Entities.Modules.Definitions;
+﻿using DotNetNuke.Library.Contracts.Entities.Content;
+using DotNetNuke.Library.Contracts.Entities.Modules.Definitions;
 using DotNetNuke.Library.Contracts.Entities.Tabs;
 using DotNetNuke.Library.Contracts.Security.Permissions;
 using System;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 
 namespace DotNetNuke.Library.Contracts.Entities.Modules
 {
-    public interface IModuleInfo
+    public interface IModuleInfo : IContentItem
     {
         string Alignment { get; set; }
         bool AllModules { get; set; }

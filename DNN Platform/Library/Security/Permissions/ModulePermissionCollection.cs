@@ -27,6 +27,7 @@ using System.Linq;
 
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 
 #endregion
 
@@ -43,7 +44,7 @@ namespace DotNetNuke.Security.Permissions
     /// </summary>
     /// -----------------------------------------------------------------------------
     [Serializable]
-    public class ModulePermissionCollection : CollectionBase
+    public class ModulePermissionCollection : CollectionBase, IModulePermissionCollection
     {
         public ModulePermissionCollection()
         {
@@ -81,11 +82,11 @@ namespace DotNetNuke.Security.Permissions
             }
         }
 
-        public ModulePermissionInfo this[int index]
+        public IModulePermissionInfo this[int index]
         {
             get
             {
-                return (ModulePermissionInfo) List[index];
+                return (IModulePermissionInfo) List[index];
             }
             set
             {

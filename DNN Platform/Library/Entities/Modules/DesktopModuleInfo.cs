@@ -23,10 +23,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Web.UI;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -36,6 +34,8 @@ using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Content.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules.Definitions;
+using DotNetNuke.Library.Contracts.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Modules.Definitions;
 using DotNetNuke.Services.Installer.Packages;
 
 #endregion
@@ -52,12 +52,12 @@ namespace DotNetNuke.Entities.Modules
     /// </summary>
     /// -----------------------------------------------------------------------------
     [Serializable]
-    public class DesktopModuleInfo : ContentItem, IXmlSerializable
+    public class DesktopModuleInfo : ContentItem, IXmlSerializable, IDesktopModuleInfo
     {
         #region Inner Classes
 
         [Serializable]
-        public class PageInfo : IXmlSerializable
+        public class PageInfo : IXmlSerializable, IPageInfo
         {
             [XmlAttribute("type")]
             public string Type { get; set; }
@@ -165,8 +165,8 @@ namespace DotNetNuke.Entities.Modules
 
         #endregion
 
-        private Dictionary<string, ModuleDefinitionInfo> _moduleDefinitions;
-        private PageInfo _pageInfo;
+        private Dictionary<string, IModuleDefinitionInfo> _moduleDefinitions;
+        private IPageInfo _pageInfo;
 
         public DesktopModuleInfo()
         {
@@ -176,7 +176,7 @@ namespace DotNetNuke.Entities.Modules
             PackageID = Null.NullInteger;
             DesktopModuleID = Null.NullInteger;
             SupportedFeatures = Null.NullInteger;
-            Shareable = ModuleSharing.Unknown;
+            Shareable = Library.Contracts.Entities.Modules.ModuleSharing.Unknown;
         }
 
 		#region "Public Properties"
@@ -359,7 +359,7 @@ namespace DotNetNuke.Entities.Modules
         /// <summary>
         /// Is the module allowed to be shared across sites?
         /// </summary>
-        public ModuleSharing Shareable
+        public Library.Contracts.Entities.Modules.ModuleSharing Shareable
         {
             get;
             set; 
@@ -371,7 +371,7 @@ namespace DotNetNuke.Entities.Modules
         /// </summary>
         /// <returns>A Boolean</returns>
         /// -----------------------------------------------------------------------------
-        public Dictionary<string, ModuleDefinitionInfo> ModuleDefinitions
+        public Dictionary<string, IModuleDefinitionInfo> ModuleDefinitions
         {
             get
             {
@@ -383,7 +383,7 @@ namespace DotNetNuke.Entities.Modules
                     }
                     else
                     {
-                        _moduleDefinitions = new Dictionary<string, ModuleDefinitionInfo>();
+                        _moduleDefinitions = new Dictionary<string, IModuleDefinitionInfo>();
                     }
                 }
                 return _moduleDefinitions;
@@ -422,7 +422,7 @@ namespace DotNetNuke.Entities.Modules
         /// -----------------------------------------------------------------------------
         public string Version { get; set; }
 
-        public PageInfo Page
+        public IPageInfo Page
         {
             get
             {
@@ -476,7 +476,7 @@ namespace DotNetNuke.Entities.Modules
             CompatibleVersions = Null.SetNullString(dr["CompatibleVersions"]);
             Dependencies = Null.SetNullString(dr["Dependencies"]);
             Permissions = Null.SetNullString(dr["Permissions"]);
-		    Shareable = (ModuleSharing)Null.SetNullInteger(dr["Shareable"]);
+		    Shareable = (Library.Contracts.Entities.Modules.ModuleSharing)Null.SetNullInteger(dr["Shareable"]);
             AdminPage = Null.SetNullString(dr["AdminPage"]);
             HostPage = Null.SetNullString(dr["HostPage"]);
             //Call the base classes fill method to populate base class proeprties
@@ -636,15 +636,15 @@ namespace DotNetNuke.Entities.Modules
 
             // Module sharing
 
-            if(Shareable != ModuleSharing.Unknown)
+            if(Shareable != Library.Contracts.Entities.Modules.ModuleSharing.Unknown)
             {
                 writer.WriteStartElement("shareable");
                 switch (Shareable)
                 {
-                    case ModuleSharing.Supported:
+                    case Library.Contracts.Entities.Modules.ModuleSharing.Supported:
                         writer.WriteString("Supported");
                         break;
-                    case ModuleSharing.Unsupported:
+                    case Library.Contracts.Entities.Modules.ModuleSharing.Unsupported:
                         writer.WriteString("Unsupported");
                         break;
                 }
@@ -760,21 +760,21 @@ namespace DotNetNuke.Entities.Modules
 
             if (string.IsNullOrEmpty(sharing))
             {
-                Shareable = ModuleSharing.Unknown;
+                Shareable = Library.Contracts.Entities.Modules.ModuleSharing.Unknown;
             }
             else
             {
                 switch (sharing.ToLowerInvariant())
                 {
                     case "supported":
-                        Shareable = ModuleSharing.Supported;
+                        Shareable = Library.Contracts.Entities.Modules.ModuleSharing.Supported;
                         break;
                     case "unsupported":
-                        Shareable = ModuleSharing.Unsupported;
+                        Shareable = Library.Contracts.Entities.Modules.ModuleSharing.Unsupported;
                         break;
                     default:
                     case "unknown":
-                        Shareable = ModuleSharing.Unknown;
+                        Shareable = Library.Contracts.Entities.Modules.ModuleSharing.Unknown;
                         break;
                 }
             }

@@ -1832,6 +1832,10 @@
       <Project>{ddf18e36-41a0-4ca7-a098-78ca6e6f41c1}</Project>
       <Name>DotNetNuke.Instrumentation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DotNetNuke.Library.Contracts\DotNetNuke.Library.Contracts.csproj">
+      <Project>{30fde113-22c7-48d5-9f72-3d7472d9da97}</Project>
+      <Name>DotNetNuke.Library.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotNetNuke.Log4net\DotNetNuke.Log4Net.csproj">
       <Project>{04f77171-0634-46e0-a95e-d7477c88712e}</Project>
       <Name>DotNetNuke.Log4Net</Name>

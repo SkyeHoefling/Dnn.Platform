@@ -26,6 +26,7 @@ using System.Xml.Serialization;
 
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 
 #endregion
 
@@ -41,7 +42,7 @@ namespace DotNetNuke.Security.Permissions
     /// </summary>
     /// -----------------------------------------------------------------------------
     [Serializable]
-    public class PermissionInfo : BaseEntityInfo
+    public class PermissionInfo : BaseEntityInfo, IPermissionInfo
     {
 		#region Private Members
 

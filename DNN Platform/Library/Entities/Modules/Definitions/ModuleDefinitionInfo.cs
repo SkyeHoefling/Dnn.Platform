@@ -28,7 +28,9 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Security.Permissions;
+using DotNetNuke.Library.Contracts.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Modules.Definitions;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 
 #endregion
 
@@ -44,14 +46,14 @@ namespace DotNetNuke.Entities.Modules.Definitions
     /// </summary>
     /// -----------------------------------------------------------------------------
     [Serializable]
-    public class ModuleDefinitionInfo : IXmlSerializable, IHydratable
+    public class ModuleDefinitionInfo : IXmlSerializable, IHydratable, IModuleDefinitionInfo
     {
-        private Dictionary<string, ModuleControlInfo> _ModuleControls;
+        private Dictionary<string, IModuleControlInfo> _ModuleControls;
         private string _definitionName;
 
         public ModuleDefinitionInfo()
         {
-            Permissions = new Dictionary<string, PermissionInfo>();
+            Permissions = new Dictionary<string, IPermissionInfo>();
             DesktopModuleID = Null.NullInteger;
             ModuleDefID = Null.NullInteger;
         }
@@ -112,7 +114,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// </summary>
         /// <returns>A Dictionary(Of String, ModuleControlInfo)</returns>
         /// -----------------------------------------------------------------------------
-        public Dictionary<string, ModuleControlInfo> ModuleControls
+        public Dictionary<string, IModuleControlInfo> ModuleControls
         {
             get
             {
@@ -130,7 +132,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// </summary>
         /// <returns>A String</returns>
         /// -----------------------------------------------------------------------------
-        public Dictionary<string, PermissionInfo> Permissions { get; private set; }
+        public Dictionary<string, IPermissionInfo> Permissions { get; private set; }
 
         #region IHydratable Members
 
@@ -273,7 +275,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
 
         public void LoadControls()
         {
-            _ModuleControls = ModuleDefID > Null.NullInteger ? ModuleControlController.GetModuleControlsByModuleDefinitionID(ModuleDefID) : new Dictionary<string, ModuleControlInfo>();
+            _ModuleControls = ModuleDefID > Null.NullInteger ? ModuleControlController.GetModuleControlsByModuleDefinitionID(ModuleDefID) : new Dictionary<string, IModuleControlInfo>();
         }
 
         /// -----------------------------------------------------------------------------

@@ -32,11 +32,11 @@ namespace DotNetNuke.UI.Modules
     {
         private static readonly ILog TracelLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
 
-        private static IModuleControlFactory GetModuleControlFactory(string controlSrc)
+        private static Library.Contracts.UI.Modules.IModuleControlFactory GetModuleControlFactory(string controlSrc)
         {
             string extension = Path.GetExtension(controlSrc.ToLowerInvariant());
 
-            IModuleControlFactory controlFactory = null;
+            Library.Contracts.UI.Modules.IModuleControlFactory controlFactory = null;
             Type factoryType;
             switch (extension)
             {
@@ -52,14 +52,14 @@ namespace DotNetNuke.UI.Modules
                     factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
                     if (factoryType != null)
                     {
-                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        controlFactory = Reflection.CreateObject(factoryType) as Library.Contracts.UI.Modules.IModuleControlFactory;
                     }
                     break;
                 case ".mvc":
                     factoryType = Reflection.CreateType("DotNetNuke.Web.Mvc.MvcModuleControlFactory");
                     if (factoryType != null)
                     {
-                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
+                        controlFactory = Reflection.CreateObject(factoryType) as Library.Contracts.UI.Modules.IModuleControlFactory;
                     }
                     break;
                 default:
@@ -76,7 +76,7 @@ namespace DotNetNuke.UI.Modules
                 TracelLogger.Debug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
-            IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
+            Library.Contracts.UI.Modules.IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
 
             if (controlFactory != null)
             {
@@ -107,7 +107,7 @@ namespace DotNetNuke.UI.Modules
             if (TracelLogger.IsDebugEnabled)
                 TracelLogger.Debug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             Control control = null;
-            IModuleControlFactory controlFactory = GetModuleControlFactory(moduleConfiguration.ModuleControl.ControlSrc);
+            Library.Contracts.UI.Modules.IModuleControlFactory controlFactory = GetModuleControlFactory(moduleConfiguration.ModuleControl.ControlSrc);
 
             if (controlFactory != null)
             {
@@ -139,7 +139,7 @@ namespace DotNetNuke.UI.Modules
                 TracelLogger.Debug($"ModuleControlFactory.LoadSettingsControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
-            IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
+            Library.Contracts.UI.Modules.IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
 
             if (controlFactory != null)
             {

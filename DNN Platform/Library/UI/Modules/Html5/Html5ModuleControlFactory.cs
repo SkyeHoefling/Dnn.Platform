@@ -22,22 +22,23 @@
 using System;
 using System.Web.UI;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Library.Contracts.Entities.Modules;
 
 namespace DotNetNuke.UI.Modules.Html5
 {
-    public class Html5ModuleControlFactory : IModuleControlFactory
+    public class Html5ModuleControlFactory : Library.Contracts.UI.Modules.IModuleControlFactory
     {
         public Control CreateControl(TemplateControl containerControl, string controlKey, string controlSrc)
         {
             return new Html5HostControl("~/" + controlSrc);
         }
 
-        public Control CreateModuleControl(TemplateControl containerControl, ModuleInfo moduleConfiguration)
+        public Control CreateModuleControl(TemplateControl containerControl, IModuleInfo moduleConfiguration)
         {
             return CreateControl(containerControl, String.Empty, moduleConfiguration.ModuleControl.ControlSrc);
         }
 
-        public Control CreateSettingsControl(TemplateControl containerControl, ModuleInfo moduleConfiguration, string controlSrc)
+        public Control CreateSettingsControl(TemplateControl containerControl, IModuleInfo moduleConfiguration, string controlSrc)
         {
             return CreateControl(containerControl, String.Empty, controlSrc);
         }

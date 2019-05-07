@@ -26,6 +26,7 @@ using System.Xml.Serialization;
 
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Library.Contracts.Security.Permissions;
 
 #endregion
 
@@ -41,7 +42,7 @@ namespace DotNetNuke.Security.Permissions
     /// </summary>
     /// -----------------------------------------------------------------------------
     [Serializable]
-    public class ModulePermissionInfo : PermissionInfoBase, IHydratable
+    public class ModulePermissionInfo : PermissionInfoBase, IHydratable, IModulePermissionInfo
     {
 		#region "Private Members"
 		
