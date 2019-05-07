@@ -16,26 +16,25 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
 // DEALINGS IN THE SOFTWARE.
 
+using DotNetNuke.Entities.Modules;
 using System;
 using System.Web.UI;
-using DotNetNuke.Contracts;
-using DotNetNuke.Entities.Modules;
 
 namespace DotNetNuke.UI.Modules
 {
-    public class WebFormsModuleControlFactory : Contracts.IModuleControlFactory
+    public class WebFormsModuleControlFactory : IModuleControlFactory
     {
         public Control CreateControl(TemplateControl containerControl, string controlKey, string controlSrc)
         {
             return ControlUtilities.LoadControl<Control>(containerControl, controlSrc);
         }
 
-        public Control CreateModuleControl(TemplateControl containerControl, IModuleInfo moduleConfiguration)
+        public Control CreateModuleControl(TemplateControl containerControl, ModuleInfo moduleConfiguration)
         {
-            return CreateControl(containerControl, String.Empty, moduleConfiguration.ModuleControlInfo.ControlSrc);
+            return CreateControl(containerControl, String.Empty, moduleConfiguration.ModuleControl.ControlSrc);
         }
 
-        public Control CreateSettingsControl(TemplateControl containerControl, IModuleInfo moduleConfiguration, string controlSrc)
+        public Control CreateSettingsControl(TemplateControl containerControl, ModuleInfo moduleConfiguration, string controlSrc)
         {
             return CreateControl(containerControl, String.Empty, controlSrc);
         }

@@ -18,13 +18,12 @@
 
 using System;
 using System.Web.UI;
-using DotNetNuke.Contracts;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
 
 namespace DotNetNuke.UI.Modules
 {
-    public class ReflectedModuleControlFactory : Contracts.IModuleControlFactory
+    public class ReflectedModuleControlFactory : IModuleControlFactory
     {
         public Control CreateControl(TemplateControl containerControl, string controlKey, string controlSrc)
         {
@@ -33,12 +32,12 @@ namespace DotNetNuke.UI.Modules
             return (containerControl.LoadControl(objType, null));
         }
 
-        public Control CreateModuleControl(TemplateControl containerControl, IModuleInfo moduleConfiguration)
+        public Control CreateModuleControl(TemplateControl containerControl, ModuleInfo moduleConfiguration)
         {
-            return CreateControl(containerControl, String.Empty, moduleConfiguration.ModuleControlInfo.ControlSrc);
+            return CreateControl(containerControl, String.Empty, moduleConfiguration.ModuleControl.ControlSrc);
         }
 
-        public Control CreateSettingsControl(TemplateControl containerControl, IModuleInfo moduleConfiguration, string controlSrc)
+        public Control CreateSettingsControl(TemplateControl containerControl, ModuleInfo moduleConfiguration, string controlSrc)
         {
             return CreateControl(containerControl, String.Empty, controlSrc);
         }

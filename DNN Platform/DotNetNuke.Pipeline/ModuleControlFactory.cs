@@ -1,22 +1,4 @@
-﻿// DotNetNuke® - http://www.dotnetnuke.com
-// Copyright (c) 2002-2018
-// by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
-// to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
-// of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
-// DEALINGS IN THE SOFTWARE.
-
-using System;
+﻿using System;
 using System.IO;
 using System.Web.UI;
 
@@ -24,9 +6,12 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
 using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
+using DotNetNuke.UI.Modules;
 using DotNetNuke.UI.Modules.Html5;
+using DotNetNuke.Web.Mvc;
+using DotNetNuke.Web.Razor;
 
-namespace DotNetNuke.UI.Modules
+namespace DotNetNuke.Pipeline
 {
     public class ModuleControlFactory
     {
@@ -49,18 +34,10 @@ namespace DotNetNuke.UI.Modules
                     break;
                 case ".cshtml":
                 case ".vbhtml":
-                    factoryType = Reflection.CreateType("DotNetNuke.Web.Razor.RazorModuleControlFactory");
-                    if (factoryType != null)
-                    {
-                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
-                    }
+                    controlFactory = new RazorModuleControlFactory();
                     break;
                 case ".mvc":
-                    factoryType = Reflection.CreateType("DotNetNuke.Web.Mvc.MvcModuleControlFactory");
-                    if (factoryType != null)
-                    {
-                        controlFactory = Reflection.CreateObject(factoryType) as IModuleControlFactory;
-                    }
+                    controlFactory = new MvcModuleControlFactory();
                     break;
                 default:
                     controlFactory = new ReflectedModuleControlFactory();
@@ -188,8 +165,8 @@ namespace DotNetNuke.UI.Modules
                     var segments = moduleConfiguration.ModuleControl.ControlSrc.Replace(".mvc", "").Split('/');
 
                     moduleControl.LocalResourceFile = String.Format("~/DesktopModules/MVC/{0}/{1}/{2}.resx",
-                                        moduleConfiguration.DesktopModule.FolderName, 
-                                        Localization.LocalResourceDirectory, 
+                                        moduleConfiguration.DesktopModule.FolderName,
+                                        Localization.LocalResourceDirectory,
                                         segments[0]);
                     break;
                 default:

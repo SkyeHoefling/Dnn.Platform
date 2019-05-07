@@ -30,7 +30,6 @@ using System.Xml.Serialization;
 
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel;
-using DotNetNuke.Contracts;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
@@ -58,7 +57,7 @@ namespace DotNetNuke.Entities.Modules
     /// -----------------------------------------------------------------------------
     [XmlRoot("module", IsNullable = false)]
     [Serializable]
-    public class ModuleInfo : ContentItem, IPropertyAccess, IModuleInfo
+    public class ModuleInfo : ContentItem, IPropertyAccess
     {
     	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleInfo));
         private string _authorizedEditRoles;
@@ -240,8 +239,6 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-        public IControlInfo ModuleControlInfo { get => ModuleControl; }
-        
         [XmlIgnore]
         public int ModuleControlId { get; set; }
 
