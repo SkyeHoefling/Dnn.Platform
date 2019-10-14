@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Support Projects", "Support Projects", "{1DFA65CE-5978-49F9-83BA-CFBD0C7A1814}"
 EndProject
@@ -498,6 +498,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.PersonaBar.Security.Tests", "Dnn.AdminExperience\Tests\Dnn.PersonaBar.Security.Tests\Dnn.PersonaBar.Security.Tests.csproj", "{A64708EF-4972-48A3-B7B9-6B65E47EFE27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dnn.PersonaBar.Users.Tests", "Dnn.AdminExperience\Tests\Dnn.PersonaBar.Users.Tests\Dnn.PersonaBar.Users.Tests.csproj", "{15506C01-A730-46B9-8571-99C20226AAE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetNuke.AspNetCore.Mvc.RazorPages", "DNN Platform\DotNetNuke.AspNetCore.Mvc.RazorPages\DotNetNuke.AspNetCore.Mvc.RazorPages.csproj", "{7711BD4F-1A56-4F79-B335-9C274E97C5BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1865,6 +1867,30 @@ Global
 		{15506C01-A730-46B9-8571-99C20226AAE6}.Release-Net45|Any CPU.Build.0 = Release|Any CPU
 		{15506C01-A730-46B9-8571-99C20226AAE6}.Release-Net45|x86.ActiveCfg = Release|Any CPU
 		{15506C01-A730-46B9-8571-99C20226AAE6}.Release-Net45|x86.Build.0 = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Debug|x86.ActiveCfg = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Debug|x86.Build.0 = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Release|Any CPU.Build.0 = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Release|x86.ActiveCfg = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Cloud_Release|x86.Build.0 = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug|x86.Build.0 = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug-Net45|Any CPU.ActiveCfg = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug-Net45|Any CPU.Build.0 = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug-Net45|x86.ActiveCfg = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Debug-Net45|x86.Build.0 = Debug|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release|x86.ActiveCfg = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release|x86.Build.0 = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release-Net45|Any CPU.ActiveCfg = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release-Net45|Any CPU.Build.0 = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release-Net45|x86.ActiveCfg = Release|Any CPU
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF}.Release-Net45|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1968,6 +1994,7 @@ Global
 		{05515510-9979-4424-8D0A-647F32A25FE7} = {8EB4193C-A708-4DA0-9F2A-F5B7599F6F8F}
 		{A64708EF-4972-48A3-B7B9-6B65E47EFE27} = {8EB4193C-A708-4DA0-9F2A-F5B7599F6F8F}
 		{15506C01-A730-46B9-8571-99C20226AAE6} = {8EB4193C-A708-4DA0-9F2A-F5B7599F6F8F}
+		{7711BD4F-1A56-4F79-B335-9C274E97C5BF} = {29273BE6-1AA8-4970-98A0-41BFFEEDA67B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46B6A641-57EB-4B19-B199-23E6FC2AB40B}
