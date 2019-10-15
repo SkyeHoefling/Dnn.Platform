@@ -30,18 +30,25 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\DotNetNuke.AspNetCore.Mvc.RazorPages*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
-    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.PlatformAbstractions*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\DotNetNuke.AspNetCore.*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <!--<Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.PlatformAbstractions*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
     <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.Hosting.Abstractions*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
     <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.FileProviders*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
     <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.Options*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
     <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.ObjectPool*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
     <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.Logging*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
     <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.Primitives*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
-    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.DependencyModel*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
-    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.AspNetCore.*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
-    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.Diagnostics.DiagnosticSource.*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.DependencyModel*&quot; &quot;..\..\Website\bin&quot; /S /Y" />-->
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <!--<Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.Diagnostics.DiagnosticSource.*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
     <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.Buffers*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.Runtime*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.Threading*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.Collections*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.ComponentModel*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.Memory*&quot; &quot;..\..\Website\bin&quot; /S /Y" />-->
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\System.*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.CodeAnalysis*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
   </Target>
 
 </Project>
