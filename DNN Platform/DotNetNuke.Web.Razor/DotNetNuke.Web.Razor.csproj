@@ -124,7 +124,6 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Library.build" />
     <None Include="packages.config" />
   </ItemGroup>
