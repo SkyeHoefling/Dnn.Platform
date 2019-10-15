@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- TODO - AH: figure out how to configure multi-target for netstandard-->
-    <TargetFramework>net472</TargetFramework>
+    <TargetFrameworks>net472</TargetFrameworks>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -28,5 +28,15 @@
       <Link>SolutionInfo.cs</Link>
     </Compile>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\DotNetNuke.AspNetCore.Mvc.RazorPages*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.PlatformAbstractions*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.Hosting.Abstractions*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.FileProviders.Abstractions*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.Options*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.Extensions.ObjectPool*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)bin\$(ConfigurationName)\net472\Microsoft.AspNetCore.*&quot; &quot;..\..\Website\bin&quot; /S /Y" />
+  </Target>
 
 </Project>
