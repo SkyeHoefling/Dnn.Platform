@@ -8,8 +8,8 @@ namespace DotNetNuke.AspNetCore.Mvc.RazorPages
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddModuleControl();
             services.AddRazorPages();
+            services.AddModuleControl();
         }
     }
 }
