@@ -2,12 +2,12 @@
 using System.IO;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Modules.Html5;
 using DotNetNuke.UI.Modules;
 using DotNetNuke.Web.Razor;
 using System.Collections.Generic;
 using DotNetNuke.Web.Mvc;
+using DotNetNuke.AspNetCore.Mvc.RazorPages;
 
 #if NET472
 using System.Web.UI;
@@ -38,15 +38,17 @@ namespace DotNetNuke.ModulePipeline
             Html5ModuleControlFactory html5,
             RazorModuleControlFactory razor3,
             MvcModuleControlFactory mvc,
+            RazorPagesModuleControlFactory razorPages,
             ReflectedModuleControlFactory fallthrough)
         {
             _controlFactories = new Dictionary<string, IModuleControlFactory>(StringComparer.OrdinalIgnoreCase);
             _controlFactories.Add(".ascx", webforms);
             _controlFactories.Add(".htm", html5);
             _controlFactories.Add(".html", html5);
-            _controlFactories.Add(".cshtml", razor3);
-            _controlFactories.Add(".vbhtml", razor3);
+            _controlFactories.Add(".razor3.cshtml", razor3);
+            _controlFactories.Add(".razor3.vbhtml", razor3);
             _controlFactories.Add(".mvc", mvc);
+            _controlFactories.Add(".razorpages.cshtml", razorPages);
             _controlFactories.Add("default", fallthrough);
         }
 
@@ -128,6 +130,7 @@ namespace DotNetNuke.ModulePipeline
                 TraceLogger.Debug($"ModuleControlFactory.LoadSettingsControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
+            moduleConfiguration.ContainerSrc
             IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
 
             if (controlFactory != null)
