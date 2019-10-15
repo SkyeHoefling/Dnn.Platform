@@ -1,6 +1,9 @@
 ﻿using DotNetNuke.DependencyInjection;
-using DotNetNuke.UI.Modules;
 using Microsoft.Extensions.DependencyInjection;
+
+#if NET472
+using DotNetNuke.UI.Modules;
+#endif
 
 namespace DotNetNuke.ModulePipeline
 {

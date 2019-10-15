@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET472
+using System;
 using System.IO;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Instrumentation;
@@ -7,10 +8,8 @@ using DotNetNuke.UI.Modules;
 using DotNetNuke.Web.Razor;
 using System.Collections.Generic;
 using DotNetNuke.Web.Mvc;
-using DotNetNuke.AspNetCore.Mvc.RazorPages;
-
-#if NET472
 using System.Web.UI;
+using DotNetNuke.AspNetCore.Mvc.RazorPages;
 #endif
 
 namespace DotNetNuke.ModulePipeline
@@ -31,6 +30,7 @@ namespace DotNetNuke.ModulePipeline
         : IModuleControlPipeline
 #endif
     {
+#if NET472
         private static readonly ILog TraceLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
         private Dictionary<string, IModuleControlFactory> _controlFactories;
         public ModuleControlPipeline(
@@ -52,7 +52,6 @@ namespace DotNetNuke.ModulePipeline
             _controlFactories.Add("default", fallthrough);
         }
 
-#if NET472
         private IModuleControlFactory GetModuleControlFactory(string controlSrc)
         {
             string extension = Path.GetExtension(controlSrc);
@@ -130,7 +129,6 @@ namespace DotNetNuke.ModulePipeline
                 TraceLogger.Debug($"ModuleControlFactory.LoadSettingsControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
-            moduleConfiguration.ContainerSrc
             IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
 
             if (controlFactory != null)
