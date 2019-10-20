@@ -1,6 +1,7 @@
 #addin nuget:?package=Cake.XdtTransform&version=0.18.1&loaddependencies=true
 #addin nuget:?package=Cake.FileHelpers&version=3.2.0
 #addin nuget:?package=Cake.Powershell&version=0.4.8
+#addin nuget:?package=Cake.Npm&version=0.17.0
 
 #tool "nuget:?package=GitVersion.CommandLine&version=5.0.1"
 #tool "nuget:?package=Microsoft.TestPlatform&version=15.7.0"
@@ -116,7 +117,21 @@ Task("RestoreManifests")
         DeleteFiles("./manifestsBackup.zip");
     });
 
+Task("EditorConfig")
+    .Does(() =>
+    {
+
+        void ConfigureNpm()
+        {
+            var settings = new NpmInstallSettings();
+            settings.Global = true;
+            settings.AddPackage("eclint");
+            NpmInstall(settings);
+        }
+    });
+
 Task("CompileSource")
+    .IsDependentOn("EditorConfig")
     .IsDependentOn("UpdateDnnManifests")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
