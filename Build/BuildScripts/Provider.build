@@ -3,13 +3,13 @@
   </Target>
   <Target Name="GetFiles">
     <ItemGroup>
-      <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
-      <SourceFiles Include="*.css;*.htm;*.xsl;*.png;*.gif" />
-      <RootConfig Include="*eb.config" />
-      <RootViews Include="*.ascx;*.asmx;*.ashx;*.aspx" />
-      <ResourceFiles Include="App_LocalResources/*.resx" />
-      <Documents Include="Documentation/*.*" />
-      <Resources Include="@(ResourceFiles);@(RootViews);@(TextFiles);@(SourceFiles);@(RootConfig);@(Documents)" />
+    <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
+    <SourceFiles Include="*.css;*.htm;*.xsl;*.png;*.gif" />
+    <RootConfig Include="*eb.config" />
+    <RootViews Include="*.ascx;*.asmx;*.ashx;*.aspx" />
+    <ResourceFiles Include="App_LocalResources/*.resx" />
+    <Documents Include="Documentation/*.*" />
+    <Resources Include="@(ResourceFiles);@(RootViews);@(TextFiles);@(SourceFiles);@(RootConfig);@(Documents)" />
     </ItemGroup>
   </Target>
   <Target Name="CopyBin">

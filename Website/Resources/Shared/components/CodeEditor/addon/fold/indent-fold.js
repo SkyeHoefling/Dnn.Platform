@@ -25,14 +25,14 @@ CodeMirror.registerHelper("fold", "indent", function(cm, start) {
     var curLine = cm.getLine(i);
     var curIndent = getIndent(curLine);
     if (curIndent > myIndent) {
-      // Lines with a greater indent are considered part of the block.
-      lastLineInFold = i;
+    // Lines with a greater indent are considered part of the block.
+    lastLineInFold = i;
     } else if (!/\S/.test(curLine)) {
-      // Empty lines might be breaks within the block we're trying to fold.
+    // Empty lines might be breaks within the block we're trying to fold.
     } else {
-      // A non-empty line at an indent equal to or less than ours marks the
-      // start of another block.
-      break;
+    // A non-empty line at an indent equal to or less than ours marks the
+    // start of another block.
+    break;
     }
   }
   if (lastLineInFold) return {

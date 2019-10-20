@@ -16,5 +16,3 @@ namespace Dnn.PersonaBar.Users.Components.Prompt
         }
     }
 }
-
-

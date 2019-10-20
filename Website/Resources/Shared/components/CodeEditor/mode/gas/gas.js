@@ -217,10 +217,10 @@ CodeMirror.defineMode("gas", function(_config, parserConfig) {
     registers.r15 = registers.pc;
 
     custom.push(function(ch, stream) {
-      if (ch === '#') {
+    if (ch === '#') {
         stream.eatWhile(/\w/);
         return "number";
-      }
+    }
     });
   }
 
@@ -234,10 +234,10 @@ CodeMirror.defineMode("gas", function(_config, parserConfig) {
   function nextUntilUnescaped(stream, end) {
     var escaped = false, next;
     while ((next = stream.next()) != null) {
-      if (next === end && !escaped) {
+    if (next === end && !escaped) {
         return false;
-      }
-      escaped = !escaped && next === "\\";
+    }
+    escaped = !escaped && next === "\\";
     }
     return escaped;
   }
@@ -245,95 +245,95 @@ CodeMirror.defineMode("gas", function(_config, parserConfig) {
   function clikeComment(stream, state) {
     var maybeEnd = false, ch;
     while ((ch = stream.next()) != null) {
-      if (ch === "/" && maybeEnd) {
+    if (ch === "/" && maybeEnd) {
         state.tokenize = null;
         break;
-      }
-      maybeEnd = (ch === "*");
+    }
+    maybeEnd = (ch === "*");
     }
     return "comment";
   }
 
   return {
     startState: function() {
-      return {
+    return {
         tokenize: null
-      };
+    };
     },
 
     token: function(stream, state) {
-      if (state.tokenize) {
+    if (state.tokenize) {
         return state.tokenize(stream, state);
-      }
+    }
 
-      if (stream.eatSpace()) {
+    if (stream.eatSpace()) {
         return null;
-      }
+    }
 
-      var style, cur, ch = stream.next();
+    var style, cur, ch = stream.next();
 
-      if (ch === "/") {
+    if (ch === "/") {
         if (stream.eat("*")) {
-          state.tokenize = clikeComment;
-          return clikeComment(stream, state);
+        state.tokenize = clikeComment;
+        return clikeComment(stream, state);
         }
-      }
+    }
 
-      if (ch === lineCommentStartSymbol) {
+    if (ch === lineCommentStartSymbol) {
         stream.skipToEnd();
         return "comment";
-      }
+    }
 
-      if (ch === '"') {
+    if (ch === '"') {
         nextUntilUnescaped(stream, '"');
         return "string";
-      }
+    }
 
-      if (ch === '.') {
+    if (ch === '.') {
         stream.eatWhile(/\w/);
         cur = stream.current().toLowerCase();
         style = directives[cur];
         return style || null;
-      }
+    }
 
-      if (ch === '=') {
+    if (ch === '=') {
         stream.eatWhile(/\w/);
         return "tag";
-      }
+    }
 
-      if (ch === '{') {
+    if (ch === '{') {
         return "braket";
-      }
+    }
 
-      if (ch === '}') {
+    if (ch === '}') {
         return "braket";
-      }
+    }
 
-      if (/\d/.test(ch)) {
+    if (/\d/.test(ch)) {
         if (ch === "0" && stream.eat("x")) {
-          stream.eatWhile(/[0-9a-fA-F]/);
-          return "number";
+        stream.eatWhile(/[0-9a-fA-F]/);
+        return "number";
         }
         stream.eatWhile(/\d/);
         return "number";
-      }
+    }
 
-      if (/\w/.test(ch)) {
+    if (/\w/.test(ch)) {
         stream.eatWhile(/\w/);
         if (stream.eat(":")) {
-          return 'tag';
+        return 'tag';
         }
         cur = stream.current().toLowerCase();
         style = registers[cur];
         return style || null;
-      }
+    }
 
-      for (var i = 0; i < custom.length; i++) {
+    for (var i = 0; i < custom.length; i++) {
         style = custom[i](ch, stream, state);
         if (style) {
-          return style;
+        return style;
         }
-      }
+    }
     },
 
     lineComment: lineCommentStartSymbol,

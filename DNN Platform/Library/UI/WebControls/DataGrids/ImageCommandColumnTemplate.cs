@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -42,16 +42,16 @@ namespace DotNetNuke.UI.WebControls
     /// -----------------------------------------------------------------------------
     public class ImageCommandColumnTemplate : ITemplate
     {
-		#region "Private Members"
+        #region "Private Members"
 
         private ImageCommandColumnEditMode mEditMode = ImageCommandColumnEditMode.Command;
         private ListItemType mItemType = ListItemType.Item;
         private bool mShowImage = true;
         private bool mVisible = true;
-		
-		#endregion
 
-		#region "Constructors"
+        #endregion
+
+        #region "Constructors"
 
         public ImageCommandColumnTemplate() : this(ListItemType.Item)
         {
@@ -61,25 +61,25 @@ namespace DotNetNuke.UI.WebControls
         {
             ItemType = itemType;
         }
-		
-		#endregion
 
-		#region "Public Properties"
+        #endregion
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets or sets the CommandName for the Column
-		/// </summary>
-		/// <value>A String</value>
-		/// -----------------------------------------------------------------------------
+        #region "Public Properties"
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the CommandName for the Column
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public string CommandName { get; set; }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets or sets the Design Mode of the Column
-		/// </summary>
-		/// <value>A Boolean</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the Design Mode of the Column
+        /// </summary>
+        /// <value>A Boolean</value>
+        /// -----------------------------------------------------------------------------
         public bool DesignMode { get; set; }
 
         /// -----------------------------------------------------------------------------
@@ -100,12 +100,12 @@ namespace DotNetNuke.UI.WebControls
             }
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets or sets the URL of the Image
-		/// </summary>
-		/// <value>A String</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the URL of the Image
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public string ImageURL { get; set; }
 
         /// -----------------------------------------------------------------------------
@@ -126,36 +126,36 @@ namespace DotNetNuke.UI.WebControls
             }
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// The Key Field that provides a Unique key to the data Item
-		/// </summary>
-		/// <value>A String</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// The Key Field that provides a Unique key to the data Item
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public string KeyField { get; set; }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets or sets the URL of the Link (unless DataBinding through KeyField)
-		/// </summary>
-		/// <value>A String</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the URL of the Link (unless DataBinding through KeyField)
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public string NavigateURL { get; set; }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets or sets the URL Formatting string
-		/// </summary>
-		/// <value>A String</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the URL Formatting string
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public string NavigateURLFormatString { get; set; }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Javascript text to attach to the OnClick Event
-		/// </summary>
-		/// <value>A String</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Javascript text to attach to the OnClick Event
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public string OnClickJS { get; set; }
 
         /// -----------------------------------------------------------------------------
@@ -177,12 +177,12 @@ namespace DotNetNuke.UI.WebControls
             }
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets or sets the Text (for Header/Footer Templates)
-		/// </summary>
-		/// <value>A String</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets or sets the Text (for Header/Footer Templates)
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public string Text { get; set; }
 
         /// -----------------------------------------------------------------------------
@@ -205,12 +205,12 @@ namespace DotNetNuke.UI.WebControls
             }
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// An flag that indicates whether the buttons are visible.
-		/// </summary>
-		/// <value>A Boolean</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// An flag that indicates whether the buttons are visible.
+        /// </summary>
+        /// <value>A Boolean</value>
+        /// -----------------------------------------------------------------------------
         public string VisibleField { get; set; }
 
         #region ITemplate Members
@@ -301,10 +301,10 @@ namespace DotNetNuke.UI.WebControls
         }
 
         #endregion
-		
-		#endregion
-		
-		#region "Private Methods"
+
+        #endregion
+
+        #region "Private Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -371,7 +371,7 @@ namespace DotNetNuke.UI.WebControls
             }
             else
             {
-				//Bind Image Button
+                //Bind Image Button
                 if (!String.IsNullOrEmpty(ImageURL) && ShowImage)
                 {
                     var colIcon = (ImageButton) sender;
@@ -382,7 +382,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 if (!String.IsNullOrEmpty(Text) && !ShowImage)
                 {
-					//Bind Link Button
+                    //Bind Link Button
                     var colLink = (LinkButton) sender;
                     container = (DataGridItem) colLink.NamingContainer;
                     keyValue = GetValue(container);
@@ -391,7 +391,7 @@ namespace DotNetNuke.UI.WebControls
                 }
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

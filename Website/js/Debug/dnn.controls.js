@@ -8,27 +8,27 @@ dnn.controls.orient.registerEnum("dnn.controls.orient");
 
 dnn.controls.action = function(){};
 dnn.controls.action.prototype = {
-	    postback: 0,
-	    expand: 1,
-	    none: 2,
-	    nav: 3
+        postback: 0,
+        expand: 1,
+        none: 2,
+        nav: 3
 }
 dnn.controls.action.registerEnum("dnn.controls.action");
 
 dnn.extend(dnn.controls, {
     version: new Number('02.03'),
-	pns: 'dnn',
-	ns: 'controls',
-	isLoaded: false,
-	controls: [],
-	toolbars: [],	//stores JSON toolbar objects		
-	_behaviorIDs: [],
-	
+    pns: 'dnn',
+    ns: 'controls',
+    isLoaded: false,
+    controls: [],
+    toolbars: [],	//stores JSON toolbar objects
+    _behaviorIDs: [],
+
     find: function(behaviorID)
     {
         return this.controls[this._behaviorIDs[behaviorID]];
     }
-		
+
 });
 
 dnn.controls.control = function(ctl)
@@ -44,30 +44,30 @@ dnn.controls.control = function(ctl)
     this._handlerControls = [];
 }
 
-dnn.controls.control.prototype = 
+dnn.controls.control.prototype =
 {
     initialize: function(behaviorID)
     {
-         dnn.controls.control.callBaseMethod(this, 'initialize');
-         if (behaviorID)
+        dnn.controls.control.callBaseMethod(this, 'initialize');
+        if (behaviorID)
             this.behaviorID = behaviorID;
-         else
+        else
             this.behaviorID = this.getProp('bid', '');
-         if (this.behaviorID.length > 0)
+        if (this.behaviorID.length > 0)
             dnn.controls._behaviorIDs[this.behaviorID] = this.ns;
-            
+
     },
-    
+
     getProp: function(name, defVal)
     {
-        if (this._props == null) 
+        if (this._props == null)
         {
             this._props = {};
             var p = dnn.getVar(this.ns + '_p');
             if (p)
             {
                 this._props = dnn.evalJSON(p);
-        	    if (dnn.dom.browser.isType(dnn.dom.browser.Mozilla) == false) //firefox cannot clear this value.  if F5 pressed, won't cause onsubmit.  Ctrl+F5 will...  
+                if (dnn.dom.browser.isType(dnn.dom.browser.Mozilla) == false) //firefox cannot clear this value.  if F5 pressed, won't cause onsubmit.  Ctrl+F5 will...
                     dnn.setVar(this.ns + '_p', ''); //clear out value when done
             }
         }
@@ -88,30 +88,30 @@ dnn.controls.control.prototype =
     {
         return this.ns + prefix + id;
     },
-    
+
     createChildControl: function (tag, id, prefix)
     {
-	    var ctl = dnn.dom.createElement(tag);
-	    ctl.ns = this.ns;
-	    //ctl.id = this.ns + prefix + id;
-	    ctl.id = this.getChildControlId(id, prefix);
-	    this.registerChildControl(ctl, id);
-	    return ctl;
+        var ctl = dnn.dom.createElement(tag);
+        ctl.ns = this.ns;
+        //ctl.id = this.ns + prefix + id;
+        ctl.id = this.getChildControlId(id, prefix);
+        this.registerChildControl(ctl, id);
+        return ctl;
     },
-    
+
     registerChildControl: function(ctl, id)
     {
-	    this._childControlIDs[ctl.id] = id;
-	    this._childControls[ctl.id] = ctl; 
-    }, 
+        this._childControlIDs[ctl.id] = id;
+        this._childControls[ctl.id] = ctl;
+    },
 
     getChildControl: function (id, prefix)
     {
-	    var newId = this.ns + prefix + id;
-	    if (this._childControls[newId] != null)	
-		    return this._childControls[newId];
-	    else
-		    return $get(newId);
+        var newId = this.ns + prefix + id;
+        if (this._childControls[newId] != null)
+            return this._childControls[newId];
+        else
+            return $get(newId);
     },
 
     getChildControlBaseId: function(ctl)
@@ -128,18 +128,18 @@ dnn.controls.control.prototype =
         this.get_events().addHandler(name, handler);
     },
 
-    remove_handler: function(name, handler) 
+    remove_handler: function(name, handler)
     {
         this.get_events().removeHandler(name, handler);
     },
-    
+
     invoke_handler: function(name, args)
     {
-    
-        var h = this.get_events().getHandler(name);    
+
+        var h = this.get_events().getHandler(name);
         if (args == null)
             args = Sys.EventArgs.Empty;
-        
+
         if (h)
             h(this, args);
     },
@@ -158,7 +158,7 @@ dnn.controls.control.prototype =
                     argString += ',';
                 argString += 'arguments[' + i + ']';
             }
-            
+
             for (var i=0; i< evts.length; i++)
             {
                 h = evts[i];
@@ -176,24 +176,24 @@ dnn.controls.control.prototype =
         eh[name] = handler;
         return eh;
     },
-    
-    callBackFail: function (result, ctx, req) 
+
+    callBackFail: function (result, ctx, req)
     {
-	    this.invoke_handler('callBackFail', new dnn.controls.DNNCallbackEventArgs(result, ctx, req));
-	    alert(result);
+        this.invoke_handler('callBackFail', new dnn.controls.DNNCallbackEventArgs(result, ctx, req));
+        alert(result);
     },
-    
+
     dispose: function()
     {
         this._childControls = null;
         this._childControlIDs = null;
-        
+
         for (var i=0; i<this._handlerControls.length; i++)
         {
             $clearHandlers(this._handlerControls[i]);
             this._handlerControls[i] = null;
         }
-        
+
         this.container = null;
         this._handlerControls = null;
         dnn.controls.control.callBaseMethod(this, 'dispose');
@@ -206,7 +206,7 @@ dnn.controls.control.prototype =
             return s.substring(2);
         return s;
     }
-    
+
 }
 
 dnn.controls.control.registerClass('dnn.controls.control', Sys.UI.Control);
@@ -215,31 +215,31 @@ dnn.controls.control.registerClass('dnn.controls.control', Sys.UI.Control);
 dnn.controls.DNNNode = function(node)
 {
     this._abbr = {target: 'tar', toolTip: 'tTip', imageIndex: 'imgIdx', image: 'img'};
-	if (node != null)
-	{
-		this.node = node; 
-		this.id = node.getAttribute('id', '');
-		this.key = node.getAttribute('key', '');
-		this.text = node.getAttribute('txt', '');
-		this.url = node.getAttribute('url', '');
-		this.js = node.getAttribute('js', '');
-		this.target = node.getAttribute('tar', '');
-		this.toolTip = node.getAttribute('tTip', '');
-		this.enabled = node.getAttribute('enabled', '1') != '0';
-		this.css = node.getAttribute('css', '');
-		this.cssSel = node.getAttribute('cssSel', '');
-		this.cssHover = node.getAttribute('cssHover', '');
-		this.cssIcon = node.getAttribute('cssIcon', '');
-		this.hasNodes = node.childNodeCount() > 0;	
-		this.hasPendingNodes = (node.getAttribute('hasNodes', '0') == '1' && this.hasNodes == false);	
-		this.imageIndex = new Number(node.getAttribute('imgIdx', '-1')); 
-		this.image = node.getAttribute('img', '');
-		this.level = this.getNodeLevel();	//cache
-		this.isBreak = node.getAttribute('isBreak', '0') == '1' ? true : false;
-	}
+    if (node != null)
+    {
+        this.node = node;
+        this.id = node.getAttribute('id', '');
+        this.key = node.getAttribute('key', '');
+        this.text = node.getAttribute('txt', '');
+        this.url = node.getAttribute('url', '');
+        this.js = node.getAttribute('js', '');
+        this.target = node.getAttribute('tar', '');
+        this.toolTip = node.getAttribute('tTip', '');
+        this.enabled = node.getAttribute('enabled', '1') != '0';
+        this.css = node.getAttribute('css', '');
+        this.cssSel = node.getAttribute('cssSel', '');
+        this.cssHover = node.getAttribute('cssHover', '');
+        this.cssIcon = node.getAttribute('cssIcon', '');
+        this.hasNodes = node.childNodeCount() > 0;
+        this.hasPendingNodes = (node.getAttribute('hasNodes', '0') == '1' && this.hasNodes == false);
+        this.imageIndex = new Number(node.getAttribute('imgIdx', '-1'));
+        this.image = node.getAttribute('img', '');
+        this.level = this.getNodeLevel();	//cache
+        this.isBreak = node.getAttribute('isBreak', '0') == '1' ? true : false;
+    }
 }
 
-dnn.controls.DNNNode.prototype = 
+dnn.controls.DNNNode.prototype =
 {
     _getAbbr: function(name)
     {
@@ -254,7 +254,7 @@ dnn.controls.DNNNode.prototype =
     },
     childNodeCount: function()
     {
-	    return this.node.childNodeCount();
+        return this.node.childNodeCount();
     },
     getNodeLevel: function()
     {
@@ -262,36 +262,36 @@ dnn.controls.DNNNode.prototype =
     },
     getParentNodes: function()
     {
-	    var nodes = [];
-	    var node = this.node;
-	    while (node != null)
-	    {
-		    node = node.parentNode();
-		    if (node == null || node.nodeName() == 'root')
-			    break;
-		    nodes.push(node);
-	    }	
-	    return nodes;
+        var nodes = [];
+        var node = this.node;
+        while (node != null)
+        {
+            node = node.parentNode();
+            if (node == null || node.nodeName() == 'root')
+                break;
+            nodes.push(node);
+        }
+        return nodes;
     },
     update: function(prop)
     {
-	    if (prop != null)
-	    {
-		    var type = typeof(this[prop]);
-			var key = prop;
-	        if (this._abbr[prop])
-	            key = this._abbr[prop];
-			
-		    if (type == 'string' || type == 'number' || this[prop] == null)
-			    this.node.setAttribute(prop, this[prop]);
-		    else if (type == 'boolean')
-			    this.node.setAttribute(prop, new Number(this[prop]));
-	    }
-	    else
-	    {
-		    for (prop in this)
+        if (prop != null)
+        {
+            var type = typeof(this[prop]);
+            var key = prop;
+            if (this._abbr[prop])
+                key = this._abbr[prop];
+
+            if (type == 'string' || type == 'number' || this[prop] == null)
+                this.node.setAttribute(prop, this[prop]);
+            else if (type == 'boolean')
+                this.node.setAttribute(prop, new Number(this[prop]));
+        }
+        else
+        {
+            for (prop in this)
                 this.update(prop);
-	    }
+        }
     }
 }
 dnn.controls.DNNNode.registerClass('dnn.controls.DNNNode');
@@ -309,55 +309,55 @@ dnn.controls.JSONNode = function (node, nodeName, nodeIndex, path)
         this._nodePath = path + '-' + nodeIndex;
     if (nodeName == 'root')
     {
-        this._nodeDictionary = []; 
+        this._nodeDictionary = [];
         this.setupJSONNodes(this, this, node.nodes);
     }
 }
 
-dnn.controls.JSONNode.prototype = 
+dnn.controls.JSONNode.prototype =
 {
-    getAttribute: function(name, def) 
+    getAttribute: function(name, def)
     {
         def = (def) ? def : '';
         return this[name] == null ? def : this[name];
     },
-    setAttribute: function(name, val) 
+    setAttribute: function(name, val)
     {
         this[name] = val;
     },
-    parentNode: function() 
+    parentNode: function()
     {
         return this._parentNode;
     },
-    hasChildNodes: function() 
+    hasChildNodes: function()
     {
         return this.nodes.length > 0;
     },
-    getNodeIndex: function() 
+    getNodeIndex: function()
     {
         return this._nodeIndex;
     },
-    getNodePath: function() 
+    getNodePath: function()
     {
         return this._nodePath;
     },
-    childNodeCount: function() 
+    childNodeCount: function()
     {
         return this.nodes.length;
     },
-    childNodes: function(idx) 
+    childNodes: function(idx)
     {
         return this.nodes[idx];
     },
-    nodeName: function() 
+    nodeName: function()
     {
         return this._nodeName;
     },
-    rootNode: function() 
+    rootNode: function()
     {
         return this._parentNode == null ? this : this._parentNode.rootNode();
     },
-    findNode: function(id) 
+    findNode: function(id)
     {
         if (arguments.length == 3)
             id = arguments[2];  //back compat 'n', 'id', val
@@ -366,84 +366,84 @@ dnn.controls.JSONNode.prototype =
 
     getJSON: function(node)
     {
-	    if (node == null)
-		    node = this;
+        if (node == null)
+            node = this;
 
-	    var json = '{';
-    	
-		json += this.getJSONAttributes(node, ':', ',') + ',nodes:[';
-    	
-	    for (var i=0; i<node.childNodeCount(); i++)
-	    {
-	        if (i > 0)
-	            json += ',';
-		    json += this.getJSON(node.childNodes(i));// + node.childNodes(i).text;
-	    }	
-    
+        var json = '{';
+
+        json += this.getJSONAttributes(node, ':', ',') + ',nodes:[';
+
+        for (var i=0; i<node.childNodeCount(); i++)
+        {
+            if (i > 0)
+                json += ',';
+            json += this.getJSON(node.childNodes(i));// + node.childNodes(i).text;
+        }
+
         json += ']}';
-	    return json;
+        return json;
     },
 
     //only necessary for backwards compat  - becoming obsolete
     getXml: function(node)
     {
-	    if (node == null)
-		    node = this;
+        if (node == null)
+            node = this;
 
-	    var xml = '';
-    	
-	    //if (node.nodeName() != '__root')
-		    xml =  '<' + node.nodeName() + this.getXmlAttributes(node) + '>';
-    	
-	    for (var i=0; i<node.childNodeCount(); i++)
-	    {
-		    xml += this.getXml(node.childNodes(i));// + node.childNodes(i).text;				
-	    }	
-	    //if (node.nodeName != '__root')
-		    xml = xml + '</' + node.nodeName() + '>';
-	    return xml;
+        var xml = '';
+
+        //if (node.nodeName() != '__root')
+            xml =  '<' + node.nodeName() + this.getXmlAttributes(node) + '>';
+
+        for (var i=0; i<node.childNodeCount(); i++)
+        {
+            xml += this.getXml(node.childNodes(i));// + node.childNodes(i).text;
+        }
+        //if (node.nodeName != '__root')
+            xml = xml + '</' + node.nodeName() + '>';
+        return xml;
     },
 
     getJSONAttributes: function(node)
     {
-	    var ret = '';
-	    for (var attr in node)
-	    {
-	        if (typeof(node[attr]) != 'function' && attr.substring(0, 1) != '_' && attr != 'nodes')
-	        {
-	            if (ret.length > 0)
-	                ret += ',';
-		        ret += ' ' + attr + ':"' + dnn.encodeJSON(node.getAttribute(attr).toString()) + '"';
-		    }
-		}
-	    return ret;
+        var ret = '';
+        for (var attr in node)
+        {
+            if (typeof(node[attr]) != 'function' && attr.substring(0, 1) != '_' && attr != 'nodes')
+            {
+                if (ret.length > 0)
+                    ret += ',';
+                ret += ' ' + attr + ':"' + dnn.encodeJSON(node.getAttribute(attr).toString()) + '"';
+            }
+        }
+        return ret;
     },
 
     getXmlAttributes: function(node)
     {
-	    var ret = '';
-	    for (var attr in node)
-	    {
-	        if (typeof(node[attr]) != 'function' && attr.substring(0, 1) != '_' && attr != 'nodes')
-	        {
-	            if (ret.length > 0)
-	                ret += ' ';
-		        ret += ' ' + attr + '="' + dnn.encodeHTML(node.getAttribute(attr)) + '"';					
-		    }
-		}
-	    return ret;
+        var ret = '';
+        for (var attr in node)
+        {
+            if (typeof(node[attr]) != 'function' && attr.substring(0, 1) != '_' && attr != 'nodes')
+            {
+                if (ret.length > 0)
+                    ret += ' ';
+                ret += ' ' + attr + '="' + dnn.encodeHTML(node.getAttribute(attr)) + '"';
+            }
+        }
+        return ret;
     },
-    
+
     setupJSONNodes: function(root, parent, nodes)
     {
         var jnode;
-        
+
         for (var i=0;i<nodes.length; i++)
-        {            
+        {
             jnode = new dnn.controls.JSONNode(nodes[i], 'n', i, parent.getNodePath());
             jnode._parentNode = parent;
             root._nodeDictionary[jnode.id] = jnode;
-            nodes[i] = jnode;    //replace with JSONNode        
+            nodes[i] = jnode;    //replace with JSONNode
             this.setupJSONNodes(root, jnode, jnode.nodes);
         }
     }
@@ -451,13 +451,13 @@ dnn.controls.JSONNode.prototype =
 dnn.controls.JSONNode.registerClass('dnn.controls.JSONNode');
 
 //Event Arguments
-dnn.controls.DNNNodeEventArgs = function(node) 
+dnn.controls.DNNNodeEventArgs = function(node)
 {
     dnn.controls.DNNNodeEventArgs.initializeBase(this);
     this._node = node;
 }
 
-dnn.controls.DNNNodeEventArgs.prototype = 
+dnn.controls.DNNNodeEventArgs.prototype =
 {
     get_node: function()
     {
@@ -466,13 +466,13 @@ dnn.controls.DNNNodeEventArgs.prototype =
 }
 dnn.controls.DNNNodeEventArgs.registerClass('dnn.controls.DNNNodeEventArgs', Sys.CancelEventArgs);
 
-dnn.controls.DNNTabStripEventArgs = function(tab) 
+dnn.controls.DNNTabStripEventArgs = function(tab)
 {
     dnn.controls.DNNTabStripEventArgs.initializeBase(this);
     this._tab = tab;
 }
 
-dnn.controls.DNNTabStripEventArgs.prototype = 
+dnn.controls.DNNTabStripEventArgs.prototype =
 {
     get_tab: function()
     {
@@ -481,13 +481,13 @@ dnn.controls.DNNTabStripEventArgs.prototype =
 }
 dnn.controls.DNNTabStripEventArgs.registerClass('dnn.controls.DNNTabStripEventArgs', Sys.CancelEventArgs);
 
-dnn.controls.DNNToolBarEventArgs = function(btn) 
+dnn.controls.DNNToolBarEventArgs = function(btn)
 {
     dnn.controls.DNNToolBarEventArgs.initializeBase(this);
     this._btn = btn;
 }
 
-dnn.controls.DNNToolBarEventArgs.prototype = 
+dnn.controls.DNNToolBarEventArgs.prototype =
 {
     get_button: function()
     {
@@ -496,7 +496,7 @@ dnn.controls.DNNToolBarEventArgs.prototype =
 }
 dnn.controls.DNNToolBarEventArgs.registerClass('dnn.controls.DNNToolBarEventArgs', Sys.CancelEventArgs);
 
-dnn.controls.DNNCallbackEventArgs = function(result, ctx, req) 
+dnn.controls.DNNCallbackEventArgs = function(result, ctx, req)
 {
     dnn.controls.DNNCallbackEventArgs.initializeBase(this);
     this._result = result;
@@ -504,18 +504,18 @@ dnn.controls.DNNCallbackEventArgs = function(result, ctx, req)
     this._req = req;
 }
 
-dnn.controls.DNNCallbackEventArgs.prototype = 
+dnn.controls.DNNCallbackEventArgs.prototype =
 {
     get_result: function()
     {
         return this._result;
     },
-    
+
     get_context: function()
     {
         return this._context;
     },
-    
+
     get_request: function()
     {
         return this._req;
@@ -528,11 +528,11 @@ dnn.controls._submitComponent = function()
 {
     dnn.controls._submitComponent.initializeBase(this);
 }
-dnn.controls._submitComponent.prototype = 
+dnn.controls._submitComponent.prototype =
 {
     onsubmit: function()
     {
-        var h = this.get_events().getHandler('submit');           
+        var h = this.get_events().getHandler('submit');
         if (h)
             h(this, Sys.EventArgs.Empty);
     },
@@ -540,11 +540,11 @@ dnn.controls._submitComponent.prototype =
     {
         this.get_events().addHandler('submit', handler);
     },
-    remove_handler: function(handler) 
+    remove_handler: function(handler)
     {
         this.get_events().removeHandler('submit', handler);
     },
-    
+
     dispose: function()
     {
         dnn.controls._submitComponent.callBaseMethod(this, 'dispose');
@@ -553,4 +553,3 @@ dnn.controls._submitComponent.prototype =
 dnn.controls._submitComponent.registerClass('dnn.controls._submitComponent', Sys.Component);
 if (dnn.controls.submitComp == null)
     dnn.controls.submitComp = new dnn.controls._submitComponent();
-

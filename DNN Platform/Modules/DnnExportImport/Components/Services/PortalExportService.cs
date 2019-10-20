@@ -161,8 +161,8 @@ namespace Dnn.ExportImport.Components.Services
                         t =>
                             t.SettingName == exportPortalSetting.SettingName &&
                             (t.CultureCode == exportPortalSetting.CultureCode ||
-                             (string.IsNullOrEmpty(t.CultureCode) &&
-                              string.IsNullOrEmpty(exportPortalSetting.CultureCode))));
+                            (string.IsNullOrEmpty(t.CultureCode) &&
+                            string.IsNullOrEmpty(exportPortalSetting.CultureCode))));
                 var isUpdate = false;
                 if (existingPortalSetting != null)
                 {
@@ -181,7 +181,7 @@ namespace Dnn.ExportImport.Components.Services
                 if (isUpdate)
                 {
                     var modifiedBy = Util.GetUserIdByName(importJob, exportPortalSetting.LastModifiedByUserId,
-                     exportPortalSetting.LastModifiedByUserName);
+                    exportPortalSetting.LastModifiedByUserName);
 
                     exportPortalSetting.PortalSettingId = existingPortalSetting.PortalSettingId;
                     DotNetNuke.Data.DataProvider.Instance()

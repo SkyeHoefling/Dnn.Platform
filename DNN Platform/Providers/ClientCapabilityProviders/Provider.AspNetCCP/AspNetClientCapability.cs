@@ -69,7 +69,7 @@ namespace DotNetNuke.Providers.AspNetClientCapabilityProvider
                 IsTouchScreen = false;
                 BrowserName = browserCaps.Browser;
                 if(browserCaps.Capabilities != null)
-                { 
+                {
                     Capabilities = browserCaps.Capabilities.Cast<DictionaryEntry>()
                         .ToDictionary(kvp => Convert.ToString(kvp.Key), kvp => Convert.ToString(kvp.Value));
                 }
@@ -105,7 +105,7 @@ namespace DotNetNuke.Providers.AspNetClientCapabilityProvider
         /// </summary>
         public AspNetClientCapability(HttpRequest request) : this(request.UserAgent ?? "", request.Browser)
         {
-            
+
         }
 
         /// <summary>
@@ -258,9 +258,9 @@ namespace DotNetNuke.Providers.AspNetClientCapabilityProvider
                 platformName = "Linux";
             }
             else if (CheckAgentAndVersion(UnixAgent, userAgent, ref platformVersion) ||
-                     CheckAgentAndVersion(UnixAgent2, userAgent, ref platformVersion) ||
-                     CheckAgentAndVersion(UnixAgent3, userAgent, ref platformVersion) ||
-                     CheckAgentAndVersion(X11Agent, userAgent, ref platformVersion))
+                    CheckAgentAndVersion(UnixAgent2, userAgent, ref platformVersion) ||
+                    CheckAgentAndVersion(UnixAgent3, userAgent, ref platformVersion) ||
+                    CheckAgentAndVersion(X11Agent, userAgent, ref platformVersion))
             {
                 platformName = "Unix";
             }

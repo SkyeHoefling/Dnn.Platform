@@ -27,7 +27,7 @@ CodeMirror.registerHelper("lint", "coffeescript", function(text) {
   try {
     var res = coffeelint.lint(text);
     for(var i = 0; i < res.length; i++) {
-      parseError(res[i]);
+    parseError(res[i]);
     }
   } catch(e) {
     found.push({from: CodeMirror.Pos(e.location.first_line, 0),

@@ -168,7 +168,7 @@ class FromNew extends Component {
                             onChange={this.onChange.bind(this, "fileName")}
                             value={state.newModule.fileName.value}
                             error={state.newModule.fileName.error && state.triedToSave} />
-                        <RadioButtons 
+                        <RadioButtons
                             options={[
                                 {
                                     label: "Visual Basic",

@@ -1,10 +1,10 @@
-import { 
+import {
     siteBehavior as ActionTypes
 } from "../constants/actionTypes";
 
 export default function siteBehavior(state = {
 }, action) {
-    switch (action.type) {        
+    switch (action.type) {
         case ActionTypes.RETRIEVED_SITESETTINGS_DEFAULT_PAGES_SETTINGS:
             return { ...state,
                 defaultPagesSettings: action.data.settings,
@@ -129,7 +129,7 @@ export default function siteBehavior(state = {
         case ActionTypes.DELETED_SITESETTINGS_SITE_ALIAS:
             return { ...state,
                 siteAliases: action.data.siteAliases
-            };        
+            };
         case ActionTypes.RETRIEVED_SITESETTINGS_OTHER_SETTINGS:
             return { ...state,
                 otherSettings: action.data.settings,
@@ -145,7 +145,7 @@ export default function siteBehavior(state = {
                 otherSettings: action.data.settings,
                 otherSettingsClientModified: action.data.otherSettingsClientModified
             };
-        case ActionTypes.RETRIEVED_SITESETTINGS_LIST_INFO: 
+        case ActionTypes.RETRIEVED_SITESETTINGS_LIST_INFO:
             return { ...state,
                 enableSortOrder: action.data.enableSortOrder,
                 entries: action.data.entries

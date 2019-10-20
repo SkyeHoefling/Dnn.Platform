@@ -1,5 +1,5 @@
 # DNN Platform Release Schedule
-To ensure adequate time for release planning by the community, partners, and vendors a specific release process will be followed for all releases.  
+To ensure adequate time for release planning by the community, partners, and vendors a specific release process will be followed for all releases.
 
 ## Release Candidates
 For a period of two-weeks (Minor & Revision) or four-weeks (Major) before any release, a Release Candidate (RC) version will be made available to the public.  At present these release candidates will be for testing only. After version 10.x efforts will be made to support upgrading from RC to Production releases.

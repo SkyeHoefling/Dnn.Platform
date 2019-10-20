@@ -1,9 +1,9 @@
 ﻿Object.isNullOrUndefined = function (value) {
-	return (typeof (value) === "undefined" || value === null);
+    return (typeof (value) === "undefined" || value === null);
 };
 
 String.isNullOrEmpty = function (value) {
-	return (Object.isNullOrUndefined(value) || value === "");
+    return (Object.isNullOrUndefined(value) || value === "");
 };
 
 String.toBoolean = function(value) {
@@ -36,9 +36,9 @@ if (typeof Object.getOwnPropertyNames === "undefined") {
 };
 
 if (typeof String.toCamel === "undefined") {
-	String.toCamel = function (text) {
-		return String.isNullOrEmpty(text) ? text : (text.charAt(0).toLowerCase() + text.substr(1));
-	};
+    String.toCamel = function (text) {
+        return String.isNullOrEmpty(text) ? text : (text.charAt(0).toLowerCase() + text.substr(1));
+    };
 };
 
 if (typeof Object.ToCamel === "undefined") {
@@ -68,34 +68,34 @@ if (typeof Object.ToCamel === "undefined") {
 };
 
 String.prototype.append = function (stringToAppend, separator) {
-	if (String.isNullOrEmpty(stringToAppend)) {
-		return this.toString();
-	}
-	else if (String.isNullOrEmpty(this.toString())) {
-		return stringToAppend;
-	}
-	else {
-		var result = [];
-		result[0] = this;
-		result[1] = stringToAppend;
-		return result.join(separator);
-	}
+    if (String.isNullOrEmpty(stringToAppend)) {
+        return this.toString();
+    }
+    else if (String.isNullOrEmpty(this.toString())) {
+        return stringToAppend;
+    }
+    else {
+        var result = [];
+        result[0] = this;
+        result[1] = stringToAppend;
+        return result.join(separator);
+    }
 };
 
 if (typeof String.prototype.trim !== 'function') {
-	String.prototype.trim = function() { return this.replace( /^\s\s*/ , '').replace( /\s\s*$/ , ''); };
+    String.prototype.trim = function() { return this.replace( /^\s\s*/ , '').replace( /\s\s*$/ , ''); };
 }
 
 if (typeof String.prototype.ltrim !== 'function') {
-	String.prototype.ltrim = function() { return this.replace( /^\s+/ , ''); };
+    String.prototype.ltrim = function() { return this.replace( /^\s+/ , ''); };
 }
 
 if (typeof String.prototype.rtrim !== 'function') {
-	String.prototype.rtrim = function() { return this.replace( /\s+$/ , ''); };
+    String.prototype.rtrim = function() { return this.replace( /\s+$/ , ''); };
 }
 
 if (typeof String.prototype.fulltrim !== 'function') {
-	String.prototype.fulltrim = function() { return this.replace( /(?:(?:^|\n)\s+|\s+(?:$|\n))/g , '').replace( /\s+/g , ' '); };
+    String.prototype.fulltrim = function() { return this.replace( /(?:(?:^|\n)\s+|\s+(?:$|\n))/g , '').replace( /\s+/g , ' '); };
 }
 
 if (typeof String.prototype.startsWith !== 'function') {
@@ -295,12 +295,12 @@ if (typeof Date.prototype.format === "undefined") {
 }
 
 /* Compare the current date against another date.
-     *
-     * @param b  {Date} the other date
-     * @returns   -1 : if this < b
-     *             0 : if this === b
-     *             1 : if this > b
-     *            NaN : if a or b is an illegal date
+    *
+    * @param b  {Date} the other date
+    * @returns   -1 : if this < b
+    *             0 : if this === b
+    *             1 : if this > b
+    *            NaN : if a or b is an illegal date
     */
 if (typeof Date.prototype.compare === "undefined") {
     Date.prototype.compare = function (b) {

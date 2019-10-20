@@ -90,7 +90,7 @@
         }
         function Post(method, data, callback, journalId) {
             var sf = opts.servicesFramework;
-            
+
             $.ajax({
                 type: "POST",
                 url: sf.getServiceRoot('Journal') + 'Services/' + method,

@@ -83,7 +83,7 @@ class ResourceList extends Component {
                 </GridCell>
                 <GridCell className="resource-rows">
                     {searchedList.map((key, i) => {
-                        const shouldBeHighlighted = props.highlightPendingTranslations 
+                        const shouldBeHighlighted = props.highlightPendingTranslations
                             && this.props.list[key].First === this.props.list[key].Second;
 
                         return <GridCell className="resource-row" key={i}>
@@ -91,14 +91,14 @@ class ResourceList extends Component {
                                 <div className="key-name">{key}</div>
                             </GridCell>
                             <GridCell className="row-detail" columnSize={rowSizes[1]}>
-                                <ResourceEditor 
-                                    value={this.props.list[key].Second} 
+                                <ResourceEditor
+                                    value={this.props.list[key].Second}
                                     enabled={false} />
                             </GridCell>
                             <GridCell className="row-detail" columnSize={rowSizes[2]}>
-                                <ResourceEditor 
-                                    className={(shouldBeHighlighted ? "highlight" : "")} 
-                                    value={this.props.list[key].First} 
+                                <ResourceEditor
+                                    className={(shouldBeHighlighted ? "highlight" : "")}
+                                    value={this.props.list[key].First}
                                     onChange={this.onChange.bind(this, key, "First") } />
                             </GridCell>
                         </GridCell>;

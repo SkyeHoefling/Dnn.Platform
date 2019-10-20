@@ -1,4 +1,4 @@
-﻿/* json2.js 
+﻿/* json2.js
  * 2008-01-17
  * Public Domain
  * No warranty expressed or implied. Use at your own risk.

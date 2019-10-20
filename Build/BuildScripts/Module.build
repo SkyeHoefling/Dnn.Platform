@@ -5,28 +5,28 @@
   </Target>
   <Target Name="GetFiles">
     <ItemGroup>
-      <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
-      <SourceFiles Include="*.css;*.htm;*.html;*.xsl;*.png;*.gif" />
-      <ConfigFiles Include="*.config" Exclude="web.config;packages.config"/>
-      <RootConfig Include="*eb.config" />
-      <RootViews Include="*.ascx;*.asmx;*.ashx;" />
-      <Services Include="*.svc" />
-      <Views Include="Views/*.ascx;" />
-      <MVCViews Include="Views/*/*.cshtml;Views/*.cshtml"/>
-      <MVCConfig Include="Views/*.config" />
-      <Controls Include="Controls/*.ascx;" />
-      <ResourceFiles Include="App_LocalResources/*.resx" />
-      <ControlResourceFiles Include="Controls/App_LocalResources/*.resx;" />
-      <Images Include="Images/*.*" />
-      <Keys Include="keys/*.*" />
-      <ClientScripts Include="ClientScripts/*.*" />
-      <JsFiles Include="js/*.*" />
-      <Scripts Include="Scripts/*.*" />
-      <SharedScripts Include="Scripts/Shared/*.*" />
-      <Templates Include="Templates/*.htm" />
-      <DataFiles Include="Resources/*.xml" />
-      <Resources Include="@(ResourceFiles);@(Scripts);@(RootViews);@(Images);@(TextFiles);@(SourceFiles);@(ClientScripts);@(JsFiles);@(ControlResourceFiles);
-                 @(Keys);@(Services);@(RootConfig);@(ConfigFiles);@(Templates);@(DataFiles);@(SharedScripts);@(Controls);@(Views);@(MVCViews); @(MVCConfig)" />
+    <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
+    <SourceFiles Include="*.css;*.htm;*.html;*.xsl;*.png;*.gif" />
+    <ConfigFiles Include="*.config" Exclude="web.config;packages.config"/>
+    <RootConfig Include="*eb.config" />
+    <RootViews Include="*.ascx;*.asmx;*.ashx;" />
+    <Services Include="*.svc" />
+    <Views Include="Views/*.ascx;" />
+    <MVCViews Include="Views/*/*.cshtml;Views/*.cshtml"/>
+    <MVCConfig Include="Views/*.config" />
+    <Controls Include="Controls/*.ascx;" />
+    <ResourceFiles Include="App_LocalResources/*.resx" />
+    <ControlResourceFiles Include="Controls/App_LocalResources/*.resx;" />
+    <Images Include="Images/*.*" />
+    <Keys Include="keys/*.*" />
+    <ClientScripts Include="ClientScripts/*.*" />
+    <JsFiles Include="js/*.*" />
+    <Scripts Include="Scripts/*.*" />
+    <SharedScripts Include="Scripts/Shared/*.*" />
+    <Templates Include="Templates/*.htm" />
+    <DataFiles Include="Resources/*.xml" />
+    <Resources Include="@(ResourceFiles);@(Scripts);@(RootViews);@(Images);@(TextFiles);@(SourceFiles);@(ClientScripts);@(JsFiles);@(ControlResourceFiles);
+                @(Keys);@(Services);@(RootConfig);@(ConfigFiles);@(Templates);@(DataFiles);@(SharedScripts);@(Controls);@(Views);@(MVCViews); @(MVCConfig)" />
     </ItemGroup>
   </Target>
   <Target Name="CopyBin">

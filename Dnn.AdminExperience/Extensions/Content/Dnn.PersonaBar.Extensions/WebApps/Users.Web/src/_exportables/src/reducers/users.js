@@ -66,9 +66,9 @@ const switchCase = [
     },
     {
         condition: ActionTypes.USER_MADE_SUPERUSER,
-        functionToRun: (state, action) => { 
-            let totalUsers = Object.assign(state.totalUsers);           
-            if (action.filter === 3) {                
+        functionToRun: (state, action) => {
+            let totalUsers = Object.assign(state.totalUsers);
+            if (action.filter === 3) {
                 return {
                     users: removeUser(state.users, action.payload.userId),
                     totalUsers: totalUsers - 1
@@ -213,4 +213,3 @@ export default function getReducer(initialState, additionalCases) {
         return returnCase;
     };
 }
-

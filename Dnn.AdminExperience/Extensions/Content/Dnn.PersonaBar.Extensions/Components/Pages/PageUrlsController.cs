@@ -21,7 +21,7 @@ namespace Dnn.PersonaBar.Pages.Components
 
         public IEnumerable<Url> GetPageUrls(TabInfo tab, int portalId)
         {
-            
+
             var locales = new Lazy<Dictionary<string, Locale>>(() => LocaleController.Instance.GetLocales(portalId));
             var customUrls = GetSortedUrls(tab, portalId, locales, 1, true, false);
             var automaticUrls = GetSortedUrls(tab, portalId, locales, 1, true, true).ToList();
@@ -72,7 +72,7 @@ namespace Dnn.PersonaBar.Pages.Components
             }
 
             if (tab.TabUrls.Any(u => u.Url.ToLowerInvariant() == dto.Path.ValueOrEmpty().ToLowerInvariant()
-                                     && (u.PortalAliasId == dto.SiteAliasKey || u.PortalAliasId == -1)))
+                                    && (u.PortalAliasId == dto.SiteAliasKey || u.PortalAliasId == -1)))
             {
                 return new PageUrlResult {
                     Success = false,
@@ -182,7 +182,7 @@ namespace Dnn.PersonaBar.Pages.Components
 
             if (statusCodeKey == "200")
             {
-                //We need to check if we are updating a current url or creating a new 200                
+                //We need to check if we are updating a current url or creating a new 200
                 if (tabUrl == null)
                 {
                     //Just create Url
@@ -374,7 +374,7 @@ namespace Dnn.PersonaBar.Pages.Components
                 int statusCode;
                 int.TryParse(url.HttpStatus, out statusCode);
 
-                //27133 : Only show a custom URL 
+                //27133 : Only show a custom URL
                 if (url.PortalAliasUsage == PortalAliasUsageType.Default)
                 {
                     var aliases = PortalAliasController.Instance.GetPortalAliasesByPortalId(portalId);
@@ -441,7 +441,7 @@ namespace Dnn.PersonaBar.Pages.Components
                 PathWithNoExtension = GetCleanPath(path, friendlyUrlSettings),
                 QueryString = queryString,
                 Locale = (urlLocale != null) ? new KeyValuePair<int, string>(urlLocale.KeyID, urlLocale.EnglishName)
-                                             : new KeyValuePair<int, string>(-1, ""),
+                                            : new KeyValuePair<int, string>(-1, ""),
                 StatusCode = StatusCodes.SingleOrDefault(kv => kv.Key == statusCode),
                 SiteAliasUsage = (int)PortalAliasUsageType.ChildPagesInherit,
                 IsSystem = isSystem,

@@ -21,13 +21,13 @@
   function matchSequence(list, end, escapes) {
     if (list.length == 0) return phpString(end);
     return function (stream, state) {
-      var patterns = list[0];
-      for (var i = 0; i < patterns.length; i++) if (stream.match(patterns[i][0])) {
+    var patterns = list[0];
+    for (var i = 0; i < patterns.length; i++) if (stream.match(patterns[i][0])) {
         state.tokenize = matchSequence(list.slice(1), end);
         return patterns[i][1];
-      }
-      state.tokenize = phpString(end, escapes);
-      return "string";
+    }
+    state.tokenize = phpString(end, escapes);
+    return "string";
     };
   }
   function phpString(closing, escapes) {
@@ -36,45 +36,45 @@
   function phpString_(stream, state, closing, escapes) {
     // "Complex" syntax
     if (escapes !== false && stream.match("${", false) || stream.match("{$", false)) {
-      state.tokenize = null;
-      return "string";
+    state.tokenize = null;
+    return "string";
     }
 
     // Simple syntax
     if (escapes !== false && stream.match(/^\$[a-zA-Z_][a-zA-Z0-9_]*/)) {
-      // After the variable name there may appear array or object operator.
-      if (stream.match("[", false)) {
+    // After the variable name there may appear array or object operator.
+    if (stream.match("[", false)) {
         // Match array operator
         state.tokenize = matchSequence([
-          [["[", null]],
-          [[/\d[\w\.]*/, "number"],
-           [/\$[a-zA-Z_][a-zA-Z0-9_]*/, "variable-2"],
-           [/[\w\$]+/, "variable"]],
-          [["]", null]]
+        [["[", null]],
+        [[/\d[\w\.]*/, "number"],
+            [/\$[a-zA-Z_][a-zA-Z0-9_]*/, "variable-2"],
+            [/[\w\$]+/, "variable"]],
+        [["]", null]]
         ], closing, escapes);
-      }
-      if (stream.match(/\-\>\w/, false)) {
+    }
+    if (stream.match(/\-\>\w/, false)) {
         // Match object operator
         state.tokenize = matchSequence([
-          [["->", null]],
-          [[/[\w]+/, "variable"]]
+        [["->", null]],
+        [[/[\w]+/, "variable"]]
         ], closing, escapes);
-      }
-      return "variable-2";
+    }
+    return "variable-2";
     }
 
     var escaped = false;
     // Normal string
     while (!stream.eol() &&
-           (escaped || escapes === false ||
+            (escaped || escapes === false ||
             (!stream.match("{$", false) &&
-             !stream.match(/^(\$[a-zA-Z_][a-zA-Z0-9_]*|\$\{)/, false)))) {
-      if (!escaped && stream.match(closing)) {
+            !stream.match(/^(\$[a-zA-Z_][a-zA-Z0-9_]*|\$\{)/, false)))) {
+    if (!escaped && stream.match(closing)) {
         state.tokenize = null;
         state.tokStack.pop(); state.tokStack.pop();
         break;
-      }
-      escaped = stream.next() == "\\" && !escaped;
+    }
+    escaped = stream.next() == "\\" && !escaped;
     }
     return "string";
   }
@@ -100,53 +100,53 @@
     builtin: keywords(phpBuiltin),
     multiLineStrings: true,
     hooks: {
-      "$": function(stream) {
+    "$": function(stream) {
         stream.eatWhile(/[\w\$_]/);
         return "variable-2";
-      },
-      "<": function(stream, state) {
+    },
+    "<": function(stream, state) {
         var before;
         if (before = stream.match(/<<\s*/)) {
-          var quoted = stream.eat(/['"]/);
-          stream.eatWhile(/[\w\.]/);
-          var delim = stream.current().slice(before[0].length + (quoted ? 2 : 1));
-          if (quoted) stream.eat(quoted);
-          if (delim) {
+        var quoted = stream.eat(/['"]/);
+        stream.eatWhile(/[\w\.]/);
+        var delim = stream.current().slice(before[0].length + (quoted ? 2 : 1));
+        if (quoted) stream.eat(quoted);
+        if (delim) {
             (state.tokStack || (state.tokStack = [])).push(delim, 0);
             state.tokenize = phpString(delim, quoted != "'");
             return "string";
-          }
+        }
         }
         return false;
-      },
-      "#": function(stream) {
+    },
+    "#": function(stream) {
         while (!stream.eol() && !stream.match("?>", false)) stream.next();
         return "comment";
-      },
-      "/": function(stream) {
+    },
+    "/": function(stream) {
         if (stream.eat("/")) {
-          while (!stream.eol() && !stream.match("?>", false)) stream.next();
-          return "comment";
+        while (!stream.eol() && !stream.match("?>", false)) stream.next();
+        return "comment";
         }
         return false;
-      },
-      '"': function(_stream, state) {
+    },
+    '"': function(_stream, state) {
         (state.tokStack || (state.tokStack = [])).push('"', 0);
         state.tokenize = phpString('"');
         return "string";
-      },
-      "{": function(_stream, state) {
+    },
+    "{": function(_stream, state) {
         if (state.tokStack && state.tokStack.length)
-          state.tokStack[state.tokStack.length - 1]++;
+        state.tokStack[state.tokStack.length - 1]++;
         return false;
-      },
-      "}": function(_stream, state) {
+    },
+    "}": function(_stream, state) {
         if (state.tokStack && state.tokStack.length > 0 &&
             !--state.tokStack[state.tokStack.length - 1]) {
-          state.tokenize = phpString(state.tokStack[state.tokStack.length - 2]);
+        state.tokenize = phpString(state.tokStack[state.tokStack.length - 2]);
         }
         return false;
-      }
+    }
     }
   };
 
@@ -155,73 +155,73 @@
     var phpMode = CodeMirror.getMode(config, phpConfig);
 
     function dispatch(stream, state) {
-      var isPHP = state.curMode == phpMode;
-      if (stream.sol() && state.pending && state.pending != '"' && state.pending != "'") state.pending = null;
-      if (!isPHP) {
+    var isPHP = state.curMode == phpMode;
+    if (stream.sol() && state.pending && state.pending != '"' && state.pending != "'") state.pending = null;
+    if (!isPHP) {
         if (stream.match(/^<\?\w*/)) {
-          state.curMode = phpMode;
-          state.curState = state.php;
-          return "meta";
+        state.curMode = phpMode;
+        state.curState = state.php;
+        return "meta";
         }
         if (state.pending == '"' || state.pending == "'") {
-          while (!stream.eol() && stream.next() != state.pending) {}
-          var style = "string";
+        while (!stream.eol() && stream.next() != state.pending) {}
+        var style = "string";
         } else if (state.pending && stream.pos < state.pending.end) {
-          stream.pos = state.pending.end;
-          var style = state.pending.style;
+        stream.pos = state.pending.end;
+        var style = state.pending.style;
         } else {
-          var style = htmlMode.token(stream, state.curState);
+        var style = htmlMode.token(stream, state.curState);
         }
         if (state.pending) state.pending = null;
         var cur = stream.current(), openPHP = cur.search(/<\?/), m;
         if (openPHP != -1) {
-          if (style == "string" && (m = cur.match(/[\'\"]$/)) && !/\?>/.test(cur)) state.pending = m[0];
-          else state.pending = {end: stream.pos, style: style};
-          stream.backUp(cur.length - openPHP);
+        if (style == "string" && (m = cur.match(/[\'\"]$/)) && !/\?>/.test(cur)) state.pending = m[0];
+        else state.pending = {end: stream.pos, style: style};
+        stream.backUp(cur.length - openPHP);
         }
         return style;
-      } else if (isPHP && state.php.tokenize == null && stream.match("?>")) {
+    } else if (isPHP && state.php.tokenize == null && stream.match("?>")) {
         state.curMode = htmlMode;
         state.curState = state.html;
         return "meta";
-      } else {
+    } else {
         return phpMode.token(stream, state.curState);
-      }
+    }
     }
 
     return {
-      startState: function() {
+    startState: function() {
         var html = CodeMirror.startState(htmlMode), php = CodeMirror.startState(phpMode);
         return {html: html,
                 php: php,
                 curMode: parserConfig.startOpen ? phpMode : htmlMode,
                 curState: parserConfig.startOpen ? php : html,
                 pending: null};
-      },
+    },
 
-      copyState: function(state) {
+    copyState: function(state) {
         var html = state.html, htmlNew = CodeMirror.copyState(htmlMode, html),
             php = state.php, phpNew = CodeMirror.copyState(phpMode, php), cur;
         if (state.curMode == htmlMode) cur = htmlNew;
         else cur = phpNew;
         return {html: htmlNew, php: phpNew, curMode: state.curMode, curState: cur,
                 pending: state.pending};
-      },
+    },
 
-      token: dispatch,
+    token: dispatch,
 
-      indent: function(state, textAfter) {
+    indent: function(state, textAfter) {
         if ((state.curMode != phpMode && /^\s*<\//.test(textAfter)) ||
             (state.curMode == phpMode && /^\?>/.test(textAfter)))
-          return htmlMode.indent(state.html, textAfter);
+        return htmlMode.indent(state.html, textAfter);
         return state.curMode.indent(state.curState, textAfter);
-      },
+    },
 
-      blockCommentStart: "/*",
-      blockCommentEnd: "*/",
-      lineComment: "//",
+    blockCommentStart: "/*",
+    blockCommentEnd: "*/",
+    lineComment: "//",
 
-      innerMode: function(state) { return {state: state.curState, mode: state.curMode}; }
+    innerMode: function(state) { return {state: state.curState, mode: state.curMode}; }
     };
   }, "htmlmixed", "clike");
 

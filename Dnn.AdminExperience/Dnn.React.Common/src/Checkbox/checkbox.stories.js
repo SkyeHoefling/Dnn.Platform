@@ -12,12 +12,12 @@ storiesOf("Checkbox", module).add("already checked", () => (
 ));
 
 storiesOf("Checkbox", module).add("with label and tooltip", () => (
-  <Checkbox 
-    value={false} 
-    onChange={action("changed")} 
-    label="I have a tooltip that opens on the bottom" 
+  <Checkbox
+    value={false}
+    onChange={action("changed")}
+    label="I have a tooltip that opens on the bottom"
     tooltipMessage="This is the tooltip of the checkbox"
-    tooltipPlace="bottom"  
+    tooltipPlace="bottom"
   />
 ))
 

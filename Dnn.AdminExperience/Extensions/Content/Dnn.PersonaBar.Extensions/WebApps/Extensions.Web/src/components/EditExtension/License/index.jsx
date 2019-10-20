@@ -37,8 +37,8 @@ class License extends Component {
                 <Checkbox
                     label={Localization.get("InstallExtension_AcceptLicense.Label")}
                     value={props.licenseAccepted}
-                    onChange={props.onToggleLicenseAccept}                     
-                />                
+                    onChange={props.onToggleLicenseAccept}
+                />
                 {!props.buttonsAreHidden && <GridCell columnSize={100} className="modal-footer">
                     <Button type="secondary" onClick={props.onCancel.bind(this)}>{Localization.get("Cancel.Button")}</Button>
                     {!props.disabled && <Button type="primary" onClick={props.onSave.bind(this, true)}>{Localization.get("EditModule_SaveAndClose.Button")}</Button>}
@@ -60,7 +60,7 @@ License.propTypes = {
     onToggleLicenseAccept: PropTypes.func
 };
 
-License.defaultProps = { 
+License.defaultProps = {
     licenseAccepted: false
 };
 

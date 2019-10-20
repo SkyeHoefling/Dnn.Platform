@@ -40,10 +40,10 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="plFolder.Text">
-	<value>Folder</value>
+  <value>Folder</value>
     </data>
     <data name="plFolder.Help">
-	<value>Select the folder to export the file to.</value>
+  <value>Select the folder to export the file to.</value>
     </data>
     <data name="plFile.Text">
         <value>File</value>
@@ -73,6 +73,6 @@
         <value>You must specify a folder and file for export.</value>
     </data>
     <data name="Root.Text">
-	<value>Root</value>
+  <value>Root</value>
     </data>
 </root>

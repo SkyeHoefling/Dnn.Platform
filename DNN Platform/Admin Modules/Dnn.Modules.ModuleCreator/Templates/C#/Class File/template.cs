@@ -1,9 +1,9 @@
 #region Copyright
 
-// 
+//
 // Copyright (c) _YEAR_
 // by _OWNER_
-// 
+//
 
 #endregion
 
@@ -16,8 +16,8 @@ using DotNetNuke.Entities.Modules;
 namespace _OWNER_._MODULE_
 {
 
-	public class _CONTROL_
-	{
+    public class _CONTROL_
+    {
 
-	}
+    }
 }

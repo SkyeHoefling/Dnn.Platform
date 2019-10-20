@@ -1,10 +1,10 @@
 ---
 name: Request for Comments
-about: Start a discussion around a feature, enhancement, or other change to DNN.Platform 
+about: Start a discussion around a feature, enhancement, or other change to DNN.Platform
 ---
 
-<!-- 
-  Please read contribution guideline first: https://github.com/dnnsoftware/Dnn.Platform/blob/development/CONTRIBUTING.md 
+<!--
+  Please read contribution guideline first: https://github.com/dnnsoftware/Dnn.Platform/blob/development/CONTRIBUTING.md
   Any potential security issues should be sent to security@dnnsoftware.com, rather than posted on GitHub
 -->
 

@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - http://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -74,7 +74,7 @@ namespace Dnn.ExportImport.Components.Common
                         archive.Entries.Where(
                             entry =>
                                 ((exceptionList != null && !exceptionList.Contains(entry.FullName)) ||
-                                 exceptionList == null) &&
+                                exceptionList == null) &&
                                 !entry.FullName.EndsWith("\\") && !entry.FullName.EndsWith("/") && entry.Length > 0)
                     )
                 {
@@ -121,7 +121,7 @@ namespace Dnn.ExportImport.Components.Common
         /// <param name="archive">Source archive to write the files to</param>
         /// <param name="files">List containing path of files to add to archive.</param>
         /// <param name="folderOffset">Starting index(Index in file url) of the root folder in archive based on what the folder structure starts in archive.
-        /// e.g. if file url is c:\\dnn\files\archived\foldername\1\file.jpg and we want to add all files in foldername folder 
+        /// e.g. if file url is c:\\dnn\files\archived\foldername\1\file.jpg and we want to add all files in foldername folder
         /// then the folder offset would be starting index of foldername</param>
         /// <param name="folder">Additional root folder to be added into archive.</param>
         public static void AddFilesToArchive(ZipArchive archive, IEnumerable<string> files, int folderOffset,
@@ -141,7 +141,7 @@ namespace Dnn.ExportImport.Components.Common
         /// <param name="file">Full path of file to add</param>
         /// <param name="archivePath">Full path of archive file</param>
         /// <param name="folderOffset">Starting index(Index in file url) of the root folder in archive based on what the folder structure starts in archive.
-        /// e.g. if file url is c:\\dnn\files\archived\foldername\1\file.jpg and we want to add all files in foldername folder 
+        /// e.g. if file url is c:\\dnn\files\archived\foldername\1\file.jpg and we want to add all files in foldername folder
         /// then the folder offset would be starting index of foldername</param>
         /// <param name="folder">Additional root folder to be added into archive.</param>
         public static bool AddFileToArchive(string file, string archivePath, int folderOffset, string folder = null)

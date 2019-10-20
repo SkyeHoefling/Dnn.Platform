@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -93,7 +93,7 @@ namespace DotNetNuke.Tests.Content
         {
             //Arrange
             Mock<IDataService> mockDataService = new Mock<IDataService>();
-            
+
             ContentController controller = new ContentController(mockDataService.Object);
 
             ComponentFactory.RegisterComponentInstance<IContentController>(controller);
@@ -307,9 +307,9 @@ namespace DotNetNuke.Tests.Content
             //Arrange
             Mock<IDataService> mockDataService = new Mock<IDataService>();
             mockDataService.Setup(ds => ds.GetContentItemsByTerm(Constants.TERM_ValidName)).Returns(MockHelper.CreateValidContentItemsReader(Constants.CONTENT_TaggedItemCount,
-                                                                                                                                             Constants.CONTENT_IndexedFalse,
-                                                                                                                                             Null.NullInteger,
-                                                                                                                                             Constants.TERM_ValidName));
+                                                                                                                                            Constants.CONTENT_IndexedFalse,
+                                                                                                                                            Null.NullInteger,
+                                                                                                                                            Constants.TERM_ValidName));
             ContentController controller = new ContentController(mockDataService.Object);
 
             //Act
@@ -331,7 +331,7 @@ namespace DotNetNuke.Tests.Content
                 .Returns(MockHelper.CreateValidContentItemsReader(10, true, 0, null));
 
             var controller = new ContentController(mock.Object);
-            
+
             var items = controller.GetContentItemsByContentType(10).ToArray();
 
             Assert.AreEqual(items.Length, 10);
@@ -512,7 +512,7 @@ namespace DotNetNuke.Tests.Content
             //Arrange
             Mock<IDataService> mockDataService = new Mock<IDataService>();
             ContentController controller = new ContentController(mockDataService.Object);
- 
+
             ContentItem content = ContentTestHelper.CreateValidContentItem();
 
             //Act, Arrange
@@ -633,20 +633,20 @@ namespace DotNetNuke.Tests.Content
             mockDataService.Setup(ds => ds.GetMetaData(Constants.CONTENT_ValidContentItemId)).Returns(MockHelper.CreateValidMetaDataReader());
 
             mockDataService.Setup(ds =>
-             ds.SynchronizeMetaData(
-                 It.IsAny<ContentItem>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
-             .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
-                 (ci, added, deleted) =>
-                 {
-                     deleted.ToList().ForEach(
-                         item => mockDataService.Object.DeleteMetaData(ci, item.Key, item.Value));
+            ds.SynchronizeMetaData(
+                It.IsAny<ContentItem>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+            .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
+                (ci, added, deleted) =>
+                {
+                    deleted.ToList().ForEach(
+                        item => mockDataService.Object.DeleteMetaData(ci, item.Key, item.Value));
 
-                     added.ToList().ForEach(
-                         item => mockDataService.Object.AddMetaData(ci, item.Key, item.Value));
-                 });
-            
+                    added.ToList().ForEach(
+                        item => mockDataService.Object.AddMetaData(ci, item.Key, item.Value));
+                });
+
             var controller = new ContentController(mockDataService.Object);
 
             //Act
@@ -664,7 +664,7 @@ namespace DotNetNuke.Tests.Content
         public void ContentController_Title_Is_Saved_On_Add()
         {
             var mockDataService = new Mock<IDataService>();
-            
+
             mockDataService.Setup(
                 ds =>
                     ds.AddContentItem(
@@ -673,19 +673,19 @@ namespace DotNetNuke.Tests.Content
                 .Returns(Constants.CONTENT_AddContentItemId);
 
             mockDataService.Setup(ds =>
-             ds.SynchronizeMetaData(
-                 It.IsAny<ContentItem>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
-             .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
-                 (ci, added, deleted) =>
-                 {
-                     deleted.ToList().ForEach(
-                         item => mockDataService.Object.DeleteMetaData(ci, item.Key, item.Value));
+            ds.SynchronizeMetaData(
+                It.IsAny<ContentItem>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+            .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
+                (ci, added, deleted) =>
+                {
+                    deleted.ToList().ForEach(
+                        item => mockDataService.Object.DeleteMetaData(ci, item.Key, item.Value));
 
-                     added.ToList().ForEach(
-                         item => mockDataService.Object.AddMetaData(ci, item.Key, item.Value));
-                 });
+                    added.ToList().ForEach(
+                        item => mockDataService.Object.AddMetaData(ci, item.Key, item.Value));
+                });
 
             // Return empty set of metadata.
             mockDataService.Setup(ds => ds.GetMetaData(It.IsAny<int>())).Returns(MockHelper.CreateValidMetaDataReader);
@@ -715,19 +715,19 @@ namespace DotNetNuke.Tests.Content
                 .Returns(Constants.CONTENT_AddContentItemId);
 
             mockDataService.Setup(ds =>
-             ds.SynchronizeMetaData(
-                 It.IsAny<ContentItem>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
-             .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
-                 (ci, added, deleted) =>
-                 {
-                     deleted.ToList().ForEach(
-                         item => mockDataService.Object.DeleteMetaData(ci, item.Key, item.Value));
+            ds.SynchronizeMetaData(
+                It.IsAny<ContentItem>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+            .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
+                (ci, added, deleted) =>
+                {
+                    deleted.ToList().ForEach(
+                        item => mockDataService.Object.DeleteMetaData(ci, item.Key, item.Value));
 
-                     added.ToList().ForEach(
-                         item => mockDataService.Object.AddMetaData(ci, item.Key, item.Value));
-                 });
+                    added.ToList().ForEach(
+                        item => mockDataService.Object.AddMetaData(ci, item.Key, item.Value));
+                });
 
             // Return empty set of metadata.
             mockDataService.Setup(ds => ds.GetMetaData(It.IsAny<int>())).Returns(MockHelper.CreateValidMetaDataReader);
@@ -751,7 +751,7 @@ namespace DotNetNuke.Tests.Content
             mockDataService.Verify(ds => ds.AddMetaData(content, AttachmentController.TitleKey, Constants.CONTENT_ValidTitle));
             mockDataService.Verify(ds => ds.AddMetaData(content, AttachmentController.TitleKey, Constants.CONTENT_ValidTitle2));
         }
-        
+
         #endregion
     }
 }

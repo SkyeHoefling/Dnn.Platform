@@ -90,8 +90,8 @@
                                         <span data-bind="attr: { 'class': faviconCss, 'style': 'background-image: url(' + icon + ');' }, css: { connected: connected() }"></span>
                                         <div class="connector-row-header">
                                             <span class="socialnetwork-name" data-bind="html: displayName"></span>
-                                            <!-- ko if:open --> 
-                                            <input type="text" class="socialnetwork-name" style="opacity: 0" 
+                                            <!-- ko if:open -->
+                                            <input type="text" class="socialnetwork-name" style="opacity: 0"
                                                 data-bind="attr: {title: $root.resx.txt_clickToEdit}, value: displayName"
                                                 onfocus="this.style.opacity = 1" onblur="this.style.opacity = 0" aria-label="Name"  />
                                             <!-- /ko -->

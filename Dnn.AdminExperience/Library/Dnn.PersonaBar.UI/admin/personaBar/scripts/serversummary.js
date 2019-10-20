@@ -63,10 +63,10 @@ define(['jquery', 'knockout', 'jquery.hoverIntent.min'], function ($, ko) {
             try {
                 ko.applyBindings(viewModel, $summaryContainer[0]);
             } catch (ex) {
-                
+
             }
         });
-        
+
         $logo.hoverIntent({
             over: function() {
                 showServerSummary();

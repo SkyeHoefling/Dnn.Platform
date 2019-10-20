@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -54,27 +54,27 @@ namespace UnitTests.Subtext
             }
         }
 
-		////[Test]
-		public void CanGetSetSession()
-		{
-			using (new HttpSimulator("/", @"c:\inetpub\").SimulateRequest())
-			{
-				HttpContext.Current.Session["Test"] = "Success";
-				Assert.AreEqual("Success", HttpContext.Current.Session["Test"], "Was not able to retrieve session variable.");
-			}
-		}
+        ////[Test]
+        public void CanGetSetSession()
+        {
+            using (new HttpSimulator("/", @"c:\inetpub\").SimulateRequest())
+            {
+                HttpContext.Current.Session["Test"] = "Success";
+                Assert.AreEqual("Success", HttpContext.Current.Session["Test"], "Was not able to retrieve session variable.");
+            }
+        }
 
-		////[Test]
-		public void CanGetSetApplicationVariables()
-		{
-			using (new HttpSimulator("/", @"c:\inetpub\").SimulateRequest())
-			{
-				HttpContext.Current.Application["Test"] = "Success";
-				Assert.AreEqual("Success", HttpContext.Current.Application["Test"], "Was not able to retrieve application variable.");
-			}
-		}
+        ////[Test]
+        public void CanGetSetApplicationVariables()
+        {
+            using (new HttpSimulator("/", @"c:\inetpub\").SimulateRequest())
+            {
+                HttpContext.Current.Application["Test"] = "Success";
+                Assert.AreEqual("Success", HttpContext.Current.Application["Test"], "Was not able to retrieve application variable.");
+            }
+        }
 
-    	////[Test]
+        ////[Test]
         public void TestHttpHandlerWritesCorrectResponse()
         {
             using (var simulator = new HttpSimulator("/", @"c:\inetpub\"))
@@ -159,14 +159,14 @@ namespace UnitTests.Subtext
             simulator.SimulateRequest(new Uri("http://localhost/Test.aspx"));
             Assert.AreEqual(string.Empty, HttpContext.Current.Request.QueryString.ToString());
             Assert.AreEqual(0, HttpContext.Current.Request.QueryString.Count);
-            
+
             simulator.SimulateRequest(new Uri("http://localhost/Test.aspx?param-name"));
             Assert.AreEqual("param-name", HttpContext.Current.Request.QueryString.ToString());
             Assert.AreEqual(1, HttpContext.Current.Request.QueryString.Count);
             Assert.IsNull(HttpContext.Current.Request.QueryString["param-name"]);
         }
 
-       // //[Test]
+        // //[Test]
         public void CanSimulateFormPost()
         {
             using (var simulator = new HttpSimulator())
@@ -189,7 +189,7 @@ namespace UnitTests.Subtext
             }
         }
 
-       // //[Test]
+        // //[Test]
         public void CanGetResponse()
         {
             var simulator = new HttpSimulator();
@@ -199,7 +199,7 @@ namespace UnitTests.Subtext
             Assert.AreEqual("Hello World!", simulator.ResponseText);
         }
 
-       // //[Test]
+        // //[Test]
         public void CanGetReferer()
         {
             var simulator = new HttpSimulator();

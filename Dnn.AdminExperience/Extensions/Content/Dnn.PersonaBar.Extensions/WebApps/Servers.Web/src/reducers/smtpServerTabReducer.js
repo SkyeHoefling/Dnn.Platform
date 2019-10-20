@@ -8,7 +8,7 @@ export default function smtpServerTabReducer(state = {
     errorMessage: "",
     infoMessage: "",
     errors: {}
-}, action) { 
+}, action) {
     switch (action.type) {
         case ActionTypes.LOAD_SMTP_SERVER_TAB:
             return { ...state,
@@ -28,10 +28,10 @@ export default function smtpServerTabReducer(state = {
             };
         case ActionTypes.CHANGE_SMTP_SERVER_MODE: {
             let errors = {};
-            if (action.payload.smtpServeMode === "h") {             
+            if (action.payload.smtpServeMode === "h") {
                 if (utils.isHostUser()) {
                     const smtpSettings = state.smtpServerInfo.host;
-                    errors = {                        
+                    errors = {
                         ...validateFields("smtpConnectionLimit", smtpSettings.smtpConnectionLimit),
                         ...validateFields("smtpMaxIdleTime", smtpSettings.smtpMaxIdleTime),
                         ...validateFields("messageSchedulerBatchSize", smtpSettings.messageSchedulerBatchSize)
@@ -39,7 +39,7 @@ export default function smtpServerTabReducer(state = {
                 }
             } else {
                 const smtpSettings = state.smtpServerInfo.site;
-                errors = {                        
+                errors = {
                     ...validateFields("smtpConnectionLimit", smtpSettings.smtpConnectionLimit),
                     ...validateFields("smtpMaxIdleTime", smtpSettings.smtpMaxIdleTime)
                 };
@@ -49,7 +49,7 @@ export default function smtpServerTabReducer(state = {
                 smtpServerInfo: {
                     ...state.smtpServerInfo,
                     smtpServerMode: action.payload.smtpServeMode
-                }, 
+                },
                 errors
             };
         }
@@ -103,7 +103,7 @@ export default function smtpServerTabReducer(state = {
                 errorMessage:  "",
                 infoMessage: ""
             };
-        case ActionTypes.UPDATED_SMTP_SERVER_SETTINGS: 
+        case ActionTypes.UPDATED_SMTP_SERVER_SETTINGS:
             return { ...state,
                 errorMessage: "",
                 infoMessage: localization.get("SaveConfirmationMessage")
@@ -119,7 +119,7 @@ export default function smtpServerTabReducer(state = {
                 errorMessage:  "",
                 infoMessage: ""
             };
-        case ActionTypes.SENT_TEST_EMAIL: 
+        case ActionTypes.SENT_TEST_EMAIL:
             return { ...state,
                 errorMessage: action.payload.success ? "" : action.payload.errorMessage,
                 infoMessage: action.payload.success ? action.payload.infoMessage : ""

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -40,14 +40,14 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class FileInstaller : ComponentInstallerBase
     {
-		#region Private Members
-		
+        #region Private Members
+
         private readonly List<InstallFile> _Files = new List<InstallFile>();
         private bool _DeleteFiles = Null.NullBoolean;
 
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -132,10 +132,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 return _PhysicalBasePath.Replace("/", "\\");
             }
         }
-		
-		#endregion
 
-		#region Public Properties
+        #endregion
+
+        #region Public Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -169,10 +169,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 return Null.NullBoolean;
             }
         }
-		
-		#endregion
 
-		#region Protected Methods
+        #endregion
+
+        #region Protected Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -208,17 +208,17 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             try
             {
-				//Check the White Lists
+                //Check the White Lists
                 if ((Package.InstallerInfo.IgnoreWhiteList || Util.IsFileValid(insFile, Package.InstallerInfo.AllowableFiles)))
                 {
-					//Install File
+                    //Install File
                     if (File.Exists(PhysicalBasePath + insFile.FullName))
                     {
                         Util.BackupFile(insFile, PhysicalBasePath, Log);
                     }
-                    
-					//Copy file from temp location
-					Util.CopyFile(insFile, PhysicalBasePath, Log);
+
+                    //Copy file from temp location
+                    Util.CopyFile(insFile, PhysicalBasePath, Log);
                     return true;
                 }
                 else
@@ -295,16 +295,16 @@ namespace DotNetNuke.Services.Installer.Installers
             {
                 fileName = pathNav.Value + "\\";
             }
-			
+
             //Get the name
             XPathNavigator nameNav = nav.SelectSingleNode("name");
             if (nameNav != null)
             {
                 fileName += nameNav.Value;
             }
-            
-			//Get the sourceFileName
-			string sourceFileName = Util.ReadElement(nav, "sourceFileName");
+
+            //Get the sourceFileName
+            string sourceFileName = Util.ReadElement(nav, "sourceFileName");
             var file = new InstallFile(fileName, sourceFileName, Package.InstallerInfo);
             if ((!string.IsNullOrEmpty(BasePath)) && (BasePath.StartsWith("app_code", StringComparison.InvariantCultureIgnoreCase) && file.Type == InstallFileType.Other))
             {
@@ -313,7 +313,7 @@ namespace DotNetNuke.Services.Installer.Installers
             if (file != null)
             {
                 //Set the Version
-				string strVersion = XmlUtils.GetNodeValue(nav, "version");
+                string strVersion = XmlUtils.GetNodeValue(nav, "version");
                 if (!string.IsNullOrEmpty(strVersion))
                 {
                     file.SetVersion(new Version(strVersion));
@@ -322,9 +322,9 @@ namespace DotNetNuke.Services.Installer.Installers
                 {
                     file.SetVersion(Package.Version);
                 }
-                
-				//Set the Action
-				string strAction = XmlUtils.GetAttributeValue(nav, "action");
+
+                //Set the Action
+                string strAction = XmlUtils.GetAttributeValue(nav, "action");
                 if (!string.IsNullOrEmpty(strAction))
                 {
                     file.Action = strAction;
@@ -374,10 +374,10 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             DeleteFile(unInstallFile);
         }
-		
-		#endregion
 
-		#region Public Methods
+        #endregion
+
+        #region Public Methods
 
 
         /// -----------------------------------------------------------------------------
@@ -453,7 +453,7 @@ namespace DotNetNuke.Services.Installer.Installers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// The Rollback method undoes the installation of the file component in the event 
+        /// The Rollback method undoes the installation of the file component in the event
         /// that one of the other components fails
         /// </summary>
         /// -----------------------------------------------------------------------------
@@ -493,7 +493,7 @@ namespace DotNetNuke.Services.Installer.Installers
                 Log.AddFailure(Util.EXCEPTION + " - " + ex.Message);
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

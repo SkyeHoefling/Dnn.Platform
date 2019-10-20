@@ -3,19 +3,19 @@ import applicationTabService from "../services/applicationTabService";
 import localization from "../localization";
 
 const applicationTabActions = {
-    loadApplicationInfo() {       
+    loadApplicationInfo() {
         return (dispatch) => {
             dispatch({
-                type: ActionTypes.LOAD_APPLICATION_TAB               
-            });        
-            
+                type: ActionTypes.LOAD_APPLICATION_TAB
+            });
+
             applicationTabService.getApplicationInfo().then(response => {
                 dispatch({
                     type: ActionTypes.LOADED_APPLICATION_TAB,
                     payload: {
                         applicationInfo: response
                     }
-                });  
+                });
             }).catch(() => {
                 dispatch({
                     type: ActionTypes.ERROR_LOADING_APPLICATION_TAB,
@@ -23,7 +23,7 @@ const applicationTabActions = {
                         errorMessage: localization.get("errorMessageLoadingApplicationTab")
                     }
                 });
-            });        
+            });
         };
     }
 };

@@ -1,10 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" Inherits="DotNetNuke.Modules.Admin.Users.ViewProfileSettings" Codebehind="Settings.ascx.cs" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <div class="dnnForm dnnViewProfileSettings dnnClear">
-	<div class="dnnFormItem">
-		<dnn:label id="lblIncludeButton" runat="server" ControlName="IncludeParent" ResourceKey="IncludeButton" />
-		 <asp:Checkbox ID="IncludeButton" runat="server" Checked="True" />
-	</div>
+    <div class="dnnFormItem">
+        <dnn:label id="lblIncludeButton" runat="server" ControlName="IncludeParent" ResourceKey="IncludeButton" />
+        <asp:Checkbox ID="IncludeButton" runat="server" Checked="True" />
+    </div>
     <div class="dnnFormItem">
         <dnn:Label ID="plTemplate" runat="server" ControlName="txtTemplate" />
         <asp:TextBox ID="txtTemplate" Columns="60" TextMode="MultiLine" Rows="25" MaxLength="2000" runat="server" Width="300px" />

@@ -6,7 +6,7 @@
         <asp:TextBox type="text" ID="FileNameInput" runat="server"/>
         <asp:RequiredFieldValidator ID="FileNameValidator" CssClass="dnnFormMessage dnnFormError"
             runat="server" resourcekey="FileNameRequired.ErrorMessage" Display="Dynamic" ControlToValidate="FileNameInput" />
-        <asp:RegularExpressionValidator runat="server" Display="Dynamic" ControlToValidate="FileNameInput" CssClass="dnnFormMessage dnnFormError" 
+        <asp:RegularExpressionValidator runat="server" Display="Dynamic" ControlToValidate="FileNameInput" CssClass="dnnFormMessage dnnFormError"
             ID="FileNameInvalidCharactersValidator"/>
     </div>
     <asp:Panel runat="server" ID="FileAttributesContainer">
@@ -16,7 +16,7 @@
                 <asp:CheckBox ID="FileAttributeArchiveCheckBox" runat="server" resourcekey="FileAttributeArchive" /><br/>
                 <asp:CheckBox ID="FileAttributeHiddenCheckBox" runat="server" resourcekey="FileAttributeHidden" /><br/>
                 <asp:CheckBox ID="FileAttributeReadonlyCheckBox" runat="server" resourcekey="FileAttributeReadonly" /><br/>
-                <asp:CheckBox ID="FileAttributeSystemCheckBox" runat="server" resourcekey="FileAttributeSystem" />                                
+                <asp:CheckBox ID="FileAttributeSystemCheckBox" runat="server" resourcekey="FileAttributeSystem" />
             </div>
         </div>
     </asp:Panel>

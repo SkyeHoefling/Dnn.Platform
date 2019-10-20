@@ -13,14 +13,14 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{o
 GO
 
 create procedure {databaseOwner}{objectQualifier}CanDeleteWorkFlowState
-	@StateID int 
+    @StateID int
 AS
-	BEGIN
-		IF exists(SELECT * FROM {databaseOwner}{objectQualifier}HtmlTextLog WHERE StateID = @StateID) 
-			SELECT 0
-		ELSE
-			SELECT 1
-	END
+    BEGIN
+        IF exists(SELECT * FROM {databaseOwner}{objectQualifier}HtmlTextLog WHERE StateID = @StateID)
+            SELECT 0
+        ELSE
+            SELECT 1
+    END
 
 GO
 

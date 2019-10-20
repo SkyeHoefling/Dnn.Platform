@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -114,7 +114,7 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
 
             RequestRegistration(jsname, null, SpecificVersion.Latest);
         }
-        
+
         /// <summary>Requests a script to be added to the page</summary>
         /// <param name="jsname">the library name</param>
         /// <param name="version">the library's version</param>
@@ -142,7 +142,7 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
                     return;
                 case SpecificVersion.LatestMajor:
                 case SpecificVersion.LatestMinor:
-                    if (RequestLooseVersionLibraryRegistration(jsname, version, specific)) 
+                    if (RequestLooseVersionLibraryRegistration(jsname, version, specific))
                     {
                         return;
                     }
@@ -199,14 +199,14 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
             }
         }
 
-        private static bool RequestLooseVersionLibraryRegistration(string jsname, Version version, SpecificVersion specific) 
+        private static bool RequestLooseVersionLibraryRegistration(string jsname, Version version, SpecificVersion specific)
         {
             Func<JavaScriptLibrary, bool> isValidLibrary = specific == SpecificVersion.LatestMajor
                 ? (Func<JavaScriptLibrary, bool>)(l => l.Version.Major == version.Major && l.Version.Minor >= version.Minor)
                 : l => l.Version.Major == version.Major && l.Version.Minor == version.Minor && l.Version.Build >= version.Build;
             var library = JavaScriptLibraryController.Instance.GetLibraries(l => l.LibraryName.Equals(jsname, StringComparison.OrdinalIgnoreCase))
-                                                              .OrderByDescending(l => l.Version)
-                                                              .FirstOrDefault(isValidLibrary);
+                                                            .OrderByDescending(l => l.Version)
+                                                            .FirstOrDefault(isValidLibrary);
             if (library != null)
             {
                 AddItemRequest(library.JavaScriptLibraryID);
@@ -297,8 +297,8 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
             try
             {
                 return JavaScriptLibraryController.Instance.GetLibraries(l => l.LibraryName.Equals(jsname, StringComparison.OrdinalIgnoreCase))
-                                                           .OrderByDescending(l => l.Version)
-                                                           .FirstOrDefault(); 
+                                                            .OrderByDescending(l => l.Version)
+                                                            .FirstOrDefault();
             }
             catch (Exception)
             {
@@ -345,8 +345,8 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
         private static IEnumerable<string> GetScriptVersions()
         {
             List<string> orderedScripts = (from object item in HttpContextSource.Current.Items.Keys
-                                           where item.ToString().StartsWith(ScriptPrefix)
-                                           select item.ToString().Substring(4)).ToList();
+                                            where item.ToString().StartsWith(ScriptPrefix)
+                                            select item.ToString().Substring(4)).ToList();
             orderedScripts.Sort();
             List<string> finalScripts = orderedScripts.ToList();
             foreach (string libraryId in orderedScripts)
@@ -467,10 +467,10 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
         private static void HandlePreInstallorLegacyItemRequests(Page page)
         {
             List<string> legacyScripts = (from object item in HttpContextSource.Current.Items.Keys
-                                          where item.ToString().StartsWith(LegacyPrefix)
-                                          select item.ToString().Substring(7)).ToList();
+                                        where item.ToString().StartsWith(LegacyPrefix)
+                                        select item.ToString().Substring(7)).ToList();
 #pragma warning disable 618
-			foreach (string legacyScript in legacyScripts)
+            foreach (string legacyScript in legacyScripts)
             {
                 switch (legacyScript)
                 {
@@ -510,7 +510,7 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
                         //such as call jQuery.RegisterDnnJQueryPlugins in Control.OnInit.
                         if (page.Form != null)
                         {
-                            
+
                         }
 
                         //register dependency
@@ -557,9 +557,9 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
                         }
                         break;
                 }
-			}
+            }
 #pragma warning restore 618
-		}
+        }
 
         #endregion
 
@@ -589,7 +589,7 @@ namespace DotNetNuke.Framework.JavaScriptLibraries
             }
             return scriptsrc;
 #pragma warning restore 618
-		}
+        }
 
         public static void RegisterClientReference(Page page, ClientAPI.ClientNamespaceReferences reference)
         {

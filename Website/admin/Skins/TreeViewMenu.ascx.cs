@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -32,20 +32,20 @@ using DotNetNuke.UI.WebControls;
 
 namespace DotNetNuke.UI.Skins.Controls
 {
-	/// -----------------------------------------------------------------------------
-	/// Project	 : DotNetNuke
-	/// Class	 : TreeViewMenu
-	/// -----------------------------------------------------------------------------
-	/// <summary>
-	/// TreeViewMenu is a Skin Object that creates a Menu using the DNN Treeview Control
-	/// to provide a Windows Explore like Menu.
-	/// </summary>
-	/// <remarks></remarks>
-	/// -----------------------------------------------------------------------------
+    /// -----------------------------------------------------------------------------
+    /// Project	 : DotNetNuke
+    /// Class	 : TreeViewMenu
+    /// -----------------------------------------------------------------------------
+    /// <summary>
+    /// TreeViewMenu is a Skin Object that creates a Menu using the DNN Treeview Control
+    /// to provide a Windows Explore like Menu.
+    /// </summary>
+    /// <remarks></remarks>
+    /// -----------------------------------------------------------------------------
     public partial class TreeViewMenu : NavObjectBase
     {
-		#region "Private Members"
-		
+        #region "Private Members"
+
         private const string MyFileName = "TreeViewMenu.ascx";
         private string _bodyCssClass = "";
         private string _cssClass = "";
@@ -68,9 +68,9 @@ namespace DotNetNuke.UI.Skins.Controls
         private int _treeIndentWidth = 10;
         private string _width = "100%";
 
-		#endregion
+        #endregion
 
-		#region "Public Properties"
+        #region "Public Properties"
 
         public string BodyCssClass
         {
@@ -318,10 +318,10 @@ namespace DotNetNuke.UI.Skins.Controls
         {
         }
 
-		#endregion
+        #endregion
 
-		#region "Private Methods"
-		
+        #region "Private Methods"
+
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// The BuildTree helper method is used to build the tree
@@ -355,8 +355,8 @@ namespace DotNetNuke.UI.Skins.Controls
                     }
                 }
             }
-			
-			//add goto Parent node
+
+            //add goto Parent node
             if (blnAddUpNode)
             {
                 var objParentNode = new DNNNode();
@@ -468,9 +468,9 @@ namespace DotNetNuke.UI.Skins.Controls
             }
         }
 
-		#endregion
+        #endregion
 
-		#region "Event Handlers"
+        #region "Event Handlers"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -489,36 +489,36 @@ namespace DotNetNuke.UI.Skins.Controls
                 if (Page.IsPostBack == false)
                 {
                     BuildTree(null, false);
-					
-					//Main Table Properties
+
+                    //Main Table Properties
                     if (!String.IsNullOrEmpty(Width))
                     {
                         tblMain.Width = Width;
                     }
-					
+
                     if (!String.IsNullOrEmpty(CssClass))
                     {
                         tblMain.Attributes.Add("class", CssClass);
                     }
-					
-					//Header Properties
+
+                    //Header Properties
                     if (!String.IsNullOrEmpty(HeaderCssClass))
                     {
                         cellHeader.Attributes.Add("class", HeaderCssClass);
                     }
-					
+
                     if (!String.IsNullOrEmpty(HeaderTextCssClass))
                     {
                         lblHeader.CssClass = HeaderTextCssClass;
                     }
-					
-					//Header Text (if set)
+
+                    //Header Text (if set)
                     if (!String.IsNullOrEmpty(HeaderText))
                     {
                         lblHeader.Text = HeaderText;
                     }
-					
-					//ResourceKey overrides if found
+
+                    //ResourceKey overrides if found
                     if (!String.IsNullOrEmpty(ResourceKey))
                     {
                         string strHeader = Localization.GetString(ResourceKey, Localization.GetResourceFile(this, MyFileName));
@@ -527,8 +527,8 @@ namespace DotNetNuke.UI.Skins.Controls
                             lblHeader.Text = Localization.GetString(ResourceKey, Localization.GetResourceFile(this, MyFileName));
                         }
                     }
-					
-					//If still not set get default key
+
+                    //If still not set get default key
                     if (String.IsNullOrEmpty(lblHeader.Text))
                     {
                         string strHeader = Localization.GetString("Title", Localization.GetResourceFile(this, MyFileName));
@@ -542,8 +542,8 @@ namespace DotNetNuke.UI.Skins.Controls
                         }
                     }
                     tblHeader.Visible = IncludeHeader;
-					
-					//Main Panel Properties
+
+                    //Main Panel Properties
                     if (!String.IsNullOrEmpty(BodyCssClass))
                     {
                         cellBody.Attributes.Add("class", BodyCssClass);
@@ -593,8 +593,8 @@ namespace DotNetNuke.UI.Skins.Controls
             base.OnInit(e);
             InitializeComponent();
         }
-		
-		#endregion
+
+        #endregion
 
         #region Nested type: eImageType
 

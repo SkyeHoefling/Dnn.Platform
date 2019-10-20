@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -76,20 +76,20 @@ namespace DotNetNuke.UI.WebControls
             object newValue = e.Value;
             object stringValue = e.StringValue;
             bool _IsDirty = Null.NullBoolean;
-			
-			//Get the Name Property
+
+            //Get the Name Property
             objProperty = DataSource.GetType().GetProperty(NameDataField);
             if (objProperty != null)
             {
                 PropertyName = Convert.ToString(objProperty.GetValue(DataSource, null));
-				//Do we have the item in the IEnumerable Collection being changed
+                //Do we have the item in the IEnumerable Collection being changed
                 PropertyName = PropertyName.Replace(" ", "_");
                 if (PropertyName == name)
                 {
-					//Get the Value Property
+                    //Get the Value Property
                     objProperty = DataSource.GetType().GetProperty(ValueDataField);
-					
-					//Set the Value property to the new value
+
+                    //Set the Value property to the new value
                     if ((!(ReferenceEquals(newValue, oldValue))) || changed)
                     {
                         if (objProperty.PropertyType.FullName == "System.String")
@@ -114,19 +114,19 @@ namespace DotNetNuke.UI.WebControls
             string name = e.Name;
             object newValue = e.Value;
             bool dirty = Null.NullBoolean;
-			
-			//Get the Name Property
+
+            //Get the Name Property
             PropertyInfo property = DataSource.GetType().GetProperty(nameDataField);
             if (property != null)
             {
                 string propertyName = Convert.ToString(property.GetValue(DataSource, null));
-				//Do we have the item in the IEnumerable Collection being changed
+                //Do we have the item in the IEnumerable Collection being changed
                 propertyName = propertyName.Replace(" ", "_");
                 if (propertyName == name)
                 {
-					//Get the Value Property
+                    //Get the Value Property
                     property = DataSource.GetType().GetProperty(dataField);
-					//Set the Value property to the new value
+                    //Set the Value property to the new value
                     property.SetValue(DataSource, newValue, null);
                     dirty = true;
                 }
@@ -166,11 +166,11 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Name = Convert.ToString(property.GetValue(DataSource, null));
                 }
             }
-			
+
             //Get the Category of the property
             editInfo.Category = string.Empty;
-			
-			//Get Category Field
+
+            //Get Category Field
             if (!String.IsNullOrEmpty(CategoryDataField))
             {
                 property = DataSource.GetType().GetProperty(CategoryDataField);
@@ -179,9 +179,9 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Category = Convert.ToString(property.GetValue(DataSource, null));
                 }
             }
-            
-			//Get Value Field
-			editInfo.Value = string.Empty;
+
+            //Get Value Field
+            editInfo.Value = string.Empty;
             if (!String.IsNullOrEmpty(ValueDataField))
             {
                 property = DataSource.GetType().GetProperty(ValueDataField);
@@ -190,9 +190,9 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Value = Convert.ToString(property.GetValue(DataSource, null));
                 }
             }
-            
-			//Get the type of the property
-			editInfo.Type = "System.String";
+
+            //Get the type of the property
+            editInfo.Type = "System.String";
             if (!String.IsNullOrEmpty(TypeDataField))
             {
                 property = DataSource.GetType().GetProperty(TypeDataField);
@@ -201,9 +201,9 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Type = Convert.ToString(property.GetValue(DataSource, null));
                 }
             }
-            
-			//Get Editor Field
-			editInfo.Editor = "DotNetNuke.UI.WebControls.TextEditControl, DotNetNuke";
+
+            //Get Editor Field
+            editInfo.Editor = "DotNetNuke.UI.WebControls.TextEditControl, DotNetNuke";
             if (!String.IsNullOrEmpty(EditorDataField))
             {
                 property = DataSource.GetType().GetProperty(EditorDataField);
@@ -212,7 +212,7 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Editor = EditorInfo.GetEditor(Convert.ToInt32(property.GetValue(DataSource, null)));
                 }
             }
-			
+
             //Get LabelMode Field
             editInfo.LabelMode = LabelMode.Left;
 
@@ -226,7 +226,7 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Required = Convert.ToBoolean(property.GetValue(DataSource, null));
                 }
             }
-			
+
             //Set ResourceKey Field
             editInfo.ResourceKey = editInfo.Name;
             editInfo.ResourceKey = string.Format("{0}_{1}", Name, editInfo.Name);
@@ -236,9 +236,9 @@ namespace DotNetNuke.UI.WebControls
 
             //Get Visibility Field
             editInfo.ProfileVisibility = new ProfileVisibility
-                                             {
-                                                 VisibilityMode = UserVisibilityMode.AllUsers
-                                             };
+                                            {
+                                                VisibilityMode = UserVisibilityMode.AllUsers
+                                            };
             if (!String.IsNullOrEmpty(VisibilityDataField))
             {
                 property = DataSource.GetType().GetProperty(VisibilityDataField);
@@ -247,7 +247,7 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.ProfileVisibility = (ProfileVisibility)property.GetValue(DataSource, null);
                 }
             }
-			
+
             //Get Validation Expression Field
             editInfo.ValidationExpression = string.Empty;
             if (!String.IsNullOrEmpty(ValidationExpressionDataField))
@@ -258,8 +258,8 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.ValidationExpression = Convert.ToString(property.GetValue(DataSource, null));
                 }
             }
-			
-			//Get Length Field
+
+            //Get Length Field
             if (!String.IsNullOrEmpty(MaxLengthDataField))
             {
                 property = DataSource.GetType().GetProperty(MaxLengthDataField);
@@ -271,8 +271,8 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Attributes = attributes;
                 }
             }
-			
-			//Remove spaces from name
+
+            //Remove spaces from name
             editInfo.Name = editInfo.Name.Replace(" ", "_");
             return editInfo;
         }

@@ -18,4 +18,4 @@
         window.cookieconsentoptions.content.href = window.dnn.getVar('cc_morelink')
     }
     window.cookieconsent.initialise(window.cookieconsentoptions);
-});    
+});

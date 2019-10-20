@@ -7,7 +7,7 @@ drop procedure AddModule
 GO
 
 create procedure AddModule
-    
+
 @TabID          int,
 @ModuleOrder    int,
 @ModuleTitle    nvarchar(256),
@@ -39,7 +39,7 @@ insert into Modules (
   CacheTime,
   AuthorizedEditRoles,
   ShowMobile
-) 
+)
 values (
   @TabID,
   @ModuleOrder,
@@ -83,7 +83,7 @@ end
 
 update Modules
 set    ModuleOrder = @ModuleOrder,
-       PaneName = @PaneName
+        PaneName = @PaneName
 where  ModuleID = @ModuleID
 
 GO
@@ -101,7 +101,7 @@ declare @ModuleOrder int
 select @PaneName = min(PaneName)
 from   Modules
 where  TabID = @TabID
-while @PaneName is not null 
+while @PaneName is not null
 begin
   select @ModuleCounter = 0
 
@@ -111,23 +111,23 @@ begin
   and    PaneName = @PaneName
   while @ModuleOrder is not null
   begin
-    select @ModuleCounter = @ModuleCounter + 1        
+    select @ModuleCounter = @ModuleCounter + 1
 
     update Modules
-    set    ModuleOrder = ((@ModuleCounter * 2) - 1) * -1 
+    set    ModuleOrder = ((@ModuleCounter * 2) - 1) * -1
     where  TabID = @TabID
     and    PaneName = @PaneName
-    and    ModuleOrder = @ModuleOrder  
+    and    ModuleOrder = @ModuleOrder
 
     select @ModuleOrder = min(ModuleOrder)
     from   Modules
     where  TabID = @TabID
     and    PaneName = @PaneName
     and    ModuleOrder > @ModuleOrder
-  end 
+  end
 
   update Modules
-  set    ModuleOrder = ModuleOrder * -1 
+  set    ModuleOrder = ModuleOrder * -1
   where  TabID = @TabID
   and    PaneName = @PaneName
 
@@ -238,21 +238,21 @@ from   Tabs
 where  PortalID = @PortalID
 while @TabOrder is not null
 begin
-  select @TabCounter = @TabCounter + 1        
+  select @TabCounter = @TabCounter + 1
 
   update Tabs
-  set    TabOrder = ((@TabCounter * 2) - 1) * -1 
+  set    TabOrder = ((@TabCounter * 2) - 1) * -1
   where  PortalID = @PortalID
-  and    TabOrder = @TabOrder  
+  and    TabOrder = @TabOrder
 
   select @TabOrder = min(TabOrder)
   from   Tabs
   where  PortalID = @PortalID
   and    TabOrder > @TabOrder
-end 
+end
 
 update Tabs
-set    TabOrder = TabOrder * -1 
+set    TabOrder = TabOrder * -1
 where  PortalID = @PortalID
 
 go
@@ -285,15 +285,15 @@ where  ModuleID = @ModuleID
 
 update Modules
 set    ModuleTitle = @ModuleTitle,
-       CacheTime   = @CacheTime,
-       ShowMobile  = @ShowMobile,
-       AuthorizedViewRoles = @ViewRoles,
-       AuthorizedEditRoles = @EditRoles,
-       Alignment = @Alignment,
-       Color = @Color,
-       Border = @Border,
-       IconFile = @IconFile,
-       TabId = @TabId
+        CacheTime   = @CacheTime,
+        ShowMobile  = @ShowMobile,
+        AuthorizedViewRoles = @ViewRoles,
+        AuthorizedEditRoles = @EditRoles,
+        Alignment = @Alignment,
+        Color = @Color,
+        Border = @Border,
+        IconFile = @IconFile,
+        TabId = @TabId
 where  ModuleID = @ModuleID
 
 if @OldTabId <> @TabId
@@ -305,7 +305,7 @@ begin
 
   update Modules
   set    PaneName = 'ContentPane',
-         ModuleOrder = @ModuleOrder
+        ModuleOrder = @ModuleOrder
   where  ModuleId = @ModuleId
 end
 
@@ -323,14 +323,14 @@ as
 
 if @PortalId is null
 begin
-  delete 
+  delete
   from   Files
   where  FileName = @FileName
   and    PortalId is null
 end
 else
 begin
-  delete 
+  delete
   from   Files
   where  FileName = @FileName
   and    PortalId = @PortalId
@@ -379,11 +379,11 @@ as
 if @PortalId is null
 begin
   select FileName,
-         Extension,
-         Size,
-         Width,
-         Height,
-         ContentType
+        Extension,
+        Size,
+        Width,
+        Height,
+        ContentType
   from   Files
   where  FileName = @FileName
   and    PortalId is null
@@ -391,11 +391,11 @@ end
 else
 begin
   select FileName,
-         Extension,
-         Size,
-         Width,
-         Height,
-         ContentType
+        Extension,
+        Size,
+        Width,
+        Height,
+        ContentType
   from   Files
   where  FileName = @FileName
   and    PortalId = @PortalId
@@ -532,7 +532,7 @@ insert into Tabs (
     ShowMobile,
     LeftPaneWidth,
     RightPaneWidth
-) 
+)
 values (
     @PortalID,
     1,
@@ -541,7 +541,7 @@ values (
     'Home',
     1,
     '200',
-    '200'   
+    '200'
 )
 
 insert into Tabs (
@@ -553,7 +553,7 @@ insert into Tabs (
     ShowMobile,
     LeftPaneWidth,
     RightPaneWidth
-) 
+)
 values (
     @PortalID,
     5,
@@ -562,7 +562,7 @@ values (
     'Admin',
     0,
     '200',
-    '200'   
+    '200'
 )
 
 select @TabId = @@IDENTITY
@@ -576,7 +576,7 @@ and    AdminOrder > 0
 while @AdminOrder is not null
 begin
   select @ModuleDefId = ModuleDefId,
-         @FriendlyName = FriendlyName
+        @FriendlyName = FriendlyName
   from   ModuleDefinitions
   where  AdminOrder = @AdminOrder
 
@@ -584,7 +584,7 @@ begin
 
   select @PaneName = 'ContentPane'
 
-  insert Modules ( 
+  insert Modules (
     TabID,
     ModuleDefID,
     ModuleOrder,
@@ -609,7 +609,7 @@ begin
   from   ModuleDefinitions
   where  AdminOrder is not null
   and    AdminOrder > @AdminOrder
-end 
+end
 
 select @UserId = null
 
@@ -624,10 +624,10 @@ if @UserId is null
 begin
   insert into Users (
     FirstName,
-    LastName, 
+    LastName,
     Email,
     Password,
-    CreatedDate 
+    CreatedDate
   )
   values (
     @FirstName,
@@ -681,9 +681,9 @@ end
 
 update Portals
 set    UploadDirectory = @UploadDirectory + '/' + convert(varchar,@PortalID) + '/',
-       AdministratorId = @UserId,
-       AdministratorRoleId = @AdministratorRoleId,
-       RegisteredRoleId = @RegisteredRoleId
+        AdministratorId = @UserId,
+        AdministratorRoleId = @AdministratorRoleId,
+        RegisteredRoleId = @RegisteredRoleId
 where  PortalID = @PortalID
 
 if @@error <> 0
@@ -704,17 +704,17 @@ create procedure GetUsers
 as
 
 select Users.UserID,
-       Users.Email,
-       'FullName' = Users.FirstName + ' ' + Users.LastName,
-       Users.FirstName,
-       Users.LastName,
-       Users.Unit,
-       Users.Street,
-       Users.City,
-       Users.Region,
-       Users.Country,
-       Users.PostalCode,
-       'Authorized' = case when UserPortals.Authorized = 1 then 'Y' else 'N' end
+        Users.Email,
+        'FullName' = Users.FirstName + ' ' + Users.LastName,
+        Users.FirstName,
+        Users.LastName,
+        Users.Unit,
+        Users.Street,
+        Users.City,
+        Users.Region,
+        Users.Country,
+        Users.PostalCode,
+        'Authorized' = case when UserPortals.Authorized = 1 then 'Y' else 'N' end
 from   Users
 inner join UserPortals on Users.UserId = UserPortals.UserId
 where  UserPortals.PortalId = @PortalId
@@ -736,21 +736,21 @@ as
 if @PortalId is null
 begin
   select VendorID,
-         VendorName,
-         Unit, 
-         Street, 
-         City, 
-         Region, 
-         Country, 
-         PostalCode, 
-         Telephone,
-         Fax,
-         Email,
-         Website,
-         Contact,
-         ClickThroughs,
-         Views,
-         'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
+        VendorName,
+        Unit,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode,
+        Telephone,
+        Fax,
+        Email,
+        Website,
+        Contact,
+        ClickThroughs,
+        Views,
+        'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
   from   Vendors
   where  PortalId is null
   and    VendorName like @Filter + '%'
@@ -759,21 +759,21 @@ end
 else
 begin
   select VendorID,
-         VendorName,
-         Unit, 
-         Street, 
-         City, 
-         Region, 
-         Country, 
-         PostalCode, 
-         Telephone,
-         Fax,
-         Email,
-         Website,
-         Contact,
-         ClickThroughs,
-         Views,
-         'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
+        VendorName,
+        Unit,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode,
+        Telephone,
+        Fax,
+        Email,
+        Website,
+        Contact,
+        ClickThroughs,
+        Views,
+        'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
   from   Vendors
   where  PortalId = @PortalId
   and    VendorName like @Filter + '%'
@@ -783,5 +783,3 @@ end
 return 1
 
 GO
-
-

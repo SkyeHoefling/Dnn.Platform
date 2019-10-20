@@ -859,7 +859,7 @@ transform: rotate(180deg);
     font-size: 12px;
 }
 .personabarnav > li#Edit .editmode-tooltip .tooltip-title{
-     color: #0a85c3;
+    color: #0a85c3;
 }
 .personabarnav > li#Edit.locked {
     background-color: transparent;
@@ -911,8 +911,8 @@ transform: rotate(180deg);
     background-color: #2f2f2f;
     display: none;
     /* display: none; IE not apply list-style-type: none; with this active
-       it will be applied in js
-     */
+        it will be applied in js
+    */
     top: -1px;
     width: 200px;
     box-sizing: border-box;
@@ -1146,12 +1146,12 @@ transform: rotate(180deg);
     bottom: auto;
     top: -7px;
 }
-@media only screen 
-and (min-device-width : 768px) 
+@media only screen
+and (min-device-width : 768px)
 and (max-device-width : 1024px),
-only screen and (min-width: 768px) and (max-width: 1024px)   { 
+only screen and (min-width: 768px) and (max-width: 1024px)   {
 
-   .socialpanelheader > h3.title-small {
+    .socialpanelheader > h3.title-small {
         font-size: 20px !important;
     }
     .socialpanelheader > div.xtra-margin-top {
@@ -1170,7 +1170,7 @@ only screen and (min-width: 768px) and (max-width: 1024px)   {
         margin-top: 8px;
     }
 }
-.socialpanelheader .personaBar-input.search { 
+.socialpanelheader .personaBar-input.search {
     background-image: url('../images/search.png');
     background-repeat: no-repeat;
     background-position: 95% center;
@@ -1224,7 +1224,7 @@ only screen and (min-width: 768px) and (max-width: 1024px)   {
     right: -10px;
     margin-right: 30px;
     top: 50%;
-    -webkit-transform: translateY(-50%);    
+    -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -o-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -1636,14 +1636,14 @@ div.ui-dialog-titlebar > .ui-dialog-titlebar-close:hover {
 
 
 /* BREADCRUMB STYLES */
-.breadcrumbs-container {    
+.breadcrumbs-container {
     font-size: 0;
     line-height: 0;
     text-transform: uppercase;
     font-weight: bold;
 }
 .breadcrumbs-container div {
-    display: inline-block;    
+    display: inline-block;
     height: 32px;
     line-height: 32px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1664,9 +1664,9 @@ div.ui-dialog-titlebar > .ui-dialog-titlebar-close:hover {
     cursor: default;
 }
 .breadcrumbs-container .more:hover {
-    background-image: url(../images/more_hover.svg); 
+    background-image: url(../images/more_hover.svg);
 }
-.breadcrumbs-container > div:first-child:last-child {    
+.breadcrumbs-container > div:first-child:last-child {
     width: 150px;
     margin-left: 0;
 }
@@ -1761,7 +1761,7 @@ div.ui-dialog-titlebar > .ui-dialog-titlebar-close:hover {
 .CodeMirror-gutters {
     min-height: 100% !important;
 }
-.CodeMirror-simplescroll-vertical{ 
+.CodeMirror-simplescroll-vertical{
     background: none !important;
     margin: 0px 5px 0px 0 !important;
 }
@@ -1978,14 +1978,14 @@ div.ui-dialog-titlebar > .ui-dialog-titlebar-close:hover {
 .server-summary li.framework {
     margin-top: 36px;
 }
-.server-summary li.doc-center a, 
+.server-summary li.doc-center a,
 .server-summary li.logout {
     font-size: 14px;
     color: #6F7273;
     text-decoration: none;
     cursor: pointer;
 }
-.server-summary li.doc-center a:hover, 
+.server-summary li.doc-center a:hover,
 .server-summary li.logout:hover {
     color: #FFF;
 }
@@ -2104,7 +2104,7 @@ div.ui-dialog-titlebar > .ui-dialog-titlebar-close:hover {
   opacity: 0;
   background: #fff;
   border: 1px solid #C8C8C8;
-  border-top: none; 
+  border-top: none;
   top: 33px;
   z-index: 3;
 }

@@ -2,7 +2,7 @@ Param(
     [parameter(Mandatory=$true)][string]$checkoutDir,
     [parameter(Mandatory=$false)][string]$symbolsDir = "Dnn.Symbols",
     [parameter(Mandatory=$false)][string]$symbolsName
-	)
+    )
 
 $baseFolder   = ([System.IO.FileInfo]"$checkoutDir\$symbolsDir").FullName
 $binFolder    = ([System.IO.FileInfo]"$baseFolder\bin").FullName
@@ -12,7 +12,7 @@ Write-Host "This script will Combine symbols under $baseFolder"
 
 Push-Location
 Set-Location $baseFolder
- 
+
 try
 {
     if (Test-Path "$binFolder")
@@ -62,7 +62,7 @@ try
     }
     else
     {
-       Write-Host "BIN folder doesn't exist: $binFolder"
+        Write-Host "BIN folder doesn't exist: $binFolder"
     }
 }
 finally

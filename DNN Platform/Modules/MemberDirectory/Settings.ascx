@@ -8,7 +8,7 @@
         <div class="dnnFormItem">
             <dnn:label id="itemTemplateLabel" runat="server" controlname="itemTemplate" />
             <asp:TextBox ID="itemTemplate" runat="server" TextMode="MultiLine" Rows="3" />
-        </div>        
+        </div>
         <div class="dnnFormItem">
             <dnn:label id="alternateItemTemplateLabel" runat="server" controlname="alternateItemTemplate" />
             <asp:TextBox ID="alternateItemTemplate" runat="server" TextMode="MultiLine" Rows="3" />
@@ -16,11 +16,11 @@
         <div class="dnnFormItem">
             <dnn:label id="enablePopUpLabel" runat="server" controlname="enablePopUp" />
             <asp:CheckBox ID="enablePopUp" runat="server" />
-        </div>        
+        </div>
         <div class="dnnFormItem">
             <dnn:label id="popUpTemplateLabel" runat="server" controlname="popUpTemplate" />
             <asp:TextBox ID="popUpTemplate" runat="server" TextMode="MultiLine" Rows="3" />
-        </div>        
+        </div>
     </fieldset>
     <h2 id="dnnPanel-Filter" class="dnnFormSectionHead"><a href="" class="dnnSectionExpanded"><%=LocalizeString("Filters")%></a></h2>
     <fieldset>
@@ -30,9 +30,9 @@
                 <asp:RadioButtonList runat="server" ID="filterBySelector" CssClass="mdFilters" RepeatDirection="Horizontal" RepeatColumns="5">
                     <asp:ListItem Value="None" resourcekey="None"/>
                     <asp:ListItem Value="User" resourcekey="User"/>
-				    <asp:ListItem Value="Group" resourcekey="Group"/>
-				    <asp:ListItem Value="Relationship" resourcekey="Relationship"/>
-				    <asp:ListItem Value="ProfileProperty" resourcekey="ProfileProperty"/>
+                    <asp:ListItem Value="Group" resourcekey="Group"/>
+                    <asp:ListItem Value="Relationship" resourcekey="Relationship"/>
+                    <asp:ListItem Value="ProfileProperty" resourcekey="ProfileProperty"/>
                 </asp:RadioButtonList>
                 <div class="mdFilterLists">
                     <asp:DropDownList runat="server" ID="groupList" DataTextField="RoleName" DataValueField="RoleID"/>
@@ -42,35 +42,35 @@
                 </div>
             </div>
         </div>
-         <div class="dnnFormItem">
+        <div class="dnnFormItem">
             <dnn:label id="sortFieldListLabel" runat="server" controlname="sortFieldList" />
             <asp:DropDownList runat="server" ID="sortFieldList">
             </asp:DropDownList>
-        </div>        
-         <div class="dnnFormItem">
+        </div>
+        <div class="dnnFormItem">
             <dnn:label id="sortOrderListLabel" runat="server" controlname="sortOrderList" />
             <asp:DropDownList runat="server" ID="sortOrderList">
                 <asp:ListItem Value="ASC" resourcekey="Ascending"/>
                 <asp:ListItem Value="DESC" resourcekey="Descending"/>
             </asp:DropDownList>
-        </div>        
+        </div>
         <div class="dnnFormItem">
             <dnn:label id="ExcludeHostUsersLabel" runat="server" controlname="ExcludeHostUsersCheckBox" />
             <asp:CheckBox ID="ExcludeHostUsersCheckBox" runat="server" />
-        </div>            
-   </fieldset>
+        </div>
+    </fieldset>
     <h2 id="H1" class="dnnFormSectionHead"><a href="" class="dnnSectionExpanded"><%=LocalizeString("Search")%></a></h2>
     <fieldset>
         <div class="dnnFormItem">
             <dnn:label id="displaySearchLabel" runat="server" controlname="displaySearch" />
             <asp:DropDownList runat="server" ID="displaySearchList">
-	            <Items>
-		            <asp:ListItem Value="None" resourcekey="DisplaySearch_None"></asp:ListItem>
-					<asp:ListItem Value="Simple" resourcekey="DisplaySearch_Simple"></asp:ListItem>
-					<asp:ListItem Value="Both" resourcekey="DisplaySearch_Both"></asp:ListItem>
-	            </Items>
-			</asp:DropDownList>
-        </div>        
+                <Items>
+                    <asp:ListItem Value="None" resourcekey="DisplaySearch_None"></asp:ListItem>
+                    <asp:ListItem Value="Simple" resourcekey="DisplaySearch_Simple"></asp:ListItem>
+                    <asp:ListItem Value="Both" resourcekey="DisplaySearch_Both"></asp:ListItem>
+                </Items>
+            </asp:DropDownList>
+        </div>
         <div class="dnnFormItem">
             <dnn:label id="searchField1Label" runat="server" controlname="searchField1List" />
             <asp:DropDownList runat="server" ID="searchField1List" DataTextField="Text" DataValueField="Value"/>
@@ -93,7 +93,7 @@
         <div class="dnnFormItem">
             <dnn:label id="disablePagerLabel" runat="server" controlname="disablePager" />
             <asp:CheckBox ID="disablePager" runat="server" />
-        </div>        
+        </div>
         <div class="dnnFormItem">
             <dnn:label id="pageSizeLabel" runat="server" controlname="pageSize" />
             <asp:TextBox ID="pageSize" runat="server" />

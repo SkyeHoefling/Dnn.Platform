@@ -29,7 +29,7 @@
     </dnn:DnnFormEditor>
     <asp:Panel ID="pnlSettings" runat="server" Visible="false" CssClass="dnnAuthenticationSettings">
         <ul class="dnnActions dnnClear">
-    	    <li><asp:LinkButton id="cmdUpdate" runat="server" CssClass="dnnPrimaryAction" resourcekey="cmdUpdate" /></li>
+            <li><asp:LinkButton id="cmdUpdate" runat="server" CssClass="dnnPrimaryAction" resourcekey="cmdUpdate" /></li>
         </ul>
     </asp:Panel>
 </fieldset>

@@ -33,7 +33,7 @@ export default class Collapsible extends Component {
             const collapsibleHeight = this.props.fixedHeight || height;
             const bodyTop = document.body.getBoundingClientRect().top;
             let bottom = collapsibleTop - bodyTop + collapsibleHeight + 40;
-            
+
             if (bottom > window.innerHeight ) {
                 bottom = bottom - window.innerHeight;
                 if (bottom > window.scrollY) {

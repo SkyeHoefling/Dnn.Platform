@@ -15,10 +15,10 @@
             <li id="dnnModuleDigitalAssetsPermissionsTab"><a href="#dnnModuleDigitalAssetsPermissions">
                 <%=LocalizeString("PermissionsTab")%></a>
             </li>
-        </ul>    
+        </ul>
         <div class="dnnClear" id="dnnModuleDigitalAssetsPropertiesContent" >
             <div class="dnnClear" id="dnnModuleDigitalAssetsGeneral">
-                <div class="dnnModuleDigitalAssetsPreviewInfo" id="dnnModuleDigitalAssetsFolderPreview">                    
+                <div class="dnnModuleDigitalAssetsPreviewInfo" id="dnnModuleDigitalAssetsFolderPreview">
                     <dam:PreviewPanelControl runat="server" ID="FolderInfoPreviewPanel"></dam:PreviewPanelControl>
                 </div>
                 <div class="dnnModuleDigitalAssetsGeneralProperties dnnForm" id="dnnModuleDigitalAssetsFolderProperties">
@@ -27,7 +27,7 @@
                         <asp:TextBox type="text" ID="FolderNameInput" runat="server"/>
                         <asp:RequiredFieldValidator ID="FolderNameValidator" CssClass="dnnFormMessage dnnFormError"
                             runat="server" resourcekey="FolderNameRequired.ErrorMessage" Display="Dynamic" ControlToValidate="FolderNameInput" />
-                        <asp:RegularExpressionValidator runat="server" Display="Dynamic" ControlToValidate="FolderNameInput" CssClass="dnnFormMessage dnnFormError" 
+                        <asp:RegularExpressionValidator runat="server" Display="Dynamic" ControlToValidate="FolderNameInput" CssClass="dnnFormMessage dnnFormError"
                             ID="FolderNameInvalidCharactersValidator"/>
                     </div>
                     <div class="dnnFormItem">
@@ -37,12 +37,12 @@
                     <asp:Panel runat="server" ID="FolderDynamicFieldsContainer"></asp:Panel>
                 </div>
             </div>
-            <div id="dnnModuleDigitalAssetsPermissions">            
+            <div id="dnnModuleDigitalAssetsPermissions">
                 <dnn:folderpermissionsgrid id="PermissionsGrid" runat="server"/>
                 <div id="copyPermissionRow" runat="server">
-					<div class="dnnFormItem"><dnn:Label ID="lblCopyPerm" runat="server" ResourceKey="lblCopyPerm" /></div>
-					<asp:LinkButton ID="cmdCopyPerm" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCopyPerm" />
-				</div>
+                    <div class="dnnFormItem"><dnn:Label ID="lblCopyPerm" runat="server" ResourceKey="lblCopyPerm" /></div>
+                    <asp:LinkButton ID="cmdCopyPerm" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCopyPerm" />
+                </div>
             </div>
         </div>
     </asp:Panel>
@@ -63,9 +63,9 @@
     dnnModule.digitalAssets.folderProperties = function ($) {
         function init(controls, settings) {
             parent.$("#iPopUp").dialog('option', 'title', settings.dialogTitle);
-            setupDnnTabs(controls, settings);            
+            setupDnnTabs(controls, settings);
         }
-        
+
         function setupDnnTabs(controls, settings) {
             var options = {};
             var selectedTab = parseInt(settings.selectedTab);
@@ -80,13 +80,13 @@
                 showTab(permissionTabId);
             }
         }
-        
+
         function hideTab(tabId) {
             $('#' + tabId).hide();
         }
-        
+
         function showTab(tabId) {
-            $('#' + tabId).css("display", "");            
+            $('#' + tabId).css("display", "");
         }
 
         return {
@@ -99,7 +99,7 @@
             scopeWrapperId: '<%=ScopeWrapper.ClientID %> ',
             permissionTabId: 'dnnModuleDigitalAssetsPermissionsTab',
             dialogTitleContainerId : 'ui-dialog-title-iPopUp'
-        }, 
+        },
         {
             selectedTab: '<%=(!IsPostBack ? "0" : "-1")%>',
             canAdminPermissions: '<%=Localization.GetSafeJSString((HasFullControl && !IsHostPortal).ToString().ToLowerInvariant()) %>',

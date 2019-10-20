@@ -1,34 +1,34 @@
 <dotnetnuke type="Package" version="6.0">
   <packages>
     <package name="DotNetNuke.Modules.CoreMessaging" type="Module" isSystem="true">
-      <friendlyName>Message Center</friendlyName>      
-      <description>Core Messaging module allows users to message each other.</description>
-      <iconFile>~/DesktopModules/CoreMessaging/Images/messaging_32X32.png</iconFile>
-      <owner>
+    <friendlyName>Message Center</friendlyName>
+    <description>Core Messaging module allows users to message each other.</description>
+    <iconFile>~/DesktopModules/CoreMessaging/Images/messaging_32X32.png</iconFile>
+    <owner>
         <name>DNN</name>
         <organization>DNN Corp.</organization>
         <url>http://www.dnnsoftware.com</url>
         <email>support@dnnsoftware.com</email>
-      </owner>
-      <license src="License.txt"></license>
-      <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
-      <azureCompatible>true</azureCompatible>
-      <dependencies>
+    </owner>
+    <license src="License.txt"></license>
+    <releaseNotes src="ReleaseNotes.txt"></releaseNotes>
+    <azureCompatible>true</azureCompatible>
+    <dependencies>
         <dependency type="CoreVersion">07.00.00</dependency>
-      </dependencies>
-      <components>
+    </dependencies>
+    <components>
         <component type="Module">
-          <desktopModule>
+        <desktopModule>
             <moduleName>DotNetNuke.Modules.CoreMessaging</moduleName>
             <foldername>CoreMessaging</foldername>
             <businessControllerClass>DotNetNuke.Modules.CoreMessaging.Components.CoreMessagingBusinessController, DotNetNuke.Modules.CoreMessaging</businessControllerClass>
             <supportedFeatures />
             <moduleDefinitions>
-              <moduleDefinition>
+            <moduleDefinition>
                 <friendlyName>Message Center</friendlyName>
                 <defaultCacheTime>0</defaultCacheTime>
                 <moduleControls>
-                  <moduleControl>
+                <moduleControl>
                     <controlKey/>
                     <controlSrc>DesktopModules/CoreMessaging/View.ascx</controlSrc>
                     <supportsPopUps>True</supportsPopUps>
@@ -38,47 +38,47 @@
                     <iconFile />
                     <helpUrl>http://www.dnnsoftware.com/help</helpUrl>
                     <viewOrder>0</viewOrder>
-                  </moduleControl>
+                </moduleControl>
                 </moduleControls>
-              </moduleDefinition>
+            </moduleDefinition>
             </moduleDefinitions>
-          </desktopModule>
-          <eventMessage>
+        </desktopModule>
+        <eventMessage>
             <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
             <processorCommand>UpgradeModule</processorCommand>
             <attributes>
-              <businessControllerClass>DotNetNuke.Modules.CoreMessaging.Components.CoreMessagingBusinessController, DotNetNuke.Modules.CoreMessaging</businessControllerClass>
-              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>06.02.00</upgradeVersionsList>
+            <businessControllerClass>DotNetNuke.Modules.CoreMessaging.Components.CoreMessagingBusinessController, DotNetNuke.Modules.CoreMessaging</businessControllerClass>
+            <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+            <upgradeVersionsList>06.02.00</upgradeVersionsList>
             </attributes>
-          </eventMessage>
+        </eventMessage>
         </component>
         <component type="Assembly">
-          <assemblies>
+        <assemblies>
             <assembly>
-              <path>bin</path>
-              <name>DotNetNuke.Modules.CoreMessaging.dll</name>
+            <path>bin</path>
+            <name>DotNetNuke.Modules.CoreMessaging.dll</name>
             </assembly>
-          </assemblies>
+        </assemblies>
         </component>
         <component type="File">
-          <files>
+        <files>
             <basePath>DesktopModules/CoreMessaging</basePath>
             <file>
-              <name>View.ascx</name>
-              <sourceFileName>View.ascx</sourceFileName>
+            <name>View.ascx</name>
+            <sourceFileName>View.ascx</sourceFileName>
             </file>
-          </files>
+        </files>
         </component>
         <component type="ResourceFile">
-          <resourceFiles>
+        <resourceFiles>
             <basePath>DesktopModules/CoreMessaging</basePath>
             <resourceFile>
-              <name>Resources.zip</name>
+            <name>Resources.zip</name>
             </resourceFile>
-          </resourceFiles>
+        </resourceFiles>
         </component>
-      </components>
+    </components>
     </package>
   </packages>
 </dotnetnuke>

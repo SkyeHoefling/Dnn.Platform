@@ -38,11 +38,11 @@ let rec sum xs =
 
 (* Quicksort *)
 let rec qsort = function
-   | [] -&gt; []
-   | pivot :: rest -&gt;
-       let is_less x = x &lt; pivot in
-       let left, right = List.partition is_less rest in
-       qsort left @ [pivot] @ qsort right
+    | [] -&gt; []
+    | pivot :: rest -&gt;
+        let is_less x = x &lt; pivot in
+        let left, right = List.partition is_less rest in
+        qsort left @ [pivot] @ qsort right
 
 (* Fibonacci Sequence *)
 let rec fib_aux n a b =
@@ -90,7 +90,7 @@ let rec sort = function
 and insert elem = function
   | [] -&gt; [elem]
   | x :: l -&gt;
-      if elem &lt; x then elem :: x :: l else x :: insert elem l;;
+    if elem &lt; x then elem :: x :: l else x :: insert elem l;;
 
 (* Imperative features *)
 let add_polynom p1 p2 =
@@ -107,8 +107,8 @@ let fact n =
   let result = ref 1 in
   for i = 2 to n do
     result := i * !result
-   done;
-   !result;;
+    done;
+    !result;;
 fact 5;;
 
 (* Triangle (graphics) *)

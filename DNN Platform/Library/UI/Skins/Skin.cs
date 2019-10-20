@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -87,7 +87,7 @@ namespace DotNetNuke.UI.Skins
         public static string MODULEADD_ERROR = Localization.GetString("ModuleAdd.Error");
 
         public const string OnInitMessage = "Skin_InitMessage";
-		public const string OnInitMessageType = "Skin_InitMessageType";
+        public const string OnInitMessageType = "Skin_InitMessageType";
 
         private readonly ModuleCommunicate _communicator = new ModuleCommunicate();
         // ReSharper restore InconsistentNaming
@@ -128,7 +128,7 @@ namespace DotNetNuke.UI.Skins
         #endregion
 
         #region Friend Properties
-        
+
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// Gets the ModuleCommunicate instance for the skin
@@ -277,7 +277,7 @@ namespace DotNetNuke.UI.Skins
             //if querystring dnnprintmode=true, controlpanel will not be shown
             if (Request.QueryString["dnnprintmode"] != "true" && !UrlUtils.InPopUp() && Request.QueryString["hidecommandbar"] != "true")
             {
-                if (Host.AllowControlPanelToDetermineVisibility || (ControlPanelBase.IsPageAdminInternal() || ControlPanelBase.IsModuleAdminInternal())) 
+                if (Host.AllowControlPanelToDetermineVisibility || (ControlPanelBase.IsPageAdminInternal() || ControlPanelBase.IsModuleAdminInternal()))
                 {
                     //ControlPanel processing
                     var controlPanel = ControlUtilities.LoadControl<ControlPanelBase>(this, Host.ControlPanel);
@@ -421,7 +421,7 @@ namespace DotNetNuke.UI.Skins
         }
 
         /// <summary>
-        /// Handle access denied errors by displaying an error message 
+        /// Handle access denied errors by displaying an error message
         /// or by performing a redirect to a predefined "access denied URL"
         /// </summary>
         /// <param name="redirect"></param>
@@ -486,25 +486,25 @@ namespace DotNetNuke.UI.Skins
                 else
                 {
                     AddPageMessage(this,
-                                   "",
-                                   string.Format(Localization.GetString("ContractExpired.Error"), PortalSettings.PortalName, Globals.GetMediumDate(PortalSettings.ExpiryDate.ToString(CultureInfo.InvariantCulture)), PortalSettings.Email),
-                                   ModuleMessage.ModuleMessageType.RedError);
+                                    "",
+                                    string.Format(Localization.GetString("ContractExpired.Error"), PortalSettings.PortalName, Globals.GetMediumDate(PortalSettings.ExpiryDate.ToString(CultureInfo.InvariantCulture)), PortalSettings.Email),
+                                    ModuleMessage.ModuleMessageType.RedError);
                 }
             }
             else
             {
-				//If request localized page which haven't complete translate yet, redirect to default language version.
-	            var redirectUrl = Globals.AccessDeniedURL(Localization.GetString("TabAccess.Error"));
-                
+                //If request localized page which haven't complete translate yet, redirect to default language version.
+                var redirectUrl = Globals.AccessDeniedURL(Localization.GetString("TabAccess.Error"));
+
                 // Current locale will use default if did'nt find any
                 Locale currentLocale = LocaleController.Instance.GetCurrentLocale(PortalSettings.PortalId);
-	            if (PortalSettings.ContentLocalizationEnabled &&
-	                TabController.CurrentPage.CultureCode != currentLocale.Code)
-	            {
-		            redirectUrl = new LanguageTokenReplace {Language = currentLocale.Code}.ReplaceEnvironmentTokens("[URL]");
-	            }
+                if (PortalSettings.ContentLocalizationEnabled &&
+                    TabController.CurrentPage.CultureCode != currentLocale.Code)
+                {
+                    redirectUrl = new LanguageTokenReplace {Language = currentLocale.Code}.ReplaceEnvironmentTokens("[URL]");
+                }
 
-				Response.Redirect(redirectUrl, true);
+                Response.Redirect(redirectUrl, true);
             }
             return success;
         }
@@ -515,7 +515,7 @@ namespace DotNetNuke.UI.Skins
             if (tabInfo.ContentItemId == Null.NullInteger && tabInfo.TabID != Null.NullInteger)
             {
                 TabController.Instance.CreateContentItem(tabInfo);
-                TabController.Instance.UpdateTab(tabInfo);    
+                TabController.Instance.UpdateTab(tabInfo);
             }
         }
 
@@ -560,7 +560,7 @@ namespace DotNetNuke.UI.Skins
             {
                 slaveModule.ModuleControlId = moduleControl.ModuleControlID;
                 slaveModule.IconFile = moduleControl.IconFile;
-                
+
                 string permissionKey;
                 switch (slaveModule.ModuleControl.ControlSrc)
                 {
@@ -639,12 +639,12 @@ namespace DotNetNuke.UI.Skins
 
             if (HttpContext.Current != null && HttpContext.Current.Items.Contains(OnInitMessage))
             {
-	            var messageType = ModuleMessage.ModuleMessageType.YellowWarning;
-				if (HttpContext.Current.Items.Contains(OnInitMessageType))
-				{
-					messageType = (ModuleMessage.ModuleMessageType)Enum.Parse(typeof (ModuleMessage.ModuleMessageType), HttpContext.Current.Items[OnInitMessageType].ToString(), true);
-				}
-				AddPageMessage(this, string.Empty, HttpContext.Current.Items[OnInitMessage].ToString(), messageType);
+                var messageType = ModuleMessage.ModuleMessageType.YellowWarning;
+                if (HttpContext.Current.Items.Contains(OnInitMessageType))
+                {
+                    messageType = (ModuleMessage.ModuleMessageType)Enum.Parse(typeof (ModuleMessage.ModuleMessageType), HttpContext.Current.Items[OnInitMessageType].ToString(), true);
+                }
+                AddPageMessage(this, string.Empty, HttpContext.Current.Items[OnInitMessage].ToString(), messageType);
 
                 JavaScript.RequestRegistration(CommonJs.DnnPlugins);
                 ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
@@ -1012,11 +1012,11 @@ namespace DotNetNuke.UI.Skins
                     if (profileModule == null || profileModule.DisplayModule)
                     {
                         pane.InjectModule(module);
-                    }                    
+                    }
                 }
                 else
                 {
-                    pane.InjectModule(module);                   
+                    pane.InjectModule(module);
                 }
 
             }

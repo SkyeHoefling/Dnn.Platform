@@ -29,83 +29,83 @@ CodeMirror.defineMode('z80', function(_config, parserConfig) {
 
   return {
     startState: function() {
-      return {
+    return {
         context: 0
-      };
+    };
     },
     token: function(stream, state) {
-      if (!stream.column())
+    if (!stream.column())
         state.context = 0;
 
-      if (stream.eatSpace())
+    if (stream.eatSpace())
         return null;
 
-      var w;
+    var w;
 
-      if (stream.eatWhile(/\w/)) {
+    if (stream.eatWhile(/\w/)) {
         if (ez80 && stream.eat('.')) {
-          stream.eatWhile(/\w/);
+        stream.eatWhile(/\w/);
         }
         w = stream.current();
 
         if (stream.indentation()) {
-          if ((state.context == 1 || state.context == 4) && variables1.test(w)) {
+        if ((state.context == 1 || state.context == 4) && variables1.test(w)) {
             state.context = 4;
             return 'var2';
-          }
+        }
 
-          if (state.context == 2 && variables2.test(w)) {
+        if (state.context == 2 && variables2.test(w)) {
             state.context = 4;
             return 'var3';
-          }
+        }
 
-          if (keywords1.test(w)) {
+        if (keywords1.test(w)) {
             state.context = 1;
             return 'keyword';
-          } else if (keywords2.test(w)) {
+        } else if (keywords2.test(w)) {
             state.context = 2;
             return 'keyword';
-          } else if (state.context == 4 && numbers.test(w)) {
+        } else if (state.context == 4 && numbers.test(w)) {
             return 'number';
-          }
+        }
 
-          if (errors.test(w))
+        if (errors.test(w))
             return 'error';
         } else if (stream.match(numbers)) {
-          return 'number';
+        return 'number';
         } else {
-          return null;
+        return null;
         }
-      } else if (stream.eat(';')) {
+    } else if (stream.eat(';')) {
         stream.skipToEnd();
         return 'comment';
-      } else if (stream.eat('"')) {
+    } else if (stream.eat('"')) {
         while (w = stream.next()) {
-          if (w == '"')
+        if (w == '"')
             break;
 
-          if (w == '\\')
+        if (w == '\\')
             stream.next();
         }
         return 'string';
-      } else if (stream.eat('\'')) {
+    } else if (stream.eat('\'')) {
         if (stream.match(/\\?.'/))
-          return 'number';
-      } else if (stream.eat('.') || stream.sol() && stream.eat('#')) {
+        return 'number';
+    } else if (stream.eat('.') || stream.sol() && stream.eat('#')) {
         state.context = 5;
 
         if (stream.eatWhile(/\w/))
-          return 'def';
-      } else if (stream.eat('$')) {
+        return 'def';
+    } else if (stream.eat('$')) {
         if (stream.eatWhile(/[\da-f]/i))
-          return 'number';
-      } else if (stream.eat('%')) {
+        return 'number';
+    } else if (stream.eat('%')) {
         if (stream.eatWhile(/[01]/))
-          return 'number';
-      } else {
+        return 'number';
+    } else {
         stream.next();
-      }
-      return null;
+    }
+    return null;
     }
   };
 });

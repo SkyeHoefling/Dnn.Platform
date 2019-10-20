@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using DotNetNuke.Services.Tokens;
 namespace DotNetNuke.Services.Journal {
-    
+
         public class ItemData : IPropertyAccess {
             public string Url { get; set; }
             public string Title { get; set; }
@@ -47,6 +47,5 @@ namespace DotNetNuke.Services.Journal {
 
 
 
-   
-}
 
+}

@@ -8,15 +8,15 @@
     if (window.dnn.getVar('cc_morelink') != '') {
         window.cookieconsentoptions.content.href = window.dnn.getVar('cc_morelink')
     }
-	if (!window.cookieconsentoptions.palette) {
-		window.cookieconsentoptions.palette = {
-			"popup": {
-      "background": "#000"
+    if (!window.cookieconsentoptions.palette) {
+        window.cookieconsentoptions.palette = {
+            "popup": {
+    "background": "#000"
     },
     "button": {
-      "background": "#f1d600"
+    "background": "#f1d600"
     }
-		}
-	}
+        }
+    }
     window.cookieconsent.initialise(window.cookieconsentoptions);
-});    
+});

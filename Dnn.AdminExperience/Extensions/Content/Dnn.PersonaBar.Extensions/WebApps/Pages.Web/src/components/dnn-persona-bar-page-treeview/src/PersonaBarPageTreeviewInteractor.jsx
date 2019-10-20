@@ -42,7 +42,7 @@ class PersonaBarPageTreeviewInteractor extends Component {
 
     static getDerivedStateFromProps(props, state) {
         let setTreeViewExpanded = null;
-        let pageList = null;   
+        let pageList = null;
         const {
             activePage,
             NoPermissionSelectionPageId

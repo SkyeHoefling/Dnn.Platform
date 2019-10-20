@@ -72,7 +72,7 @@ export default class FolderPicker extends Component {
 
     render() {
         const {onSelectFolder} = this.props;
-        
+
         return (
             <FolderSelector
                 folders={this.state.folders}
@@ -80,7 +80,7 @@ export default class FolderPicker extends Component {
                 onParentExpands={this.getChildrenFolders.bind(this)}
                 onFolderChange={onSelectFolder}
                 {...this.props} />
-        );    
+        );
     }
 }
 
@@ -105,4 +105,3 @@ FolderPicker.propTypes = {
 FolderPicker.defaultProps = {
     portalId: -1
 };
-

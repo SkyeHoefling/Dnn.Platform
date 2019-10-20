@@ -11,8 +11,8 @@
 </div>
 
 <div class="socialpanelbody recycleBinContainer body"
-     data-bind="tabs: {activate: $root.tabActivated}"
-     id="recycleBin-body">
+    data-bind="tabs: {activate: $root.tabActivated}"
+    id="recycleBin-body">
 
     <ul class="tabs-nav">
         <li data-bind="visible: settings.canViewPages"><a href="#pages" data-bind="html: resx.recyclebin_Pages, click: $root.refreshPages"></a></li>
@@ -21,14 +21,14 @@
     </ul>
 
     <div id="pages" data-bind="visible: settings.canViewPages && deletedPagesReady() && activeTab() == 0"
-         class="listOfItems">
+        class="listOfItems">
         <div data-bind="text: resx.recyclebin_NoPages, visible: deletedpagesList().length == 0,
                                 css: { 'EmptyList NoPages': deletedpagesList().length == 0}"></div>
         <div data-bind="visible: deletedpagesList().length > 0, jScrollPane: { observableElement: deletedPagesReady,
                                 parentHeightOptions: { heightCorrection: -110 },
                                 jScrollPaneOptions: {
                                     contentWidth: $('#pages').width() } }"
-             id="pageList">
+            id="pageList">
             <table class="dnnRBGrid">
                 <tr class="dnnRBGridHeader">
                     <td class="first" data-bind="visible:settings.canViewPages && settings.canManagePages"><input type="checkbox" class="page-item" data-bind="checked: selectAllPages" aria-label="Check" /></td>
@@ -45,7 +45,7 @@
         </div>
     </div>
     <div id="modules" data-bind="visible:settings.canViewModules && deletedModulesReady() && activeTab() == 1"
-         class="listOfItems">
+        class="listOfItems">
         <div data-bind="text: resx.recyclebin_NoModules, visible: deletedmodulesList().length == 0,
                                 css: { 'EmptyList NoModules': deletedmodulesList().length == 0}"></div>
         <div data-bind="visible: deletedmodulesList().length > 0, jScrollPane: { observableElement: deletedModulesReady,
@@ -68,7 +68,7 @@
         </div>
     </div>
     <div id="users" data-bind="visible: settings.canViewUsers && deletedUsersReady() && activeTab() == 2"
-         class="listOfItems">
+        class="listOfItems">
         <div data-bind="text: resx.recyclebin_NoUsers, visible: deletedusersList().length == 0,
                                 css: { 'EmptyList NoUsers': deletedusersList().length == 0}"></div>
         <div data-bind="visible: deletedusersList().length > 0, jScrollPane: { observableElement: deletedUsersReady,

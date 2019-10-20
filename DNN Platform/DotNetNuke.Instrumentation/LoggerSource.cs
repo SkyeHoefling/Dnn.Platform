@@ -1,6 +1,6 @@
 ﻿namespace DotNetNuke.Instrumentation
 {
-    public static class LoggerSource 
+    public static class LoggerSource
     {
         static ILoggerSource _instance = new LoggerSourceImpl();
 

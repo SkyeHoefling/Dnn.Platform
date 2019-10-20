@@ -29,7 +29,7 @@ class InstallationService {
         }
         else if (legacyType) {
             sf.postfile("InstallPackage?legacySkin=" + legacyType, formData, callback, util.utilities.notifyError);
-        } 
+        }
         else if (isPortalPackage) {
             sf.postfile("InstallPackage?isPortalPackage=" + isPortalPackage, formData, callback, util.utilities.notifyError);
         }

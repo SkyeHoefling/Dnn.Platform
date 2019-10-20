@@ -53,7 +53,7 @@ class MessagingSettingsPanelBody extends Component {
 
     loadData() {
         const {props} = this;
-        
+
         timeIntervalOptions = [];
         timeIntervalOptions.push({ "value": 0, "label": "0" });
         timeIntervalOptions.push({ "value": 0.5, "label": "0.5" });

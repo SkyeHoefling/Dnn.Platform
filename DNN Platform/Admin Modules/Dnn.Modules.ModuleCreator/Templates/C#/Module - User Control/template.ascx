@@ -14,7 +14,7 @@
 
         </div>
 
-   </fieldset>
+    </fieldset>
 
     <ul class="dnnActions dnnClear">
 
@@ -25,4 +25,3 @@
     </ul>
 
 </div>
-

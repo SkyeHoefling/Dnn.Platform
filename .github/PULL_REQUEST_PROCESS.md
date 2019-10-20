@@ -19,7 +19,7 @@ The following items must all be true prior to a pull request being submitted to 
 > NOTE: Changes to methods that have been marked as [Obsolete] will typically not be accepted due to inherit risks associated with code scheduled for removal.  If a critical bug/issue exists, please be sure to document & discuss using an RFC issue prior to submitting your contribution to ensure alignment with acceptance criteria.
 
 ## Code Review Process
-Community review of submitted pull requests is encouraged, and all pull requests must be reviewed by at least **two (2)** designated approvers before the change can be approved.  Once approved by two unique designated approvers, the change can be merged. An approver should NEVER merge their own change, even with two supporting approvals.  
+Community review of submitted pull requests is encouraged, and all pull requests must be reviewed by at least **two (2)** designated approvers before the change can be approved.  Once approved by two unique designated approvers, the change can be merged. An approver should NEVER merge their own change, even with two supporting approvals.
 
 ### Designated Approvers
 At the current time the following community members are designated approvers.
@@ -53,10 +53,10 @@ If a reviewer has suggestions for improvement, those should be noted in the pull
 ## Merging & Closing of Requests
 Once a pull request has been reviewed by two designated approvers it may be merged and the pull request closed.
 
-> This **_MUST NOT_** be done by the submitter of the Pull Request for ANY reason!  
+> This **_MUST NOT_** be done by the submitter of the Pull Request for ANY reason!
 
 ### Execption for Build Process Pull Requests
-A special exception has been granted to reduce the number of Designed Approval reviews to 1 for all pull requests related to Build Support when incrementing versions in prepration of a release, or reconfiguration of the environment for the next version. 
+A special exception has been granted to reduce the number of Designed Approval reviews to 1 for all pull requests related to Build Support when incrementing versions in prepration of a release, or reconfiguration of the environment for the next version.
 
 Additionally a special exception has been granted to merge pull requests created by the Designated Approvers for the purposes of keeping release branches in sync when the pull request ONLY moves previously approved changes.  Such as moving bug fixes from a minor release into the next major release, or otherwise.
 
@@ -65,13 +65,13 @@ We follow the process outlined in the [Versioning Policy](VERSIONING_POLICY.md) 
 
 ### Stale Pull Requests
 
-The review team will work to respond to all pull requests in a timely fashion.  If changes or additional information is requested a pull request will remain open allowing the submitter to update their contribution accordingly.  If a request for additional information or changes is not completed with 90 days of request the Pull Request will be closed to keep the pipeline clear.  Once the needed information has been gathered the information can be re-submitted via a new Pull Request.  
+The review team will work to respond to all pull requests in a timely fashion.  If changes or additional information is requested a pull request will remain open allowing the submitter to update their contribution accordingly.  If a request for additional information or changes is not completed with 90 days of request the Pull Request will be closed to keep the pipeline clear.  Once the needed information has been gathered the information can be re-submitted via a new Pull Request.
 
 For expedited processing you may reference the prior Pull Request.
 
 ### Items for Future Releases
-If an item was submitted that will be integrated into a future release that is not currently in the development pipeline it is possible that the Pull Request will remain open. 
+If an item was submitted that will be integrated into a future release that is not currently in the development pipeline it is possible that the Pull Request will remain open.
 
 In this situation the reviewing team will approve the request, tag the request with a specific version milestone and add a comment noting when and why it will be included in the particularly identified release.
 
-This most often will apply to technology or dependency changes that require alignment with Major, Minor, Revision build inclusion.  
+This most often will apply to technology or dependency changes that require alignment with Major, Minor, Revision build inclusion.

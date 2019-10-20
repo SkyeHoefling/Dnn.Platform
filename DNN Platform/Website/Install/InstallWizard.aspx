@@ -11,12 +11,12 @@
     <link rel="stylesheet" type="text/css" href="../Resources/Shared/stylesheets/dnndefault/7.0.0/default.css?refresh" />
     <link rel="stylesheet" type="text/css" href="Install.css?refresh" />
     <link rel="stylesheet" type="text/css" href="../Resources/Shared/stylesheets/dnn.PasswordStrength.css?refresh" />
-     <!--[if IE]>
-	<link rel="stylesheet" type="text/css" href="../Portals/_default/ie.css?refresh" />
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="../Portals/_default/ie.css?refresh" />
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="../Portals/_default/skins/_default/WebControlSkin/default/combobox.default.css?refresh" />
     <script type="text/javascript" src="../Resources/Shared/scripts/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="../Resources/Shared/scripts/jquery/jquery-migrate.min.js"></script>
+    <script type="text/javascript" src="../Resources/Shared/scripts/jquery/jquery-migrate.min.js"></script>
     <script type="text/javascript" src="../Resources/Shared/Scripts/jquery/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../Resources/Shared/Scripts/jquery/jquery.hoverIntent.min.js"></script>
     <script type="text/javascript" src="../Resources/Shared/scripts/dnn.PasswordStrength.js"></script>
@@ -30,7 +30,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="scManager" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <asp:placeholder id="BodySCRIPTS" runat="server">
-              <script type="text/javascript" src="../Resources/Shared/Scripts/dnn.jquery.js"></script>
+            <script type="text/javascript" src="../Resources/Shared/Scripts/dnn.jquery.js"></script>
         </asp:placeholder>
 
     <br/>
@@ -50,7 +50,7 @@
             <hr/>
         </h2>
         <asp:Label ID="lblError" runat="server" CssClass="dnnFormMessage dnnFormError" />
-		<div id="permissionCheckMessage">
+        <div id="permissionCheckMessage">
             <span class="NormalBold promptMessage permissionCheck"></span>
         </div>
         <div id="tabs" class="dnnWizardTab">
@@ -64,15 +64,15 @@
                     </a>
                 </li>
                 <li id="installInfo"><a href="#installInstallation">
-                     <div class="dnnWizardStep">
+                    <div class="dnnWizardStep">
                         <span class="dnnWizardStepNumber">2</span>
                         <span class="dnnWizardStepTitle"><%= LocalizeString("Installation")%></span>
                         <span class="dnnWizardStepArrow"></span>
                     </div>
                     </a>
-                 </li>
+                </li>
                 <li id="webInfo"><a href="#installViewWebsite">
-                     <div class="dnnWizardStep">
+                    <div class="dnnWizardStep">
                         <span><img id="finishImage" src="../images/finishflag.png" alt="" /></span>
                         <span class="dnnWizardStepTitle"><%= LocalizeString("ViewWebsite")%></span>
                     </div>
@@ -81,7 +81,7 @@
             </ul>
             <div class="installAccountInfo dnnClear" id="installAccountInfo">
                 <asp:Label ID="lblAccountInfoIntro" runat="server" ResourceKey="AccountInfoIntro" />
-				<asp:Label ID="lblIntroDetail" runat="Server" ResourceKey="IntroDetail" />
+                <asp:Label ID="lblIntroDetail" runat="Server" ResourceKey="IntroDetail" />
                 <p style="display: block; margin: 10px 0 10px 0;">
                     <asp:Label ID="lblAccountInfoError" runat="server" CssClass="dnnFormMessage dnnFormError" />
                 </p>
@@ -244,9 +244,9 @@
                             <div id="installation-buttons">
                                 <a id="retry" href="javascript:void(0)" class="dnnPrimaryAction"><%= LocalizeString("Retry") %></a>
                                 <a id="seeLogs" href="javascript:void(0)" class="dnnSecondaryAction"><%= LocalizeString("SeeLogs") %></a>
-								<asp:LinkButton ID="visitSite" runat="server" resourcekey="VisitWebsite" CssClass="dnnPrimaryAction visitSiteLink" />
+                                <asp:LinkButton ID="visitSite" runat="server" resourcekey="VisitWebsite" CssClass="dnnPrimaryAction visitSiteLink" />
                             </div>
-							<hr />
+                            <hr />
                             <div id="installation-log-container" class="dnnScroll">
                                 <div id="installation-log" ></div>
                             </div>
@@ -267,7 +267,7 @@
                 <div id="installViewWebsite" runat="Server" visible="True" class="dnnForm">
                 </div>
             </div>
-       </div>
+        </div>
     </div>
 
     <br/><br/><br/>

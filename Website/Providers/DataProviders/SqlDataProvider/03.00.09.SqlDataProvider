@@ -13,13 +13,13 @@ GO
 
 CREATE procedure {databaseOwner}{objectQualifier}GetUserRolesByUsername
 
-@PortalId int, 
-@Username nvarchar(100), 
+@PortalId int,
+@Username nvarchar(100),
 @Rolename nvarchar(50)
 
 as
 
-SELECT	R.*,        
+SELECT	R.*,
         'FullName' = U.FirstName + ' ' + U.LastName,
         UR.UserRoleID,
         UR.UserID,
@@ -43,52 +43,52 @@ CREATE procedure {databaseOwner}{objectQualifier}GetSearchResultModules
 
 AS
 
-SELECT     
-		TM.TabID, 
-		T.TabName  AS SearchTabName
+SELECT
+        TM.TabID,
+        T.TabName  AS SearchTabName
 FROM	{objectQualifier}Modules M
-INNER JOIN	{objectQualifier}ModuleDefinitions MD ON MD.ModuleDefID = M.ModuleDefID 
-INNER JOIN	{objectQualifier}TabModules TM ON TM.ModuleID = M.ModuleID 
+INNER JOIN	{objectQualifier}ModuleDefinitions MD ON MD.ModuleDefID = M.ModuleDefID
+INNER JOIN	{objectQualifier}TabModules TM ON TM.ModuleID = M.ModuleID
 INNER JOIN	{objectQualifier}Tabs T ON T.TabID = TM.TabID
 WHERE	MD.FriendlyName = N'Search Results'
-	AND T.PortalID = @PortalID
-	AND T.IsDeleted = 0
+    AND T.PortalID = @PortalID
+    AND T.IsDeleted = 0
 GO
 
 drop procedure {databaseOwner}{objectQualifier}GetFolderPermissionsByFolderPath
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetFolderPermissionsByFolderPath
-	@PortalID int,
-	@FolderPath varchar(300), 
-	@PermissionID int
+    @PortalID int,
+    @FolderPath varchar(300),
+    @PermissionID int
 AS
 
 SELECT
-	FP.[FolderPermissionID],
-	F.[FolderID],
-	F.[FolderPath],
-	P.[PermissionID],
-	FP.[RoleID],
-	case FP.RoleID
-		when -1 then 'All Users'
-		when -2 then 'Superuser'		
-		when -3 then 'Unauthenticated Users'
-		else 	R.RoleName
-	end
-	'RoleName',
-	FP.[AllowAccess],
-	P.[PermissionCode],
-	P.[PermissionKey],
-	P.[PermissionName]
+    FP.[FolderPermissionID],
+    F.[FolderID],
+    F.[FolderPath],
+    P.[PermissionID],
+    FP.[RoleID],
+    case FP.RoleID
+        when -1 then 'All Users'
+        when -2 then 'Superuser'
+        when -3 then 'Unauthenticated Users'
+        else 	R.RoleName
+    end
+    'RoleName',
+    FP.[AllowAccess],
+    P.[PermissionCode],
+    P.[PermissionKey],
+    P.[PermissionName]
 FROM
-	{objectQualifier}FolderPermission FP
-LEFT JOIN {objectQualifier}Folders F ON	FP.FolderID = F.FolderID	
+    {objectQualifier}FolderPermission FP
+LEFT JOIN {objectQualifier}Folders F ON	FP.FolderID = F.FolderID
 LEFT JOIN {objectQualifier}Permission P ON	FP.PermissionID = P.PermissionID
 LEFT JOIN {objectQualifier}Roles R ON	FP.RoleID = R.RoleID
 WHERE
-	( (F.[FolderPath] = @FolderPath and ((F.[PortalID] = @PortalID) or (F.[PortalID] is null and @PortalID is null)))
-          or (F.FolderPath is null and P.PermissionCode = 'SYSTEM_FOLDER') )
+    ( (F.[FolderPath] = @FolderPath and ((F.[PortalID] = @PortalID) or (F.[PortalID] is null and @PortalID is null)))
+        or (F.FolderPath is null and P.PermissionCode = 'SYSTEM_FOLDER') )
 AND	(P.[PermissionID] = @PermissionID or @PermissionID = -1)
 
 GO
@@ -100,7 +100,7 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}GetAllTabsModules
 
 AS
 
-select 
+select
   {objectQualifier}tabmodules.tabid,
   {objectQualifier}Modules.*,
   {objectQualifier}DesktopModules.*
@@ -109,9 +109,9 @@ inner join {objectQualifier}ModuleDefinitions on {objectQualifier}Modules.Module
 inner join {objectQualifier}DesktopModules on {objectQualifier}ModuleDefinitions.DesktopModuleID = {objectQualifier}DesktopModules.DesktopModuleID
 inner join {objectQualifier}TabModules on {objectQualifier}Modules.ModuleID = {objectQualifier}TabModules.ModuleID
 where  {objectQualifier}Modules.PortalId = @PortalId and {objectQualifier}Modules.AllTabs = @AllTabs
-  and {objectQualifier}tabmodules.tabmoduleID =(select min(tabmoduleID) 
-		from {objectQualifier}tabmodules
-		where ModuleID = {objectQualifier}Modules.ModuleID)
+  and {objectQualifier}tabmodules.tabmoduleID =(select min(tabmoduleID)
+        from {objectQualifier}tabmodules
+        where ModuleID = {objectQualifier}Modules.ModuleID)
 order by {objectQualifier}Modules.ModuleId
 
 GO
@@ -123,24 +123,24 @@ from   {objectQualifier}ModuleDefinitions
 where  FriendlyName = 'Module Definitions'
 
 INSERT INTO {databaseOwner}{objectQualifier}ModuleControls (
-	[ModuleDefID], 
-	[ControlKey], 
-	[ControlTitle], 
-	[ControlSrc], 
-	[IconFile], 
-	[ControlType], 
-	[ViewOrder], 
-	[HelpUrl]
-) 
+    [ModuleDefID],
+    [ControlKey],
+    [ControlTitle],
+    [ControlSrc],
+    [IconFile],
+    [ControlType],
+    [ViewOrder],
+    [HelpUrl]
+)
 VALUES (
-	@ModuleDefID, 
-	N'Package', 
-	N'Create Private Assembly', 
-	N'Admin/ModuleDefinitions/PrivateAssembly.ascx', 
-	N'icon_moduledefinitions_32px.gif', 
-	3, 
-	NULL, 
-	NULL
+    @ModuleDefID,
+    N'Package',
+    N'Create Private Assembly',
+    N'Admin/ModuleDefinitions/PrivateAssembly.ascx',
+    N'icon_moduledefinitions_32px.gif',
+    3,
+    NULL,
+    NULL
 )
 
 GO
@@ -158,24 +158,24 @@ CREATE procedure {databaseOwner}{objectQualifier}GetBanner
 as
 
 select {objectQualifier}Banners.BannerId,
-       {objectQualifier}Banners.VendorId,
-       'ImageFile' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Banners.ImageFile else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end,
-       {objectQualifier}Banners.BannerName,
-       {objectQualifier}Banners.Impressions,
-       {objectQualifier}Banners.CPM,
-       {objectQualifier}Banners.Views,
-       {objectQualifier}Banners.ClickThroughs,
-       {objectQualifier}Banners.StartDate,
-       {objectQualifier}Banners.EndDate,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Banners.CreatedDate,
-       {objectQualifier}Banners.BannerTypeId,
-       {objectQualifier}Banners.Description,
-       {objectQualifier}Banners.GroupName,
-       {objectQualifier}Banners.Criteria,
-       {objectQualifier}Banners.URL        
-FROM   {objectQualifier}Banners 
-INNER JOIN {objectQualifier}Vendors ON {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId 
+        {objectQualifier}Banners.VendorId,
+        'ImageFile' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Banners.ImageFile else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end,
+        {objectQualifier}Banners.BannerName,
+        {objectQualifier}Banners.Impressions,
+        {objectQualifier}Banners.CPM,
+        {objectQualifier}Banners.Views,
+        {objectQualifier}Banners.ClickThroughs,
+        {objectQualifier}Banners.StartDate,
+        {objectQualifier}Banners.EndDate,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Banners.CreatedDate,
+        {objectQualifier}Banners.BannerTypeId,
+        {objectQualifier}Banners.Description,
+        {objectQualifier}Banners.GroupName,
+        {objectQualifier}Banners.Criteria,
+        {objectQualifier}Banners.URL
+FROM   {objectQualifier}Banners
+INNER JOIN {objectQualifier}Vendors ON {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId
 LEFT OUTER JOIN {objectQualifier}Users ON {objectQualifier}Banners.CreatedByUser = {objectQualifier}Users.UserID
 left outer join {objectQualifier}Files on {objectQualifier}Banners.ImageFile = 'FileId=' + convert(varchar,{objectQualifier}Files.FileID)
 where  {objectQualifier}Banners.BannerId = @BannerId
@@ -185,60 +185,60 @@ AND {objectQualifier}Vendors.PortalId = @PortalID
 GO
 
 UPDATE {objectQualifier}Announcements
-	SET URL = 'FileID=' + convert(varchar,F.FileID)
-FROM 
-	{objectQualifier}Announcements AS A
-	INNER JOIN {objectQualifier}Files AS F ON A.URL = F.FileName
+    SET URL = 'FileID=' + convert(varchar,F.FileID)
+FROM
+    {objectQualifier}Announcements AS A
+    INNER JOIN {objectQualifier}Files AS F ON A.URL = F.FileName
 GO
 
 UPDATE {objectQualifier}Links
-	SET URL = 'FileID=' + convert(varchar,F.FileID)
-FROM 
-	{objectQualifier}Links AS L
-	INNER JOIN {objectQualifier}Files AS F ON L.URL = F.FileName
+    SET URL = 'FileID=' + convert(varchar,F.FileID)
+FROM
+    {objectQualifier}Links AS L
+    INNER JOIN {objectQualifier}Files AS F ON L.URL = F.FileName
 GO
 
 UPDATE {objectQualifier}Documents
-	SET URL = 'FileID=' + convert(varchar,F.FileID)
-FROM 
-	{objectQualifier}Documents AS D
-	INNER JOIN {objectQualifier}Files AS F ON D.URL = F.FileName
+    SET URL = 'FileID=' + convert(varchar,F.FileID)
+FROM
+    {objectQualifier}Documents AS D
+    INNER JOIN {objectQualifier}Files AS F ON D.URL = F.FileName
 GO
 
 DROP procedure {databaseOwner}{objectQualifier}GetSearchResults
 GO
 
 CREATE procedure {databaseOwner}{objectQualifier}GetSearchResults
-	@PortalID int,
-	@Word nVarChar(100)
+    @PortalID int,
+    @Word nVarChar(100)
 AS
 SELECT si.SearchItemID,
-	sw.Word,
-	siw.Occurrences,
-	siw.Occurrences + 1000 as Relevance,
-	m.ModuleID,
-	tm.TabID,
-	si.Title,
-	si.Description,
-	si.Author,
-	si.PubDate,
-	si.SearchKey,
-	si.Guid,
-	si.ImageFileId,
-	u.FirstName + ' ' + u.LastName As AuthorName
+    sw.Word,
+    siw.Occurrences,
+    siw.Occurrences + 1000 as Relevance,
+    m.ModuleID,
+    tm.TabID,
+    si.Title,
+    si.Description,
+    si.Author,
+    si.PubDate,
+    si.SearchKey,
+    si.Guid,
+    si.ImageFileId,
+    u.FirstName + ' ' + u.LastName As AuthorName
 FROM    {objectQualifier}SearchWord sw
-	INNER JOIN {objectQualifier}SearchItemWord siw ON sw.SearchWordsID = siw.SearchWordsID
-	INNER JOIN {objectQualifier}SearchItem si ON siw.SearchItemID = si.SearchItemID
-	INNER JOIN {objectQualifier}Modules m ON si.ModuleId = m.ModuleID
-	LEFT OUTER JOIN {objectQualifier}TabModules tm ON si.ModuleId = tm.ModuleID
-	INNER JOIN {objectQualifier}Tabs t ON tm.TabID = t.TabID
-	LEFT OUTER JOIN {objectQualifier}Users u ON si.Author = u.UserID
+    INNER JOIN {objectQualifier}SearchItemWord siw ON sw.SearchWordsID = siw.SearchWordsID
+    INNER JOIN {objectQualifier}SearchItem si ON siw.SearchItemID = si.SearchItemID
+    INNER JOIN {objectQualifier}Modules m ON si.ModuleId = m.ModuleID
+    LEFT OUTER JOIN {objectQualifier}TabModules tm ON si.ModuleId = tm.ModuleID
+    INNER JOIN {objectQualifier}Tabs t ON tm.TabID = t.TabID
+    LEFT OUTER JOIN {objectQualifier}Users u ON si.Author = u.UserID
 WHERE   (((m.StartDate Is Null) OR (GetDate() > m.StartDate)) AND ((m.EndDate Is Null) OR (GetDate() < m.EndDate)))
-	AND (((t.StartDate Is Null) OR (GetDate() > t.StartDate)) AND ((t.EndDate Is Null) OR (GetDate() < t.EndDate)))
-	AND (sw.Word = @Word) 
-	AND (t.IsDeleted = 0) 
-	AND (m.IsDeleted = 0) 
-	AND (t.PortalID = @PortalID)
+    AND (((t.StartDate Is Null) OR (GetDate() > t.StartDate)) AND ((t.EndDate Is Null) OR (GetDate() < t.EndDate)))
+    AND (sw.Word = @Word)
+    AND (t.IsDeleted = 0)
+    AND (m.IsDeleted = 0)
+    AND (t.PortalID = @PortalID)
 GO
 
 
@@ -474,7 +474,7 @@ ALTER TABLE {databaseOwner}[{objectQualifier}TabPermission] ADD CONSTRAINT [PK_{
 GO
 ALTER TABLE {databaseOwner}[{objectQualifier}Permission] ADD CONSTRAINT [PK_{objectQualifier}Permission] PRIMARY KEY CLUSTERED  ([PermissionID])
 GO
-ALTER TABLE {databaseOwner}[{objectQualifier}ModulePermission] ADD 
+ALTER TABLE {databaseOwner}[{objectQualifier}ModulePermission] ADD
 CONSTRAINT [PK_{objectQualifier}ModulePermission] PRIMARY KEY CLUSTERED  ([ModulePermissionID])
 GO
 ALTER TABLE {databaseOwner}[{objectQualifier}FolderPermission] ADD

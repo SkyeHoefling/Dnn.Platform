@@ -60,7 +60,7 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
-            
+
             UserId = GetFlagValue(FlagId, "User Id", -1, true, true, true);
             Email = GetFlagValue(FlagEmail, "Email", string.Empty);
             Username = GetFlagValue(FlagUsername, "Username", string.Empty);
@@ -97,17 +97,17 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
                     User,
                     out userInfo)
                 ) != null
-               )
+                )
             {
                 return errorResultModel;
-            }                        
-          
+            }
+
             // Update the User
             // process the password first. If invalid, we can abort other changes to the user
             if (!string.IsNullOrEmpty(Password))
             {
                 try
-                {                    
+                {
                     _usersController.ChangePassword(userInfo.PortalID, userInfo.UserID, Password);
                     sbResults.Append(LocalizeString("ChangeSuccessful"));
                 }

@@ -21,21 +21,21 @@
 
   function searchOverlay(query, caseInsensitive) {
     if (typeof query == "string")
-      query = new RegExp(query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), caseInsensitive ? "gi" : "g");
+    query = new RegExp(query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"), caseInsensitive ? "gi" : "g");
     else if (!query.global)
-      query = new RegExp(query.source, query.ignoreCase ? "gi" : "g");
+    query = new RegExp(query.source, query.ignoreCase ? "gi" : "g");
 
     return {token: function(stream) {
-      query.lastIndex = stream.pos;
-      var match = query.exec(stream.string);
-      if (match && match.index == stream.pos) {
+    query.lastIndex = stream.pos;
+    var match = query.exec(stream.string);
+    if (match && match.index == stream.pos) {
         stream.pos += match[0].length;
         return "searching";
-      } else if (match) {
+    } else if (match) {
         stream.pos = match.index;
-      } else {
+    } else {
         stream.skipToEnd();
-      }
+    }
     }};
   }
 
@@ -59,10 +59,10 @@
 
   function persistentDialog(cm, text, deflt, f) {
     cm.openDialog(text, f, {
-      value: deflt,
-      selectValueOnOpen: true,
-      closeOnEnter: false,
-      onClose: function() { clearSearch(cm); }
+    value: deflt,
+    selectValueOnOpen: true,
+    closeOnEnter: false,
+    onClose: function() { clearSearch(cm); }
     });
   }
 
@@ -78,22 +78,22 @@
 
   function parseString(string) {
     return string.replace(/\\(.)/g, function(_, ch) {
-      if (ch == "n") return "\n"
-      if (ch == "r") return "\r"
-      return ch
+    if (ch == "n") return "\n"
+    if (ch == "r") return "\r"
+    return ch
     })
   }
 
   function parseQuery(query) {
     var isRE = query.match(/^\/(.*)\/([a-z]*)$/);
     if (isRE) {
-      try { query = new RegExp(isRE[1], isRE[2].indexOf("i") == -1 ? "" : "i"); }
-      catch(e) {} // Not a regular expression after all, do a string search
+    try { query = new RegExp(isRE[1], isRE[2].indexOf("i") == -1 ? "" : "i"); }
+    catch(e) {} // Not a regular expression after all, do a string search
     } else {
-      query = parseString(query)
+    query = parseString(query)
     }
     if (typeof query == "string" ? query == "" : query.test(""))
-      query = /x^/;
+    query = /x^/;
     return query;
   }
 
@@ -107,8 +107,8 @@
     state.overlay = searchOverlay(state.query, queryCaseInsensitive(state.query));
     cm.addOverlay(state.overlay);
     if (cm.showMatchesOnScrollbar) {
-      if (state.annotate) { state.annotate.clear(); state.annotate = null; }
-      state.annotate = cm.showMatchesOnScrollbar(state.query, queryCaseInsensitive(state.query));
+    if (state.annotate) { state.annotate.clear(); state.annotate = null; }
+    state.annotate = cm.showMatchesOnScrollbar(state.query, queryCaseInsensitive(state.query));
     }
   }
 
@@ -117,20 +117,20 @@
     if (state.query) return findNext(cm, rev);
     var q = cm.getSelection() || state.lastQuery;
     if (persistent && cm.openDialog) {
-      persistentDialog(cm, queryDialog, q, function(query, event) {
+    persistentDialog(cm, queryDialog, q, function(query, event) {
         CodeMirror.e_stop(event);
         if (!query) return;
         if (query != state.queryText) startSearch(cm, state, query);
         findNext(cm, event.shiftKey);
-      });
+    });
     } else {
-      dialog(cm, queryDialog, "Search for:", q, function(query) {
+    dialog(cm, queryDialog, "Search for:", q, function(query) {
         if (query && !state.query) cm.operation(function() {
-          startSearch(cm, state, query);
-          state.posFrom = state.posTo = cm.getCursor();
-          findNext(cm, rev);
+        startSearch(cm, state, query);
+        state.posFrom = state.posTo = cm.getCursor();
+        findNext(cm, rev);
         });
-      });
+    });
     }
   }
 
@@ -138,8 +138,8 @@
     var state = getSearchState(cm);
     var cursor = getSearchCursor(cm, state.query, rev ? state.posFrom : state.posTo);
     if (!cursor.find(rev)) {
-      cursor = getSearchCursor(cm, state.query, rev ? CodeMirror.Pos(cm.lastLine()) : CodeMirror.Pos(cm.firstLine(), 0));
-      if (!cursor.find(rev)) return;
+    cursor = getSearchCursor(cm, state.query, rev ? CodeMirror.Pos(cm.lastLine()) : CodeMirror.Pos(cm.firstLine(), 0));
+    if (!cursor.find(rev)) return;
     }
     cm.setSelection(cursor.from(), cursor.to());
     cm.scrollIntoView({from: cursor.from(), to: cursor.to()}, 20);
@@ -164,42 +164,42 @@
     if (cm.getOption("readOnly")) return;
     var query = cm.getSelection() || getSearchState(cm).lastQuery;
     dialog(cm, replaceQueryDialog, "Replace:", query, function(query) {
-      if (!query) return;
-      query = parseQuery(query);
-      dialog(cm, replacementQueryDialog, "Replace with:", "", function(text) {
+    if (!query) return;
+    query = parseQuery(query);
+    dialog(cm, replacementQueryDialog, "Replace with:", "", function(text) {
         text = parseString(text)
         if (all) {
-          cm.operation(function() {
+        cm.operation(function() {
             for (var cursor = getSearchCursor(cm, query); cursor.findNext();) {
-              if (typeof query != "string") {
+            if (typeof query != "string") {
                 var match = cm.getRange(cursor.from(), cursor.to()).match(query);
                 cursor.replace(text.replace(/\$(\d)/g, function(_, i) {return match[i];}));
-              } else cursor.replace(text);
+            } else cursor.replace(text);
             }
-          });
+        });
         } else {
-          clearSearch(cm);
-          var cursor = getSearchCursor(cm, query, cm.getCursor());
-          var advance = function() {
+        clearSearch(cm);
+        var cursor = getSearchCursor(cm, query, cm.getCursor());
+        var advance = function() {
             var start = cursor.from(), match;
             if (!(match = cursor.findNext())) {
-              cursor = getSearchCursor(cm, query);
-              if (!(match = cursor.findNext()) ||
-                  (start && cursor.from().line == start.line && cursor.from().ch == start.ch)) return;
+            cursor = getSearchCursor(cm, query);
+            if (!(match = cursor.findNext()) ||
+                (start && cursor.from().line == start.line && cursor.from().ch == start.ch)) return;
             }
             cm.setSelection(cursor.from(), cursor.to());
             cm.scrollIntoView({from: cursor.from(), to: cursor.to()});
             confirmDialog(cm, doReplaceConfirm, "Replace?",
-                          [function() {doReplace(match);}, advance]);
-          };
-          var doReplace = function(match) {
+                        [function() {doReplace(match);}, advance]);
+        };
+        var doReplace = function(match) {
             cursor.replace(typeof query == "string" ? text :
-                           text.replace(/\$(\d)/g, function(_, i) {return match[i];}));
+                            text.replace(/\$(\d)/g, function(_, i) {return match[i];}));
             advance();
-          };
-          advance();
+        };
+        advance();
         }
-      });
+    });
     });
   }
 

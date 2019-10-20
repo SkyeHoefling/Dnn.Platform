@@ -10,9 +10,9 @@
 <script src="vb.js"></script>
 <script type="text/javascript" src="../../addon/runmode/runmode.js"></script>
 <style>
-      .CodeMirror {border: 1px solid #aaa; height:210px; height: auto;}
-      .CodeMirror-scroll { overflow-x: auto; overflow-y: hidden;}
-      .CodeMirror pre { font-family: Inconsolata; font-size: 14px}
+    .CodeMirror {border: 1px solid #aaa; height:210px; height: auto;}
+    .CodeMirror-scroll { overflow-x: auto; overflow-y: hidden;}
+    .CodeMirror pre { font-family: Inconsolata; font-size: 14px}
     </style>
 <div id=nav>
   <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
@@ -36,15 +36,15 @@ function test(golden, text) {
   var ok = true;
   var i = 0;
   function callback(token, style, lineNo, pos){
-		//console.log(String(token) + " " + String(style) + " " + String(lineNo) + " " + String(pos));
+        //console.log(String(token) + " " + String(style) + " " + String(lineNo) + " " + String(pos));
     var result = [String(token), String(style)];
     if (golden[i][0] != result[0] || golden[i][1] != result[1]){
-      return "Error, expected: " + String(golden[i]) + ", got: " + String(result);
-      ok = false;
+    return "Error, expected: " + String(golden[i]) + ", got: " + String(result);
+    ok = false;
     }
     i++;
   }
-  CodeMirror.runMode(text, "text/x-vb",callback); 
+  CodeMirror.runMode(text, "text/x-vb",callback);
 
   if (ok) return "Tests OK";
 }
@@ -59,9 +59,9 @@ function testIf(){
   return test(golden, text);
 }
 function testDecl(){
-   var golden = [['Dim','keyword'],[' ','null'],['x','variable'],[' ','null'],['as','keyword'],[' ','null'],['Integer','keyword']];
-   var text = 'Dim x as Integer';
-   return test(golden, text);
+    var golden = [['Dim','keyword'],[' ','null'],['x','variable'],[' ','null'],['as','keyword'],[' ','null'],['Integer','keyword']];
+    var text = 'Dim x as Integer';
+    return test(golden, text);
 }
 function testAll(){
   var result = "";
@@ -86,9 +86,9 @@ function init() {
     runTest();
 }
 function runTest() {
-	document.getElementById('testresult').innerHTML = testAll();
+    document.getElementById('testresult').innerHTML = testAll();
   initText(editor);
-	
+
 }
 document.body.onload = init;
 </script>

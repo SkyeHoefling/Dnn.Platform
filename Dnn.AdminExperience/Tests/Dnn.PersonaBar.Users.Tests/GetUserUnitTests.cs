@@ -53,7 +53,7 @@ namespace Dnn.PersonaBar.Users.Tests
                 .Setup(u => u.ValidateUser(_userId, portalSettings, null, out _userInfo))
                 .Returns(errorResultModel);
 
-            // Act 
+            // Act
             var result = RunCommand("--email", "user1@g.com");
 
             // Assert
@@ -81,7 +81,7 @@ namespace Dnn.PersonaBar.Users.Tests
                 .Setup(u => u.ValidateUser(_userId, portalSettings, null, out _userInfo))
                 .Returns(errorResultModel);
 
-            // Act 
+            // Act
             var result = RunCommand("--username", "user1");
 
             // Assert
@@ -91,12 +91,12 @@ namespace Dnn.PersonaBar.Users.Tests
         [Test]
         public void Run_GetUserWithValidCommand_ShouldSuccessResponse()
         {
-            // Arrange            
+            // Arrange
             _userValidatorMock
-             .Setup(u => u.ValidateUser(_userId, portalSettings, null, out _userInfo))
-             .Returns(errorResultModel);
+            .Setup(u => u.ValidateUser(_userId, portalSettings, null, out _userInfo))
+            .Returns(errorResultModel);
 
-            // Act 
+            // Act
             var result = RunCommand(_userId.ToString());
 
             // Assert
@@ -106,14 +106,14 @@ namespace Dnn.PersonaBar.Users.Tests
         [Test]
         public void Run_GetUserWithValidCommand_ShouldErrorResponse()
         {
-            // Arrange            
+            // Arrange
             errorResultModel = new ConsoleErrorResultModel();
 
             _userValidatorMock
                 .Setup(u => u.ValidateUser(_userId, portalSettings, null, out _userInfo))
                 .Returns(errorResultModel);
 
-            // Act 
+            // Act
             var result = RunCommand(_userId.ToString());
 
             // Assert

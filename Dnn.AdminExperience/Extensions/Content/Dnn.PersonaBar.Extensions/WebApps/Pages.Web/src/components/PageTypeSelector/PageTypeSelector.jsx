@@ -60,10 +60,10 @@ class PageTypeSelector extends Component {
         const createdDate = Localization.get("CreatedValue")
                                 .replace("[CREATEDDATE]", utils.formatDateNoTime(page.createdOnDate))
                                 .replace("[CREATEDUSER]", page.created || "System");
-        
-        const hierarchy = this._getHierarchyLabel();        
+
+        const hierarchy = this._getHierarchyLabel();
         const components = this.getComponents();
-                
+
         return (
             <div className={styles.pageTypeSelector} ref={node => this.node = node}>
                 <div>
@@ -87,7 +87,7 @@ class PageTypeSelector extends Component {
                                 {Localization.get("PageParent") + ": "}
                             </span>
                             <span id="pageParentContent" className={this.pageParentLarge ? "page-info-item-value parent-page-name parent-page-style-content-large" : "page-info-item-value parent-page-name"}>
-                                 <span id="parentPageValue" ref={(parentPageRef)=>this._calculateParentPageSize(parentPageRef)} >
+                                <span id="parentPageValue" ref={(parentPageRef)=>this._calculateParentPageSize(parentPageRef)} >
                                     {hierarchy}
                                 </span>
                             </span>

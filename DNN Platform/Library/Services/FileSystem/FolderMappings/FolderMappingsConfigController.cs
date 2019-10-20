@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -37,8 +37,8 @@ namespace DotNetNuke.Services.FileSystem
         public FolderMappingsConfigController()
         {
             FolderMappings = new Dictionary<string, string>();
-            FolderTypes = new List<FolderTypeConfig>();    
-            LoadConfig();     
+            FolderTypes = new List<FolderTypeConfig>();
+            LoadConfig();
         }
         #endregion
 
@@ -47,7 +47,7 @@ namespace DotNetNuke.Services.FileSystem
 
         private void FillFolderMappings(XmlDocument configDocument)
         {
-            var folderMappingsNode = configDocument.SelectSingleNode(ConfigNode+"/folderMappings");            
+            var folderMappingsNode = configDocument.SelectSingleNode(ConfigNode+"/folderMappings");
             if (folderMappingsNode == null)
             {
                 return;
@@ -79,7 +79,7 @@ namespace DotNetNuke.Services.FileSystem
             var folderType = new FolderTypeConfig()
             {
                 Name = XmlUtils.GetAttributeValue(nodeNavigator, "name"),
-                Provider = XmlUtils.GetNodeValue(nodeNavigator, "provider"),                
+                Provider = XmlUtils.GetNodeValue(nodeNavigator, "provider"),
             };
             XmlNodeList settingsNode = node.SelectNodes("settings/setting");
             if (settingsNode != null)
@@ -103,8 +103,8 @@ namespace DotNetNuke.Services.FileSystem
         #endregion
 
         #region public Properties
-        public IList<FolderTypeConfig> FolderTypes { get; internal set; } 
-        
+        public IList<FolderTypeConfig> FolderTypes { get; internal set; }
+
         private const string configNode = "folderMappingsSettings";
         public string ConfigNode
         {
@@ -116,7 +116,7 @@ namespace DotNetNuke.Services.FileSystem
         public void LoadConfig()
         {
             try
-            {                
+            {
                 if (File.Exists(defaultConfigFilePath))
                 {
                     var configDocument = new XmlDocument { XmlResolver = null };
@@ -132,7 +132,7 @@ namespace DotNetNuke.Services.FileSystem
         }
 
         public void SaveConfig(string folderMappinsSettings)
-        {            
+        {
             if (!File.Exists(defaultConfigFilePath))
             {
                 var folderMappingsConfigContent = "<" + ConfigNode + ">" + folderMappinsSettings + "</" + ConfigNode +">";

@@ -5,14 +5,14 @@ import utils from "../../../utils";
 
 const queryString = {"HideCancel": "true", "HideDelete": "true", "NoRedirectOnUpdate": "true"};
 
-const iFrameStyle = { 
-    width: "100%", 
-    height: "450px", 
-    marginTop: "20px" 
+const iFrameStyle = {
+    width: "100%",
+    height: "450px",
+    marginTop: "20px"
 };
 
 class ModuleEdit extends Component {
-    
+
     constructor() {
         super();
         this.onIFrameLoad = this.onIFrameLoad.bind(this);
@@ -73,7 +73,7 @@ class ModuleEdit extends Component {
                 editUrl = utils.url.appendQueryString(editUrl, queryString);
                 this.setState({editUrl: editUrl});
             }
-            
+
         }
     }
 
@@ -118,7 +118,7 @@ class ModuleEdit extends Component {
     render() {
         const {state} = this;
 
-        return (state.userMode === "edit" && 
+        return (state.userMode === "edit" &&
             <iframe ref={node => this.iframeRef = node} src={state.editUrl} style={iFrameStyle} frameBorder={0}></iframe>
         );
     }

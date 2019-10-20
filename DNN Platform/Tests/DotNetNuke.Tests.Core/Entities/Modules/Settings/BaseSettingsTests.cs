@@ -61,7 +61,7 @@ namespace DotNetNuke.Tests.Core.Entities.Modules.Settings
             MockHostController.Setup(hc => hc.GetString("PerformanceSetting")).Returns("3");
             MockCache.Setup(c => c.Insert(It.IsAny<string>(), It.IsAny<object>())).Callback((string cacheKey, object itemToCache) => MockCacheCollection[cacheKey] = itemToCache);
             MockCache.Setup(c => c.Insert(It.IsAny<string>(), It.IsAny<object>(), It.IsAny<DNNCacheDependency>(), It.IsAny<DateTime>(), It.IsAny<TimeSpan>(), It.IsAny<CacheItemPriority>(), It.IsAny<CacheItemRemovedCallback>()))
-                     .Callback((string cacheKey, object itemToCache, DNNCacheDependency dcd, DateTime dt, TimeSpan ts, CacheItemPriority cip, CacheItemRemovedCallback circ) => MockCacheCollection[cacheKey] = itemToCache);
+                    .Callback((string cacheKey, object itemToCache, DNNCacheDependency dcd, DateTime dt, TimeSpan ts, CacheItemPriority cip, CacheItemRemovedCallback circ) => MockCacheCollection[cacheKey] = itemToCache);
             MockCache.Setup(c => c.GetItem(It.IsAny<string>())).Returns((string cacheKey) => MockCacheCollection[cacheKey]);
         }
 

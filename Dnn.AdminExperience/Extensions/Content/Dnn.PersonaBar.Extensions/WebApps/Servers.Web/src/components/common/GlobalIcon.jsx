@@ -16,9 +16,9 @@ export default class GlobalIcon extends Component {
     }
 }
 
-GlobalIcon.propTypes = {    
+GlobalIcon.propTypes = {
     isSwitch: PropTypes.bool.isRequired,
-    tooltipStyle: PropTypes.object  
+    tooltipStyle: PropTypes.object
 };
 
 GlobalIcon.defaultProps = {

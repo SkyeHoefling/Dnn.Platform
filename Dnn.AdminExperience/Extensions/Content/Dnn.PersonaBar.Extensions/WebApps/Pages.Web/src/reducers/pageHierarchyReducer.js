@@ -23,7 +23,7 @@ export default function  pageHierarchyReducer(state = {
             return { ...state,
                 dragItemTemplate: action.itemTemplate
             };
-        
+
         case ContentActionTypes.SAVED_PAGE:
             return { ...state,
                 createdPage: action.data.createdPage
@@ -31,7 +31,7 @@ export default function  pageHierarchyReducer(state = {
 
         case ActionTypes.CHANGE_SELECTED_PAGE_PATH:
             return { ...state,
-                selectedPagePath: action.path  
+                selectedPagePath: action.path
             };
 
         case ActionTypes.SELECT_PAGE:

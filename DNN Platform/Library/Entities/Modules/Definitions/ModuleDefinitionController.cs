@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -71,7 +71,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// <summary>
         /// GetModuleDefinitionByID gets a Module Definition by its ID
         /// </summary>
-		/// <param name="objModuleDefinition">The object of the Module Definition</param>
+        /// <param name="objModuleDefinition">The object of the Module Definition</param>
         /// -----------------------------------------------------------------------------
         public void DeleteModuleDefinition(ModuleDefinitionInfo objModuleDefinition)
         {
@@ -86,7 +86,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// -----------------------------------------------------------------------------
         public void DeleteModuleDefinition(int moduleDefinitionId)
         {
-			//Delete associated permissions
+            //Delete associated permissions
             var permissionController = new PermissionController();
             foreach (PermissionInfo permission in permissionController.GetPermissionsByModuleDefID(moduleDefinitionId))
             {
@@ -115,24 +115,24 @@ namespace DotNetNuke.Entities.Modules.Definitions
             return (from kvp in GetModuleDefinitions()
                     where kvp.Value.ModuleDefID == moduleDefID
                     select kvp.Value)
-                   .FirstOrDefault();
+                    .FirstOrDefault();
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// GetModuleDefinitionByFriendlyName gets a Module Definition by its Friendly
-		/// Name (and DesktopModuleID)
-		/// </summary>
-		/// <param name="friendlyName">The friendly name</param>
-		/// -----------------------------------------------------------------------------
-		public static ModuleDefinitionInfo GetModuleDefinitionByFriendlyName(string friendlyName)
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// GetModuleDefinitionByFriendlyName gets a Module Definition by its Friendly
+        /// Name (and DesktopModuleID)
+        /// </summary>
+        /// <param name="friendlyName">The friendly name</param>
+        /// -----------------------------------------------------------------------------
+        public static ModuleDefinitionInfo GetModuleDefinitionByFriendlyName(string friendlyName)
         {
             Requires.NotNullOrEmpty("friendlyName", friendlyName);
 
             return (from kvp in GetModuleDefinitions()
                     where kvp.Value.FriendlyName == friendlyName
                     select kvp.Value)
-                   .FirstOrDefault();
+                    .FirstOrDefault();
         }
 
         /// -----------------------------------------------------------------------------
@@ -151,7 +151,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
             return (from kvp in GetModuleDefinitions()
                     where kvp.Value.FriendlyName == friendlyName && kvp.Value.DesktopModuleID == desktopModuleID
                     select kvp.Value)
-                   .FirstOrDefault();
+                    .FirstOrDefault();
         }
 
         /// -----------------------------------------------------------------------------
@@ -161,9 +161,9 @@ namespace DotNetNuke.Entities.Modules.Definitions
         /// -----------------------------------------------------------------------------
         public static Dictionary<int, ModuleDefinitionInfo> GetModuleDefinitions()
         {
-            return CBO.GetCachedObject<Dictionary<int, ModuleDefinitionInfo>>(new CacheItemArgs(DataCache.ModuleDefinitionCacheKey, 
+            return CBO.GetCachedObject<Dictionary<int, ModuleDefinitionInfo>>(new CacheItemArgs(DataCache.ModuleDefinitionCacheKey,
                                                                                         DataCache.ModuleDefinitionCachePriority),
-                                                                              GetModuleDefinitionsCallBack);
+                                                                            GetModuleDefinitionsCallBack);
         }
 
         /// -----------------------------------------------------------------------------
@@ -194,7 +194,7 @@ namespace DotNetNuke.Entities.Modules.Definitions
             return (from kvp in GetModuleDefinitions()
                     where kvp.Value.DefinitionName == definitionName && kvp.Value.DesktopModuleID == desktopModuleID
                     select kvp.Value)
-                   .FirstOrDefault();
+                    .FirstOrDefault();
         }
 
         /// -----------------------------------------------------------------------------
@@ -210,16 +210,16 @@ namespace DotNetNuke.Entities.Modules.Definitions
             int moduleDefinitionID = moduleDefinition.ModuleDefID;
             if (moduleDefinitionID == Null.NullInteger)
             {
-				//Add new Module Definition
+                //Add new Module Definition
                 moduleDefinitionID = dataProvider.AddModuleDefinition(moduleDefinition.DesktopModuleID,
-                                                                      moduleDefinition.FriendlyName,
-                                                                      moduleDefinition.DefinitionName,
-                                                                      moduleDefinition.DefaultCacheTime,
-                                                                      UserController.Instance.GetCurrentUserInfo().UserID);
+                                                                    moduleDefinition.FriendlyName,
+                                                                    moduleDefinition.DefinitionName,
+                                                                    moduleDefinition.DefaultCacheTime,
+                                                                    UserController.Instance.GetCurrentUserInfo().UserID);
             }
             else
             {
-				//Upgrade Module Definition
+                //Upgrade Module Definition
                 dataProvider.UpdateModuleDefinition(moduleDefinition.ModuleDefID, moduleDefinition.FriendlyName, moduleDefinition.DefinitionName, moduleDefinition.DefaultCacheTime, UserController.Instance.GetCurrentUserInfo().UserID);
             }
             if (saveChildren)

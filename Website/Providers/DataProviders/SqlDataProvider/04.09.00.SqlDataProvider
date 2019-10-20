@@ -24,20 +24,20 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}GetUserRoles
 
 AS
 
-SELECT     
-	UR.UserRoleID,
-        R.RoleID, 
-	U.UserID, 
-	U.DisplayName, 
-	U.Email, 
-	UR.EffectiveDate, 
-        UR.ExpiryDate, 
-	UR.IsTrialUsed
+SELECT
+    UR.UserRoleID,
+        R.RoleID,
+    U.UserID,
+    U.DisplayName,
+    U.Email,
+    UR.EffectiveDate,
+        UR.ExpiryDate,
+    UR.IsTrialUsed
 FROM {databaseOwner}{objectQualifier}UserRoles UR
-	INNER JOIN {databaseOwner}{objectQualifier}Users U ON UR.UserID = U.UserID 
-	INNER JOIN {databaseOwner}{objectQualifier}Roles R ON UR.RoleID = R.RoleID 
+    INNER JOIN {databaseOwner}{objectQualifier}Users U ON UR.UserID = U.UserID
+    INNER JOIN {databaseOwner}{objectQualifier}Roles R ON UR.RoleID = R.RoleID
 WHERE
-	U.UserID = @UserId AND R.PortalID = @PortalId
+    U.UserID = @UserId AND R.PortalID = @PortalId
 
 GO
 
@@ -49,7 +49,3 @@ GO
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-
-
-
-

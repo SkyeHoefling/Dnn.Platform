@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -210,51 +210,51 @@ namespace DotNetNuke.Services.Install
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-		/// OnLoad runs just before the page is rendered
+        /// OnLoad runs just before the page is rendered
         /// </summary>
         /// <remarks>
         /// </remarks>
         /// -----------------------------------------------------------------------------
         protected override void OnLoad(EventArgs e)
         {
-			base.OnLoad(e);
+            base.OnLoad(e);
 
-			if(IsPostBack)
-			{
-				if(!string.IsNullOrEmpty(txtPassword.Text))
-				{
-					ViewState["Password"] = txtPassword.Text;
-				}
-				else if(ViewState["Password"] != null)
-				{
-					txtPassword.Text = ViewState["Password"].ToString();
-				}
+            if(IsPostBack)
+            {
+                if(!string.IsNullOrEmpty(txtPassword.Text))
+                {
+                    ViewState["Password"] = txtPassword.Text;
+                }
+                else if(ViewState["Password"] != null)
+                {
+                    txtPassword.Text = ViewState["Password"].ToString();
+                }
 
-				if (!string.IsNullOrEmpty(txtConfirm.Text))
-				{
-					ViewState["Confirm"] = txtConfirm.Text;
-				}
-				else if (ViewState["Confirm"] != null)
-				{
-					txtConfirm.Text = ViewState["Confirm"].ToString();
-				}
-			}
+                if (!string.IsNullOrEmpty(txtConfirm.Text))
+                {
+                    ViewState["Confirm"] = txtConfirm.Text;
+                }
+                else if (ViewState["Confirm"] != null)
+                {
+                    txtConfirm.Text = ViewState["Confirm"].ToString();
+                }
+            }
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// OnLoad runs just before the page is rendered
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// -----------------------------------------------------------------------------
-		protected override void OnPreRender(EventArgs e)
-		{
-			base.OnPreRender(e);
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// OnLoad runs just before the page is rendered
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// -----------------------------------------------------------------------------
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
 
-			//Make sure that the password is not cleared on pastback
-			txtConfirm.Attributes["value"] = txtConfirm.Text;
-			txtPassword.Attributes["value"] = txtPassword.Text;
-		}
+            //Make sure that the password is not cleared on pastback
+            txtConfirm.Attributes["value"] = txtConfirm.Text;
+            txtPassword.Attributes["value"] = txtPassword.Text;
+        }
     }
 }

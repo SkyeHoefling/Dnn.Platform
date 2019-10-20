@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -273,7 +273,7 @@ namespace DotNetNuke.Security.Permissions
         {
             string cacheKey = string.Format(DataCache.TabPermissionCacheKey, portalID);
             return CBO.GetCachedObject<Dictionary<int, TabPermissionCollection>>(new CacheItemArgs(cacheKey, DataCache.TabPermissionCacheTimeOut, DataCache.TabPermissionCachePriority, portalID),
-                                                                                 GetTabPermissionsCallBack);
+                                                                                GetTabPermissionsCallBack);
         }
 
         /// -----------------------------------------------------------------------------
@@ -333,7 +333,7 @@ namespace DotNetNuke.Security.Permissions
             if (folder == null) return false;
             return (PortalSecurity.IsInRoles(folder.FolderPermissions.ToString(permissionKey))
                     || PortalSecurity.IsInRoles(folder.FolderPermissions.ToString(AdminFolderPermissionKey)))
-                   && !PortalSecurity.IsDenied(folder.FolderPermissions.ToString(permissionKey));
+                    && !PortalSecurity.IsDenied(folder.FolderPermissions.ToString(permissionKey));
             //Deny on Edit permission on folder shouldn't take away any other explicitly Allowed
             //&& !PortalSecurity.IsDenied(folder.FolderPermissions.ToString(AdminFolderPermissionKey));
         }
@@ -342,7 +342,7 @@ namespace DotNetNuke.Security.Permissions
         {
             return (PortalSecurity.IsInRoles(tab.TabPermissions.ToString(permissionKey))
                     || PortalSecurity.IsInRoles(tab.TabPermissions.ToString(AdminPagePermissionKey)))
-                   && !PortalSecurity.IsDenied(tab.TabPermissions.ToString(permissionKey));
+                    && !PortalSecurity.IsDenied(tab.TabPermissions.ToString(permissionKey));
             //Deny on Edit permission on page shouldn't take away any other explicitly Allowed
             //&&!PortalSecurity.IsDenied(tab.TabPermissions.ToString(AdminPagePermissionKey));
         }
@@ -466,7 +466,7 @@ namespace DotNetNuke.Security.Permissions
                 RoleController.Instance.GetRoleById(portalId,
                     PortalController.Instance.GetPortal(portalId).AdministratorRoleId)
             };
-        } 
+        }
 
 #endregion
 
@@ -476,7 +476,7 @@ namespace DotNetNuke.Security.Permissions
         {
             return CanViewModule(moduleConfiguration) &&
                                 (HasModulePermission(moduleConfiguration.ModulePermissions, permissionKey)
-                                 || HasModulePermission(moduleConfiguration.ModulePermissions, "EDIT"));
+                                || HasModulePermission(moduleConfiguration.ModulePermissions, "EDIT"));
         }
 
         protected bool IsDeniedModulePermission(ModuleInfo moduleConfiguration, string permissionKey)
@@ -691,9 +691,9 @@ namespace DotNetNuke.Security.Permissions
                         //Try to add Read permission
                         var newFolderPerm = new FolderPermissionInfo(readPerm)
                                                 {
-                                                    FolderID = folderPermission.FolderID, 
-                                                    RoleID = folderPermission.RoleID, 
-                                                    UserID = folderPermission.UserID, 
+                                                    FolderID = folderPermission.FolderID,
+                                                    RoleID = folderPermission.RoleID,
+                                                    UserID = folderPermission.UserID,
                                                     AllowAccess = true
                                                 };
 
@@ -702,9 +702,9 @@ namespace DotNetNuke.Security.Permissions
                         //Try to add Browse permission
                         newFolderPerm = new FolderPermissionInfo(browsePerm)
                                             {
-                                                FolderID = folderPermission.FolderID, 
-                                                RoleID = folderPermission.RoleID, 
-                                                UserID = folderPermission.UserID, 
+                                                FolderID = folderPermission.FolderID,
+                                                RoleID = folderPermission.RoleID,
+                                                UserID = folderPermission.UserID,
                                                 AllowAccess = true
                                             };
 
@@ -726,7 +726,7 @@ namespace DotNetNuke.Security.Permissions
                                                         folderPermission.AllowAccess,
                                                         folderPermission.UserID,
                                                         UserController.Instance.GetCurrentUserInfo().UserID);
-                }                
+                }
             }
         }
 
@@ -957,7 +957,7 @@ namespace DotNetNuke.Security.Permissions
             {
                 hasPermission = PortalSecurity.IsInRoles(modulePermissions.ToString(permissionKey));
             }
-            return hasPermission; 
+            return hasPermission;
         }
 
         /// -----------------------------------------------------------------------------
@@ -984,12 +984,12 @@ namespace DotNetNuke.Security.Permissions
                         else
                         {
                             dataProvider.AddModulePermission(module.ModuleID,
-                                                             module.PortalID,
-                                                             modulePermission.PermissionID,
-                                                             modulePermission.RoleID,
-                                                             modulePermission.AllowAccess,
-                                                             modulePermission.UserID,
-                                                             UserController.Instance.GetCurrentUserInfo().UserID);
+                                                            module.PortalID,
+                                                            modulePermission.PermissionID,
+                                                            modulePermission.RoleID,
+                                                            modulePermission.AllowAccess,
+                                                            modulePermission.UserID,
+                                                            UserController.Instance.GetCurrentUserInfo().UserID);
                         }
                     }
                 }
@@ -1018,7 +1018,7 @@ namespace DotNetNuke.Security.Permissions
         public virtual IEnumerable<RoleInfo> ImplicitRolesForFolders(int portalId)
         {
             return DefaultImplicitRoles(portalId);
-        } 
+        }
 
         /// <summary>
         /// Returns a flag indicating whether the current user can add content to a page

@@ -29,10 +29,10 @@
 # Copyright (c) 2011 Jeff Pickhardt, released under
 # the MIT License.
 #
-# Modified from the Python CodeMirror mode, which also is 
+# Modified from the Python CodeMirror mode, which also is
 # under the MIT License Copyright (c) 2010 Timothy Farrell.
 #
-# The following script, Underscore.coffee, is used to 
+# The following script, Underscore.coffee, is used to
 # demonstrate CoffeeScript mode for CodeMirror.
 #
 # To download CoffeeScript mode for CodeMirror, go to:
@@ -127,11 +127,11 @@ _.VERSION = '1.1.0'
 _.each = (obj, iterator, context) ->
   try
     if nativeForEach and obj.forEach is nativeForEach
-      obj.forEach iterator, context
+    obj.forEach iterator, context
     else if _.isNumber obj.length
-      iterator.call context, obj[i], i, obj for i in [0...obj.length]
+    iterator.call context, obj[i], i, obj for i in [0...obj.length]
     else
-      iterator.call context, val, key, obj for own key, val of obj
+    iterator.call context, val, key, obj for own key, val of obj
   catch e
     throw e if e isnt breaker
   obj
@@ -173,8 +173,8 @@ _.detect = (obj, iterator, context) ->
   result = null
   _.each obj, (value, index, list) ->
     if iterator.call context, value, index, list
-      result = value
-      _.breakLoop()
+    result = value
+    _.breakLoop()
   result
 
 
@@ -348,7 +348,7 @@ _.intersect = (array) ->
   rest = _.rest arguments
   _.select _.uniq(array), (item) ->
     _.all rest, (other) ->
-      _.indexOf(other, item) >= 0
+    _.indexOf(other, item) >= 0
 
 
 # Zip together multiple lists into a single array -- elements that share
@@ -456,7 +456,7 @@ _.compose = ->
   ->
     args = arguments
     for i in [funcs.length - 1..0] by -1
-      args = [funcs[i].apply(this, args)]
+    args = [funcs[i].apply(this, args)]
     args[0]
 
 
@@ -521,9 +521,9 @@ _.isEqual = (a, b) ->
   # Compare regular expressions.
   if _.isRegExp(a) and _.isRegExp(b)
     return a.source is b.source and
-           a.global is b.global and
-           a.ignoreCase is b.ignoreCase and
-           a.multiline is b.multiline
+            a.global is b.global and
+            a.ignoreCase is b.ignoreCase and
+            a.multiline is b.multiline
   # If a is not an object by this point, we can't handle it.
   return false if atype isnt 'object'
   # Check for different array lengths before comparing contents.
@@ -650,15 +650,15 @@ _.template = (str, data) ->
     'var p=[],print=function(){p.push.apply(p,arguments);};' +
     'with(obj||{}){p.push(\'' +
     str.replace(/\r/g, '\\r')
-       .replace(/\n/g, '\\n')
-       .replace(/\t/g, '\\t')
-       .replace(endMatch,"���")
-       .split("'").join("\\'")
-       .split("���").join("'")
-       .replace(c.interpolate, "',$1,'")
-       .split(c.start).join("');")
-       .split(c.end).join("p.push('") +
-       "');}return p.join('');"
+        .replace(/\n/g, '\\n')
+        .replace(/\t/g, '\\t')
+        .replace(endMatch,"���")
+        .split("'").join("\\'")
+        .split("���").join("'")
+        .replace(c.interpolate, "',$1,'")
+        .split(c.start).join("');")
+        .split(c.end).join("p.push('") +
+        "');}return p.join('');"
   if data then fn(data) else fn
 
 
@@ -730,7 +730,7 @@ wrapper::chain = ->
 wrapper::value = -> this._wrapped
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-coffeescript</code>.</p>

@@ -205,7 +205,7 @@ export default class SearchableTags extends Component {
         const Tags = this.state.tags.map((tag, index) => {
             return <Tag tag={tag.name} key={tag.id  + index} onRemove={this.removeTagByName.bind(this, tag.id) }/>;
         });
-        
+
         const inputStyle = {
             width: this.state.inputWidth,
             display: (this.state.isInputVisible === false ? "none" : "block")
@@ -233,7 +233,7 @@ export default class SearchableTags extends Component {
                     value={this.state.newTagText}
                     onChange={this.onChange.bind(this) }
                     onFocus={this.onTagFocus.bind(this) }
-                    onBlur={this.onTagBlur.bind(this) } 
+                    onBlur={this.onTagBlur.bind(this) }
                     aria-label="Tag" />
             </div>
             {searchResults && <div className="tag-search-results">
@@ -252,9 +252,9 @@ SearchableTags.propTypes = {
     utils: PropTypes.object.isRequired,
     tags: PropTypes.array.isRequired,
     onUpdateTags: PropTypes.func.isRequired,
-    
+
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
-    
+
     isDisabled: PropTypes.bool
 };

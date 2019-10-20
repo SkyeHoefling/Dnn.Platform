@@ -43,7 +43,7 @@
                     <%-- search action for Search function on small devices --%>
                     <a id="search-action" aria-label="Search"></a>
                     <%--<div id="login" class="pull-right">
-                         No Login & User control for this skin 
+                        No Login & User control for this skin
                     </div>--%>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
-                <div id="navbar" class="collapse navbar-collapse pull-right"> 
+                <div id="navbar" class="collapse navbar-collapse pull-right">
                     <dnn:MENU ID="MENU" MenuStyle="Menus/MainMenu" runat="server" NodeSelector="*"></dnn:MENU>
                 </div>
             </div>
@@ -81,12 +81,12 @@
     <div class="container">
         <main role="main">
             <div class="row dnnpane">
-                <div id="HeaderPane" class="col-md-12 headerPane" runat="server"></div> 
+                <div id="HeaderPane" class="col-md-12 headerPane" runat="server"></div>
             </div>
             <div id="breadcrumb" class="col-md-12">
                 <dnn:BREADCRUMB ID="dnnBreadcrumb" runat="server" CssClass="breadcrumbLink" RootLevel="0" Separator="&lt;img src=&quot;/Portals/_default/Skins/Xcillion/Images/breadcrumb-arrow.png&quot;&gt;" HideWithNoBreadCrumb="true" />
-            </div>  
-            <div id="mainContent-inner">    
+            </div>
+            <div id="mainContent-inner">
                 <div class="row dnnpane">
                     <div id="ContentPane" class="col-md-12 contentPane" runat="server"></div>
                 </div>
@@ -106,15 +106,15 @@
                         </div>
                         <div class="terms-priv">
                             <dnn:LINKTOMOBILE ID="dnnLinkToMobile" runat="server" />
-					        <dnn:TERMS ID="dnnTerms" runat="server" /> |
-					        <dnn:PRIVACY ID="dnnPrivacy" runat="server" />
+                            <dnn:TERMS ID="dnnTerms" runat="server" /> |
+                            <dnn:PRIVACY ID="dnnPrivacy" runat="server" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-    
+
 </div><!-- /.SiteWrapper -->
 
 <%-- CSS & JS includes --%>

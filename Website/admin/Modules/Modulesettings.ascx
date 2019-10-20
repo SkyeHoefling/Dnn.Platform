@@ -49,11 +49,11 @@
                 <div class="dnnFormItem" id="trnewPages" runat="server" ViewStateMode="Disabled">
                     <dnn:label id="plNewTabs" runat="server" controlname="chkNewTabs" />
                     <asp:CheckBox ID="chkNewTabs" runat="server" />
-                </div>               
-				<div class="dnnFormItem" id="allowIndexRow" runat="server">
-					<dnn:Label ID="AllowIndexLabel" runat="server" ControlName="chkAllowIndex" />
-					<asp:CheckBox ID="chkAllowIndex" runat="server" />
-				</div>  
+                </div>
+                <div class="dnnFormItem" id="allowIndexRow" runat="server">
+                    <dnn:Label ID="AllowIndexLabel" runat="server" ControlName="chkAllowIndex" />
+                    <asp:CheckBox ID="chkAllowIndex" runat="server" />
+                </div>
                 <div id="isShareableRow" runat="server" Visible="False" class="dnnFormItem" ViewStateMode="Disabled">
                     <dnn:label id="isShareableLabel" runat="server" controlname="isShareableCheckBox" />
                     <asp:CheckBox ID="isShareableCheckBox" runat="server"/>
@@ -81,13 +81,13 @@
                 <div class="dnnFormItem">
                     <dnn:label id="plEndDate" runat="server" controlname="txtEndDate" />
                     <dnnweb:dnndatetimepicker id="endDatePicker" runat="server" ViewStateMode="Disabled" />
-                    
+
                 </div>
-				<div class="dnnFormItem">
-					<asp:CustomValidator runat="server" ControlToValidate="endDatePicker" ClientValidationFunction="compareDate" 
-						Display="Dynamic" resourcekey="valEndDate2.ErrorMessage" CompareControl="startDatePicker"
+                <div class="dnnFormItem">
+                    <asp:CustomValidator runat="server" ControlToValidate="endDatePicker" ClientValidationFunction="compareDate"
+                        Display="Dynamic" resourcekey="valEndDate2.ErrorMessage" CompareControl="startDatePicker"
                         CssClass="dnnFormMessage dnnFormError"></asp:CustomValidator>
-				</div>
+                </div>
                 <div class="dnnFormItem">
                     <dnn:label id="plMoniker" runat="server" controlname="txtMoniker" />
                     <asp:TextBox ID="txtMoniker" runat="server" MaxLength="100" />
@@ -118,7 +118,7 @@
                                     </div>
                                 </EmptyDataTemplate>
                         </dnnweb:DnnGrid>
-                    </div>   
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -152,7 +152,7 @@
                 </div>
                 <div class="dnnFormItem">
                     <dnn:label id="plAlign" runat="server" controlname="cboAlign" />
-                    
+
                         <asp:RadioButtonList ID="cboAlign" CssClass="dnnFormRadioButtons" runat="server"
                             RepeatLayout="Flow">
                             <asp:ListItem resourcekey="Left" Value="left" />
@@ -160,7 +160,7 @@
                             <asp:ListItem resourcekey="Right" Value="right" />
                             <asp:ListItem resourcekey="Not_Specified" Value="" />
                         </asp:RadioButtonList>
-                   
+
                 </div>
                 <div class="dnnFormItem">
                     <dnn:label id="plColor" runat="server" controlname="txtColor" />
@@ -236,7 +236,7 @@
                 </div>
                 <div class="dnnFormItem" id="divCacheDuration" runat="server" visible="false">
                     <asp:Panel ID="cacheWarningRow" runat="server" Class="dnnFormMessage dnnFormWarning">
-                        <asp:Label ID="lblCacheDurationWarning" runat="server" ResourceKey="CacheDurationWarning"/>                
+                        <asp:Label ID="lblCacheDurationWarning" runat="server" ResourceKey="CacheDurationWarning"/>
                     </asp:Panel>
                     <dnn:label id="lblCacheDuration" runat="server" controlname="txtCacheDuration" resourcekey="CacheDuration" />
                     <asp:TextBox ID="txtCacheDuration" runat="server" class="msCacheDuration"/>
@@ -324,7 +324,7 @@
             });
 
         }
-        
+
         function toggleShareableRowViewOnly(animation) {
             var isSharable = $('#<%=isShareableCheckBox.ClientID %>').attr("checked");
             if (isSharable == "checked") {
@@ -340,13 +340,13 @@
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
                 setUpDnnModuleSettings();
             });
-	        
+
             window.compareDate = function (source, arg) {
-            	var id = source.controltovalidate;
-            	var compareId = source.getAttribute("CompareControl");
-            	var time = $('#' + id).val();
-            	var compareTime = $('#' + id.substr(0, id.lastIndexOf("_") + 1) + compareId).val();
-            	arg.IsValid = compareTime == null || time > compareTime;
+                var id = source.controltovalidate;
+                var compareId = source.getAttribute("CompareControl");
+                var time = $('#' + id).val();
+                var compareTime = $('#' + id.substr(0, id.lastIndexOf("_") + 1) + compareId).val();
+                arg.IsValid = compareTime == null || time > compareTime;
             };
         });
     } (jQuery, window.Sys));

@@ -68,7 +68,7 @@
         }
         return url;
     };
-    
+
     dnn.searchResult.renderPager = function (totalHits, pageIndex, more) {
         // render
         $('.dnnSearchResultPager').show();
@@ -76,9 +76,9 @@
         var pager = '';
 
         if (pageIndex > 1 || more) {
-            
+
             pager += '<span class="dnnPager-current" >' + dnn.searchResult.defaultSettings.currentPageIndexText + ' ' + pageIndex + '</span>';
-            
+
             if (pageIndex > 1) {
                 pager += '<a class="dnnPager-prev" href="javascript:void(0)" />';
             } else {
@@ -154,7 +154,7 @@
             markup += '&nbsp;&nbsp;&nbsp;<span>' + dnn.searchResult.defaultSettings.authorText + ' </span>';
             markup += '<a href="' + data.AuthorProfileUrl + '" target="_blank">' + data.AuthorName + '</a>';
         }
-                        
+
         if (showTags && data.Tags && data.Tags.length) {
             markup += '&nbsp;&nbsp;&nbsp;<span class="tagSpan">' + dnn.searchResult.defaultSettings.tagsText + ' </span>';
             var k = 0;
@@ -163,12 +163,12 @@
             }
             markup += '<a href="javascript:void(0)" class="dnnSearchResultItem-tagsLink" data-value="' + data.Tags[k] + '" >' + data.Tags[k] + '</a>';
         }
-        
+
         markup += '</div>';
 
         return markup;
     };
-    
+
     dnn.searchResult.renderResults = function (data) {
 
         var markup = '', totalHits = 0;
@@ -181,12 +181,12 @@
                     // grouped
                     var groupedTitle = result.Title;
                     var groupedUrl = result.DocumentUrl;
-                    
+
                     // render grouped title
                     markup += '<div class="dnnSearchResultItem"><div class="dnnSearchResultItem-Title">';
                     markup += '<a href="' + groupedUrl + '"' + dnn.searchResult.defaultSettings.linkTarget + '>' + groupedTitle + '</a></div>';
                     markup += '<div class="dnnSearchResultItem-Link"><a href="' + groupedUrl + '"' + dnn.searchResult.defaultSettings.linkTarget + '>' + groupedUrl + '</a></div></div>';
-                    
+
                     // render subsets
                     for (var j = 0; j < result.Results.length; j++) {
                         markup += '<div class="dnnSearchResultItem-Subset">' + dnn.searchResult.renderResult(result.Results[j]) + '</div>';
@@ -241,23 +241,23 @@
         }
     };
 
-	dnn.searchResult.parseLocationInfo = function() {
-	    var query = location.search.substring(1);
-	    var path = location.href.replace(location.search, '');
-	    var queries = {};
-		var vars = query.split("&");
-		for (var i = 0; i < vars.length; i++) {
-		    var pair = vars[i].split("=");
-			if (pair.length === 2) {
-			    var value = pair[1];
-			    queries['qs-' + pair[0].toLowerCase()] = unescape(value);
-			}
-		}
-		return {
-		    path: path,
+    dnn.searchResult.parseLocationInfo = function() {
+        var query = location.search.substring(1);
+        var path = location.href.replace(location.search, '');
+        var queries = {};
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair.length === 2) {
+                var value = pair[1];
+                queries['qs-' + pair[0].toLowerCase()] = unescape(value);
+            }
+        }
+        return {
+            path: path,
             queries: queries
-		};
-	};
+        };
+    };
 
     dnn.searchResult.buildLocationInfo = function(info) {
         var path = info.path;
@@ -275,10 +275,10 @@
         return path;
     };
 
-	dnn.searchResult.pushHistoryState = function () {
-		if (!dnn.searchResult.catchHistoryState) {
-			return;
-		}
+    dnn.searchResult.pushHistoryState = function () {
+        if (!dnn.searchResult.catchHistoryState) {
+            return;
+        }
 
         var keyword = dnn.searchResult.queryOptions.searchTerm;
         var filter = dnn.searchResult.queryOptions.advancedTerm;
@@ -288,13 +288,13 @@
 
         var locationInfo = dnn.searchResult.parseLocationInfo();
         var queries = locationInfo.queries;
-	    var urlChanged = false;
-	    if (queries['qs-search'] !== keyword) {
-	        queries['qs-search'] = keyword;
-	        urlChanged = true;
-	    }
+        var urlChanged = false;
+        if (queries['qs-search'] !== keyword) {
+            queries['qs-search'] = keyword;
+            urlChanged = true;
+        }
 
-	    var tags = dnn.searchResult.advancedSearchOptions.tags;
+        var tags = dnn.searchResult.advancedSearchOptions.tags;
         if (tags && tags.length) {
             var tagsString = '';
             for (var i = 0; i < tags.length; i++) {
@@ -310,43 +310,43 @@
         } else if (queries['qs-tag']) {
             queries['qs-tag'] = '';
                 urlChanged = true;
-	    }
+        }
 
-	    var after = dnn.searchResult.advancedSearchOptions.after;
-	    if (after) {
-	        if (after !== queries['qs-lastmodified']) {
-	            queries['qs-lastmodified'] = after;
-	            urlChanged = true;
-	        }
-	    } else if (queries['qs-lastmodified']) {
-	        queries['qs-lastmodified'] = '';
-            urlChanged = true;
-	    }
-
-	    var types = dnn.searchResult.advancedSearchOptions.types;
-	    if (types && types.length) {
-	        var typesString = types.join(',');
-	        if (queries['qs-scope'] !== typesString) {
-	            queries['qs-scope'] = typesString;
+        var after = dnn.searchResult.advancedSearchOptions.after;
+        if (after) {
+            if (after !== queries['qs-lastmodified']) {
+                queries['qs-lastmodified'] = after;
                 urlChanged = true;
-	        }
-	    } else if (queries['qs-scope']) {
-	        queries['qs-scope'] = '';
+            }
+        } else if (queries['qs-lastmodified']) {
+            queries['qs-lastmodified'] = '';
             urlChanged = true;
-	    }
+        }
 
-	    var exactSearch = dnn.searchResult.advancedSearchOptions.exactSearch;
-	    if (exactSearch) {
-	        if (queries['qs-exactsearch'] !== 'y') {
-	            queries['qs-exactsearch'] = "y";
-	            urlChanged = true;
-	        }
-	    }else if (queries['qs-exactsearch'] === 'y') {
-	        queries['qs-exactsearch'] = '';
+        var types = dnn.searchResult.advancedSearchOptions.types;
+        if (types && types.length) {
+            var typesString = types.join(',');
+            if (queries['qs-scope'] !== typesString) {
+                queries['qs-scope'] = typesString;
+                urlChanged = true;
+            }
+        } else if (queries['qs-scope']) {
+            queries['qs-scope'] = '';
             urlChanged = true;
-	    }
+        }
 
-	    var pageIndex = dnn.searchResult.queryOptions.pageIndex;
+        var exactSearch = dnn.searchResult.advancedSearchOptions.exactSearch;
+        if (exactSearch) {
+            if (queries['qs-exactsearch'] !== 'y') {
+                queries['qs-exactsearch'] = "y";
+                urlChanged = true;
+            }
+        }else if (queries['qs-exactsearch'] === 'y') {
+            queries['qs-exactsearch'] = '';
+            urlChanged = true;
+        }
+
+        var pageIndex = dnn.searchResult.queryOptions.pageIndex;
         if (pageIndex > 1) {
             if (!queries['qs-page'] || parseInt(queries['qs-page']) !== pageIndex) {
                 queries['qs-page'] = pageIndex;
@@ -380,10 +380,10 @@
         }
 
         if (urlChanged) {
-	        var url = dnn.searchResult.buildLocationInfo(locationInfo);
-	        history.pushState({searchState: true}, "Search", url);
-	    }
-	}
+            var url = dnn.searchResult.buildLocationInfo(locationInfo);
+            history.pushState({searchState: true}, "Search", url);
+        }
+    }
 
     dnn.searchResult.doSearch = function () {
         var sterm = dnn.searchResult.queryOptions.searchTerm;
@@ -402,7 +402,7 @@
                 beforeSend: dnn.searchResult.service.setModuleHeaders,
                 success: function (results) {
                     dnn.searchResult.renderResults(results);
-	                dnn.searchResult.pushHistoryState();
+                    dnn.searchResult.pushHistoryState();
                 },
                 complete: function () {
                     dnn.searchResult.removeLoading();
@@ -508,19 +508,19 @@
 
     dnn.searchResult.init = function (settings) {
 
-    	dnn.searchResult.defaultSettings = $.extend(dnn.searchResult.defaultSettings, settings);
-    	dnn.searchResult.catchHistoryState = typeof history.pushState !== "undefined";
-    	if (dnn.searchResult.catchHistoryState) {
-		    history.replaceState({searchState: true}, "Search", document.URL);
-		    window.addEventListener("popstate", function (e) {
+        dnn.searchResult.defaultSettings = $.extend(dnn.searchResult.defaultSettings, settings);
+        dnn.searchResult.catchHistoryState = typeof history.pushState !== "undefined";
+        if (dnn.searchResult.catchHistoryState) {
+            history.replaceState({searchState: true}, "Search", document.URL);
+            window.addEventListener("popstate", function (e) {
 
-		        if (!e.state.searchState) {
-		            return;
-		        }
+                if (!e.state.searchState) {
+                    return;
+                }
 
-		        window.location.reload();
-		    });
-		}
+                window.location.reload();
+            });
+        }
 
         // search box
         dnn.searchResult.searchInput = $('#dnnSearchResult_dnnSearchBox').dnnSearchBox({

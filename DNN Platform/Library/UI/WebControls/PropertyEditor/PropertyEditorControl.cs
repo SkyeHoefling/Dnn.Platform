@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -44,7 +44,7 @@ namespace DotNetNuke.UI.WebControls
 {
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// The PropertyEditorControl control provides a way to display and edit any 
+    /// The PropertyEditorControl control provides a way to display and edit any
     /// properties of any Info class
     /// </summary>
     /// <remarks>
@@ -52,13 +52,13 @@ namespace DotNetNuke.UI.WebControls
     /// -----------------------------------------------------------------------------
     public class PropertyEditorControl : WebControl, INamingContainer
     {
-		#region Private Members
+        #region Private Members
 
         private bool _itemChanged;
         private Hashtable _sections;
         #endregion
-		
-		#region Constructors
+
+        #region Constructors
 
         public PropertyEditorControl()
         {
@@ -76,10 +76,10 @@ namespace DotNetNuke.UI.WebControls
             Groups = Null.NullString;
             AutoGenerate = true;
         }
-		
-		#endregion
 
-		#region Protected Members
+        #endregion
+
+        #region Protected Members
 
         protected override HtmlTextWriterTag TagKey
         {
@@ -99,10 +99,10 @@ namespace DotNetNuke.UI.WebControls
         {
             get { return GetProperties(); }
         }
-		
-		#endregion
 
-		#region Public Properties
+        #endregion
+
+        #region Public Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -234,11 +234,11 @@ namespace DotNetNuke.UI.WebControls
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Gets and sets whether to sort properties. 
+        /// Gets and sets whether to sort properties.
         /// </summary>
         /// <value>The Sort Mode of the editor</value>
         /// <remarks>
-        /// By default all properties will be sorted 
+        /// By default all properties will be sorted
         /// </remarks>
         /// -----------------------------------------------------------------------------
         [Category("Appearance")]
@@ -256,7 +256,7 @@ namespace DotNetNuke.UI.WebControls
         [Category("Behavior"), PersistenceMode(PersistenceMode.InnerProperty), DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public ArrayList Fields { get; private set; }
 
-		#region "Style Properties"
+        #region "Style Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -341,20 +341,20 @@ namespace DotNetNuke.UI.WebControls
         /// -----------------------------------------------------------------------------
         [Browsable(true), Category("Styles"), DesignerSerializationVisibility(DesignerSerializationVisibility.Content), TypeConverter(typeof (ExpandableObjectConverter)), PersistenceMode(PersistenceMode.InnerProperty), Description("Set the Style for the Visibility Control")]
         public Style VisibilityStyle { get; private set; }
-		
-		#endregion
 
-		#endregion
+        #endregion
 
-		#region Events
+        #endregion
+
+        #region Events
 
         public event PropertyChangedEventHandler ItemAdded;
         public event EditorCreatedEventHandler ItemCreated;
         public event PropertyChangedEventHandler ItemDeleted;
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -371,7 +371,7 @@ namespace DotNetNuke.UI.WebControls
         {
             if (DataSource != null)
             {
-				//TODO:  We need to add code to support using the cache in the future
+                //TODO:  We need to add code to support using the cache in the future
                 const BindingFlags bindings = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
 
                 var properties = DataSource.GetType().GetProperties(bindings);
@@ -421,16 +421,16 @@ namespace DotNetNuke.UI.WebControls
             container.Controls.Add(editor);
         }
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// AddEditorRow builds a sigle editor row and adds it to the Table, using the
         /// specified adapter
         /// </summary>
-		/// <param name="table">The Table Control to add the row to</param>
+        /// <param name="table">The Table Control to add the row to</param>
         /// <param name="name">The name of property being added</param>
         /// <param name="adapter">An IEditorInfoAdapter</param>
         /// -----------------------------------------------------------------------------
@@ -444,17 +444,17 @@ namespace DotNetNuke.UI.WebControls
 
             //Create a FieldEditor for this Row
             var editor = new FieldEditorControl
-                             {
-                                 DataSource = DataSource,
-                                 EditorInfoAdapter = adapter,
-                                 DataField = name,
-                                 EditorDisplayMode = DisplayMode,
-                                 EnableClientValidation = EnableClientValidation,
-                                 EditMode = EditMode,
-                                 HelpDisplayMode = HelpDisplayMode,
-                                 LabelMode = LabelMode,
-                                 LabelWidth = LabelWidth
-                             };
+                            {
+                                DataSource = DataSource,
+                                EditorInfoAdapter = adapter,
+                                DataField = name,
+                                EditorDisplayMode = DisplayMode,
+                                EnableClientValidation = EnableClientValidation,
+                                EditMode = EditMode,
+                                HelpDisplayMode = HelpDisplayMode,
+                                LabelMode = LabelMode,
+                                LabelWidth = LabelWidth
+                            };
             AddEditorRow(editor, cell);
 
             Fields.Add(editor);
@@ -485,8 +485,8 @@ namespace DotNetNuke.UI.WebControls
         /// </summary>
         /// <remarks>This method is protected so that classes that inherit from
         /// PropertyEditor can modify how the Row is displayed</remarks>
-		/// <param name="table">The Table Control to add the row to</param>
-		/// <param name="obj">Row Data Info.</param>
+        /// <param name="table">The Table Control to add the row to</param>
+        /// <param name="obj">Row Data Info.</param>
         /// -----------------------------------------------------------------------------
         protected virtual void AddEditorRow(Table table, object obj)
         {
@@ -600,8 +600,8 @@ namespace DotNetNuke.UI.WebControls
                 panel.Controls.Add(new LiteralControl("<hr noshade=\"noshade\" size=\"1\"/>"));
             }
             Controls.Add(panel);
-			
-			//Get the Hashtable
+
+            //Get the Hashtable
             if (_sections == null)
             {
                 _sections = new Hashtable();
@@ -631,14 +631,14 @@ namespace DotNetNuke.UI.WebControls
 
             if (!AutoGenerate)
             {
-				//Create a new table
+                //Create a new table
                 if (DisplayMode == EditorDisplayMode.Div)
                 {
                     AddFields();
                 }
                 else
                 {
-					//Add the Table to the Controls Collection
+                    //Add the Table to the Controls Collection
                     table = new Table { ID = "tbl" };
                     AddFields(table);
                     Controls.Add(table);
@@ -655,34 +655,34 @@ namespace DotNetNuke.UI.WebControls
                         {
                             if (DisplayMode == EditorDisplayMode.Div)
                             {
-								var groupData = UnderlyingDataSource.Cast<object>().Where(obj => GetCategory(obj) == strGroup.Trim() && GetRowVisibility(obj));
-	                            if (groupData.Count() > 0)
-	                            {
-		                            //Add header
-		                            var header = new HtmlGenericControl("h2");
-		                            header.Attributes.Add("class", "dnnFormSectionHead");
-		                            header.Attributes.Add("id", strGroup);
-		                            Controls.Add(header);
+                                var groupData = UnderlyingDataSource.Cast<object>().Where(obj => GetCategory(obj) == strGroup.Trim() && GetRowVisibility(obj));
+                                if (groupData.Count() > 0)
+                                {
+                                    //Add header
+                                    var header = new HtmlGenericControl("h2");
+                                    header.Attributes.Add("class", "dnnFormSectionHead");
+                                    header.Attributes.Add("id", strGroup);
+                                    Controls.Add(header);
 
                                     var localizedGroupName = Localization.GetString("ProfileProperties_" + strGroup + ".Header", LocalResourceFile);
-		                            if (string.IsNullOrEmpty(localizedGroupName))
-		                            {
-			                            localizedGroupName = strGroup;
-		                            }
-		                            var link = new HyperLink() { Text = localizedGroupName, NavigateUrl = "#" };
-		                            header.Controls.Add(link);
+                                    if (string.IsNullOrEmpty(localizedGroupName))
+                                    {
+                                        localizedGroupName = strGroup;
+                                    }
+                                    var link = new HyperLink() { Text = localizedGroupName, NavigateUrl = "#" };
+                                    header.Controls.Add(link);
 
-		                            //fieldset to hold properties in group
-		                            var fieldset = new HtmlGenericControl("fieldset");
-		                            var container = new Panel();
-		                            fieldset.Controls.Add(container);
+                                    //fieldset to hold properties in group
+                                    var fieldset = new HtmlGenericControl("fieldset");
+                                    var container = new Panel();
+                                    fieldset.Controls.Add(container);
 
-		                            foreach (object obj in groupData)
-		                            {
-										AddEditorRow(container, obj);
-		                            }
-		                            Controls.Add(fieldset);
-	                            }
+                                    foreach (object obj in groupData)
+                                    {
+                                        AddEditorRow(container, obj);
+                                    }
+                                    Controls.Add(fieldset);
+                                }
                             }
                             else
                             {
@@ -717,12 +717,12 @@ namespace DotNetNuke.UI.WebControls
                 }
                 else
                 {
-					//Create a new table
+                    //Create a new table
                     if (DisplayMode == EditorDisplayMode.Div)
                     {
                         foreach (object obj in UnderlyingDataSource)
                         {
-							//Add the Editor Row to the Table
+                            //Add the Editor Row to the Table
                             if (GetRowVisibility(obj))
                             {
                                 AddEditorRow(obj);
@@ -739,8 +739,8 @@ namespace DotNetNuke.UI.WebControls
                                 AddEditorRow(table, obj);
                             }
                         }
-						
-						//Add the Table to the Controls Collection
+
+                        //Add the Table to the Controls Collection
                         Controls.Add(table);
                     }
                 }
@@ -819,7 +819,7 @@ namespace DotNetNuke.UI.WebControls
             }
             if (!isVisible && EditMode == PropertyEditorMode.Edit)
             {
-				//Check if property is required - as this will need to override visibility
+                //Check if property is required - as this will need to override visibility
                 object[] requiredAttributes = objProperty.GetCustomAttributes(typeof (RequiredAttribute), true);
                 if (requiredAttributes.Length > 0)
                 {
@@ -881,7 +881,7 @@ namespace DotNetNuke.UI.WebControls
         {
             if (_itemChanged)
             {
-				//Rebind the control to the DataSource to make sure that the dependent
+                //Rebind the control to the DataSource to make sure that the dependent
                 //editors are updated
                 DataBind();
             }
@@ -889,8 +889,8 @@ namespace DotNetNuke.UI.WebControls
             {
                 CssClass = "dnnForm";
             }
-			
-			//Find the Min/Max buttons
+
+            //Find the Min/Max buttons
             if (GroupByMode == GroupByMode.Section && (_sections != null))
             {
                 foreach (DictionaryEntry key in _sections)
@@ -902,10 +902,10 @@ namespace DotNetNuke.UI.WebControls
             }
             base.OnPreRender(e);
         }
-		
-		#endregion
 
-		#region Public Methods
+        #endregion
+
+        #region Public Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -933,9 +933,9 @@ namespace DotNetNuke.UI.WebControls
             ChildControlsCreated = true;
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -976,7 +976,7 @@ namespace DotNetNuke.UI.WebControls
         {
             _itemChanged = true;
         }
-		
-		#endregion
+
+        #endregion
     }
 }

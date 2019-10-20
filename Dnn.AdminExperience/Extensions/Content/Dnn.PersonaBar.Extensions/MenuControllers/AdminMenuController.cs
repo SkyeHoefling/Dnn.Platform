@@ -8,7 +8,7 @@ namespace Dnn.PersonaBar.AdminLogs.MenuControllers
     {
         public void UpdateParameters(MenuItem menuItem)
         {
-            
+
         }
 
         public bool Visible(MenuItem menuItem)

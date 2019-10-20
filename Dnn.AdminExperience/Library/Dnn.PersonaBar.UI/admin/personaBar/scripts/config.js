@@ -14,7 +14,7 @@ define(['jquery'], function ($) {
                 antiForgeryToken: antiForgeryToken
             }, inIframe ? window.parent['personaBarSettings'] : {});
 
-            return config;   
-       } 
+            return config;
+        }
     };
 });

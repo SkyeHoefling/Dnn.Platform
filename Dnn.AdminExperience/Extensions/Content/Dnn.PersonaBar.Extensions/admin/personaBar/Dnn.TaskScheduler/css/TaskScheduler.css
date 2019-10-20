@@ -1,5 +1,5 @@
 ﻿#scheduler-headerPanel {
-    
+
 }
 
 .schedulerPanelContainer {
@@ -98,7 +98,7 @@
     position: absolute;
     top: 50%;
     right: 5px;
-    -webkit-transform: translateY(-50%);    
+    -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -o-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -142,13 +142,13 @@
     text-align: right;
 }
 #task-queue > ul > li div.scheduler-id label {
-    
+
 }
 #task-queue > ul > li div.scheduler-id span {
-    
+
 }
 #task-queue > ul > li div.scheduler-task {
-    
+
 }
 #task-queue > ul > li div.scheduler-task .col {
     width: 50%;

@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -114,9 +114,9 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
             var table = new DataTable("PortalSettings");
 
             var cols = new string[]
-                           {
+                            {
                             "SettingName","SettingValue","CreatedByUserID","CreatedOnDate","LastModifiedByUserID","LastModifiedOnDate","CultureCode"
-                           };
+                            };
 
             foreach (var col in cols)
             {
@@ -138,12 +138,12 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
             DataTable table = new DataTable("Portal");
 
             var cols = new string[]
-                           {
-                               "PortalID", "PortalGroupID", "PortalName", "LogoFile", "FooterText", "ExpiryDate", "UserRegistration", "BannerAdvertising", "AdministratorId", "Currency", "HostFee",
-                               "HostSpace", "PageQuota", "UserQuota", "AdministratorRoleId", "RegisteredRoleId", "Description", "KeyWords", "BackgroundFile", "GUID", "PaymentProcessor", "ProcessorUserId",
-                               "ProcessorPassword", "SiteLogHistory", "Email", "DefaultLanguage", "TimezoneOffset", "AdminTabId", "HomeDirectory", "SplashTabId", "HomeTabId", "LoginTabId", "RegisterTabId",
-                               "UserTabId", "SearchTabId", "Custom404TabId", "Custom500TabId", "TermsTabId", "PrivacyTabId", "SuperTabId", "CreatedByUserID", "CreatedOnDate", "LastModifiedByUserID", "LastModifiedOnDate", "CultureCode"
-                           };
+                            {
+                                "PortalID", "PortalGroupID", "PortalName", "LogoFile", "FooterText", "ExpiryDate", "UserRegistration", "BannerAdvertising", "AdministratorId", "Currency", "HostFee",
+                                "HostSpace", "PageQuota", "UserQuota", "AdministratorRoleId", "RegisteredRoleId", "Description", "KeyWords", "BackgroundFile", "GUID", "PaymentProcessor", "ProcessorUserId",
+                                "ProcessorPassword", "SiteLogHistory", "Email", "DefaultLanguage", "TimezoneOffset", "AdminTabId", "HomeDirectory", "SplashTabId", "HomeTabId", "LoginTabId", "RegisterTabId",
+                                "UserTabId", "SearchTabId", "Custom404TabId", "Custom500TabId", "TermsTabId", "PrivacyTabId", "SuperTabId", "CreatedByUserID", "CreatedOnDate", "LastModifiedByUserID", "LastModifiedOnDate", "CultureCode"
+                            };
 
             foreach (var col in cols)
             {
@@ -163,7 +163,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_GetSynonyms_Two_Terms_Returns_Correct_Results()
         {
-            //Arrange            
+            //Arrange
 
             //Act
             var synonyms = _searchHelper.GetSynonyms(PortalId0, CultureEnUs, TermDNN).ToArray();
@@ -176,7 +176,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_GetSynonyms_Three_Terms_Returns_Correct_Results()
         {
-            //Arrange            
+            //Arrange
 
             //Act
             var synonyms = _searchHelper.GetSynonyms(PortalId0, CultureEnUs, TermHop).ToArray();
@@ -194,7 +194,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_NoWildCardButExact_1()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "\"brown fox\"";
             const string expected = inPhrase;
 
@@ -208,7 +208,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_NoWildCardButExact_2()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "\"brown fox\" -\"(Lazy) dog\" jumps";
             const string expected = inPhrase;
 
@@ -222,7 +222,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_NoWildCardNoExact()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "(brown) OR (fox AND dog) +jumbs";
             const string expected = inPhrase;
 
@@ -236,7 +236,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_0()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "fox dog";
             const string expected = "(fox OR fox*) (dog OR dog*)";
 
@@ -250,7 +250,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_1()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "(lazy-dog)";
             const string expected = "(lazy-dog OR lazy-dog*)";
 
@@ -264,7 +264,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_2()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "fox (dog)";
             const string expected = "(fox OR fox*) (dog OR dog*)";
 
@@ -278,7 +278,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_3()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "(dog) fox";
             const string expected = "(dog OR dog*) (fox OR fox*)";
 
@@ -292,7 +292,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_4()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "brown fox (lazy) dog";
             const string expected = "(brown OR brown*) (fox OR fox*) (lazy OR lazy*) (dog OR dog*)";
 
@@ -306,7 +306,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_5()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "(brown fox) lazy dog";
             const string expected = "((brown OR brown*) (fox OR fox*)) (lazy OR lazy*) (dog OR dog*)";
 
@@ -320,7 +320,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_6()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "brown fox (lazy dog)";
             const string expected = "(brown OR brown*) (fox OR fox*) ((lazy OR lazy*) (dog OR dog*))";
 
@@ -334,7 +334,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_7()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "brown fox (lazy AND dog)";
             const string expected = "(brown OR brown*) (fox OR fox*) ((lazy OR lazy*) AND (dog OR dog*))";
 
@@ -348,7 +348,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardNoExact_8()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "brown fox (lazy and dog)";
             const string expected = "(brown OR brown*) (fox OR fox*) ((lazy OR lazy*) (and OR and*) (dog OR dog*))";
 
@@ -362,7 +362,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardWithExact_1()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "\"brown fox\"";
             const string expected = inPhrase;
 
@@ -376,7 +376,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardWithExact_2()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "\"brown fox\" dog";
             const string expected = "\"brown fox\" (dog OR dog*)";
 
@@ -390,7 +390,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardWithExact_3()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "The +\"brown fox\" -\"Lazy dog\" jumps";
             const string expected = "(The OR The*) +\"brown fox\" -\"Lazy dog\" (jumps OR jumps*)";
 
@@ -404,7 +404,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Search
         [Test]
         public void SearchHelper_Rephrase_WildCardWithTilde_4()
         {
-            //Arrange            
+            //Arrange
             const string inPhrase = "dog jump~2";
             const string expected = "(dog OR dog*) jump~2";
 

@@ -27,9 +27,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Setup_RemoveAllRoleMembers')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Setup_RemoveAllRoleMembers')
+                AND (type = 'P')))
 DROP PROCEDURE [dbo].aspnet_Setup_RemoveAllRoleMembers
 GO
 
@@ -76,7 +76,7 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Applications')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   PRINT 'Creating the aspnet_Applications table...'
   CREATE TABLE [dbo].aspnet_Applications (
@@ -95,7 +95,7 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Users')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   PRINT 'Creating the aspnet_Users table...'
   CREATE TABLE [dbo].aspnet_Users (
@@ -107,8 +107,8 @@ BEGIN
     IsAnonymous      bit                 NOT NULL DEFAULT 0,
     LastActivityDate DATETIME            NOT NULL)
 
-   CREATE UNIQUE CLUSTERED INDEX aspnet_Users_Index ON [dbo].aspnet_Users(ApplicationId, LoweredUserName)
-   CREATE NONCLUSTERED INDEX aspnet_Users_Index2 ON [dbo].aspnet_Users(ApplicationId, LastActivityDate)
+    CREATE UNIQUE CLUSTERED INDEX aspnet_Users_Index ON [dbo].aspnet_Users(ApplicationId, LoweredUserName)
+    CREATE NONCLUSTERED INDEX aspnet_Users_Index2 ON [dbo].aspnet_Users(ApplicationId, LastActivityDate)
 END
 GO
 
@@ -119,7 +119,7 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_SchemaVersions')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   PRINT 'Creating the aspnet_SchemaVersions table...'
   CREATE TABLE [dbo].aspnet_SchemaVersions (
@@ -184,10 +184,10 @@ GO
 -- CheckSchemaVersion SP
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_CheckSchemaVersion')
-               AND (type = 'P')))
-   EXEC('CREATE PROCEDURE [dbo].aspnet_CheckSchemaVersion AS RAISERROR(''Empty aspnet_CheckSchemaVersion Procedure!!'', 16, 1) WITH SETERROR')
+            FROM sys.objects
+            WHERE (name = N'aspnet_CheckSchemaVersion')
+                AND (type = 'P')))
+    EXEC('CREATE PROCEDURE [dbo].aspnet_CheckSchemaVersion AS RAISERROR(''Empty aspnet_CheckSchemaVersion Procedure!!'', 16, 1) WITH SETERROR')
 GO
 
 ALTER PROCEDURE [dbo].aspnet_CheckSchemaVersion
@@ -210,9 +210,9 @@ GO
 -- CreateApplication SP
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Applications_CreateApplication')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Applications_CreateApplication')
+                AND (type = 'P')))
 EXEC('CREATE PROCEDURE [dbo].aspnet_Applications_CreateApplication AS RAISERROR(''Empty aspnet_Applications_CreateApplication Procedure!!'', 16, 1) WITH SETERROR')
 GO
 
@@ -230,11 +230,11 @@ BEGIN
 
         IF( @@TRANCOUNT = 0 )
         BEGIN
-	        BEGIN TRANSACTION
-	        SET @TranStarted = 1
+            BEGIN TRANSACTION
+            SET @TranStarted = 1
         END
         ELSE
-    	    SET @TranStarted = 0
+            SET @TranStarted = 0
 
         SELECT  @ApplicationId = ApplicationId
         FROM dbo.aspnet_Applications WITH (UPDLOCK, HOLDLOCK)
@@ -252,8 +252,8 @@ BEGIN
         BEGIN
             IF(@@ERROR = 0)
             BEGIN
-	        SET @TranStarted = 0
-	        COMMIT TRANSACTION
+            SET @TranStarted = 0
+            COMMIT TRANSACTION
             END
             ELSE
             BEGIN
@@ -270,9 +270,9 @@ GO
 -- UnRegisterSchemaVersion SP
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_UnRegisterSchemaVersion')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_UnRegisterSchemaVersion')
+                AND (type = 'P')))
 EXEC('CREATE PROCEDURE [dbo].aspnet_UnRegisterSchemaVersion AS RAISERROR(''Empty aspnet_UnRegisterSchemaVersion Procedure!!'', 16, 1) WITH SETERROR')
 GO
 
@@ -291,9 +291,9 @@ GO
 -- CreateUser SP
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Users_CreateUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Users_CreateUser')
+                AND (type = 'P')))
 EXEC('CREATE PROCEDURE [dbo].aspnet_Users_CreateUser AS RAISERROR(''Empty aspnet_Users_CreateUser Procedure!!'', 16, 1) WITH SETERROR')
 GO
 
@@ -327,9 +327,9 @@ GO
 --- DeleteUser SP
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Users_DeleteUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Users_DeleteUser')
+                AND (type = 'P')))
 EXEC('CREATE PROCEDURE [dbo].aspnet_Users_DeleteUser AS RAISERROR(''Empty aspnet_Users_DeleteUser Procedure!!'', 16, 1) WITH SETERROR')
 GO
 ALTER PROCEDURE [dbo].aspnet_Users_DeleteUser
@@ -348,11 +348,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-	SET @TranStarted = 0
+    SET @TranStarted = 0
 
     DECLARE @ErrorCode   int
     DECLARE @RowCount    int
@@ -378,7 +378,7 @@ BEGIN
         DELETE FROM dbo.aspnet_Membership WHERE @UserId = UserId
 
         SELECT @ErrorCode = @@ERROR,
-               @RowCount = @@ROWCOUNT
+                @RowCount = @@ROWCOUNT
 
         IF( @ErrorCode <> 0 )
             GOTO Cleanup
@@ -456,8 +456,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	    SET @TranStarted = 0
-	    COMMIT TRANSACTION
+        SET @TranStarted = 0
+        COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -468,7 +468,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-	    ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -481,9 +481,9 @@ GO
 --- aspnet_AnyDataInTables SP
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_AnyDataInTables')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_AnyDataInTables')
+                AND (type = 'P')))
 EXEC('CREATE PROCEDURE [dbo].aspnet_AnyDataInTables AS RAISERROR(''Empty aspnet_AnyDataInTables Procedure!!'', 16, 1) WITH SETERROR')
 GO
 ALTER PROCEDURE [dbo].aspnet_AnyDataInTables
@@ -581,7 +581,7 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'vw_aspnet_Applications')
-                  AND (type = 'V')))
+                AND (type = 'V')))
 BEGIN
   PRINT 'Creating the vw_aspnet_Applications view...'
   EXEC('
@@ -597,7 +597,7 @@ END
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'vw_aspnet_Users')
-                  AND (type = 'V')))
+                AND (type = 'V')))
 BEGIN
   PRINT 'Creating the vw_aspnet_Users view...'
   EXEC('

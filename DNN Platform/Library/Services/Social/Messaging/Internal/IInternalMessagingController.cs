@@ -2,19 +2,19 @@
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -56,22 +56,22 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
 
         ///<summary>How long a user needs to wait before user is allowed sending the next message</summary>
         ///<returns>Time in seconds. Returns zero if user has never sent a message</returns>
-        /// <param name="sender">Sender's UserInfo</param>        
+        /// <param name="sender">Sender's UserInfo</param>
         int WaitTimeForNextMessage(UserInfo sender);
 
         ///<summary>Last message sent by the User</summary>
         ///<returns>Message. Null when no message was sent</returns>
-        /// <param name="sender">Sender's UserInfo</param>        
+        /// <param name="sender">Sender's UserInfo</param>
         Message GetLastSentMessage(UserInfo sender);
 
-        ///<summary>Maximum number of Recipients allowed</summary>        
+        ///<summary>Maximum number of Recipients allowed</summary>
         ///<returns>Count. Message to a Role is considered a single Recipient. Each User in the To list is counted as one User each.</returns>
-        /// <param name="portalId">Portal Id</param>        
+        /// <param name="portalId">Portal Id</param>
         int RecipientLimit(int portalId);
 
-        ///<summary>Are attachments allowed</summary>        
+        ///<summary>Are attachments allowed</summary>
         ///<returns>True or False</returns>
-        /// <param name="portalId">Portal Id</param>        
+        /// <param name="portalId">Portal Id</param>
         bool AttachmentsAllowed(int portalId);
 
         /// <summary>Whether or not to includes the attachment in the email message.</summary>
@@ -79,9 +79,9 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
         /// <returns></returns>
         bool IncludeAttachments(int portalId);
 
-		///<summary>Whether disable regular users to send message to user/group, default is false.</summary>        
-		/// <param name="portalId">Portal Id</param>    
-	    bool DisablePrivateMessage(int portalId);
+        ///<summary>Whether disable regular users to send message to user/group, default is false.</summary>
+        /// <param name="portalId">Portal Id</param>
+        bool DisablePrivateMessage(int portalId);
 
         #endregion
 

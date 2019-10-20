@@ -126,7 +126,7 @@ export default class Sortable extends Component {
     sortItem(newIndex) {
         const curIndex = this.currentIndex;
         let {items} = this.state;
-        let currentItem = items.find(i => i.index == curIndex);                
+        let currentItem = items.find(i => i.index == curIndex);
         let itemToReplace = items.find(i => i.index == newIndex);
         if (!itemToReplace) {
             return;

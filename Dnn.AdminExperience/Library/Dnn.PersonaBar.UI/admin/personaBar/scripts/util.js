@@ -141,17 +141,17 @@ define(['jquery'], function ($) {
                         if (typeof confirmHandler === 'function') confirmHandler.apply();
                         $('#confirmation-dialog').fadeOut(200, 'linear', function () { $('#mask').hide(); });
                     });
-					
-					if (cancelBtn != '') {
-						$('#confirmation-dialog a#cancelbtn').show();
-						$('#confirmation-dialog a#cancelbtn').html(cancelBtn).unbind('click').bind('click', function () {
-							if (typeof cancelHandler === 'function') cancelHandler.apply();
-							$('#confirmation-dialog').fadeOut(200, 'linear', function () { $('#mask').hide(); });
-						});
-					} else {
-						$('#confirmation-dialog a#cancelbtn').hide();
-					}
-                    
+
+                    if (cancelBtn != '') {
+                        $('#confirmation-dialog a#cancelbtn').show();
+                        $('#confirmation-dialog a#cancelbtn').html(cancelBtn).unbind('click').bind('click', function () {
+                            if (typeof cancelHandler === 'function') cancelHandler.apply();
+                            $('#confirmation-dialog').fadeOut(200, 'linear', function () { $('#mask').hide(); });
+                        });
+                    } else {
+                        $('#confirmation-dialog a#cancelbtn').hide();
+                    }
+
                     $('#mask').show();
                     $('#confirmation-dialog').fadeIn(200, 'linear');
 
@@ -190,9 +190,9 @@ define(['jquery'], function ($) {
                     if (clickToClose !== true) {
                         notificationDialog.addClass('close-hidden');
                     }
-					else {
-						notificationDialog.removeClass('close-hidden');
-					}
+                    else {
+                        notificationDialog.removeClass('close-hidden');
+                    }
                     if (type === 'error') {
                         notificationDialog.addClass('errorMessage');
                     }
@@ -309,9 +309,9 @@ define(['jquery'], function ($) {
 
                     return this.formatCommaSeparate(size.toFixed(1)) + ' ' + suffix;
                 },
-				getCulture: function () {
+                getCulture: function () {
                     return config.culture;
-				},
+                },
                 getSKU: function() {
                     return config.sku;
                 },
@@ -361,7 +361,7 @@ define(['jquery'], function ($) {
                 *
                 * @method buildMenuViewModel
                 * @param {Object} menuStructure the menu structured stored in config object
-                * @return {Object} view model that will be used to build the HTML DOM of the menu 
+                * @return {Object} view model that will be used to build the HTML DOM of the menu
                 */
                 buildMenuViewModel: function buildMenuViewModel(menuStructure) {
 
@@ -436,13 +436,13 @@ define(['jquery'], function ($) {
                 },
 
                 /**
-                * Gets the path defined by the first menu item with a 
+                * Gets the path defined by the first menu item with a
                 * given module name
                 *
                 * @method getPathByModuleName
                 * @param {Object} menuStructure the menu structured stored in config object
                 * @param {String} moduleName moduleName
-                * @return {String} path 
+                * @return {String} path
                 */
                 getPathByModuleName: function getPathByModuleName(menuStructure, moduleName) {
                     var path = null;

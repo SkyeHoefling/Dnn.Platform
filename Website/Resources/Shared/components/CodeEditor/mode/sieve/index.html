@@ -69,9 +69,9 @@ elsif address :domain :is ["From", "To"] "example.com"
 # or it contains a subject known to be spam, file it away.
 #
 elsif anyof (not address :all :contains
-               ["To", "Cc", "Bcc"] "me@example.com",
-             header :matches "subject"
-               ["*make*money*fast*", "*university*dipl*mas*"])
+                ["To", "Cc", "Bcc"] "me@example.com",
+            header :matches "subject"
+                ["*make*money*fast*", "*university*dipl*mas*"])
 {
   # If message header does not contain my address,
   # it's from a list.
@@ -85,7 +85,7 @@ else
 }
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
     </script>
 
     <p><strong>MIME types defined:</strong> <code>application/sieve</code>.</p>

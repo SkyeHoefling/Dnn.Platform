@@ -39,8 +39,8 @@ class ModePanel extends Component {
                 SchedulerMode: props.schedulerMode,
                 SchedulerdelayAtAppStart: props.schedulerDelay
             }
-        });        
-    }    
+        });
+    }
 
     onSave(event) {
         event.preventDefault();

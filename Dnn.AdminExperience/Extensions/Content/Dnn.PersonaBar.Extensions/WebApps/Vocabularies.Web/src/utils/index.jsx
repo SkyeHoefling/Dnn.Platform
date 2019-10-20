@@ -6,7 +6,7 @@ const utils = {
 
         this.utilities = options.utility;
         this.moduleName = options.moduleName;
-        this.settings = options.settings;    
+        this.settings = options.settings;
     },
     canEdit: function () {
         return this.settings.isHost || this.settings.isAdmin || (this.settings.permissions && this.settings.permissions.EDIT === true);

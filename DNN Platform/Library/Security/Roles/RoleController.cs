@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -141,8 +141,8 @@ namespace DotNetNuke.Security.Roles
                     var ci = new CultureInfo(preferredLocale);
                     UserRoleInfo objUserRole = RoleController.Instance.GetUserRole(PortalSettings.PortalId, objUser.UserID, objRole.RoleID);
                     Custom.Add(Null.IsNull(objUserRole.EffectiveDate)
-                                   ? DateTime.Today.ToString("g", ci)
-                                   : objUserRole.EffectiveDate.ToString("g", ci));
+                                    ? DateTime.Today.ToString("g", ci)
+                                    : objUserRole.EffectiveDate.ToString("g", ci));
                     Custom.Add(Null.IsNull(objUserRole.ExpiryDate) ? "-" : objUserRole.ExpiryDate.ToString("g", ci));
                     break;
                 case UserRoleActions.delete:
@@ -155,16 +155,16 @@ namespace DotNetNuke.Security.Roles
                 ToUserID = objUser.UserID,
                 Subject =
                     Localization.GetSystemMessage(objUser.Profile.PreferredLocale, PortalSettings,
-                                                  "EMAIL_ROLE_" +
-                                                  UserRoleActionsCaption[(int)Action] +
-                                                  "_SUBJECT", objUser),
+                                                "EMAIL_ROLE_" +
+                                                UserRoleActionsCaption[(int)Action] +
+                                                "_SUBJECT", objUser),
                 Body = Localization.GetSystemMessage(objUser.Profile.PreferredLocale,
-                                                     PortalSettings,
-                                                     "EMAIL_ROLE_" +
-                                                     UserRoleActionsCaption[(int)Action] + "_BODY",
-                                                     objUser,
-                                                     Localization.GlobalResourceFile,
-                                                     Custom),
+                                                    PortalSettings,
+                                                    "EMAIL_ROLE_" +
+                                                    UserRoleActionsCaption[(int)Action] + "_BODY",
+                                                    objUser,
+                                                    Localization.GlobalResourceFile,
+                                                    Custom),
                 Status = MessageStatusType.Unread
             };
 
@@ -417,10 +417,10 @@ namespace DotNetNuke.Security.Roles
                     //Delete Role
                     DeleteUserRoleInternal(portalId, userId, roleId);
                     EventLogController.Instance.AddLog("UserId",
-                                       userId.ToString(CultureInfo.InvariantCulture),
-                                       PortalController.Instance.GetCurrentPortalSettings(),
-                                       UserController.Instance.GetCurrentUserInfo().UserID,
-                                       EventLogController.EventLogType.USER_ROLE_DELETED);
+                                        userId.ToString(CultureInfo.InvariantCulture),
+                                        PortalController.Instance.GetCurrentPortalSettings(),
+                                        UserController.Instance.GetCurrentUserInfo().UserID,
+                                        EventLogController.EventLogType.USER_ROLE_DELETED);
                 }
             }
             else
@@ -655,7 +655,7 @@ namespace DotNetNuke.Security.Roles
         }
 
         /// <summary>
-        /// Completely remove all a user's roles for a specific portal. This method is used when 
+        /// Completely remove all a user's roles for a specific portal. This method is used when
         /// anonymizing a user
         /// </summary>
         /// <param name="user">User for which all roles must be deleted. The PortalId property
@@ -674,8 +674,8 @@ namespace DotNetNuke.Security.Roles
         /// <summary>
         /// Fetch a single RoleGroup
         /// </summary>
-		/// <param name="portalId">The Id of the Portal</param>
-		/// <param name="roleGroupId">Role Group ID</param>
+        /// <param name="portalId">The Id of the Portal</param>
+        /// <param name="roleGroupId">Role Group ID</param>
         /// <returns></returns>
         /// <remarks></remarks>
         /// -----------------------------------------------------------------------------
@@ -688,12 +688,12 @@ namespace DotNetNuke.Security.Roles
         /// <summary>
         /// Fetch a single RoleGroup by Name
         /// </summary>
-		/// <param name="portalId">The Id of the Portal</param>
+        /// <param name="portalId">The Id of the Portal</param>
         /// <param name="roleGroupName">Role Group Name</param>
         /// <returns></returns>
         /// <remarks></remarks>
         /// -----------------------------------------------------------------------------
-		public static RoleGroupInfo GetRoleGroupByName(int portalId, string roleGroupName)
+        public static RoleGroupInfo GetRoleGroupByName(int portalId, string roleGroupName)
         {
             return provider.GetRoleGroupByName(portalId, roleGroupName);
         }
@@ -715,7 +715,7 @@ namespace DotNetNuke.Security.Roles
         /// Serializes the role groups
         /// </summary>
         /// <param name="writer">An XmlWriter</param>
-		/// <param name="portalID">The Id of the Portal</param>
+        /// <param name="portalID">The Id of the Portal</param>
         /// -----------------------------------------------------------------------------
         public static void SerializeRoleGroups(XmlWriter writer, int portalID)
         {

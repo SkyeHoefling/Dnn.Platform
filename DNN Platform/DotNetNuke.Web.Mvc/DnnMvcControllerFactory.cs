@@ -6,7 +6,7 @@ using System.Web.Routing;
 namespace DotNetNuke.Web.Mvc
 {
     /// <summary>
-    /// DNN Specific MVC Controller Factory that attempts to use 
+    /// DNN Specific MVC Controller Factory that attempts to use
     /// Dependency Injection to include all dependencies on the
     /// Controller.
     /// </summary>

@@ -22,24 +22,24 @@ class Template extends Component {
             return {value: template.Value, label: template.Id};
         });
     }
-    
+
     render() {
         const {selectedTemplateId, templates, onSelect} = this.props;
-        
+
         if (!templates || templates.length === 0) {
             return null;
         }
-        
+
         return <div>
             <Label style={styles.label}
                 labelType="inline"
                 tooltipMessage={Localization.get("TemplateTooltip")}
                 label={Localization.get("Template")}
                 />
-            <Dropdown style={styles.dropdown} 
+            <Dropdown style={styles.dropdown}
                 options={this.getTemplatesOptions()}
                 value={selectedTemplateId}
-                onSelect={onSelect.bind(this)} 
+                onSelect={onSelect.bind(this)}
                 withBorder={true} />
         </div>;
     }

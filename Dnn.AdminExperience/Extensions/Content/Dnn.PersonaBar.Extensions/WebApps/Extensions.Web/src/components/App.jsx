@@ -32,7 +32,7 @@ class App extends Component {
             backToReferrerFunc: null
         }, () => {
             props.dispatch(VisiblePanelActions.selectPanel(panel));
-        });        
+        });
     }
 
     backToReferrer(callback) {

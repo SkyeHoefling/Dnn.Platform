@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -58,7 +58,7 @@ namespace DotNetNuke.Entities.Users
 
         #region Private Members
 
-		private static bool IsAdminUser(PortalSettings portalSettings, UserInfo accessingUser, UserInfo targetUser)
+        private static bool IsAdminUser(PortalSettings portalSettings, UserInfo accessingUser, UserInfo targetUser)
         {
             bool isAdmin = false;
 
@@ -67,12 +67,12 @@ namespace DotNetNuke.Entities.Users
                 //Is Super User?
                 isAdmin = accessingUser.IsSuperUser;
 
-				if (!isAdmin && targetUser.PortalID != -1)
+                if (!isAdmin && targetUser.PortalID != -1)
                 {
                     //Is Administrator
-	                var administratorRoleName = portalSettings != null
-		                ? portalSettings.AdministratorRoleName
-		                : PortalController.Instance.GetPortal(targetUser.PortalID).AdministratorRoleName;
+                    var administratorRoleName = portalSettings != null
+                        ? portalSettings.AdministratorRoleName
+                        : PortalController.Instance.GetPortal(targetUser.PortalID).AdministratorRoleName;
 
                     isAdmin = accessingUser.IsInRole(administratorRoleName);
                 }
@@ -81,14 +81,14 @@ namespace DotNetNuke.Entities.Users
             return isAdmin;
         }
 
-		private static bool IsMember(UserInfo accessingUser)
+        private static bool IsMember(UserInfo accessingUser)
         {
             return (accessingUser != null && accessingUser.UserID != -1);
         }
 
-		private static bool IsUser(UserInfo accessingUser, UserInfo targetUser)
+        private static bool IsUser(UserInfo accessingUser, UserInfo targetUser)
         {
-			return (accessingUser != null && accessingUser.UserID == targetUser.UserID);
+            return (accessingUser != null && accessingUser.UserID == targetUser.UserID);
         }
 
         #endregion
@@ -105,8 +105,8 @@ namespace DotNetNuke.Entities.Users
 
                 if(property != null)
                 {
-					var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
-					if (CheckAccessLevel(portalSettings, property, accessingUser, user))
+                    var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
+                    if (CheckAccessLevel(portalSettings, property, accessingUser, user))
                     {
                         switch (property.PropertyName.ToLowerInvariant())
                         {
@@ -124,7 +124,7 @@ namespace DotNetNuke.Entities.Users
 
                 propertyNotFound = true;
                 return property != null && property.PropertyName.Equals("photo", StringComparison.InvariantCultureIgnoreCase)
-					? Globals.ApplicationPath + "/images/no_avatar.gif" : PropertyAccess.ContentLocked;
+                    ? Globals.ApplicationPath + "/images/no_avatar.gif" : PropertyAccess.ContentLocked;
             }
             propertyNotFound = true;
             return string.Empty;
@@ -167,11 +167,11 @@ namespace DotNetNuke.Entities.Users
                             foreach (Relationship relationship in property.ProfileVisibility.RelationshipVisibilities)
                             {
                                 if (targetUser.Social.UserRelationships.Any(userRelationship =>
-                                                                          (userRelationship.RelationshipId == relationship.RelationshipId
-                                                                              && userRelationship.Status == RelationshipStatus.Accepted
-                                                                              && ((userRelationship.RelatedUserId == accessingUser.UserID && userRelationship.UserId == targetUser.UserID)
+                                                                        (userRelationship.RelationshipId == relationship.RelationshipId
+                                                                            && userRelationship.Status == RelationshipStatus.Accepted
+                                                                            && ((userRelationship.RelatedUserId == accessingUser.UserID && userRelationship.UserId == targetUser.UserID)
                                                                                     || (userRelationship.RelatedUserId == targetUser.UserID && userRelationship.UserId == accessingUser.UserID)))
-                                                                      ))
+                                                                    ))
                                 {
                                     isVisible = true;
                                     break;

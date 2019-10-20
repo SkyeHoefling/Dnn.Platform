@@ -32,12 +32,12 @@
 .twocol-contentL,
 .onecol
 {
-    position: relative; 
+    position: relative;
     clear: both;
     float: left;
     width: 100%;
     text-align: left;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .threecol-portal .dnn-mid
@@ -214,7 +214,7 @@
 .em14 .threecol-portal .dnn-main,
 .em14 .twocol-contentR .dnn-main
 {
-    right: 14em; 
+    right: 14em;
 }
 
 .em14 .twocol-contentR .dnn-side
@@ -224,7 +224,7 @@
 
 .em14 .threecol-portal .dnn-side
 {
-    left: 28em; 
+    left: 28em;
 }
 
 .em14 .threecol-portal .dnn-a
@@ -308,7 +308,7 @@
 .em16 .threecol-portal .dnn-main,
 .em16 .twocol-contentR .dnn-main
 {
-    right: 16em; 
+    right: 16em;
 }
 
 .em16 .twocol-contentR .dnn-side
@@ -318,7 +318,7 @@
 
 .em16 .threecol-portal .dnn-side
 {
-    left: 32em; 
+    left: 32em;
 }
 
 .em16 .threecol-portal .dnn-a
@@ -402,7 +402,7 @@
 .em18 .threecol-portal .dnn-main,
 .em18 .twocol-contentR .dnn-main
 {
-    right: 18em; 
+    right: 18em;
 }
 
 .em18 .twocol-contentR .dnn-side
@@ -412,7 +412,7 @@
 
 .em18 .threecol-portal .dnn-side
 {
-    left: 36em; 
+    left: 36em;
 }
 
 .em18 .threecol-portal .dnn-a

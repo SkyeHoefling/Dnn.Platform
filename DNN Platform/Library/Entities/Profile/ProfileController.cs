@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -75,7 +75,7 @@ namespace DotNetNuke.Entities.Profile
         }
 
         internal static void AddDefaultDefinition(int portalId, string category, string name, string type, int length, int viewOrder, UserVisibilityMode defaultVisibility,
-                                                  Dictionary<string, ListEntryInfo> types)
+                                                Dictionary<string, ListEntryInfo> types)
         {
             ListEntryInfo typeInfo = types["DataType:" + type] ?? types["DataType:Unknown"];
             var propertyDefinition = new ProfilePropertyDefinition(portalId)
@@ -273,19 +273,19 @@ namespace DotNetNuke.Entities.Profile
                 definition.Visible = true;
             }
             int intDefinition = _dataProvider.AddPropertyDefinition(portalId,
-                                                               definition.ModuleDefId,
-                                                               definition.DataType,
-                                                               definition.DefaultValue,
-                                                               definition.PropertyCategory,
-                                                               definition.PropertyName,
-                                                               definition.ReadOnly,
-                                                               definition.Required,
-                                                               definition.ValidationExpression,
-                                                               definition.ViewOrder,
-                                                               definition.Visible,
-                                                               definition.Length,
-                                                               (int)definition.DefaultVisibility,
-                                                               UserController.Instance.GetCurrentUserInfo().UserID);
+                                                                definition.ModuleDefId,
+                                                                definition.DataType,
+                                                                definition.DefaultValue,
+                                                                definition.PropertyCategory,
+                                                                definition.PropertyName,
+                                                                definition.ReadOnly,
+                                                                definition.Required,
+                                                                definition.ValidationExpression,
+                                                                definition.ViewOrder,
+                                                                definition.Visible,
+                                                                definition.Length,
+                                                                (int)definition.DefaultVisibility,
+                                                                UserController.Instance.GetCurrentUserInfo().UserID);
             EventLogController.Instance.AddLog(definition, PortalController.Instance.GetCurrentPortalSettings(), UserController.Instance.GetCurrentUserInfo().UserID, "", EventLogController.EventLogType.PROFILEPROPERTY_CREATED);
             ClearProfileDefinitionCache(definition.PortalId);
             ClearAllUsersInfoProfileCacheByPortal(definition.PortalId);
@@ -490,18 +490,18 @@ namespace DotNetNuke.Entities.Profile
                 definition.Visible = true;
             }
             _dataProvider.UpdatePropertyDefinition(definition.PropertyDefinitionId,
-                                              definition.DataType,
-                                              definition.DefaultValue,
-                                              definition.PropertyCategory,
-                                              definition.PropertyName,
-                                              definition.ReadOnly,
-                                              definition.Required,
-                                              definition.ValidationExpression,
-                                              definition.ViewOrder,
-                                              definition.Visible,
-                                              definition.Length,
-                                              (int)definition.DefaultVisibility,
-                                              UserController.Instance.GetCurrentUserInfo().UserID);
+                                            definition.DataType,
+                                            definition.DefaultValue,
+                                            definition.PropertyCategory,
+                                            definition.PropertyName,
+                                            definition.ReadOnly,
+                                            definition.Required,
+                                            definition.ValidationExpression,
+                                            definition.ViewOrder,
+                                            definition.Visible,
+                                            definition.Length,
+                                            (int)definition.DefaultVisibility,
+                                            UserController.Instance.GetCurrentUserInfo().UserID);
             EventLogController.Instance.AddLog(definition, PortalController.Instance.GetCurrentPortalSettings(), UserController.Instance.GetCurrentUserInfo().UserID, "", EventLogController.EventLogType.PROFILEPROPERTY_UPDATED);
             ClearProfileDefinitionCache(definition.PortalId);
             ClearAllUsersInfoProfileCacheByPortal(definition.PortalId);

@@ -25,7 +25,7 @@ class FullEditor extends Component {
     execCommand(button, e) {
         this.editorControl.focus();
         document.execCommand(button, false, null);
-        
+
         e.preventDefault();
     }
 
@@ -54,9 +54,9 @@ class FullEditor extends Component {
                             {
                                 group.map((button, i) => {
                                     return (
-                                        <a 
-                                            className='btn' 
-                                            data-role={button} 
+                                        <a
+                                            className='btn'
+                                            data-role={button}
                                             href='#'
                                             onClick={this.execCommand.bind(this, button)}
                                             dangerouslySetInnerHTML={{ __html: require("./icons/" + button + ".svg") }}
@@ -76,7 +76,7 @@ class FullEditor extends Component {
     renderEditor() {
         const { props } = this;
         return (
-            <div className='fulleditor-editor' 
+            <div className='fulleditor-editor'
                 contentEditable
                 ref={(e) => { this.editorControl = e; }}
                 dangerouslySetInnerHTML={{ __html: props.value }}>

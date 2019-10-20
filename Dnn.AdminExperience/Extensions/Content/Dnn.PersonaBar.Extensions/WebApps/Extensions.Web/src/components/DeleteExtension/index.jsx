@@ -81,7 +81,7 @@ DeleteExtension.propTypes = {
     selectedInstalledPackageType: PropTypes.string
 };
 
-DeleteExtension.defaultProps = { 
+DeleteExtension.defaultProps = {
     deleteExtensionFiles: false
 };
 

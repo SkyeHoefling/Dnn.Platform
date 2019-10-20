@@ -92,19 +92,19 @@ define(['module'], function (module) {
         },
 
         /**
-         * Parses a resource name into its component parts. Resource names
-         * look like: module/name.ext!strip, where the !strip part is
-         * optional.
-         * @param {String} name the resource name
-         * @returns {Object} with properties "moduleName", "ext" and "strip"
-         * where strip is a boolean.
-         */
+        * Parses a resource name into its component parts. Resource names
+        * look like: module/name.ext!strip, where the !strip part is
+        * optional.
+        * @param {String} name the resource name
+        * @returns {Object} with properties "moduleName", "ext" and "strip"
+        * where strip is a boolean.
+        */
         parseName: function (name) {
             var modName, ext, temp,
                 strip = false,
                 index = name.lastIndexOf("."),
                 isRelative = name.indexOf('./') === 0 ||
-                             name.indexOf('../') === 0;
+                            name.indexOf('../') === 0;
 
             if (index !== -1 && (!isRelative || index > 1)) {
                 modName = name.substring(0, index);
@@ -136,13 +136,13 @@ define(['module'], function (module) {
         xdRegExp: /^((\w+)\:)?\/\/([^\/\\]+)/,
 
         /**
-         * Is an URL on another domain. Only works for browser use, returns
-         * false in non-browser environments. Only used to know if an
-         * optimized .js version of a text resource should be loaded
-         * instead.
-         * @param {String} url
-         * @returns Boolean
-         */
+        * Is an URL on another domain. Only works for browser use, returns
+        * false in non-browser environments. Only used to know if an
+        * optimized .js version of a text resource should be loaded
+        * instead.
+        * @param {String} url
+        * @returns Boolean
+        */
         useXhr: function (url, protocol, hostname, port) {
             var uProtocol, uHostName, uPort,
                 match = text.xdRegExp.exec(url);
@@ -157,8 +157,8 @@ define(['module'], function (module) {
             uHostName = uHostName[0];
 
             return (!uProtocol || uProtocol === protocol) &&
-                   (!uHostName || uHostName.toLowerCase() === hostname.toLowerCase()) &&
-                   ((!uPort && !uHostName) || isSamePort(uProtocol, uPort, protocol, port));
+                    (!uHostName || uHostName.toLowerCase() === hostname.toLowerCase()) &&
+                    ((!uPort && !uHostName) || isSamePort(uProtocol, uPort, protocol, port));
         },
 
         finishLoad: function (name, strip, content, onLoad) {
@@ -191,7 +191,7 @@ define(['module'], function (module) {
                     (parsed.ext ? '.' + parsed.ext : ''),
                 url = req.toUrl(nonStripName),
                 useXhr = (masterConfig.useXhr) ||
-                         text.useXhr;
+                        text.useXhr;
 
             // Do not load if it is an empty: url
             if (url.indexOf('empty:') === 0) {
@@ -224,9 +224,9 @@ define(['module'], function (module) {
             if (buildMap.hasOwnProperty(moduleName)) {
                 var content = text.jsEscape(buildMap[moduleName]);
                 write.asModule(pluginName + "!" + moduleName,
-                               "define(function () { return '" +
-                                   content +
-                               "';});\n");
+                                "define(function () { return '" +
+                                    content +
+                                "';});\n");
             }
         },
 
@@ -387,7 +387,7 @@ define(['module'], function (module) {
             //XPCOM, you so crazy
             try {
                 inStream = Cc['@mozilla.org/network/file-input-stream;1']
-                           .createInstance(Ci.nsIFileInputStream);
+                            .createInstance(Ci.nsIFileInputStream);
                 inStream.init(fileObj, 1, 0, false);
 
                 convertStream = Cc['@mozilla.org/intl/converter-input-stream;1']

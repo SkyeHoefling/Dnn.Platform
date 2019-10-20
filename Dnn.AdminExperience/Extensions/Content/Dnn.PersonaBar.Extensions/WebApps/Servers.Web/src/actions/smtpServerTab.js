@@ -3,19 +3,19 @@ import smtpServerService from "../services/smtpServerService";
 import localization from "../localization";
 
 const smtpServeTabActions = {
-    loadSmtpServerInfo() {       
+    loadSmtpServerInfo() {
         return (dispatch) => {
             dispatch({
-                type: ActionTypes.LOAD_SMTP_SERVER_TAB               
-            });        
-            
+                type: ActionTypes.LOAD_SMTP_SERVER_TAB
+            });
+
             smtpServerService.getSmtpSettings().then(response => {
                 dispatch({
                     type: ActionTypes.LOADED_SMTP_SERVER_TAB,
                     payload: {
                         smtpServerInfo: response
                     }
-                });  
+                });
             }).catch(() => {
                 dispatch({
                     type: ActionTypes.ERROR_LOADING_SMTP_SERVER_TAB,
@@ -23,7 +23,7 @@ const smtpServeTabActions = {
                         errorMessage: localization.get("errorMessageLoadingSmtpServerTab")
                     }
                 });
-            });        
+            });
         };
     },
     changeSmtpServerMode(smtpServeMode) {
@@ -50,26 +50,26 @@ const smtpServeTabActions = {
         return (dispatch) => {
             dispatch({
                 type: ActionTypes.CHANGE_SMTP_CONFIGURATION_VALUE,
-                payload: { 
+                payload: {
                     field: key,
                     value
                 }
-            });  
+            });
         };
     },
-    updateSmtpServerSettings(parameters) {       
+    updateSmtpServerSettings(parameters) {
         return (dispatch) => {
             dispatch({
-                type: ActionTypes.UPDATE_SMTP_SERVER_SETTINGS               
-            });        
-            
+                type: ActionTypes.UPDATE_SMTP_SERVER_SETTINGS
+            });
+
             smtpServerService.updateSmtpSettings(parameters).then(response => {
                 dispatch({
                     type: ActionTypes.UPDATED_SMTP_SERVER_SETTINGS,
                     payload: {
                         success: response.success
                     }
-                });  
+                });
             }).catch(() => {
                 dispatch({
                     type: ActionTypes.ERROR_UPDATING_SMTP_SERVER_SETTINGS,
@@ -77,15 +77,15 @@ const smtpServeTabActions = {
                         errorMessage: localization.get("errorMessageUpdatingSmtpServerTab")
                     }
                 });
-            });        
+            });
         };
     },
-    sendTestEmail(parameters) {       
+    sendTestEmail(parameters) {
         return (dispatch) => {
             dispatch({
-                type: ActionTypes.SEND_TEST_EMAIL               
-            });        
-            
+                type: ActionTypes.SEND_TEST_EMAIL
+            });
+
             smtpServerService.sendTestEmail(parameters).then(response => {
                 dispatch({
                     type: ActionTypes.SENT_TEST_EMAIL,
@@ -94,7 +94,7 @@ const smtpServeTabActions = {
                         infoMessage: response.confirmationMessage,
                         errorMessage: response.errMessage
                     }
-                });  
+                });
             }).catch((data) => {
                 let response = JSON.parse(data.responseText);
                 dispatch({
@@ -103,7 +103,7 @@ const smtpServeTabActions = {
                         errorMessage: response.errMessage
                     }
                 });
-            });        
+            });
         };
     }
 };

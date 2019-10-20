@@ -39,7 +39,7 @@ namespace Dnn.PersonaBar.Library.Prompt
         {
             ValidationMessage += message;
         }
-        
+
         /// <summary>
         /// Get the flag value
         /// </summary>
@@ -97,7 +97,7 @@ namespace Dnn.PersonaBar.Library.Prompt
             }
             if (checkpositive &&
                 (typeof(T) == typeof(int) || typeof(T) == typeof(long) || typeof(T) == typeof(int?) ||
-                 typeof(T) == typeof(long?)) && value != null && Convert.ToInt32(value) <= 0)
+                typeof(T) == typeof(long?)) && value != null && Convert.ToInt32(value) <= 0)
             {
                 ValidationMessage += Localization.GetString("Promp_PositiveValueRequired", resourceFile)?.Replace("[0]", fieldName);
             }

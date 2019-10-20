@@ -21,15 +21,15 @@
             <asp:TextBox ID="txtConfirmPassword" runat="server" MaxLength="39" TextMode="Password" CssClass="password-confirm" />
             <asp:RequiredFieldValidator ID="valConfirmPassword" CssClass="dnnFormMessage dnnFormError dnnRequired" runat="server" resourcekey="Confirm.Required" Display="Dynamic" ControlToValidate="txtConfirmPassword" />
         </div>
-		<div id="divQA" runat="server" visible="false">
-		    <div class="dnnFormItem">
-				<asp:label id = "lblQuestion" runat="server" />
-			</div>
-			<div class="dnnFormItem">
-				<asp:textbox id="txtAnswer" runat="server" />
+        <div id="divQA" runat="server" visible="false">
+            <div class="dnnFormItem">
+                <asp:label id = "lblQuestion" runat="server" />
+            </div>
+            <div class="dnnFormItem">
+                <asp:textbox id="txtAnswer" runat="server" />
                 <asp:RequiredFieldValidator ID="valAnswer" CssClass="dnnFormMessage dnnFormError dnnRequired" runat="server" Display="Dynamic" resourcekey="Answer.Required" ControlToValidate="txtAnswer" />
-			</div>
-		</div>
+            </div>
+        </div>
         <ul class="dnnActions dnnClear">
             <li>
                 <asp:LinkButton ID="cmdChangePassword" CssClass="dnnPrimaryAction" runat="server" resourcekey="cmdChangePassword" /></li>

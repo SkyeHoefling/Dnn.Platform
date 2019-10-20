@@ -24,7 +24,7 @@ export default class CollapsibleRow extends Component {
             this.setState({ collapsed: this.props.collapsed });
         }
     }
-    
+
     componentWillUnmount() {
         document.removeEventListener("click", this.handleClick);
         this._isMounted = false;
@@ -122,4 +122,3 @@ CollapsibleRow.propTypes = {
 CollapsibleRow.defaultProps = {
     collapsed: true
 };
-

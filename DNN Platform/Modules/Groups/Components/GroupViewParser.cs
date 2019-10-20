@@ -12,7 +12,7 @@ namespace DotNetNuke.Modules.Groups.Components
 {
     public class GroupViewParser
     {
-        
+
         PortalSettings PortalSettings { get; set; }
         RoleInfo RoleInfo { get; set; }
         UserInfo CurrentUser { get; set; }
@@ -88,7 +88,7 @@ namespace DotNetNuke.Modules.Groups.Components
             Template = Template.Replace("[GROUPEDITBUTTON]", String.Empty);
 
             var url = Globals.NavigateURL(GroupViewTabId, "", new String[] { "groupid=" + RoleInfo.RoleID.ToString() });
-            
+
             Template = Utilities.ParseTokenWrapper(Template, "IsPendingMember", membershipPending);
             Template = Template.Replace("[groupviewurl]", url);
             Components.GroupItemTokenReplace tokenReplace = new Components.GroupItemTokenReplace(RoleInfo);

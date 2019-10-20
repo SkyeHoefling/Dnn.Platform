@@ -36,6 +36,6 @@ export default class FilesGrid extends Component {
     }
 }
 
-FilesGrid.propTypes = {   
+FilesGrid.propTypes = {
     files: PropTypes.array
 };

@@ -1,4 +1,4 @@
-/* 
+/*
  * Deprecated DNN CSS class names will remain available for some time
  * before being  permanently removed. Removal will occur according to
  * the  following process:
@@ -7,17 +7,17 @@
  *    with a maintenance (x.y.z) release.
  * 2. Removal will not occur less than six months after the release
  *    when it was deprecated.
- * 3. Removal will not occur until after deprecation has been noted 
+ * 3. Removal will not occur until after deprecation has been noted
  *    in at least two major releases.
  *
  *                                              |        |Planned |
  *  Name                                        |Release |Removal |
  *----------------------------------------------+--------+--------+
  * Mod{NAME}C                                     5.6.2    6.2
- *   {NAME} = sanitized version of the DesktopModule Name 
+ *   {NAME} = sanitized version of the DesktopModule Name
  *   Used on <div> tag surrounding Module Content, inside container
  *----------------------------------------------+--------+--------+
- */  
+ */
 
 
 
@@ -38,13 +38,13 @@ Body
 .TabBg {
 }
 
-.LeftPane  { 
+.LeftPane  {
 }
 
-.ContentPane  { 
+.ContentPane  {
 }
 
-.RightPane  { 
+.RightPane  {
 }
 
 /* text style for the selected tab */
@@ -67,7 +67,7 @@ A.SelectedTab:active   {
 /* text style for the unselected tabs */
 .OtherTabs {
 }
-    
+
 /* hyperlink style for the unselected tabs */
 A.OtherTabs:link {
 }
@@ -115,7 +115,7 @@ A.OtherTabs:active   {
 /* text style for buttons and link buttons used in the portal admin pages */
 .CommandButton     {
 }
-    
+
 /* hyperlink style for buttons and link buttons used in the portal admin pages */
 A.CommandButton:link {
 }
@@ -125,7 +125,7 @@ A.CommandButton:visited  {
 
 A.CommandButton:hover    {
 }
-    
+
 A.CommandButton:active   {
 }
 
@@ -204,9 +204,9 @@ HR {
 }
 
 /* MODULE-SPECIFIC */
-/* text style for reading messages in Discussion */    
+/* text style for reading messages in Discussion */
 .Message    {
-}   
+}
 
 /* style of item titles by Announcements and events */
 .ItemTitle    {

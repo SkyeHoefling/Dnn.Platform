@@ -1,16 +1,16 @@
 Third Party Acknowledgements
 ==============================================================================
 
-Brian Bilbro ( bbilbro@hotmail.com ) 
+Brian Bilbro ( bbilbro@hotmail.com )
 - Module Communicator code and architecture (http://aspalliance.com/bbilbro/DesktopDefault.aspx?tabindex=1&tabid=7&ArticleID=6 )
 
 Atif Aziz
 - SQLCommandGenerator
 
-Daniel Willmott 
+Daniel Willmott
 - Unauthenticated user
 
-Fredi Gertsch ( fredi@gerts.ch ) 
+Fredi Gertsch ( fredi@gerts.ch )
 - Tab Administrator
 
 Jon Henning - Solution Partners - (http://www.solpart.com)

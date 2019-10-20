@@ -19,7 +19,7 @@ class GridCell extends Component {
 
 GridCell.propTypes = {
     children: PropTypes.node,
-    columnSize: PropTypes.number,   
+    columnSize: PropTypes.number,
     type: PropTypes.string,
     style: PropTypes.object,
     className: PropTypes.string

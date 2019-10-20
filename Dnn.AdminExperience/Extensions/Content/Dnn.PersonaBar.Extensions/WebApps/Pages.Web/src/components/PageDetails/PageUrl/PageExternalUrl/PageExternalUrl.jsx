@@ -15,14 +15,14 @@ class PageExternalUrl extends Component {
 
     render() {
         const {page} = this.props;
-        
+
         return (
             <div className={styles.pageExternalUrl}>
                 <InputGroup>
                     <SingleLineInputWithError
                         className="external-url-input"
                         label={Localization.get("ExternalUrl")}
-                        tooltipMessage={Localization.get("ExternalUrlTooltip")}    
+                        tooltipMessage={Localization.get("ExternalUrlTooltip")}
                         value={page.externalRedirection}
                         onChange={this.onChangeField.bind(this, "externalRedirection")}
                         maxLength={255} />

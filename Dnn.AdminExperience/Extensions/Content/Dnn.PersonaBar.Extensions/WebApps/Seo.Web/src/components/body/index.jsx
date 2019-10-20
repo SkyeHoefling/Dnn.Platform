@@ -34,15 +34,15 @@ export class Body extends Component {
                 type="primary">
                 <Tabs onSelect={this.handleSelect.bind(this)}
                     tabHeaders={[
-                        resx.get("GeneralSettingsTab"), 
-                        resx.get("ExtensionUrlProvidersTab"), 
+                        resx.get("GeneralSettingsTab"),
+                        resx.get("ExtensionUrlProvidersTab"),
                         <div style={{ fontSize: "9pt", paddingRight: 25 }} key="first">
-                            {resx.get("ExpressionsTab")} 
+                            {resx.get("ExpressionsTab")}
                             <Tooltip
                                 messages={[resx.get("GlobalSetting")]}
                                 type="global"
                                 style={{ position: "absolute", right: 0, top: 15, float: "right", textTransform: "none" }} />
-                        </div>, 
+                        </div>,
                         resx.get("TestURLTab")
                     ]}
                     type="secondary">

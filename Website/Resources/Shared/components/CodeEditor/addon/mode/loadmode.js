@@ -21,13 +21,13 @@
     if (!deps) return cont();
     var missing = [];
     for (var i = 0; i < deps.length; ++i) {
-      if (!CodeMirror.modes.hasOwnProperty(deps[i]))
+    if (!CodeMirror.modes.hasOwnProperty(deps[i]))
         missing.push(deps[i]);
     }
     if (!missing.length) return cont();
     var split = splitCallback(cont, missing.length);
     for (var i = 0; i < missing.length; ++i)
-      CodeMirror.requireMode(missing[i], split);
+    CodeMirror.requireMode(missing[i], split);
   }
 
   CodeMirror.requireMode = function(mode, cont) {
@@ -37,28 +37,28 @@
 
     var file = CodeMirror.modeURL.replace(/%N/g, mode);
     if (env == "plain") {
-      var script = document.createElement("script");
-      script.src = file;
-      var others = document.getElementsByTagName("script")[0];
-      var list = loading[mode] = [cont];
-      CodeMirror.on(script, "load", function() {
+    var script = document.createElement("script");
+    script.src = file;
+    var others = document.getElementsByTagName("script")[0];
+    var list = loading[mode] = [cont];
+    CodeMirror.on(script, "load", function() {
         ensureDeps(mode, function() {
-          for (var i = 0; i < list.length; ++i) list[i]();
+        for (var i = 0; i < list.length; ++i) list[i]();
         });
-      });
-      others.parentNode.insertBefore(script, others);
+    });
+    others.parentNode.insertBefore(script, others);
     } else if (env == "cjs") {
-      require(file);
-      cont();
+    require(file);
+    cont();
     } else if (env == "amd") {
-      requirejs([file], cont);
+    requirejs([file], cont);
     }
   };
 
   CodeMirror.autoLoadMode = function(instance, mode) {
     if (!CodeMirror.modes.hasOwnProperty(mode))
-      CodeMirror.requireMode(mode, function() {
+    CodeMirror.requireMode(mode, function() {
         instance.setOption("mode", instance.getOption("mode"));
-      });
+    });
   };
 });

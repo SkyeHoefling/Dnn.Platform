@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -105,7 +105,7 @@ namespace DotNetNuke.Security
             new Regex("alert[\\s(&nbsp;)]*\\([\\s(&nbsp;)]*'?[\\s(&nbsp;)]*[\"(&quot;)]?", RxOptions),
             new Regex(@"eval*.\(", RxOptions),
         };
-        
+
         private static readonly Regex DangerElementsRegex = new Regex(@"(<[^>]*?) on.*?\=(['""]*)[\s\S]*?(\2)( *)([^>]*?>)", RxOptions);
         private static readonly Regex DangerElementContentRegex = new Regex(@"on.*?\=(['""]*)[\s\S]*?(\1)( *)", RxOptions);
 
@@ -253,7 +253,7 @@ namespace DotNetNuke.Security
                         roleAllowed = true;
                     }
                 }
-            }            
+            }
         }
 
         private static RoleType GetRoleType(string roleName)
@@ -297,7 +297,7 @@ namespace DotNetNuke.Security
         ///-----------------------------------------------------------------------------
         private static string FilterStrings(string strInput)
         {
-			//setup up list of search terms as items may be used twice
+            //setup up list of search terms as items may be used twice
             var tempInput = strInput;
             if (string.IsNullOrEmpty(tempInput))
             {
@@ -318,7 +318,7 @@ namespace DotNetNuke.Security
             //check if text contains encoded angle brackets, if it does it we decode it to check the plain text
             if (tempInput.Contains("&gt;") || tempInput.Contains("&lt;"))
             {
-				//text is encoded, so decode and try again
+                //text is encoded, so decode and try again
                 tempInput = HttpUtility.HtmlDecode(tempInput);
                 tempInput = RxListStrings.Aggregate(tempInput, (current, s) => s.Replace(current, replacement));
 
@@ -416,10 +416,10 @@ namespace DotNetNuke.Security
         {
             return StripTagsRegex.IsMatch(strInput);
         }
-		
-		#endregion
-		
-		#region Public Methods
+
+        #endregion
+
+        #region Public Methods
 
         ///-----------------------------------------------------------------------------
         /// <summary>
@@ -591,14 +591,14 @@ namespace DotNetNuke.Security
                 case ConfigType.ListController:
                     const RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Singleline;
                     const string listName = "ProfanityFilter";
-            
+
                     var listController = new ListController();
-                
+
                     PortalSettings settings;
 
                     IEnumerable<ListEntryInfo> listEntryHostInfos;
                     IEnumerable<ListEntryInfo> listEntryPortalInfos;
-            
+
                     switch (filterScope)
                     {
                         case FilterScope.SystemList:
@@ -615,7 +615,7 @@ namespace DotNetNuke.Security
                         case FilterScope.PortalList:
                             settings = PortalController.Instance.GetCurrentPortalSettings();
                             listEntryPortalInfos = listController.GetListEntryInfoItems(listName + "-" + settings.PortalId, "", settings.PortalId);
-                            inputString = listEntryPortalInfos.Aggregate(inputString, (current, removeItem) => Regex.Replace(current, @"\b" + Regex.Escape(removeItem.Text) + @"\b", string.Empty, options));        
+                            inputString = listEntryPortalInfos.Aggregate(inputString, (current, removeItem) => Regex.Replace(current, @"\b" + Regex.Escape(removeItem.Text) + @"\b", string.Empty, options));
                             break;
                     }
 
@@ -635,12 +635,12 @@ namespace DotNetNuke.Security
             {
                 //Create a custom auth cookie
 
-                //first, create the authentication ticket     
+                //first, create the authentication ticket
                 var authenticationTicket = createPersistentCookie
                     ? new FormsAuthenticationTicket(user.Username, true, Config.GetPersistentCookieTimeout())
                     : new FormsAuthenticationTicket(user.Username, false, Config.GetAuthCookieTimeout());
 
-                //encrypt it     
+                //encrypt it
                 var encryptedAuthTicket = FormsAuthentication.Encrypt(authenticationTicket);
 
                 //Create a new Cookie
@@ -751,7 +751,7 @@ namespace DotNetNuke.Security
             }
 
             //Remove current userinfo from context items
-			HttpContext.Current.Items.Remove("UserInfo");
+            HttpContext.Current.Items.Remove("UserInfo");
 
             //remove language cookie
             var httpCookie = HttpContext.Current.Response.Cookies["language"];
@@ -772,7 +772,7 @@ namespace DotNetNuke.Security
             if (cookie != null)
             {
                 cookie.Value = null;
-				cookie.Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/");
+                cookie.Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/");
                 cookie.Expires = DateTime.Now.AddYears(-30);
             }
 
@@ -780,7 +780,7 @@ namespace DotNetNuke.Security
             if (cookie != null)
             {
                 cookie.Value = null;
-				cookie.Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/");
+                cookie.Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/");
                 cookie.Expires = DateTime.Now.AddYears(-30);
             }
 
@@ -794,7 +794,7 @@ namespace DotNetNuke.Security
                     if (auth != null)
                     {
                         auth.Value = null;
-						auth.Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/");
+                        auth.Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/");
                         auth.Expires = DateTime.Now.AddYears(-30);
                     }
                 }
@@ -826,19 +826,19 @@ namespace DotNetNuke.Security
 
             return (userInput == filteredInput);
         }
-		
-		#endregion
-		
-		#region Public Shared/Static Methods
+
+        #endregion
+
+        #region Public Shared/Static Methods
 
         public static void ForceSecureConnection()
         {
-			//get current url
+            //get current url
             var url = HttpContext.Current.Request.Url.ToString();
-			//if unsecure connection
+            //if unsecure connection
             if (url.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase))
             {
-				//switch to secure connection
+                //switch to secure connection
                 url = "https://" + url.Substring("http://".Length);
                 //append ssl parameter to querystring to indicate secure connection processing has already occurred
                 if (url.IndexOf("?", StringComparison.Ordinal) == -1)
@@ -863,9 +863,9 @@ namespace DotNetNuke.Security
                 var groupController = new PortalGroupController();
                 var group = groupController.GetPortalGroups().SingleOrDefault(p => p.MasterPortalId == PortalController.GetEffectivePortalId(portalId));
 
-				if (@group != null 
-						&& !string.IsNullOrEmpty(@group.AuthenticationDomain)
-						&& PortalSettings.Current.PortalAlias.HTTPAlias.Contains(@group.AuthenticationDomain))
+                if (@group != null
+                        && !string.IsNullOrEmpty(@group.AuthenticationDomain)
+                        && PortalSettings.Current.PortalAlias.HTTPAlias.Contains(@group.AuthenticationDomain))
                 {
                     cookieDomain = @group.AuthenticationDomain;
                 }
@@ -944,7 +944,7 @@ namespace DotNetNuke.Security
         {
             UserInfo objUserInfo = UserController.Instance.GetCurrentUserInfo();
             PortalSettings settings = PortalController.Instance.GetCurrentPortalSettings();
-            return IsInRoles(objUserInfo, settings, roles);            
+            return IsInRoles(objUserInfo, settings, roles);
         }
 
         public static bool IsInRoles(UserInfo objUserInfo, PortalSettings settings, string roles)
@@ -955,7 +955,7 @@ namespace DotNetNuke.Security
             if (!isInRoles)
             {
                 if (roles != null)
-                {                    
+                {
                     foreach (string role in roles.Split(new[] { ';' }))
                     {
                         bool? roleAllowed;
@@ -968,7 +968,7 @@ namespace DotNetNuke.Security
                     }
                 }
             }
-            return isInRoles; 
+            return isInRoles;
         }
 
         public static bool IsFriend(int userId)
@@ -991,6 +991,6 @@ namespace DotNetNuke.Security
             PortalSettings settings = PortalController.Instance.GetCurrentPortalSettings();
             return IsInRoles(objUserInfo, settings, RoleOwnerPrefix + userId);
         }
-		#endregion
-    }    
+        #endregion
+    }
 }

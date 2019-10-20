@@ -24,14 +24,14 @@ export default function pagesReducer(state = {
     const changeModuleCopy = function changeModuleCopy(id, key, value) {
         const modules = [...state.selectedPage.modules];
         return modules.map((m) => {
-            if (m.id === id) {                
+            if (m.id === id) {
                 return {
                     ...m,
                     [key]: typeof(value) === "boolean" ? value : parseInt(value)
                 };
             }
             return m;
-        }); 
+        });
     };
 
     switch (action.type) {
@@ -47,7 +47,7 @@ export default function pagesReducer(state = {
                 selectedPageSettingTab: action.selectedPageSettingTab
             };
         case ActionTypes.LOAD_PAGE:
-            return { ...state,                
+            return { ...state,
                 selectedPage: null,
                 editingSettingModuleId: null
             };
@@ -81,15 +81,15 @@ export default function pagesReducer(state = {
 
         case ActionTypes.FETCH_CACHE_PROVIDER_LIST:
             return state;
-            
+
         case ActionTypes.FETCHED_CACHE_PROVIDER_LIST:
             return { ...state,
-                cacheProviderList: action.data.cacheProviderList                           
+                cacheProviderList: action.data.cacheProviderList
             };
 
         case ActionTypes.ERROR_FETCHING_CACHE_PROVIDER_LIST:
             return state;
-        
+
         case ActionTypes.EDITING_PAGE_MODULE: {
             const editingSettingModuleId = action.data.module.id;
             return { ...state,
@@ -97,7 +97,7 @@ export default function pagesReducer(state = {
             };
         }
         case ActionTypes.CANCEL_PAGE:
-            return { ...state,                
+            return { ...state,
                 selectedPage: null,
                 errors: {},
                 editingSettingModuleId: null,
@@ -107,7 +107,7 @@ export default function pagesReducer(state = {
 
         case ActionTypes.SAVE_PAGE:
             if (action.data) {
-                return {...state, 
+                return {...state,
                     selectedPage: { ...state.selectedPage,
                         tags: action.data.tags.join()
                     },
@@ -129,43 +129,43 @@ export default function pagesReducer(state = {
             const modules = [...state.selectedPage.modules.filter(f => f.id !== action.data.module.id)];
             return { ...state,
                 selectedPage: {
-                    ...state.selectedPage, 
+                    ...state.selectedPage,
                     modules
                 }
             };
         }
-        
+
         case ActionTypes.UPDATED_PAGE_MODULE_COPY: {
             const modules = changeModuleCopy(action.data.id, action.data.key, action.data.event) ;
             return { ...state,
                 selectedPage: {
-                    ...state.selectedPage, 
+                    ...state.selectedPage,
                     modules
                 },
-                dirtyPage: true                   
+                dirtyPage: true
             };
         }
-        
+
         case ActionTypes.ADD_CUSTOM_URL:
         case ActionTypes.REPLACE_CUSTOM_URL:
         case ActionTypes.DELETE_CUSTOM_URL: {
             const pageUrls = action.payload.pageUrls;
-            
+
             return { ...state,
                 selectedPage: {
-                    ...state.selectedPage, 
+                    ...state.selectedPage,
                     pageUrls
                 }
             };
         }
 
         case ActionTypes.RETRIEVED_CACHED_PAGE_COUNT:
-            return { ...state,                
+            return { ...state,
                 cachedPageCount: action.data.cachedPageCount
             };
 
         case ActionTypes.CLEARED_CACHED_PAGE:
-            return { ...state,                
+            return { ...state,
                 cachedPageCount: 0
             };
 

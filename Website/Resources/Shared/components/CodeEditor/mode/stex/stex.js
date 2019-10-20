@@ -20,39 +20,39 @@
     "use strict";
 
     function pushCommand(state, command) {
-      state.cmdState.push(command);
+    state.cmdState.push(command);
     }
 
     function peekCommand(state) {
-      if (state.cmdState.length > 0) {
+    if (state.cmdState.length > 0) {
         return state.cmdState[state.cmdState.length - 1];
-      } else {
+    } else {
         return null;
-      }
+    }
     }
 
     function popCommand(state) {
-      var plug = state.cmdState.pop();
-      if (plug) {
+    var plug = state.cmdState.pop();
+    if (plug) {
         plug.closeBracket();
-      }
+    }
     }
 
     // returns the non-default plugin closest to the end of the list
     function getMostPowerful(state) {
-      var context = state.cmdState;
-      for (var i = context.length - 1; i >= 0; i--) {
+    var context = state.cmdState;
+    for (var i = context.length - 1; i >= 0; i--) {
         var plug = context[i];
         if (plug.name == "DEFAULT") {
-          continue;
+        continue;
         }
         return plug;
-      }
-      return { styleIdentifier: function() { return null; } };
+    }
+    return { styleIdentifier: function() { return null; } };
     }
 
     function addPluginPattern(pluginName, cmdStyle, styles) {
-      return function () {
+    return function () {
         this.name = pluginName;
         this.bracketNo = 0;
         this.style = cmdStyle;
@@ -60,14 +60,14 @@
         this.argument = null;   // \begin and \end have arguments that follow. These are stored in the plugin
 
         this.styleIdentifier = function() {
-          return this.styles[this.bracketNo - 1] || null;
+        return this.styles[this.bracketNo - 1] || null;
         };
         this.openBracket = function() {
-          this.bracketNo++;
-          return "bracket";
+        this.bracketNo++;
+        return "bracket";
         };
         this.closeBracket = function() {};
-      };
+    };
     }
 
     var plugins = {};
@@ -79,169 +79,169 @@
     plugins["end"] = addPluginPattern("end", "tag", ["atom"]);
 
     plugins["DEFAULT"] = function () {
-      this.name = "DEFAULT";
-      this.style = "tag";
+    this.name = "DEFAULT";
+    this.style = "tag";
 
-      this.styleIdentifier = this.openBracket = this.closeBracket = function() {};
+    this.styleIdentifier = this.openBracket = this.closeBracket = function() {};
     };
 
     function setState(state, f) {
-      state.f = f;
+    state.f = f;
     }
 
     // called when in a normal (no environment) context
     function normal(source, state) {
-      var plug;
-      // Do we look like '\command' ?  If so, attempt to apply the plugin 'command'
-      if (source.match(/^\\[a-zA-Z@]+/)) {
+    var plug;
+    // Do we look like '\command' ?  If so, attempt to apply the plugin 'command'
+    if (source.match(/^\\[a-zA-Z@]+/)) {
         var cmdName = source.current().slice(1);
         plug = plugins[cmdName] || plugins["DEFAULT"];
         plug = new plug();
         pushCommand(state, plug);
         setState(state, beginParams);
         return plug.style;
-      }
+    }
 
-      // escape characters
-      if (source.match(/^\\[$&%#{}_]/)) {
+    // escape characters
+    if (source.match(/^\\[$&%#{}_]/)) {
         return "tag";
-      }
+    }
 
-      // white space control characters
-      if (source.match(/^\\[,;!\/\\]/)) {
+    // white space control characters
+    if (source.match(/^\\[,;!\/\\]/)) {
         return "tag";
-      }
+    }
 
-      // find if we're starting various math modes
-      if (source.match("\\[")) {
+    // find if we're starting various math modes
+    if (source.match("\\[")) {
         setState(state, function(source, state){ return inMathMode(source, state, "\\]"); });
         return "keyword";
-      }
-      if (source.match("$$")) {
+    }
+    if (source.match("$$")) {
         setState(state, function(source, state){ return inMathMode(source, state, "$$"); });
         return "keyword";
-      }
-      if (source.match("$")) {
+    }
+    if (source.match("$")) {
         setState(state, function(source, state){ return inMathMode(source, state, "$"); });
         return "keyword";
-      }
+    }
 
-      var ch = source.next();
-      if (ch == "%") {
+    var ch = source.next();
+    if (ch == "%") {
         source.skipToEnd();
         return "comment";
-      } else if (ch == '}' || ch == ']') {
+    } else if (ch == '}' || ch == ']') {
         plug = peekCommand(state);
         if (plug) {
-          plug.closeBracket(ch);
-          setState(state, beginParams);
+        plug.closeBracket(ch);
+        setState(state, beginParams);
         } else {
-          return "error";
+        return "error";
         }
         return "bracket";
-      } else if (ch == '{' || ch == '[') {
+    } else if (ch == '{' || ch == '[') {
         plug = plugins["DEFAULT"];
         plug = new plug();
         pushCommand(state, plug);
         return "bracket";
-      } else if (/\d/.test(ch)) {
+    } else if (/\d/.test(ch)) {
         source.eatWhile(/[\w.%]/);
         return "atom";
-      } else {
+    } else {
         source.eatWhile(/[\w\-_]/);
         plug = getMostPowerful(state);
         if (plug.name == 'begin') {
-          plug.argument = source.current();
+        plug.argument = source.current();
         }
         return plug.styleIdentifier();
-      }
+    }
     }
 
     function inMathMode(source, state, endModeSeq) {
-      if (source.eatSpace()) {
+    if (source.eatSpace()) {
         return null;
-      }
-      if (source.match(endModeSeq)) {
+    }
+    if (source.match(endModeSeq)) {
         setState(state, normal);
         return "keyword";
-      }
-      if (source.match(/^\\[a-zA-Z@]+/)) {
+    }
+    if (source.match(/^\\[a-zA-Z@]+/)) {
         return "tag";
-      }
-      if (source.match(/^[a-zA-Z]+/)) {
+    }
+    if (source.match(/^[a-zA-Z]+/)) {
         return "variable-2";
-      }
-      // escape characters
-      if (source.match(/^\\[$&%#{}_]/)) {
+    }
+    // escape characters
+    if (source.match(/^\\[$&%#{}_]/)) {
         return "tag";
-      }
-      // white space control characters
-      if (source.match(/^\\[,;!\/]/)) {
+    }
+    // white space control characters
+    if (source.match(/^\\[,;!\/]/)) {
         return "tag";
-      }
-      // special math-mode characters
-      if (source.match(/^[\^_&]/)) {
+    }
+    // special math-mode characters
+    if (source.match(/^[\^_&]/)) {
         return "tag";
-      }
-      // non-special characters
-      if (source.match(/^[+\-<>|=,\/@!*:;'"`~#?]/)) {
+    }
+    // non-special characters
+    if (source.match(/^[+\-<>|=,\/@!*:;'"`~#?]/)) {
         return null;
-      }
-      if (source.match(/^(\d+\.\d*|\d*\.\d+|\d+)/)) {
+    }
+    if (source.match(/^(\d+\.\d*|\d*\.\d+|\d+)/)) {
         return "number";
-      }
-      var ch = source.next();
-      if (ch == "{" || ch == "}" || ch == "[" || ch == "]" || ch == "(" || ch == ")") {
+    }
+    var ch = source.next();
+    if (ch == "{" || ch == "}" || ch == "[" || ch == "]" || ch == "(" || ch == ")") {
         return "bracket";
-      }
+    }
 
-      if (ch == "%") {
+    if (ch == "%") {
         source.skipToEnd();
         return "comment";
-      }
-      return "error";
+    }
+    return "error";
     }
 
     function beginParams(source, state) {
-      var ch = source.peek(), lastPlug;
-      if (ch == '{' || ch == '[') {
+    var ch = source.peek(), lastPlug;
+    if (ch == '{' || ch == '[') {
         lastPlug = peekCommand(state);
         lastPlug.openBracket(ch);
         source.eat(ch);
         setState(state, normal);
         return "bracket";
-      }
-      if (/[ \t\r]/.test(ch)) {
+    }
+    if (/[ \t\r]/.test(ch)) {
         source.eat(ch);
         return null;
-      }
-      setState(state, normal);
-      popCommand(state);
+    }
+    setState(state, normal);
+    popCommand(state);
 
-      return normal(source, state);
+    return normal(source, state);
     }
 
     return {
-      startState: function() {
+    startState: function() {
         return {
-          cmdState: [],
-          f: normal
+        cmdState: [],
+        f: normal
         };
-      },
-      copyState: function(s) {
+    },
+    copyState: function(s) {
         return {
-          cmdState: s.cmdState.slice(),
-          f: s.f
+        cmdState: s.cmdState.slice(),
+        f: s.f
         };
-      },
-      token: function(stream, state) {
+    },
+    token: function(stream, state) {
         return state.f(stream, state);
-      },
-      blankLine: function(state) {
+    },
+    blankLine: function(state) {
         state.f = normal;
         state.cmdState.length = 0;
-      },
-      lineComment: "%"
+    },
+    lineComment: "%"
     };
   });
 

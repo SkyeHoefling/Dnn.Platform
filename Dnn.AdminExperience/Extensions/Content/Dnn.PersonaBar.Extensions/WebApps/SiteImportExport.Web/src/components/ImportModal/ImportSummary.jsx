@@ -39,7 +39,7 @@ class ImportSummary extends Component {
                                         label={Localization.get("Pages")}
                                     />
                                     <div className="import-summary-item">{this.getSummaryItem("Pages")}</div>
-                                </GridCell>                                
+                                </GridCell>
                                 <GridCell>
                                     <Label
                                         labelType="inline"

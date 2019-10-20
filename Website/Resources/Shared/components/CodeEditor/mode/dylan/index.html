@@ -34,7 +34,7 @@ Module:       locators-internals
 Synopsis:     Abstract modeling of locations
 Author:       Andy Armstrong
 Copyright:    Original Code is Copyright (c) 1995-2004 Functional Objects, Inc.
-              All rights reserved.
+            All rights reserved.
 License:      See License.txt in this distribution for details.
 Warranty:     Distributed WITHOUT WARRANTY OF ANY KIND
 
@@ -71,16 +71,16 @@ end method as;
 
 define method make
     (class == <directory-locator>,
-     #key server :: false-or(<server-locator>) = #f,
-          path :: <sequence> = #[],
-          relative? :: <boolean> = #f,
-          name :: false-or(<string>) = #f)
+    #key server :: false-or(<server-locator>) = #f,
+        path :: <sequence> = #[],
+        relative? :: <boolean> = #f,
+        name :: false-or(<string>) = #f)
  => (locator :: <directory-locator>)
   make(<native-directory-locator>,
-       server:    server,
-       path:      path,
-       relative?: relative?,
-       name:      name)
+        server:    server,
+        path:      path,
+        relative?: relative?,
+        name:      name)
 end method make;
 
 define method as
@@ -91,16 +91,16 @@ end method as;
 
 define method make
     (class == <file-locator>,
-     #key directory :: false-or(<directory-locator>) = #f,
-          base :: false-or(<string>) = #f,
-          extension :: false-or(<string>) = #f,
-          name :: false-or(<string>) = #f)
+    #key directory :: false-or(<directory-locator>) = #f,
+        base :: false-or(<string>) = #f,
+        extension :: false-or(<string>) = #f,
+        name :: false-or(<string>) = #f)
  => (locator :: <file-locator>)
   make(<native-file-locator>,
-       directory: directory,
-       base:      base,
-       extension: extension,
-       name:      name)
+        directory: directory,
+        base:      base,
+        extension: extension,
+        name:      name)
 end method make;
 
 /// Locator coercion
@@ -129,9 +129,9 @@ define sealed sideways method as
   else
     let string = locator-as-string(class, locator);
     if ($cache-locator-strings?)
-      element($locator-to-string-cache, locator) := string;
+    element($locator-to-string-cache, locator) := string;
     else
-      string
+    string
     end
   end
 end method as;
@@ -145,9 +145,9 @@ define sealed sideways method as
   else
     let locator = string-as-locator(class, string);
     if ($cache-locators?)
-      element($string-to-locator-cache, string) := locator;
+    element($string-to-locator-cache, string) := locator;
     else
-      locator
+    locator
     end
   end
 end method as;
@@ -159,9 +159,9 @@ end class <locator-error>;
 
 define function locator-error
     (format-string :: <string>, #rest format-arguments)
-  error(make(<locator-error>, 
-             format-string:    format-string,
-             format-arguments: format-arguments))
+  error(make(<locator-error>,
+            format-string:    format-string,
+            format-arguments: format-arguments))
 end function locator-error;
 
 /// Useful locator protocols
@@ -199,9 +199,9 @@ define method locator-directory
   let path = locator.locator-path;
   unless (empty?(path))
     make(object-class(locator),
-         server:    locator.locator-server,
-         path:      copy-sequence(path, end: path.size - 1),
-         relative?: locator.locator-relative?)
+        server:    locator.locator-server,
+        path:      copy-sequence(path, end: path.size - 1),
+        relative?: locator.locator-relative?)
   end
 end method locator-directory;
 
@@ -218,14 +218,14 @@ define method simplify-locator
   let relative? = locator.locator-relative?;
   let resolve-parent? = ~locator.locator-might-have-links?;
   let simplified-path
-    = simplify-path(path, 
+    = simplify-path(path,
                     resolve-parent?: resolve-parent?,
                     relative?: relative?);
   if (path ~= simplified-path)
     make(object-class(locator),
-         server:    locator.locator-server,
-         path:      simplified-path,
-         relative?: locator.locator-relative?)
+        server:    locator.locator-server,
+        path:      simplified-path,
+        relative?: locator.locator-relative?)
   else
     locator
   end
@@ -237,9 +237,9 @@ define method simplify-locator
   let simplified-directory = directory & simplify-locator(directory);
   if (directory ~= simplified-directory)
     make(object-class(locator),
-         directory: simplified-directory,
-         base:      locator.locator-base,
-         extension: locator.locator-extension)
+        directory: simplified-directory,
+        base:      locator.locator-base,
+        extension: locator.locator-extension)
   else
     locator
   end
@@ -257,9 +257,9 @@ define method subdirectory-locator
   let old-path = locator.locator-path;
   let new-path = concatenate-as(<simple-object-vector>, old-path, sub-path);
   make(object-class(locator),
-       server:    locator.locator-server,
-       path:      new-path,
-       relative?: locator.locator-relative?)
+        server:    locator.locator-server,
+        path:      new-path,
+        relative?: locator.locator-relative?)
 end method subdirectory-locator;
 
 /// Relative locator
@@ -275,19 +275,19 @@ define method relative-locator
   let from-path = from-locator.locator-path;
   case
     ~locator.locator-relative? & from-locator.locator-relative? =>
-      locator-error
+    locator-error
         ("Cannot find relative path of absolute locator %= from relative locator %=",
-         locator, from-locator);
+        locator, from-locator);
     locator.locator-server ~= from-locator.locator-server =>
-      locator;
+    locator;
     path = from-path =>
-      make(object-class(locator),
-           path: vector(#"self"),
-           relative?: #t);
+    make(object-class(locator),
+            path: vector(#"self"),
+            relative?: #t);
     otherwise =>
-      make(object-class(locator),
-           path: relative-path(path, from-path, test: locator.locator-test),
-           relative?: #t);
+    make(object-class(locator),
+            path: relative-path(path, from-path, test: locator.locator-test),
+            relative?: #t);
   end
 end method relative-locator;
 
@@ -298,7 +298,7 @@ define method relative-locator
   let relative-directory = directory & relative-locator(directory, from-directory);
   if (relative-directory ~= directory)
     simplify-locator
-      (make(object-class(locator),
+    (make(object-class(locator),
             directory: relative-directory,
             base:      locator.locator-base,
             extension: locator.locator-extension))
@@ -313,13 +313,13 @@ define method relative-locator
   let from-directory = from-locator.locator-directory;
   case
     from-directory =>
-      relative-locator(locator, from-directory);
+    relative-locator(locator, from-directory);
     ~locator.locator-relative? =>
-      locator-error
+    locator-error
         ("Cannot find relative path of absolute locator %= from relative locator %=",
-         locator, from-locator);
+        locator, from-locator);
     otherwise =>
-      locator;
+    locator;
   end
 end method relative-locator;
 
@@ -337,7 +337,7 @@ define method merge-locators
   if (locator.locator-relative?)
     let path = concatenate(from-locator.locator-path, locator.locator-path);
     simplify-locator
-      (make(object-class(locator),
+    (make(object-class(locator),
             server:    from-locator.locator-server,
             path:      path,
             relative?: from-locator.locator-relative?))
@@ -350,17 +350,17 @@ define method merge-locators
     (locator :: <file-locator>, from-locator :: <directory-locator>)
  => (merged-locator :: <file-locator>)
   let directory = locator.locator-directory;
-  let merged-directory 
+  let merged-directory
     = if (directory)
         merge-locators(directory, from-locator)
-      else
+    else
         simplify-locator(from-locator)
-      end;
+    end;
   if (merged-directory ~= directory)
     make(object-class(locator),
-         directory: merged-directory,
-         base:      locator.locator-base,
-         extension: locator.locator-extension)
+        directory: merged-directory,
+        base:      locator.locator-base,
+        extension: locator.locator-extension)
   else
     locator
   end
@@ -392,7 +392,7 @@ end method open-locator;
 </textarea></div>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: "text/x-dylan",
         lineNumbers: true,
         matchBrackets: true,
@@ -400,7 +400,7 @@ end method open-locator;
         extraKeys: {"Ctrl-Q": "toggleComment"},
         tabMode: "indent",
         indentUnit: 2
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-dylan</code>.</p>

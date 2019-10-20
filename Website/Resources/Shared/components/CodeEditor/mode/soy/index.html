@@ -41,9 +41,9 @@
   Hello <b>{$name}</b>!
   <div>
     {if $score}
-      <em>{$score} points</em>
+    <em>{$score} points</em>
     {else}
-      no score
+    no score
     {/if}
   </div>
 {/template}
@@ -54,13 +54,13 @@
 </textarea></form>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-soy",
         indentUnit: 2,
         indentWithTabs: false
-      });
+    });
     </script>
 
     <p>A mode for <a href="https://developers.google.com/closure/templates/">Closure Templates</a> (Soy).</p>

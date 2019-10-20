@@ -86,5 +86,5 @@
         async: true
     };
 
-	///dnnModuleService END
+    ///dnnModuleService END
 }(jQuery));

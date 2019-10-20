@@ -7,7 +7,7 @@
 .dnnRibbonBar { width:100%; white-space: nowrap;}
 .dnnRibbonBarCol1 { text-align:left; vertical-align:middle; width:33%; white-space: nowrap; }
 .dnnRibbonBarCol2 { text-align:center; vertical-align:middle; width:33%; }
-.dnnRibbonBarCol3 { text-align:right; vertical-align:middle; white-space: nowrap; width:33%; }	
+.dnnRibbonBarCol3 { text-align:right; vertical-align:middle; white-space: nowrap; width:33%; }
 
 .dnnRibbon { white-space:nowrap; width:100%;background-color:#ffffff;padding:0px; }
 .dnnRibbon .barContent { white-space:nowrap;width:100%;background-color:#ffffff;padding:0px;border:solid 1px #dadada; }
@@ -83,7 +83,7 @@
 
 .Tab1_AddMod .AddMod1 { padding-top:6px;white-space:nowrap;}
 .Tab1_AddMod .AddMod2,
-.Tab1_AddMod .AddMod3 
+.Tab1_AddMod .AddMod3
 { padding-left:15px;white-space:nowrap;}
 .Tab1_AddMod .AddMod2 td,
 .Tab1_AddMod .AddMod3 td
@@ -96,7 +96,7 @@
 .Tab2_Settings { _width:55px; text-align:center; white-space:nowrap;}
 .Tab2_Actions { _width:99px; white-space:nowrap; }
 .Tab2_Actions .content { _height:89px;_overflow:hidden; }
- 
+
 .Tab2_EditPage { _width:451px; white-space:nowrap;}
 .Tab2_EditPage .content { _height:89px;_overflow:hidden;}
 .Tab2_EditPage .SkinListHeader { font-weight:bold; border-bottom: solid 1px #dcdcdc; }
@@ -105,7 +105,7 @@
 .Tab2_EditPage .EditPage2 { padding-left:10px; }
 
 .Tab2_EditPage .EditPage1 td,
-.Tab2_EditPage .EditPage2 td 
+.Tab2_EditPage .EditPage2 td
 { padding: 1px 2px 1px 0px; }
 
 .Tab2_Copy { _width:202px; white-space:nowrap;}
@@ -124,7 +124,7 @@
 .Tab3_AddPage .AddPage2 { padding-left:10px; }
 
 .Tab3_AddPage .AddPage1 td,
-.Tab3_AddPage .AddPage2 td 
+.Tab3_AddPage .AddPage2 td
 { padding: 1px 2px 1px 0px; }
 
 .Tab3_Features { _width:154px; white-space:nowrap; }
@@ -158,6 +158,3 @@
 .dnnImageTextLink .Disabled a:Active { color:Gray; text-decoration:none;font-size:11px; }
 .dnnImageTextLink .Disabled a:Hover { color:Gray; text-decoration:none;font-size:11px; }
 .dnnImageTextLink .Disabled a:Visited { color:Gray; text-decoration:none;font-size:11px; }
-
-
-

@@ -119,7 +119,7 @@ namespace Dnn.PersonaBar.Library.Controllers
             message = new KeyValuePair<HttpStatusCode, string>(HttpStatusCode.NotFound, string.Format(Localization.GetString("Prompt_PageNotFound", Constants.LocalResourcesFile), targetPageId));
 
             if (targetPage == null)
-            {                
+            {
                 return null;
             }
 
@@ -147,15 +147,15 @@ namespace Dnn.PersonaBar.Library.Controllers
             else
             {
                 return null;
-            }            
-        }      
+            }
+        }
 
         public void DeleteModule(PortalSettings portalSettings, int moduleId, int pageId, out KeyValuePair<HttpStatusCode, string> message)
-        {         
+        {
             var module = GetModule(portalSettings,moduleId,pageId,out message);
 
             if (module != null)
-            {               
+            {
                     try
                     {
                         ModuleController.Instance.DeleteTabModule(pageId, moduleId, true);
@@ -165,8 +165,8 @@ namespace Dnn.PersonaBar.Library.Controllers
                     {
                         Logger.Error(ex);
                         message = new KeyValuePair<HttpStatusCode, string>(HttpStatusCode.InternalServerError, string.Format(Localization.GetString("Prompt_FailedtoDeleteModule", Constants.LocalResourcesFile), moduleId));
-                    }             
-            }           
+                    }
+            }
         }
 
         public ModuleInfo GetModule(PortalSettings portalSettings, int moduleId, int? pageId, out KeyValuePair<HttpStatusCode, string> message)
@@ -203,7 +203,7 @@ namespace Dnn.PersonaBar.Library.Controllers
             message = new KeyValuePair<HttpStatusCode, string>(HttpStatusCode.NotFound, string.Format(Localization.GetString("Prompt_NoModule", Constants.LocalResourcesFile), moduleId));
             return null;
         }
-      
+
         public IEnumerable<ModuleInfo> GetModules(PortalSettings portalSettings, bool? deleted, out int total, string moduleName = null, string moduleTitle = null,
             int? pageId = null, int pageIndex = 0, int pageSize = 10)
         {

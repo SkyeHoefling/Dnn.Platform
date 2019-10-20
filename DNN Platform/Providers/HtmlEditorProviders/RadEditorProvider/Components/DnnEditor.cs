@@ -7,16 +7,16 @@ using Telerik.Web.UI;
 
 namespace DotNetNuke.RadEditorProvider.Components
 {
-	internal class DnnEditor : RadEditor
-	{
-		public bool PreventDefaultStylesheet { get; set; }
+    internal class DnnEditor : RadEditor
+    {
+        public bool PreventDefaultStylesheet { get; set; }
 
-		protected override void RegisterCssReferences()
-		{
-			if (!PreventDefaultStylesheet)
-			{
-				base.RegisterCssReferences();
-			}
-		}
-	}
+        protected override void RegisterCssReferences()
+        {
+            if (!PreventDefaultStylesheet)
+            {
+                base.RegisterCssReferences();
+            }
+        }
+    }
 }

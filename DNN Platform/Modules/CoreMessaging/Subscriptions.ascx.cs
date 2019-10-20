@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -131,18 +131,18 @@ namespace DotNetNuke.Modules.CoreMessaging
             {
                 userPreference = userPreferenceController.GetUserPreference(user);
             }
-           
+
 
             const int notifyFrequency = 2;
             const int messageFrequency = 0;
-            
+
             return new Hashtable
-                   {
-                       { "moduleScope", string.Format("#{0}", ScopeWrapper.ClientID) },
-                       { "pageSize", 25 },
-                       { "notifyFrequency", userPreference != null ? (int)userPreference.NotificationsEmailFrequency : notifyFrequency },
-                       { "msgFrequency", userPreference != null ? (int)userPreference.MessagesEmailFrequency : messageFrequency }                
-                   };
+                    {
+                        { "moduleScope", string.Format("#{0}", ScopeWrapper.ClientID) },
+                        { "pageSize", 25 },
+                        { "notifyFrequency", userPreference != null ? (int)userPreference.NotificationsEmailFrequency : notifyFrequency },
+                        { "msgFrequency", userPreference != null ? (int)userPreference.MessagesEmailFrequency : messageFrequency }
+                    };
         }
 
         private static Hashtable GetModuleSettings(PortalSettings portalSettings, ModuleInfo moduleInfo, int uniqueId)
@@ -184,27 +184,27 @@ namespace DotNetNuke.Modules.CoreMessaging
 #endif
 
             return new Hashtable
-                   {
-                       { "anonymous", PortalSettings.Current.UserId < 0 },
-                       { "currentUserId", PortalSettings.Current.UserId },
-                       { "debug", debug },
-                       { "culture", CultureInfo.CurrentUICulture.Name },
-                       { "showMissingKeys", Localization.ShowMissingKeys },
-                       { "portalId", portalSettings.PortalId },
-                       { "moduleId", moduleId },
-                       { "moduleSettings", moduleSettings },
-                       { "moduleTitle", moduleTitle },
-                       { "moduleRoot", moduleRoot },
-                       { "navigationKey", navigationKey },
-                       { "sessionTimeout", Convert.ToInt32(GetSessionTimeout().TotalMinutes) },
-                       { "sharedResources", GetSharedResources() },
-                       { "authorizationUrl", GetLoginUrl(portalSettings) },
-                       { "usePopup", usePopup },
-                       { "returnUrl", HttpContext.Current.Request.UrlReferrer },
-                       { "uniqueId", uniqueId },
+                    {
+                        { "anonymous", PortalSettings.Current.UserId < 0 },
+                        { "currentUserId", PortalSettings.Current.UserId },
+                        { "debug", debug },
+                        { "culture", CultureInfo.CurrentUICulture.Name },
+                        { "showMissingKeys", Localization.ShowMissingKeys },
+                        { "portalId", portalSettings.PortalId },
+                        { "moduleId", moduleId },
+                        { "moduleSettings", moduleSettings },
+                        { "moduleTitle", moduleTitle },
+                        { "moduleRoot", moduleRoot },
+                        { "navigationKey", navigationKey },
+                        { "sessionTimeout", Convert.ToInt32(GetSessionTimeout().TotalMinutes) },
+                        { "sharedResources", GetSharedResources() },
+                        { "authorizationUrl", GetLoginUrl(portalSettings) },
+                        { "usePopup", usePopup },
+                        { "returnUrl", HttpContext.Current.Request.UrlReferrer },
+                        { "uniqueId", uniqueId },
                     };
         }
-        
+
         private static string GetHistoryNavigationKey(string moduleName)
         {
             return HttpContext.Current.Server.HtmlEncode(moduleName.ToLowerInvariant().Replace(" ", string.Empty));

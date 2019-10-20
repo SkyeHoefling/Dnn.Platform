@@ -45,105 +45,105 @@
 
   function toTagEnd(iter) {
     for (;;) {
-      var gt = iter.text.indexOf(">", iter.ch);
-      if (gt == -1) { if (nextLine(iter)) continue; else return; }
-      if (!tagAt(iter, gt + 1)) { iter.ch = gt + 1; continue; }
-      var lastSlash = iter.text.lastIndexOf("/", gt);
-      var selfClose = lastSlash > -1 && !/\S/.test(iter.text.slice(lastSlash + 1, gt));
-      iter.ch = gt + 1;
-      return selfClose ? "selfClose" : "regular";
+    var gt = iter.text.indexOf(">", iter.ch);
+    if (gt == -1) { if (nextLine(iter)) continue; else return; }
+    if (!tagAt(iter, gt + 1)) { iter.ch = gt + 1; continue; }
+    var lastSlash = iter.text.lastIndexOf("/", gt);
+    var selfClose = lastSlash > -1 && !/\S/.test(iter.text.slice(lastSlash + 1, gt));
+    iter.ch = gt + 1;
+    return selfClose ? "selfClose" : "regular";
     }
   }
   function toTagStart(iter) {
     for (;;) {
-      var lt = iter.ch ? iter.text.lastIndexOf("<", iter.ch - 1) : -1;
-      if (lt == -1) { if (prevLine(iter)) continue; else return; }
-      if (!tagAt(iter, lt + 1)) { iter.ch = lt; continue; }
-      xmlTagStart.lastIndex = lt;
-      iter.ch = lt;
-      var match = xmlTagStart.exec(iter.text);
-      if (match && match.index == lt) return match;
+    var lt = iter.ch ? iter.text.lastIndexOf("<", iter.ch - 1) : -1;
+    if (lt == -1) { if (prevLine(iter)) continue; else return; }
+    if (!tagAt(iter, lt + 1)) { iter.ch = lt; continue; }
+    xmlTagStart.lastIndex = lt;
+    iter.ch = lt;
+    var match = xmlTagStart.exec(iter.text);
+    if (match && match.index == lt) return match;
     }
   }
 
   function toNextTag(iter) {
     for (;;) {
-      xmlTagStart.lastIndex = iter.ch;
-      var found = xmlTagStart.exec(iter.text);
-      if (!found) { if (nextLine(iter)) continue; else return; }
-      if (!tagAt(iter, found.index + 1)) { iter.ch = found.index + 1; continue; }
-      iter.ch = found.index + found[0].length;
-      return found;
+    xmlTagStart.lastIndex = iter.ch;
+    var found = xmlTagStart.exec(iter.text);
+    if (!found) { if (nextLine(iter)) continue; else return; }
+    if (!tagAt(iter, found.index + 1)) { iter.ch = found.index + 1; continue; }
+    iter.ch = found.index + found[0].length;
+    return found;
     }
   }
   function toPrevTag(iter) {
     for (;;) {
-      var gt = iter.ch ? iter.text.lastIndexOf(">", iter.ch - 1) : -1;
-      if (gt == -1) { if (prevLine(iter)) continue; else return; }
-      if (!tagAt(iter, gt + 1)) { iter.ch = gt; continue; }
-      var lastSlash = iter.text.lastIndexOf("/", gt);
-      var selfClose = lastSlash > -1 && !/\S/.test(iter.text.slice(lastSlash + 1, gt));
-      iter.ch = gt + 1;
-      return selfClose ? "selfClose" : "regular";
+    var gt = iter.ch ? iter.text.lastIndexOf(">", iter.ch - 1) : -1;
+    if (gt == -1) { if (prevLine(iter)) continue; else return; }
+    if (!tagAt(iter, gt + 1)) { iter.ch = gt; continue; }
+    var lastSlash = iter.text.lastIndexOf("/", gt);
+    var selfClose = lastSlash > -1 && !/\S/.test(iter.text.slice(lastSlash + 1, gt));
+    iter.ch = gt + 1;
+    return selfClose ? "selfClose" : "regular";
     }
   }
 
   function findMatchingClose(iter, tag) {
     var stack = [];
     for (;;) {
-      var next = toNextTag(iter), end, startLine = iter.line, startCh = iter.ch - (next ? next[0].length : 0);
-      if (!next || !(end = toTagEnd(iter))) return;
-      if (end == "selfClose") continue;
-      if (next[1]) { // closing tag
+    var next = toNextTag(iter), end, startLine = iter.line, startCh = iter.ch - (next ? next[0].length : 0);
+    if (!next || !(end = toTagEnd(iter))) return;
+    if (end == "selfClose") continue;
+    if (next[1]) { // closing tag
         for (var i = stack.length - 1; i >= 0; --i) if (stack[i] == next[2]) {
-          stack.length = i;
-          break;
+        stack.length = i;
+        break;
         }
         if (i < 0 && (!tag || tag == next[2])) return {
-          tag: next[2],
-          from: Pos(startLine, startCh),
-          to: Pos(iter.line, iter.ch)
+        tag: next[2],
+        from: Pos(startLine, startCh),
+        to: Pos(iter.line, iter.ch)
         };
-      } else { // opening tag
+    } else { // opening tag
         stack.push(next[2]);
-      }
+    }
     }
   }
   function findMatchingOpen(iter, tag) {
     var stack = [];
     for (;;) {
-      var prev = toPrevTag(iter);
-      if (!prev) return;
-      if (prev == "selfClose") { toTagStart(iter); continue; }
-      var endLine = iter.line, endCh = iter.ch;
-      var start = toTagStart(iter);
-      if (!start) return;
-      if (start[1]) { // closing tag
+    var prev = toPrevTag(iter);
+    if (!prev) return;
+    if (prev == "selfClose") { toTagStart(iter); continue; }
+    var endLine = iter.line, endCh = iter.ch;
+    var start = toTagStart(iter);
+    if (!start) return;
+    if (start[1]) { // closing tag
         stack.push(start[2]);
-      } else { // opening tag
+    } else { // opening tag
         for (var i = stack.length - 1; i >= 0; --i) if (stack[i] == start[2]) {
-          stack.length = i;
-          break;
+        stack.length = i;
+        break;
         }
         if (i < 0 && (!tag || tag == start[2])) return {
-          tag: start[2],
-          from: Pos(iter.line, iter.ch),
-          to: Pos(endLine, endCh)
+        tag: start[2],
+        from: Pos(iter.line, iter.ch),
+        to: Pos(endLine, endCh)
         };
-      }
+    }
     }
   }
 
   CodeMirror.registerHelper("fold", "xml", function(cm, start) {
     var iter = new Iter(cm, start.line, 0);
     for (;;) {
-      var openTag = toNextTag(iter), end;
-      if (!openTag || iter.line != start.line || !(end = toTagEnd(iter))) return;
-      if (!openTag[1] && end != "selfClose") {
+    var openTag = toNextTag(iter), end;
+    if (!openTag || iter.line != start.line || !(end = toTagEnd(iter))) return;
+    if (!openTag[1] && end != "selfClose") {
         var start = Pos(iter.line, iter.ch);
         var close = findMatchingClose(iter, openTag[2]);
         return close && {from: start, to: close.from};
-      }
+    }
     }
   });
   CodeMirror.findMatchingTag = function(cm, pos, range) {
@@ -156,21 +156,21 @@
     if (end == "selfClose") return {open: here, close: null, at: "open"};
 
     if (start[1]) { // closing tag
-      return {open: findMatchingOpen(iter, start[2]), close: here, at: "close"};
+    return {open: findMatchingOpen(iter, start[2]), close: here, at: "close"};
     } else { // opening tag
-      iter = new Iter(cm, to.line, to.ch, range);
-      return {open: here, close: findMatchingClose(iter, start[2]), at: "open"};
+    iter = new Iter(cm, to.line, to.ch, range);
+    return {open: here, close: findMatchingClose(iter, start[2]), at: "open"};
     }
   };
 
   CodeMirror.findEnclosingTag = function(cm, pos, range) {
     var iter = new Iter(cm, pos.line, pos.ch, range);
     for (;;) {
-      var open = findMatchingOpen(iter);
-      if (!open) break;
-      var forward = new Iter(cm, pos.line, pos.ch, range);
-      var close = findMatchingClose(forward, open.tag);
-      if (close) return {open: open, close: close};
+    var open = findMatchingOpen(iter);
+    if (!open) break;
+    var forward = new Iter(cm, pos.line, pos.ch, range);
+    var close = findMatchingClose(forward, open.tag);
+    if (close) return {open: open, close: close};
     }
   };
 

@@ -7,6 +7,5 @@
         </div>
     </div>
     <div id="ContentPane" runat="server"></div>
-	<div class="clear"></div>
+    <div class="clear"></div>
 </div>
-

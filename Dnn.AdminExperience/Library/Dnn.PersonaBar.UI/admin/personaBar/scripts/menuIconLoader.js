@@ -62,6 +62,6 @@ define(['jquery', 'main/config'], function ($, cf) {
     return {
         load: function () {
             loadIcons();
-        } 
+        }
     };
 });

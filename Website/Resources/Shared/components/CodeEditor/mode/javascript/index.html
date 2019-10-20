@@ -42,7 +42,7 @@ StringStream.prototype = {
   peek: function() {return this.string.charAt(this.pos);},
   next: function() {
     if (this.pos &lt; this.string.length)
-      return this.string.charAt(this.pos++);
+    return this.string.charAt(this.pos++);
   },
   eat: function(match) {
     var ch = this.string.charAt(this.pos);
@@ -64,33 +64,33 @@ StringStream.prototype = {
   },
   match: function(pattern, consume, caseInsensitive) {
     if (typeof pattern == "string") {
-      function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
-      if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
+    function cased(str) {return caseInsensitive ? str.toLowerCase() : str;}
+    if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
         if (consume !== false) this.pos += str.length;
         return true;
-      }
+    }
     }
     else {
-      var match = this.string.slice(this.pos).match(pattern);
-      if (match &amp;&amp; consume !== false) this.pos += match[0].length;
-      return match;
+    var match = this.string.slice(this.pos).match(pattern);
+    if (match &amp;&amp; consume !== false) this.pos += match[0].length;
+    return match;
     }
   }
 };
 </textarea></div>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
         continueComments: "Enter",
         extraKeys: {"Ctrl-Q": "toggleComment"}
-      });
+    });
     </script>
 
     <p>
-      JavaScript mode supports several configuration options:
-      <ul>
+    JavaScript mode supports several configuration options:
+    <ul>
         <li><code>json</code> which will set the mode to expect JSON
         data rather than a JavaScript program.</li>
         <li><code>jsonld</code> which will set the mode to expect
@@ -107,7 +107,7 @@ StringStream.prototype = {
         Defaults to <code>/[\w$]/</code>, which does not handle
         non-ASCII identifiers. Can be set to something more elaborate
         to improve Unicode support.</li>
-      </ul>
+    </ul>
     </p>
 
     <p><strong>MIME types defined:</strong> <code>text/javascript</code>, <code>application/json</code>, <code>application/ld+json</code>, <code>text/typescript</code>, <code>application/typescript</code>.</p>

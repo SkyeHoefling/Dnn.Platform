@@ -24,7 +24,7 @@ dnn.controls.DNNMenu = function(o)
 {
     dnn.controls.DNNMenu.initializeBase(this, [o]);
 
-    //--- Data Properties ---//  
+    //--- Data Properties ---//
     this.rootNode = null;
     this.nodes = [];
     this._loadNodes();
@@ -245,7 +245,7 @@ dnn.controls.DNNMenu.prototype =
     {
         var menuBuilder = this._getMenuBuilder(mNode, null);
         /*if (this.suborient == dnn.controls.orient.vertical) // (this.useTables)
-        menuBuilder = new dnn.controls.DNNMenuTableBuilder(this, mNode);		
+        menuBuilder = new dnn.controls.DNNMenuTableBuilder(this, mNode);
         else
         menuBuilder = new dnn.controls.DNNMenuBuilder(this, mNode);
         */
@@ -949,7 +949,7 @@ dnn.controls.DNNMenuTableBuilder.prototype =
 
     newCont: function()
     {
-        this.subcont = this.newCell(); //TD	
+        this.subcont = this.newCell(); //TD
     },
 
     newCell: function()

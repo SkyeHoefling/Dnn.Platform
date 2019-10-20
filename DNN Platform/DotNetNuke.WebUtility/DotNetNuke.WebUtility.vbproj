@@ -92,17 +92,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetNuke.Web.Client">
-      <HintPath>..\DotNetNuke.Web.Client\bin\DotNetNuke.Web.Client.dll</HintPath>
+    <HintPath>..\DotNetNuke.Web.Client\bin\DotNetNuke.Web.Client.dll</HintPath>
     </Reference>
     <Reference Include="System">
-      <Name>System</Name>
+    <Name>System</Name>
     </Reference>
     <Reference Include="System.configuration" />
     <Reference Include="System.Web">
-      <Name>System.Web</Name>
+    <Name>System.Web</Name>
     </Reference>
     <Reference Include="System.Xml">
-      <Name>System.XML</Name>
+    <Name>System.XML</Name>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -113,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.vb">
-      <SubType>Code</SubType>
+    <SubType>Code</SubType>
     </Compile>
     <Compile Include="Attributes\ControlMethodAttribute.vb" />
     <Compile Include="Attributes\ControlMethodClassAttribute.vb" />
@@ -123,19 +123,19 @@
     <Compile Include="Browser Caps\FunctionalityCollection.vb" />
     <Compile Include="Browser Caps\FunctionalityInfo.vb" />
     <Compile Include="ClientAPI.vb">
-      <SubType>Code</SubType>
+    <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClientAPIPostBackControl.vb">
-      <SubType>Code</SubType>
+    <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClientAPICallBackResponse.vb" />
     <Compile Include="ClientAPIPostBackEventArgs.vb" />
     <Compile Include="IClientAPICallbackEventHandler.vb" />
     <Compile Include="DataCache.vb">
-      <SubType>Code</SubType>
+    <SubType>Code</SubType>
     </Compile>
     <Compile Include="Globals.vb">
-      <SubType>Code</SubType>
+    <SubType>Code</SubType>
     </Compile>
     <Compile Include="MSAJAX.vb" />
     <Compile Include="NonNamingHiddenInput.vb" />

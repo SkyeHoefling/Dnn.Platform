@@ -16,13 +16,13 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetRoleGroupByName
-	@PortalID		int,
-	@RoleGroupName	nvarchar(50)
+    @PortalID		int,
+    @RoleGroupName	nvarchar(50)
 AS
-	SELECT *
-		FROM {databaseOwner}{objectQualifier}RoleGroups
-		WHERE  PortalId = @PortalID 
-			AND RoleGroupName = @RoleGroupName
+    SELECT *
+        FROM {databaseOwner}{objectQualifier}RoleGroups
+        WHERE  PortalId = @PortalID
+            AND RoleGroupName = @RoleGroupName
 GO
 
 
@@ -34,23 +34,23 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}DeletePortalInfo
-	@PortalID int
+    @PortalID int
 
 AS
-	/* Delete all the Portal Modules */
-	DELETE
-	FROM {databaseOwner}{objectQualifier}Modules
-	WHERE PortalId = @PortalID
+    /* Delete all the Portal Modules */
+    DELETE
+    FROM {databaseOwner}{objectQualifier}Modules
+    WHERE PortalId = @PortalID
 
-	/* Delete all the Portal Skins */
-	DELETE
-	FROM {databaseOwner}{objectQualifier}Packages
-	WHERE  PortalId = @PortalID
+    /* Delete all the Portal Skins */
+    DELETE
+    FROM {databaseOwner}{objectQualifier}Packages
+    WHERE  PortalId = @PortalID
 
-	/* Delete Portal */
-	DELETE
-	FROM {databaseOwner}{objectQualifier}Portals
-	WHERE  PortalId = @PortalID
+    /* Delete Portal */
+    DELETE
+    FROM {databaseOwner}{objectQualifier}Portals
+    WHERE  PortalId = @PortalID
 GO
 
 /* Update UpdatePortalAliasOnInstall */
@@ -61,14 +61,14 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdatePortalAliasOnInstall
-	@PortalAlias			nvarchar(200),
-	@LastModifiedByUserID	int
+    @PortalAlias			nvarchar(200),
+    @LastModifiedByUserID	int
 AS
-	UPDATE {databaseOwner}{objectQualifier}PortalAlias 
-		SET HTTPAlias = @PortalAlias,
-			LastModifiedByUserID = @LastModifiedByUserID,
-			LastModifiedOnDate = getdate()
-	WHERE  HTTPAlias = '_default'
+    UPDATE {databaseOwner}{objectQualifier}PortalAlias
+        SET HTTPAlias = @PortalAlias,
+            LastModifiedByUserID = @LastModifiedByUserID,
+            LastModifiedOnDate = getdate()
+    WHERE  HTTPAlias = '_default'
 GO
 
 /* Update GetSkinPackage */
@@ -79,16 +79,16 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetSkinPackage
-	@PortalID   int,
-	@SkinName   nvarchar(50),
-	@SkinType   nvarchar(50)
+    @PortalID   int,
+    @SkinName   nvarchar(50),
+    @SkinType   nvarchar(50)
 
 AS
-	SELECT *
-		FROM  {databaseOwner}{objectQualifier}SkinPackages
-		WHERE (PortalID = @PortalID OR @PortalID IS NULL Or PortalID IS Null)
-			AND SkinName = @SkinName
-			AND SkinType = @SkinType
+    SELECT *
+        FROM  {databaseOwner}{objectQualifier}SkinPackages
+        WHERE (PortalID = @PortalID OR @PortalID IS NULL Or PortalID IS Null)
+            AND SkinName = @SkinName
+            AND SkinType = @SkinType
 GO
 
 /* Update GetPackageByName */
@@ -100,12 +100,12 @@ GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPackageByName
     @PortalID   int,
-	@Name		nvarchar(128)
+    @Name		nvarchar(128)
 AS
-	SELECT *
-		FROM   {databaseOwner}{objectQualifier}Packages
-		WHERE  [Name] = @Name 
-			AND (PortalID = @PortalID OR @PortalID IS NULL Or PortalID IS Null)
+    SELECT *
+        FROM   {databaseOwner}{objectQualifier}Packages
+        WHERE  [Name] = @Name
+            AND (PortalID = @PortalID OR @PortalID IS NULL Or PortalID IS Null)
 GO
 
 /* Update UpdateServerActivity */
@@ -119,38 +119,38 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateServerActivity
     @ServerName			nvarchar(50),
     @IISAppName			nvarchar(200),
     @CreatedDate		datetime,
-    @LastActivityDate	datetime 
+    @LastActivityDate	datetime
 AS
 
-	DECLARE @ServerID int
-	SET @ServerID = (SELECT ServerID FROM {databaseOwner}{objectQualifier}WebServers WHERE ServerName = @ServerName AND IISAppName = @IISAppName)
+    DECLARE @ServerID int
+    SET @ServerID = (SELECT ServerID FROM {databaseOwner}{objectQualifier}WebServers WHERE ServerName = @ServerName AND IISAppName = @IISAppName)
 
-	IF @ServerID IS NULL
-		BEGIN
-			-- Insert
-			INSERT INTO {databaseOwner}{objectQualifier}WebServers (
-				ServerName,
-				IISAppName,
-				CreatedDate,
-				LastActivityDate,
-				[Enabled]
-			)
-			VALUES (
-				@ServerName,
-				@IISAppName,
-				@CreatedDate,
-				@LastActivityDate,
-				0
-			)
-		END
-	ELSE
-		BEGIN
-			-- Update
-			UPDATE {databaseOwner}{objectQualifier}WebServers 
-				SET 
-					LastActivityDate = @LastActivityDate
-				WHERE  ServerName = @ServerName AND IISAppName = @IISAppName
-		END
+    IF @ServerID IS NULL
+        BEGIN
+            -- Insert
+            INSERT INTO {databaseOwner}{objectQualifier}WebServers (
+                ServerName,
+                IISAppName,
+                CreatedDate,
+                LastActivityDate,
+                [Enabled]
+            )
+            VALUES (
+                @ServerName,
+                @IISAppName,
+                @CreatedDate,
+                @LastActivityDate,
+                0
+            )
+        END
+    ELSE
+        BEGIN
+            -- Update
+            UPDATE {databaseOwner}{objectQualifier}WebServers
+                SET
+                    LastActivityDate = @LastActivityDate
+                WHERE  ServerName = @ServerName AND IISAppName = @IISAppName
+        END
 GO
 
 /************************************************************/

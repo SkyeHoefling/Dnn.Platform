@@ -10,8 +10,8 @@ namespace DNN.Integration.Test.Framework.Helpers
         {
             var query = string.Format(
                 @"SELECT ISNULL(SUM(execution_count),0)
-                  FROM sys.dm_exec_procedure_stats
-                  WHERE OBJECT_NAME(object_id, database_id) = '{{objectQualifier}}{0}'", storedProcedureName);
+                FROM sys.dm_exec_procedure_stats
+                WHERE OBJECT_NAME(object_id, database_id) = '{{objectQualifier}}{0}'", storedProcedureName);
             return DatabaseHelper.ExecuteScalar<int>(query);
         }
     }

@@ -116,7 +116,7 @@
     position: relative;
     width: 35px;
     height: 35px;
-    transform: translate(50%, 0%); 
+    transform: translate(50%, 0%);
     background: url('../images/loading.gif') no-repeat;
 }
 .pagePanel .pagehierarchy-container .pages-list ul li div.page-item span.thumbnail.loading:before, li.page-drag-helper div.page-item span.thumbnail.loading:before {
@@ -193,7 +193,7 @@
 }
 .pagePanel .pagehierarchy-container .pages-list ul li div.page-item span.child-count {
     display: inline-block;
-    height: 16px;    
+    height: 16px;
     padding-left: 0;
     font-weight: bold;
     font-size: 10px;
@@ -378,7 +378,7 @@ div.page-drag-helper span.icon {
     width: 20px;
     height: 20px;
     vertical-align: middle;
-    background: url('../images/icon-pages-drag.png') no-repeat;    
+    background: url('../images/icon-pages-drag.png') no-repeat;
     margin-right: 4px;
     margin-bottom: 30px;
 }
@@ -458,13 +458,13 @@ div.page-drag-helper.page-drag-multiple span.icon {
 
 .pagePanel .pagehierarchy-container.drag-view .pages-list-scroller .pages-list {
     width: 262px;
-	padding: 6px 0;
+    padding: 6px 0;
 }
 .pagePanel .pagehierarchy-container.drag-view .pages-list-scroller .pages-list.jspScrollable .jspPane {
     padding-right: 26px !important;
 }
 .pagePanel .pagehierarchy-container.drag-view .pages-list-scroller .pages-list ul {
-	margin: 0 6px;
+    margin: 0 6px;
 }
 .pagePanel .pagehierarchy-container.drag-view .pages-list-scroller .pages-list ul li {
     margin-top: 4px;

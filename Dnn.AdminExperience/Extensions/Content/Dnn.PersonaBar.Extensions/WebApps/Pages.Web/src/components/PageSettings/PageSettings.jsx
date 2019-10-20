@@ -101,7 +101,7 @@ class PageSettings extends Component {
             this.props.onChangeField("hierarchy", parentPageName);
         }
     }
-    
+
     render() {
         const {
             selectedPage,
@@ -175,7 +175,7 @@ class PageSettings extends Component {
                         onDeleteModule={onDeletePageModule}
                         onEditingModule={onEditingPageModule}
                         onCancelEditingModule={onCancelEditingPageModule}
-                        editingSettingModuleId={editingSettingModuleId} 
+                        editingSettingModuleId={editingSettingModuleId}
                         onModuleCopyChange={onModuleCopyChange}
                         selectedPage={selectedPage}
                         showCopySettings={!isEditingExistingPage && selectedPage.templateTabId} />
@@ -187,7 +187,7 @@ class PageSettings extends Component {
         let headers = [];
         let tabs = [];
         if (!isEditingExistingPage || securityService.userHasPermission(permissionTypes.MANAGE_PAGE, selectedPage)) {
-            
+
             headers.push(Localization.get("Details"));
             tabs.push(
                 <div className="dnn-simple-tab-item" key="details">
@@ -276,4 +276,3 @@ PageSettings.propTypes = {
 };
 
 export default PageSettings;
-

@@ -1,7 +1,7 @@
 import { search as ActionTypes } from "../constants/actionTypes";
 import ApplicationService from "../services/applicationService";
 
-const searchActions = {    
+const searchActions = {
     getBasicSearchSettings(callback) {
         return (dispatch) => {
             ApplicationService.getBasicSearchSettings(data => {
@@ -107,7 +107,7 @@ const searchActions = {
             ApplicationService.addSynonymsGroup(payload, data => {
                 let updatedGroups = groups.SynonymsGroups.map((item) => {
                     return item;
-                });                
+                });
                 updatedGroups.unshift({SynonymsGroupId: data.Id, SynonymsTags: payload.SynonymsTags});
                 const synonymsGroups = Object.assign({}, groups);
                 synonymsGroups.SynonymsGroups = updatedGroups;
@@ -226,7 +226,7 @@ const searchActions = {
     },
     updateIgnoreWords(payload, callback, failureCallback) {
         return (dispatch) => {
-            ApplicationService.updateIgnoreWords(payload, data => {                
+            ApplicationService.updateIgnoreWords(payload, data => {
                 dispatch({
                     type: ActionTypes.UPDATED_SITESETTINGS_IGNORE_WORDS,
                     data: {

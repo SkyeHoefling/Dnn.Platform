@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import "./style.less";
 
 function getHandler(handler, enabled) {
-    return handler && enabled ? handler : null; 
+    return handler && enabled ? handler : null;
 }
 
 function getOpts(enabled, multipleSelect) {
     const opts = {};
     if (!enabled) {
-        opts["disabled"] = "disabled"; 
+        opts["disabled"] = "disabled";
     }
     if (multipleSelect) {
-        opts["multiple"] = "multiple"; 
+        opts["multiple"] = "multiple";
     }
     return opts;
 }
@@ -20,7 +20,7 @@ function getOpts(enabled, multipleSelect) {
 function getOptionsList(options) {
     return options.map((option, index) => {
         return <option key={option.value + "_" + index} value={option.value}>{option.label}</option>;
-    });  
+    });
 }
 
 function getActualValue(multipleSelect, value, valueArray) {
@@ -34,29 +34,29 @@ function getActualValue(multipleSelect, value, valueArray) {
             return [value];
         }
         return valueArray;
-    } 
+    }
 }
 
 const Select = ({onChange, value, valueArray, options, enabled, multipleSelect, style}) => (
-    <select 
+    <select
         className="dnn-uicommon-select"
-        onChange={getHandler(onChange, enabled)}            
-        value={getActualValue(multipleSelect, value, valueArray)}            
-        style={style}    
-        aria-label="Select"        
+        onChange={getHandler(onChange, enabled)}
+        value={getActualValue(multipleSelect, value, valueArray)}
+        style={style}
+        aria-label="Select"
         {...getOpts(enabled, multipleSelect)}>
         {getOptionsList(options)}
-    </select> 
+    </select>
 );
 
 Select.propTypes = {
     onChange: PropTypes.func,
     options: PropTypes.arrayOf(PropTypes.object).isRequired,
     value: PropTypes.string,
-    valueArray: PropTypes.array,    
+    valueArray: PropTypes.array,
     enabled: PropTypes.bool,
     multipleSelect: PropTypes.bool,
-    style: PropTypes.object 
+    style: PropTypes.object
 };
 
 Select.defaultProps = {

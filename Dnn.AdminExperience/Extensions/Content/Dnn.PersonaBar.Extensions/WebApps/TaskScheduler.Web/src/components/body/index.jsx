@@ -24,7 +24,7 @@ export class Body extends Component {
         const {props} = this;
         if (props.settingsClientModified) {
             util.utilities.confirm(resx.get("SettingsRestoreWarning"), resx.get("Yes"), resx.get("No"), () => {
-                props.dispatch(TaskActions.cancelSettingsClientModified());      
+                props.dispatch(TaskActions.cancelSettingsClientModified());
                 props.dispatch(PaginationActions.loadTab(index));
             });
         }

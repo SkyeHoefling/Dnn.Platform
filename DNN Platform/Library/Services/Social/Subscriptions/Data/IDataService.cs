@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -39,14 +39,14 @@ namespace DotNetNuke.Services.Social.Subscriptions.Data
         /// </summary>
         /// <returns>Subscription types</returns>
         IDataReader GetSubscriptionTypes();
-        
+
         /// <summary>
         /// Deletes a Subscription Type
         /// </summary>
         /// <param name="subscriptionTypeId">Subscription Type Id</param>
         /// <returns>True if the subscription type has been deleted, false otherwise</returns>
         bool DeleteSubscriptionType(int subscriptionTypeId);
-        
+
         /// <summary>
         /// Adds a Subscription
         /// </summary>
@@ -78,7 +78,7 @@ namespace DotNetNuke.Services.Social.Subscriptions.Data
         /// <param name="objectKey">Object Key</param>
         /// <returns>Collection of Subscriptions</returns>
         IDataReader GetSubscriptionsByContent(int portalId, int subscriptionTypeId, string objectKey);
-        
+
         /// <summary>
         /// Checks if the user is subscribed to an ObjectKey
         /// </summary>
@@ -90,7 +90,7 @@ namespace DotNetNuke.Services.Social.Subscriptions.Data
         /// <param name="tabId">Tab Id</param>
         /// <returns>Subscription</returns>
         IDataReader IsSubscribed(int portalId, int userId, int subscriptionTypeId, string objectKey, int moduleId, int tabId);
-        
+
         /// <summary>
         /// Deletes a Subscription
         /// </summary>

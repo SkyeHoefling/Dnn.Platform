@@ -10,8 +10,8 @@
 
 /* -- code to assign read access to existing portals Root folder -- */
 declare @permid as int
-select @permid = permissionid 
-from {databaseOwner}{objectQualifier}permission 
+select @permid = permissionid
+from {databaseOwner}{objectQualifier}permission
 where permissionkey='READ' and permissioncode='SYSTEM_FOLDER'
 
 INSERT INTO {databaseOwner}{objectQualifier}folderpermission (folderid,permissionid,roleid,allowaccess)
@@ -19,10 +19,10 @@ SELECT folderid,@permid,-1,1
 FROM {databaseOwner}{objectQualifier}folders
 WHERE FolderPath = '' AND
 folderid not in (
-	SELECT {databaseOwner}{objectQualifier}folders.folderid
-	FROM {databaseOwner}{objectQualifier}Folders 
-	INNER JOIN {databaseOwner}{objectQualifier}FolderPermission ON {databaseOwner}{objectQualifier}Folders.FolderID = {databaseOwner}{objectQualifier}FolderPermission.FolderID
-	WHERE {databaseOwner}{objectQualifier}Folders.FolderPath = '' AND {databaseOwner}{objectQualifier}FolderPermission.RoleID = - 1
+    SELECT {databaseOwner}{objectQualifier}folders.folderid
+    FROM {databaseOwner}{objectQualifier}Folders
+    INNER JOIN {databaseOwner}{objectQualifier}FolderPermission ON {databaseOwner}{objectQualifier}Folders.FolderID = {databaseOwner}{objectQualifier}FolderPermission.FolderID
+    WHERE {databaseOwner}{objectQualifier}Folders.FolderPath = '' AND {databaseOwner}{objectQualifier}FolderPermission.RoleID = - 1
 )
 GO
 
@@ -45,23 +45,23 @@ ALTER  procedure {databaseOwner}{objectQualifier}GetTab
 
 as
 
-select TabID, 
-TabOrder, 
-{objectQualifier}Tabs.PortalID, 
-TabName, 
-IsVisible, 
-ParentId, 
-[Level], 
-DisableLink, 
-Title, 
-Description, 
-KeyWords, 
-IsDeleted, 
-'Url'= case when F2.FileName is null then {objectQualifier}Tabs.Url else F2.Folder + F2.FileName end, 
-SkinSrc, 
-ContainerSrc, 
-TabPath, 
-StartDate, 
+select TabID,
+TabOrder,
+{objectQualifier}Tabs.PortalID,
+TabName,
+IsVisible,
+ParentId,
+[Level],
+DisableLink,
+Title,
+Description,
+KeyWords,
+IsDeleted,
+'Url'= case when F2.FileName is null then {objectQualifier}Tabs.Url else F2.Folder + F2.FileName end,
+SkinSrc,
+ContainerSrc,
+TabPath,
+StartDate,
 EndDate,
 'IconFile' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Tabs.IconFile else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end,
 'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
@@ -157,19 +157,19 @@ as
 
 update dnn_Banners
 set    ImageFile     = @ImageFile,
-       BannerName    = @BannerName,
-       URL           = @URL,
-       Impressions   = @Impressions,
-       CPM           = @CPM,
-       StartDate     = @StartDate,
-       EndDate       = @EndDate,
-       CreatedByUser = @UserName,
-       CreatedDate   = getdate(),
-       BannerTypeId  = @BannerTypeId,
-       Description   = @Description,
-       GroupName     = @GroupName,
-       Criteria      = @Criteria
-where  BannerId = @BannerId 
+        BannerName    = @BannerName,
+        URL           = @URL,
+        Impressions   = @Impressions,
+        CPM           = @CPM,
+        StartDate     = @StartDate,
+        EndDate       = @EndDate,
+        CreatedByUser = @UserName,
+        CreatedDate   = getdate(),
+        BannerTypeId  = @BannerTypeId,
+        Description   = @Description,
+        GroupName     = @GroupName,
+        Criteria      = @Criteria
+where  BannerId = @BannerId
 
 
 GO

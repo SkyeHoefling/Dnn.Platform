@@ -84,7 +84,7 @@ export default class Browse extends Component {
         let portalIdParams = this.props.portalId && this.props.portalId !== -1
             ? { portalId: this.props.portalId }
             : {};
-                    
+
         if (!searchText) {
             return sf.get("GetFolders", portalIdParams, this.setFolders.bind(this), this.handleError.bind(this));
         }
@@ -183,7 +183,7 @@ export default class Browse extends Component {
                 selectedFile={this.state.selectedFile}
                 files={this.state.files}
                 onFileClick={this.onFileClick.bind(this) }
-                getFiles={this.getFiles.bind(this) }                
+                getFiles={this.getFiles.bind(this) }
             />
             <span>{this.renderActions()}</span>
         </div>;
@@ -191,7 +191,7 @@ export default class Browse extends Component {
 }
 
 
-Browse.propTypes = {    
+Browse.propTypes = {
     utils: PropTypes.object.isRequired,
     selectedFile: PropTypes.object.isRequired,
     selectedFolder: PropTypes.object.isRequired,
@@ -211,4 +211,3 @@ Browse.propTypes = {
 Browse.defaultProps = {
     fileFormats: []
 };
-

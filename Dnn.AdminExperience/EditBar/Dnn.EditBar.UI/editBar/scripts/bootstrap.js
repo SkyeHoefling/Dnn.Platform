@@ -1,7 +1,7 @@
 (function () {
-	var regex = /\.mobi\.html/;
+    var regex = /\.mobi\.html/;
     var mobi = regex.test(location.href);
-    
+
     function addCssToHead(css, version) {
         var head = document.getElementsByTagName('head')[0];
         for (var i = 0; i < css.length; i++) {

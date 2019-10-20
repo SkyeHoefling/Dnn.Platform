@@ -56,8 +56,8 @@ module.exports = {
         "quotes": ["warn", "double" ],
         "indent": ["warn", 4, {"SwitchCase": 1}],
         "no-unused-vars": "warn",
-        "no-console": "warn",      
-        "keyword-spacing": "warn", 
+        "no-console": "warn",
+        "keyword-spacing": "warn",
         "eqeqeq": "warn",
         "space-before-function-paren": ["warn", { "anonymous": "always", "named": "never" }],
         "space-before-blocks": "warn",
@@ -68,6 +68,6 @@ module.exports = {
         "jest/no-disabled-tests": "warn",
         "jest/no-focused-tests": "error",
         "jest/no-identical-title": "error",
-        "jest/valid-expect": "error"       
+        "jest/valid-expect": "error"
     }
 };

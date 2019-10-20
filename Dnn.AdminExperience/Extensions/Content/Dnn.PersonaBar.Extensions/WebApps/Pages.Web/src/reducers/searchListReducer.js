@@ -8,7 +8,7 @@ export default function searchListReducer(state = { searchList:[], searchResult:
         case ActionTypes.SAVE_SEARCH_RESULT:
             if (action.data.filtersUpdated) {
                 return {
-                    ...state, 
+                    ...state,
                     searchResult: action.data.searchResult,
                     searchList: action.data.searchResult.Results,
                     filtersUpdated : action.data.filtersUpdated,
@@ -16,14 +16,14 @@ export default function searchListReducer(state = { searchList:[], searchResult:
                 };
             } else {
                 return {
-                    ...state, 
+                    ...state,
                     searchResult: action.data.searchResult,
                     searchList: state.searchList.concat(action.data.searchResult.Results),
                     filtersUpdated : action.data.filtersUpdated
                 };
             }
 
-            
+
         default:
             return state;
     }

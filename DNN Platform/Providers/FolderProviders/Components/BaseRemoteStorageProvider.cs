@@ -41,13 +41,13 @@ namespace DotNetNuke.Providers.FolderProviders.Components
                 c =>
                 {
                     var list = GetObjectList(folderMapping, key);
-                    
+
                     //return list.FirstOrDefault(i => i.Key == key);
                     return list.FirstOrDefault(i => i.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
                 });
-            
+
         }
-        
+
         #endregion
 
         #region Protected Properties
@@ -56,7 +56,7 @@ namespace DotNetNuke.Providers.FolderProviders.Components
         {
             get { return String.Empty; }
         }
-        
+
         protected virtual string ObjectCacheKey
         {
             get { return String.Empty; }
@@ -106,7 +106,7 @@ namespace DotNetNuke.Providers.FolderProviders.Components
         {
             return Boolean.Parse(folderMapping.FolderMappingSettings[settingName].ToString());
         }
-        
+
         protected static int GetIntegerSetting(FolderMappingInfo folderMapping, string settingName, int defaultValue)
         {
             int value;
@@ -130,7 +130,7 @@ namespace DotNetNuke.Providers.FolderProviders.Components
         {
             Requires.NotNull(nameof(folderMapping), folderMapping);
             Requires.NotNullOrEmpty(nameof(settingName), settingName);
-            
+
             return folderMapping.FolderMappingSettings[settingName]?.ToString();
         }
 
@@ -275,7 +275,7 @@ namespace DotNetNuke.Providers.FolderProviders.Components
             var pattern = "^" + mappedPath;
             return  (from i in list
                     let f = i.Key
-                     let r = (!string.IsNullOrEmpty(mappedPath) ? Regex.Replace(f, pattern, "", RegexOptions.IgnoreCase, TimeSpan.FromSeconds(2)) : f)
+                    let r = (!string.IsNullOrEmpty(mappedPath) ? Regex.Replace(f, pattern, "", RegexOptions.IgnoreCase, TimeSpan.FromSeconds(2)) : f)
                     where f.StartsWith(mappedPath, true, CultureInfo.InvariantCulture) && f.Length > mappedPath.Length && r.IndexOf("/", StringComparison.Ordinal) == -1
                     select Path.GetFileName(f)).ToArray();
 
@@ -342,7 +342,7 @@ namespace DotNetNuke.Providers.FolderProviders.Components
             {
                 throw new FileNotFoundException(FileNotFoundMessage, file.RelativePath);
             }
-            return item.LastModified;            
+            return item.LastModified;
         }
 
         /// <summary>
@@ -354,7 +354,7 @@ namespace DotNetNuke.Providers.FolderProviders.Components
             Requires.NotNull("folderMapping", folderMapping);
 
             var list = GetObjectList(folderMapping, folderPath);
-            
+
             var pattern = "^" + Regex.Escape(folderPath);
 
             return (from o in list
@@ -364,9 +364,9 @@ namespace DotNetNuke.Providers.FolderProviders.Components
                         ? Regex.Replace(f,  pattern, "", RegexOptions.IgnoreCase, TimeSpan.FromSeconds(2))
                         : f)
                 where f.StartsWith(folderPath, StringComparison.InvariantCultureIgnoreCase)
-                                   && f.Length > folderPath.Length
-                                   && r.IndexOf("/", StringComparison.Ordinal) > -1
-                           select folderPath + r.Substring(0, r.IndexOf("/", StringComparison.Ordinal)) + "/").Distinct().ToList();
+                                    && f.Length > folderPath.Length
+                                    && r.IndexOf("/", StringComparison.Ordinal) > -1
+                            select folderPath + r.Substring(0, r.IndexOf("/", StringComparison.Ordinal)) + "/").Distinct().ToList();
 
             //var mylist =  (from o in list
             //        let f = o.Key
@@ -501,7 +501,7 @@ namespace DotNetNuke.Providers.FolderProviders.Components
         {
             if (FileExists(FolderManager.Instance.GetFolder(file.FolderId), file.FileName))
             {
-                return GetHashCode(file);                
+                return GetHashCode(file);
             }
             return String.Empty;
         }

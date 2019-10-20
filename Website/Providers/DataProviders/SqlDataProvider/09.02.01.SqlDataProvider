@@ -82,24 +82,24 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteTabModule]
-	@TabId      INT,
-	@ModuleId   INT,
-	@SoftDelete	BIT,
+    @TabId      INT,
+    @ModuleId   INT,
+    @SoftDelete	BIT,
     @LastModifiedByUserID INT = -1
 AS
 IF @SoftDelete = 1
-	UPDATE {databaseOwner}{objectQualifier}TabModules
-		SET	IsDeleted = 1,
-			VersionGuid = newId(),
+    UPDATE {databaseOwner}{objectQualifier}TabModules
+        SET	IsDeleted = 1,
+            VersionGuid = newId(),
             LastModifiedByUserID = @LastModifiedByUserID,
-			LastModifiedOnDate = GETDATE()
-	WHERE  TabId = @TabId
-		AND    ModuleId = @ModuleId
+            LastModifiedOnDate = GETDATE()
+    WHERE  TabId = @TabId
+        AND    ModuleId = @ModuleId
 ELSE
-	DELETE
-	FROM   {databaseOwner}{objectQualifier}TabModules 
-	WHERE  TabId = @TabId
-		AND    ModuleId = @ModuleId
+    DELETE
+    FROM   {databaseOwner}{objectQualifier}TabModules
+    WHERE  TabId = @TabId
+        AND    ModuleId = @ModuleId
 GO
 
 /************************************************************/

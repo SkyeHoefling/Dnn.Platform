@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import {
     siteInfo as SiteInfoActions
 } from "../../actions";
-import { 
-    InputGroup, 
-    SingleLineInputWithError, 
-    MultiLineInputWithError, 
-    GridSystem, 
-    Dropdown, 
-    FileUpload, 
-    Label, 
+import {
+    InputGroup,
+    SingleLineInputWithError,
+    MultiLineInputWithError,
+    GridSystem,
+    Dropdown,
+    FileUpload,
+    Label,
     Button } from "@dnnsoftware/dnn-react-common";
 import "./style.less";
 import util from "../../utils";
@@ -53,7 +53,7 @@ class BasicSettingsPanelBody extends Component {
         let { props} = this;
         if (props.basicSettings) {
             let portalIdChanged = false;
-            let cultureCodeChanged = false;            
+            let cultureCodeChanged = false;
             if (props.portalId === undefined || props.basicSettings.PortalId === props.portalId) {
                 portalIdChanged = false;
             }
@@ -147,7 +147,7 @@ class BasicSettingsPanelBody extends Component {
 
     onCancel() {
         const {props} = this;
-        util.utilities.confirm(resx.get("SettingsRestoreWarning"), resx.get("Yes"), resx.get("No"), () => {            
+        util.utilities.confirm(resx.get("SettingsRestoreWarning"), resx.get("Yes"), resx.get("No"), () => {
             props.dispatch(SiteInfoActions.getPortalSettings(props.portalId, props.cultureCode, (data) => {
                 let basicSettings = Object.assign({}, data.Settings);
                 this.setState({

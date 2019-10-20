@@ -3,18 +3,18 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls.Internal" Assembly="DotNetNuke.Web" %>
 <div class="dnnForm dnnLoginService dnnClear">
     <div class="dnnFormItem">
-		<div class="dnnLabel">
-			<asp:label id="plUsername" AssociatedControlID="txtUsername" runat="server" CssClass="dnnFormLabel" />
-		</div>        
+        <div class="dnnLabel">
+            <asp:label id="plUsername" AssociatedControlID="txtUsername" runat="server" CssClass="dnnFormLabel" />
+        </div>
         <asp:textbox id="txtUsername" runat="server" />
     </div>
     <div class="dnnFormItem">
-		<div class="dnnLabel">
-			<asp:label id="plPassword" AssociatedControlID="txtPassword" runat="server" resourcekey="Password" CssClass="dnnFormLabel" ViewStateMode="Disabled" />
-		</div>
+        <div class="dnnLabel">
+            <asp:label id="plPassword" AssociatedControlID="txtPassword" runat="server" resourcekey="Password" CssClass="dnnFormLabel" ViewStateMode="Disabled" />
+        </div>
         <asp:textbox id="txtPassword" textmode="Password" runat="server" />
     </div>
-    <div class="dnnFormItem" id="divCaptcha1" runat="server" visible="false">		
+    <div class="dnnFormItem" id="divCaptcha1" runat="server" visible="false">
         <asp:label id="plCaptcha" AssociatedControlID="ctlCaptcha" runat="server" resourcekey="Captcha" CssClass="dnnFormLabel" />
     </div>
     <div class="dnnFormItem dnnCaptcha" id="divCaptcha2" runat="server" visible="false">
@@ -23,18 +23,18 @@
     <div class="dnnFormItem">
         <asp:label id="lblLogin" runat="server" AssociatedControlID="cmdLogin" CssClass="dnnFormLabel" ViewStateMode="Disabled" />
         <asp:LinkButton id="cmdLogin" resourcekey="cmdLogin" cssclass="dnnPrimaryAction" text="Login" runat="server" CausesValidation="false" />
-		<asp:HyperLink id="cancelLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCancel" CausesValidation="false" />
-        
+        <asp:HyperLink id="cancelLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCancel" CausesValidation="false" />
+
     </div>
-	<div class="dnnFormItem">
-		<asp:label id="lblLoginRememberMe" runat="server" CssClass="dnnFormLabel" />
-		<span class="dnnLoginRememberMe"><asp:checkbox id="chkCookie" resourcekey="Remember" runat="server" /></span>
-	</div>
+    <div class="dnnFormItem">
+        <asp:label id="lblLoginRememberMe" runat="server" CssClass="dnnFormLabel" />
+        <span class="dnnLoginRememberMe"><asp:checkbox id="chkCookie" resourcekey="Remember" runat="server" /></span>
+    </div>
     <div class="dnnFormItem">
         <span class="dnnFormLabel">&nbsp;</span>
         <div class="dnnLoginActions">
             <ul class="dnnActions dnnClear">
-                <li id="liRegister" runat="server"><asp:HyperLink ID="registerLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdRegister" ViewStateMode="Disabled" /></li>                
+                <li id="liRegister" runat="server"><asp:HyperLink ID="registerLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdRegister" ViewStateMode="Disabled" /></li>
                 <li id="liPassword" runat="server"><asp:HyperLink ID="passwordLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdPassword" ViewStateMode="Disabled" /></li>
             </ul>
         </div>
@@ -61,7 +61,7 @@
                 }
                 $el.removeClass(disabledActionClass);
             }
-            function setUpLogin() {                
+            function setUpLogin() {
                 $.each(actionLinks || [], function (index, action) {
                     var $action = $(action);
                     $action.click(function () {
@@ -73,7 +73,7 @@
                     });
                 });
             }
-		
+
             $(document).ready(function () {
                 $(document).on('keydown', '.dnnLoginService', function (e) {
                     if ($(e.target).is('input:text,input:password') && e.keyCode === 13) {

@@ -22,7 +22,7 @@
         });
     };
 
-    /* 
+    /*
     Delegate function allows us to use Selectors to handle events.
     This allows us to use event bubbling and single event handler
     which improves perf and makes eventhandling more dynamic.
@@ -52,7 +52,7 @@
 
         // Generate a reusable function that will serve as a template
         // generator (and which will be cached).
-      new Function("obj",
+    new Function("obj",
         "var p=[],print=function(){p.push.apply(p,arguments);};" +
 
         // Introduce the data as local variables using with(){}
@@ -60,14 +60,14 @@
 
         // Convert the template into pure JavaScript
         str
-          .replace(/[\r\t\n]/g, " ")
-          .split("<#").join("\t")
-          .replace(/((^|#>)[^\t]*)'/g, "$1\r")
-          .replace(/\t=(.*?)#>/g, "',$1,'")
-          .split("\t").join("');")
-          .split("#>").join("p.push('")
-          .split("\r").join("\\'")
-      + "');}return p.join('');");
+        .replace(/[\r\t\n]/g, " ")
+        .split("<#").join("\t")
+        .replace(/((^|#>)[^\t]*)'/g, "$1\r")
+        .replace(/\t=(.*?)#>/g, "',$1,'")
+        .split("\t").join("');")
+        .split("#>").join("p.push('")
+        .split("\r").join("\\'")
+    + "');}return p.join('');");
 
         // Provide some basic currying to the user
         return data ? fn(data) : fn;
@@ -77,7 +77,7 @@
 
 jQuery(document).ready(function($) {
     var dlg = $.template('<div id="<#=id#>" title="<#=title#> - <#=name#>" >Empty Dialog</div>')
-    
+
     $('#dashboardTabs div[id$="-tab"]').hide();
     $('#dashboardTabs div[id$="-tab"]:first').show();
     $('#tablist li:first a').addClass('active');
@@ -95,7 +95,7 @@ jQuery(document).ready(function($) {
             return false;
         }
     }));
-    
+
     $('#dashboardTabs div[id$="-tab"] table').zebratable();
 
     // clean up to avoid memory leaks in certain versions of IE 6
@@ -104,4 +104,3 @@ jQuery(document).ready(function($) {
     });
 
 });
-

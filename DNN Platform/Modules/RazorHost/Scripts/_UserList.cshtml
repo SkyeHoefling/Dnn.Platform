@@ -1,4 +1,4 @@
-@{ 
+@{
     var db = Database.Open("SiteSqlServer");
     var usersTableName = String.Format("{0}Users", DotNetNuke.Data.DataProvider.Instance().ObjectQualifier);
     var portalTableName = String.Format("{0}UserPortals", DotNetNuke.Data.DataProvider.Instance().ObjectQualifier);
@@ -13,7 +13,7 @@
             <th>User Name</th>
             <th>First Name</th>
             <th>Last Name</th>
-			<th>Email Address</th>
+            <th>Email Address</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
                 <td>@row.Username</td>
                 <td>@row.FirstName</td>
                 <td>@row.LastName</td>
-	        <td>@row.Email</td>
+            <td>@row.Email</td>
 
             </tr>
         }

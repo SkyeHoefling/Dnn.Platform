@@ -17,7 +17,7 @@ class IgnoreWordsEditor extends Component {
             words: {
                 StopWords: "",
                 CultureCode: "en-US"
-            },            
+            },
             error: {
                 tags: true
             },
@@ -37,7 +37,7 @@ class IgnoreWordsEditor extends Component {
     onSettingChange(key, event) {
         let {state, props} = this;
         let words = Object.assign({}, state.words);
-        
+
         words[key] = event.join();
 
         if (words[key] === "" && key === "StopWords") {
@@ -69,7 +69,7 @@ class IgnoreWordsEditor extends Component {
 
         props.onUpdate(state.words, state.culture);
     }
-    
+
     onCancel() {
         const {props} = this;
         if (props.ignoreWordsClientModified) {
@@ -86,7 +86,7 @@ class IgnoreWordsEditor extends Component {
     /* eslint-disable react/no-danger */
     render() {
         /* eslint-disable react/no-danger */
-        if (this.state.words !== undefined || this.props.id === "add") {  
+        if (this.state.words !== undefined || this.props.id === "add") {
             return (
                 <div className="words-editor">
                     <InputGroup>
@@ -103,7 +103,7 @@ class IgnoreWordsEditor extends Component {
                             type="secondary"
                             onClick={this.onCancel.bind(this)}>
                             {resx.get("Cancel")}
-                        </Button>                        
+                        </Button>
                         <Button
                             type="primary"
                             onClick={this.onSave.bind(this)}>
@@ -128,7 +128,7 @@ IgnoreWordsEditor.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return {              
+    return {
         ignoreWordsClientModified: state.search.ignoreWordsClientModified
     };
 }

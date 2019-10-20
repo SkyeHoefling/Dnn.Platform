@@ -12,7 +12,7 @@ namespace DotNetNuke.Services.GeneratedImage.StartTransform
     /// <summary>
     /// Secure File ImageTransform class
     /// </summary>
-	public class SecureFileTransform : ImageTransform
+    public class SecureFileTransform : ImageTransform
     {
         #region Properties
         /// <summary>
@@ -29,15 +29,15 @@ namespace DotNetNuke.Services.GeneratedImage.StartTransform
         /// Provides an Unique String for the image transformation
         /// </summary>
         public override string UniqueString => base.UniqueString + SecureFile.FileId;
-	    #endregion 
-       
+        #endregion
+
         public SecureFileTransform()
-		{
+        {
             InterpolationMode = InterpolationMode.HighQualityBicubic;
             SmoothingMode = SmoothingMode.HighQuality;
             PixelOffsetMode = PixelOffsetMode.HighQuality;
             CompositingQuality = CompositingQuality.HighQuality;
-		}
+        }
 
         /// <summary>
         /// Processes an input image returing a secure file image
@@ -59,13 +59,13 @@ namespace DotNetNuke.Services.GeneratedImage.StartTransform
             {
                 return CopyImage(content);
             }
-		}
+        }
 
         private Image GetSecureFileExtensionIconImage()
         {
             var extensionImageAbsolutePath = Globals.ApplicationMapPath + "\\" +
-                       PortalSettings.Current.DefaultIconLocation.Replace("/", "\\") + "\\" +
-                       "Ext" + SecureFile.Extension + "_32x32_Standard.png";
+                        PortalSettings.Current.DefaultIconLocation.Replace("/", "\\") + "\\" +
+                        "Ext" + SecureFile.Extension + "_32x32_Standard.png";
 
             if (!File.Exists(extensionImageAbsolutePath))
             {

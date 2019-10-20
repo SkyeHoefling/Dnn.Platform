@@ -80,7 +80,7 @@ define(['jquery'], function () {
         var templateSuffix = '.html';
         var cssSuffix = '.css';
         var initMethod = 'init';
-        
+
         if (extensionFolder.indexOf('_') > -1) {
             extensionFolder = extensionFolder.split('_')[0];
         }

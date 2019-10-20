@@ -4,7 +4,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const path = require("path");
 const languages = {
     "en": null
-    // TODO: create locallizaton files per language 
+    // TODO: create locallizaton files per language
     // "de": require("./localizations/de.json"),
     // "es": require("./localizations/es.json"),
     // "fr": require("./localizations/fr.json"),

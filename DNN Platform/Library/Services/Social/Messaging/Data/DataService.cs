@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -54,9 +54,9 @@ namespace DotNetNuke.Services.Social.Messaging.Data
             return _provider.ExecuteScalar<int>("CoreMessaging_SaveMessage", message.MessageID, portalId ,message.To, message.From, message.Subject, message.Body, message.ConversationId, message.ReplyAllAllowed, message.SenderUserID, createUpdateUserId);
         }
 
-		/// <summary>Gets the message.</summary>
-		/// <param name="messageId">The message identifier.</param>
-		/// <returns>A <see cref="IDataReader"/> containing the message data</returns>
+        /// <summary>Gets the message.</summary>
+        /// <param name="messageId">The message identifier.</param>
+        /// <returns>A <see cref="IDataReader"/> containing the message data</returns>
         public IDataReader GetMessage(int messageId)
         {
             return _provider.ExecuteReader("CoreMessaging_GetMessage", messageId);
@@ -179,7 +179,7 @@ namespace DotNetNuke.Services.Social.Messaging.Data
         /// <returns>A <see cref="IDataReader"/> containing the sent message box data</returns>
         public IDataReader GetSentBoxView(int userId, int portalId, int afterMessageId, int numberOfRecords, string sortColumn, bool sortAscending)
         {
-            return _provider.ExecuteReader("CoreMessaging_GetSentBox", userId, portalId, afterMessageId, numberOfRecords, sortColumn, sortAscending);            
+            return _provider.ExecuteReader("CoreMessaging_GetSentBox", userId, portalId, afterMessageId, numberOfRecords, sortColumn, sortAscending);
         }
 
         /// <summary>Gets the archive box view.</summary>
@@ -205,7 +205,7 @@ namespace DotNetNuke.Services.Social.Messaging.Data
         /// <param name="totalRecords">The total records.</param>
         /// <returns>A <see cref="IDataReader"/> containing the message thread data</returns>
         public IDataReader GetMessageThread(int conversationId, int userId, int afterMessageId, int numberOfRecords, string sortColumn, bool @sortAscending, ref int totalRecords)
-        {            
+        {
             return _provider.ExecuteReader("CoreMessaging_GetMessageThread", conversationId, userId, afterMessageId, numberOfRecords, sortColumn, sortAscending);
         }
 
@@ -406,12 +406,12 @@ namespace DotNetNuke.Services.Social.Messaging.Data
                     if (file == null) continue;
 
                     var attachment = new MessageFileView
-                                         {
-                                             Name = file.FileName,
-                                             Size = file.Size.ToString(CultureInfo.InvariantCulture),
-                                             Url = FileManager.Instance.GetUrl(file),
-                                             FileId = fileId
-                                         };
+                                        {
+                                            Name = file.FileName,
+                                            Size = file.Size.ToString(CultureInfo.InvariantCulture),
+                                            Url = FileManager.Instance.GetUrl(file),
+                                            FileId = fileId
+                                        };
 
                     attachments.Add(attachment);
                 }
@@ -450,7 +450,7 @@ namespace DotNetNuke.Services.Social.Messaging.Data
             return _provider.ExecuteReader("CoreMessaging_CountLegacyMessages");
         }
 
-        #endregion    
+        #endregion
 
         #region Queued email API's
 

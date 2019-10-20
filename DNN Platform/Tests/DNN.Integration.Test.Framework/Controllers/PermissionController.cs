@@ -15,9 +15,9 @@ namespace DNN.Integration.Test.Framework.Controllers
         public static dynamic GetPermission(string code, string key)
         {
             const string query =
-                @"SELECT * 
-                  FROM {{objectQualifier}}Permission
-                  WHERE PermissionCode = '{0}' AND PermissionKey = '{1}'";
+                @"SELECT *
+                FROM {{objectQualifier}}Permission
+                WHERE PermissionCode = '{0}' AND PermissionKey = '{1}'";
             return DatabaseHelper.ExecuteDynamicQuery(string.Format(query, code, key)).SingleOrDefault();
         }
     }

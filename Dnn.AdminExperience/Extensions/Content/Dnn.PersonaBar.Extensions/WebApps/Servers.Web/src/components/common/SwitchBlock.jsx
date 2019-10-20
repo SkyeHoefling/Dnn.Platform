@@ -11,14 +11,14 @@ export default class InfoBlock extends Component {
         return <InputGroup>
             <Label className="title"
                 tooltipMessage={props.tooltip}
-                label={props.label} style={{width: "auto", "margin-top": "8px"}} />   
-            {props.isGlobal && <GlobalIcon isSwitch={true} tooltipStyle={this.props.globalTooltipStyle} /> }         
+                label={props.label} style={{width: "auto", "margin-top": "8px"}} />
+            {props.isGlobal && <GlobalIcon isSwitch={true} tooltipStyle={this.props.globalTooltipStyle} /> }
             <Switch labelHidden={false}
                 onText={props.onText}
                 offText={props.offText}
                 readOnly={props.readOnly}
                 value={props.value}
-                onChange={props.onChange} 
+                onChange={props.onChange}
                 style={{float: "right"}} />
         </InputGroup>;
     }
@@ -33,7 +33,7 @@ InfoBlock.propTypes = {
     value: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
     isGlobal: PropTypes.bool.isRequired,
-    globalTooltipStyle: PropTypes.object  
+    globalTooltipStyle: PropTypes.object
 };
 
 InfoBlock.defaultProps = {

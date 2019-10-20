@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -52,10 +52,10 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
     [ToolboxData("<{0}:DateEditControl runat=server></{0}:DateEditControl>")]
     public class DateEditControl : EditControl
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DateEditControl));
-		private DnnDatePicker _dateControl;
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DateEditControl));
+        private DnnDatePicker _dateControl;
 
-		#region Protected Properties
+        #region Protected Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -139,7 +139,7 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
                 DateTime dteValue = Null.NullDate;
                 try
                 {
-					//Try and cast the value to an DateTime
+                    //Try and cast the value to an DateTime
                     var dteString = OldValue as string;
                     if (!string.IsNullOrEmpty(dteString))
                     {
@@ -175,21 +175,21 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Override Properties
-		
-		public override string ID
-		{
-			get
-			{
-				return base.ID + "_control";
-			}
-			set
-			{
-				base.ID = value;
-			}
-		}
+        #region Override Properties
+
+        public override string ID
+        {
+            get
+            {
+                return base.ID + "_control";
+            }
+            set
+            {
+                base.ID = value;
+            }
+        }
 
         public override string EditControlClientId
         {
@@ -200,42 +200,42 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
 
             }
         }
-		
-		#endregion
 
-		#region Private Properties
+        #endregion
 
-	    private DnnDatePicker DateControl
-	    {
-		    get
-		    {
-			    if (_dateControl == null)
-			    {
-				    _dateControl = new DnnDatePicker();
-			    }
+        #region Private Properties
 
-			    return _dateControl;
-		    }
-	    }
+        private DnnDatePicker DateControl
+        {
+            get
+            {
+                if (_dateControl == null)
+                {
+                    _dateControl = new DnnDatePicker();
+                }
 
-		#endregion
+                return _dateControl;
+            }
+        }
+
+        #endregion
 
         protected override void CreateChildControls()
         {
             base.CreateChildControls();
 
 
-			DateControl.ControlStyle.CopyFrom(ControlStyle);
-			DateControl.ID = base.ID + "_control";
+            DateControl.ControlStyle.CopyFrom(ControlStyle);
+            DateControl.ID = base.ID + "_control";
 
-			Controls.Add(DateControl);
+            Controls.Add(DateControl);
         }
 
         protected virtual void LoadDateControls()
         {
             if (DateValue != Null.NullDate)
             {
-				DateControl.SelectedDate = DateValue.Date;
+                DateControl.SelectedDate = DateValue.Date;
             }
         }
 
@@ -244,7 +244,7 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
             EnsureChildControls();
             bool dataChanged = false;
             string presentValue = StringValue;
-			string postedValue = postCollection[postDataKey + "_control"];
+            string postedValue = postCollection[postDataKey + "_control"];
             if (!presentValue.Equals(postedValue))
             {
                 if (string.IsNullOrEmpty(postedValue))

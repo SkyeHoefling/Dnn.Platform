@@ -84,4 +84,3 @@ Folders.propTypes = {
     onFolderClick: PropTypes.func.isRequired,
     getChildren: PropTypes.func.isRequired
 };
-

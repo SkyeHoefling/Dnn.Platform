@@ -1,4 +1,4 @@
-﻿Test,							ForceLowerCaseRegex,	Scheme,		Page Name,		Params,					Expected Url,	
+﻿Test,							ForceLowerCaseRegex,	Scheme,		Page Name,		Params,					Expected Url,
 Home,							,						http://,	Home,			,						http://{alias}/
 About Us,						,						http://,	About Us,		,						http://{alias}/aboutus.aspx
 Profile Messages,				,						http://,	Messages,		,						http://{alias}/activityfeed/messages.aspx

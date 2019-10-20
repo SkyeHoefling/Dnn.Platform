@@ -58,12 +58,12 @@
             <SymbolsFiles Include="$(checkoutDirectory)\Website\bin\*.xml" Exclude="@(SymbolsExclude)"/>
         </ItemGroup>
         <Zip Files="@(SymbolsFiles)" WorkingDirectory="$(checkoutDirectory)\website"
-                 ZipFileName="$(checkoutDirectory)\src\Build\Symbols\Resources.zip" />
+                ZipFileName="$(checkoutDirectory)\src\Build\Symbols\Resources.zip" />
         <ItemGroup>
             <SymbolsPackage Include="$(checkoutDirectory)\src\Build\Symbols\*.*;" />
         </ItemGroup>
         <Zip Files="@(SymbolsPackage)" WorkingDirectory="$(checkoutDirectory)\src\Build\Symbols\"
-                 ZipFileName="$(checkoutDirectory)\Website\Install\Module\$(SymbolsPackageName)" />
+                ZipFileName="$(checkoutDirectory)\Website\Install\Module\$(SymbolsPackageName)" />
 
         <Delete Files="$(checkoutDirectory)\src\Build\Symbols\Resources.zip" />
     </Target>

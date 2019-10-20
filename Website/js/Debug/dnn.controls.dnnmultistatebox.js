@@ -7,36 +7,36 @@
 Type.registerNamespace('dnn.controls');
 
 dnn.extend(dnn.controls, {
-    initMultiStateBox: function (ctl) 
-    {    	
+    initMultiStateBox: function (ctl)
+    {
         if (ctl && dnn.controls.controls[ctl.id] == null)
-	    {
-		    var ts = new dnn.controls.DNNMultiStateBox(ctl);
-		    ts.initialize();
-		    return ts;
-	    }
+        {
+            var ts = new dnn.controls.DNNMultiStateBox(ctl);
+            ts.initialize();
+            return ts;
+        }
     }
 });
 
 //------- Constructor -------//
 dnn.controls.DNNMultiStateBox = function(o)
 {
-	dnn.controls.DNNMultiStateBox.initializeBase(this, [o]);	
+    dnn.controls.DNNMultiStateBox.initializeBase(this, [o]);
 
-	//--- Appearance Properties ---//
-	this.css = this.getProp('css', '');
+    //--- Appearance Properties ---//
+    this.css = this.getProp('css', '');
 
     this.enabled = (this.getProp('enabled', '1') == '1');
-	this.imgPath = this.getProp('imgpath', 'images/');
-	this.states = this.getProp('states', '[]');
-	this.states = Sys.Serialization.JavaScriptSerializer.deserialize(this.states);
-	this.stateIndex = []
-	
-	for (var i=0; i<this.states.length; i++)
-	    this.stateIndex[this.states[i].Key] = i;
-	    
-	this.js = this.getProp('js', '');	
-	
+    this.imgPath = this.getProp('imgpath', 'images/');
+    this.states = this.getProp('states', '[]');
+    this.states = Sys.Serialization.JavaScriptSerializer.deserialize(this.states);
+    this.stateIndex = []
+
+    for (var i=0; i<this.states.length; i++)
+        this.stateIndex[this.states[i].Key] = i;
+
+    this.js = this.getProp('js', '');
+
     this._img = document.createElement('img');
     //this._img.style.position = 'absolute';
     this.container.parentNode.insertBefore(this._img, this.container);
@@ -58,30 +58,30 @@ dnn.controls.DNNMultiStateBox = function(o)
     }
     else
         this._img.tabIndex = 0;
-        
+
     this.set_Value(this.get_Value());
-    
-    this.addHandlers(this.container, {'click': this.click}, this);	
-    this.addHandlers(this._img, {'click': this.click, 'keypress': this.keypress}, this);	
+
+    this.addHandlers(this.container, {'click': this.click}, this);
+    this.addHandlers(this._img, {'click': this.click, 'keypress': this.keypress}, this);
 
 }
 
-dnn.controls.DNNMultiStateBox.prototype = 
+dnn.controls.DNNMultiStateBox.prototype =
 {
 get_Value: function() {return this.container.value;},
-set_Value: function(value) 
+set_Value: function(value)
 {
     var index = this.stateIndex[value];
     var state = this.states[index];
 
     if (this.enabled)
         this._img.src = this.imgPath + state.ImageUrl;
-    else    
+    else
         this._img.src = this.imgPath + state.DisabledImageUrl;
     this._img.alt = state.ToolTip;
     if (this._label)
         this._label.innerHTML = state.Text;
-    
+
     this.container.value = state.Key;
 },
 

@@ -1,10 +1,10 @@
 import utilities from "../utils";
 const boilerPlate = {
     init() {
-        // This setting is required and define the public path 
-        // to allow the web application to download assets on demand 
+        // This setting is required and define the public path
+        // to allow the web application to download assets on demand
         // eslint-disable-next-line no-undef
-        // __webpack_public_path__ = options.publicPath;        
+        // __webpack_public_path__ = options.publicPath;
         let options = window.dnn.initSeo();
 
         utilities.init(options.utility);

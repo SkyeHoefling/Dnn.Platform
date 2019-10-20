@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -64,10 +64,10 @@ namespace DotNetNuke.Services.FileSystem
 
         #region Properties
 
-		public virtual IDictionary<string, string> ContentTypes
-		{
-			get { return FileContentTypeManager.Instance.ContentTypes; }
-		}
+        public virtual IDictionary<string, string> ContentTypes
+        {
+            get { return FileContentTypeManager.Instance.ContentTypes; }
+        }
 
         #endregion
 
@@ -419,7 +419,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
 
                     // Retrieve Metadata
                     SetInitialFileMetadata(ref fileContent, file, folderProvider);
-                    
+
                     // Workflow
                     folderWorkflow = WorkflowManager.Instance.GetWorkflow(folder.WorkflowID);
                     if (folderWorkflow != null)
@@ -433,7 +433,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                             {
                                 AddFile(file, createdByUserID);
                                 fileExists = true;
-                            }  
+                            }
                             else
                             {
                                 //File Events for updating will be not fired. Only events for adding nust be fired
@@ -460,38 +460,38 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                     file.SHA1Hash = folderProvider.GetHashCode(file);
                 }
 
-				var isDatabaseProvider = folderMapping.FolderProviderType == "DatabaseFolderProvider";
+                var isDatabaseProvider = folderMapping.FolderProviderType == "DatabaseFolderProvider";
 
                 try
                 {
-					//add file into database first if folder provider is default providers
-					//add file into database after file saved into folder provider for remote folder providers to avoid multiple thread issue.
-					if (isDatabaseProvider)
-	                {
-		                if(folderWorkflow == null || !fileExists)
-						{
+                    //add file into database first if folder provider is default providers
+                    //add file into database after file saved into folder provider for remote folder providers to avoid multiple thread issue.
+                    if (isDatabaseProvider)
+                    {
+                        if(folderWorkflow == null || !fileExists)
+                        {
                             ManageFileAdding(createdByUserID, folderWorkflow, fileExists, file);
                         }
 
                         if (needToWriteFile)
-						{
-							folderProvider.AddFile(folder, contentFileName, fileContent);
-						}
-	                }
-	                else
-	                {
-						if (needToWriteFile)
-						{
-							folderProvider.AddFile(folder, contentFileName, fileContent);
-						}
+                        {
+                            folderProvider.AddFile(folder, contentFileName, fileContent);
+                        }
+                    }
+                    else
+                    {
+                        if (needToWriteFile)
+                        {
+                            folderProvider.AddFile(folder, contentFileName, fileContent);
+                        }
 
-		                if(folderWorkflow == null || !fileExists)
-						{
+                        if(folderWorkflow == null || !fileExists)
+                        {
                             ManageFileAdding(createdByUserID, folderWorkflow, fileExists, file);
                         }
                     }
 
-	                var providerLastModificationTime = folderProvider.GetLastModificationTime(file);
+                    var providerLastModificationTime = folderProvider.GetLastModificationTime(file);
                     if (file.LastModificationTime != providerLastModificationTime)
                     {
                         DataProvider.Instance().UpdateFileLastModificationTime(file.FileId, providerLastModificationTime);
@@ -514,14 +514,14 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                     Logger.Error(ex);
 
                     if (!folderProvider.FileExists(folder, file.FileName))
-                    {                     
+                    {
                         FileDeletionController.Instance.DeleteFileData(file);
                     }
 
                     throw new FolderProviderException(
                         Localization.Localization.GetExceptionMessage("AddFileUnderlyingSystemError",
-                                                                      "The underlying system threw an exception. The file has not been added."),
-                                                                      ex);
+                                                                    "The underlying system threw an exception. The file has not been added."),
+                                                                    ex);
                 }
 
                 DataCache.RemoveCache("GetFileById" + file.FileId);
@@ -634,7 +634,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             {
                 throw new NoSpaceAvailableException(
                     Localization.Localization.GetExceptionMessage("AddFileNoSpaceAvailable",
-                                                                  "The portal has no space available to store the specified file. The file has not been added."));
+                                                                "The portal has no space available to store the specified file. The file has not been added."));
             }
 
             //Publish Period
@@ -659,7 +659,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             {
                 AddFile(file, createdByUserID);
             }
-            else 
+            else
             {
                 //File Events for updating will not be fired. Only events for adding nust be fired
                 UpdateFile(file, true, false);
@@ -670,7 +670,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                 {
                     //Maybe here we can set HasBeenPublished as 0
                     DataProvider.Instance().SetFileHasBeenPublished(file.FileId, false);
-                }                
+                }
             }
         }
 
@@ -695,7 +695,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                                                     file.StartDate,
                                                     file.EndDate,
                                                     file.EnablePublishPeriod,
-                                                    file.ContentItemID);          
+                                                    file.ContentItemID);
         }
 
         private string ProcessVersioning(IFolderInfo folder, IFileInfo oldFile, IFileInfo file, int createdByUserID)
@@ -885,7 +885,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
         public virtual string GetContentType(string extension)
         {
 
-	        return FileContentTypeManager.Instance.GetContentType(extension);
+            return FileContentTypeManager.Instance.GetContentType(extension);
         }
 
         /// <summary>
@@ -1374,7 +1374,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                         }
                     }
                 }
-                
+
                 file.SHA1Hash = FolderProvider.Instance(FolderMappingController.Instance.GetFolderMapping(file.FolderMappingID).FolderProviderType).GetHashCode(file, fileContent);
             }
 
@@ -1542,29 +1542,29 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
         }
 
         private bool StartWorkflow(int createdByUserID, Workflow folderWorkflow, bool fileExists, int contentItemID)
-        {      
+        {
             if (WorkflowEngine.Instance.IsWorkflowCompleted(contentItemID))
             {
                 WorkflowEngine.Instance.StartWorkflow(folderWorkflow.WorkflowID, contentItemID, createdByUserID);
                 return true;
-            }            
+            }
             return false;
         }
         private string UpdateWhileApproving(IFolderInfo folder, int createdByUserID, IFileInfo file, IFileInfo oldFile, Stream content)
         {
-            var contentController = new ContentController();            
+            var contentController = new ContentController();
             bool workflowCompleted = WorkflowEngine.Instance.IsWorkflowCompleted(file.ContentItemID);
 
             var isDatabaseMapping = FolderMappingController.Instance.GetFolderMapping(folder.PortalID, folder.FolderMappingID).MappingName == "Database";
-            
-            //If the file does not exist, then the field would not has value. 
+
+            //If the file does not exist, then the field would not has value.
             //Currently, first upload has not version file
             if (oldFile == null || !oldFile.HasBeenPublished)
             {
                 return file.FileName;
             }
             if (workflowCompleted) //We assume User can add content to folder
-            {               
+            {
                 return isDatabaseMapping ? FileVersionController.Instance.AddFileVersion(file, createdByUserID, false, false, content) : FileVersionController.Instance.AddFileVersion(file, createdByUserID, false);
             }
 
@@ -1801,8 +1801,8 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             //regex is meant to block files like "foo.asp;.png" which can take advantage
             //of a vulnerability in IIS6 which treasts such files as .asp, not .png
             return !string.IsNullOrEmpty(extension)
-                   && Host.AllowedExtensionWhitelist.IsAllowedExtension(extension)
-                   && !Globals.FileExtensionRegex.IsMatch(fileName);
+                    && Host.AllowedExtensionWhitelist.IsAllowedExtension(extension)
+                    && !Globals.FileExtensionRegex.IsMatch(fileName);
         }
 
         /// <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
@@ -1904,7 +1904,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
         /// Update file info to database.
         /// </summary>
         /// <param name="file">File info.</param>
-        /// <param name="updateLazyload">Whether to update the lazy load properties: Width, Height, Sha1Hash.</param>        
+        /// <param name="updateLazyload">Whether to update the lazy load properties: Width, Height, Sha1Hash.</param>
         /// <returns>The file info</returns>
         internal virtual IFileInfo UpdateFile(IFileInfo file, bool updateLazyload)
         {
@@ -1925,23 +1925,23 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             Requires.NotNull("file", file);
 
             DataProvider.Instance().UpdateFile(file.FileId,
-                                               file.VersionGuid,
-                                               file.FileName,
-                                               file.Extension,
-                                               file.Size,
-                                               updateLazyload ? file.Width : Null.NullInteger,
-                                               updateLazyload ? file.Height : Null.NullInteger,
-                                               file.ContentType,
-                                               file.FolderId,
-                                               GetCurrentUserID(),
-                                               updateLazyload ? file.SHA1Hash : Null.NullString,
-                                               file.LastModificationTime,
-                                               file.Title,
-                                               file.Description,
-                                               file.StartDate,
-                                               file.EndDate,
-                                               file.EnablePublishPeriod,
-                                               file.ContentItemID);
+                                                file.VersionGuid,
+                                                file.FileName,
+                                                file.Extension,
+                                                file.Size,
+                                                updateLazyload ? file.Width : Null.NullInteger,
+                                                updateLazyload ? file.Height : Null.NullInteger,
+                                                file.ContentType,
+                                                file.FolderId,
+                                                GetCurrentUserID(),
+                                                updateLazyload ? file.SHA1Hash : Null.NullString,
+                                                file.LastModificationTime,
+                                                file.Title,
+                                                file.Description,
+                                                file.StartDate,
+                                                file.EndDate,
+                                                file.EnablePublishPeriod,
+                                                file.ContentItemID);
 
             DataCache.RemoveCache("GetFileById" + file.FileId);
             ClearFolderCache(file.PortalId);

@@ -40,7 +40,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Module
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
-            
+
             ModuleName = GetFlagValue(FlagModuleName, "Module Name", string.Empty, true, true);
             PageId = GetFlagValue(FlagPageId, "Page Id", -1, true, false, true);
             ModuleTitle = GetFlagValue(FlagModuleTitle, "Module Title", string.Empty);

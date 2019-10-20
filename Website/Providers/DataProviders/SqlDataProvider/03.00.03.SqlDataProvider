@@ -9,11 +9,11 @@
 /************************************************************/
 
 ALTER TABLE {databaseOwner}{objectQualifier}TabModules ADD CONSTRAINT
-	IX_{objectQualifier}TabModules UNIQUE NONCLUSTERED 
-	(
-	TabID,
-	ModuleID
-	) ON [PRIMARY]
+    IX_{objectQualifier}TabModules UNIQUE NONCLUSTERED
+    (
+    TabID,
+    ModuleID
+    ) ON [PRIMARY]
 
 GO
 
@@ -21,75 +21,75 @@ DROP TABLE {databaseOwner}{objectQualifier}Referrer
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Schedule ADD CONSTRAINT
-	PK_{objectQualifier}Schedule PRIMARY KEY CLUSTERED 
-	(
-	ScheduleID
-	) ON [PRIMARY]
+    PK_{objectQualifier}Schedule PRIMARY KEY CLUSTERED
+    (
+    ScheduleID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ScheduleItemSettings ADD CONSTRAINT
-	PK_{objectQualifier}ScheduleItemSettings PRIMARY KEY CLUSTERED 
-	(
-	ScheduleID,
-	SettingName
-	) ON [PRIMARY]
+    PK_{objectQualifier}ScheduleItemSettings PRIMARY KEY CLUSTERED
+    (
+    ScheduleID,
+    SettingName
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ScheduleItemSettings WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}ScheduleItemSettings_{objectQualifier}Schedule FOREIGN KEY
-	(
-	ScheduleID
-	) REFERENCES {databaseOwner}{objectQualifier}Schedule
-	(
-	ScheduleID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_{objectQualifier}ScheduleItemSettings_{objectQualifier}Schedule FOREIGN KEY
+    (
+    ScheduleID
+    ) REFERENCES {databaseOwner}{objectQualifier}Schedule
+    (
+    ScheduleID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ScheduleHistory ADD CONSTRAINT
-	PK_{objectQualifier}ScheduleHistory PRIMARY KEY CLUSTERED 
-	(
-	ScheduleHistoryID
-	) ON [PRIMARY]
+    PK_{objectQualifier}ScheduleHistory PRIMARY KEY CLUSTERED
+    (
+    ScheduleHistoryID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ScheduleHistory WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}ScheduleHistory_{objectQualifier}Schedule FOREIGN KEY
-	(
-	ScheduleID
-	) REFERENCES {databaseOwner}{objectQualifier}Schedule
-	(
-	ScheduleID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_{objectQualifier}ScheduleHistory_{objectQualifier}Schedule FOREIGN KEY
+    (
+    ScheduleID
+    ) REFERENCES {databaseOwner}{objectQualifier}Schedule
+    (
+    ScheduleID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}SearchItem WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}SearchItem_{objectQualifier}Modules FOREIGN KEY
-	(
-	ModuleId
-	) REFERENCES {databaseOwner}{objectQualifier}Modules
-	(
-	ModuleID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_{objectQualifier}SearchItem_{objectQualifier}Modules FOREIGN KEY
+    (
+    ModuleId
+    ) REFERENCES {databaseOwner}{objectQualifier}Modules
+    (
+    ModuleID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Affiliates WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}Affiliates_{objectQualifier}Vendors FOREIGN KEY
-	(
-	VendorId
-	) REFERENCES {databaseOwner}{objectQualifier}Vendors
-	(
-	VendorId
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_{objectQualifier}Affiliates_{objectQualifier}Vendors FOREIGN KEY
+    (
+    VendorId
+    ) REFERENCES {databaseOwner}{objectQualifier}Vendors
+    (
+    VendorId
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
@@ -121,18 +121,18 @@ create procedure {databaseOwner}{objectQualifier}GetBanners
 as
 
 select BannerId,
-       BannerName,
-       URL,
-       Impressions,
-       CPM,
-       Views,
-       ClickThroughs,
-       StartDate,
-       EndDate,
-       BannerTypeId,
-       Description,
-       GroupName,
-       Criteria
+        BannerName,
+        URL,
+        Impressions,
+        CPM,
+        Views,
+        ClickThroughs,
+        StartDate,
+        EndDate,
+        BannerTypeId,
+        Description,
+        GroupName,
+        Criteria
 from   {objectQualifier}Banners
 where  VendorId = @VendorId
 order  by CreatedDate desc
@@ -144,7 +144,7 @@ drop procedure {databaseOwner}{objectQualifier}AddDesktopModule
 GO
 
 CREATE  procedure {databaseOwner}{objectQualifier}AddDesktopModule
-    
+
 @FriendlyName   nvarchar(128),
 @Description    nvarchar(2000),
 @Version        nvarchar(8),
@@ -180,7 +180,7 @@ GO
 
 CREATE  procedure {databaseOwner}{objectQualifier}UpdateDesktopModule
 
-@DesktopModuleId int,    
+@DesktopModuleId int,
 @FriendlyName    nvarchar(128),
 @Description     nvarchar(2000),
 @Version         nvarchar(8),
@@ -192,11 +192,11 @@ as
 
 update {objectQualifier}DesktopModules
 set    FriendlyName    = @FriendlyName,
-       Description     = @Description,
-       Version         = @Version,
-       IsPremium       = @IsPremium,
-       IsAdmin         = @IsAdmin,
-       BusinessControllerClass = @BusinessController
+        Description     = @Description,
+        Version         = @Version,
+        IsPremium       = @IsPremium,
+        IsAdmin         = @IsAdmin,
+        BusinessControllerClass = @BusinessController
 where  DesktopModuleId = @DesktopModuleId
 GO
 
@@ -244,12 +244,12 @@ create procedure {databaseOwner}{objectQualifier}GetSearchItems
 as
 
 select si.*,
-       'Author' = u.FirstName + ' ' + u.LastName,
-       t.TabId
+        'Author' = u.FirstName + ' ' + u.LastName,
+        t.TabId
 from   {objectQualifier}SearchItem si
 left outer join {objectQualifier}Users u ON si.Author = u.UserID
-inner join {objectQualifier}Modules m ON si.ModuleId = m.ModuleID 
-inner join {objectQualifier}TabModules tm ON m.ModuleId = tm.ModuleID 
+inner join {objectQualifier}Modules m ON si.ModuleId = m.ModuleID
+inner join {objectQualifier}TabModules tm ON m.ModuleId = tm.ModuleID
 inner join {objectQualifier}Tabs t ON tm.TabID = t.TabID
 inner join {objectQualifier}Portals p ON t.PortalID = p.PortalID
 where (p.PortalId = @PortalId or @PortalId is null)
@@ -259,7 +259,7 @@ and   (m.ModuleId = @ModuleId or @ModuleId is null)
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}SearchItem
-	DROP COLUMN Link, Content
+    DROP COLUMN Link, Content
 GO
 
 drop procedure {databaseOwner}{objectQualifier}AddSearchItem
@@ -277,24 +277,24 @@ create procedure {databaseOwner}{objectQualifier}AddSearchItem
 as
 
 insert into {objectQualifier}SearchItem (
-	Title,
-	Description,
-	Author,
-	PubDate,
-	ModuleId,
- 	SearchKey,
-	Guid,
-	HitCount
-) 
+    Title,
+    Description,
+    Author,
+    PubDate,
+    ModuleId,
+    SearchKey,
+    Guid,
+    HitCount
+)
 values (
-	@Title,
-	@Description,
-	@Author,
-	@PubDate,
-	@ModuleId,
-	@SearchKey,
-	convert(nvarchar(40), newid()),
-	0
+    @Title,
+    @Description,
+    @Author,
+    @PubDate,
+    @ModuleId,
+    @SearchKey,
+    convert(nvarchar(40), newid()),
+    0
 )
 
 select SCOPE_IDENTITY()
@@ -307,11 +307,11 @@ DROP INDEX {databaseOwner}{objectQualifier}Vendors.IX_Vendors_1
 GO
 DROP INDEX {databaseOwner}{objectQualifier}VendorClassification.IX_VendorClassification_2
 GO
-DROP INDEX {databaseOwner}{objectQualifier}Roles.IX_Roles_1  
+DROP INDEX {databaseOwner}{objectQualifier}Roles.IX_Roles_1
 GO
 DROP INDEX {databaseOwner}{objectQualifier}ModuleSettings.IX_{objectQualifier}ModuleSettings
 GO
- 
+
 ALTER TABLE {databaseOwner}{objectQualifier}HostSettings
  DROP CONSTRAINT IX_{objectQualifier}HostSettings
 GO
@@ -321,7 +321,3 @@ GO
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-
-
-
-

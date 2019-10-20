@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -44,7 +44,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
     [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
     public class MemberDirectoryController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (MemberDirectoryController));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (MemberDirectoryController));
         #region Private Methods
 
         private static void AddSearchTerm(ref string propertyNames, ref string propertyValues, string name, string value)
@@ -82,14 +82,14 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
 
             var canView = (group.SecurityMode == SecurityMode.SecurityRole)
-                               ? (PortalSettings.UserInfo.IsInRole(PortalSettings.AdministratorRoleName))
-                               : (PortalSettings.UserInfo.IsInRole(group.RoleName));
+                                ? (PortalSettings.UserInfo.IsInRole(PortalSettings.AdministratorRoleName))
+                                : (PortalSettings.UserInfo.IsInRole(group.RoleName));
 
-			//if current user can view the group page and group is public, then should be able to view members.
-			if (!canView)
-			{
-				canView = ModulePermissionController.CanViewModule(ActiveModule) && group.IsPublic;
-			}
+            //if current user can view the group page and group is public, then should be able to view members.
+            if (!canView)
+            {
+                canView = ModulePermissionController.CanViewModule(ActiveModule) && group.IsPublic;
+            }
             return canView;
         }
 
@@ -110,7 +110,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
 
         private IEnumerable<UserInfo> GetUsers(int userId, int groupId, string searchTerm, int pageIndex, int pageSize, string propertyNames, string propertyValues)
         {
-            var portalId = PortalSettings.PortalId;            
+            var portalId = PortalSettings.PortalId;
             var isAdmin = PortalSettings.UserInfo.IsInRole(PortalSettings.AdministratorRoleName);
 
             var filterBy = GetSetting(ActiveModule.ModuleSettings, "FilterBy", String.Empty);
@@ -156,10 +156,10 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
                     if (CanViewGroupMembers(portalId, groupId))
                     {
                         users = UserController.Instance.GetUsersAdvancedSearch(portalId, PortalSettings.UserId, userId,
-                                                                                       groupId,
-                                                                                       -1, isAdmin, pageIndex, pageSize,
-                                                                                       sortField, (sortOrder == "ASC"),
-                                                                                       propertyNames, propertyValues);
+                                                                                        groupId,
+                                                                                        -1, isAdmin, pageIndex, pageSize,
+                                                                                        sortField, (sortOrder == "ASC"),
+                                                                                        propertyNames, propertyValues);
                     }
                     else
                     {
@@ -168,32 +168,32 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
                     break;
                 case "Relationship":
                     users = UserController.Instance.GetUsersAdvancedSearch(portalId, PortalSettings.UserId, userId, -1,
-                                                                           Int32.Parse(filterValue), isAdmin, pageIndex, pageSize,
-                                                                           sortField, (sortOrder == "ASC"),
-                                                                           propertyNames, propertyValues);
+                                                                            Int32.Parse(filterValue), isAdmin, pageIndex, pageSize,
+                                                                            sortField, (sortOrder == "ASC"),
+                                                                            propertyNames, propertyValues);
                     break;
                 case "ProfileProperty":
                     var propertyValue = GetSetting(ActiveModule.ModuleSettings, "FilterPropertyValue", String.Empty);
                     AddSearchTerm(ref propertyNames, ref propertyValues, filterValue, propertyValue);
 
                     users = UserController.Instance.GetUsersAdvancedSearch(portalId, PortalSettings.UserId, userId, -1,
-                                                                           -1, isAdmin, pageIndex, pageSize,
-                                                                           sortField, (sortOrder == "ASC"),
-                                                                           propertyNames, propertyValues);
+                                                                            -1, isAdmin, pageIndex, pageSize,
+                                                                            sortField, (sortOrder == "ASC"),
+                                                                            propertyNames, propertyValues);
                     break;
                 default:
                     users = isBasicSearch ? UserController.Instance.GetUsersBasicSearch(PortalSettings.PortalId, pageIndex, pageSize,
-                                                                           sortField, (sortOrder == "ASC"),
-                                                                           "DisplayName", searchTerm)
-                                                                           :
-                                                                           UserController.Instance.GetUsersAdvancedSearch(portalId, PortalSettings.UserId, userId, -1,
-                                                                               -1, isAdmin, pageIndex, pageSize,
-                                                                               sortField, (sortOrder == "ASC"),
-                                                                               propertyNames, propertyValues);
+                                                                            sortField, (sortOrder == "ASC"),
+                                                                            "DisplayName", searchTerm)
+                                                                            :
+                                                                            UserController.Instance.GetUsersAdvancedSearch(portalId, PortalSettings.UserId, userId, -1,
+                                                                                -1, isAdmin, pageIndex, pageSize,
+                                                                                sortField, (sortOrder == "ASC"),
+                                                                                propertyNames, propertyValues);
                     break;
             }
             if (excludeHostUsers)
-            {                
+            {
                 return FilterExcludedUsers(users);
             }
             return users;
@@ -214,7 +214,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             try
             {
                 if (userId < 0) userId = PortalSettings.UserId;
-                
+
                 var searchField1 = GetSetting(ActiveModule.TabModuleSettings, "SearchField1", "DisplayName");
                 var searchField2 = GetSetting(ActiveModule.TabModuleSettings, "SearchField2", "Email");
                 var searchField3 = GetSetting(ActiveModule.TabModuleSettings, "SearchField3", "City");
@@ -276,7 +276,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             try
             {
                 var names = (from UserInfo user in GetUsers(-1, groupId, displayName.Trim(), 0, 10, "", "")
-                             select new { label = user.DisplayName, value = user.DisplayName, userId = user.UserID })
+                            select new { label = user.DisplayName, value = user.DisplayName, userId = user.UserID })
                                 .ToList();
 
                 return Request.CreateResponse(HttpStatusCode.OK, names);

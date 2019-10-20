@@ -54,17 +54,17 @@
         }
 
         $(this).find("div > div").bind(
-			"click"
-			, function () {
-			    if ($(this).children("a").length > 0)
-			        window.location.href = $(this).children("a")[0].href;
-			}
-		);
+            "click"
+            , function () {
+                if ($(this).children("a").length > 0)
+                    window.location.href = $(this).children("a")[0].href;
+            }
+        );
 
         $(this).find("div > div").hover(
-			function (e) { $(this).addClass("console-mouseon"); }
-			, function (e) { $(this).removeClass("console-mouseon"); }
-		);
+            function (e) { $(this).addClass("console-mouseon"); }
+            , function (e) { $(this).removeClass("console-mouseon"); }
+        );
 
         var self = this;
         $(this).find("select").bind("change", function () {

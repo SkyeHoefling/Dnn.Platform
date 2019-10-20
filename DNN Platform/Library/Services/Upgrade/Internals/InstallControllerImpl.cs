@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -112,7 +112,7 @@ namespace DotNetNuke.Services.Upgrade.Internals
 
         /// <summary>
         /// SetInstallConfig - Saves configuration n DotNetNuke.Install.Config
-        /// </summary>        
+        /// </summary>
         public void SetInstallConfig(InstallConfig installConfig)
         {
             if (installConfig == null)
@@ -125,7 +125,7 @@ namespace DotNetNuke.Services.Upgrade.Internals
             Upgrade.GetInstallTemplate(installTemplate);
             XmlNode dotnetnukeNode = installTemplate.SelectSingleNode("//dotnetnuke");
 
-            //Set Version            
+            //Set Version
             if (!string.IsNullOrEmpty(installConfig.Version))
             {
                 XmlNode versionNode = installTemplate.SelectSingleNode("//dotnetnuke/version");
@@ -138,7 +138,7 @@ namespace DotNetNuke.Services.Upgrade.Internals
                 versionNode.InnerText = installConfig.Version;
             }
 
-            //Set installer culture            
+            //Set installer culture
             if (!string.IsNullOrEmpty(installConfig.InstallCulture))
             {
                 XmlNode versionNode = installTemplate.SelectSingleNode("//dotnetnuke/installCulture");
@@ -172,7 +172,7 @@ namespace DotNetNuke.Services.Upgrade.Internals
                 AppendNewXmlNode(ref installTemplate, ref superUserNode, "updatepassword", "false");
             }
 
-            //Set Folder Mappings Settings            
+            //Set Folder Mappings Settings
             if (!string.IsNullOrEmpty(installConfig.FolderMappingsSettings))
             {
                 XmlNode folderMappingsNode = installTemplate.SelectSingleNode("//dotnetnuke/"+FolderMappingsConfigController.Instance.ConfigNode);
@@ -637,7 +637,7 @@ namespace DotNetNuke.Services.Upgrade.Internals
             }
             return culture;
         }
-        
+
         private CultureInfo GetCultureFromQs()
         {
             if (HttpContext.Current == null || HttpContext.Current.Request["language"] == null)
@@ -654,19 +654,19 @@ namespace DotNetNuke.Services.Upgrade.Internals
         {
             string myfile = "";
             WebResponse wr = Util.GetExternalRequest(downloadUrl,
-                                                     null,
-                                                     null,
-                                                     null,
-                                                     null,
-                                                     null,
-                                                     -1,
-													 null,
-													 null,
-                                                     false,
-                                                     "DotNetNuke-Appgallery/1.0.0.0(Microsoft Windows NT 6.1.7600.0",
-                                                     "wpi://2.1.0.0/Microsoft Windows NT 6.1.7600.0",
-                                                     out myfile,
-													 10000);
+                                                    null,
+                                                    null,
+                                                    null,
+                                                    null,
+                                                    null,
+                                                    -1,
+                                                    null,
+                                                    null,
+                                                    false,
+                                                    "DotNetNuke-Appgallery/1.0.0.0(Microsoft Windows NT 6.1.7600.0",
+                                                    "wpi://2.1.0.0/Microsoft Windows NT 6.1.7600.0",
+                                                    out myfile,
+                                                    10000);
             //use fixed name for later installation
             myfile = "installlanguage.resources";
             Util.DeployExtension(wr, myfile, installFolder);

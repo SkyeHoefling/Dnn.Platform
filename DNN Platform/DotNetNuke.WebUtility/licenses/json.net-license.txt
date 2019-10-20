@@ -11,7 +11,7 @@ The Json.NET library makes working with JSON formatted data in .NET simple. Quic
 - The JsonSerializer for quickly converting your .NET objects to JSON and back again
 - Json.NET can optionally produce well formatted, indented JSON for debugging or display
 - Attributes like JsonIgnore and JsonProperty can be added to a class to customize how a class is serialized
-- Ability to convert JSON to and from XML 
+- Ability to convert JSON to and from XML
 
 
 

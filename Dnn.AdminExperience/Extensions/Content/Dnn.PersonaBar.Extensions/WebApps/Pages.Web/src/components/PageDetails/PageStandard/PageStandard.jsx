@@ -50,7 +50,7 @@ class PageDetails extends Component {
             includeDisabled: true
         };
 
-        let TabParameters_1 = Object.assign(Object.assign({}, TabParameters), { 
+        let TabParameters_1 = Object.assign(Object.assign({}, TabParameters), {
             disabledNotSelectable: false,
             includeDeletedChildren: false
         });
@@ -123,7 +123,7 @@ class PageDetails extends Component {
                                 PortalTabsParameters={TabParameters_1}
                                 style={{ width: "333px", zIndex: 5 }}
                                 OnSelect={this.onSelect.bind(this)}
-                                serviceFramework={sf} 
+                                serviceFramework={sf}
                                 currentTabId={page.tabId} />
                         </InputGroup>
                     </GridCell>

@@ -1,9 +1,9 @@
 #Region "Copyright"
 
-' 
+'
 ' Copyright (c) _YEAR_
 ' by _OWNER_
-' 
+'
 
 #End Region
 
@@ -27,7 +27,7 @@ Namespace _OWNER_._MODULE_
                 Dim strMessage As String = Processing()
                 Me.ScheduleHistoryItem.Succeeded = True
                 Me.ScheduleHistoryItem.AddLogNote("_MODULE_ Succeeded")
-            Catch exc As Exception    
+            Catch exc As Exception
                 Me.ScheduleHistoryItem.Succeeded = False
                 Me.ScheduleHistoryItem.AddLogNote("_MODULE_ Failed")
                 Me.Errored(exc)
@@ -36,10 +36,9 @@ Namespace _OWNER_._MODULE_
 
         Public Function Processing() As String
             Dim Message As String = ""
-            Return Message 
+            Return Message
         End Function
 
     End Class
 
 End Namespace
-

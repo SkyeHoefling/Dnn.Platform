@@ -10,7 +10,7 @@ class PackageCardOverlay extends Component {
             <div className="package-card-overlay" onClick={props.selectPackage}>
                 <div className="icon-container">
                     <div>{props.isSelected ? Localization.get("ClicktoDeselect") : Localization.get("ClicktoSelect")}</div>
-                </div>                
+                </div>
             </div>
         );
     }

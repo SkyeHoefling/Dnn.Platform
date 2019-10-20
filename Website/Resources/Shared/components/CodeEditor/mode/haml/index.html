@@ -41,7 +41,7 @@
 .container
   .row
     .span8
-      %h1.title= @page_title
+    %h1.title= @page_title
 %p.title= @page_title
 %p
   /
@@ -49,8 +49,8 @@
     Hello multiline comment
 
   -# haml comment
-      This wont be displayed
-      nor will this
+    This wont be displayed
+    nor will this
   Date/Time:
   - now = DateTime.now
   %strong= now
@@ -66,10 +66,10 @@
   </h1>
     </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         mode: "text/x-haml"
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-haml</code>.</p>

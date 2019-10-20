@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -40,7 +40,7 @@ namespace DotNetNuke.Modules.Admin.Sales
 {
     public partial class PayPalSubscription : PageBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PayPalSubscription));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PayPalSubscription));
         private void InitializeComponent()
         {
         }
@@ -94,7 +94,7 @@ namespace DotNetNuke.Modules.Admin.Sales
 
                     if (Request.QueryString["cancel"] != null)
                     {
-						//build the cancellation PayPal URL
+                        //build the cancellation PayPal URL
                         strPayPalURL += "cmd=_subscr-find&alias=" + Globals.HTTPPOSTEncode(strProcessorUserId);
                     }
                     else
@@ -113,18 +113,18 @@ namespace DotNetNuke.Modules.Admin.Sales
                             {
                                 intBillingPeriod = objRole.BillingPeriod;
                             }
-							
-							//explicitely format numbers using en-US so numbers are correctly built
+
+                            //explicitely format numbers using en-US so numbers are correctly built
                             var enFormat = new CultureInfo("en-US");
                             string strService = string.Format(enFormat.NumberFormat, "{0:#####0.00}", objRole.ServiceFee);
                             string strTrial = string.Format(enFormat.NumberFormat, "{0:#####0.00}", objRole.TrialFee);
                             if (objRole.BillingFrequency == "O" || objRole.TrialFrequency == "O")
                             {
-								//build the payment PayPal URL
+                                //build the payment PayPal URL
                                 strPayPalURL += "&redirect_cmd=_xclick&business=" + Globals.HTTPPOSTEncode(strProcessorUserId);
                                 strPayPalURL += "&item_name=" +
                                                 Globals.HTTPPOSTEncode(PortalSettings.PortalName + " - " + objRole.RoleName + " ( " + objRole.ServiceFee.ToString("#.##") + " " +
-                                                                       PortalSettings.Currency + " )");
+                                                                        PortalSettings.Currency + " )");
                                 strPayPalURL += "&item_number=" + Globals.HTTPPOSTEncode(intRoleId.ToString());
                                 strPayPalURL += "&no_shipping=1&no_note=1";
                                 strPayPalURL += "&quantity=1";
@@ -133,11 +133,11 @@ namespace DotNetNuke.Modules.Admin.Sales
                             }
                             else //recurring payments
                             {
-								//build the subscription PayPal URL
+                                //build the subscription PayPal URL
                                 strPayPalURL += "&redirect_cmd=_xclick-subscriptions&business=" + Globals.HTTPPOSTEncode(strProcessorUserId);
                                 strPayPalURL += "&item_name=" +
                                                 Globals.HTTPPOSTEncode(PortalSettings.PortalName + " - " + objRole.RoleName + " ( " + objRole.ServiceFee.ToString("#.##") + " " +
-                                                                       PortalSettings.Currency + " every " + intBillingPeriod + " " + GetBillingFrequencyText(objRole.BillingFrequency) + " )");
+                                                                        PortalSettings.Currency + " every " + intBillingPeriod + " " + GetBillingFrequencyText(objRole.BillingFrequency) + " )");
                                 strPayPalURL += "&item_number=" + Globals.HTTPPOSTEncode(intRoleId.ToString());
                                 strPayPalURL += "&no_shipping=1&no_note=1";
                                 if (objRole.TrialFrequency != "N")
@@ -165,18 +165,18 @@ namespace DotNetNuke.Modules.Admin.Sales
                                 ListEntryInfo colList = ctlList.GetListEntryInfo("Region", objUserInfo.Profile.Region);
                                 strPayPalURL += "&address1=" +
                                                 Globals.HTTPPOSTEncode(Convert.ToString(!String.IsNullOrEmpty(objUserInfo.Profile.Unit) ? objUserInfo.Profile.Unit + " " : "") +
-                                                                       objUserInfo.Profile.Street);
+                                                                        objUserInfo.Profile.Street);
                                 strPayPalURL += "&city=" + Globals.HTTPPOSTEncode(objUserInfo.Profile.City);
                                 strPayPalURL += "&state=" + Globals.HTTPPOSTEncode(colList.Value);
                                 strPayPalURL += "&zip=" + Globals.HTTPPOSTEncode(objUserInfo.Profile.PostalCode);
                             }
                         }
-						catch (Exception ex)
-						{
-							//issue getting user address
-							Logger.Error(ex);
-						}
-						
+                        catch (Exception ex)
+                        {
+                            //issue getting user address
+                            Logger.Error(ex);
+                        }
+
                         //Return URL
                         if (settings.ContainsKey("paypalsubscriptionreturn") && !string.IsNullOrEmpty(settings["paypalsubscriptionreturn"]))
                         {
@@ -186,7 +186,7 @@ namespace DotNetNuke.Modules.Admin.Sales
                         {
                             strPayPalURL += "&return=" + Globals.HTTPPOSTEncode(Globals.AddHTTP(Globals.GetDomainName(Request)));
                         }
-						
+
                         //Cancellation URL
                         if (settings.ContainsKey("paypalsubscriptioncancelreturn") && !string.IsNullOrEmpty(settings["paypalsubscriptioncancelreturn"]))
                         {
@@ -196,7 +196,7 @@ namespace DotNetNuke.Modules.Admin.Sales
                         {
                             strPayPalURL += "&cancel_return=" + Globals.HTTPPOSTEncode(Globals.AddHTTP(Globals.GetDomainName(Request)));
                         }
-						
+
                         //Instant Payment Notification URL
                         if (settings.ContainsKey("paypalsubscriptionnotifyurl") && !string.IsNullOrEmpty(settings["paypalsubscriptionnotifyurl"]))
                         {
@@ -208,8 +208,8 @@ namespace DotNetNuke.Modules.Admin.Sales
                         }
                         strPayPalURL += "&sra=1"; //reattempt on failure
                     }
-					
-					//redirect to PayPal
+
+                    //redirect to PayPal
                     Response.Redirect(strPayPalURL, true);
                 }
                 else
@@ -222,8 +222,8 @@ namespace DotNetNuke.Modules.Admin.Sales
                     {
                         strPayPalURL = Globals.AddHTTP(Globals.GetDomainName(Request));
                     }
-					
-					//redirect to PayPal
+
+                    //redirect to PayPal
                     Response.Redirect(strPayPalURL, true);
                 }
             }

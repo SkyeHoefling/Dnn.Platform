@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -37,14 +37,14 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
     /// <summary>
     /// InstallDatabaseStep - Step that installs Database
     /// </summary>
-    /// -----------------------------------------------------------------------------    
+    /// -----------------------------------------------------------------------------
     public class InstallDatabaseStep : BaseInstallationStep
     {
         #region Implementation of IInstallationStep
 
         /// <summary>
         /// Main method to execute the step
-        /// </summary>        
+        /// </summary>
         public override void Execute()
         {
             Percentage = 0;
@@ -72,9 +72,9 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
                     var exception = Upgrade.ExecuteScript(scriptFile, false);
                     if (!string.IsNullOrEmpty(exception))
                     {
-	                    Errors.Add(exception);
-						Status = StepStatus.Retry;
-						return;
+                        Errors.Add(exception);
+                        Status = StepStatus.Retry;
+                        return;
                     }
                     Percentage += percentForMiniStep;
                 }
@@ -85,12 +85,12 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
                 Details = Localization.Localization.GetString("InstallingMembershipDatabaseScriptStep", LocalInstallResourceFile);
                 //Optionally Install the memberRoleProvider
                 var exceptions = Upgrade.InstallMemberRoleProvider(providerPath, false);
-				if (!string.IsNullOrEmpty(exceptions))
-				{
-					Errors.Add(exceptions);
-					Status = StepStatus.Retry;
-					return;
-				}
+                if (!string.IsNullOrEmpty(exceptions))
+                {
+                    Errors.Add(exceptions);
+                    Status = StepStatus.Retry;
+                    return;
+                }
             }
             Percentage = percentForEachStep * counter++;
 
@@ -108,13 +108,13 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
                     Details = description + fileName;
 
                     bool scriptExecuted;
-					var exceptions = Upgrade.UpgradeVersion(scriptFile, false, out scriptExecuted);
-					if (!string.IsNullOrEmpty(exceptions))
-					{
-						Errors.Add(exceptions);
-						Status = StepStatus.Retry;
-						return;
-					}
+                    var exceptions = Upgrade.UpgradeVersion(scriptFile, false, out scriptExecuted);
+                    if (!string.IsNullOrEmpty(exceptions))
+                    {
+                        Errors.Add(exceptions);
+                        Status = StepStatus.Retry;
+                        return;
+                    }
 
                     if (scriptExecuted)
                     {
@@ -132,32 +132,32 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
                 string description = Localization.Localization.GetString("UpgradingVersionApplication", LocalInstallResourceFile);
                 Details = description + ver;
                 var exceptions = Upgrade.UpgradeApplication(providerPath, ver, false);
-				if (!string.IsNullOrEmpty(exceptions))
-				{
-					Errors.Add(exceptions);
-					Status = StepStatus.Retry;
-					return;
-				}
+                if (!string.IsNullOrEmpty(exceptions))
+                {
+                    Errors.Add(exceptions);
+                    Status = StepStatus.Retry;
+                    return;
+                }
                 Percentage += percentForMiniStep;
             }
             Percentage = percentForEachStep * counter++;
 
 
-			//Step 4 - Execute config file updates
-			foreach (Version ver in versions)
-			{
-				string description = Localization.Localization.GetString("UpdatingConfigFile", LocalInstallResourceFile);
-				Details = description + ver;
-				var exceptions = Upgrade.UpdateConfig(providerPath, ver, false);
-				if (!string.IsNullOrEmpty(exceptions))
-				{
-					Errors.Add(exceptions);
-					Status = StepStatus.Retry;
-					return;
-				}
-				Percentage += percentForMiniStep;
-			}
-			Percentage = percentForEachStep * counter++;
+            //Step 4 - Execute config file updates
+            foreach (Version ver in versions)
+            {
+                string description = Localization.Localization.GetString("UpdatingConfigFile", LocalInstallResourceFile);
+                Details = description + ver;
+                var exceptions = Upgrade.UpdateConfig(providerPath, ver, false);
+                if (!string.IsNullOrEmpty(exceptions))
+                {
+                    Errors.Add(exceptions);
+                    Status = StepStatus.Retry;
+                    return;
+                }
+                Percentage += percentForMiniStep;
+            }
+            Percentage = percentForEachStep * counter++;
 
             //Step 5 - Delete files which are no longer used
             foreach (Version ver in versions)
@@ -165,12 +165,12 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
                 string description = Localization.Localization.GetString("DeletingOldFiles", LocalInstallResourceFile);
                 Details = description + ver;
                 var exceptions = Upgrade.DeleteFiles(providerPath, ver, false);
-				if (!string.IsNullOrEmpty(exceptions))
-				{
-					Errors.Add(exceptions);
-					Status = StepStatus.Retry;
-					return;
-				}
+                if (!string.IsNullOrEmpty(exceptions))
+                {
+                    Errors.Add(exceptions);
+                    Status = StepStatus.Retry;
+                    return;
+                }
                 Percentage += percentForMiniStep;
             }
             Percentage = percentForEachStep * counter++;
@@ -184,7 +184,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
 
             DataCache.ClearHostCache(true);
             Percentage = percentForEachStep * counter++;
-            
+
             Status = Errors.Count > 0 ? StepStatus.Retry : StepStatus.Done;
         }
 

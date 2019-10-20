@@ -279,7 +279,7 @@ class PagePicker extends Component {
 
     getSelected(page, isCurrentOrDescendant) {
         let className = "page-value";
-        if (page.Selectable && !isCurrentOrDescendant)      
+        if (page.Selectable && !isCurrentOrDescendant)
             className += (page.CheckedState !== 1 ? " selected" : "");
         else
             className += " non-selectable";
@@ -290,7 +290,7 @@ class PagePicker extends Component {
     getChildItems(children, isCurrentOrDescendant) {
         if (!children) {
             return [];
-        }        
+        }
         return children.map((page) => {
             const {props} = this;
             const checkboxIcon = this.getCheckboxIcon(page.CheckedState);
@@ -298,7 +298,7 @@ class PagePicker extends Component {
             const textClass = props.IsMultiSelect && props.ShowIcon ? " text-with-page-icon" : (!props.IsMultiSelect && !props.ShowIcon ? "no-icon" : "");
             const pageClass = props.IsMultiSelect && props.ShowIcon ? " page-icon" : "";
             const parentNotSelectable = isCurrentOrDescendant ? isCurrentOrDescendant : this.props.currentTabId === parseInt(page.TabId);
-            
+
             return <li key={page.TabId} className={"page-item page-" + page.TabId + (page.HasChildren ? " has-children" : "") + (page.IsOpen ? " opened" : " closed") }>
                 {(!page.IsOpen && page.HasChildren) && <div className="arrow-icon" dangerouslySetInnerHTML={{ __html: ArrowRightIcon }} onClick={this.getDescendants.bind(this, page, null) }></div>}
                 {(page.IsOpen && page.HasChildren) && <div className="arrow-icon" dangerouslySetInnerHTML={{ __html: ArrowDownIcon }} onClick={this.getDescendants.bind(this, page, null) }></div>}
@@ -559,7 +559,7 @@ class PagePicker extends Component {
     /* eslint-disable react/no-danger */
     render() {
         const {props, state} = this;
-        
+
         if (this.loaded || props.IsInDropDown) {
             let picker = <div/>;
             if (state.portalTabs.length > 0 && state.portalTabs[0].Processed) {
@@ -650,9 +650,9 @@ PagePicker.propTypes = {
     //Default label shown before pinging API.
     defaultLabel: PropTypes.string,
 
-    //callback method on selection of a tab. 
+    //callback method on selection of a tab.
     //In case of "Single" selection mode it will send back currently selected tabid and tabname.
-    //In case of "Multi" selection mode it will send back array currently selected tabs. 
+    //In case of "Multi" selection mode it will send back array currently selected tabs.
     OnSelect: PropTypes.func.isRequired,
 
     //Send as true if you all the tabs to be pre selected.  This will work only in case of IsMultiSelect=true
@@ -661,7 +661,7 @@ PagePicker.propTypes = {
     //The parameters to list the portal tabs. Default is : {portalId: 0,cultureCode: "",isMultiLanguage: false,excludeAdminTabs: false,disabledNotSelectable: false,roles: "1;-1",sortOrder: 0}
     PortalTabsParameters: PropTypes.object,
 
-    //Id of the tab which should be selected by default. Default is -1 
+    //Id of the tab which should be selected by default. Default is -1
     //This will work only in case of IsMultiSelect=false.
     selectedTabId: PropTypes.number,
 

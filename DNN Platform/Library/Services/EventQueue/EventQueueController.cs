@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -33,17 +33,17 @@ using DotNetNuke.Services.Log.EventLog;
 
 namespace DotNetNuke.Services.EventQueue
 {
-	/// <summary>
-	/// EventQueueController provides business layer of event queue.
-	/// </summary>
-	/// <remarks>
-	/// Sometimes when your module running in DotNetNuke,and contains some operats didn't want to execute immediately.
-	/// e.g: after your module installed into system, and some component you want to registed when the application restart, 
-	/// you can send an 'Application_Start' message, so your specific operation will be executed when application has been restart.
-	/// </remarks>
-	/// <example>
-	/// <code lang="C#">
-	/// var oAppStartMessage = new EventMessage
+    /// <summary>
+    /// EventQueueController provides business layer of event queue.
+    /// </summary>
+    /// <remarks>
+    /// Sometimes when your module running in DotNetNuke,and contains some operats didn't want to execute immediately.
+    /// e.g: after your module installed into system, and some component you want to registed when the application restart,
+    /// you can send an 'Application_Start' message, so your specific operation will be executed when application has been restart.
+    /// </remarks>
+    /// <example>
+    /// <code lang="C#">
+    /// var oAppStartMessage = new EventMessage
     /// {
     ///     Sender = sender,
     ///     Priority = MessagePriority.High,
@@ -60,11 +60,11 @@ namespace DotNetNuke.Services.EventQueue
     /// {
     ///     Config.Touch();
     /// }
-	/// </code>
-	/// </example>
+    /// </code>
+    /// </example>
     public class EventQueueController
     {
-		#region "Private Shared Methods"
+        #region "Private Shared Methods"
 
         private static EventMessage FillMessage(IDataReader dr, bool CheckForOpenDataReader)
         {
@@ -115,7 +115,7 @@ namespace DotNetNuke.Services.EventQueue
                 EventMessage obj;
                 while (dr.Read())
                 {
-					//fill business object
+                    //fill business object
                     obj = FillMessage(dr, false);
                     //add to collection
                     arr.Add(obj);
@@ -127,7 +127,7 @@ namespace DotNetNuke.Services.EventQueue
             }
             finally
             {
-				//close datareader
+                //close datareader
                 CBO.CloseDataReader(dr, true);
             }
             return arr;
@@ -135,7 +135,7 @@ namespace DotNetNuke.Services.EventQueue
 
         private static string[] GetSubscribers(string eventName)
         {
-			//Get the subscribers to this event
+            //Get the subscribers to this event
             string[] subscribers = null;
             PublishedEvent publishedEvent = null;
             if (EventQueueConfiguration.GetConfig().PublishedEvents.TryGetValue(eventName, out publishedEvent))
@@ -148,58 +148,58 @@ namespace DotNetNuke.Services.EventQueue
             }
             return subscribers;
         }
-		
-		#endregion
-		
-		#region "Public Shared Methods"
 
-		/// <summary>
-		/// Gets the messages.
-		/// </summary>
-		/// <param name="eventName">Name of the event.</param>
-		/// <returns>event message collection.</returns>
+        #endregion
+
+        #region "Public Shared Methods"
+
+        /// <summary>
+        /// Gets the messages.
+        /// </summary>
+        /// <param name="eventName">Name of the event.</param>
+        /// <returns>event message collection.</returns>
         public static EventMessageCollection GetMessages(string eventName)
         {
             return FillMessageCollection(DataProvider.Instance().GetEventMessages(eventName));
         }
 
-		/// <summary>
-		/// Gets the messages.
-		/// </summary>
-		/// <param name="eventName">Name of the event.</param>
-		/// <param name="subscriberId">The subscriber id.</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Gets the messages.
+        /// </summary>
+        /// <param name="eventName">Name of the event.</param>
+        /// <param name="subscriberId">The subscriber id.</param>
+        /// <returns></returns>
         public static EventMessageCollection GetMessages(string eventName, string subscriberId)
         {
             return FillMessageCollection(DataProvider.Instance().GetEventMessagesBySubscriber(eventName, subscriberId));
         }
 
-		/// <summary>
-		/// Processes the messages.
-		/// </summary>
-		/// <param name="eventName">Name of the event.</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Processes the messages.
+        /// </summary>
+        /// <param name="eventName">Name of the event.</param>
+        /// <returns></returns>
         public static bool ProcessMessages(string eventName)
         {
             return ProcessMessages(GetMessages(eventName));
         }
 
-		/// <summary>
-		/// Processes the messages.
-		/// </summary>
-		/// <param name="eventName">Name of the event.</param>
-		/// <param name="subscriberId">The subscriber id.</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Processes the messages.
+        /// </summary>
+        /// <param name="eventName">Name of the event.</param>
+        /// <param name="subscriberId">The subscriber id.</param>
+        /// <returns></returns>
         public static bool ProcessMessages(string eventName, string subscriberId)
         {
             return ProcessMessages(GetMessages(eventName, subscriberId));
         }
 
-		/// <summary>
-		/// Processes the messages.
-		/// </summary>
-		/// <param name="eventMessages">The event messages.</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Processes the messages.
+        /// </summary>
+        /// <param name="eventMessages">The event messages.</param>
+        /// <returns></returns>
         public static bool ProcessMessages(EventMessageCollection eventMessages)
         {
             bool success = Null.NullBoolean;
@@ -214,7 +214,7 @@ namespace DotNetNuke.Services.EventQueue
                     {
                         throw new Exception();
                     }
-					
+
                     //Set Message comlete so it is not run a second time
                     DataProvider.Instance().SetEventMessageComplete(message.EventMessageID);
 
@@ -222,7 +222,7 @@ namespace DotNetNuke.Services.EventQueue
                 }
                 catch
                 {
-					//log if message could not be processed
+                    //log if message could not be processed
                     var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
                     log.AddProperty("EventQueue.ProcessMessage", "Message Processing Failed");
                     log.AddProperty("ProcessorType", message.ProcessorType);
@@ -239,7 +239,7 @@ namespace DotNetNuke.Services.EventQueue
                     LogController.Instance.AddLog(log);
                     if (message.ExpirationDate < DateTime.Now)
                     {
-						//Set Message comlete so it is not run a second time
+                        //Set Message comlete so it is not run a second time
                         DataProvider.Instance().SetEventMessageComplete(message.EventMessageID);
                     }
                 }
@@ -247,20 +247,20 @@ namespace DotNetNuke.Services.EventQueue
             return success;
         }
 
-		/// <summary>
-		/// Sends the message.
-		/// </summary>
-		/// <param name="message">The message.</param>
-		/// <param name="eventName">Name of the event.</param>
-		/// <returns></returns>
+        /// <summary>
+        /// Sends the message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="eventName">Name of the event.</param>
+        /// <returns></returns>
         public static bool SendMessage(EventMessage message, string eventName)
         {
-			//set the sent date if it wasn't set by the sender
+            //set the sent date if it wasn't set by the sender
             if (message.SentDate != null)
             {
                 message.SentDate = DateTime.Now;
             }
-			
+
             //Get the subscribers to this event
             string[] subscribers = GetSubscribers(eventName);
 
@@ -272,17 +272,17 @@ namespace DotNetNuke.Services.EventQueue
                 for (int indx = 0; indx <= subscribers.Length - 1; indx++)
                 {
                     intMessageID = DataProvider.Instance().AddEventMessage(eventName,
-                                                                           (int) message.Priority,
-                                                                           message.ProcessorType,
-                                                                           message.ProcessorCommand,
-                                                                           message.Body,
-                                                                           message.Sender,
-                                                                           subscribers[indx],
-                                                                           message.AuthorizedRoles,
-                                                                           message.ExceptionMessage,
-                                                                           message.SentDate,
-                                                                           message.ExpirationDate,
-                                                                           message.SerializeAttributes());
+                                                                            (int) message.Priority,
+                                                                            message.ProcessorType,
+                                                                            message.ProcessorCommand,
+                                                                            message.Body,
+                                                                            message.Sender,
+                                                                            subscribers[indx],
+                                                                            message.AuthorizedRoles,
+                                                                            message.ExceptionMessage,
+                                                                            message.SentDate,
+                                                                            message.ExpirationDate,
+                                                                            message.SerializeAttributes());
                 }
             }
             catch (Exception ex)
@@ -292,17 +292,17 @@ namespace DotNetNuke.Services.EventQueue
             }
             return success;
         }
-		
-		#endregion
-		
-		#region "Obsolete Methods"
+
+        #endregion
+
+        #region "Obsolete Methods"
 
         [Obsolete("This method is obsolete. Use Sendmessage(message, eventName) instead. Scheduled removal in v10.0.0.")]
         public bool SendMessage(EventMessage message, string eventName, bool encryptMessage)
         {
             return SendMessage(message, eventName);
         }
-		
-		#endregion
+
+        #endregion
     }
 }

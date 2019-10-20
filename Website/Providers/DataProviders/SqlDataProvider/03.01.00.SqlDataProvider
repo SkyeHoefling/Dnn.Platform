@@ -9,225 +9,225 @@
 /************************************************************/
 
 ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules
-	ADD [FolderName] nvarchar(128) NULL,
-		[ModuleName] nvarchar(128) NULL,
-		[SupportedFeatures] int NOT NULL CONSTRAINT DF_{objectQualifier}DesktopModules_SupportedFeatures DEFAULT 0
+    ADD [FolderName] nvarchar(128) NULL,
+        [ModuleName] nvarchar(128) NULL,
+        [SupportedFeatures] int NOT NULL CONSTRAINT DF_{objectQualifier}DesktopModules_SupportedFeatures DEFAULT 0
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [FolderName] = FriendlyName,
-		[ModuleName] = FriendlyName
+    SET [FolderName] = FriendlyName,
+        [ModuleName] = FriendlyName
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules
-	ALTER COLUMN [FolderName] nvarchar(128) NOT NULL
+    ALTER COLUMN [FolderName] nvarchar(128) NOT NULL
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules
-	ALTER COLUMN [ModuleName] nvarchar(128) NOT NULL
-GO
-
-ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules 
-	ADD CONSTRAINT IX_{objectQualifier}DesktopModules_ModuleName UNIQUE NONCLUSTERED (ModuleName) ON [PRIMARY]
+    ALTER COLUMN [ModuleName] nvarchar(128) NOT NULL
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules
-	DROP CONSTRAINT IX_{objectQualifier}DesktopModules
+    ADD CONSTRAINT IX_{objectQualifier}DesktopModules_ModuleName UNIQUE NONCLUSTERED (ModuleName) ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules
+    DROP CONSTRAINT IX_{objectQualifier}DesktopModules
 GO
 
 CREATE NONCLUSTERED INDEX IX_{objectQualifier}DesktopModules_FriendlyName ON {databaseOwner}{objectQualifier}DesktopModules (FriendlyName) ON [PRIMARY]
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Announcements',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Announcements'
+    SET [ModuleName] = 'DNN_Announcements',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Announcements'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [FolderName] = 'Forum',
-		[ModuleName] = 'DNN_Blog',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Blog'
+    SET [FolderName] = 'Forum',
+        [ModuleName] = 'DNN_Blog',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Blog'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Contacts',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Contacts'
+    SET [ModuleName] = 'DNN_Contacts',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Contacts'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Discussions',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 2
-	WHERE [ModuleName] = 'Discussions'
+    SET [ModuleName] = 'DNN_Discussions',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 2
+    WHERE [ModuleName] = 'Discussions'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Documents',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Documents'
+    SET [ModuleName] = 'DNN_Documents',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Documents'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Events',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Events'
+    SET [ModuleName] = 'DNN_Events',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Events'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_FAQs',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'FAQs'
+    SET [ModuleName] = 'DNN_FAQs',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'FAQs'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Feedback',
-		[Version] = '03.01.00'
-	WHERE [ModuleName] = 'Feedback'
+    SET [ModuleName] = 'DNN_Feedback',
+        [Version] = '03.01.00'
+    WHERE [ModuleName] = 'Feedback'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Forum',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Forum'
+    SET [ModuleName] = 'DNN_Forum',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Forum'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Gallery'
-	WHERE [ModuleName] = 'Gallery'
+    SET [ModuleName] = 'DNN_Gallery'
+    WHERE [ModuleName] = 'Gallery'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_IFrame',
-		[Version] = '03.01.00'
-	WHERE [ModuleName] = 'IFrame'
+    SET [ModuleName] = 'DNN_IFrame',
+        [Version] = '03.01.00'
+    WHERE [ModuleName] = 'IFrame'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [FolderName] = 'Images',
-		[ModuleName] = 'DNN_Image',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Image'
+    SET [FolderName] = 'Images',
+        [ModuleName] = 'DNN_Image',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Image'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Links',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Links'
+    SET [ModuleName] = 'DNN_Links',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Links'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [FolderName] = 'News',
-		[ModuleName] = 'DNN_NewsFeeds',
-		[Version] = '03.01.00'
-	WHERE [ModuleName] = 'News Feeds (RSS)'
+    SET [FolderName] = 'News',
+        [ModuleName] = 'DNN_NewsFeeds',
+        [Version] = '03.01.00'
+    WHERE [ModuleName] = 'News Feeds (RSS)'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [FolderName] = 'HTML',
-		[ModuleName] = 'DNN_HTML',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 3
-	WHERE [ModuleName] = 'Text/HTML'
+    SET [FolderName] = 'HTML',
+        [ModuleName] = 'DNN_HTML',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 3
+    WHERE [ModuleName] = 'Text/HTML'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_Survey',
-		[Version] = '03.01.00'
-	WHERE [ModuleName] = 'Survey'
+    SET [ModuleName] = 'DNN_Survey',
+        [Version] = '03.01.00'
+    WHERE [ModuleName] = 'Survey'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [FolderName] = 'UserDefinedTable',
-		[ModuleName] = 'DNN_UserDefinedTable',
-		[Version] = '03.01.00',
-		[SupportedFeatures] = 2
-	WHERE [ModuleName] = 'User Defined Table'
+    SET [FolderName] = 'UserDefinedTable',
+        [ModuleName] = 'DNN_UserDefinedTable',
+        [Version] = '03.01.00',
+        [SupportedFeatures] = 2
+    WHERE [ModuleName] = 'User Defined Table'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [ModuleName] = 'DNN_UsersOnline',
-		[Version] = '03.01.00'
-	WHERE [ModuleName] = 'UsersOnline'
+    SET [ModuleName] = 'DNN_UsersOnline',
+        [Version] = '03.01.00'
+    WHERE [ModuleName] = 'UsersOnline'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}DesktopModules
-	SET [FolderName] = 'XML',
-		[ModuleName] = 'DNN_XML',
-		[Version] = '03.01.00'
-	WHERE [ModuleName] = 'XML/XSL'
+    SET [FolderName] = 'XML',
+        [ModuleName] = 'DNN_XML',
+        [Version] = '03.01.00'
+    WHERE [ModuleName] = 'XML/XSL'
 GO
 
 UPDATE {databaseOwner}{objectQualifier}ModuleControls
-	SET [HelpUrl] = N'http://www.dotnetnuke.com/default.aspx?tabid=787'
-FROM	{databaseOwner}{objectQualifier}DesktopModules 
-	INNER JOIN {databaseOwner}{objectQualifier}ModuleDefinitions ON {databaseOwner}{objectQualifier}DesktopModules.DesktopModuleID = {databaseOwner}{objectQualifier}ModuleDefinitions.DesktopModuleID
-	INNER JOIN {databaseOwner}{objectQualifier}ModuleControls ON {databaseOwner}{objectQualifier}ModuleDefinitions.ModuleDefID = {databaseOwner}{objectQualifier}ModuleControls.ModuleDefID
-WHERE	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Announcements') 
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Contacts') 
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Discussions')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Documents')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Events')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_FAQs')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Feedback')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_IFrame')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Image')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Links')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_NewsFeeds')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_HTML')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Survey')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_UserDefinedTable')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_UsersOnline')
-	OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_XML')
+    SET [HelpUrl] = N'http://www.dotnetnuke.com/default.aspx?tabid=787'
+FROM	{databaseOwner}{objectQualifier}DesktopModules
+    INNER JOIN {databaseOwner}{objectQualifier}ModuleDefinitions ON {databaseOwner}{objectQualifier}DesktopModules.DesktopModuleID = {databaseOwner}{objectQualifier}ModuleDefinitions.DesktopModuleID
+    INNER JOIN {databaseOwner}{objectQualifier}ModuleControls ON {databaseOwner}{objectQualifier}ModuleDefinitions.ModuleDefID = {databaseOwner}{objectQualifier}ModuleControls.ModuleDefID
+WHERE	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Announcements')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Contacts')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Discussions')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Documents')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Events')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_FAQs')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Feedback')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_IFrame')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Image')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Links')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_NewsFeeds')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_HTML')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_Survey')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_UserDefinedTable')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_UsersOnline')
+    OR	({databaseOwner}{objectQualifier}DesktopModules.ModuleName = N'DNN_XML')
 GO
 
 DROP procedure {databaseOwner}{objectQualifier}AddDesktopModule
 GO
 
 CREATE procedure {databaseOwner}{objectQualifier}AddDesktopModule
-    
-	@ModuleName			nvarchar(128),
-	@FolderName			nvarchar(128),
-	@FriendlyName		nvarchar(128),
-	@Description		nvarchar(2000),
-	@Version			nvarchar(8),
-	@IsPremium			bit,
-	@IsAdmin			bit,
-	@BusinessController nvarchar(200),
-	@SupportedFeatures	int
+
+    @ModuleName			nvarchar(128),
+    @FolderName			nvarchar(128),
+    @FriendlyName		nvarchar(128),
+    @Description		nvarchar(2000),
+    @Version			nvarchar(8),
+    @IsPremium			bit,
+    @IsAdmin			bit,
+    @BusinessController nvarchar(200),
+    @SupportedFeatures	int
 
 as
 
 insert into {objectQualifier}DesktopModules (
-	ModuleName,
-	FolderName,
-	FriendlyName,
-	Description,
-	Version,
-	IsPremium,
-	IsAdmin,
-	BusinessControllerClass,
-	SupportedFeatures
+    ModuleName,
+    FolderName,
+    FriendlyName,
+    Description,
+    Version,
+    IsPremium,
+    IsAdmin,
+    BusinessControllerClass,
+    SupportedFeatures
 )
 values (
-	@ModuleName,
-	@FolderName,
-	@FriendlyName,
-	@Description,
-	@Version,
-	@IsPremium,
-	@IsAdmin,
-	@BusinessController,
-	@SupportedFeatures
+    @ModuleName,
+    @FolderName,
+    @FriendlyName,
+    @Description,
+    @Version,
+    @IsPremium,
+    @IsAdmin,
+    @BusinessController,
+    @SupportedFeatures
 )
 
 select SCOPE_IDENTITY()
@@ -239,30 +239,30 @@ GO
 
 CREATE  procedure {databaseOwner}{objectQualifier}UpdateDesktopModule
 
-	@DesktopModuleId	int,    
-	@ModuleName			nvarchar(128),
-	@FolderName			nvarchar(128),
-	@FriendlyName		nvarchar(128),
-	@Description		nvarchar(2000),
-	@Version			nvarchar(8),
-	@IsPremium			bit,
-	@IsAdmin			bit,
-	@BusinessController nvarchar(200),
-	@SupportedFeatures	int
+    @DesktopModuleId	int,
+    @ModuleName			nvarchar(128),
+    @FolderName			nvarchar(128),
+    @FriendlyName		nvarchar(128),
+    @Description		nvarchar(2000),
+    @Version			nvarchar(8),
+    @IsPremium			bit,
+    @IsAdmin			bit,
+    @BusinessController nvarchar(200),
+    @SupportedFeatures	int
 
 as
 
 update {objectQualifier}DesktopModules
-set    
-	ModuleName    = @ModuleName,
-	FolderName    = @FolderName,
-	FriendlyName    = @FriendlyName,
-	Description     = @Description,
-	Version         = @Version,
-	IsPremium       = @IsPremium,
-	IsAdmin         = @IsAdmin,
-	BusinessControllerClass = @BusinessController,
-	SupportedFeatures    = @SupportedFeatures
+set
+    ModuleName    = @ModuleName,
+    FolderName    = @FolderName,
+    FriendlyName    = @FriendlyName,
+    Description     = @Description,
+    Version         = @Version,
+    IsPremium       = @IsPremium,
+    IsAdmin         = @IsAdmin,
+    BusinessControllerClass = @BusinessController,
+    SupportedFeatures    = @SupportedFeatures
 where  DesktopModuleId = @DesktopModuleId
 
 GO
@@ -272,7 +272,7 @@ GO
 
 CREATE procedure {databaseOwner}{objectQualifier}GetDesktopModuleByFriendlyName
 
-	@FriendlyName    nvarchar(128)
+    @FriendlyName    nvarchar(128)
 
 as
 
@@ -284,7 +284,7 @@ GO
 
 CREATE procedure {databaseOwner}{objectQualifier}GetDesktopModuleByModuleName
 
-	@ModuleName    nvarchar(128)
+    @ModuleName    nvarchar(128)
 
 as
 
@@ -295,7 +295,7 @@ where  ModuleName = @ModuleName
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModuleDefinitions ADD
-	DefaultCacheTime int NOT NULL CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DefaultCacheTime DEFAULT 0
+    DefaultCacheTime int NOT NULL CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DefaultCacheTime DEFAULT 0
 GO
 
 DROP procedure {databaseOwner}{objectQualifier}AddModuleDefinition
@@ -303,9 +303,9 @@ GO
 
 CREATE procedure {databaseOwner}{objectQualifier}AddModuleDefinition
 
-	@DesktopModuleId int,    
-	@FriendlyName    nvarchar(128),
-	@DefaultCacheTime int
+    @DesktopModuleId int,
+    @FriendlyName    nvarchar(128),
+    @DefaultCacheTime int
 
 as
 
@@ -326,16 +326,16 @@ GO
 
 CREATE procedure {databaseOwner}{objectQualifier}UpdateModuleDefinition
 
-	@ModuleDefId int,    
-	@FriendlyName    nvarchar(128),
-	@DefaultCacheTime int
+    @ModuleDefId int,
+    @FriendlyName    nvarchar(128),
+    @DefaultCacheTime int
 
 as
 
-update {objectQualifier}ModuleDefinitions 
-	SET FriendlyName = @FriendlyName,
-		DefaultCacheTime = @DefaultCacheTime
-	WHERE ModuleDefId = @ModuleDefId
+update {objectQualifier}ModuleDefinitions
+    SET FriendlyName = @FriendlyName,
+        DefaultCacheTime = @DefaultCacheTime
+    WHERE ModuleDefId = @ModuleDefId
 GO
 
 DROP PROCEDURE {databaseOwner}{objectQualifier}GetSearchModules
@@ -348,36 +348,36 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}GetSearchModules
 as
 
 select M.ModuleID,
-       M.ModuleDefID,
-       M.ModuleTitle,
-       M.AllTabs,
-       M.IsDeleted,
-       M.InheritViewPermissions,
-       M.Header,
-       M.Footer,
-       M.StartDate,
-       M.EndDate,
-       M.PortalID,
-       TM.TabModuleId,
-       TM.TabId,
-       TM.PaneName,
-       TM.ModuleOrder,
-       TM.CacheTime,
-       TM.Alignment,
-       TM.Color,
-       TM.Border,
-       TM.Visibility,
-       TM.ContainerSrc,
-       TM.DisplayTitle,
-       TM.DisplayPrint,
-       TM.DisplaySyndicate,
-       'IconFile' = case when F.FileName is null then TM.IconFile else F.Folder + F.FileName end,
-       DM.*,
-       MC.ModuleControlId,
-       MC.ControlSrc,
-       MC.ControlType,
-       MC.ControlTitle,
-       MC.HelpURL
+        M.ModuleDefID,
+        M.ModuleTitle,
+        M.AllTabs,
+        M.IsDeleted,
+        M.InheritViewPermissions,
+        M.Header,
+        M.Footer,
+        M.StartDate,
+        M.EndDate,
+        M.PortalID,
+        TM.TabModuleId,
+        TM.TabId,
+        TM.PaneName,
+        TM.ModuleOrder,
+        TM.CacheTime,
+        TM.Alignment,
+        TM.Color,
+        TM.Border,
+        TM.Visibility,
+        TM.ContainerSrc,
+        TM.DisplayTitle,
+        TM.DisplayPrint,
+        TM.DisplaySyndicate,
+        'IconFile' = case when F.FileName is null then TM.IconFile else F.Folder + F.FileName end,
+        DM.*,
+        MC.ModuleControlId,
+        MC.ControlSrc,
+        MC.ControlType,
+        MC.ControlTitle,
+        MC.HelpURL
 from {objectQualifier}Modules M
 inner join {objectQualifier}TabModules TM on M.ModuleId = TM.ModuleId
 inner join {objectQualifier}Tabs T on TM.TabId = T.TabId
@@ -385,17 +385,17 @@ inner join {objectQualifier}ModuleDefinitions MD on M.ModuleDefId = MD.ModuleDef
 inner join {objectQualifier}DesktopModules DM on MD.DesktopModuleId = DM.DesktopModuleId
 inner join {objectQualifier}ModuleControls MC on MD.ModuleDefId = MC.ModuleDefId
 left outer join {objectQualifier}Files F on TM.IconFile = 'fileid=' + convert(varchar,F.FileID)
-where  M.IsDeleted = 0  
-	and T.IsDeleted = 0  
-	and ControlKey is null 
-	and DM.IsAdmin = 0
-	and (DM.SupportedFeatures & 2 = 2)
-	and (T.EndDate < GETDATE() or T.EndDate IS NULL) 
-	and (T.StartDate > GETDATE() or T.StartDate IS NULL) 
-	and (M.StartDate > GETDATE() or M.StartDate IS NULL) 
-	and (M.EndDate < GETDATE() or M.EndDate IS NULL) 
-	and (NOT (DM.BusinessControllerClass IS NULL))
-	and (T.PortalID = @PortalID OR (T.PortalID IS NULL AND @PortalID Is NULL))
+where  M.IsDeleted = 0
+    and T.IsDeleted = 0
+    and ControlKey is null
+    and DM.IsAdmin = 0
+    and (DM.SupportedFeatures & 2 = 2)
+    and (T.EndDate < GETDATE() or T.EndDate IS NULL)
+    and (T.StartDate > GETDATE() or T.StartDate IS NULL)
+    and (M.StartDate > GETDATE() or M.StartDate IS NULL)
+    and (M.EndDate < GETDATE() or M.EndDate IS NULL)
+    and (NOT (DM.BusinessControllerClass IS NULL))
+    and (T.PortalID = @PortalID OR (T.PortalID IS NULL AND @PortalID Is NULL))
 order by TM.ModuleOrder
 
 GO
@@ -416,28 +416,28 @@ GO
 /* -- remove orphan modules: not deleted but without any tabmodule instance -- */
 DELETE {databaseOwner}{objectQualifier}modules
 FROM {databaseOwner}{objectQualifier}modules
-LEFT OUTER JOIN {databaseOwner}{objectQualifier}TabModules ON 
-	{databaseOwner}{objectQualifier}Modules.ModuleID = {databaseOwner}{objectQualifier}TabModules.ModuleID
-WHERE ({databaseOwner}{objectQualifier}Modules.PortalID IS NOT NULL AND 
-	{databaseOwner}{objectQualifier}Modules.IsDeleted = 0 AND 
-	{databaseOwner}{objectQualifier}TabModules.TabModuleID IS NULL)
+LEFT OUTER JOIN {databaseOwner}{objectQualifier}TabModules ON
+    {databaseOwner}{objectQualifier}Modules.ModuleID = {databaseOwner}{objectQualifier}TabModules.ModuleID
+WHERE ({databaseOwner}{objectQualifier}Modules.PortalID IS NOT NULL AND
+    {databaseOwner}{objectQualifier}Modules.IsDeleted = 0 AND
+    {databaseOwner}{objectQualifier}TabModules.TabModuleID IS NULL)
 
 GO
 
 
 ALTER TABLE {databaseOwner}{objectQualifier}Schedule
-	ADD [Servers] nvarchar(150) NULL
-	
+    ADD [Servers] nvarchar(150) NULL
+
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ScheduleHistory
-	ADD [Server] nvarchar(150) NULL
+    ADD [Server] nvarchar(150) NULL
 
 GO
 DROP PROCEDURE {databaseOwner}{objectQualifier}GetSchedule
 GO
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetSchedule
-	@Server varchar(150)
+    @Server varchar(150)
 AS
 SELECT S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, SH.NextStart, S.Servers
 FROM {objectQualifier}Schedule S
@@ -554,7 +554,7 @@ DROP PROCEDURE {databaseOwner}{objectQualifier}GetScheduleNextTask
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetScheduleNextTask
-	@Server varchar(150)
+    @Server varchar(150)
 AS
 SELECT TOP 1 S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, SH.NextStart
 FROM {objectQualifier}Schedule S
@@ -621,94 +621,94 @@ GO
 
 
 CREATE TABLE {databaseOwner}{objectQualifier}EventLog (
-	[LogGUID] [varchar] (36) NOT NULL ,
-	[LogTypeKey] [nvarchar] (35) NOT NULL ,
-	[LogConfigID] [int] NULL ,
-	[LogUserID] [int] NULL ,
-	[LogUserName] [nvarchar] (50) NULL ,
-	[LogPortalID] [int] NULL ,
-	[LogPortalName] [nvarchar] (100) NULL ,
-	[LogCreateDate] [datetime] NOT NULL ,
-	[LogServerName] [nvarchar] (50) NOT NULL ,
-	[LogProperties] [ntext] NOT NULL ,
-	[LogNotificationPending] [bit] NULL 
+    [LogGUID] [varchar] (36) NOT NULL ,
+    [LogTypeKey] [nvarchar] (35) NOT NULL ,
+    [LogConfigID] [int] NULL ,
+    [LogUserID] [int] NULL ,
+    [LogUserName] [nvarchar] (50) NULL ,
+    [LogPortalID] [int] NULL ,
+    [LogPortalName] [nvarchar] (100) NULL ,
+    [LogCreateDate] [datetime] NOT NULL ,
+    [LogServerName] [nvarchar] (50) NOT NULL ,
+    [LogProperties] [ntext] NOT NULL ,
+    [LogNotificationPending] [bit] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}EventLogConfig (
-	[ID] [int] IDENTITY (1, 1) NOT NULL ,
-	[LogTypeKey] [nvarchar] (35) NULL ,
-	[LogTypePortalID] [int] NULL ,
-	[LoggingIsActive] [bit] NOT NULL ,
-	[KeepMostRecent] [int] NOT NULL ,
-	[EmailNotificationIsActive] [bit] NOT NULL ,
-	[NotificationThreshold] [int] NULL ,
-	[NotificationThresholdTime] [int] NULL ,
-	[NotificationThresholdTimeType] [int] NULL ,
-	[MailFromAddress] [nvarchar] (50) NOT NULL ,
-	[MailToAddress] [nvarchar] (50) NOT NULL 
+    [ID] [int] IDENTITY (1, 1) NOT NULL ,
+    [LogTypeKey] [nvarchar] (35) NULL ,
+    [LogTypePortalID] [int] NULL ,
+    [LoggingIsActive] [bit] NOT NULL ,
+    [KeepMostRecent] [int] NOT NULL ,
+    [EmailNotificationIsActive] [bit] NOT NULL ,
+    [NotificationThreshold] [int] NULL ,
+    [NotificationThresholdTime] [int] NULL ,
+    [NotificationThresholdTimeType] [int] NULL ,
+    [MailFromAddress] [nvarchar] (50) NOT NULL ,
+    [MailToAddress] [nvarchar] (50) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}EventLogTypes (
-	[LogTypeKey] [nvarchar] (35) NOT NULL ,
-	[LogTypeFriendlyName] [nvarchar] (50) NOT NULL ,
-	[LogTypeDescription] [nvarchar] (128) NOT NULL ,
-	[LogTypeOwner] [nvarchar] (100) NOT NULL ,
-	[LogTypeCSSClass] [nvarchar] (40) NOT NULL 
+    [LogTypeKey] [nvarchar] (35) NOT NULL ,
+    [LogTypeFriendlyName] [nvarchar] (50) NOT NULL ,
+    [LogTypeDescription] [nvarchar] (128) NOT NULL ,
+    [LogTypeOwner] [nvarchar] (100) NOT NULL ,
+    [LogTypeCSSClass] [nvarchar] (40) NOT NULL
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}EventLog WITH NOCHECK ADD 
-	CONSTRAINT [PK_EventLogMaster] PRIMARY KEY  CLUSTERED 
-	(
-		[LogGUID]
-	)  ON [PRIMARY] 
+ALTER TABLE {databaseOwner}{objectQualifier}EventLog WITH NOCHECK ADD
+    CONSTRAINT [PK_EventLogMaster] PRIMARY KEY  CLUSTERED
+    (
+        [LogGUID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}EventLogConfig WITH NOCHECK ADD 
-	CONSTRAINT [PK_EventLogConfig] PRIMARY KEY  CLUSTERED 
-	(
-		[ID]
-	)  ON [PRIMARY] 
+ALTER TABLE {databaseOwner}{objectQualifier}EventLogConfig WITH NOCHECK ADD
+    CONSTRAINT [PK_EventLogConfig] PRIMARY KEY  CLUSTERED
+    (
+        [ID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}EventLogTypes WITH NOCHECK ADD 
-	CONSTRAINT [PK_EventLogTypes] PRIMARY KEY  CLUSTERED 
-	(
-		[LogTypeKey]
-	)  ON [PRIMARY] 
+ALTER TABLE {databaseOwner}{objectQualifier}EventLogTypes WITH NOCHECK ADD
+    CONSTRAINT [PK_EventLogTypes] PRIMARY KEY  CLUSTERED
+    (
+        [LogTypeKey]
+    )  ON [PRIMARY]
 GO
 
  CREATE  UNIQUE  INDEX [LogTypeKey_LogTypePortalID] ON {databaseOwner}{objectQualifier}EventLogConfig([LogTypeKey], [LogTypePortalID]) ON [PRIMARY]
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}EventLog ADD 
-	CONSTRAINT [FK_{objectQualifier}EventLog_{objectQualifier}EventLogConfig] FOREIGN KEY 
-	(
-		[LogConfigID]
-	) REFERENCES {databaseOwner}{objectQualifier}EventLogConfig (
-		[ID]
-	)
+ALTER TABLE {databaseOwner}{objectQualifier}EventLog ADD
+    CONSTRAINT [FK_{objectQualifier}EventLog_{objectQualifier}EventLogConfig] FOREIGN KEY
+    (
+        [LogConfigID]
+    ) REFERENCES {databaseOwner}{objectQualifier}EventLogConfig (
+        [ID]
+    )
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}EventLogConfig ADD 
-	CONSTRAINT [FK_EventLogConfig_EventLogTypes] FOREIGN KEY 
-	(
-		[LogTypeKey]
-	) REFERENCES {databaseOwner}{objectQualifier}EventLogTypes (
-		[LogTypeKey]
-	)
+ALTER TABLE {databaseOwner}{objectQualifier}EventLogConfig ADD
+    CONSTRAINT [FK_EventLogConfig_EventLogTypes] FOREIGN KEY
+    (
+        [LogTypeKey]
+    ) REFERENCES {databaseOwner}{objectQualifier}EventLogTypes (
+        [LogTypeKey]
+    )
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}EventLog ADD CONSTRAINT
-	FK_{objectQualifier}EventLog_{objectQualifier}EventLogTypes FOREIGN KEY
-	(
-	LogTypeKey
-	) REFERENCES {databaseOwner}{objectQualifier}EventLogTypes
-	(
-	LogTypeKey
-	)
+    FK_{objectQualifier}EventLog_{objectQualifier}EventLogTypes FOREIGN KEY
+    (
+    LogTypeKey
+    ) REFERENCES {databaseOwner}{objectQualifier}EventLogTypes
+    (
+    LogTypeKey
+    )
 GO
 
 
@@ -717,39 +717,39 @@ GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddEventLog
-	@LogGUID varchar(36),
-	@LogTypeKey nvarchar(35),
-	@LogUserID int,
-	@LogUserName nvarchar(50),
-	@LogPortalID int,
-	@LogPortalName nvarchar(100),
-	@LogCreateDate datetime,
-	@LogServerName nvarchar(50),
-	@LogProperties ntext,
-	@LogConfigID int
+    @LogGUID varchar(36),
+    @LogTypeKey nvarchar(35),
+    @LogUserID int,
+    @LogUserName nvarchar(50),
+    @LogPortalID int,
+    @LogPortalName nvarchar(100),
+    @LogCreateDate datetime,
+    @LogServerName nvarchar(50),
+    @LogProperties ntext,
+    @LogConfigID int
 AS
 INSERT INTO {databaseOwner}{objectQualifier}EventLog
-	(LogGUID,
-	LogTypeKey,
-	LogUserID,
-	LogUserName,
-	LogPortalID,
-	LogPortalName,
-	LogCreateDate,
-	LogServerName,
-	LogProperties,
-	LogConfigID)
+    (LogGUID,
+    LogTypeKey,
+    LogUserID,
+    LogUserName,
+    LogPortalID,
+    LogPortalName,
+    LogCreateDate,
+    LogServerName,
+    LogProperties,
+    LogConfigID)
 VALUES
-	(@LogGUID,
-	@LogTypeKey,
-	@LogUserID,
-	@LogUserName,
-	@LogPortalID,
-	@LogPortalName,
-	@LogCreateDate,
-	@LogServerName,
-	@LogProperties,
-	@LogConfigID)
+    (@LogGUID,
+    @LogTypeKey,
+    @LogUserID,
+    @LogUserName,
+    @LogPortalID,
+    @LogPortalName,
+    @LogCreateDate,
+    @LogServerName,
+    @LogProperties,
+    @LogConfigID)
 
 DECLARE @NotificationActive bit
 DECLARE @NotificationThreshold bit
@@ -763,85 +763,85 @@ SET @CurrentDateTime = getDate()
 
 
 SELECT TOP 1 @NotificationActive = EmailNotificationIsActive,
-	@NotificationThreshold = NotificationThreshold,
-	@NotificationThresholdTime = NotificationThresholdTime,
-	@NotificationThresholdTimeType = @NotificationThresholdTimeType,
-	@MinDateTime = 
-		CASE
-			 --seconds
-			WHEN NotificationThresholdTimeType=1 THEN DateAdd(second, NotificationThresholdTime * -1, @CurrentDateTime)
-			--minutes
-			WHEN NotificationThresholdTimeType=2  THEN DateAdd(minute, NotificationThresholdTime * -1, @CurrentDateTime)
-			--hours
-			WHEN NotificationThresholdTimeType=3  THEN DateAdd(Hour, NotificationThresholdTime * -1, @CurrentDateTime)
-			--days
-			WHEN NotificationThresholdTimeType=4  THEN DateAdd(Day, NotificationThresholdTime * -1, @CurrentDateTime)
-		END
+    @NotificationThreshold = NotificationThreshold,
+    @NotificationThresholdTime = NotificationThresholdTime,
+    @NotificationThresholdTimeType = @NotificationThresholdTimeType,
+    @MinDateTime =
+        CASE
+            --seconds
+            WHEN NotificationThresholdTimeType=1 THEN DateAdd(second, NotificationThresholdTime * -1, @CurrentDateTime)
+            --minutes
+            WHEN NotificationThresholdTimeType=2  THEN DateAdd(minute, NotificationThresholdTime * -1, @CurrentDateTime)
+            --hours
+            WHEN NotificationThresholdTimeType=3  THEN DateAdd(Hour, NotificationThresholdTime * -1, @CurrentDateTime)
+            --days
+            WHEN NotificationThresholdTimeType=4  THEN DateAdd(Day, NotificationThresholdTime * -1, @CurrentDateTime)
+        END
 FROM {databaseOwner}{objectQualifier}EventLogConfig
 WHERE ID = @LogConfigID
 
 IF @NotificationActive=1
 BEGIN
-	
-	SELECT @ThresholdQueue = COUNT(*)
-	FROM {databaseOwner}{objectQualifier}EventLog
-	INNER JOIN {databaseOwner}{objectQualifier}EventLogConfig
-	ON {databaseOwner}{objectQualifier}EventLog.LogConfigID = {databaseOwner}{objectQualifier}EventLogConfig.ID
-	WHERE LogCreateDate > @MinDateTime
 
-	PRINT 'MinDateTime=' + convert(varchar(20), @MinDateTime)
-	PRINT 'ThresholdQueue=' + convert(varchar(20), @ThresholdQueue)
-	PRINT 'NotificationThreshold=' + convert(varchar(20), @NotificationThreshold)
+    SELECT @ThresholdQueue = COUNT(*)
+    FROM {databaseOwner}{objectQualifier}EventLog
+    INNER JOIN {databaseOwner}{objectQualifier}EventLogConfig
+    ON {databaseOwner}{objectQualifier}EventLog.LogConfigID = {databaseOwner}{objectQualifier}EventLogConfig.ID
+    WHERE LogCreateDate > @MinDateTime
 
-	IF @ThresholdQueue > @NotificationThreshold
-	BEGIN
-		UPDATE {databaseOwner}{objectQualifier}EventLog
-		SET LogNotificationPending = 1 
-		WHERE LogConfigID = @LogConfigID
-		AND LogNotificationPending IS NULL		
-		AND LogCreateDate > @MinDateTime
-	END
+    PRINT 'MinDateTime=' + convert(varchar(20), @MinDateTime)
+    PRINT 'ThresholdQueue=' + convert(varchar(20), @ThresholdQueue)
+    PRINT 'NotificationThreshold=' + convert(varchar(20), @NotificationThreshold)
+
+    IF @ThresholdQueue > @NotificationThreshold
+    BEGIN
+        UPDATE {databaseOwner}{objectQualifier}EventLog
+        SET LogNotificationPending = 1
+        WHERE LogConfigID = @LogConfigID
+        AND LogNotificationPending IS NULL
+        AND LogCreateDate > @MinDateTime
+    END
 END
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddEventLogConfig
-	@LogTypeKey nvarchar(35),
-	@LogTypePortalID int,
-	@LoggingIsActive bit,
-	@KeepMostRecent int,
-	@EmailNotificationIsActive bit,
-	@NotificationThreshold int,
-	@NotificationThresholdTime int,
-	@NotificationThresholdTimeType int,
-	@MailFromAddress nvarchar(50),
-	@MailToAddress nvarchar(50)
+    @LogTypeKey nvarchar(35),
+    @LogTypePortalID int,
+    @LoggingIsActive bit,
+    @KeepMostRecent int,
+    @EmailNotificationIsActive bit,
+    @NotificationThreshold int,
+    @NotificationThresholdTime int,
+    @NotificationThresholdTimeType int,
+    @MailFromAddress nvarchar(50),
+    @MailToAddress nvarchar(50)
 AS
 INSERT INTO {databaseOwner}{objectQualifier}EventLogConfig
-	(LogTypeKey,
-	LogTypePortalID,
-	LoggingIsActive,
-	KeepMostRecent,
-	EmailNotificationIsActive,
-	NotificationThreshold,
-	NotificationThresholdTime,
-	NotificationThresholdTimeType,
-	MailFromAddress,
-	MailToAddress)
+    (LogTypeKey,
+    LogTypePortalID,
+    LoggingIsActive,
+    KeepMostRecent,
+    EmailNotificationIsActive,
+    NotificationThreshold,
+    NotificationThresholdTime,
+    NotificationThresholdTimeType,
+    MailFromAddress,
+    MailToAddress)
 VALUES
-	(@LogTypeKey,
-	@LogTypePortalID,
-	@LoggingIsActive,
-	@KeepMostRecent,
-	@EmailNotificationIsActive,
-	@NotificationThreshold,
-	@NotificationThresholdTime,
-	@NotificationThresholdTimeType,
-	@MailFromAddress,
-	@MailToAddress)
+    (@LogTypeKey,
+    @LogTypePortalID,
+    @LoggingIsActive,
+    @KeepMostRecent,
+    @EmailNotificationIsActive,
+    @NotificationThreshold,
+    @NotificationThresholdTime,
+    @NotificationThresholdTimeType,
+    @MailFromAddress,
+    @MailToAddress)
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}DeleteEventLog
-	@LogGUID varchar(36)
+    @LogGUID varchar(36)
 AS
 DELETE FROM {databaseOwner}{objectQualifier}EventLog
 WHERE LogGUID = @LogGUID or @LogGUID IS NULL
@@ -849,7 +849,7 @@ WHERE LogGUID = @LogGUID or @LogGUID IS NULL
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}DeleteEventLogConfig
-	@ID int
+    @ID int
 AS
 DELETE FROM {databaseOwner}{objectQualifier}EventLogConfig
 WHERE ID = @ID
@@ -857,8 +857,8 @@ WHERE ID = @ID
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetEventLog
-	@PortalID int,
-	@LogTypeKey nvarchar(35)
+    @PortalID int,
+    @LogTypeKey nvarchar(35)
 AS
 SELECT {databaseOwner}{objectQualifier}EventLog.*
 FROM {databaseOwner}{objectQualifier}EventLog
@@ -872,7 +872,7 @@ GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetEventLogByLogGUID
-	@LogGUID varchar(36)
+    @LogGUID varchar(36)
 AS
 SELECT *
 FROM {databaseOwner}{objectQualifier}EventLog
@@ -881,7 +881,7 @@ WHERE (LogGUID = @LogGUID)
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetEventLogConfig
-	@ID int
+    @ID int
 AS
 SELECT *
 FROM {databaseOwner}{objectQualifier}EventLogConfig
@@ -897,29 +897,29 @@ FROM {databaseOwner}{objectQualifier}EventLogTypes
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateEventLogConfig
-	@ID int,
-	@LogTypeKey nvarchar(35),
-	@LogTypePortalID int,
-	@LoggingIsActive bit,
-	@KeepMostRecent int,
-	@EmailNotificationIsActive bit,
-	@NotificationThreshold int,
-	@NotificationThresholdTime int,
-	@NotificationThresholdTimeType int,
-	@MailFromAddress nvarchar(50),
-	@MailToAddress nvarchar(50)
+    @ID int,
+    @LogTypeKey nvarchar(35),
+    @LogTypePortalID int,
+    @LoggingIsActive bit,
+    @KeepMostRecent int,
+    @EmailNotificationIsActive bit,
+    @NotificationThreshold int,
+    @NotificationThresholdTime int,
+    @NotificationThresholdTimeType int,
+    @MailFromAddress nvarchar(50),
+    @MailToAddress nvarchar(50)
 AS
 UPDATE {databaseOwner}{objectQualifier}EventLogConfig
 SET 	LogTypeKey = @LogTypeKey,
-	LogTypePortalID = @LogTypePortalID,
-	LoggingIsActive = @LoggingIsActive,
-	KeepMostRecent = @KeepMostRecent,
-	EmailNotificationIsActive = @EmailNotificationIsActive,
-	NotificationThreshold = @NotificationThreshold,
-	NotificationThresholdTime = @NotificationThresholdTime,
-	NotificationThresholdTimeType = @NotificationThresholdTimeType,
-	MailFromAddress = @MailFromAddress,
-	MailToAddress = @MailToAddress
+    LogTypePortalID = @LogTypePortalID,
+    LoggingIsActive = @LoggingIsActive,
+    KeepMostRecent = @KeepMostRecent,
+    EmailNotificationIsActive = @EmailNotificationIsActive,
+    NotificationThreshold = @NotificationThreshold,
+    NotificationThresholdTime = @NotificationThresholdTime,
+    NotificationThresholdTimeType = @NotificationThresholdTimeType,
+    MailFromAddress = @MailFromAddress,
+    MailToAddress = @MailToAddress
 WHERE	ID = @ID
 GO
 
@@ -927,99 +927,99 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}PurgeEventLog
 AS
 DELETE FROM {databaseOwner}{objectQualifier}EventLog
 FROM {databaseOwner}{objectQualifier}EventLogConfig elc
-WHERE 
+WHERE
     (
     SELECT COUNT(*)
     FROM {databaseOwner}{objectQualifier}EventLog el
     WHERE el.LogConfigID = elc.ID
-	and {databaseOwner}{objectQualifier}EventLog.LogTypeKey = el.LogTypeKey
-	and el.LogCreateDate >= {databaseOwner}{objectQualifier}EventLog.LogCreateDate
+    and {databaseOwner}{objectQualifier}EventLog.LogTypeKey = el.LogTypeKey
+    and el.LogCreateDate >= {databaseOwner}{objectQualifier}EventLog.LogCreateDate
     ) > elc.KeepMostRecent
 AND elc.KeepMostRecent<>-1
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddEventLogType
-	@LogTypeKey nvarchar(35),
-	@LogTypeFriendlyName nvarchar(50),
-	@LogTypeDescription nvarchar(128),
-	@LogTypeOwner nvarchar(100),
-	@LogTypeCSSClass nvarchar(40)
+    @LogTypeKey nvarchar(35),
+    @LogTypeFriendlyName nvarchar(50),
+    @LogTypeDescription nvarchar(128),
+    @LogTypeOwner nvarchar(100),
+    @LogTypeCSSClass nvarchar(40)
 AS
-	INSERT INTO {databaseOwner}{objectQualifier}EventLogTypes
-	(LogTypeKey,
-	LogTypeFriendlyName,
-	LogTypeDescription,
-	LogTypeOwner,
-	LogTypeCSSClass)
+    INSERT INTO {databaseOwner}{objectQualifier}EventLogTypes
+    (LogTypeKey,
+    LogTypeFriendlyName,
+    LogTypeDescription,
+    LogTypeOwner,
+    LogTypeCSSClass)
 VALUES
-	(@LogTypeKey,
-	@LogTypeFriendlyName,
-	@LogTypeDescription,
-	@LogTypeOwner,
-	@LogTypeCSSClass)	
-	
+    (@LogTypeKey,
+    @LogTypeFriendlyName,
+    @LogTypeDescription,
+    @LogTypeOwner,
+    @LogTypeCSSClass)
+
 GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateEventLogType
-	@LogTypeKey nvarchar(35),
-	@LogTypeFriendlyName nvarchar(50),
-	@LogTypeDescription nvarchar(128),
-	@LogTypeOwner nvarchar(100),
-	@LogTypeCSSClass nvarchar(40)
+    @LogTypeKey nvarchar(35),
+    @LogTypeFriendlyName nvarchar(50),
+    @LogTypeDescription nvarchar(128),
+    @LogTypeOwner nvarchar(100),
+    @LogTypeCSSClass nvarchar(40)
 AS
 UPDATE {databaseOwner}{objectQualifier}EventLogTypes
-	SET LogTypeFriendlyName = @LogTypeFriendlyName,
-	LogTypeDescription = @LogTypeDescription,
-	LogTypeOwner = @LogTypeOwner,
-	LogTypeCSSClass = @LogTypeCSSClass
+    SET LogTypeFriendlyName = @LogTypeFriendlyName,
+    LogTypeDescription = @LogTypeDescription,
+    LogTypeOwner = @LogTypeOwner,
+    LogTypeCSSClass = @LogTypeCSSClass
 WHERE	LogTypeKey = @LogTypeKey
-	
+
 GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}DeleteEventLogType
-	@LogTypeKey nvarchar(35)
+    @LogTypeKey nvarchar(35)
 AS
 DELETE FROM {databaseOwner}{objectQualifier}EventLogTypes
 WHERE	LogTypeKey = @LogTypeKey
-	
+
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetEventLogPendingNotifConfig
 AS
 
 SELECT 	COUNT(*) as PendingNotifs,
-	elc.ID,
-	elc.LogTypeKey, 
-	elc.LogTypePortalID, 
-	elc.LoggingIsActive,
-	elc.KeepMostRecent,
-	elc.EmailNotificationIsActive,
-	elc.NotificationThreshold,
-	elc.NotificationThresholdTime,
-	elc.NotificationThresholdTimeType,
-	elc.MailToAddress, 
-	elc.MailFromAddress
+    elc.ID,
+    elc.LogTypeKey,
+    elc.LogTypePortalID,
+    elc.LoggingIsActive,
+    elc.KeepMostRecent,
+    elc.EmailNotificationIsActive,
+    elc.NotificationThreshold,
+    elc.NotificationThresholdTime,
+    elc.NotificationThresholdTimeType,
+    elc.MailToAddress,
+    elc.MailFromAddress
 FROM {databaseOwner}{objectQualifier}EventLogConfig elc
 INNER JOIN {databaseOwner}{objectQualifier}EventLog
 ON {databaseOwner}{objectQualifier}EventLog.LogConfigID = elc.ID
 WHERE {databaseOwner}{objectQualifier}EventLog.LogNotificationPending = 1
 GROUP BY elc.ID,
-	elc.LogTypeKey, 
-	elc.LogTypePortalID, 
-	elc.LoggingIsActive,
-	elc.KeepMostRecent,
-	elc.EmailNotificationIsActive,
-	elc.NotificationThreshold,
-	elc.NotificationThresholdTime,
-	elc.NotificationThresholdTimeType,
-	elc.MailToAddress, 
-	elc.MailFromAddress
+    elc.LogTypeKey,
+    elc.LogTypePortalID,
+    elc.LoggingIsActive,
+    elc.KeepMostRecent,
+    elc.EmailNotificationIsActive,
+    elc.NotificationThreshold,
+    elc.NotificationThresholdTime,
+    elc.NotificationThresholdTimeType,
+    elc.MailToAddress,
+    elc.MailFromAddress
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetEventLogPendingNotif
-	@LogConfigID int
+    @LogConfigID int
 AS
 SELECT *
 FROM {databaseOwner}{objectQualifier}EventLog
@@ -1030,7 +1030,7 @@ GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateEventLogPendingNotif
-	@LogConfigID int
+    @LogConfigID int
 AS
 UPDATE {databaseOwner}{objectQualifier}EventLog
 SET LogNotificationPending = 0
@@ -1040,15 +1040,15 @@ AND LogConfigID = @LogConfigID
 GO
 
 INSERT {databaseOwner}{objectQualifier}HostSettings
-	VALUES (N'EnableModuleOnLineHelp',N'Y', 0)
+    VALUES (N'EnableModuleOnLineHelp',N'Y', 0)
 GO
 
 INSERT {databaseOwner}{objectQualifier}HostSettings
-	VALUES (N'HelpURL',N'http://www.dotnetnuke.com/default.aspx?tabid=787', 0)
+    VALUES (N'HelpURL',N'http://www.dotnetnuke.com/default.aspx?tabid=787', 0)
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Vendors ADD
-	Keywords2 ntext NULL
+    Keywords2 ntext NULL
 GO
 
 update {databaseOwner}{objectQualifier}Vendors
@@ -1056,11 +1056,11 @@ set Keywords2 = Keywords
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Vendors
-	DROP COLUMN Keywords
+    DROP COLUMN Keywords
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Vendors ADD
-	Keywords ntext NULL
+    Keywords ntext NULL
 GO
 
 update {databaseOwner}{objectQualifier}Vendors
@@ -1068,7 +1068,7 @@ set Keywords = Keywords2
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Vendors
-	DROP COLUMN Keywords2
+    DROP COLUMN Keywords2
 GO
 
 

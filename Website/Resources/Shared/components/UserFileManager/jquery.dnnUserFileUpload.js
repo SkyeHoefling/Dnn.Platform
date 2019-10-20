@@ -19,7 +19,7 @@
             setTimeout((function () { $message.hide('fade'); }), 4000);
         }
 
-        // error response 
+        // error response
         $fileUploadWrapperSelector.on('fileuploadfail', function (e, data) {
             opts.complete(data);
             displayError(opts.serverErrorMessage);

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -90,9 +90,9 @@ namespace DotNetNuke.Modules.Admin.Modules
                     try
                     {
                         var objObject = Reflection.CreateObject(Module.DesktopModule.BusinessControllerClass, Module.DesktopModule.BusinessControllerClass);
-                        
-						//Double-check
-						if (objObject is IPortable)
+
+                        //Double-check
+                        if (objObject is IPortable)
                         {
                             XmlDocument moduleXml = new XmlDocument { XmlResolver = null };
                             XmlNode moduleNode = ModuleController.SerializeModule(moduleXml, Module, true);
@@ -113,9 +113,9 @@ namespace DotNetNuke.Modules.Admin.Modules
                             var content = sw.ToString();
                             if (!String.IsNullOrEmpty(content))
                             {
-								//remove invalid chars in content -> DNN 26810: Handled by ModuleController.SerializeModule
-	                            //content = Regex.Replace(content, _invalidCharsRegex, string.Empty);
-								//add attributes to XML document
+                                //remove invalid chars in content -> DNN 26810: Handled by ModuleController.SerializeModule
+                                //content = Regex.Replace(content, _invalidCharsRegex, string.Empty);
+                                //add attributes to XML document
                                 //content = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" + "<content type=\"" + CleanName(Module.DesktopModule.ModuleName) + "\" version=\"" +
                                 //          Module.DesktopModule.Version + "\">" + content + "</content>";
 
@@ -123,10 +123,10 @@ namespace DotNetNuke.Modules.Admin.Modules
                                 if (PortalController.Instance.HasSpaceAvailable(PortalId, content.Length))
                                 {
                                     //add file to Files table
-									using (var fileContent = new MemoryStream(Encoding.UTF8.GetBytes(content)))
-									{
+                                    using (var fileContent = new MemoryStream(Encoding.UTF8.GetBytes(content)))
+                                    {
                                         Services.FileSystem.FileManager.Instance.AddFile(folder, fileName, fileContent, true, true, "application/octet-stream");
-									}
+                                    }
                                 }
                                 else
                                 {
@@ -237,7 +237,7 @@ namespace DotNetNuke.Modules.Admin.Modules
                             UI.Skins.Skin.AddModuleMessage(this, strMessage, ModuleMessage.ModuleMessageType.RedError);
                         }
                         }
-                    
+
                 }
                 else
                 {

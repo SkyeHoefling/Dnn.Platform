@@ -35,7 +35,7 @@ namespace DotNetNuke.Services.GeneratedImage
 
 #if INDIVIDUAL_LOCKS
         private Hashtable _fileLocks = new Hashtable();
-#else 
+#else
         private readonly object _fileLock = new object();
 #endif
 
@@ -265,7 +265,7 @@ namespace DotNetNuke.Services.GeneratedImage
                 }
             }
         }
-        
+
         private object GetFileLockObject(string id)
         {
 #if INDIVIDUAL_LOCKS

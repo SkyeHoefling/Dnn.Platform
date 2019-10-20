@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -68,11 +68,11 @@ namespace DotNetNuke.Tests.AspNetClientCapabilityProviderTest
         {
             _clientCapabilityProvider = new Providers.AspNetClientCapabilityProvider.AspNetClientCapabilityProvider();
 
-			ComponentFactory.Container = new SimpleContainer();
-			var dataProvider = MockComponentProvider.CreateDataProvider();
-			dataProvider.Setup(d => d.GetProviderPath()).Returns("");
-			MockComponentProvider.CreateDataCacheProvider();
-			MockComponentProvider.CreateEventLogController();
+            ComponentFactory.Container = new SimpleContainer();
+            var dataProvider = MockComponentProvider.CreateDataProvider();
+            dataProvider.Setup(d => d.GetProviderPath()).Returns("");
+            MockComponentProvider.CreateDataCacheProvider();
+            MockComponentProvider.CreateEventLogController();
         }
 
         [TearDown]
@@ -103,7 +103,7 @@ namespace DotNetNuke.Tests.AspNetClientCapabilityProviderTest
         public void AspNetClientCapability_IsMobile_Returns_True_For_IPhone()
         {
             // Arrange
-            var clientCapability = _clientCapabilityProvider.GetClientCapability(iphoneUserAgent);             
+            var clientCapability = _clientCapabilityProvider.GetClientCapability(iphoneUserAgent);
 
             // Act
             var bIsMobile = clientCapability.IsMobile;
@@ -131,7 +131,7 @@ namespace DotNetNuke.Tests.AspNetClientCapabilityProviderTest
             //Arrange
             var clientCapability = _clientCapabilityProvider.GetClientCapability(iPadTabletUserAgent);
 
-            // Act            
+            // Act
             var bIsMobile = clientCapability.IsMobile;
 
             //Assert
@@ -145,7 +145,7 @@ namespace DotNetNuke.Tests.AspNetClientCapabilityProviderTest
             //simulator.SetHeader("user-agent", samsungGalaxyTablet);
             //simulator.SimulateRequest();
             //var capabilities = new HttpCapabilitiesDefaultProvider().GetBrowserCapabilities(HttpContext.Current.Request);
-            
+
             //Arrange
             var clientCapability = _clientCapabilityProvider.GetClientCapability(samsungGalaxyTablet);
 

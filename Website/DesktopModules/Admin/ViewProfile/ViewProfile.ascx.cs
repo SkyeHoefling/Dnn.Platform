@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -43,20 +43,20 @@ using DotNetNuke.Services.Social.Notifications;
 namespace DotNetNuke.Modules.Admin.ViewProfile
 {
 
-	/// <summary>
-	///   The ViewProfile ProfileModuleUserControlBase is used to view a Users Profile
-	/// </summary>
+    /// <summary>
+    ///   The ViewProfile ProfileModuleUserControlBase is used to view a Users Profile
+    /// </summary>
     public partial class ViewProfile : ProfileModuleUserControlBase
-	{
-		public override bool DisplayModule
-		{
-			get
-			{
-				return true;
-			}
-		}
+    {
+        public override bool DisplayModule
+        {
+            get
+            {
+                return true;
+            }
+        }
 
-        public bool IncludeButton   
+        public bool IncludeButton
         {
             get
             {
@@ -77,9 +77,9 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
         {
             base.OnInit(e);
 
-			//throw 404 so that deleted profile is not reindexed
-			if(ProfileUser == null || ProfileUser.IsDeleted)
-			{
+            //throw 404 so that deleted profile is not reindexed
+            if(ProfileUser == null || ProfileUser.IsDeleted)
+            {
                 UrlUtils.Handle404Exception(Response, PortalSettings.Current);
             }
 
@@ -90,17 +90,17 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
             JavaScript.RequestRegistration(CommonJs.Knockout);
         }
 
-		/// <summary>
-		///   Page_Load runs when the control is loaded
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		protected override void OnLoad(EventArgs e)
-		{
-			base.OnLoad(e);
+        /// <summary>
+        ///   Page_Load runs when the control is loaded
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
 
-			try
-			{
+            try
+            {
                 if(Null.IsNull(ProfileUserId))
                 {
                     Visible = false;
@@ -112,7 +112,7 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                 {
                     template = Localization.GetString("DefaultTemplate", LocalResourceFile);
                 }
-			    var editUrl = Globals.NavigateURL(ModuleContext.PortalSettings.ActiveTab.TabID, "Profile", "userId=" + ProfileUserId, "pageno=1");
+                var editUrl = Globals.NavigateURL(ModuleContext.PortalSettings.ActiveTab.TabID, "Profile", "userId=" + ProfileUserId, "pageno=1");
                 var profileUrl = Globals.NavigateURL(ModuleContext.PortalSettings.ActiveTab.TabID, "Profile", "userId=" + ProfileUserId, "pageno=2");
 
                 if (template.Contains("[BUTTON:EDITPROFILE]"))
@@ -152,7 +152,7 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                     buttonPanel.Visible = false;
                 }
 
-			    if (ProfileUser.Profile.ProfileProperties.Cast<ProfilePropertyDefinition>().Count(profProperty => profProperty.Visible) == 0)
+                if (ProfileUser.Profile.ProfileProperties.Cast<ProfilePropertyDefinition>().Count(profProperty => profProperty.Visible) == 0)
                 {
                     noPropertiesLabel.Visible = true;
                     profileOutput.Visible = false;
@@ -173,7 +173,7 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                     profileOutput.Visible = true;
                 }
 
-			    var propertyAccess = new ProfilePropertyAccess(ProfileUser);
+                var propertyAccess = new ProfilePropertyAccess(ProfileUser);
                 StringBuilder sb = new StringBuilder();
                 bool propertyNotFound = false;
 
@@ -181,11 +181,11 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                 {
                     var displayDataType = ProfilePropertyAccess.DisplayDataType(property).ToLowerInvariant();
                     string value = propertyAccess.GetProperty(property.PropertyName,
-                                                              String.Empty,
-                                                              Thread.CurrentThread.CurrentUICulture,
-                                                              ModuleContext.PortalSettings.UserInfo,
-                                                              Scope.DefaultSettings,
-                                                              ref propertyNotFound);
+                                                            String.Empty,
+                                                            Thread.CurrentThread.CurrentUICulture,
+                                                            ModuleContext.PortalSettings.UserInfo,
+                                                            Scope.DefaultSettings,
+                                                            ref propertyNotFound);
 
 
                     var clientName = Localization.GetSafeJSString(property.PropertyName);
@@ -209,10 +209,10 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                     sb.Append('\n');
                 }
 
-			    string email = (ProfileUserId == ModuleContext.PortalSettings.UserId
-			                    || ModuleContext.PortalSettings.UserInfo.IsInRole(ModuleContext.PortalSettings.AdministratorRoleName))
-			                       ? ProfileUser.Email
-			                       : String.Empty;
+                string email = (ProfileUserId == ModuleContext.PortalSettings.UserId
+                                || ModuleContext.PortalSettings.UserInfo.IsInRole(ModuleContext.PortalSettings.AdministratorRoleName))
+                                    ? ProfileUser.Email
+                                    : String.Empty;
 
                 sb.Append("self.Email = ko.observable('");
                 email = Localization.GetSafeJSString(Server.HtmlDecode(email));
@@ -227,36 +227,36 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                 ProfileProperties = sb.ToString();
 
 
-			}
-			catch (Exception exc)
-			{
-				//Module failed to load
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
+            }
+            catch (Exception exc)
+            {
+                //Module failed to load
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
-		private string GetRedirectUrl()
-		{
-			//redirect user to default page if not specific the home tab, do this action to prevent loop redirect.
-			var homeTabId = ModuleContext.PortalSettings.HomeTabId;
-			string redirectUrl;
+        private string GetRedirectUrl()
+        {
+            //redirect user to default page if not specific the home tab, do this action to prevent loop redirect.
+            var homeTabId = ModuleContext.PortalSettings.HomeTabId;
+            string redirectUrl;
 
-			if (homeTabId > Null.NullInteger)
-			{
-				redirectUrl = Globals.NavigateURL(homeTabId);
-			}
-			else
-			{
-				redirectUrl = Globals.GetPortalDomainName(PortalSettings.Current.PortalAlias.HTTPAlias, Request, true) +
-							  "/" + Globals.glbDefaultPage;
-			}
+            if (homeTabId > Null.NullInteger)
+            {
+                redirectUrl = Globals.NavigateURL(homeTabId);
+            }
+            else
+            {
+                redirectUrl = Globals.GetPortalDomainName(PortalSettings.Current.PortalAlias.HTTPAlias, Request, true) +
+                            "/" + Globals.glbDefaultPage;
+            }
 
-			return redirectUrl;
-		}
+            return redirectUrl;
+        }
 
         private void ProcessQuerystring()
         {
@@ -264,7 +264,7 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
 
             var action = Request.QueryString["action"];
 
-            if (!Request.IsAuthenticated && !string.IsNullOrEmpty(action)) //action requested but not logged in. 
+            if (!Request.IsAuthenticated && !string.IsNullOrEmpty(action)) //action requested but not logged in.
             {
                 string loginUrl = Common.Globals.LoginURL(Request.RawUrl, false);
                 Response.Redirect(loginUrl);
@@ -272,7 +272,7 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
             if (Request.IsAuthenticated && !string.IsNullOrEmpty(action) ) // only process this for authenticated requests
             {
                 //current user, i.e. the one that the request was for
-                var currentUser = UserController.Instance.GetCurrentUserInfo();               
+                var currentUser = UserController.Instance.GetCurrentUserInfo();
                 // the initiating user,i.e. the one who wanted to be friend
                 // note that in this case here currentUser is visiting the profile of initiatingUser, most likely from a link in the notification e-mail
                 var initiatingUser = UserController.Instance.GetUserById(PortalSettings.Current.PortalId, Convert.ToInt32(Request.QueryString["UserID"]));
@@ -281,15 +281,15 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                 {
                     return; //do not further process for users who are on their own profile page
                 }
-            
+
                 var friendRelationship = RelationshipController.Instance.GetFriendRelationship(currentUser, initiatingUser);
 
                 if (friendRelationship != null)
-                {                   
+                {
                     if (action.ToLowerInvariant() == "acceptfriend")
                     {
                         var friend = UserController.GetUserById(PortalSettings.Current.PortalId, friendRelationship.UserId);
-                        FriendsController.Instance.AcceptFriend(friend);                        
+                        FriendsController.Instance.AcceptFriend(friend);
                     }
 
                     if (action.ToLowerInvariant() == "followback")
@@ -308,7 +308,7 @@ namespace DotNetNuke.Modules.Admin.ViewProfile
                         {
                             //ignore
                         }
-                    }                    
+                    }
                 }
 
                 Response.Redirect(Common.Globals.UserProfileURL(initiatingUser.UserID));

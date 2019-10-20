@@ -47,7 +47,7 @@ class LanguageService {
         const sf = this.getServiceFramework("Pages");
         sf.post("UpdateTabLocalization", params, callback, failureCallback);
     }
-    
+
     restoreModule(params, callback, failureCallback) {
         const sf = this.getServiceFramework("Pages");
         sf.post("RestoreModule?" + serializeQueryStringParameters(params), {}, callback, failureCallback);

@@ -32,7 +32,7 @@ class RoleRow extends Component {
         document.removeEventListener("click", this.handleClick);
         this._isMounted = false;
     }
-    
+
     handleClick(event) {
         // Note: this workaround is needed in IE. The remove event listener in the componentWillUnmount is called
         // before the handleClick handler is called, but in spite of that, the handleClick is executed. To avoid

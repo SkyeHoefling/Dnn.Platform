@@ -5,7 +5,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const webpackExternals =  require("@dnnsoftware/dnn-react-common/WebpackExternals");
 const languages = {
     "en": null
-    // TODO: create locallizaton files per language 
+    // TODO: create locallizaton files per language
     // "de": require("./localizations/de.json"),
     // "es": require("./localizations/es.json"),
     // "fr": require("./localizations/fr.json"),
@@ -38,7 +38,7 @@ module.exports = {
                     ]
                 }
             },
-            { test: /\.(less|css)$/, use: [ 
+            { test: /\.(less|css)$/, use: [
                 { loader: "style-loader" },
                 { loader: "css-loader", options: { modules: "global" } },
                 { loader: "less-loader" }
@@ -53,7 +53,7 @@ module.exports = {
             path.resolve("./exportables"),  // Look in exportables after
             path.resolve("./node_modules"),  // Try local node_modules
             path.resolve("../../../../../node_modules")   // Last fallback to workspaces node_modules
-        ]        
+        ]
     },
     externals: Object.assign(webpackExternals, {
         "dnn-sites-common-action-types": "window.dnn.Sites.CommonActionTypes",

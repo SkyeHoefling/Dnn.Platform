@@ -244,20 +244,20 @@
 }
 
 .dnnModuleDialog .dnnProgressBar {
-	position: absolute;
-	top: 68px;
-	width: 100%;
-	height: 5px;
-	overflow: hidden;
-	background-color: #e2e2e2;
-	display: none;
+    position: absolute;
+    top: 68px;
+    width: 100%;
+    height: 5px;
+    overflow: hidden;
+    background-color: #e2e2e2;
+    display: none;
 }
 .dnnModuleDialog .dnnProgressBar span {
-	display: block;
-	background-color: #00a4e5;
-	width: 0;
-	height: 100%;
-	overflow: hidden;
+    display: block;
+    background-color: #00a4e5;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
 }
 
 .dnnModuleDialog .dnnModuleList .listContainer ul li span.actions .button.bookmarkModule {
@@ -317,7 +317,7 @@
     right: 68px;
     display: inline-block;
     width: 250px;
-    height: 100%;    
+    height: 100%;
 }
 .dnnModuleDialog .dnnDialogTitle .search-container .search-input-container {
     height: 100%;
@@ -343,15 +343,15 @@
     color:    #c8c8c8;
 }
 .dnnModuleDialog .dnnDialogTitle .search-container input.search-input:-moz-placeholder {
-   color:    #c8c8c8;
-   opacity:  1;
+    color:    #c8c8c8;
+    opacity:  1;
 }
 .dnnModuleDialog .dnnDialogTitle .search-container input.search-input::-moz-placeholder {
-   color:    #c8c8c8;
-   opacity:  1;
+    color:    #c8c8c8;
+    opacity:  1;
 }
 .dnnModuleDialog .dnnDialogTitle .search-container input.search-input:-ms-input-placeholder {
-   color:    #c8c8c8;
+    color:    #c8c8c8;
 }
 .dnnModuleDialog .dnnDialogTitle .search-container input.search-input::-ms-clear {
     display: none;
@@ -439,8 +439,8 @@
 .dnnModuleDialog  .dnnDropDownList.page * {
     box-sizing: border-box;
 }
-.dnnModuleDialog  .dnnDropDownList.page .selected-item { 
-	border: none;
+.dnnModuleDialog  .dnnDropDownList.page .selected-item {
+    border: none;
     box-shadow: none;
     background: none;
 }
@@ -455,7 +455,7 @@
 .dnnModuleDialog  .dnnDropDownList.page .selected-item a:after {
     content: "";
     display: block;
-    width: 0; 
+    width: 0;
     height: 0;
     position: absolute;
     right: 0;
@@ -544,59 +544,59 @@
 .dnnModuleDialog .dropdown .carat:after,
 .dnnModuleDialog .dropdown .selected::after,
 .dnnModuleDialog .dropdown:after{
-	-webkit-transition: all 150ms ease-in-out;
-	-moz-transition: all 150ms ease-in-out;
-	-ms-transition: all 150ms ease-in-out;
-	transition: all 150ms ease-in-out;
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
 }
 .dnnModuleDialog .dropdown .selected::after,
 .dnnModuleDialog .dropdown.scrollable div::after{
-	-webkit-pointer-events: none;
-	-moz-pointer-events: none;
-	-ms-pointer-events: none;
-	pointer-events: none;
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    -ms-pointer-events: none;
+    pointer-events: none;
 }
 .dnnModuleDialog .dropdown{
-	position: relative;
+    position: relative;
     display: inline-block;
-	cursor: pointer;
-	font-weight: bold;
-	background: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
     vertical-align: top;
 }
 .dnnModuleDialog .dropdown.open{
-	z-index: 2;
+    z-index: 2;
 }
 .dnnModuleDialog .dropdown:after{
-	content: '';
-	position: absolute;
-	right: 3px;
-	bottom: 3px;
-	top: 2px;
-	width: 30px;
-	background: transparent;
+    content: '';
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    top: 2px;
+    width: 30px;
+    background: transparent;
 }
 .dnnModuleDialog .dropdown.focus:after{
 
 }
 .dnnModuleDialog .dropdown .carat{
-	content: '';
-	position: absolute;
-	right: 10px;
-	top: 14px;
-	border-left: 5px solid transparent;
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 4px solid #4B4E4F;
-	z-index: 2;
-	
-	-webkit-transform-origin: 50% 20%;
-	-moz-transform-origin: 50% 20%;
-	-ms-transform-origin: 50% 20%;
-	transform-origin: 50% 20%;
-	
+    z-index: 2;
+
+    -webkit-transform-origin: 50% 20%;
+    -moz-transform-origin: 50% 20%;
+    -ms-transform-origin: 50% 20%;
+    transform-origin: 50% 20%;
+
 }
 .dnnModuleDialog
 .dnnModuleDialog .dropdown.focus .carat{
@@ -608,47 +608,47 @@
     border-top-color: #1E88C3;
 }
 .dnnModuleDialog .dropdown .old{
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 0;
-	width: 0;
-	overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
 }
 .dnnModuleDialog .dropdown select{
-	position: absolute;
-	left: 0px;
-	top: 0px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
 .dnnModuleDialog .dropdown.touch .old{
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 .dnnModuleDialog .dropdown.touch select{
-	width: 100%;
-	height: 100%;
-	opacity: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
 }
 .dnnModuleDialog .dropdown .selected,
 .dnnModuleDialog .dropdown li{
-	display: block;
-	overflow: hidden;
-	white-space: nowrap;
-	color: #6F7273;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #6F7273;
     font-weight: normal;
     margin: 0;
     list-style: none;
-	padding: 8px 12px;
+    padding: 8px 12px;
     height: 32px;
 }
 .dnnModuleDialog .dropdown div{
-	position: absolute;
-	height: 0;
-	left: 0;
-	right: 0;
-	margin-top: -1px;
-	overflow: hidden;
-	opacity: 0;
+    position: absolute;
+    height: 0;
+    left: 0;
+    right: 0;
+    margin-top: -1px;
+    overflow: hidden;
+    opacity: 0;
 
     background: #fff;
     border: 1px solid #C8C8C8;
@@ -657,44 +657,44 @@
     top: 42px;
 }
 .dnnModuleDialog .dropdown.open div{
-	opacity: 1;
-	z-index: 2;
+    opacity: 1;
+    z-index: 2;
 }
 .dnnModuleDialog .dropdown.scrollable div::after{
-	content: '';
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	height: 50px;
-	
-	box-shadow: inset 0 -50px 30px -35px #f8f8f8;
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50px;
+
+    box-shadow: inset 0 -50px 30px -35px #f8f8f8;
 }
 .dnnModuleDialog .dropdown.scrollable:hover div::after{
-	box-shadow: inset 0 -50px 30px -35px #f4f4f4;
+    box-shadow: inset 0 -50px 30px -35px #f4f4f4;
 }
 .dnnModuleDialog .dropdown.scrollable.bottom div::after{
-	opacity: 0;
+    opacity: 0;
 }
 .dnnModuleDialog .dropdown ul{
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-	list-style: none;
-	overflow: hidden;
+    list-style: none;
+    overflow: hidden;
 }
 .dnnModuleDialog .dropdown.scrollable.open ul{
-	overflow-y: auto;
+    overflow-y: auto;
 }
 .dnnModuleDialog .dropdown li.focus{
-	background: #EFF0F0;
-	position: relative;
-	z-index: 3;
-	color: #1E88C3;
+    background: #EFF0F0;
+    position: relative;
+    z-index: 3;
+    color: #1E88C3;
 }
 /*Drop Down Style End*/
 div.dnnModuleDialog_ModuleListMessage {
@@ -810,9 +810,9 @@ div.DnnModule.highlight.animate {
 
     border: 2px solid #06a7e3;
 }
-.dnnModuleManager .DnnModule.forDrag:before, 
-.dnnModuleManager .DnnModule.forDrag:after, 
-.dnnModuleSorting .DnnModule.forDrag:before, 
+.dnnModuleManager .DnnModule.forDrag:before,
+.dnnModuleManager .DnnModule.forDrag:after,
+.dnnModuleSorting .DnnModule.forDrag:before,
 .dnnModuleSorting .DnnModule.forDrag:after {
     display: none;
 }
@@ -830,7 +830,7 @@ div.DnnModule.highlight.animate {
 .dnnModuleManager .DnnModule.floating > div.dnnDragHint, .dnnModuleSorting .DnnModule.floating > div.dnnDragHint {
     height: 100% !important;
     outline: none;
-	-webkit-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
     -moz-box-sizing: border-box !important;
     box-sizing: border-box !important;
     cursor: default;

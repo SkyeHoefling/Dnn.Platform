@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -145,7 +145,7 @@ namespace DotNetNuke.Web.InternalServices
             // local references for use in closure
             var portalSettings = PortalSettings;
             var currentSynchronizationContext = SynchronizationContext.Current;
-            var userInfo = UserInfo;    
+            var userInfo = UserInfo;
             var task = request.Content.ReadAsMultipartAsync(provider)
                 .ContinueWith(o =>
                     {
@@ -210,10 +210,10 @@ namespace DotNetNuke.Web.InternalServices
 
                         }
 
-                        /* Response Content Type cannot be application/json 
-                         * because IE9 with iframe-transport manages the response 
-                         * as a file download 
-                         */
+                        /* Response Content Type cannot be application/json
+                        * because IE9 with iframe-transport manages the response
+                        * as a file download
+                        */
                         var mediaTypeFormatter = new JsonMediaTypeFormatter();
                         mediaTypeFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/plain"));
 
@@ -425,7 +425,7 @@ namespace DotNetNuke.Web.InternalServices
                 }
 
                 var folderManager = FolderManager.Instance;
-                var effectivePortalId = isHostPortal ? Null.NullInteger : portalId;                
+                var effectivePortalId = isHostPortal ? Null.NullInteger : portalId;
                 var folderInfo = folderManager.GetFolder(effectivePortalId, folder);
 
                 int userId;
@@ -641,10 +641,10 @@ namespace DotNetNuke.Web.InternalServices
                     var mediaTypeFormatter = new JsonMediaTypeFormatter();
                     mediaTypeFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/plain"));
 
-                    /* Response Content Type cannot be application/json 
-                     * because IE9 with iframe-transport manages the response 
-                     * as a file download 
-                     */
+                    /* Response Content Type cannot be application/json
+                    * because IE9 with iframe-transport manages the response
+                    * as a file download
+                    */
                     return Request.CreateResponse(
                         HttpStatusCode.OK,
                         result,
@@ -701,9 +701,9 @@ namespace DotNetNuke.Web.InternalServices
                 result = UploadFile(responseStream, portalId, UserInfo, dto.Folder.ValueOrEmpty(), dto.Filter.ValueOrEmpty(),
                     fileName, dto.Overwrite, dto.IsHostMenu, dto.Unzip);
 
-                /* Response Content Type cannot be application/json 
-                    * because IE9 with iframe-transport manages the response 
-                    * as a file download 
+                /* Response Content Type cannot be application/json
+                    * because IE9 with iframe-transport manages the response
+                    * as a file download
                     */
                 return Request.CreateResponse(
                     HttpStatusCode.OK,
@@ -786,10 +786,10 @@ namespace DotNetNuke.Web.InternalServices
         {
             var groups = PortalGroupController.Instance.GetPortalGroups().ToArray();
             var mygroup = (from @group in groups
-                           select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
-                               into portals
-                           where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
-                           select portals.ToArray()).FirstOrDefault();
+                            select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
+                                into portals
+                            where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
+                            select portals.ToArray()).FirstOrDefault();
             return mygroup;
         }
 

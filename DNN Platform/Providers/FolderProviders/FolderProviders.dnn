@@ -1,82 +1,82 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
     <package name="DotNetNuke.Providers.FolderProviders" type="Provider" isSystem="true">
-      <friendlyName>DotNetNuke Folder Providers</friendlyName>
-      <description>Azure Folder Providers for DotNetNuke.</description>
-      <dependencies />
-      <owner>
+    <friendlyName>DotNetNuke Folder Providers</friendlyName>
+    <description>Azure Folder Providers for DotNetNuke.</description>
+    <dependencies />
+    <owner>
         <name>DNN</name>
         <organization>DNN Corp.</organization>
         <url>http://www.dnnsoftware.com</url>
         <email>support@dnnsoftware.com</email>
-      </owner>
-      <license src="license.txt" />
-      <releaseNotes src="releaseNotes.txt" /> 
-      <azureCompatible>true</azureCompatible>
-      <components>
+    </owner>
+    <license src="license.txt" />
+    <releaseNotes src="releaseNotes.txt" />
+    <azureCompatible>true</azureCompatible>
+    <components>
         <component type="Provider" />
         <component type="Assembly">
-          <assemblies>
+        <assemblies>
             <assembly>
-              <path>bin\Providers</path>
-              <name>DotNetNuke.Providers.FolderProviders.dll</name>
+            <path>bin\Providers</path>
+            <name>DotNetNuke.Providers.FolderProviders.dll</name>
             </assembly>
             <assembly>
-              <path>bin\Providers</path>
-              <name>Microsoft.WindowsAzure.Storage.dll</name>
-              <version>8.3.0</version>
+            <path>bin\Providers</path>
+            <name>Microsoft.WindowsAzure.Storage.dll</name>
+            <version>8.3.0</version>
             </assembly>
-          </assemblies>
+        </assemblies>
         </component>
         <component type="ResourceFile">
-          <resourceFiles>
+        <resourceFiles>
             <basePath>Providers\FolderProviders</basePath>
             <resourceFile>
-              <name>Resources.zip</name>
+            <name>Resources.zip</name>
             </resourceFile>
-          </resourceFiles>
+        </resourceFiles>
         </component>
         <component type="Config">
-          <config>
+        <config>
             <configFile>web.config</configFile>
             <install>
-              <configuration>
+            <configuration>
                 <nodes>
-                  <node path="/configuration/dotnetnuke/folder/providers" action="update" key="name" collision="save">
+                <node path="/configuration/dotnetnuke/folder/providers" action="update" key="name" collision="save">
                     <add name="AzureFolderProvider"
-                         type="DotNetNuke.Providers.FolderProviders.AzureFolderProvider.AzureFolderProvider, DotNetNuke.Providers.FolderProviders"
-                         providerPath="~/Providers/FolderProviders/AzureFolderProvider/" />
-                  </node>
+                        type="DotNetNuke.Providers.FolderProviders.AzureFolderProvider.AzureFolderProvider, DotNetNuke.Providers.FolderProviders"
+                        providerPath="~/Providers/FolderProviders/AzureFolderProvider/" />
+                </node>
                 </nodes>
-              </configuration>
+            </configuration>
             </install>
             <uninstall>
-              <configuration>
+            <configuration>
                 <nodes>
-                  <node path="/configuration/dotnetnuke/folder/providers/add[@name='AzureFolderProvider']" action="remove" />
+                <node path="/configuration/dotnetnuke/folder/providers/add[@name='AzureFolderProvider']" action="remove" />
                 </nodes>
-              </configuration>
+            </configuration>
             </uninstall>
-          </config>
+        </config>
         </component>
         <component type="Cleanup" version="09.02.01" fileName="09.02.00.txt" />
         <component type="File">
-          <files>
+        <files>
             <basePath>Providers\FolderProviders\AzureFolderProvider</basePath>
             <file>
-              <name>09.02.00.txt</name>
+            <name>09.02.00.txt</name>
             </file>
-          </files>
+        </files>
         </component>
-      </components>
-      <eventMessage>
+    </components>
+    <eventMessage>
         <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
         <processorCommand>UpgradeModule</processorCommand>
         <attributes>
-          <businessControllerClass>DotNetNuke.Providers.FolderProviders.Components.BusinessController, DotNetNuke.Providers.FolderProviders</businessControllerClass>
-          <upgradeVersionsList>09.02.00</upgradeVersionsList>
+        <businessControllerClass>DotNetNuke.Providers.FolderProviders.Components.BusinessController, DotNetNuke.Providers.FolderProviders</businessControllerClass>
+        <upgradeVersionsList>09.02.00</upgradeVersionsList>
         </attributes>
-      </eventMessage>
+    </eventMessage>
     </package>
   </packages>
 </dotnetnuke>

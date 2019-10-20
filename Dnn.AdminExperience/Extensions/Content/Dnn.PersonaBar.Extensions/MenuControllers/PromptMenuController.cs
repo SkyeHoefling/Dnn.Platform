@@ -9,7 +9,7 @@ namespace Dnn.PersonaBar.Prompt.MenuControllers
     {
         public void UpdateParameters(MenuItem menuItem)
         {
-            
+
         }
 
         public bool Visible(MenuItem menuItem)

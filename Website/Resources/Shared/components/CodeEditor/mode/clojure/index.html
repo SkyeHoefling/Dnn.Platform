@@ -44,8 +44,8 @@
   "Given a set of living cells, computes the new set of living cells."
   [cells]
   (set (for [[cell n] (frequencies (mapcat neighbours cells))
-             :when (or (= n 3) (and (= n 2) (cells cell)))]
-         cell)))
+            :when (or (= n 3) (and (= n 2) (cells cell)))]
+        cell)))
 
 ;; Utility methods for displaying game on a text terminal
 
@@ -67,20 +67,20 @@
 
 (def
   ^{:doc "board represents the initial set of living cells"}
-   board #{[2 1] [2 2] [2 3]})
+    board #{[2 1] [2 2] [2 3]})
 
 (display-grids (take 3 (iterate step board)) 5 5)
 
 ;; Let's play with characters
 (println \1 \a \# \\
-         \" \( \newline
-         \} \" \space
-         \tab \return \backspace
-         \u1000 \uAaAa \u9F9F)
+        \" \( \newline
+        \} \" \space
+        \tab \return \backspace
+        \u1000 \uAaAa \u9F9F)
 
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-clojure</code>.</p>

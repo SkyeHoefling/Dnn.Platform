@@ -53,11 +53,11 @@
 
   ! Now form average over positive and negative points only
   if (count(points > 0.) > 0) then
-     positive_average = sum(points, points > 0.) / count(points > 0.)
+    positive_average = sum(points, points > 0.) / count(points > 0.)
   end if
 
   if (count(points < 0.) > 0) then
-     negative_average = sum(points, points < 0.) / count(points < 0.)
+    negative_average = sum(points, points < 0.) / count(points < 0.)
   end if
 
   deallocate (points)
@@ -71,10 +71,10 @@
 </textarea></div>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         mode: "text/x-fortran"
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-Fortran</code>.</p>

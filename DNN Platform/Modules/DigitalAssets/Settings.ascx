@@ -8,9 +8,9 @@
 <fieldset>
     <div class="dnnFormItem">
         <dnnweb:Label ID="DefaultFolderTypeLabel" runat="server" ResourceKey="DefaultFolderType" Suffix=":" ControlName="DefaultFolderTypeComboBox" />
-		<dnnweb:DnnComboBox id="DefaultFolderTypeComboBox" DataTextField="MappingName" DataValueField="FolderMappingID" runat="server" CssClass="dnnFixedSizeComboBox" />
+        <dnnweb:DnnComboBox id="DefaultFolderTypeComboBox" DataTextField="MappingName" DataValueField="FolderMappingID" runat="server" CssClass="dnnFixedSizeComboBox" />
     </div>
-    
+
     <div class="dnnFormItem">
         <dnnweb:Label ID="ModeLabel" runat="server" ResourceKey="Mode" Suffix=":" ControlName="ModeComboBox" />
         <dnnweb:DnnComboBox ID="ModeComboBox" runat="server" OnClientSelectedIndexChanged="updateRootFolderItemVisibility" >
@@ -31,14 +31,14 @@
             </asp:RadioButtonList>
             <div id="FilterByFolderOptions">
                 <dnnweb:DnnFolderDropDownList ID="FilterByFolderDropDownList" runat="server" /><br/>
-                <div>                        
+                <div>
                     <asp:RadioButtonList ID="SubfolderFilterRadioButtonList" runat="server" RepeatDirection="Vertical" RepeatLayout="Flow">
-                        <asp:ListItem Value="ExcludeSubfolders" resourcekey="ExcludeSubfolders" Selected="True" />                      
-                        <asp:ListItem Value="IncludeSubfoldersFilesOnly" resourcekey="IncludeSubfoldersFilesOnly"/>                      
+                        <asp:ListItem Value="ExcludeSubfolders" resourcekey="ExcludeSubfolders" Selected="True" />
+                        <asp:ListItem Value="IncludeSubfoldersFilesOnly" resourcekey="IncludeSubfoldersFilesOnly"/>
                         <asp:ListItem Value="IncludeSubfoldersFolderStructure" resourcekey="IncludeSubfoldersFolderStructure"/>
                     </asp:RadioButtonList>
-                </div>                
-                <asp:CustomValidator runat="server" Display="Dynamic" resourcekey="FolderMustBeSelected.ErrorMessage" 
+                </div>
+                <asp:CustomValidator runat="server" Display="Dynamic" resourcekey="FolderMustBeSelected.ErrorMessage"
                     CssClass="dnnFormMessage dnnFormError" ID="FolderMustBeSelected" OnServerValidate="ValidateFolderIsSelected" ClientValidationFunction="settingsController.ValidateFolderIsSelected"/>
             </div>
         </div>
@@ -50,20 +50,20 @@
     function updateRootFolderItemVisibility(sender) {
         if (sender.get_value() != "Normal") {
             $('#<%=ViewConditionItem.ClientID%>').hide();
-        } else {            
+        } else {
             $('#<%=ViewConditionItem.ClientID%>').show();
         }
     }
 
     var settingsController;
-    
+
     $(function () {
-        
-    <% if (ModeComboBox.SelectedValue != "Normal") 
-       { %>    
-            $('#<%=ViewConditionItem.ClientID%>').hide();            
+
+    <% if (ModeComboBox.SelectedValue != "Normal")
+        { %>
+            $('#<%=ViewConditionItem.ClientID%>').hide();
     <% } %>
-        
+
         settingsController = new dnn.DigitalAssetsFilterViewSettingsController({ serviceRoot: "DigitalAssetsPro" },
             {
                 FolderDropDownList: $("#<%= FilterByFolderDropDownList.ClientID %>"),

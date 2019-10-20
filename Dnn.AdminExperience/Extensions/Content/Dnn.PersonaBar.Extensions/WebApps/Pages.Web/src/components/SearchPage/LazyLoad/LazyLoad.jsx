@@ -15,15 +15,15 @@ class LazyLoad extends Component {
             this.setState({
                 page:0
             });
-        }        
+        }
     }
 
     addListenerToFindBottom() {
         document.onscroll =  () => {
             // Internet Explorer
             let scrollY = window.scrollY ? window.scrollY : document.documentElement.scrollTop;
-            
-            let pos = scrollY + window.innerHeight; 
+
+            let pos = scrollY + window.innerHeight;
             if (pos === document.documentElement.scrollHeight) {
                 if (this.props.hasMore) {
                     this.setState({
@@ -33,7 +33,7 @@ class LazyLoad extends Component {
                     });
                 }
             }
-        }; 
+        };
     }
 
     render() {

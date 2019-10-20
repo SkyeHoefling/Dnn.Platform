@@ -52,8 +52,8 @@ namespace Dnn.PersonaBar.Pages.Components
             //get all terms info
             var allTerms = new List<Term>();
             var vocabularies = from v in vocabularyController.GetVocabularies()
-                               where (v.ScopeType.ScopeType == "Portal" && v.ScopeId == tabPortalId && !v.Name.Equals("Tags", StringComparison.OrdinalIgnoreCase))
-                               select v;
+                                where (v.ScopeType.ScopeType == "Portal" && v.ScopeId == tabPortalId && !v.Name.Equals("Tags", StringComparison.OrdinalIgnoreCase))
+                                select v;
             foreach (var v in vocabularies)
             {
                 allTerms.AddRange(termController.GetTermsByVocabulary(v.VocabularyId));

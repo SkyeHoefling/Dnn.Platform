@@ -28,12 +28,12 @@ export default function themeReducer(state = {
                 retrievedThemes: true,
                 retrievingThemes: false
             };
-        
+
         case ActionTypes.ERROR_RETRIEVING_THEMES:
             return { ...state,
                 retrievingThemes: false
             };
-            
+
         case ActionTypes.RETRIEVING_THEME_FILES:
             return { ...state,
                 retrievingThemeFiles: true
@@ -45,7 +45,7 @@ export default function themeReducer(state = {
                 containers: action.data.containers,
                 retrievingThemeFiles: false
             };
-        
+
         case ActionTypes.ERROR_RETRIEVING_THEME_FILES:
             return { ...state,
                 retrievingThemeFiles: false

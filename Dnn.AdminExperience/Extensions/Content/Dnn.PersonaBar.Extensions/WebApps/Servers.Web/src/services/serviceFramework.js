@@ -35,4 +35,4 @@ const serviceFramework = {
     }
 };
 
-export default serviceFramework; 
+export default serviceFramework;

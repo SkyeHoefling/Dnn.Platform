@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -54,11 +54,11 @@ namespace DotNetNuke.Services.Search.Controllers
         #region Private Properties
 
         private const string SeacrchContollersCacheKey = "SearchControllers";
-        
+
         private readonly int _moduleSearchTypeId = SearchHelper.Instance.GetSearchTypeByName("module").SearchTypeId;
 
         #endregion
-        
+
         #region Core Search APIs
 
         public SearchResults SiteSearch(SearchQuery searchQuery)
@@ -96,8 +96,8 @@ namespace DotNetNuke.Services.Search.Controllers
             {
                 try
                 {
-	                var allowLeadingWildcard = HostController.Instance.GetString("Search_AllowLeadingWildcard", "N") == "Y" || searchQuery.AllowLeadingWildcard;
-					var keywords = SearchHelper.Instance.RephraseSearchText(searchQuery.KeyWords, searchQuery.WildCardSearch, allowLeadingWildcard);
+                    var allowLeadingWildcard = HostController.Instance.GetString("Search_AllowLeadingWildcard", "N") == "Y" || searchQuery.AllowLeadingWildcard;
+                    var keywords = SearchHelper.Instance.RephraseSearchText(searchQuery.KeyWords, searchQuery.WildCardSearch, allowLeadingWildcard);
                     // don't use stemming analyzer for exact matches or non-analyzed fields (e.g. Tags)
                     var analyzer = LuceneController.Instance.GetCustomAnalyzer() ?? new SearchQueryAnalyzer(true);
                     var nonStemmerAnalyzer = new SearchQueryAnalyzer(false);
@@ -106,7 +106,7 @@ namespace DotNetNuke.Services.Search.Controllers
                     {
                         var parserContent = new QueryParser(Constants.LuceneVersion, fieldToSearch,
                             fieldToSearch == Constants.Tag ? nonStemmerAnalyzer : analyzer);
-						parserContent.AllowLeadingWildcard = allowLeadingWildcard;
+                        parserContent.AllowLeadingWildcard = allowLeadingWildcard;
                         var parsedQueryContent = parserContent.Parse(keywords);
                         keywordQuery.Add(parsedQueryContent, Occur.SHOULD);
                     }
@@ -124,7 +124,7 @@ namespace DotNetNuke.Services.Search.Controllers
             var portalIdQuery = new BooleanQuery();
             foreach (var portalId in searchQuery.PortalIds)
             {
-                portalIdQuery.Add(NumericRangeQuery.NewIntRange(Constants.PortalIdTag, portalId, portalId, true, true), Occur.SHOULD);                
+                portalIdQuery.Add(NumericRangeQuery.NewIntRange(Constants.PortalIdTag, portalId, portalId, true, true), Occur.SHOULD);
             }
             if (searchQuery.PortalIds.Any()) query.Add(portalIdQuery, Occur.MUST);
 
@@ -136,7 +136,7 @@ namespace DotNetNuke.Services.Search.Controllers
             }
 
             if(searchQuery.RoleId > 0)
-                query.Add(NumericRangeQuery.NewIntRange(Constants.RoleIdTag, searchQuery.RoleId, searchQuery.RoleId, true, true), Occur.MUST);  
+                query.Add(NumericRangeQuery.NewIntRange(Constants.RoleIdTag, searchQuery.RoleId, searchQuery.RoleId, true, true), Occur.MUST);
 
             foreach (var tag in searchQuery.Tags)
             {
@@ -156,7 +156,7 @@ namespace DotNetNuke.Services.Search.Controllers
 
             foreach (var kvp in searchQuery.NumericKeys)
             {
-                query.Add(NumericRangeQuery.NewIntRange(Constants.NumericKeyPrefixTag + kvp.Key, kvp.Value, kvp.Value, true, true), Occur.MUST); 
+                query.Add(NumericRangeQuery.NewIntRange(Constants.NumericKeyPrefixTag + kvp.Key, kvp.Value, kvp.Value, true, true), Occur.MUST);
             }
 
             if (!string.IsNullOrEmpty(searchQuery.CultureCode))
@@ -252,16 +252,16 @@ namespace DotNetNuke.Services.Search.Controllers
                 {
                     if (searchTypeId == _moduleSearchTypeId)
                     {
-			foreach (var moduleDefId in searchQuery.ModuleDefIds.OrderBy(id => id))
+            foreach (var moduleDefId in searchQuery.ModuleDefIds.OrderBy(id => id))
                         {
                             searchTypeIdQuery.Add(NumericRangeQuery.NewIntRange(Constants.ModuleDefIdTag, moduleDefId, moduleDefId, true, true), Occur.SHOULD);
                         }
                         if (!searchQuery.ModuleDefIds.Any())
-                            searchTypeIdQuery.Add(NumericRangeQuery.NewIntRange(Constants.SearchTypeTag, searchTypeId, searchTypeId, true, true), Occur.SHOULD);  
+                            searchTypeIdQuery.Add(NumericRangeQuery.NewIntRange(Constants.SearchTypeTag, searchTypeId, searchTypeId, true, true), Occur.SHOULD);
                     }
                     else
                     {
-                        searchTypeIdQuery.Add(NumericRangeQuery.NewIntRange(Constants.SearchTypeTag, searchTypeId, searchTypeId, true, true), Occur.SHOULD);       
+                        searchTypeIdQuery.Add(NumericRangeQuery.NewIntRange(Constants.SearchTypeTag, searchTypeId, searchTypeId, true, true), Occur.SHOULD);
                     }
                 }
                 query.Add(searchTypeIdQuery, Occur.MUST);
@@ -274,7 +274,7 @@ namespace DotNetNuke.Services.Search.Controllers
             var doc = luceneResult.Document;
             result.DisplayScore = luceneResult.DisplayScore;
             result.Score = luceneResult.Score;
-            
+
             // set culture code of result
             result.CultureCode = string.Empty;
             var localeField = luceneResult.Document.GetField(Constants.LocaleTag);
@@ -391,7 +391,7 @@ namespace DotNetNuke.Services.Search.Controllers
             if (!string.IsNullOrEmpty(luceneResult.ContentSnippet)) sb.Append(luceneResult.ContentSnippet + "...");
 
             var snippet = sb.ToString();
-           if (string.IsNullOrEmpty(snippet)) snippet = searchResult.Title;
+            if (string.IsNullOrEmpty(snippet)) snippet = searchResult.Title;
 
             return snippet;
         }
@@ -424,7 +424,7 @@ namespace DotNetNuke.Services.Search.Controllers
 
             return resultControllers;
         }
-        
+
         private Tuple<int, IList<SearchResult>> GetSecurityTrimmedResults(SearchQuery searchQuery, LuceneQuery luceneQuery)
         {
             var results = new List<SearchResult>();
@@ -459,7 +459,7 @@ namespace DotNetNuke.Services.Search.Controllers
 
             return new Tuple<int, IList<SearchResult>>(totalHits, results);
         }
-        
+
         private bool HasPermissionToViewDoc(Document document, SearchQuery searchQuery)
         {
             // others LuceneResult fields are not impotrant at this moment

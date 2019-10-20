@@ -12,13 +12,13 @@
   </Target>
   <Target Name="GetFiles">
     <ItemGroup>
-      <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
-      <SourceFiles Include="*.ascx;*.xslt;" />
-      <ResourceFiles Include="App_LocalResources/*.resx" />
-      <DNNMenuFiles Include="DNNMenu/*.*" />
-      <DumpXMLFiles Include="DumpXML/*.*" />
-      <JsFiles Include="js/*.*" />
-      <Resources Include="@(TextFiles);@(SourceFiles);@(ResourceFiles);@(DNNMenuFiles);@(DumpXMLFiles);@(JsFiles);" />
+    <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
+    <SourceFiles Include="*.ascx;*.xslt;" />
+    <ResourceFiles Include="App_LocalResources/*.resx" />
+    <DNNMenuFiles Include="DNNMenu/*.*" />
+    <DumpXMLFiles Include="DumpXML/*.*" />
+    <JsFiles Include="js/*.*" />
+    <Resources Include="@(TextFiles);@(SourceFiles);@(ResourceFiles);@(DNNMenuFiles);@(DumpXMLFiles);@(JsFiles);" />
     </ItemGroup>
   </Target>
   <Target Name="CopyBin">

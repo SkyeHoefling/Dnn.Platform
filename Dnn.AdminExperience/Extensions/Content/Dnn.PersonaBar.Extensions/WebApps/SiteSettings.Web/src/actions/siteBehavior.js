@@ -627,7 +627,7 @@ const siteBehaviorActions = {
                 dispatch({
                     type: ActionTypes.UPDATED_SITESETTINGS_LIST_ENTRY,
                     data: {
-                        
+
                     }
                 });
                 if (callback) {
@@ -646,7 +646,7 @@ const siteBehaviorActions = {
                 dispatch({
                     type: ActionTypes.DELETED_SITESETTINGS_LIST_ENTRY,
                     data: {
-                        
+
                     }
                 });
                 if (callback) {

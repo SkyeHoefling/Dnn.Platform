@@ -12,7 +12,7 @@
 /*************************/
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}GetSkins]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetSkins]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetSkins]
 GO
 
 CREATE procedure {databaseOwner}[{objectQualifier}GetSkins]
@@ -38,26 +38,26 @@ create procedure {databaseOwner}{objectQualifier}GetBanner
 as
 
 select B.BannerId,
-       B.VendorId,
-       'ImageFile' = case when F.FileName is null then B.ImageFile else F.Folder + F.FileName end,
-       B.BannerName,
-       B.Impressions,
-       B.CPM,
-       B.Views,
-       B.ClickThroughs,
-       B.StartDate,
-       B.EndDate,
-       'CreatedByUser' = U.FirstName + ' ' + U.LastName,
-       B.CreatedDate,
-       B.BannerTypeId,
-       B.Description,
-       B.GroupName,
-       B.Criteria,
-       B.URL,        
-       B.Width,
-       B.Height
-from   {databaseOwner}{objectQualifier}Banners B 
-inner join {databaseOwner}{objectQualifier}Vendors V ON B.VendorId = V.VendorId 
+        B.VendorId,
+        'ImageFile' = case when F.FileName is null then B.ImageFile else F.Folder + F.FileName end,
+        B.BannerName,
+        B.Impressions,
+        B.CPM,
+        B.Views,
+        B.ClickThroughs,
+        B.StartDate,
+        B.EndDate,
+        'CreatedByUser' = U.FirstName + ' ' + U.LastName,
+        B.CreatedDate,
+        B.BannerTypeId,
+        B.Description,
+        B.GroupName,
+        B.Criteria,
+        B.URL,
+        B.Width,
+        B.Height
+from   {databaseOwner}{objectQualifier}Banners B
+inner join {databaseOwner}{objectQualifier}Vendors V ON B.VendorId = V.VendorId
 left outer join {databaseOwner}{objectQualifier}Users U ON B.CreatedByUser = U.UserID
 left outer join {databaseOwner}{objectQualifier}Files F on B.ImageFile = 'FileId=' + convert(varchar,F.FileID)
 where  B.BannerId = @BannerId
@@ -74,10 +74,10 @@ GO
 
 
 CREATE NONCLUSTERED INDEX IX_{objectQualifier}ScheduleHistory_NextStart ON {databaseOwner}{objectQualifier}ScheduleHistory
-	(
-	ScheduleID,
-	NextStart
-	) ON [PRIMARY]
+    (
+    ScheduleID,
+    NextStart
+    ) ON [PRIMARY]
 GO
 
 DROP PROCEDURE {databaseOwner}{objectQualifier}GetSchedule
@@ -89,19 +89,19 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}GetSchedule
 
 AS
 
-SELECT S.ScheduleID, 
-       S.TypeFullName, 
-       S.TimeLapse, 
-       S.TimeLapseMeasurement,  
-       S.RetryTimeLapse, 
-       S.RetryTimeLapseMeasurement, 
-       S.ObjectDependencies, 
-       S.AttachToEvent, 
-       S.RetainHistoryNum, 
-       S.CatchUpEnabled, 
-       S.Enabled, 
-       SH.NextStart, 
-       S.Servers
+SELECT S.ScheduleID,
+        S.TypeFullName,
+        S.TimeLapse,
+        S.TimeLapseMeasurement,
+        S.RetryTimeLapse,
+        S.RetryTimeLapseMeasurement,
+        S.ObjectDependencies,
+        S.AttachToEvent,
+        S.RetainHistoryNum,
+        S.CatchUpEnabled,
+        S.Enabled,
+        SH.NextStart,
+        S.Servers
 FROM {databaseOwner}{objectQualifier}Schedule S
 LEFT JOIN {databaseOwner}{objectQualifier}ScheduleHistory SH ON S.ScheduleID = SH.ScheduleID
 WHERE (SH.ScheduleHistoryID = (SELECT TOP 1 S1.ScheduleHistoryID FROM {objectQualifier}ScheduleHistory S1 WHERE S1.ScheduleID = S.ScheduleID ORDER BY S1.NextStart DESC) OR SH.ScheduleHistoryID IS NULL)
@@ -119,21 +119,21 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}GetScheduleNextTask
 
 AS
 
-SELECT TOP 1 S.ScheduleID, 
-       S.TypeFullName, 
-       S.TimeLapse, 
-       S.TimeLapseMeasurement,  
-       S.RetryTimeLapse, 
-       S.RetryTimeLapseMeasurement, 
-       S.ObjectDependencies, 
-       S.AttachToEvent, 
-       S.RetainHistoryNum, 
-       S.CatchUpEnabled, 
-       S.Enabled, 
-       SH.NextStart
+SELECT TOP 1 S.ScheduleID,
+        S.TypeFullName,
+        S.TimeLapse,
+        S.TimeLapseMeasurement,
+        S.RetryTimeLapse,
+        S.RetryTimeLapseMeasurement,
+        S.ObjectDependencies,
+        S.AttachToEvent,
+        S.RetainHistoryNum,
+        S.CatchUpEnabled,
+        S.Enabled,
+        SH.NextStart
 FROM {databaseOwner}{objectQualifier}Schedule S
 LEFT JOIN {databaseOwner}{objectQualifier}ScheduleHistory SH ON S.ScheduleID = SH.ScheduleID
-WHERE ((SH.ScheduleHistoryID = (SELECT TOP 1 S1.ScheduleHistoryID FROM {objectQualifier}ScheduleHistory S1 WHERE S1.ScheduleID = S.ScheduleID ORDER BY S1.NextStart DESC) OR SH.ScheduleHistoryID IS NULL) AND S.Enabled = 1) 
+WHERE ((SH.ScheduleHistoryID = (SELECT TOP 1 S1.ScheduleHistoryID FROM {objectQualifier}ScheduleHistory S1 WHERE S1.ScheduleID = S.ScheduleID ORDER BY S1.NextStart DESC) OR SH.ScheduleHistoryID IS NULL) AND S.Enabled = 1)
 AND (S.Servers LIKE ',%' + @Server + '%,' or S.Servers IS NULL)
 GROUP BY S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement, S.RetryTimeLapse, S.RetryTimeLapseMeasurement, S.ObjectDependencies, S.AttachToEvent, S.RetainHistoryNum, S.CatchUpEnabled, S.Enabled, SH.NextStart
 ORDER BY SH.NextStart ASC
@@ -141,10 +141,10 @@ ORDER BY SH.NextStart ASC
 GO
 
 CREATE NONCLUSTERED INDEX IX_{objectQualifier}ScheduleHistory_StartDate ON {databaseOwner}{objectQualifier}ScheduleHistory
-	(
-	ScheduleID,
-	StartDate
-	) ON [PRIMARY]
+    (
+    ScheduleID,
+    StartDate
+    ) ON [PRIMARY]
 GO
 
 DROP PROCEDURE {databaseOwner}{objectQualifier}PurgeScheduleHistory
@@ -157,7 +157,7 @@ AS
 DELETE FROM {databaseOwner}{objectQualifier}ScheduleHistory
 FROM {databaseOwner}{objectQualifier}Schedule s
 WHERE (
-  SELECT COUNT(*) 
+  SELECT COUNT(*)
   FROM {databaseOwner}{objectQualifier}ScheduleHistory sh
   WHERE sh.ScheduleID = {objectQualifier}ScheduleHistory.ScheduleID
   AND sh.StartDate >= {objectQualifier}ScheduleHistory.StartDate

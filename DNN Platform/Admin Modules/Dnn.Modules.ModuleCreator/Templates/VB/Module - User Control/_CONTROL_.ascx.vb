@@ -1,9 +1,9 @@
 #Region "Copyright"
 
-' 
+'
 ' Copyright (c) _YEAR_
 ' by _OWNER_
-' 
+'
 
 #End Region
 

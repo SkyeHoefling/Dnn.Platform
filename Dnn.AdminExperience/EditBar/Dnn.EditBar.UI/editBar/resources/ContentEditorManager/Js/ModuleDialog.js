@@ -111,9 +111,9 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
         },
 
         addPage: function (id, content) {
-			if ($('#' + id).length) {
-				return;
-			}
+            if ($('#' + id).length) {
+                return;
+            }
 
             var pageContainer = this._dialogLayout.find('.dnnPageContainer');
             var newPage = $('<div class="dnnPage ' + id + '" id="' + id + '"></div>');
@@ -212,10 +212,10 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
             this.showProgressBar();
 
             this._getService().request('AddModule', 'POST', params, function (data) {
-				if (callbackBeforeRefresh && typeof callback === "function") {
-					callback.call(handler.getModuleManager().getPane(), [data.TabModuleID]);
-					callback = null;
-				}
+                if (callbackBeforeRefresh && typeof callback === "function") {
+                    callback.call(handler.getModuleManager().getPane(), [data.TabModuleID]);
+                    callback = null;
+                }
 
                 handler._addModuleComplete(data, callback);
             });
@@ -239,31 +239,31 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
             return dnn.getVar("sf_siteRoot", "/").replace(/\/$/, "");
         },
 
-		showProgressBar: function() {
-			var $progressBar = this._dialogLayout.find('.dnnProgressBar');
-			var $bar = $progressBar.find('> span');
-			$bar.width(0);
-			$progressBar.show();
-			$bar.animate({
-				width: $progressBar.width() * 0.8
-			}, 5000);
-		},
+        showProgressBar: function() {
+            var $progressBar = this._dialogLayout.find('.dnnProgressBar');
+            var $bar = $progressBar.find('> span');
+            $bar.width(0);
+            $progressBar.show();
+            $bar.animate({
+                width: $progressBar.width() * 0.8
+            }, 5000);
+        },
 
-		hideProgressBar: function() {
-			var $progressBar = this._dialogLayout.find('.dnnProgressBar');
-			var $bar = $progressBar.find('> span');
-			$bar.stop().width($progressBar.width());
-			$progressBar.hide();
-		},
+        hideProgressBar: function() {
+            var $progressBar = this._dialogLayout.find('.dnnProgressBar');
+            var $bar = $progressBar.find('> span');
+            $bar.stop().width($progressBar.width());
+            $progressBar.hide();
+        },
 
-		_refreshComplete: function (sender, args) {
-			this.hideProgressBar();
+        _refreshComplete: function (sender, args) {
+            this.hideProgressBar();
             Sys.WebForms.PageRequestManager.getInstance().remove_endRequest(this._refreshCompleteHandler);
 
-			if (args.get_error() != undefined){
-				args.set_errorHandled(true);
-				location.reload();
-			}
+            if (args.get_error() != undefined){
+                args.set_errorHandled(true);
+                location.reload();
+            }
 
             var handler = this;
             var moduleManager = this.getModuleManager();
@@ -310,14 +310,14 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
                         return window.eval.call(window, script);
                     })();
                 }
-		        else if (window.execScript) {
-			        return window.execScript(script);
-		        } else {
+                else if (window.execScript) {
+                    return window.execScript(script);
+                } else {
                     return null;
                 }
-	        } catch (ex) {
-		        return null;
-	        }
+            } catch (ex) {
+                return null;
+            }
         },
 
         _calcPosition: function (handler) {
@@ -349,7 +349,7 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
                             '</div>' +
                         '</div>' +
                     '</div>' +
-					'<div class="dnnProgressBar"><span /></div>' +
+                    '<div class="dnnProgressBar"><span /></div>' +
                 '</div>');
 
             return layout;
@@ -513,35 +513,35 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
             }
             if (data.length > 0) {
                 //render rearranged list
-				for (var i = 0; i < data.length; i++) {
-				    var itemData = data[i];
-				    if (list === 'listAll' && listMode === 'category' && this._isRecommendModule(itemData)) {
+                for (var i = 0; i < data.length; i++) {
+                    var itemData = data[i];
+                    if (list === 'listAll' && listMode === 'category' && this._isRecommendModule(itemData)) {
                         continue;
                     }
 
-					var $item = $(this._renderItem(itemData));
-					container.append($item);
-					this._injectModuleScript($item, itemData);
-				}
+                    var $item = $(this._renderItem(itemData));
+                    container.append($item);
+                    this._injectModuleScript($item, itemData);
+                }
 
-				if (list === "listAll") {
-				    if (data.length < this._pageSize) {
-				        this._loadMore = false;
-				    } else {
-				        this._startIndex += data.length;
-				    }
+                if (list === "listAll") {
+                    if (data.length < this._pageSize) {
+                        this._loadMore = false;
+                    } else {
+                        this._startIndex += data.length;
+                    }
 
-				    if (!htmlModuleId) {
-				        for (var i = 0; i < data.length; i++) {
-				            if (data[i].ModuleName === htmlModuleName) {
-				                htmlModuleId = data[i].ModuleID;
-				            }
-				        }
-				    }
-				    if (htmlModuleId > -1) {
-				        var $htmlItem = this._dialogLayout.find('.dnnModuleItem[data-moduleid="' + htmlModuleId + '"]');
-				        $htmlItem.parent().prepend($htmlItem);
-				    }
+                    if (!htmlModuleId) {
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].ModuleName === htmlModuleName) {
+                                htmlModuleId = data[i].ModuleID;
+                            }
+                        }
+                    }
+                    if (htmlModuleId > -1) {
+                        var $htmlItem = this._dialogLayout.find('.dnnModuleItem[data-moduleid="' + htmlModuleId + '"]');
+                        $htmlItem.parent().prepend($htmlItem);
+                    }
 
                     this._dialogLayout.trigger('moduleloaded');
 
@@ -662,26 +662,26 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
 
         _injectModuleScript: function (item, data) {
             if (data.ModuleID == -1) return;
-	        var handler = this;
-			this._getEditorService().request('LoadModuleScript', 'GET', {
-				desktopModuleId: data.ModuleID
-			}, function (returnData) {
-				if (returnData.Script) {
-					var model = handler._executeScript(returnData.Script);
-					if (model && model.addModuleHandler && typeof model.addModuleHandler === "function") {
-						model.addModuleHandler.call(window, data.ModuleID, data.ModuleName);
-					}
-				}
+            var handler = this;
+            this._getEditorService().request('LoadModuleScript', 'GET', {
+                desktopModuleId: data.ModuleID
+            }, function (returnData) {
+                if (returnData.Script) {
+                    var model = handler._executeScript(returnData.Script);
+                    if (model && model.addModuleHandler && typeof model.addModuleHandler === "function") {
+                        model.addModuleHandler.call(window, data.ModuleID, data.ModuleName);
+                    }
+                }
 
-				if (returnData.StyleFile) {
-					$(document.body).append('<link href="' + returnData.StyleFile + '" type="text/css" rel="stylesheet" />');
-				}
+                if (returnData.StyleFile) {
+                    $(document.body).append('<link href="' + returnData.StyleFile + '" type="text/css" rel="stylesheet" />');
+                }
 
-				item.data('modulejs', true);
-			}, function() {
-				item.data('modulejs', true);
-			});
-		},
+                item.data('modulejs', true);
+            }, function() {
+                item.data('modulejs', true);
+            });
+        },
 
         _initScrollView: function () {
             var container = this._dialogLayout.find(".dnnModuleList");
@@ -776,16 +776,16 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
         },
 
         _doAddModule: function (e) {
-        	var $item = $(e.target);
-	        $item = $item.hasClass('dnnModuleItem') ? $item : $item.parents('.dnnModuleItem');
-	        var handler = this;
-			if (!$item.data('modulejs')) {
-				setTimeout(function() {
-					handler._doAddModule(e);
-				}, 500);
+            var $item = $(e.target);
+            $item = $item.hasClass('dnnModuleItem') ? $item : $item.parents('.dnnModuleItem');
+            var handler = this;
+            if (!$item.data('modulejs')) {
+                setTimeout(function() {
+                    handler._doAddModule(e);
+                }, 500);
 
-				return false;
-			}
+                return false;
+            }
 
             var moduleId = $item.data("moduleid");
             if (!moduleId || moduleId == -1) {
@@ -1007,10 +1007,10 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
             var newModule = $('div.DnnModule-' + moduleId);
 
             if (!this._noFloat) {
-	            setTimeout(function() {
-					handler._processModuleForDrag(newModule);
-	            }, 150);
-                
+                setTimeout(function() {
+                    handler._processModuleForDrag(newModule);
+                }, 150);
+
             } else {
                 //animate the new module
                 newModule.addClass('highlight');
@@ -1051,10 +1051,10 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
                 handler._noFloat = false;
                 handler._removeCookie('noFloat');
 
-				if (dnn
-	                && dnn.ContentEditorManager
-	                && typeof dnn.ContentEditorManager.catchSortEvents === "function") {
-	                dnn.ContentEditorManager.catchSortEvents();
+                if (dnn
+                    && dnn.ContentEditorManager
+                    && typeof dnn.ContentEditorManager.catchSortEvents === "function") {
+                    dnn.ContentEditorManager.catchSortEvents();
                 }
             }, 250);
 

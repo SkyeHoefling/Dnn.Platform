@@ -137,17 +137,17 @@ namespace DotNetNuke.Providers.AspNetClientCapabilityProvider
             get
             {
                 return _dummyProperies ??
-                       (_dummyProperies = new Dictionary<string, string>
-                       {
-                           {"Id", "UNKNOWN"},
-                           {"IsMobile", "false"},
-                           {"ScreenPixelsWidth", "600"},
-                           {"ScreenPixelsHeight", "800"},
-                           {"IsTablet", "false"},
-                           {"HasTouchScreen", "false"},
-                           {"BrowserName", "???"},
-                           {"SupportsFlash", "false"},
-                       });
+                        (_dummyProperies = new Dictionary<string, string>
+                        {
+                            {"Id", "UNKNOWN"},
+                            {"IsMobile", "false"},
+                            {"ScreenPixelsWidth", "600"},
+                            {"ScreenPixelsHeight", "800"},
+                            {"IsTablet", "false"},
+                            {"HasTouchScreen", "false"},
+                            {"BrowserName", "???"},
+                            {"SupportsFlash", "false"},
+                        });
             }
         }
 

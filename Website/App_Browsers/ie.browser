@@ -142,7 +142,7 @@
         </identification>
         <controlAdapters>
             <adapter controlType="System.Web.UI.WebControls.Menu"
-                     adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
+                    adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
         </controlAdapters>
     </browser>
 
@@ -160,10 +160,10 @@
         <identification>
             <capability name="platform" match="(MacPPC|Mac68K)" />
         </identification>
-    
+
         <controlAdapters>
             <adapter controlType="System.Web.UI.WebControls.Menu"
-                     adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
+                    adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
         </controlAdapters>
     </browser>
 
@@ -194,10 +194,10 @@
             <capability name="tagwriter"           value="System.Web.UI.HtmlTextWriter" />
             <capability name="vbscript"            value="true" />
         </capabilities>
-    
+
         <controlAdapters>
             <adapter controlType="System.Web.UI.WebControls.Menu"
-                     adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
+                    adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
         </controlAdapters>
     </browser>
 
@@ -226,7 +226,7 @@
 
         <controlAdapters>
             <adapter controlType="System.Web.UI.WebControls.Menu"
-                     adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
+                    adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
         </controlAdapters>
     </browser>
 
@@ -312,10 +312,10 @@
             <capability name="cookies"             value="true" />
             <capability name="tables"              value="true" />
         </capabilities>
-    
+
         <controlAdapters>
             <adapter controlType="System.Web.UI.WebControls.Menu"
-                     adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
+                    adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
         </controlAdapters>
     </browser>
 
@@ -331,10 +331,10 @@
             <capability name="cookies" value="true" />
             <capability name="tables"  value="true" />
         </capabilities>
-    
+
         <controlAdapters>
             <adapter controlType="System.Web.UI.WebControls.Menu"
-                     adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
+                    adapterType="System.Web.UI.WebControls.Adapters.MenuAdapter" />
         </controlAdapters>
     </browser>
 

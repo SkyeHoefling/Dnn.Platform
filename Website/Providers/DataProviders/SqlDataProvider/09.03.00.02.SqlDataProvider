@@ -13,7 +13,7 @@ DROP PROCEDURE {databaseOwner}{objectQualifier}aspnet_Membership_UnlockUser
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}aspnet_Membership_UnlockUser
-	@ApplicationName                         nvarchar(256),
+    @ApplicationName                         nvarchar(256),
     @UserName                                nvarchar(256)
 AS
 BEGIN
@@ -34,14 +34,14 @@ BEGIN
         FailedPasswordAttemptCount = 0,
         FailedPasswordAttemptWindowStart = CONVERT( datetime, '17540101', 112 ),
         FailedPasswordAnswerAttemptCount = 0,
-        FailedPasswordAnswerAttemptWindowStart = CONVERT( datetime, '17540101', 112 )		
-		-- Removed to ensure lockout date is preserved
-		-- , LastLockoutDate = CONVERT( datetime, '17540101', 112 )
+        FailedPasswordAnswerAttemptWindowStart = CONVERT( datetime, '17540101', 112 )
+        -- Removed to ensure lockout date is preserved
+        -- , LastLockoutDate = CONVERT( datetime, '17540101', 112 )
     WHERE @UserId = UserId
 
     RETURN 0
 
-	END
+    END
 GO
 
 /************************************************************/

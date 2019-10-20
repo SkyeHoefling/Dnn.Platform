@@ -86,8 +86,8 @@
     <div class="container">
         <main role="main">
             <div class="row dnnpane">
-                <div id="HeaderPane" class="col-md-12 headerPane" runat="server"></div> 
-            </div>   
+                <div id="HeaderPane" class="col-md-12 headerPane" runat="server"></div>
+            </div>
             <div id="mainContent-inner">
                 <div class="row dnnpane">
                     <div id="ContentPane" class="col-md-12 contentPane" runat="server"></div>
@@ -142,7 +142,7 @@
                             <dnn:LINKTOMOBILE ID="dnnLinkToMobile" runat="server" />
                             <dnn:TERMS ID="dnnTerms" runat="server" />
                             |
-					        <dnn:PRIVACY ID="dnnPrivacy" runat="server" />
+                            <dnn:PRIVACY ID="dnnPrivacy" runat="server" />
                         </div>
                     </div>
                 </div>

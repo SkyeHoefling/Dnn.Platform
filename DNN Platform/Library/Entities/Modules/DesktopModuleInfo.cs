@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke� - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -179,7 +179,7 @@ namespace DotNetNuke.Entities.Modules
             Shareable = ModuleSharing.Unknown;
         }
 
-		#region "Public Properties"
+        #region "Public Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -216,13 +216,13 @@ namespace DotNetNuke.Entities.Modules
             {
                 Term term = (from Term t in Terms select t).FirstOrDefault();
                 return (term != null) ? term.Name : String.Empty;
-            } 
+            }
             set
             {
                 Terms.Clear();
                 ITermController termController = Util.GetTermController();
-                var term = (from Term t in termController.GetTermsByVocabulary("Module_Categories") 
-                            where t.Name == value 
+                var term = (from Term t in termController.GetTermsByVocabulary("Module_Categories")
+                            where t.Name == value
                             select t)
                             .FirstOrDefault();
                 if (term != null)
@@ -362,7 +362,7 @@ namespace DotNetNuke.Entities.Modules
         public ModuleSharing Shareable
         {
             get;
-            set; 
+            set;
         }
 
         /// -----------------------------------------------------------------------------
@@ -449,11 +449,11 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-		#endregion
+        #endregion
 
-		#region IHydratable Members
+        #region IHydratable Members
 
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         /// Fills a DesktopModuleInfo from a Data Reader
         /// </summary>
@@ -476,7 +476,7 @@ namespace DotNetNuke.Entities.Modules
             CompatibleVersions = Null.SetNullString(dr["CompatibleVersions"]);
             Dependencies = Null.SetNullString(dr["Dependencies"]);
             Permissions = Null.SetNullString(dr["Permissions"]);
-		    Shareable = (ModuleSharing)Null.SetNullInteger(dr["Shareable"]);
+            Shareable = (ModuleSharing)Null.SetNullInteger(dr["Shareable"]);
             AdminPage = Null.SetNullString(dr["AdminPage"]);
             HostPage = Null.SetNullString(dr["HostPage"]);
             //Call the base classes fill method to populate base class proeprties
@@ -583,7 +583,7 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         /// Writes a DesktopModuleInfo to an XmlWriter
         /// </summary>
@@ -603,7 +603,7 @@ namespace DotNetNuke.Entities.Modules
             {
                 writer.WriteElementString("codeSubDirectory", CodeSubDirectory);
             }
-			
+
             //Write out Supported Features
             writer.WriteStartElement("supportedFeatures");
             if (IsPortable)
@@ -668,7 +668,7 @@ namespace DotNetNuke.Entities.Modules
 
         #endregion
 
-		#region "Private Helper Methods"
+        #region "Private Helper Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -678,7 +678,7 @@ namespace DotNetNuke.Entities.Modules
         /// -----------------------------------------------------------------------------
         private void ClearFeature(DesktopModuleSupportedFeature feature)
         {
-			//And with the 1's complement of Feature to Clear the Feature flag
+            //And with the 1's complement of Feature to Clear the Feature flag
             SupportedFeatures = SupportedFeatures & ~((int) feature);
         }
 
@@ -793,16 +793,16 @@ namespace DotNetNuke.Entities.Modules
             {
                 reader.ReadStartElement("moduleDefinition");
 
-				//Create new ModuleDefinition object
+                //Create new ModuleDefinition object
                 var moduleDefinition = new ModuleDefinitionInfo();
 
-				//Load it from the Xml
+                //Load it from the Xml
                 moduleDefinition.ReadXml(reader);
 
-				//Add to the collection
+                //Add to the collection
                 ModuleDefinitions.Add(moduleDefinition.FriendlyName, moduleDefinition);
             } while (reader.ReadToNextSibling("moduleDefinition"));
-		}
+        }
 
         private void ReadPageInfo(XmlReader reader)
         {
@@ -821,6 +821,6 @@ namespace DotNetNuke.Entities.Modules
             }
         }
 
-		#endregion
-	}
+        #endregion
+    }
 }

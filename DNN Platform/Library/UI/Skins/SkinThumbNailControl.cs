@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -46,15 +46,15 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public abstract class SkinThumbNailControl : UserControlBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinThumbNailControl));
-		#region "Private Members"
-		
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinThumbNailControl));
+        #region "Private Members"
+
         protected HtmlGenericControl ControlContainer;
         protected RadioButtonList OptSkin;
-		
-		#endregion
 
-		#region "Properties"
+        #endregion
+
+        #region "Properties"
 
         public string Border
         {
@@ -127,7 +127,7 @@ namespace DotNetNuke.UI.Skins
             }
             set
             {
-				//select current skin
+                //select current skin
                 int intIndex;
                 for (intIndex = 0; intIndex <= OptSkin.Items.Count - 1; intIndex++)
                 {
@@ -155,10 +155,10 @@ namespace DotNetNuke.UI.Skins
                 }
             }
         }
-		
-		#endregion
 
-		#region "Private Methods"
+        #endregion
+
+        #region "Private Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -213,8 +213,8 @@ namespace DotNetNuke.UI.Skins
             {
                 return strSkinFile;
             }
-			
-			//portal folder
+
+            //portal folder
             switch (strSkinFile.ToLowerInvariant())
             {
                 case "skin":
@@ -252,63 +252,63 @@ namespace DotNetNuke.UI.Skins
             }
             if (blnCreate)
             {
-                const int intSize = 140; //size of the thumbnail 
+                const int intSize = 140; //size of the thumbnail
                 Image objImage;
                 try
                 {
                     objImage = Image.FromFile(strImage);
-					
-					//scale the image to prevent distortion
+
+                    //scale the image to prevent distortion
                     int intWidth;
                     int intHeight;
                     double dblScale;
                     if (objImage.Height > objImage.Width)
                     {
-						//The height was larger, so scale the width 
+                        //The height was larger, so scale the width
                         dblScale = (double)intSize / objImage.Height;
                         intHeight = intSize;
                         intWidth = Convert.ToInt32(objImage.Width*dblScale);
                     }
                     else
                     {
-						//The width was larger, so scale the height 
+                        //The width was larger, so scale the height
                         dblScale = (double)intSize / objImage.Width;
                         intWidth = intSize;
                         intHeight = Convert.ToInt32(objImage.Height*dblScale);
                     }
-                    
-					//create the thumbnail image
-					var objThumbnail = objImage.GetThumbnailImage(intWidth, intHeight, null, IntPtr.Zero);
-                    
-					//delete the old file ( if it exists )
-					if (File.Exists(strThumbnail))
+
+                    //create the thumbnail image
+                    var objThumbnail = objImage.GetThumbnailImage(intWidth, intHeight, null, IntPtr.Zero);
+
+                    //delete the old file ( if it exists )
+                    if (File.Exists(strThumbnail))
                     {
                         File.Delete(strThumbnail);
                     }
-                    
-					//save the thumbnail image 
-					objThumbnail.Save(strThumbnail, objImage.RawFormat);
-                    
-					//set the file attributes
-					File.SetAttributes(strThumbnail, FileAttributes.Normal);
+
+                    //save the thumbnail image
+                    objThumbnail.Save(strThumbnail, objImage.RawFormat);
+
+                    //set the file attributes
+                    File.SetAttributes(strThumbnail, FileAttributes.Normal);
                     File.SetLastWriteTime(strThumbnail, File.GetLastWriteTime(strImage));
 
                     //tidy up
                     objImage.Dispose();
                     objThumbnail.Dispose();
                 }
-				catch (Exception ex)
-				{
-					Logger.Error(ex);
-				}
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                }
             }
             strThumbnail = Globals.ApplicationPath + "\\" + strThumbnail.Substring(strThumbnail.IndexOf("portals\\", StringComparison.InvariantCultureIgnoreCase));
             return strThumbnail;
         }
 
-		#endregion
+        #endregion
 
-		#region "Public Methods"
+        #region "Public Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -337,7 +337,7 @@ namespace DotNetNuke.UI.Skins
             {
                 AddDefaultSkin();
             }
-			
+
             //load host skins (includeNotSpecified = false as we have already added it)
             LoadHostSkins(false);
 
@@ -361,8 +361,8 @@ namespace DotNetNuke.UI.Skins
             {
                 AddDefaultSkin();
             }
-			
-			//load host skins
+
+            //load host skins
             var strRoot = Globals.HostMapPath + SkinRoot;
             if (Directory.Exists(strRoot))
             {
@@ -392,8 +392,8 @@ namespace DotNetNuke.UI.Skins
             {
                 AddDefaultSkin();
             }
-			
-			//load portal skins
+
+            //load portal skins
             var strRoot = PortalSettings.HomeDirectoryMapPath + SkinRoot;
             if (Directory.Exists(strRoot))
             {
@@ -433,8 +433,8 @@ namespace DotNetNuke.UI.Skins
                 }
             }
         }
-		
-		#endregion
+
+        #endregion
 
     }
 }

@@ -1,9 +1,9 @@
 #region Copyright
 
-// 
+//
 // Copyright (c) _YEAR_
 // by _OWNER_
-// 
+//
 
 #endregion
 
@@ -22,4 +22,4 @@ namespace _OWNER_._MODULE_
             mapRouteManager.MapHttpRoute("_OWNER_._MODULE_", "default", "{controller}/{action}", new[] {"_OWNER_._MODULE_"});
         }
     }
-} 
+}

@@ -20,31 +20,31 @@ export default function  pageSeoReducer(state = {
     const changeField = function changeField(key, value) {
         const newEditedUrl = {
             ...state.editedUrl
-        };  
-        
+        };
+
         if (key === "statusCode") {
             newEditedUrl.statusCode = {
                 ...state.editedUrl.statusCode
             };
             newEditedUrl[key].Key = value;
             newEditedUrl[key].Value = statusCodes.filter(statusCode => statusCode.value === value)[0].label;
-        } else if (key === "siteAlias") { 
+        } else if (key === "siteAlias") {
             newEditedUrl.siteAlias = {
                 ...state.editedUrl.siteAlias
             };
             newEditedUrl[key].Key = value;
         } else {
-            if (key === "path" && 
+            if (key === "path" &&
                     (!value || !value.startsWith("/"))) {
                 value = "/" + value;
-            } else if (key === "queryString" && 
+            } else if (key === "queryString" &&
                     (!value || !value.startsWith("?"))) {
                 value = "?" + value;
             }
-            
+
             newEditedUrl[key] = value;
         }
-        
+
         return newEditedUrl;
     };
     switch (action.type) {
@@ -105,7 +105,7 @@ export default function  pageSeoReducer(state = {
             return { ...state,
                 editingUrl: false
             };
-            
+
         default:
             return state;
     }

@@ -94,62 +94,62 @@ CodeMirror.defineMode("eiffel", function() {
     if (stream.eatSpace()) return null;
     var ch = stream.next();
     if (ch == '"'||ch == "'") {
-      return chain(readQuoted(ch, "string"), stream, state);
+    return chain(readQuoted(ch, "string"), stream, state);
     } else if (ch == "-"&&stream.eat("-")) {
-      stream.skipToEnd();
-      return "comment";
+    stream.skipToEnd();
+    return "comment";
     } else if (ch == ":"&&stream.eat("=")) {
-      return "operator";
+    return "operator";
     } else if (/[0-9]/.test(ch)) {
-      stream.eatWhile(/[xXbBCc0-9\.]/);
-      stream.eat(/[\?\!]/);
-      return "ident";
+    stream.eatWhile(/[xXbBCc0-9\.]/);
+    stream.eat(/[\?\!]/);
+    return "ident";
     } else if (/[a-zA-Z_0-9]/.test(ch)) {
-      stream.eatWhile(/[a-zA-Z_0-9]/);
-      stream.eat(/[\?\!]/);
-      return "ident";
+    stream.eatWhile(/[a-zA-Z_0-9]/);
+    stream.eat(/[\?\!]/);
+    return "ident";
     } else if (/[=+\-\/*^%<>~]/.test(ch)) {
-      stream.eatWhile(/[=+\-\/*^%<>~]/);
-      return "operator";
+    stream.eatWhile(/[=+\-\/*^%<>~]/);
+    return "operator";
     } else {
-      return null;
+    return null;
     }
   }
 
   function readQuoted(quote, style,  unescaped) {
     return function(stream, state) {
-      var escaped = false, ch;
-      while ((ch = stream.next()) != null) {
+    var escaped = false, ch;
+    while ((ch = stream.next()) != null) {
         if (ch == quote && (unescaped || !escaped)) {
-          state.tokenize.pop();
-          break;
+        state.tokenize.pop();
+        break;
         }
         escaped = !escaped && ch == "%";
-      }
-      return style;
+    }
+    return style;
     };
   }
 
   return {
     startState: function() {
-      return {tokenize: [tokenBase]};
+    return {tokenize: [tokenBase]};
     },
 
     token: function(stream, state) {
-      var style = state.tokenize[state.tokenize.length-1](stream, state);
-      if (style == "ident") {
+    var style = state.tokenize[state.tokenize.length-1](stream, state);
+    if (style == "ident") {
         var word = stream.current();
         style = keywords.propertyIsEnumerable(stream.current()) ? "keyword"
-          : operators.propertyIsEnumerable(stream.current()) ? "operator"
-          : /^[A-Z][A-Z_0-9]*$/g.test(word) ? "tag"
-          : /^0[bB][0-1]+$/g.test(word) ? "number"
-          : /^0[cC][0-7]+$/g.test(word) ? "number"
-          : /^0[xX][a-fA-F0-9]+$/g.test(word) ? "number"
-          : /^([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)$/g.test(word) ? "number"
-          : /^[0-9]+$/g.test(word) ? "number"
-          : "variable";
-      }
-      return style;
+        : operators.propertyIsEnumerable(stream.current()) ? "operator"
+        : /^[A-Z][A-Z_0-9]*$/g.test(word) ? "tag"
+        : /^0[bB][0-1]+$/g.test(word) ? "number"
+        : /^0[cC][0-7]+$/g.test(word) ? "number"
+        : /^0[xX][a-fA-F0-9]+$/g.test(word) ? "number"
+        : /^([0-9]+\.[0-9]*)|([0-9]*\.[0-9]+)$/g.test(word) ? "number"
+        : /^[0-9]+$/g.test(word) ? "number"
+        : "variable";
+    }
+    return style;
     },
     lineComment: "--"
   };

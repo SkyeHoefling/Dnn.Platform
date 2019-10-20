@@ -140,9 +140,9 @@ namespace DotNetNuke.Web.Services
             {
 
                 var cacheKey = string.Format(DataCache.DesktopModuleCacheKey, portalId) + "_" +
-                               desktopModule.DesktopModuleID;
+                                desktopModule.DesktopModuleID;
                 var args = new CacheItemArgs(cacheKey, DataCache.DesktopModuleCacheTimeOut,
-                                             DataCache.DesktopModuleCachePriority, portalId, desktopModule);
+                                            DataCache.DesktopModuleCachePriority, portalId, desktopModule);
 
                 return CBO.GetCachedObject<IList<TabModule>>(args, GetTabModulesCallback);
             }
@@ -173,12 +173,12 @@ namespace DotNetNuke.Web.Services
                 tabModules.AddRange(
                     tab.ChildModules.Values.Where(
                         childModule => childModule.DesktopModuleID == desktopModule.DesktopModuleID)
-                       .Select(childModule => new TabModule
-                       {
-                           TabInfo = tab,
-                           ModuleInfo = childModule,
-                           ModuleVersion = desktopModule.Version
-                       }));
+                        .Select(childModule => new TabModule
+                        {
+                            TabInfo = tab,
+                            ModuleInfo = childModule,
+                            ModuleVersion = desktopModule.Version
+                        }));
             }
 
             return tabModules;

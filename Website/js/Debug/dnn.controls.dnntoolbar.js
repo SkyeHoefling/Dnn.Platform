@@ -230,14 +230,14 @@ dnn.controls.DNNToolBarButton.prototype =
 
     },
     /*
-    mouseOver: function () 
+    mouseOver: function ()
     {
         this.tb.show(false);
         if (this.hoverCss)
             this.ctl.className = this.css + ' ' + this.hoverCss;
     },
-    
-    mouseOut: function () 
+
+    mouseOut: function ()
     {
         this.tb.beginHide();
         if (this.hoverCss)
@@ -250,4 +250,3 @@ dnn.controls.DNNToolBarButton.prototype =
 
 }
 dnn.controls.DNNToolBarButton.registerClass('dnn.controls.DNNToolBarButton');
-

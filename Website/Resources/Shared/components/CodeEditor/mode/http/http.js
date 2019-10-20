@@ -20,13 +20,13 @@ CodeMirror.defineMode("http", function() {
 
   function start(stream, state) {
     if (stream.match(/^HTTP\/\d\.\d/)) {
-      state.cur = responseStatusCode;
-      return "keyword";
+    state.cur = responseStatusCode;
+    return "keyword";
     } else if (stream.match(/^[A-Z]+/) && /[ \t]/.test(stream.peek())) {
-      state.cur = requestPath;
-      return "keyword";
+    state.cur = requestPath;
+    return "keyword";
     } else {
-      return failFirstLine(stream, state);
+    return failFirstLine(stream, state);
     }
   }
 
@@ -37,17 +37,17 @@ CodeMirror.defineMode("http", function() {
     state.cur = responseStatusText;
     var status = Number(code[0]);
     if (status >= 100 && status < 200) {
-      return "positive informational";
+    return "positive informational";
     } else if (status >= 200 && status < 300) {
-      return "positive success";
+    return "positive success";
     } else if (status >= 300 && status < 400) {
-      return "positive redirect";
+    return "positive redirect";
     } else if (status >= 400 && status < 500) {
-      return "negative client-error";
+    return "negative client-error";
     } else if (status >= 500 && status < 600) {
-      return "negative server-error";
+    return "negative server-error";
     } else {
-      return "error";
+    return "error";
     }
   }
 
@@ -65,24 +65,24 @@ CodeMirror.defineMode("http", function() {
 
   function requestProtocol(stream, state) {
     if (stream.match(/^HTTP\/\d\.\d$/)) {
-      state.cur = header;
-      return "keyword";
+    state.cur = header;
+    return "keyword";
     } else {
-      return failFirstLine(stream, state);
+    return failFirstLine(stream, state);
     }
   }
 
   function header(stream) {
     if (stream.sol() && !stream.eat(/[ \t]/)) {
-      if (stream.match(/^.*?:/)) {
+    if (stream.match(/^.*?:/)) {
         return "atom";
-      } else {
+    } else {
         stream.skipToEnd();
         return "error";
-      }
+    }
     } else {
-      stream.skipToEnd();
-      return "string";
+    stream.skipToEnd();
+    return "string";
     }
   }
 
@@ -93,17 +93,17 @@ CodeMirror.defineMode("http", function() {
 
   return {
     token: function(stream, state) {
-      var cur = state.cur;
-      if (cur != header && cur != body && stream.eatSpace()) return null;
-      return cur(stream, state);
+    var cur = state.cur;
+    if (cur != header && cur != body && stream.eatSpace()) return null;
+    return cur(stream, state);
     },
 
     blankLine: function(state) {
-      state.cur = body;
+    state.cur = body;
     },
 
     startState: function() {
-      return {cur: start};
+    return {cur: start};
     }
   };
 });

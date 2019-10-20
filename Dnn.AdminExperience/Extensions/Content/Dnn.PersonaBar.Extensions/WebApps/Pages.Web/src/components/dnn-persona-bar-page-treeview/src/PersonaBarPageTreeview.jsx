@@ -112,7 +112,7 @@ export class PersonaBarPageTreeview extends Component {
         }
         if (item.status !== "Visible") {
             return true;
-        }  
+        }
         return false;
     }
 
@@ -120,7 +120,7 @@ export class PersonaBarPageTreeview extends Component {
         const DRAG_HOVER = item.onDragOverState === true;
         const SELECTED = item.selected === true;
         const DISABLED = this._checkItemDisabled(item);
-        
+
         if (DRAG_HOVER || SELECTED) {
             return "list-item-highlight list-item-dragover";
         } else if (DISABLED) {
@@ -142,7 +142,7 @@ export class PersonaBarPageTreeview extends Component {
             onDragOver,
             onDragEnd,
             draggedItem,
-            Localization, 
+            Localization,
             selectedPageDirty } = this.props;
 
         let index = 0;
@@ -185,9 +185,9 @@ export class PersonaBarPageTreeview extends Component {
                             <span
                                 className={`item-name ${itemNameHidden}`}
                                 onClick={() => item.canManagePage ? onSelection(item) : onNoPermissionSelection(item)}>
-                                { (item.tabId === 0) || (item.selected && selectedPageDirty) ? 
+                                { (item.tabId === 0) || (item.selected && selectedPageDirty) ?
                                     (
-                                        <SingleLineInput 
+                                        <SingleLineInput
                                             style={{ marginBottom: "0px", width:"80%", height:"100%"}}
                                             onChange={() => void(0)}
                                             value={name}/>

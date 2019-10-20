@@ -19,44 +19,44 @@
 
   CodeMirror.defineMode("cypher", function(config) {
     var tokenBase = function(stream/*, state*/) {
-      var ch = stream.next();
-      if (ch === "\"" || ch === "'") {
+    var ch = stream.next();
+    if (ch === "\"" || ch === "'") {
         stream.match(/.+?["']/);
         return "string";
-      }
-      if (/[{}\(\),\.;\[\]]/.test(ch)) {
+    }
+    if (/[{}\(\),\.;\[\]]/.test(ch)) {
         curPunc = ch;
         return "node";
-      } else if (ch === "/" && stream.eat("/")) {
+    } else if (ch === "/" && stream.eat("/")) {
         stream.skipToEnd();
         return "comment";
-      } else if (operatorChars.test(ch)) {
+    } else if (operatorChars.test(ch)) {
         stream.eatWhile(operatorChars);
         return null;
-      } else {
+    } else {
         stream.eatWhile(/[_\w\d]/);
         if (stream.eat(":")) {
-          stream.eatWhile(/[\w\d_\-]/);
-          return "atom";
+        stream.eatWhile(/[\w\d_\-]/);
+        return "atom";
         }
         var word = stream.current();
         if (funcs.test(word)) return "builtin";
         if (preds.test(word)) return "def";
         if (keywords.test(word)) return "keyword";
         return "variable";
-      }
+    }
     };
     var pushContext = function(state, type, col) {
-      return state.context = {
+    return state.context = {
         prev: state.context,
         indent: state.indent,
         col: col,
         type: type
-      };
+    };
     };
     var popContext = function(state) {
-      state.indent = state.context.indent;
-      return state.context = state.context.prev;
+    state.indent = state.context.indent;
+    return state.context = state.context.prev;
     };
     var indentUnit = config.indentUnit;
     var curPunc;
@@ -66,78 +66,78 @@
     var operatorChars = /[*+\-<>=&|~%^]/;
 
     return {
-      startState: function(/*base*/) {
+    startState: function(/*base*/) {
         return {
-          tokenize: tokenBase,
-          context: null,
-          indent: 0,
-          col: 0
+        tokenize: tokenBase,
+        context: null,
+        indent: 0,
+        col: 0
         };
-      },
-      token: function(stream, state) {
+    },
+    token: function(stream, state) {
         if (stream.sol()) {
-          if (state.context && (state.context.align == null)) {
+        if (state.context && (state.context.align == null)) {
             state.context.align = false;
-          }
-          state.indent = stream.indentation();
+        }
+        state.indent = stream.indentation();
         }
         if (stream.eatSpace()) {
-          return null;
+        return null;
         }
         var style = state.tokenize(stream, state);
         if (style !== "comment" && state.context && (state.context.align == null) && state.context.type !== "pattern") {
-          state.context.align = true;
+        state.context.align = true;
         }
         if (curPunc === "(") {
-          pushContext(state, ")", stream.column());
+        pushContext(state, ")", stream.column());
         } else if (curPunc === "[") {
-          pushContext(state, "]", stream.column());
+        pushContext(state, "]", stream.column());
         } else if (curPunc === "{") {
-          pushContext(state, "}", stream.column());
+        pushContext(state, "}", stream.column());
         } else if (/[\]\}\)]/.test(curPunc)) {
-          while (state.context && state.context.type === "pattern") {
+        while (state.context && state.context.type === "pattern") {
             popContext(state);
-          }
-          if (state.context && curPunc === state.context.type) {
+        }
+        if (state.context && curPunc === state.context.type) {
             popContext(state);
-          }
+        }
         } else if (curPunc === "." && state.context && state.context.type === "pattern") {
-          popContext(state);
+        popContext(state);
         } else if (/atom|string|variable/.test(style) && state.context) {
-          if (/[\}\]]/.test(state.context.type)) {
+        if (/[\}\]]/.test(state.context.type)) {
             pushContext(state, "pattern", stream.column());
-          } else if (state.context.type === "pattern" && !state.context.align) {
+        } else if (state.context.type === "pattern" && !state.context.align) {
             state.context.align = true;
             state.context.col = stream.column();
-          }
+        }
         }
         return style;
-      },
-      indent: function(state, textAfter) {
+    },
+    indent: function(state, textAfter) {
         var firstChar = textAfter && textAfter.charAt(0);
         var context = state.context;
         if (/[\]\}]/.test(firstChar)) {
-          while (context && context.type === "pattern") {
+        while (context && context.type === "pattern") {
             context = context.prev;
-          }
+        }
         }
         var closing = context && firstChar === context.type;
         if (!context) return 0;
         if (context.type === "keywords") return CodeMirror.commands.newlineAndIndent;
         if (context.align) return context.col + (closing ? 0 : 1);
         return context.indent + (closing ? 0 : indentUnit);
-      }
+    }
     };
   });
 
   CodeMirror.modeExtensions["cypher"] = {
     autoFormatLineBreaks: function(text) {
-      var i, lines, reProcessedPortion;
-      var lines = text.split("\n");
-      var reProcessedPortion = /\s+\b(return|where|order by|match|with|skip|limit|create|delete|set)\b\s/g;
-      for (var i = 0; i < lines.length; i++)
+    var i, lines, reProcessedPortion;
+    var lines = text.split("\n");
+    var reProcessedPortion = /\s+\b(return|where|order by|match|with|skip|limit|create|delete|set)\b\s/g;
+    for (var i = 0; i < lines.length; i++)
         lines[i] = lines[i].replace(reProcessedPortion, " \n$1 ").trim();
-      return lines.join("\n");
+    return lines.join("\n");
     }
   };
 

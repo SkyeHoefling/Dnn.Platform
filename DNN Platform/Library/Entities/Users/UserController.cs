@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -55,9 +55,9 @@ namespace DotNetNuke.Entities.Users
     /// The UserController class provides Business Layer methods for Users
     /// </summary>
     /// <remarks>
-    /// DotNetNuke user management is base on asp.net membership provider, but  the default implementation of these providers 
-    /// do not satisfy the broad set of use cases which we need to support in DotNetNuke. so The dependency of DotNetNuke on the 
-    /// MemberRole (ASP.NET 2 Membership) components will be abstracted into a DotNetNuke Membership Provider, in order to allow 
+    /// DotNetNuke user management is base on asp.net membership provider, but  the default implementation of these providers
+    /// do not satisfy the broad set of use cases which we need to support in DotNetNuke. so The dependency of DotNetNuke on the
+    /// MemberRole (ASP.NET 2 Membership) components will be abstracted into a DotNetNuke Membership Provider, in order to allow
     /// developers complete flexibility in implementing alternate Membership approaches.
     /// <list type="bullet">
     /// <item>This will allow for a number of enhancements to be added</item>
@@ -478,13 +478,13 @@ namespace DotNetNuke.Entities.Users
                                                             "",
                                                             portalSettings.AdministratorId);
             message.Body = Localization.GetSystemMessage(user.Profile.PreferredLocale,
-                                                         portalSettings,
-                                                         "EMAIL_USER_UNREGISTER_BODY",
-                                                         user,
-                                                         Localization.GlobalResourceFile,
-                                                         null,
-                                                         "",
-                                                         portalSettings.AdministratorId);
+                                                        portalSettings,
+                                                        "EMAIL_USER_UNREGISTER_BODY",
+                                                        user,
+                                                        Localization.GlobalResourceFile,
+                                                        null,
+                                                        "",
+                                                        portalSettings.AdministratorId);
             message.Status = MessageStatusType.Unread;
             Mail.SendEmail(portalSettings.Email, portalSettings.Email, message.Subject, message.Body);
         }
@@ -528,15 +528,15 @@ namespace DotNetNuke.Entities.Users
             string propertyValues)
         {
             return MembershipProvider.Instance().GetUsersAdvancedSearch(PortalController.GetEffectivePortalId(portalId), userId, filterUserId, filterRoleId, relationTypeId,
-                                                      isAdmin, pageIndex, pageSize, sortColumn,
-                                                      sortAscending, propertyNames, propertyValues);
+                                                    isAdmin, pageIndex, pageSize, sortColumn,
+                                                    sortAscending, propertyNames, propertyValues);
         }
 
         public IList<UserInfo> GetUsersBasicSearch(int portalId, int pageIndex, int pageSize, string sortColumn, bool sortAscending,
             string propertyName, string propertyValue)
         {
             return MembershipProvider.Instance().GetUsersBasicSearch(PortalController.GetEffectivePortalId(portalId), pageIndex, pageSize, sortColumn,
-                                                       sortAscending, propertyName, propertyValue);
+                                                        sortAscending, propertyName, propertyValue);
         }
 
         /// <summary>
@@ -563,7 +563,7 @@ namespace DotNetNuke.Entities.Users
 
         public bool IsValidUserName(string userName)
         {
-            // Validate username against bad characters; it must not start or end with space, 
+            // Validate username against bad characters; it must not start or end with space,
             // must not contain control characters, and not contain special punctuations
             // Printable ASCII: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
             // Fallback to default if there is no host setting configured
@@ -782,7 +782,7 @@ namespace DotNetNuke.Entities.Users
             Guid resetTokenGuid = new Guid(resetToken);
 
             var user = GetUserByName(portalid, username);
-            //if user does not exist return false 
+            //if user does not exist return false
             if (user == null)
             {
                 return false;
@@ -837,7 +837,7 @@ namespace DotNetNuke.Entities.Users
             Guid resetTokenGuid = new Guid(resetToken);
 
             var user = GetUserByName(portalid, username);
-            //if user does not exist return false 
+            //if user does not exist return false
             if (user == null)
             {
                 errorMessage = Localization.GetString("PasswordResetFailed_UserUndefined");
@@ -1068,7 +1068,7 @@ namespace DotNetNuke.Entities.Users
             int portalId = user.PortalID;
             user.PortalID = GetEffectivePortalId(portalId);
 
-            // If the HTTP Current Context is unavailable (e.g. when called from within a SchedulerClient) GetCurrentPortalSettings() returns null and the 
+            // If the HTTP Current Context is unavailable (e.g. when called from within a SchedulerClient) GetCurrentPortalSettings() returns null and the
             // PortalSettings are created/loaded for the portal (originally) assigned to the user.
             var portalSettings = PortalController.Instance.GetCurrentPortalSettings() ?? new PortalSettings(portalId);
 
@@ -1163,7 +1163,7 @@ namespace DotNetNuke.Entities.Users
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// GetCachedUser retrieves the User from the Cache, or fetches a fresh copy if 
+        /// GetCachedUser retrieves the User from the Cache, or fetches a fresh copy if
         /// not in cache or if Cache settings not set to HeavyCaching
         /// </summary>
         /// <remarks>
@@ -1211,7 +1211,7 @@ namespace DotNetNuke.Entities.Users
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Gets the Current Password Information for the User 
+        /// Gets the Current Password Information for the User
         /// </summary>
         /// <remarks>This method will only return the password if the memberProvider supports
         /// and is using a password encryption method that supports decryption.</remarks>
@@ -1775,7 +1775,7 @@ namespace DotNetNuke.Entities.Users
         }
 
         /// <summary>
-        /// Permanently delete a user and the associated user folder on disk. 
+        /// Permanently delete a user and the associated user folder on disk.
         /// This also deletes the membership user if the user is
         /// not a member of any other portal.
         /// </summary>
@@ -1815,7 +1815,7 @@ namespace DotNetNuke.Entities.Users
         /// <summary>
         /// Delete the contents and folder that belongs to a user in a specific portal
         /// </summary>
-        /// <param name="user">The user for whom to delete the folder. 
+        /// <param name="user">The user for whom to delete the folder.
         /// Note the PortalID is taken to specify which portal to delete the folder from.</param>
         private static void DeleteUserFolder(UserInfo user)
         {
@@ -2103,9 +2103,9 @@ namespace DotNetNuke.Entities.Users
         /// <param name="verificationCode">The verification code of the User attempting to log in</param>
         /// <param name="portalName">The name of the Portal</param>
         /// <param name="ip">The IP Address of the user attempting to log in</param>
-        /// <param name="loginStatus">A UserLoginStatus enumeration that indicates the status of the 
+        /// <param name="loginStatus">A UserLoginStatus enumeration that indicates the status of the
         /// Login attempt.  This value is returned by reference.</param>
-        /// <param name="createPersistentCookie">A flag that indicates whether the login credentials 
+        /// <param name="createPersistentCookie">A flag that indicates whether the login credentials
         /// should be persisted.</param>
         /// <returns>The UserInfo object representing a successful login</returns>
         /// -----------------------------------------------------------------------------
@@ -2197,7 +2197,7 @@ namespace DotNetNuke.Entities.Users
         /// <param name="verificationCode">The verification code of the User attempting to log in</param>
         /// <param name="portalName">The name of the Portal</param>
         /// <param name="ip">The IP Address of the user attempting to log in</param>
-        /// <param name="loginStatus">A UserLoginStatus enumeration that indicates the status of the 
+        /// <param name="loginStatus">A UserLoginStatus enumeration that indicates the status of the
         /// Login attempt.  This value is returned by reference.</param>
         /// <returns>The UserInfo object representing a valid user</returns>
         /// -----------------------------------------------------------------------------
@@ -2217,7 +2217,7 @@ namespace DotNetNuke.Entities.Users
         /// <param name="verificationCode">The verification code of the User attempting to log in</param>
         /// <param name="portalName">The name of the Portal</param>
         /// <param name="ip">The IP Address of the user attempting to log in</param>
-        /// <param name="loginStatus">A UserLoginStatus enumeration that indicates the status of the 
+        /// <param name="loginStatus">A UserLoginStatus enumeration that indicates the status of the
         /// Login attempt.  This value is returned by reference.</param>
         /// <returns>The UserInfo object representing a valid user</returns>
         /// -----------------------------------------------------------------------------

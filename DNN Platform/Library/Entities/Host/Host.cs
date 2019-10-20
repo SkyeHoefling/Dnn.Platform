@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -45,8 +45,8 @@ namespace DotNetNuke.Entities.Host
     using Web.Client;
 
     /// <summary>
-	/// Contains most of the host settings.
-	/// </summary>
+    /// Contains most of the host settings.
+    /// </summary>
     [Serializable]
     public class Host : BaseEntityInfo
     {
@@ -139,7 +139,7 @@ namespace DotNetNuke.Entities.Host
         /// <summary>
         /// setting to control where the control panel is loaded by the core and allowed to control it's own visibility.
         /// this is useful when the control panel needs to be visible for all users regardless of edit page/module permissions.
-        /// it's also for backwards compatibility, prior to 7.2 the control panel was always loaded. 
+        /// it's also for backwards compatibility, prior to 7.2 the control panel was always loaded.
         /// </summary>
         public static bool AllowControlPanelToDetermineVisibility
         {
@@ -383,7 +383,7 @@ namespace DotNetNuke.Entities.Host
                 return HostController.Instance.GetBoolean("EnableBannedList", true);
             }
         }
-        
+
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -579,7 +579,7 @@ namespace DotNetNuke.Entities.Host
         /// <remarks>
         ///   Defaults to False
         /// </remarks>
-        /// ----------------------------------------------------------------------------- 
+        /// -----------------------------------------------------------------------------
         [Obsolete("Support for users online was removed in 8.x, other solutions exist outside of the DNN Platform.  Scheduled removal in v11.0.0.")]
         public static bool EnableUsersOnline
         {
@@ -608,7 +608,7 @@ namespace DotNetNuke.Entities.Host
                 return HostController.Instance.GetBoolean("SMTPEnableSSL", false);
             }
         }
-        
+
         /// -----------------------------------------------------------------------------
         /// <summary>
         ///   Gets whether the Event Log Buffer is Enabled
@@ -635,7 +635,7 @@ namespace DotNetNuke.Entities.Host
                 return new FileExtensionWhitelist(HostController.Instance.GetString("FileExtensions"));
             }
         }
-        
+
         /// -----------------------------------------------------------------------------
         /// <summary>
         ///   Gets the GUID
@@ -1297,7 +1297,7 @@ namespace DotNetNuke.Entities.Host
                     return false;
                 }
 
-                //we don't want to load the portal smtp server when on a host tab. 
+                //we don't want to load the portal smtp server when on a host tab.
                 if (portalSettings.ActiveTab.PortalID == Null.NullInteger)
                 {
                     return false;
@@ -1571,28 +1571,28 @@ namespace DotNetNuke.Entities.Host
             }
         }
 
-		/// <summary>
-		///   Gets the Url for a hosted version of jQuery Migrate plugin.
-		/// </summary>
-		/// <remarks>
-		///   Defaults to the DefaultHostedUrl constant in the jQuery class.
-		///   The framework will default to the latest released 1.x version hosted on Google.
-		/// </remarks>
-		[Obsolete("This is managed through the JavaScript Library package. Scheduled removal in v10.0.0.")]
-		public static string jQueryMigrateUrl
-		{
-			get
-			{
-				if (HttpContext.Current.Request.IsSecureConnection)
-				{
-					return HostController.Instance.GetString("jQueryMigrateUrl", string.Empty).Replace("http://", "https://");
-				}
-				else
-				{
-					return HostController.Instance.GetString("jQueryMigrateUrl", string.Empty);
-				}
-			}
-		}
+        /// <summary>
+        ///   Gets the Url for a hosted version of jQuery Migrate plugin.
+        /// </summary>
+        /// <remarks>
+        ///   Defaults to the DefaultHostedUrl constant in the jQuery class.
+        ///   The framework will default to the latest released 1.x version hosted on Google.
+        /// </remarks>
+        [Obsolete("This is managed through the JavaScript Library package. Scheduled removal in v10.0.0.")]
+        public static string jQueryMigrateUrl
+        {
+            get
+            {
+                if (HttpContext.Current.Request.IsSecureConnection)
+                {
+                    return HostController.Instance.GetString("jQueryMigrateUrl", string.Empty).Replace("http://", "https://");
+                }
+                else
+                {
+                    return HostController.Instance.GetString("jQueryMigrateUrl", string.Empty);
+                }
+            }
+        }
 
         /// <summary>
         ///   Gets the Url for a hosted version of jQuery UI
@@ -1617,75 +1617,75 @@ namespace DotNetNuke.Entities.Host
             }
         }
 
-		/// <summary>
-		///   Gets whether to use a hosted version of the MS Ajax Library
-		/// </summary>
-		/// <remarks>
-		///   Defaults to False
-		/// </remarks>
-	    public static bool EnableMsAjaxCdn
-	    {
-		    get
-		    {
-				return HostController.Instance.GetBoolean("EnableMsAjaxCDN", false);
-		    }
-	    }
+        /// <summary>
+        ///   Gets whether to use a hosted version of the MS Ajax Library
+        /// </summary>
+        /// <remarks>
+        ///   Defaults to False
+        /// </remarks>
+        public static bool EnableMsAjaxCdn
+        {
+            get
+            {
+                return HostController.Instance.GetBoolean("EnableMsAjaxCDN", false);
+            }
+        }
 
-		/// <summary>
-		///   Gets whether to use a hosted version of the Telerik Library
-		/// </summary>
-		/// <remarks>
-		///   Defaults to False
-		/// </remarks>
-		[Obsolete("Not used anymore. Scheduled removal in v10.0.0.")]
-		public static bool EnableTelerikCdn
-		{
-			get
-			{
-				return HostController.Instance.GetBoolean("EnableTelerikCDN", false);
-			}
-		}
+        /// <summary>
+        ///   Gets whether to use a hosted version of the Telerik Library
+        /// </summary>
+        /// <remarks>
+        ///   Defaults to False
+        /// </remarks>
+        [Obsolete("Not used anymore. Scheduled removal in v10.0.0.")]
+        public static bool EnableTelerikCdn
+        {
+            get
+            {
+                return HostController.Instance.GetBoolean("EnableTelerikCDN", false);
+            }
+        }
 
         /// <summary>
         /// Get Telerik CDN Basic Path.
         /// </summary>
         [Obsolete("Not used anymore. Scheduled removal in v10.0.0.")]
         public static string TelerikCdnBasicUrl
-	    {
-			get
-			{
-				return HostController.Instance.GetString("TelerikCDNBasicUrl");
-			}
-	    }
+        {
+            get
+            {
+                return HostController.Instance.GetString("TelerikCDNBasicUrl");
+            }
+        }
 
         /// <summary>
         /// Get Telerik CDN Secure Path.
         /// </summary>
         [Obsolete("Not used anymore. Scheduled removal in v10.0.0.")]
         public static string TelerikCdnSecureUrl
-		{
-			get
-			{
-				return HostController.Instance.GetString("TelerikCDNSecureUrl");
-			}
-		}
+        {
+            get
+            {
+                return HostController.Instance.GetString("TelerikCDNSecureUrl");
+            }
+        }
 
-		/// <summary>
-		/// Get the time, in seconds, before asynchronous postbacks time out if no response is received.
-		/// </summary>
-		public static int AsyncTimeout
-		{
-			get
-			{
-				var timeout = HostController.Instance.GetInteger("AsyncTimeout", 90);
-				if (timeout < 90)
-				{
-					timeout = 90;
-				}
+        /// <summary>
+        /// Get the time, in seconds, before asynchronous postbacks time out if no response is received.
+        /// </summary>
+        public static int AsyncTimeout
+        {
+            get
+            {
+                var timeout = HostController.Instance.GetInteger("AsyncTimeout", 90);
+                if (timeout < 90)
+                {
+                    timeout = 90;
+                }
 
-				return timeout;
-			}
-		}
+                return timeout;
+            }
+        }
 
         /// <summary>
         /// Get a value indicating whether to put the entire instance into maintenance mode

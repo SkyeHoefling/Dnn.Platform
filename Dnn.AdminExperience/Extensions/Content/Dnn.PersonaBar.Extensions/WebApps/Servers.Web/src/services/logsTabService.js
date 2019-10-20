@@ -9,7 +9,7 @@ const getLogs = function () {
                     label: log
                 };
             });
-            
+
             const upgradeLogList = response.Results.UpgradeLogList.map((log) => {
                 return {
                     value: log,
@@ -17,16 +17,16 @@ const getLogs = function () {
                     upgradeLog: true
                 };
             });
-            
+
             return logList.concat(upgradeLogList);
         });
 };
 
 const getLog = function (fileName, upgradeLog) {
     if (upgradeLog) {
-        return serviceFramework.get("ServerSettingsLogs", "GetUpgradeLogFile", {logName: fileName});    
+        return serviceFramework.get("ServerSettingsLogs", "GetUpgradeLogFile", {logName: fileName});
     }
-    
+
     return serviceFramework.get("ServerSettingsLogs", "GetLogFile", {fileName: fileName});
 };
 
@@ -35,4 +35,4 @@ const databaseTabService = {
     getLog: getLog
 };
 
-export default databaseTabService; 
+export default databaseTabService;

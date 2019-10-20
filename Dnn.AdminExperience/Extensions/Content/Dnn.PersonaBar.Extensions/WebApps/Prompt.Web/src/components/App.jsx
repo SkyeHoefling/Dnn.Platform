@@ -61,7 +61,7 @@ export class App extends Component {
         if (isClear) {
             this.history = [];
         } else {
-            //Remove command from history if already exists. 
+            //Remove command from history if already exists.
             if (this.history.some(item => item === value)) {
                 this.history = this.history.filter(item => {
                     return item !== value;

@@ -16,7 +16,7 @@ class Password extends Component {
     componentDidMount() {
         this.props.loadPasswordStrengthOptions();
     }
-   
+
     render() {
         return (
             <div className="passwordContainer">

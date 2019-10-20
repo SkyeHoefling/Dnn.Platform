@@ -19,7 +19,7 @@ StringStream.prototype = {
   peek: function() {return this.string.charAt(this.pos) || null;},
   next: function() {
     if (this.pos < this.string.length)
-      return this.string.charAt(this.pos++);
+    return this.string.charAt(this.pos++);
   },
   eat: function(match) {
     var ch = this.string.charAt(this.pos);
@@ -47,17 +47,17 @@ StringStream.prototype = {
   indentation: function() {return 0;},
   match: function(pattern, consume, caseInsensitive) {
     if (typeof pattern == "string") {
-      var cased = function(str) {return caseInsensitive ? str.toLowerCase() : str;};
-      var substr = this.string.substr(this.pos, pattern.length);
-      if (cased(substr) == cased(pattern)) {
+    var cased = function(str) {return caseInsensitive ? str.toLowerCase() : str;};
+    var substr = this.string.substr(this.pos, pattern.length);
+    if (cased(substr) == cased(pattern)) {
         if (consume !== false) this.pos += pattern.length;
         return true;
-      }
+    }
     } else {
-      var match = this.string.slice(this.pos).match(pattern);
-      if (match && match.index > 0) return null;
-      if (match && consume !== false) this.pos += match[0].length;
-      return match;
+    var match = this.string.slice(this.pos).match(pattern);
+    if (match && match.index > 0) return null;
+    if (match && consume !== false) this.pos += match[0].length;
+    return match;
     }
   },
   current: function(){return this.string.slice(this.start, this.pos);},
@@ -109,36 +109,36 @@ CodeMirror.runMode = function (string, modespec, callback, options) {
     var node = callback, col = 0;
     node.innerHTML = "";
     callback = function (text, style) {
-      if (text == "\n") {
+    if (text == "\n") {
         node.appendChild(document.createElement("br"));
         col = 0;
         return;
-      }
-      var content = "";
-      // replace tabs
-      for (var pos = 0; ;) {
+    }
+    var content = "";
+    // replace tabs
+    for (var pos = 0; ;) {
         var idx = text.indexOf("\t", pos);
         if (idx == -1) {
-          content += text.slice(pos);
-          col += text.length - pos;
-          break;
+        content += text.slice(pos);
+        col += text.length - pos;
+        break;
         } else {
-          col += idx - pos;
-          content += text.slice(pos, idx);
-          var size = tabSize - col % tabSize;
-          col += size;
-          for (var i = 0; i < size; ++i) content += " ";
-          pos = idx + 1;
+        col += idx - pos;
+        content += text.slice(pos, idx);
+        var size = tabSize - col % tabSize;
+        col += size;
+        for (var i = 0; i < size; ++i) content += " ";
+        pos = idx + 1;
         }
-      }
+    }
 
-      if (style) {
+    if (style) {
         var sp = node.appendChild(document.createElement("span"));
         sp.className = "cm-" + style.replace(/ +/g, " cm-");
         sp.appendChild(document.createTextNode(content));
-      } else {
+    } else {
         node.appendChild(document.createTextNode(content));
-      }
+    }
     };
   }
 
@@ -148,9 +148,9 @@ CodeMirror.runMode = function (string, modespec, callback, options) {
     var stream = new CodeMirror.StringStream(lines[i]);
     if (!stream.string && mode.blankLine) mode.blankLine(state);
     while (!stream.eol()) {
-      var style = mode.token(stream, state);
-      callback(stream.current(), style, i, stream.start, state);
-      stream.start = stream.pos;
+    var style = mode.token(stream, state);
+    callback(stream.current(), style, i, stream.start, state);
+    stream.start = stream.pos;
     }
   }
 };

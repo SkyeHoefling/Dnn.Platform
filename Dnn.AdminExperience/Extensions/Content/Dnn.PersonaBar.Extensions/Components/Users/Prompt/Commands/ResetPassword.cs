@@ -32,7 +32,7 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
-            
+
             UserId = GetFlagValue(FlagId, "User Id", -1, true, true, true);
             Notify = GetFlagValue(FlagNotify, "Notify", false);
         }
@@ -49,7 +49,7 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
                     User,
                     out userInfo)
                 ) != null
-               )
+                )
             {
                 return errorResultModel;
             }

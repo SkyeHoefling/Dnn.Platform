@@ -17,7 +17,7 @@ CodeMirror.defineMode('shell', function() {
   function define(style, string) {
     var split = string.split(' ');
     for(var i = 0; i < split.length; i++) {
-      words[split[i]] = style;
+    words[split[i]] = style;
     }
   };
 
@@ -42,38 +42,38 @@ CodeMirror.defineMode('shell', function() {
     var ch = stream.next();
 
     if (ch === '\\') {
-      stream.next();
-      return null;
+    stream.next();
+    return null;
     }
     if (ch === '\'' || ch === '"' || ch === '`') {
-      state.tokens.unshift(tokenString(ch));
-      return tokenize(stream, state);
+    state.tokens.unshift(tokenString(ch));
+    return tokenize(stream, state);
     }
     if (ch === '#') {
-      if (sol && stream.eat('!')) {
+    if (sol && stream.eat('!')) {
         stream.skipToEnd();
         return 'meta'; // 'comment'?
-      }
-      stream.skipToEnd();
-      return 'comment';
+    }
+    stream.skipToEnd();
+    return 'comment';
     }
     if (ch === '$') {
-      state.tokens.unshift(tokenDollar);
-      return tokenize(stream, state);
+    state.tokens.unshift(tokenDollar);
+    return tokenize(stream, state);
     }
     if (ch === '+' || ch === '=') {
-      return 'operator';
+    return 'operator';
     }
     if (ch === '-') {
-      stream.eat('-');
-      stream.eatWhile(/\w/);
-      return 'attribute';
+    stream.eat('-');
+    stream.eatWhile(/\w/);
+    return 'attribute';
     }
     if (/\d/.test(ch)) {
-      stream.eatWhile(/\d/);
-      if(stream.eol() || !/\w/.test(stream.peek())) {
+    stream.eatWhile(/\d/);
+    if(stream.eol() || !/\w/.test(stream.peek())) {
         return 'number';
-      }
+    }
     }
     stream.eatWhile(/[\w-]/);
     var cur = stream.current();
@@ -83,24 +83,24 @@ CodeMirror.defineMode('shell', function() {
 
   function tokenString(quote) {
     return function(stream, state) {
-      var next, end = false, escaped = false;
-      while ((next = stream.next()) != null) {
+    var next, end = false, escaped = false;
+    while ((next = stream.next()) != null) {
         if (next === quote && !escaped) {
-          end = true;
-          break;
+        end = true;
+        break;
         }
         if (next === '$' && !escaped && quote !== '\'') {
-          escaped = true;
-          stream.backUp(1);
-          state.tokens.unshift(tokenDollar);
-          break;
+        escaped = true;
+        stream.backUp(1);
+        state.tokens.unshift(tokenDollar);
+        break;
         }
         escaped = !escaped && next === '\\';
-      }
-      if (end || !escaped) {
+    }
+    if (end || !escaped) {
         state.tokens.shift();
-      }
-      return (quote === '`' || quote === ')' ? 'quote' : 'string');
+    }
+    return (quote === '`' || quote === ')' ? 'quote' : 'string');
     };
   };
 
@@ -109,12 +109,12 @@ CodeMirror.defineMode('shell', function() {
     var ch = stream.next(), hungry = /\w/;
     if (ch === '{') hungry = /[^}]/;
     if (ch === '(') {
-      state.tokens[0] = tokenString(')');
-      return tokenize(stream, state);
+    state.tokens[0] = tokenString(')');
+    return tokenize(stream, state);
     }
     if (!/\d/.test(ch)) {
-      stream.eatWhile(hungry);
-      stream.eat('}');
+    stream.eatWhile(hungry);
+    stream.eat('}');
     }
     state.tokens.shift();
     return 'def';
@@ -127,7 +127,7 @@ CodeMirror.defineMode('shell', function() {
   return {
     startState: function() {return {tokens:[]};},
     token: function(stream, state) {
-      return tokenize(stream, state);
+    return tokenize(stream, state);
     },
     lineComment: '#',
     fold: "brace"

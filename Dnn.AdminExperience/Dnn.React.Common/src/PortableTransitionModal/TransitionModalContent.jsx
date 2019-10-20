@@ -26,12 +26,12 @@ class TransitionModalContent extends Component {
 TransitionModalContent.propTypes = {
     onClose: PropTypes.func.isRequired,
     onOk: PropTypes.func,
-    
+
     message: PropTypes.string,
     header: PropTypes.string,
     showCancelButton: PropTypes.bool,
     cancelButtonText:PropTypes.string,
-    
+
     showOkButton: PropTypes.bool,
     okButtonText: PropTypes.string
 };

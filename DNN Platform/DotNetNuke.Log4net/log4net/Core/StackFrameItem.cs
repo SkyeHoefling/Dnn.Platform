@@ -1,11 +1,11 @@
 #if !NETCF
 #region Apache License
 //
-// Licensed to the Apache Software Foundation (ASF) under one or more 
+// Licensed to the Apache Software Foundation (ASF) under one or more
 // contributor license agreements. See the NOTICE file distributed with
-// this work for additional information regarding copyright ownership. 
+// this work for additional information regarding copyright ownership.
 // The ASF licenses this file to you under the Apache License, Version 2.0
-// (the "License"); you may not use this file except in compliance with 
+// (the "License"); you may not use this file except in compliance with
 // the License. You may obtain a copy of the License at
 //
 // http://www.apache.org/licenses/LICENSE-2.0
@@ -29,14 +29,14 @@ namespace log4net.Core
     /// provides stack frame information without actually referencing a System.Diagnostics.StackFrame
     /// as that would require that the containing assembly is loaded.
     /// </summary>
-    /// 
+    ///
     [Serializable]
     public class StackFrameItem
     {
         #region Public Instance Constructors
 
         /// <summary>
-        /// returns a stack frame item from a stack frame. This 
+        /// returns a stack frame item from a stack frame. This
         /// </summary>
         /// <param name="frame"></param>
         /// <returns></returns>
@@ -48,24 +48,24 @@ namespace log4net.Core
             m_method = new MethodItem();
             m_className = NA;
 
-			try
-			{
-				// get frame values
-				m_lineNumber = frame.GetFileLineNumber().ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
-				m_fileName = frame.GetFileName();
-				// get method values
-				MethodBase method = frame.GetMethod();
-				if (method != null)
-				{
-					if(method.DeclaringType != null)
-						m_className = method.DeclaringType.FullName;
-					m_method = new MethodItem(method);
-				}
-			}
-			catch (Exception ex)
-			{
-				LogLog.Error(declaringType, "An exception ocurred while retreiving stack frame information.", ex);
-			}
+            try
+            {
+                // get frame values
+                m_lineNumber = frame.GetFileLineNumber().ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                m_fileName = frame.GetFileName();
+                // get method values
+                MethodBase method = frame.GetMethod();
+                if (method != null)
+                {
+                    if(method.DeclaringType != null)
+                        m_className = method.DeclaringType.FullName;
+                    m_method = new MethodItem(method);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogLog.Error(declaringType, "An exception ocurred while retreiving stack frame information.", ex);
+            }
 
             // set full info
             m_fullInfo = m_className + '.' + m_method.Name + '(' + m_fileName + ':' + m_lineNumber + ')';
@@ -76,16 +76,16 @@ namespace log4net.Core
         #region Public Instance Properties
 
         /// <summary>
-        /// Gets the fully qualified class name of the caller making the logging 
+        /// Gets the fully qualified class name of the caller making the logging
         /// request.
         /// </summary>
         /// <value>
-        /// The fully qualified class name of the caller making the logging 
+        /// The fully qualified class name of the caller making the logging
         /// request.
         /// </value>
         /// <remarks>
         /// <para>
-        /// Gets the fully qualified class name of the caller making the logging 
+        /// Gets the fully qualified class name of the caller making the logging
         /// request.
         /// </para>
         /// </remarks>
@@ -168,7 +168,7 @@ namespace log4net.Core
         private readonly string m_fileName;
         private readonly string m_className;
         private readonly string m_fullInfo;
-		private readonly MethodItem m_method;
+        private readonly MethodItem m_method;
 
         #endregion
 

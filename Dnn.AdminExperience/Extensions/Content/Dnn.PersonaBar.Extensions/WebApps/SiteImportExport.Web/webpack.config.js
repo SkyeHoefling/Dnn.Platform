@@ -36,18 +36,18 @@ module.exports = {
     module: {
         rules: [
             //{ test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "eslint-loader" }
-            { 
-                test: /\.(js|jsx)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 enforce: "pre",
                 use: [{
                     loader: "babel-loader"
                 },{
                     loader: "eslint-loader"
-                }] 
+                }]
             },
-            { 
-                test: /\.less$/, 
+            {
+                test: /\.less$/,
                 use: [{
                     loader: "style-loader"  // creates style nodes from JS strings
                 }, {
@@ -57,9 +57,9 @@ module.exports = {
                     loader: "less-loader"   // compiles Less to CSS
                 }]
             },
-            { 
-                test: /\.(js|jsx)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
                     options: {
@@ -67,14 +67,14 @@ module.exports = {
                     }
                 }
             },
-            { 
-                test: /\.(ttf|woff)$/, 
+            {
+                test: /\.(ttf|woff)$/,
                 use: {
-                    loader: "url-loader?limit=8192" 
+                    loader: "url-loader?limit=8192"
                 }
             },
-            { 
-                test: /\.svg$/, 
+            {
+                test: /\.svg$/,
                 use: {
                     loader: "svg-url-loader"
                 }

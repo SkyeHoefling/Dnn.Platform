@@ -1,7 +1,7 @@
 import {
     portal as ActionTypes
 } from "../actionTypes";
-import 
+import
 {CommonPortalService as PortalService}
     from "../services";
 import utilities from "utils";

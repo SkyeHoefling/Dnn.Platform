@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -195,8 +195,8 @@ namespace DotNetNuke.UI.WebControls
             {
                 case PagingControlMode.URL:
                     return !String.IsNullOrEmpty(QuerystringParams)
-                               ? (!String.IsNullOrEmpty(CurrentPage) ? TestableGlobals.Instance.NavigateURL(TabID, "", QuerystringParams, "currentpage=" + CurrentPage) : TestableGlobals.Instance.NavigateURL(TabID, "", QuerystringParams))
-                               : (!String.IsNullOrEmpty(CurrentPage) ? TestableGlobals.Instance.NavigateURL(TabID, "", "currentpage=" + CurrentPage) : TestableGlobals.Instance.NavigateURL(TabID));
+                                ? (!String.IsNullOrEmpty(CurrentPage) ? TestableGlobals.Instance.NavigateURL(TabID, "", QuerystringParams, "currentpage=" + CurrentPage) : TestableGlobals.Instance.NavigateURL(TabID, "", QuerystringParams))
+                                : (!String.IsNullOrEmpty(CurrentPage) ? TestableGlobals.Instance.NavigateURL(TabID, "", "currentpage=" + CurrentPage) : TestableGlobals.Instance.NavigateURL(TabID));
                 default:
                     return Page.ClientScript.GetPostBackClientHyperlink(this, "Page_" + CurrentPage, false);
             }
@@ -214,8 +214,8 @@ namespace DotNetNuke.UI.WebControls
                 return CSSClassLinkInactive.Trim().Length > 0 ? "<span class=\"" + CSSClassLinkInactive + "\">[" + PageNum + "]</span>" : "<span>[" + PageNum + "]</span>";
             }
             return CSSClassLinkActive.Trim().Length > 0
-                       ? "<a href=\"" + CreateURL(PageNum.ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" + PageNum + "</a>"
-                       : "<a href=\"" + CreateURL(PageNum.ToString()) + "\">" + PageNum + "</a>";
+                        ? "<a href=\"" + CreateURL(PageNum.ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" + PageNum + "</a>"
+                        : "<a href=\"" + CreateURL(PageNum.ToString()) + "\">" + PageNum + "</a>";
         }
 
         /// <summary>
@@ -226,13 +226,13 @@ namespace DotNetNuke.UI.WebControls
         private string GetPreviousLink()
         {
             return CurrentPage > 1 && _totalPages > 0
-                       ? (CSSClassLinkActive.Trim().Length > 0
-                              ? "<a href=\"" + CreateURL((CurrentPage - 1).ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" +
+                        ? (CSSClassLinkActive.Trim().Length > 0
+                            ? "<a href=\"" + CreateURL((CurrentPage - 1).ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" +
                                 Localization.GetString("Previous", Localization.SharedResourceFile) + "</a>"
-                              : "<a href=\"" + CreateURL((CurrentPage - 1).ToString()) + "\">" + Localization.GetString("Previous", Localization.SharedResourceFile) + "</a>")
-                       : (CSSClassLinkInactive.Trim().Length > 0
-                              ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("Previous", Localization.SharedResourceFile) + "</span>"
-                              : "<span>" + Localization.GetString("Previous", Localization.SharedResourceFile) + "</span>");
+                            : "<a href=\"" + CreateURL((CurrentPage - 1).ToString()) + "\">" + Localization.GetString("Previous", Localization.SharedResourceFile) + "</a>")
+                        : (CSSClassLinkInactive.Trim().Length > 0
+                            ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("Previous", Localization.SharedResourceFile) + "</span>"
+                            : "<span>" + Localization.GetString("Previous", Localization.SharedResourceFile) + "</span>");
         }
 
         /// <summary>
@@ -243,13 +243,13 @@ namespace DotNetNuke.UI.WebControls
         private string GetNextLink()
         {
             return CurrentPage != _totalPages && _totalPages > 0
-                       ? (CSSClassLinkActive.Trim().Length > 0
-                              ? "<a href=\"" + CreateURL((CurrentPage + 1).ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" + Localization.GetString("Next", Localization.SharedResourceFile) +
+                        ? (CSSClassLinkActive.Trim().Length > 0
+                            ? "<a href=\"" + CreateURL((CurrentPage + 1).ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" + Localization.GetString("Next", Localization.SharedResourceFile) +
                                 "</a>"
-                              : "<a href=\"" + CreateURL((CurrentPage + 1).ToString()) + "\">" + Localization.GetString("Next", Localization.SharedResourceFile) + "</a>")
-                       : (CSSClassLinkInactive.Trim().Length > 0
-                              ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("Next", Localization.SharedResourceFile) + "</span>"
-                              : "<span>" + Localization.GetString("Next", Localization.SharedResourceFile) + "</span>");
+                            : "<a href=\"" + CreateURL((CurrentPage + 1).ToString()) + "\">" + Localization.GetString("Next", Localization.SharedResourceFile) + "</a>")
+                        : (CSSClassLinkInactive.Trim().Length > 0
+                            ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("Next", Localization.SharedResourceFile) + "</span>"
+                            : "<span>" + Localization.GetString("Next", Localization.SharedResourceFile) + "</span>");
         }
 
         /// <summary>
@@ -262,12 +262,12 @@ namespace DotNetNuke.UI.WebControls
             if (CurrentPage > 1 && _totalPages > 0)
             {
                 return CSSClassLinkActive.Trim().Length > 0
-                           ? "<a href=\"" + CreateURL("1") + "\" class=\"" + CSSClassLinkActive + "\">" + Localization.GetString("First", Localization.SharedResourceFile) + "</a>"
-                           : "<a href=\"" + CreateURL("1") + "\">" + Localization.GetString("First", Localization.SharedResourceFile) + "</a>";
+                            ? "<a href=\"" + CreateURL("1") + "\" class=\"" + CSSClassLinkActive + "\">" + Localization.GetString("First", Localization.SharedResourceFile) + "</a>"
+                            : "<a href=\"" + CreateURL("1") + "\">" + Localization.GetString("First", Localization.SharedResourceFile) + "</a>";
             }
             return CSSClassLinkInactive.Trim().Length > 0
-                       ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("First", Localization.SharedResourceFile) + "</span>"
-                       : "<span>" + Localization.GetString("First", Localization.SharedResourceFile) + "</span>";
+                        ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("First", Localization.SharedResourceFile) + "</span>"
+                        : "<span>" + Localization.GetString("First", Localization.SharedResourceFile) + "</span>";
         }
 
         /// <summary>
@@ -280,12 +280,12 @@ namespace DotNetNuke.UI.WebControls
             if (CurrentPage != _totalPages && _totalPages > 0)
             {
                 return CSSClassLinkActive.Trim().Length > 0
-                           ? "<a href=\"" + CreateURL(_totalPages.ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" + Localization.GetString("Last", Localization.SharedResourceFile) + "</a>"
-                           : "<a href=\"" + CreateURL(_totalPages.ToString()) + "\">" + Localization.GetString("Last", Localization.SharedResourceFile) + "</a>";
+                            ? "<a href=\"" + CreateURL(_totalPages.ToString()) + "\" class=\"" + CSSClassLinkActive + "\">" + Localization.GetString("Last", Localization.SharedResourceFile) + "</a>"
+                            : "<a href=\"" + CreateURL(_totalPages.ToString()) + "\">" + Localization.GetString("Last", Localization.SharedResourceFile) + "</a>";
             }
             return CSSClassLinkInactive.Trim().Length > 0
-                       ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("Last", Localization.SharedResourceFile) + "</span>"
-                       : "<span>" + Localization.GetString("Last", Localization.SharedResourceFile) + "</span>";
+                        ? "<span class=\"" + CSSClassLinkInactive + "\">" + Localization.GetString("Last", Localization.SharedResourceFile) + "</span>"
+                        : "<span>" + Localization.GetString("Last", Localization.SharedResourceFile) + "</span>";
         }
 
         protected override void CreateChildControls()

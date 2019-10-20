@@ -34,7 +34,7 @@
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend({}, DynamicTreeView.defaults(), this.options);
 
@@ -55,7 +55,7 @@
 
             var onCreateNodeElementHandler = $.proxy(this._onCreateNodeElement, this);
             $(this._tree).on("oncreatenode", onCreateNodeElementHandler);
-            
+
             var onShowChildrenHandler = $.proxy(this._onShowChildren, this);
             $(this._tree).on("onshowchildren", onShowChildrenHandler);
 
@@ -176,7 +176,7 @@
             this.updateLayout();
             $(this).trigger($.Event("onredrawtree"));
         },
-        
+
         _onShowChildren: function () {
             $(this).trigger($.Event("onshowchildren"));
         },
@@ -201,15 +201,15 @@
             if (typeof id === "undefined") {
                 return this._selectedNodeId;
             }
-            
+
             if (id !== this._selectedNodeId || !this.selectedNode()) {
                 var node = this._getNodeById(id);
                 this.selectedNode(node);
             }
             return this._selectedNodeId = id;
         },
-        
-        scrollToSelectedNode: function() {               
+
+        scrollToSelectedNode: function() {
             //if node selected, we need scoll tree to show the selected node.
             var node = this._getNodeById(this.selectedId());
             if (!node) {
@@ -319,7 +319,7 @@
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend({}, SortableTreeView.defaults(), this.options);
 
@@ -394,7 +394,7 @@
         _onLoadChildren: function (nodeContext, children) {
             this._dynamicTree.showChildren(nodeContext, children);
             this._updateResult(this._dynamicTree.count());
-            
+
             $(this).trigger($.Event('onloadchildren'), [nodeContext]);
         },
         _onShowChildren: function(nodeContext) {
@@ -458,7 +458,7 @@
             this._dynamicTree.rootNode(rootNode);
             this._updateResult(this._dynamicTree.count());
             this._loading(false);
-            
+
             $(this).trigger($.Event('ontreeloaded'));
         },
 
@@ -552,7 +552,7 @@
                 if (order === dnn.SortOrder.ascending) {
                     return dnn.SortOrder.descending;
                 }
-                
+
                 return dnn.SortOrder.ascending;
             }
             if (order === dnn.SortOrder.unspecified) {

@@ -27,7 +27,7 @@
         <asp:RequiredFieldValidator runat="server" ID="filtersRequiredFieldValidator" CssClass="dnnFormMessage dnnFormError" Display="Dynamic"
             resourceKey="filtersRequired" ControlToValidate="comboBoxFilters"></asp:RequiredFieldValidator>
     </div>
-    
+
     <div class="dnnFormItem" id="scopeForRolesRow">
         <dnn:Label ID="plResultsScopeForRoles" runat="server" ControlName="comboBoxRoles" />
         <dnn:DnnComboBox ID="comboBoxRoles" runat="server" CheckBoxes="true" Width="437px">
@@ -82,7 +82,7 @@
                     updateState();
                 });
             })();
-            
+
             (function() {
                 var $filters = $('#<%=comboBoxFilters.ClientID%>');
                 var updateState = function() {

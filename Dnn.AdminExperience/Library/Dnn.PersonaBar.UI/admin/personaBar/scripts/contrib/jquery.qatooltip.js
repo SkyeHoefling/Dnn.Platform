@@ -1,7 +1,7 @@
 ﻿(function ($) {
     $.fn.qaTooltip = function (options) {
         var opts = $.extend({}, $.fn.qaTooltip.defaultOptions, options),
-                   $wrap = this;
+                    $wrap = this;
         $wrap.each(function () {
             var $this = $(this);
             $this.css('position', 'relative');

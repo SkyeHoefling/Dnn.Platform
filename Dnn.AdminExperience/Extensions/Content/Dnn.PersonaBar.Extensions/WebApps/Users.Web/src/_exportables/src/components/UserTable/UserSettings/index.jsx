@@ -57,7 +57,7 @@ class UserSettings extends Component {
         let newObject = Object.assign({}, obj);
         const keys = Object.keys(newObject);
         keys.forEach(key => newObject[key] = "");
-        return newObject; 
+        return newObject;
     }
 
     getUserDetails(props, userId) {
@@ -81,7 +81,7 @@ class UserSettings extends Component {
             loading: false
         });
     }
-    
+
     onChange(key, item) {
         if (this.state.loading) {
             return;
@@ -102,7 +102,7 @@ class UserSettings extends Component {
             }));
         }
     }
-  
+
     validateForm() {
         let valid = true;
         let {errors} = this.state;
@@ -162,7 +162,7 @@ class UserSettings extends Component {
         if (value === "") {
             return "";
         }
-        return value ? Localization.get("True") : Localization.get("False");        
+        return value ? Localization.get("True") : Localization.get("False");
     }
 
     render() {
@@ -238,7 +238,7 @@ class UserSettings extends Component {
                                 <div onClick={this.onChangePassword.bind(this) }>[ {Localization.get("ChangePassword")} ]
                                 </div>
                             </GridCell>
-                            {!state.userDetails.needUpdatePassword && 
+                            {!state.userDetails.needUpdatePassword &&
                                 <GridCell className={"link" + (this.state.loading ? " disabled" : "")}>
                                     <div onClick={this.onForcePasswordChange.bind(this) }>[ {Localization.get("ForceChangePassword")} ]
                                     </div>

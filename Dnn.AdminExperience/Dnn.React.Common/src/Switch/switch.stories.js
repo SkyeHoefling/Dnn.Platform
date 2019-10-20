@@ -11,15 +11,15 @@ class ControlledSwitch extends Component {
 
   render(){
     return (
-      <Switch
+    <Switch
         labelHidden={false}
         onText="On"
         offText="Off"
         label="Controlled Switch"
         onChange={(value) => this.setState({ value: value })}
         labelPlacement="left"
-        value={this.state.value}    
-      />
+        value={this.state.value}
+    />
     );
   }
 }

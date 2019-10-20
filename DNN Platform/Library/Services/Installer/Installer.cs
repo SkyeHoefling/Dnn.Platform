@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -52,19 +52,19 @@ namespace DotNetNuke.Services.Installer
     /// -----------------------------------------------------------------------------
     public class Installer
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Installer));
-		#region Private Members
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Installer));
+        #region Private Members
 
         private Stream _inputStream;
 
         #endregion
 
-		#region Constructors
+        #region Constructors
 
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// This Constructor creates a new Installer instance from a string representing
-        /// the physical path to the temporary install folder and a string representing 
+        /// the physical path to the temporary install folder and a string representing
         /// the physical path to the root of the site
         /// </summary>
         /// <param name="tempFolder">The physical path to the zip file containg the package</param>
@@ -146,10 +146,10 @@ namespace DotNetNuke.Services.Installer
                 ReadManifest(new FileStream(manifest, FileMode.Open, FileAccess.Read));
             }
         }
-		
-		#endregion
 
-		#region Public Properties
+        #endregion
+
+        #region Public Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -183,7 +183,7 @@ namespace DotNetNuke.Services.Installer
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Gets 
+        /// Gets
         /// </summary>
         /// <value>A Dictionary(Of String, PackageInstaller)</value>
         /// -----------------------------------------------------------------------------
@@ -195,9 +195,9 @@ namespace DotNetNuke.Services.Installer
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -206,11 +206,11 @@ namespace DotNetNuke.Services.Installer
         /// -----------------------------------------------------------------------------
         private void InstallPackages(ref bool clearClientCache)
         {
-			//Iterate through all the Packages
+            //Iterate through all the Packages
             for (int index = 0; index <= Packages.Count - 1; index++)
             {
                 PackageInstaller installer = Packages.Values[index];
-				//Check if package is valid
+                //Check if package is valid
                 if (installer.Package.IsValid)
                 {
                     if (installer.Package.InstallerInfo.PackageID > Null.NullInteger || installer.Package.InstallerInfo.RepairInstall)
@@ -250,11 +250,11 @@ namespace DotNetNuke.Services.Installer
                 var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
 
                 if (InstallerInfo.ManifestFile != null)
-	            {
-		            log.LogProperties.Add(new LogDetailInfo(eventType + " " + package + ":", InstallerInfo.ManifestFile.Name.Replace(".dnn", "")));
-	            }
+                {
+                    log.LogProperties.Add(new LogDetailInfo(eventType + " " + package + ":", InstallerInfo.ManifestFile.Name.Replace(".dnn", "")));
+                }
 
-	            foreach (LogEntry objLogEntry in InstallerInfo.Log.Logs)
+                foreach (LogEntry objLogEntry in InstallerInfo.Log.Logs)
                 {
                     log.LogProperties.Add(new LogDetailInfo("Info:", objLogEntry.Description));
                 }
@@ -274,7 +274,7 @@ namespace DotNetNuke.Services.Installer
         /// -----------------------------------------------------------------------------
         private void ProcessPackages(XPathNavigator rootNav)
         {
-			//Parse the package nodes
+            //Parse the package nodes
             foreach (XPathNavigator nav in rootNav.Select("packages/package"))
             {
                 int order = Packages.Count;
@@ -460,7 +460,7 @@ namespace DotNetNuke.Services.Installer
             {
                 Logger.Error("Exception deleting folder "+TempInstallFolder+" while installing "+InstallerInfo.ManifestFile.Name, ex);
                 Exceptions.Exceptions.LogException(ex);
-            }            
+            }
         }
 
         /// -----------------------------------------------------------------------------
@@ -484,13 +484,13 @@ namespace DotNetNuke.Services.Installer
             }
             catch (Exception ex)
             {
-            
+
                 InstallerInfo.Log.AddFailure(ex);
                 bStatus = false;
             }
             finally
             {
-				//Delete Temp Folder
+                //Delete Temp Folder
                 if (!string.IsNullOrEmpty(TempInstallFolder))
                 {
                     Globals.DeleteFolderRecursive(TempInstallFolder);
@@ -506,7 +506,7 @@ namespace DotNetNuke.Services.Installer
                 InstallerInfo.Log.EndJob(Util.INSTALL_Failed);
                 bStatus = false;
             }
-			
+
             //log installation event
             LogInstallEvent("Package", "Install");
 
@@ -549,7 +549,7 @@ namespace DotNetNuke.Services.Installer
             }
             else if (deleteTemp)
             {
-				//Delete Temp Folder
+                //Delete Temp Folder
                 DeleteTempFolder();
             }
         }
@@ -586,7 +586,7 @@ namespace DotNetNuke.Services.Installer
             LogInstallEvent("Package", "UnInstall");
             return true;
         }
-		
-		#endregion
+
+        #endregion
     }
 }

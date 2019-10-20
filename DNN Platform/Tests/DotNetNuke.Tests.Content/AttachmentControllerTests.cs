@@ -2,19 +2,19 @@
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -67,19 +67,19 @@ namespace DotNetNuke.Tests.Content
             var dataService = new Mock<IDataService>();
 
             dataService.Setup(ds =>
-             ds.SynchronizeMetaData(
-                 It.IsAny<ContentItem>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
-                 It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
-             .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
-                 (ci, added, deleted) =>
-                 {
-                     deleted.ToList().ForEach(
-                         item => dataService.Object.DeleteMetaData(ci, item.Key, item.Value));
+            ds.SynchronizeMetaData(
+                It.IsAny<ContentItem>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>(),
+                It.IsAny<IEnumerable<KeyValuePair<string, string>>>()))
+            .Callback<ContentItem, IEnumerable<KeyValuePair<string, string>>, IEnumerable<KeyValuePair<string, string>>>(
+                (ci, added, deleted) =>
+                {
+                    deleted.ToList().ForEach(
+                        item => dataService.Object.DeleteMetaData(ci, item.Key, item.Value));
 
-                     added.ToList().ForEach(
-                         item => dataService.Object.AddMetaData(ci, item.Key, item.Value));
-                 });
+                    added.ToList().ForEach(
+                        item => dataService.Object.AddMetaData(ci, item.Key, item.Value));
+                });
 
             // Register controller types that are dependent on our IDataService.
             var contentController = new ContentController(dataService.Object);
@@ -120,7 +120,7 @@ namespace DotNetNuke.Tests.Content
 
             // Return empty set of metadata.
             dataService.Setup(ds => ds.GetMetaData(It.IsAny<int>())).Returns(MockHelper.CreateEmptyMetaDataReader);
-            
+
             var content = ContentTestHelper.CreateValidContentItem();
             content.Metadata.Clear();
 
@@ -157,7 +157,7 @@ namespace DotNetNuke.Tests.Content
                 ds =>
                     ds.GetMetaData(It.IsAny<int>())).Returns(
                         () => MockHelper.CreateMetaDataReaderWithFiles(files, new IFileInfo[0], new IFileInfo[0]));
-            
+
             var contentItem = Util.GetContentController().GetContentItem(Constants.CONTENT_ValidContentItemId);
             Assert.IsNotNull(contentItem);
 
@@ -182,7 +182,7 @@ namespace DotNetNuke.Tests.Content
 
             // Use a closure to store the metadata locally in this method.
             var data = new Dictionary<string, string>();
-            
+
             dataService.Setup(
                 ds =>
                     ds.GetMetaData(It.IsAny<int>())).Returns(
@@ -223,7 +223,7 @@ namespace DotNetNuke.Tests.Content
 
             dataService.Verify(
                 ds => ds.AddMetaData(It.IsAny<ContentItem>(), FileController.FilesKey, "[0]"), Times.Once());
-            
+
             dataService.Verify(
                 ds => ds.AddMetaData(It.IsAny<ContentItem>(), FileController.FilesKey, "[0,1]"), Times.Once());
         }
@@ -291,7 +291,7 @@ namespace DotNetNuke.Tests.Content
             dataService.Verify(ds => ds.DeleteMetaData(contentItem, FileController.TitleKey, It.IsAny<string>()), Times.Never());
 
             contentItem.ContentTitle = "Foobar";
-            
+
             contentController.UpdateContentItem(contentItem);
 
             dataService.Verify(ds => ds.AddMetaData(contentItem, FileController.TitleKey, It.IsAny<string>()), Times.Once());
@@ -314,7 +314,7 @@ namespace DotNetNuke.Tests.Content
             dataService.Verify(ds => ds.AddMetaData(contentItem, FileController.TitleKey, It.IsAny<string>()), Times.Exactly(2));
             dataService.Verify(ds => ds.DeleteMetaData(contentItem, FileController.TitleKey, It.IsAny<string>()), Times.Once());
         }
-        
+
         #endregion
     }
 }

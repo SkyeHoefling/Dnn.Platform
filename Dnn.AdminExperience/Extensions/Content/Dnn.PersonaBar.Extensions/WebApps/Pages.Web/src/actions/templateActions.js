@@ -5,7 +5,7 @@ import cloneDeep from "lodash/cloneDeep";
 
 const ERROR_STATUS = 1;
 const templateActions = {
-    
+
     loadSavePageAsTemplate() {
         return {
             type: ActionTypes.LOAD_SAVE_AS_TEMPLATE,
@@ -24,7 +24,7 @@ const templateActions = {
         return (dispatch, getState) => {
             dispatch({
                 type: ActionTypes.SAVING_TEMPLATE
-            });    
+            });
 
             const {pages, template} = getState();
             const page = pages.selectedPage;
@@ -39,11 +39,11 @@ const templateActions = {
                     });
                     return;
                 }
-                
+
                 utils.notify(response.Response);
                 dispatch({
                     type: ActionTypes.SAVED_TEMPLATE
-                });  
+                });
             }).catch((error) => {
                 dispatch({
                     type: ActionTypes.ERROR_SAVING_TEMPLATE,

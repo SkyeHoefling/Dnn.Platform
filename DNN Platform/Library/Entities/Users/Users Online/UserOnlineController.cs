@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -48,7 +48,7 @@ namespace DotNetNuke.Entities.Users
     [Obsolete("Support for users online was removed in 8.x, other solutions exist outside of the DNN Platform.  Scheduled removal in v11.0.0.")]
     public class UserOnlineController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (UserOnlineController));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (UserOnlineController));
         private static readonly MembershipProvider memberProvider = MembershipProvider.Instance();
         private static readonly object Locker = new object();
         private static readonly string CacheKey = "OnlineUserList";
@@ -160,8 +160,8 @@ namespace DotNetNuke.Entities.Users
             //Check if the Tracking cookie exists
             HttpCookie cookie = context.Request.Cookies[cookieName];
             //Track Anonymous User
-			if ((cookie == null))
-            {  	
+            if ((cookie == null))
+            {
                 //Create a temporary userId
                 userID = Guid.NewGuid().ToString();
 
@@ -193,13 +193,13 @@ namespace DotNetNuke.Entities.Users
             {
                 if ((cookie.Value == null))
                 {
-					//Expire the cookie, there is something wrong with it
+                    //Expire the cookie, there is something wrong with it
                     context.Response.Cookies[cookieName].Expires = new DateTime(1999, 10, 12);
 
                     //No need to do anything else
                     return;
                 }
-				
+
                 //Get userID out of cookie
                 userID = cookie.Value;
 
@@ -209,7 +209,7 @@ namespace DotNetNuke.Entities.Users
                     userList[userID] = new AnonymousUserInfo();
                     ((AnonymousUserInfo) userList[userID]).CreationDate = DateTime.Now;
                 }
-				
+
                 user = (AnonymousUserInfo) userList[userID];
                 user.UserID = userID;
                 user.PortalID = portalSettings.PortalId;
@@ -309,8 +309,8 @@ namespace DotNetNuke.Entities.Users
 
             //Clear the list
             ClearUserList();
-			
-			//Persist the current User List
+
+            //Persist the current User List
             try
             {
                 memberProvider.UpdateUsersOnline(listToProcess);
@@ -320,7 +320,7 @@ namespace DotNetNuke.Entities.Users
                 Logger.Error(exc);
 
             }
-			
+
             //Remove users that have expired
             memberProvider.DeleteUsersOnline(GetOnlineTimeWindow());
         }

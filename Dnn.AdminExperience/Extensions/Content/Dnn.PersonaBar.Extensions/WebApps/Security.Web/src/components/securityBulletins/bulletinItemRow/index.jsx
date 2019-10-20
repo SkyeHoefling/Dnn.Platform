@@ -48,7 +48,7 @@ class BulletinItemRow extends Component {
                             <div className="term-label-wrapper">
                                 <span>{this.props.pubDate}&nbsp; </span>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <Collapsible className={this.props.className} isOpened={!this.state.collapsed}>{!state.collapsed && props.children }</Collapsible>

@@ -86,9 +86,9 @@ DELETE FROM {databaseOwner}[{objectQualifier}ModuleControls]
     WHERE [ControlKey] = N'CONTROLPANEL:PERSONABAR'
 GO
 
-UPDATE {databaseOwner}{objectQualifier}HostSettings 
-	SET SettingValue = 'Admin/ControlPanel/ControlBar.ascx'
-	WHERE SettingName = 'ControlPanel'
+UPDATE {databaseOwner}{objectQualifier}HostSettings
+    SET SettingValue = 'Admin/ControlPanel/ControlBar.ascx'
+    WHERE SettingName = 'ControlPanel'
 GO
 
 DELETE FROM {databaseOwner}[{objectQualifier}Permission] WHERE PermissionCode = N'PERSONABAR_MENU'

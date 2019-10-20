@@ -223,7 +223,7 @@ dnn.extend(dnn.dom.positioning, {
     placeOnTop: function(oCont, bShow, sSrc)
     {
         if (dnn.dom.browser.isType(dnn.dom.browser.Opera, dnn.dom.browser.Mozilla, dnn.dom.browser.Netscape, dnn.dom.browser.Safari) ||
-	        (dnn.dom.browser.isType(dnn.dom.browser.InternetExplorer) && dnn.dom.browser.version >= 7))
+            (dnn.dom.browser.isType(dnn.dom.browser.InternetExplorer) && dnn.dom.browser.version >= 7))
             return; //not needed
 
         var oIFR = dnn.dom.getById('ifr' + oCont.id);
@@ -335,16 +335,16 @@ dnn.extend(dnn.dom.positioning, {
             this.dragContainer(this.dragCtr, e);
     }
 
-});    
+});
 
 //dims object
 dnn.dom.positioning.dims = function(eSrc)
 {
     var bHidden = (eSrc.style.display == 'none');
-	
+
     if (bHidden)
-	    eSrc.style.display = "";
-	
+        eSrc.style.display = "";
+
     this.w = dnn.dom.positioning.elementWidth(eSrc);
     this.h = dnn.dom.positioning.elementHeight(eSrc);
     var oPos = dnn.dom.positioning.elementPos(eSrc);
@@ -354,14 +354,12 @@ dnn.dom.positioning.dims = function(eSrc)
     this.al = oPos.al;	//actual left
     this.rot = this.at - this.t; //relative offset top
     this.rol = this.al - this.l; //relative offset left
-	
+
     this.r = this.l + this.w;
     this.b = this.t + this.h;
-	
+
     if (bHidden)
-	    eSrc.style.display = "none";
-	
+        eSrc.style.display = "none";
+
 }
 dnn.dom.positioning.dims.registerClass('dnn.dom.positioning.dims');
-
-

@@ -14,11 +14,11 @@
 CodeMirror.defineMode("verilog", function(config, parserConfig) {
 
   var indentUnit = config.indentUnit,
-      statementIndentUnit = parserConfig.statementIndentUnit || indentUnit,
-      dontAlignCalls = parserConfig.dontAlignCalls,
-      noIndentKeywords = parserConfig.noIndentKeywords || [],
-      multiLineStrings = parserConfig.multiLineStrings,
-      hooks = parserConfig.hooks || {};
+    statementIndentUnit = parserConfig.statementIndentUnit || indentUnit,
+    dontAlignCalls = parserConfig.dontAlignCalls,
+    noIndentKeywords = parserConfig.noIndentKeywords || [],
+    multiLineStrings = parserConfig.multiLineStrings,
+    hooks = parserConfig.hooks || {};
 
   function words(str) {
     var obj = {}, words = str.split(" ");
@@ -27,8 +27,8 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   }
 
   /**
-   * Keywords from IEEE 1800-2012
-   */
+    * Keywords from IEEE 1800-2012
+    */
   var keywords = words(
     "accept_on alias always always_comb always_ff always_latch and assert assign assume automatic before begin bind " +
     "bins binsof bit break buf bufif0 bufif1 byte case casex casez cell chandle checker class clocking cmos config " +
@@ -50,17 +50,17 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     "wait wait_order wand weak weak0 weak1 while wildcard wire with within wor xnor xor");
 
   /** Operators from IEEE 1800-2012
-     unary_operator ::=
-       + | - | ! | ~ | & | ~& | | | ~| | ^ | ~^ | ^~
-     binary_operator ::=
-       + | - | * | / | % | == | != | === | !== | ==? | !=? | && | || | **
-       | < | <= | > | >= | & | | | ^ | ^~ | ~^ | >> | << | >>> | <<<
-       | -> | <->
-     inc_or_dec_operator ::= ++ | --
-     unary_module_path_operator ::=
-       ! | ~ | & | ~& | | | ~| | ^ | ~^ | ^~
-     binary_module_path_operator ::=
-       == | != | && | || | & | | | ^ | ^~ | ~^
+    unary_operator ::=
+        + | - | ! | ~ | & | ~& | | | ~| | ^ | ~^ | ^~
+    binary_operator ::=
+        + | - | * | / | % | == | != | === | !== | ==? | !=? | && | || | **
+        | < | <= | > | >= | & | | | ^ | ^~ | ~^ | >> | << | >>> | <<<
+        | -> | <->
+    inc_or_dec_operator ::= ++ | --
+    unary_module_path_operator ::=
+        ! | ~ | & | ~& | | | ~| | ^ | ~^ | ^~
+    binary_module_path_operator ::=
+        == | != | && | || | & | | | ^ | ^~ | ~^
   */
   var isOperatorChar = /[\+\-\*\/!~&|^%=?:]/;
   var isBracketChar = /[\[\]{}()]/;
@@ -100,7 +100,7 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   for (var i in noIndentKeywords) {
     var keyword = noIndentKeywords[i];
     if (openClose[keyword]) {
-      openClose[keyword] = undefined;
+    openClose[keyword] = undefined;
     }
   }
 
@@ -111,58 +111,58 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     var ch = stream.peek(), style;
     if (hooks[ch] && (style = hooks[ch](stream, state)) != false) return style;
     if (hooks.tokenBase && (style = hooks.tokenBase(stream, state)) != false)
-      return style;
+    return style;
 
     if (/[,;:\.]/.test(ch)) {
-      curPunc = stream.next();
-      return null;
+    curPunc = stream.next();
+    return null;
     }
     if (isBracketChar.test(ch)) {
-      curPunc = stream.next();
-      return "bracket";
+    curPunc = stream.next();
+    return "bracket";
     }
     // Macros (tick-defines)
     if (ch == '`') {
-      stream.next();
-      if (stream.eatWhile(/[\w\$_]/)) {
+    stream.next();
+    if (stream.eatWhile(/[\w\$_]/)) {
         return "def";
-      } else {
+    } else {
         return null;
-      }
+    }
     }
     // System calls
     if (ch == '$') {
-      stream.next();
-      if (stream.eatWhile(/[\w\$_]/)) {
+    stream.next();
+    if (stream.eatWhile(/[\w\$_]/)) {
         return "meta";
-      } else {
+    } else {
         return null;
-      }
+    }
     }
     // Time literals
     if (ch == '#') {
-      stream.next();
-      stream.eatWhile(/[\d_.]/);
-      return "def";
+    stream.next();
+    stream.eatWhile(/[\d_.]/);
+    return "def";
     }
     // Strings
     if (ch == '"') {
-      stream.next();
-      state.tokenize = tokenString(ch);
-      return state.tokenize(stream, state);
+    stream.next();
+    state.tokenize = tokenString(ch);
+    return state.tokenize(stream, state);
     }
     // Comments
     if (ch == "/") {
-      stream.next();
-      if (stream.eat("*")) {
+    stream.next();
+    if (stream.eat("*")) {
         state.tokenize = tokenComment;
         return tokenComment(stream, state);
-      }
-      if (stream.eat("/")) {
+    }
+    if (stream.eat("/")) {
         stream.skipToEnd();
         return "comment";
-      }
-      stream.backUp(1);
+    }
+    stream.backUp(1);
     }
 
     // Numeric literals
@@ -173,28 +173,28 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
         stream.match(hexLiteral) ||
         stream.match(unsignedNumber) ||
         stream.match(realLiteral)) {
-      return "number";
+    return "number";
     }
 
     // Operators
     if (stream.eatWhile(isOperatorChar)) {
-      return "meta";
+    return "meta";
     }
 
     // Keywords / plain variables
     if (stream.eatWhile(/[\w\$_]/)) {
-      var cur = stream.current();
-      if (keywords[cur]) {
+    var cur = stream.current();
+    if (keywords[cur]) {
         if (openClose[cur]) {
-          curPunc = "newblock";
+        curPunc = "newblock";
         }
         if (statementKeywords[cur]) {
-          curPunc = "newstatement";
+        curPunc = "newstatement";
         }
         curKeyword = cur;
         return "keyword";
-      }
-      return "variable";
+    }
+    return "variable";
     }
 
     stream.next();
@@ -203,25 +203,25 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
 
   function tokenString(quote) {
     return function(stream, state) {
-      var escaped = false, next, end = false;
-      while ((next = stream.next()) != null) {
+    var escaped = false, next, end = false;
+    while ((next = stream.next()) != null) {
         if (next == quote && !escaped) {end = true; break;}
         escaped = !escaped && next == "\\";
-      }
-      if (end || !(escaped || multiLineStrings))
+    }
+    if (end || !(escaped || multiLineStrings))
         state.tokenize = tokenBase;
-      return "string";
+    return "string";
     };
   }
 
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+    if (ch == "/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return "comment";
   }
@@ -241,23 +241,23 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   function popContext(state) {
     var t = state.context.type;
     if (t == ")" || t == "]" || t == "}") {
-      state.indented = state.context.indented;
+    state.indented = state.context.indented;
     }
     return state.context = state.context.prev;
   }
 
   function isClosing(text, contextClosing) {
     if (text == contextClosing) {
-      return true;
+    return true;
     } else {
-      // contextClosing may be mulitple keywords separated by ;
-      var closingKeywords = contextClosing.split(";");
-      for (var i in closingKeywords) {
+    // contextClosing may be mulitple keywords separated by ;
+    var closingKeywords = contextClosing.split(";");
+    for (var i in closingKeywords) {
         if (text == closingKeywords[i]) {
-          return true;
+        return true;
         }
-      }
-      return false;
+    }
+    return false;
     }
   }
 
@@ -267,12 +267,12 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     // the end of a line
     var allClosings = [];
     for (var i in openClose) {
-      if (openClose[i]) {
+    if (openClose[i]) {
         var closings = openClose[i].split(";");
         for (var j in closings) {
-          allClosings.push(closings[j]);
+        allClosings.push(closings[j]);
         }
-      }
+    }
     }
     var re = new RegExp("[{}()\\[\\]]|(" + allClosings.join("|") + ")$");
     return re;
@@ -285,80 +285,80 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     electricInput: buildElectricInputRegEx(),
 
     startState: function(basecolumn) {
-      var state = {
+    var state = {
         tokenize: null,
         context: new Context((basecolumn || 0) - indentUnit, 0, "top", false),
         indented: 0,
         startOfLine: true
-      };
-      if (hooks.startState) hooks.startState(state);
-      return state;
+    };
+    if (hooks.startState) hooks.startState(state);
+    return state;
     },
 
     token: function(stream, state) {
-      var ctx = state.context;
-      if (stream.sol()) {
+    var ctx = state.context;
+    if (stream.sol()) {
         if (ctx.align == null) ctx.align = false;
         state.indented = stream.indentation();
         state.startOfLine = true;
-      }
-      if (hooks.token) hooks.token(stream, state);
-      if (stream.eatSpace()) return null;
-      curPunc = null;
-      curKeyword = null;
-      var style = (state.tokenize || tokenBase)(stream, state);
-      if (style == "comment" || style == "meta" || style == "variable") return style;
-      if (ctx.align == null) ctx.align = true;
+    }
+    if (hooks.token) hooks.token(stream, state);
+    if (stream.eatSpace()) return null;
+    curPunc = null;
+    curKeyword = null;
+    var style = (state.tokenize || tokenBase)(stream, state);
+    if (style == "comment" || style == "meta" || style == "variable") return style;
+    if (ctx.align == null) ctx.align = true;
 
-      if (curPunc == ctx.type) {
+    if (curPunc == ctx.type) {
         popContext(state);
-      } else if ((curPunc == ";" && ctx.type == "statement") ||
-               (ctx.type && isClosing(curKeyword, ctx.type))) {
+    } else if ((curPunc == ";" && ctx.type == "statement") ||
+                (ctx.type && isClosing(curKeyword, ctx.type))) {
         ctx = popContext(state);
         while (ctx && ctx.type == "statement") ctx = popContext(state);
-      } else if (curPunc == "{") {
+    } else if (curPunc == "{") {
         pushContext(state, stream.column(), "}");
-      } else if (curPunc == "[") {
+    } else if (curPunc == "[") {
         pushContext(state, stream.column(), "]");
-      } else if (curPunc == "(") {
+    } else if (curPunc == "(") {
         pushContext(state, stream.column(), ")");
-      } else if (ctx && ctx.type == "endcase" && curPunc == ":") {
+    } else if (ctx && ctx.type == "endcase" && curPunc == ":") {
         pushContext(state, stream.column(), "statement");
-      } else if (curPunc == "newstatement") {
+    } else if (curPunc == "newstatement") {
         pushContext(state, stream.column(), "statement");
-      } else if (curPunc == "newblock") {
+    } else if (curPunc == "newblock") {
         if (curKeyword == "function" && ctx && (ctx.type == "statement" || ctx.type == "endgroup")) {
-          // The 'function' keyword can appear in some other contexts where it actually does not
-          // indicate a function (import/export DPI and covergroup definitions).
-          // Do nothing in this case
+        // The 'function' keyword can appear in some other contexts where it actually does not
+        // indicate a function (import/export DPI and covergroup definitions).
+        // Do nothing in this case
         } else if (curKeyword == "task" && ctx && ctx.type == "statement") {
-          // Same thing for task
+        // Same thing for task
         } else {
-          var close = openClose[curKeyword];
-          pushContext(state, stream.column(), close);
+        var close = openClose[curKeyword];
+        pushContext(state, stream.column(), close);
         }
-      }
+    }
 
-      state.startOfLine = false;
-      return style;
+    state.startOfLine = false;
+    return style;
     },
 
     indent: function(state, textAfter) {
-      if (state.tokenize != tokenBase && state.tokenize != null) return CodeMirror.Pass;
-      if (hooks.indent) {
+    if (state.tokenize != tokenBase && state.tokenize != null) return CodeMirror.Pass;
+    if (hooks.indent) {
         var fromHook = hooks.indent(state);
         if (fromHook >= 0) return fromHook;
-      }
-      var ctx = state.context, firstChar = textAfter && textAfter.charAt(0);
-      if (ctx.type == "statement" && firstChar == "}") ctx = ctx.prev;
-      var closing = false;
-      var possibleClosing = textAfter.match(closingBracketOrWord);
-      if (possibleClosing)
+    }
+    var ctx = state.context, firstChar = textAfter && textAfter.charAt(0);
+    if (ctx.type == "statement" && firstChar == "}") ctx = ctx.prev;
+    var closing = false;
+    var possibleClosing = textAfter.match(closingBracketOrWord);
+    if (possibleClosing)
         closing = isClosing(possibleClosing[0], ctx.type);
-      if (ctx.type == "statement") return ctx.indented + (firstChar == "{" ? 0 : statementIndentUnit);
-      else if (closingBracket.test(ctx.type) && ctx.align && !dontAlignCalls) return ctx.column + (closing ? 0 : 1);
-      else if (ctx.type == ")" && !closing) return ctx.indented + statementIndentUnit;
-      else return ctx.indented + (closing ? 0 : indentUnit);
+    if (ctx.type == "statement") return ctx.indented + (firstChar == "{" ? 0 : statementIndentUnit);
+    else if (closingBracket.test(ctx.type) && ctx.align && !dontAlignCalls) return ctx.column + (closing ? 0 : 1);
+    else if (ctx.type == ")" && !closing) return ctx.indented + statementIndentUnit;
+    else return ctx.indented + (closing ? 0 : indentUnit);
     },
 
     blockCommentStart: "/*",
@@ -387,36 +387,36 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
     var rtnIndent = -1, indentUnitRq = 0, curIndent = stream.indentation();
     switch (state.tlvCurCtlFlowChar) {
     case "\\":
-      curIndent = 0;
-      break;
+    curIndent = 0;
+    break;
     case "|":
-      if (state.tlvPrevPrevCtlFlowChar == "@") {
+    if (state.tlvPrevPrevCtlFlowChar == "@") {
         indentUnitRq = -2; //-2 new pipe rq after cur pipe
         break;
-      }
-      if (tlvchScopePrefixes[state.tlvPrevCtlFlowChar])
+    }
+    if (tlvchScopePrefixes[state.tlvPrevCtlFlowChar])
         indentUnitRq = 1; // +1 new scope
-      break;
+    break;
     case "M":  // m4
-      if (state.tlvPrevPrevCtlFlowChar == "@") {
+    if (state.tlvPrevPrevCtlFlowChar == "@") {
         indentUnitRq = -2; //-2 new inst rq after  pipe
         break;
-      }
-      if (tlvchScopePrefixes[state.tlvPrevCtlFlowChar])
+    }
+    if (tlvchScopePrefixes[state.tlvPrevCtlFlowChar])
         indentUnitRq = 1; // +1 new scope
-      break;
+    break;
     case "@":
-      if (state.tlvPrevCtlFlowChar == "S")
+    if (state.tlvPrevCtlFlowChar == "S")
         indentUnitRq = -1; // new pipe stage after stmts
-      if (state.tlvPrevCtlFlowChar == "|")
+    if (state.tlvPrevCtlFlowChar == "|")
         indentUnitRq = 1; // 1st pipe stage
-      break;
+    break;
     case "S":
-      if (state.tlvPrevCtlFlowChar == "@")
+    if (state.tlvPrevCtlFlowChar == "@")
         indentUnitRq = 1; // flow in pipe stage
-      if (tlvchScopePrefixes[state.tlvPrevCtlFlowChar])
+    if (tlvchScopePrefixes[state.tlvPrevCtlFlowChar])
         indentUnitRq = 1; // +1 new scope
-      break;
+    break;
     }
     var statementIndentUnit = tlvindentUnit;
     rtnIndent = curIndent + (indentUnitRq*statementIndentUnit);
@@ -426,112 +426,112 @@ CodeMirror.defineMode("verilog", function(config, parserConfig) {
   CodeMirror.defineMIME("text/x-tlv", {
     name: "verilog",
     hooks: {
-      "\\": function(stream, state) {
+    "\\": function(stream, state) {
         var vxIndent = 0, style = false;
         var curPunc  = stream.string;
         if ((stream.sol()) && ((/\\SV/.test(stream.string)) || (/\\TLV/.test(stream.string)))) {
-          curPunc = (/\\TLV_version/.test(stream.string))
+        curPunc = (/\\TLV_version/.test(stream.string))
             ? "\\TLV_version" : stream.string;
-          stream.skipToEnd();
-          if (curPunc == "\\SV" && state.vxCodeActive) {state.vxCodeActive = false;};
-          if ((/\\TLV/.test(curPunc) && !state.vxCodeActive)
+        stream.skipToEnd();
+        if (curPunc == "\\SV" && state.vxCodeActive) {state.vxCodeActive = false;};
+        if ((/\\TLV/.test(curPunc) && !state.vxCodeActive)
             || (curPunc=="\\TLV_version" && state.vxCodeActive)) {state.vxCodeActive = true;};
-          style = "keyword";
-          state.tlvCurCtlFlowChar  = state.tlvPrevPrevCtlFlowChar
+        style = "keyword";
+        state.tlvCurCtlFlowChar  = state.tlvPrevPrevCtlFlowChar
             = state.tlvPrevCtlFlowChar = "";
-          if (state.vxCodeActive == true) {
+        if (state.vxCodeActive == true) {
             state.tlvCurCtlFlowChar  = "\\";
             vxIndent = tlvGenIndent(stream, state);
-          }
-          state.vxIndentRq = vxIndent;
+        }
+        state.vxIndentRq = vxIndent;
         }
         return style;
-      },
-      tokenBase: function(stream, state) {
+    },
+    tokenBase: function(stream, state) {
         var vxIndent = 0, style = false;
         var tlvisOperatorChar = /[\[\]=:]/;
         var tlvkpScopePrefixs = {
-          "**":"variable-2", "*":"variable-2", "$$":"variable", "$":"variable",
-          "^^":"attribute", "^":"attribute"};
+        "**":"variable-2", "*":"variable-2", "$$":"variable", "$":"variable",
+        "^^":"attribute", "^":"attribute"};
         var ch = stream.peek();
         var vxCurCtlFlowCharValueAtStart = state.tlvCurCtlFlowChar;
         if (state.vxCodeActive == true) {
-          if (/[\[\]{}\(\);\:]/.test(ch)) {
+        if (/[\[\]{}\(\);\:]/.test(ch)) {
             // bypass nesting and 1 char punc
             style = "meta";
             stream.next();
-          } else if (ch == "/") {
+        } else if (ch == "/") {
             stream.next();
             if (stream.eat("/")) {
-              stream.skipToEnd();
-              style = "comment";
-              state.tlvCurCtlFlowChar = "S";
+            stream.skipToEnd();
+            style = "comment";
+            state.tlvCurCtlFlowChar = "S";
             } else {
-              stream.backUp(1);
+            stream.backUp(1);
             }
-          } else if (ch == "@") {
+        } else if (ch == "@") {
             // pipeline stage
             style = tlvchScopePrefixes[ch];
             state.tlvCurCtlFlowChar = "@";
             stream.next();
             stream.eatWhile(/[\w\$_]/);
-          } else if (stream.match(/\b[mM]4+/, true)) { // match: function(pattern, consume, caseInsensitive)
+        } else if (stream.match(/\b[mM]4+/, true)) { // match: function(pattern, consume, caseInsensitive)
             // m4 pre proc
             stream.skipTo("(");
             style = "def";
             state.tlvCurCtlFlowChar = "M";
-          } else if (ch == "!" && stream.sol()) {
+        } else if (ch == "!" && stream.sol()) {
             // v stmt in tlv region
             // state.tlvCurCtlFlowChar  = "S";
             style = "comment";
             stream.next();
-          } else if (tlvisOperatorChar.test(ch)) {
+        } else if (tlvisOperatorChar.test(ch)) {
             // operators
             stream.eatWhile(tlvisOperatorChar);
             style = "operator";
-          } else if (ch == "#") {
+        } else if (ch == "#") {
             // phy hier
             state.tlvCurCtlFlowChar  = (state.tlvCurCtlFlowChar == "")
-              ? ch : state.tlvCurCtlFlowChar;
+            ? ch : state.tlvCurCtlFlowChar;
             stream.next();
             stream.eatWhile(/[+-]\d/);
             style = "tag";
-          } else if (tlvkpScopePrefixs.propertyIsEnumerable(ch)) {
+        } else if (tlvkpScopePrefixs.propertyIsEnumerable(ch)) {
             // special TLV operators
             style = tlvkpScopePrefixs[ch];
             state.tlvCurCtlFlowChar = state.tlvCurCtlFlowChar == "" ? "S" : state.tlvCurCtlFlowChar;  // stmt
             stream.next();
             stream.match(/[a-zA-Z_0-9]+/);
-          } else if (style = tlvchScopePrefixes[ch] || false) {
+        } else if (style = tlvchScopePrefixes[ch] || false) {
             // special TLV operators
             state.tlvCurCtlFlowChar = state.tlvCurCtlFlowChar == "" ? ch : state.tlvCurCtlFlowChar;
             stream.next();
             stream.match(/[a-zA-Z_0-9]+/);
-          }
-          if (state.tlvCurCtlFlowChar != vxCurCtlFlowCharValueAtStart) { // flow change
+        }
+        if (state.tlvCurCtlFlowChar != vxCurCtlFlowCharValueAtStart) { // flow change
             vxIndent = tlvGenIndent(stream, state);
             state.vxIndentRq = vxIndent;
-          }
+        }
         }
         return style;
-      },
-      token: function(stream, state) {
+    },
+    token: function(stream, state) {
         if (state.vxCodeActive == true && stream.sol() && state.tlvCurCtlFlowChar != "") {
-          state.tlvPrevPrevCtlFlowChar = state.tlvPrevCtlFlowChar;
-          state.tlvPrevCtlFlowChar = state.tlvCurCtlFlowChar;
-          state.tlvCurCtlFlowChar = "";
+        state.tlvPrevPrevCtlFlowChar = state.tlvPrevCtlFlowChar;
+        state.tlvPrevCtlFlowChar = state.tlvCurCtlFlowChar;
+        state.tlvCurCtlFlowChar = "";
         }
-      },
-      indent: function(state) {
+    },
+    indent: function(state) {
         return (state.vxCodeActive == true) ? state.vxIndentRq : -1;
-      },
-      startState: function(state) {
+    },
+    startState: function(state) {
         state.tlvCurCtlFlowChar = "";
         state.tlvPrevCtlFlowChar = "";
         state.tlvPrevPrevCtlFlowChar = "";
         state.vxCodeActive = true;
         state.vxIndentRq = 0;
-      }
+    }
     }
   });
 });

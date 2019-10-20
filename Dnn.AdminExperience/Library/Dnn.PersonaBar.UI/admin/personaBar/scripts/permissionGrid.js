@@ -7,7 +7,7 @@ if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }
 if (typeof dnn.controls === "undefined" || dnn.controls === null) { dnn.controls = {}; }
 
 (function ($) {
-	
+
     var permissionGrid = dnn.controls.PermissionGrid = function (parent, data, options) {
         this.options = options;
         this.data = data;
@@ -161,14 +161,14 @@ if (typeof dnn.controls === "undefined" || dnn.controls === null) { dnn.controls
             rolesContainer.data('roles-data', rolesData);
             rolesContainer.html(
                 '<div class="leftGroup">' +
-				    '<label for="roleGroupSelector">' + this._localizedString('Filter By Group') + '</label>' +
+                    '<label for="roleGroupSelector">' + this._localizedString('Filter By Group') + '</label>' +
                     '<select id="roleGroupSelector"></select>' +
-			    '</div>' +
+                '</div>' +
                 '<div class="rightGroup">' +
-				    '<label for="roleSelector">' + this._localizedString('Select Role') + '</label>' +
+                    '<label for="roleSelector">' + this._localizedString('Select Role') + '</label>' +
                     '<select id="roleSelector"></select>' +
                     '<a class="simple-button btn-addrole" href="#">' + this._localizedString('Add') + '</a>' +
-			    '</div>');
+                '</div>');
 
             rolesContainer.prependTo(this._gridContainer);
             //bind groups data
@@ -203,7 +203,7 @@ if (typeof dnn.controls === "undefined" || dnn.controls === null) { dnn.controls
                     service.moduleRoot = 'InternalServices';
                     serviceUrl = service.getServiceRoot() + 'ItemListService/SearchUser';
                 }
-                
+
                 new dnn.permissionGridManager(serviceUrl, 'permissionGrid');
             }, 0);
         },
@@ -250,7 +250,7 @@ if (typeof dnn.controls === "undefined" || dnn.controls === null) { dnn.controls
                 });
             } else {
                 //Check if View Permission is not allow, then also set other permission
-            	if (isView) {
+                if (isView) {
                     if (currentState != 1) {
                         var $notView = col.parent().find('td').not('.p-view').not('.p-navigate').not('.p-browse');
                         $notView.each(function () {

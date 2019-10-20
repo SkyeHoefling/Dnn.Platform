@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -47,7 +47,7 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class ModuleInstaller : ComponentInstallerBase
     {
-		#region Private Properties
+        #region Private Properties
 
         private DesktopModuleInfo _desktopModule;
         private EventMessage _eventMessage;
@@ -67,13 +67,13 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             get
             {
-				return "cshtml, vbhtml, ashx, aspx, ascx, vb, cs, resx, css, js, resources, config, vbproj, csproj, sln, htm, html, xml, psd, svc, asmx, xsl, xslt";
+                return "cshtml, vbhtml, ashx, aspx, ascx, vb, cs, resx, css, js, resources, config, vbproj, csproj, sln, htm, html, xml, psd, svc, asmx, xsl, xslt";
             }
         }
-		
-		#endregion
 
-		#region Private Methods
+        #endregion
+
+        #region Private Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -84,7 +84,7 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             try
             {
-				//Attempt to get the Desktop Module
+                //Attempt to get the Desktop Module
                 DesktopModuleInfo tempDesktopModule = DesktopModuleController.GetDesktopModuleByPackageID(Package.PackageID);
                 if (tempDesktopModule != null)
                 {
@@ -95,23 +95,23 @@ namespace DotNetNuke.Services.Installer.Installers
                         Config.RemoveCodeSubDirectory(_desktopModule.CodeSubDirectory);
                     }
                     var controller = new DesktopModuleController();
-                    
+
 
                     Log.AddInfo(string.Format(Util.MODULE_UnRegistered, tempDesktopModule.ModuleName));
                     //remove admin/host pages
                     if (!String.IsNullOrEmpty(tempDesktopModule.AdminPage))
                     {
                         string tabPath = "//Admin//" + tempDesktopModule.AdminPage;
-                        
+
                         var portals = PortalController.Instance.GetPortals();
                         foreach (PortalInfo portal in portals)
                         {
                             var tabID = TabController.GetTabByTabPath(portal.PortalID, tabPath, Null.NullString);
-                            
+
                             TabInfo temp = TabController.Instance.GetTab(tabID, portal.PortalID);
                             if ((temp != null))
                             {
-                               
+
                                 var mods = TabModulesController.Instance.GetTabModules((temp));
                                 bool noOtherTabModule = true;
                                 foreach (ModuleInfo mod in mods)
@@ -119,7 +119,7 @@ namespace DotNetNuke.Services.Installer.Installers
                                     if (mod.DesktopModuleID != tempDesktopModule.DesktopModuleID)
                                     {
                                         noOtherTabModule = false;
-                                        
+
                                     }
                                 }
                                 if (noOtherTabModule)
@@ -130,7 +130,7 @@ namespace DotNetNuke.Services.Installer.Installers
                                 Log.AddInfo(string.Format(Util.MODULE_AdminPagemoduleRemoved, tempDesktopModule.AdminPage, portal.PortalID));
                             }
                         }
-                        
+
                     }
                     if (!String.IsNullOrEmpty(tempDesktopModule.HostPage))
                     {
@@ -155,10 +155,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 Log.AddFailure(ex);
             }
         }
-		
-		#endregion
 
-		#region Public Methods
+        #endregion
+
+        #region Public Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -168,7 +168,7 @@ namespace DotNetNuke.Services.Installer.Installers
         /// -----------------------------------------------------------------------------
         public override void Commit()
         {
-			//Add CodeSubDirectory
+            //Add CodeSubDirectory
             if (!string.IsNullOrEmpty(_desktopModule.CodeSubDirectory))
             {
                 Config.AddCodeSubDirectory(_desktopModule.CodeSubDirectory);
@@ -193,8 +193,8 @@ namespace DotNetNuke.Services.Installer.Installers
                 //send it to occur on next App_Start Event
                 EventQueueController.SendMessage(oAppStartMessage, "Application_Start_FirstRequest");
             }
-			
-			//Add Event Message
+
+            //Add Event Message
             if (_eventMessage != null)
             {
                 if (!String.IsNullOrEmpty(_eventMessage.Attributes["UpgradeVersionsList"]))
@@ -203,9 +203,9 @@ namespace DotNetNuke.Services.Installer.Installers
                     EventQueueController.SendMessage(_eventMessage, "Application_Start");
                 }
             }
-            
-			//Add DesktopModule to all portals
-			if (!_desktopModule.IsPremium)
+
+            //Add DesktopModule to all portals
+            if (!_desktopModule.IsPremium)
             {
                 DesktopModuleController.AddDesktopModuleToPortals(_desktopModule.DesktopModuleID);
             }
@@ -229,7 +229,7 @@ namespace DotNetNuke.Services.Installer.Installers
                         Log.AddInfo(string.Format(Util.MODULE_AdminPagemoduleAdded, _desktopModule.AdminPage,portal.PortalID));
                     }
                 }
-               
+
             }
 
             //Add host items
@@ -259,16 +259,16 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             try
             {
-				//Attempt to get the Desktop Module
+                //Attempt to get the Desktop Module
                 _installedDesktopModule = DesktopModuleController.GetDesktopModuleByModuleName(_desktopModule.ModuleName, Package.InstallerInfo.PortalID);
 
                 if (_installedDesktopModule != null)
                 {
                     _desktopModule.DesktopModuleID = _installedDesktopModule.DesktopModuleID;
-					//save the module's category
-                	_desktopModule.Category = _installedDesktopModule.Category;
+                    //save the module's category
+                    _desktopModule.Category = _installedDesktopModule.Category;
                 }
-				
+
                 //Clear ModuleControls and Module Definitions caches in case script has modifed the contents
                 DataCache.RemoveCache(DataCache.ModuleDefinitionCacheKey);
                 DataCache.RemoveCache(DataCache.ModuleControlsCacheKey);
@@ -308,7 +308,7 @@ namespace DotNetNuke.Services.Installer.Installers
             }
 
             _eventMessage = ReadEventMessageNode(manifestNav);
-			
+
             //Load permissions (to add)
             foreach (XPathNavigator moduleDefinitionNav in manifestNav.Select("desktopModule/moduleDefinitions/moduleDefinition"))
             {
@@ -334,21 +334,21 @@ namespace DotNetNuke.Services.Installer.Installers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// The Rollback method undoes the installation of the component in the event 
+        /// The Rollback method undoes the installation of the component in the event
         /// that one of the other components fails
         /// </summary>
         /// -----------------------------------------------------------------------------
         public override void Rollback()
         {
-			//If Temp Module exists then we need to update the DataStore with this 
+            //If Temp Module exists then we need to update the DataStore with this
             if (_installedDesktopModule == null)
             {
-				//No Temp Module - Delete newly added module
+                //No Temp Module - Delete newly added module
                 DeleteModule();
             }
             else
             {
-				//Temp Module - Rollback to Temp
+                //Temp Module - Rollback to Temp
                 DesktopModuleController.SaveDesktopModule(_installedDesktopModule, true, false);
             }
         }
@@ -362,7 +362,7 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             DeleteModule();
         }
-		
-		#endregion
+
+        #endregion
     }
 }

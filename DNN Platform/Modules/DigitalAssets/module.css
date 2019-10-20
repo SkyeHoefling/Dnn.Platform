@@ -22,12 +22,12 @@
     padding: 0;
 }
 
-#dnnModuleDigitalAssetsLeftPane ul.dnnAdminTabNav li {    
+#dnnModuleDigitalAssetsLeftPane ul.dnnAdminTabNav li {
     width: 50%;
     margin-right: 0;
 }
 
-#dnnModuleDigitalAssetsLeftPane ul.dnnAdminTabNav li a {    
+#dnnModuleDigitalAssetsLeftPane ul.dnnAdminTabNav li a {
     width: 100%;
 }
 
@@ -43,18 +43,18 @@
 }
 
 #dnnModuleDigitalAssetsLeftPaneFilesTabContentScroll {
-    padding-top: 10px;    
+    padding-top: 10px;
     outline: none;
     position: absolute;
     bottom: 0;
     top: 0;
     left: 10px;
-    right: 0;    
+    right: 0;
 }
 
 #dnnModuleDigitalAssetsLeftPaneActions {
-    position: absolute;   
-    list-style: none outside none; 
+    position: absolute;
+    list-style: none outside none;
     color: #000000;
     font: 12px/16px "Segoe UI",Arial,Helvetica,sans-serif;
     margin-left: 0;
@@ -62,7 +62,7 @@
 
 #dnnModuleDigitalAssetsLeftPaneActions li {
     cursor: pointer;
-    line-height: 40px; 
+    line-height: 40px;
     background-position: 3px center;
     background-repeat: no-repeat;
     padding-left: 22px;
@@ -82,7 +82,7 @@
 }
 
 .dnnModuleDigitalAssetsErrorMessage {
-    color: red;    
+    color: red;
 }
 
 #dnnModuleDigitalAssetsSelectionToolbar {
@@ -90,7 +90,7 @@
 }
 
 #dnnModuleDigitalAssetsSelectionToolbar, #dnnModuleDigitalAssetsListViewToolbar, #dnnModuleDigitalAssetsListContainer,
-.dnnModuleDigitalAssetsGrid > table > thead > tr {    
+.dnnModuleDigitalAssetsGrid > table > thead > tr {
     min-height: 20px;
     border: none;
     border-right: 1px solid #E0E0E0;
@@ -174,11 +174,11 @@
     padding-left: 5px;
 }
 
-.RadGrid.dnnModuleDigitalAssetsGrid .rgPageFirst, 
-.RadGrid.dnnModuleDigitalAssetsGrid .rgPagePrev, 
-.RadGrid.dnnModuleDigitalAssetsGrid .rgPageNext, 
+.RadGrid.dnnModuleDigitalAssetsGrid .rgPageFirst,
+.RadGrid.dnnModuleDigitalAssetsGrid .rgPagePrev,
+.RadGrid.dnnModuleDigitalAssetsGrid .rgPageNext,
 .RadGrid.dnnModuleDigitalAssetsGrid .rgPageLast {
-    
+
     color: #999999;
     height: 22px;
     vertical-align: top;
@@ -192,11 +192,11 @@
     color: #999999;
 }
 
-.RadGrid.dnnModuleDigitalAssetsGrid .rgPageFirst:hover, 
-.RadGrid.dnnModuleDigitalAssetsGrid .rgPagePrev:hover, 
-.RadGrid.dnnModuleDigitalAssetsGrid .rgPageNext:hover, 
+.RadGrid.dnnModuleDigitalAssetsGrid .rgPageFirst:hover,
+.RadGrid.dnnModuleDigitalAssetsGrid .rgPagePrev:hover,
+.RadGrid.dnnModuleDigitalAssetsGrid .rgPageNext:hover,
 .RadGrid.dnnModuleDigitalAssetsGrid .rgPageLast:hover {
-    
+
     color: #333;
     text-decoration: underline;
 }
@@ -235,7 +235,7 @@ span.dnnModuleDigitalAssetsNoItems {
     background-position: center center;
     background-repeat: no-repeat;
     display: block;
-    height: 20px;    
+    height: 20px;
     width: 20px;
 }
 #dnnModuleDigitalAssetsMainToolbarTitle {
@@ -279,7 +279,7 @@ span.dnnModuleDigitalAssetsNoItems {
     height: 30px;
     min-width: 31px;
     cursor: pointer;
-    padding: 0;    
+    padding: 0;
 }
 
 #dnnModuleDigitalAssetsMainToolbar button.leftAligned {
@@ -339,7 +339,7 @@ span.dnnModuleDigitalAssetsNoItems {
 #dnnModuleDigitalAssetsMainToolbar button span {
     background-position: center center;
     background-repeat: no-repeat;
-    display: block;    
+    display: block;
     height: 30px;
     width: 100%;
     max-width: 30px;
@@ -383,9 +383,9 @@ span.dnnModuleDigitalAssetsNoItems {
     display: none;
 }
 
-#dnnModuleDigitalAssetsSelectionText 
+#dnnModuleDigitalAssetsSelectionText
 {
-    font-weight: bold;    
+    font-weight: bold;
     margin-left: 10px;
     margin-right: 20px;
     float: left;
@@ -407,7 +407,7 @@ li.rmItem a.permission_denied {
 }
 
 #dnnModuleDigitalAssetsCreateFolderModal .dnnModuleDigitalAssetsCreateFolderModalNoEditableField {
-    margin-bottom: 18px;        
+    margin-bottom: 18px;
     max-width: 225px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -522,7 +522,7 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
     bottom: 0;
 }
 
-.dnnModuleDigitalAssetsGrid tr.rgRow, .dnnModuleDigitalAssetsGrid tr.rgAltRow 
+.dnnModuleDigitalAssetsGrid tr.rgRow, .dnnModuleDigitalAssetsGrid tr.rgAltRow
 {
     background-color: transparent;
     color: #777777;
@@ -534,7 +534,7 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
     border-top: 1px solid #E0E0E0;
 }
 
-.dnnModuleDigitalAssetsGrid th.rgHeader, .dnnModuleDigitalAssetsGrid th.rgResizeCol 
+.dnnModuleDigitalAssetsGrid th.rgHeader, .dnnModuleDigitalAssetsGrid th.rgResizeCol
 {
     border-bottom-color: #E0E0E0;
     border-right-color: #E0E0E0;
@@ -545,9 +545,9 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
     color: #777;
 }
 
-.dnnModuleDigitalAssetsGrid tr.rgRow:hover td, .dnnModuleDigitalAssetsGrid tr.rgAltRow:hover td 
+.dnnModuleDigitalAssetsGrid tr.rgRow:hover td, .dnnModuleDigitalAssetsGrid tr.rgAltRow:hover td
 {
-    color: black;   
+    color: black;
 }
 
 .dnnModuleDigitalAssetsGrid tr.rgSelectedRow, .dnnModuleDigitalAssetsGrid tr.rgSelectedRow,
@@ -556,7 +556,7 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
     background-color: #4D8AE2;
 }
 
-.dnnModuleDigitalAssetsGrid tr.rgSelectedRow, .dnnModuleDigitalAssetsGrid tr.rgSelectedRow 
+.dnnModuleDigitalAssetsGrid tr.rgSelectedRow, .dnnModuleDigitalAssetsGrid tr.rgSelectedRow
 {
     color: white;
 }
@@ -577,18 +577,18 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
 .dnnModuleDigitalAssetsGrid tr.rgPager thead {
     display: none !important;
 }
-    
+
 /* Context Menu */
 
 .RadMenu.dnnModuleDigitalAssetsContextMenu ul.rmGroup li.rmItem
  {
     background-color: white;
-    background-image: none;    
+    background-image: none;
     border-bottom: 1px solid #DFDFDF;
     height: 35px;
 }
 
-.RadMenu.dnnModuleDigitalAssetsContextMenu, .RadMenu.dnnModuleDigitalAssetsContextMenu a.rmLink 
+.RadMenu.dnnModuleDigitalAssetsContextMenu, .RadMenu.dnnModuleDigitalAssetsContextMenu a.rmLink
 {
     font: inherit;
     font-size: 11px;
@@ -601,7 +601,7 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
 }
 
 .RadMenu.dnnModuleDigitalAssetsContextMenu ul.rmGroup span.rmText {
-    background-image: none; 
+    background-image: none;
     color: #777;
 }
 
@@ -615,7 +615,7 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
 }
 
 .RadMenu.dnnModuleDigitalAssetsContextMenu ul.rmGroup a.rmLink:hover span {
-    color: black;     
+    color: black;
 }
 
 .RadMenu.dnnModuleDigitalAssetsContextMenu .RadMenu.dnnModuleDigitalAssetsContextMenu ul.rmGroup li.rmItem.rmLast
@@ -714,13 +714,13 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
 }
 
 .dnnModuledigitalAssetsTreeView.RadTreeView .rtImg {
-    cursor: pointer;    
+    cursor: pointer;
     height: 16px;
     width: 16px;
 }
 
 .dnnModuledigitalAssetsTreeView {
-    width: 200px;   
+    width: 200px;
 }
 
 .dnnModuledigitalAssetsTreeView.RadTreeView_Default .rtPlus, .dnnModuledigitalAssetsTreeView.RadTreeView_Default .rtMinus {
@@ -740,7 +740,7 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
     color: #4E89E3;
 }
 
-.dnnModuledigitalAssetsTreeView.RadTreeView li.rtLI>div {    
+.dnnModuledigitalAssetsTreeView.RadTreeView li.rtLI>div {
     text-overflow: ellipsis;
 }
 
@@ -766,7 +766,7 @@ div.dnnModuleDigitalAssetsGrid > table > tfoot > tr.rgPager > td > table {
     margin-bottom: 47px;
 }
 
-#dnnModuleDigitalAssetsListView {  
+#dnnModuleDigitalAssetsListView {
     padding: 9px;
     display: inline-block;
 }
@@ -852,7 +852,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
     min-height: 300px;
     width: 600px !important;
     margin-top: 7px;
-    margin-bottom: 25px;    
+    margin-bottom: 25px;
     float: left;
 }
 
@@ -862,7 +862,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
     height: 160px;
     vertical-align: middle;
     display: table-cell;
-    text-align: center;    
+    text-align: center;
 }
 
 .dnnModuleDigitalAssetsPreviewInfoImageContainerThumbnail
@@ -873,7 +873,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
 }
 
 .dnnModuleDigitalAssetsPreviewInfoZoomOut {
-    margin-top: 8px; 
+    margin-top: 8px;
 }
 
 .dnnModuleDigitalAssetsPreviewInfoZoomOutContainer {
@@ -883,7 +883,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
 
     vertical-align: middle;
     display: table-cell;
-    text-align: center;    
+    text-align: center;
 
     width: 32px;
     height: 32px;
@@ -930,7 +930,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
 }
 
 .dnnModuleDigitalAssetsGeneralPropertiesSingleField{
-    margin-left: 8px;    
+    margin-left: 8px;
 }
 
 .dnnLabel + span.dnnModuleDigitalAssetsGeneralPropertiesSingleField
@@ -939,7 +939,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
 }
 
 .dnnModuleDigitalAssetsGeneralPropertiesGroupedFields {
-    display: inline-block;    
+    display: inline-block;
     padding-left: 8px;
     width: 55%;
     background-color: #f0f0f0;
@@ -950,7 +950,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
     left: -5px;
 }
 
-.dnnFormItem > div.dnnModuleDigitalAssetsGeneralPropertiesGroupedFields {    
+.dnnFormItem > div.dnnModuleDigitalAssetsGeneralPropertiesGroupedFields {
     margin-bottom: 18px;
 }
 
@@ -981,13 +981,13 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
 
 #dnnModuleDigitalAssetsLeftPane ul.buttonGroup li a {
     padding: 5px 0px;
-    margin-top: 5px;    
+    margin-top: 5px;
     border: 1px solid #c2c2c2;
     background: #f0f2f1;
-    background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%); 
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)); 
-    background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%); 
-    background: linear-gradient(top, #fff 0%,#f0f2f1 100%); 
+    background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1));
+    background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%);
+    background: linear-gradient(top, #fff 0%,#f0f2f1 100%);
     color: #999999;
     font-weight: normal;
     box-shadow: 0 1px grey;
@@ -1024,17 +1024,17 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
 #dnnModuleDigitalAssetsMainToolbar .DigitalAssetsMenuButton > span {
     display:block;
     height:30px;
-    float:right;        
+    float:right;
     border:1px solid transparent
 }
 
 .DigitalAssetsMenuButton_menu > ul > li > span {
-    display: inline-block; 
+    display: inline-block;
     margin-right: 3px;
 }
 
 #dnnModuleDigitalAssetsMainToolbar .DigitalAssetsMenuButton_wrapper {
-    height:16px;    
+    height:16px;
     margin-top: 5px;
     min-width:1px;
     position: relative;
@@ -1058,14 +1058,14 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
     right: -3px;
     bottom: -13px;
     display:none;
-    min-width:82px; 
+    min-width:82px;
     margin-top: 24px;
     background-color:#fff;
     z-index:1000;
 }
 #dnnModuleDigitalAssetsMainToolbar .DigitalAssetsMenuButton_menu .handle{
     z-index:1000;
-    position:absolute; 
+    position:absolute;
     right: 19px;
     top: -29px;
     width: 39px;
@@ -1074,7 +1074,7 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
     border-bottom:1px solid #fff;
     -moz-border-radius-topright: 3px;
     -webkit-border-radius: 			0px 3px 0px 0px;
-    border-radius: 					0px 3px 0px 0px; 
+    border-radius: 					0px 3px 0px 0px;
 }
 
 #dnnModuleDigitalAssetsMainToolbar .DigitalAssetsMenuButton_menu .handle:hover
@@ -1087,25 +1087,25 @@ div.dnnModuleDigitalAssetsListViewItem span:hover {
 }
 
 #dnnModuleDigitalAssetsMainToolbar .DigitalAssetsMenuButton_menu ul{
-    position:absolute; 
-    top:-3px; 
+    position:absolute;
+    top:-3px;
     right:-157px;
     width: 215px;
     padding:10px 0 10px 0;
     border:1px solid #ccc;
     list-style:none;
     background:#fff;
-    
+
     -webkit-border-radius: 0px 0px 3px 3px;
     border-radius: 0px 0px 3px 3px;
-    
+
     -webkit-box-shadow: 	0px 2px 0px 0px rgba(0, 0, 0, .5);
     -moz-box-shadow: 		0px 2px 0px 0px rgba(0, 0, 0, .5);
-    box-shadow: 			0px 2px 0px 0px rgba(0, 0, 0, .5); 
-        
+    box-shadow: 			0px 2px 0px 0px rgba(0, 0, 0, .5);
+
 }
 #dnnModuleDigitalAssetsMainToolbar .DigitalAssetsMenuButton_menu ul li {
-    list-style:none; 
+    list-style:none;
     margin-bottom: 4px;
     padding-left: 10px;
 }
@@ -1140,7 +1140,7 @@ div.dnnModuleDigitalAssetsDragClue, .dnnModuleDigitalAssetsGrid.GridDraggedRows,
     padding: 10px 15px;
     color: #DDDDDD;
     font-weight: bold;
-    display: inline;  
+    display: inline;
 }
 
 .dnnModuledigitalAssetsTreeView.rtDragClue>ul>div {
@@ -1165,7 +1165,7 @@ li.dropTarget, .dnnModuleDigitalAssetsListViewItem.dropTarget {
     box-shadow: 0 0 10px 0 #028BFF inset;
 }
 
-tr.dropTarget td {    
+tr.dropTarget td {
     box-shadow: 0px 10px 8px -10px #028BFF inset, 0 -10px 8px -10px #028BFF inset;
 }
 

@@ -36,7 +36,7 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
-            
+
             Email = GetFlagValue(FlagEmail, "Email", string.Empty);
             Username = GetFlagValue(FlagUsername, "Username", string.Empty);
             Role = GetFlagValue(FlagRole, "Role", string.Empty);
@@ -84,7 +84,7 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
             var recCount = 0;
             var max = Max <= 0 ? 10 : (Max > 500 ? 500 : Max);
 
-            // We need to cover the site group scenario for child portal 
+            // We need to cover the site group scenario for child portal
             var portalId = PortalController.GetEffectivePortalId(PortalId);
             var getUsersContract = new GetUsersContract
             {

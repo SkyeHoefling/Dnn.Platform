@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -79,9 +79,9 @@ namespace DotNetNuke.Services.Search.Entities
         /// <summary>
         /// Locale to restrict Search to. This field can be left empty for single language site
         /// </summary>
-        /// <remarks>E.g. A value en-US or nl-NL can specified to restrict search to a single locale .</remarks> 
+        /// <remarks>E.g. A value en-US or nl-NL can specified to restrict search to a single locale .</remarks>
         public string Locale { get; set; }
-        
+
         /// <summary>
         /// Begin Date of the time when Content was last modified (in Utc). This field is optional.
         /// </summary>
@@ -171,11 +171,11 @@ namespace DotNetNuke.Services.Search.Entities
         /// <remarks>An empty dictionary means this is property is not used.</remarks>
         public IDictionary<string, int> NumericKeys { get; set; }
 
-		/// <summary>
-		/// Set this to true to allow search in word.
-		/// </summary>
-		/// <remarks>When host setting "Search_AllowLeadingWildcard" set to true, it will always allow search in word but ignore this value.</remarks>
-		public bool AllowLeadingWildcard { get; set; }
+        /// <summary>
+        /// Set this to true to allow search in word.
+        /// </summary>
+        /// <remarks>When host setting "Search_AllowLeadingWildcard" set to true, it will always allow search in word but ignore this value.</remarks>
+        public bool AllowLeadingWildcard { get; set; }
 
         #region constructor
 
@@ -194,6 +194,6 @@ namespace DotNetNuke.Services.Search.Entities
             NumericKeys = new Dictionary<string, int>();
         }
 
-        #endregion 
+        #endregion
     }
 }

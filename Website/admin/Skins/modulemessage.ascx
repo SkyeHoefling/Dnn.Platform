@@ -5,11 +5,11 @@
     <asp:label id="lblMessage" runat="server" enableviewstate="False" />
 </asp:Panel>
 <dnn:DnnScriptBlock ID="scrollScript" runat="server">
-	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-			var $body = window.opera ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
-			var scrollTop = $('#<%=dnnSkinMessage.ClientID %>').offset().top - parseInt($(document.body).css("margin-top"));
-			$body.animate({ scrollTop: scrollTop }, 'fast');
-		});
-	</script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            var $body = window.opera ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
+            var scrollTop = $('#<%=dnnSkinMessage.ClientID %>').offset().top - parseInt($(document.body).css("margin-top"));
+            $body.animate({ scrollTop: scrollTop }, 'fast');
+        });
+    </script>
 </dnn:DnnScriptBlock>

@@ -1,67 +1,67 @@
 /* DNN-7164 */
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Modules]') AND name = N'IX_{objectQualifier}Modules_ModuleDefId')
-	DROP INDEX [IX_{objectQualifier}Modules_ModuleDefId] ON {databaseOwner}[{objectQualifier}Modules] 
+    DROP INDEX [IX_{objectQualifier}Modules_ModuleDefId] ON {databaseOwner}[{objectQualifier}Modules]
 GO
 
 CREATE NONCLUSTERED INDEX [IX_{objectQualifier}Modules_ModuleDefId] ON {databaseOwner}[{objectQualifier}Modules]
 (
-	[ModuleDefID] ASC,
-	[ModuleID] ASC
+    [ModuleDefID] ASC,
+    [ModuleID] ASC
 )
-	INCLUDE ( [AllTabs],
-	[InheritViewPermissions],
-	[StartDate],
-	[EndDate],
-	[PortalID],
-	[CreatedByUserID],
-	[CreatedOnDate],
-	[LastModifiedByUserID],
-	[LastModifiedOnDate],
-	[LastContentModifiedOnDate],
-	[IsShareable],
-	[IsShareableViewOnly]) 
+    INCLUDE ( [AllTabs],
+    [InheritViewPermissions],
+    [StartDate],
+    [EndDate],
+    [PortalID],
+    [CreatedByUserID],
+    [CreatedOnDate],
+    [LastModifiedByUserID],
+    [LastModifiedOnDate],
+    [LastContentModifiedOnDate],
+    [IsShareable],
+    [IsShareableViewOnly])
 GO
 
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}TabModules]') AND name = N'IX_{objectQualifier}TabModules_ModuleID')
-	DROP INDEX [IX_{objectQualifier}TabModules_ModuleID] ON {databaseOwner}[{objectQualifier}TabModules]
+    DROP INDEX [IX_{objectQualifier}TabModules_ModuleID] ON {databaseOwner}[{objectQualifier}TabModules]
 GO
 
 CREATE NONCLUSTERED INDEX [IX_{objectQualifier}TabModules_ModuleID] ON {databaseOwner}[{objectQualifier}TabModules]
 (
-	[ModuleID] ASC,
-	[TabID] ASC
+    [ModuleID] ASC,
+    [TabID] ASC
 )
 INCLUDE ( [IsDeleted],
-	[CultureCode],
-	[ModuleTitle],
-	[Visibility],
-	[ContainerSrc],
-	[DisplayTitle],
-	[DisplayPrint],
-	[DisplaySyndicate],
-	[IsWebSlice],
-	[WebSliceTitle],
-	[WebSliceExpiryDate],
-	[WebSliceTTL],
-	[Header],
-	[Footer],
-	[UniqueId],
-	[VersionGuid],
-	[DefaultLanguageGuid],
-	[LocalizedVersionGuid],
-	[TabModuleID],
-	[PaneName],
-	[ModuleOrder],
-	[CacheTime],
-	[Alignment],
-	[Color],
-	[Border],
-	[IconFile],
-	[CacheMethod]) 
+    [CultureCode],
+    [ModuleTitle],
+    [Visibility],
+    [ContainerSrc],
+    [DisplayTitle],
+    [DisplayPrint],
+    [DisplaySyndicate],
+    [IsWebSlice],
+    [WebSliceTitle],
+    [WebSliceExpiryDate],
+    [WebSliceTTL],
+    [Header],
+    [Footer],
+    [UniqueId],
+    [VersionGuid],
+    [DefaultLanguageGuid],
+    [LocalizedVersionGuid],
+    [TabModuleID],
+    [PaneName],
+    [ModuleOrder],
+    [CacheTime],
+    [Alignment],
+    [Color],
+    [Border],
+    [IconFile],
+    [CacheMethod])
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}vw_Modules]', N'V') IS NOT NULL
-	DROP VIEW {databaseOwner}[{objectQualifier}vw_Modules]
+    DROP VIEW {databaseOwner}[{objectQualifier}vw_Modules]
 GO
 
 CREATE VIEW {databaseOwner}[{objectQualifier}vw_Modules]
@@ -81,11 +81,11 @@ AS
         TM.Alignment,
         TM.Color,
         TM.Border,
-        Case when tm.IconFile LIKE 'fileid=%' 
-			then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
-			 WHERE fileid = CAST(SUBSTRING(tm.IconFile, 8, 10) AS Int))
-			 else Coalesce(tm.IconFile,'')
-			 end as IconFile,
+        Case when tm.IconFile LIKE 'fileid=%'
+            then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
+            WHERE fileid = CAST(SUBSTRING(tm.IconFile, 8, 10) AS Int))
+            else Coalesce(tm.IconFile,'')
+            end as IconFile,
         M.AllTabs,
         TM.Visibility,
         TM.IsDeleted,
@@ -127,17 +127,17 @@ AS
         TM.LocalizedVersionGuid,
         TM.CultureCode
     FROM        {databaseOwner}[{objectQualifier}ModuleDefinitions] AS MD
-     INNER JOIN {databaseOwner}[{objectQualifier}Modules]           AS M  ON MD.ModuleDefID = M.ModuleDefID
-     INNER JOIN {databaseOwner}[{objectQualifier}ModuleControls]    AS MC ON MD.ModuleDefID = MC.ModuleDefID
-     INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules]    AS DM ON MD.DesktopModuleID = DM.DesktopModuleID
-     LEFT  JOIN {databaseOwner}[{objectQualifier}ContentItems]      AS CI ON M.ContentItemID = CI.ContentItemID
-     LEFT  JOIN {databaseOwner}[{objectQualifier}TabModules]       AS TM ON M.ModuleID = TM.ModuleID
-     LEFT  JOIN {databaseOwner}[{objectQualifier}Tabs]              AS T  ON TM.TabID = T.TabID
+    INNER JOIN {databaseOwner}[{objectQualifier}Modules]           AS M  ON MD.ModuleDefID = M.ModuleDefID
+    INNER JOIN {databaseOwner}[{objectQualifier}ModuleControls]    AS MC ON MD.ModuleDefID = MC.ModuleDefID
+    INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules]    AS DM ON MD.DesktopModuleID = DM.DesktopModuleID
+    LEFT  JOIN {databaseOwner}[{objectQualifier}ContentItems]      AS CI ON M.ContentItemID = CI.ContentItemID
+    LEFT  JOIN {databaseOwner}[{objectQualifier}TabModules]       AS TM ON M.ModuleID = TM.ModuleID
+    LEFT  JOIN {databaseOwner}[{objectQualifier}Tabs]              AS T  ON TM.TabID = T.TabID
     WHERE (MC.ControlKey IS NULL)
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}vw_Portals]', N'V') IS NOT NULL
-	DROP VIEW {databaseOwner}[{objectQualifier}vw_Portals]
+    DROP VIEW {databaseOwner}[{objectQualifier}vw_Portals]
 GO
 
 CREATE VIEW {databaseOwner}[{objectQualifier}vw_Portals]
@@ -146,11 +146,11 @@ AS
         P.PortalID,
         P.PortalGroupID,
         PL.PortalName,
-		 Case when PL.LogoFile LIKE 'fileid=%' 
-			then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
-			 WHERE fileid = CAST(SUBSTRING(PL.LogoFile, 8, 10) AS Int))
-			 else Coalesce(PL.LogoFile,'')
-			 end as LogoFile,
+        Case when PL.LogoFile LIKE 'fileid=%'
+            then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
+            WHERE fileid = CAST(SUBSTRING(PL.LogoFile, 8, 10) AS Int))
+            else Coalesce(PL.LogoFile,'')
+            end as LogoFile,
         PL.FooterText,
         P.ExpiryDate,
         P.UserRegistration,
@@ -165,12 +165,12 @@ AS
         P.RegisteredRoleId,
         PL.Description,
         PL.KeyWords,
-         Case when PL.BackgroundFile LIKE 'fileid=%' 
-			then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
-			 WHERE fileid = CAST(SUBSTRING(PL.BackgroundFile, 8, 10) AS Int))
-			 else Coalesce(PL.BackgroundFile,'')
-			 end as BackgroundFile
-		,
+        Case when PL.BackgroundFile LIKE 'fileid=%'
+            then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
+            WHERE fileid = CAST(SUBSTRING(PL.BackgroundFile, 8, 10) AS Int))
+            else Coalesce(PL.BackgroundFile,'')
+            end as BackgroundFile
+        ,
         P.GUID,
         P.PaymentProcessor,
         P.ProcessorUserId,
@@ -182,7 +182,7 @@ AS
         PL.AdminTabId,
         P.HomeDirectory,
         PL.SplashTabId,
-       PL.HomeTabId,
+        PL.HomeTabId,
         PL.LoginTabId,
         PL.RegisterTabId,
         PL.UserTabId,
@@ -201,7 +201,7 @@ AS
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}vw_TabModules]', N'V') IS NOT NULL
-	DROP VIEW {databaseOwner}[{objectQualifier}vw_TabModules]
+    DROP VIEW {databaseOwner}[{objectQualifier}vw_TabModules]
 GO
 
 CREATE VIEW {databaseOwner}[{objectQualifier}vw_TabModules]
@@ -221,12 +221,12 @@ AS
         TM.Alignment,
         TM.Color,
         TM.Border,
-         Case when tm.IconFile LIKE 'fileid=%' 
-			then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
-			 WHERE fileid = CAST(SUBSTRING(tm.IconFile, 8, 10) AS Int))
-			 else Coalesce(tm.IconFile,'')
-			 end as IconFile
-		,M.AllTabs,
+        Case when tm.IconFile LIKE 'fileid=%'
+            then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
+            WHERE fileid = CAST(SUBSTRING(tm.IconFile, 8, 10) AS Int))
+            else Coalesce(tm.IconFile,'')
+            end as IconFile
+        ,M.AllTabs,
         TM.Visibility,
         TM.IsDeleted,
         TM.Header,
@@ -267,17 +267,17 @@ AS
         TM.LocalizedVersionGuid,
         TM.CultureCode
     FROM {databaseOwner}[{objectQualifier}ModuleDefinitions]     AS MD
-     INNER JOIN {databaseOwner}[{objectQualifier}Modules]        AS M  ON MD.ModuleDefID = M.ModuleDefID
-     INNER JOIN {databaseOwner}[{objectQualifier}ModuleControls] AS MC ON MD.ModuleDefID = MC.ModuleDefID
-     INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules] AS DM ON MD.DesktopModuleID = DM.DesktopModuleID
-     LEFT  JOIN {databaseOwner}[{objectQualifier}ContentItems]   AS CI ON M.ContentItemID = CI.ContentItemID
-     LEFT  JOIN {databaseOwner}[{objectQualifier}TabModules]     AS TM ON M.ModuleID = TM.ModuleID
-     LEFT  JOIN {databaseOwner}[{objectQualifier}Tabs]           AS T  ON TM.TabID = T.TabID
+    INNER JOIN {databaseOwner}[{objectQualifier}Modules]        AS M  ON MD.ModuleDefID = M.ModuleDefID
+    INNER JOIN {databaseOwner}[{objectQualifier}ModuleControls] AS MC ON MD.ModuleDefID = MC.ModuleDefID
+    INNER JOIN {databaseOwner}[{objectQualifier}DesktopModules] AS DM ON MD.DesktopModuleID = DM.DesktopModuleID
+    LEFT  JOIN {databaseOwner}[{objectQualifier}ContentItems]   AS CI ON M.ContentItemID = CI.ContentItemID
+    LEFT  JOIN {databaseOwner}[{objectQualifier}TabModules]     AS TM ON M.ModuleID = TM.ModuleID
+    LEFT  JOIN {databaseOwner}[{objectQualifier}Tabs]           AS T  ON TM.TabID = T.TabID
     WHERE (MC.ControlKey IS NULL)
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}vw_Tabs]', N'V') IS NOT NULL
-	DROP VIEW {databaseOwner}[{objectQualifier}vw_Tabs]
+    DROP VIEW {databaseOwner}[{objectQualifier}vw_Tabs]
 GO
 
 CREATE VIEW {databaseOwner}[{objectQualifier}vw_Tabs]
@@ -295,19 +295,19 @@ AS
         T.DefaultLanguageGuid,
         T.LocalizedVersionGuid,
         T.IsVisible,
-		T.HasBeenPublished,
-		 Case when t.IconFile LIKE 'fileid=%' 
-			then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
-			 WHERE fileid = CAST(SUBSTRING(t.IconFile, 8, 10) AS Int))
-			 else Coalesce(t.IconFile,'')
-			 end as IconFile
-		,
-         Case when t.IconFileLarge LIKE 'fileid=%' 
-			then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
-			 WHERE fileid = CAST(SUBSTRING(t.IconFileLarge, 8, 10) AS Int))
-			 else Coalesce(t.IconFileLarge,'')
-			 end as IconFileLarge
-		,T.DisableLink,
+        T.HasBeenPublished,
+        Case when t.IconFile LIKE 'fileid=%'
+            then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
+            WHERE fileid = CAST(SUBSTRING(t.IconFile, 8, 10) AS Int))
+            else Coalesce(t.IconFile,'')
+            end as IconFile
+        ,
+        Case when t.IconFileLarge LIKE 'fileid=%'
+            then (SELECT IsNull(Folder, '') + [FileName] FROM {databaseOwner}[{objectQualifier}vw_Files]
+            WHERE fileid = CAST(SUBSTRING(t.IconFileLarge, 8, 10) AS Int))
+            else Coalesce(t.IconFileLarge,'')
+            end as IconFileLarge
+        ,T.DisableLink,
         T.Title,
         T.Description,
         T.KeyWords,
@@ -335,7 +335,7 @@ AS
         T.CreatedOnDate,
         T.LastModifiedByUserID,
         T.LastModifiedOnDate,
-		T.IsSystem
+        T.IsSystem
     FROM       {databaseOwner}[{objectQualifier}Tabs]         AS T
     LEFT  JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI ON T.ContentItemID = CI.ContentItemID
 GO

@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -45,7 +45,7 @@ namespace DotNetNuke.Modules.RazorHost
     [Obsolete("Deprecated in 9.3.2, will be removed in 11.0.0, use Razor Pages instead")]
     public partial class CreateModule : ModuleUserControlBase
     {
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CreateModule));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CreateModule));
 
         private string razorScriptFileFormatString = "~/DesktopModules/RazorModules/RazorHost/Scripts/{0}";
         private string razorScriptFolder = "~/DesktopModules/RazorModules/RazorHost/Scripts/";
@@ -121,37 +121,37 @@ namespace DotNetNuke.Modules.RazorHost
             }
 
             //Create new Manifest in target folder
-			string manifestMapPath = folderMapPath + "/" + ModuleControl.Replace(".ascx", ".dnn");
-			try
-			{
-				using (var manifestWriter = new StreamWriter(manifestMapPath))
-				{
-					string manifestTemplate = Localization.GetString("ManifestText.Text", LocalResourceFile);
-					string manifest = string.Format(manifestTemplate, txtName.Text, txtDescription.Text, txtFolder.Text, ModuleControl, scriptList.SelectedValue);
-					manifestWriter.Write(manifest);
-					manifestWriter.Flush();
-				}
-			}
-			catch (Exception ex)
-			{
-				Exceptions.LogException(ex);
-				UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("ManifestCreationError", LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
-				return;
-			}
+            string manifestMapPath = folderMapPath + "/" + ModuleControl.Replace(".ascx", ".dnn");
+            try
+            {
+                using (var manifestWriter = new StreamWriter(manifestMapPath))
+                {
+                    string manifestTemplate = Localization.GetString("ManifestText.Text", LocalResourceFile);
+                    string manifest = string.Format(manifestTemplate, txtName.Text, txtDescription.Text, txtFolder.Text, ModuleControl, scriptList.SelectedValue);
+                    manifestWriter.Write(manifest);
+                    manifestWriter.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                Exceptions.LogException(ex);
+                UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("ManifestCreationError", LocalResourceFile), ModuleMessage.ModuleMessageType.RedError);
+                return;
+            }
 
             //Register Module
             ModuleDefinitionInfo moduleDefinition = ImportManifest(manifestMapPath);
 
-			//remove the manifest file
-	        try
-	        {
-				FileWrapper.Instance.Delete(manifestMapPath);
-	        }
-	        catch (Exception ex)
-	        {
-				Logger.Error(ex);
-	        }
-			
+            //remove the manifest file
+            try
+            {
+                FileWrapper.Instance.Delete(manifestMapPath);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
+
 
             //Optionally goto new Page
             if (chkAddPage.Checked)

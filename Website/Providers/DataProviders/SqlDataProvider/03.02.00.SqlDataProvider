@@ -18,14 +18,14 @@ CREATE procedure {databaseOwner}{objectQualifier}GetFiles
 as
 
 select FileId,
-       PortalId,
-       FileName,
-       Extension,
-       Size,
-       WIdth,
-       Height,
-       ContentType,
-       Folder
+        PortalId,
+        FileName,
+        Extension,
+        Size,
+        WIdth,
+        Height,
+        ContentType,
+        Folder
 from {objectQualifier}Files
 where  ((PortalId = @PortalId AND Folder=@Folder) or (@PortalId is null and PortalId is null AND Folder=@Folder))
 order by FileName
@@ -43,19 +43,19 @@ CREATE procedure {databaseOwner}{objectQualifier}GetDesktopModulesByPortal
 as
 
 select distinct({objectQualifier}DesktopModules.DesktopModuleId) as DesktopModuleId,
-       {objectQualifier}DesktopModules.FriendlyName,
-       {objectQualifier}DesktopModules.Description,
-       {objectQualifier}DesktopModules.Version,
-       {objectQualifier}DesktopModules.IsPremium,
-       {objectQualifier}DesktopModules.IsAdmin,
-       {objectQualifier}DesktopModules.businesscontrollerclass,
-       {objectQualifier}DesktopModules.foldername,
-       {objectQualifier}DesktopModules.modulename,
-       {objectQualifier}DesktopModules.supportedfeatures
+        {objectQualifier}DesktopModules.FriendlyName,
+        {objectQualifier}DesktopModules.Description,
+        {objectQualifier}DesktopModules.Version,
+        {objectQualifier}DesktopModules.IsPremium,
+        {objectQualifier}DesktopModules.IsAdmin,
+        {objectQualifier}DesktopModules.businesscontrollerclass,
+        {objectQualifier}DesktopModules.foldername,
+        {objectQualifier}DesktopModules.modulename,
+        {objectQualifier}DesktopModules.supportedfeatures
 from {objectQualifier}DesktopModules
 left outer join {objectQualifier}PortalDesktopModules on {objectQualifier}DesktopModules.DesktopModuleId = {objectQualifier}PortalDesktopModules.DesktopModuleId
 where  IsAdmin = 0
-and    ( IsPremium = 0 or (PortalId = @PortalId and PortalDesktopModuleId is not null)) 
+and    ( IsPremium = 0 or (PortalId = @PortalId and PortalDesktopModuleId is not null))
 order  by FriendlyName
 
 GO
@@ -70,7 +70,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteModuleSetting
 @SettingName   nvarchar(50)
 as
 
-DELETE FROM {objectQualifier}ModuleSettings 
+DELETE FROM {objectQualifier}ModuleSettings
 WHERE ModuleId = @ModuleId
 AND SettingName = @SettingName
 
@@ -84,7 +84,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteModuleSettings
 @ModuleId      int
 as
 
-DELETE FROM {objectQualifier}ModuleSettings 
+DELETE FROM {objectQualifier}ModuleSettings
 WHERE ModuleId = @ModuleId
 
 GO
@@ -98,7 +98,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteTabModuleSetting
 @SettingName   nvarchar(50)
 as
 
-DELETE FROM {objectQualifier}TabModuleSettings 
+DELETE FROM {objectQualifier}TabModuleSettings
 WHERE TabModuleId = @TabModuleId
 AND SettingName = @SettingName
 
@@ -112,7 +112,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteTabModuleSettings
 @TabModuleId      int
 as
 
-DELETE FROM {objectQualifier}TabModuleSettings 
+DELETE FROM {objectQualifier}TabModuleSettings
 WHERE TabModuleId = @TabModuleId
 
 GO
@@ -120,4 +120,3 @@ GO
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-

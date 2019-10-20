@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -225,7 +225,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             catch (Exception ex)
             {
                 Services.Exceptions.Exceptions.LogException(ex);
-            }            
+            }
         }
 
         private void SendNotificationToWorkflowStarter(StateTransaction stateTransaction, Entities.Workflow workflow, ContentItem contentItem, int starterUserId, WorkflowActionTypes workflowActionType)
@@ -256,7 +256,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             {
                 Services.Exceptions.Exceptions.LogException(ex);
             }
-            
+
         }
 
         private void SendNotificationsToReviewers(ContentItem contentItem, WorkflowState state, StateTransaction stateTransaction, WorkflowActionTypes workflowActionType, PortalSettings portalSettings)
@@ -290,7 +290,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             catch (Exception ex)
             {
                 Services.Exceptions.Exceptions.LogException(ex);
-            }            
+            }
         }
 
         private Notification GetNotification(string workflowContext, StateTransaction stateTransaction,
@@ -321,10 +321,10 @@ namespace DotNetNuke.Entities.Content.Workflow
         private ReviewersDto GetUserAndRolesForStateReviewers(PortalSettings portalSettings, WorkflowState state)
         {
             var reviewers = new ReviewersDto
-                                             {
-                                                 Roles = new List<RoleInfo>(),
-                                                 Users = new List<UserInfo>()
-                                             };
+                                            {
+                                                Roles = new List<RoleInfo>(),
+                                                Users = new List<UserInfo>()
+                                            };
             if (state.SendNotification)
             {
                 var permissions = _workflowStatePermissionsRepository.GetWorkflowStatePermissionByState(state.StateID).ToArray();
@@ -348,9 +348,9 @@ namespace DotNetNuke.Entities.Content.Workflow
 
         private static List<RoleInfo> GetRolesFromPermissions(PortalSettings settings, IEnumerable<WorkflowStatePermission> permissions)
         {
-            return (from permission in permissions 
-                         where permission.AllowAccess && permission.RoleID > Null.NullInteger 
-                         select RoleController.Instance.GetRoleById(settings.PortalId, permission.RoleID)).ToList();
+            return (from permission in permissions
+                        where permission.AllowAccess && permission.RoleID > Null.NullInteger
+                        select RoleController.Instance.GetRoleById(settings.PortalId, permission.RoleID)).ToList();
         }
 
         private static bool IsAdministratorRoleAlreadyIncluded(PortalSettings settings, IEnumerable<RoleInfo> roles)
@@ -536,7 +536,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             //Send notifications to stater
             if (workflow.WorkflowID != _systemWorkflowManager.GetDirectPublishWorkflow(workflow.PortalID).WorkflowID) //This notification is not sent in Direct Publish WF
             {
-                SendNotificationToWorkflowStarter(initialTransaction, workflow, contentItem, userId, WorkflowActionTypes.StartWorkflow);                
+                SendNotificationToWorkflowStarter(initialTransaction, workflow, contentItem, userId, WorkflowActionTypes.StartWorkflow);
             }
 
             // Delete previous logs
@@ -559,7 +559,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             {
                 return;
             }
-            
+
             if (IsWorkflowCompleted(contentItem)
                         && !(workflow.IsSystem && workflow.States.Count() == 1))
             {
@@ -602,7 +602,7 @@ namespace DotNetNuke.Entities.Content.Workflow
                     : WorkflowLogType.StateInitiated, stateTransaction.UserId);
 
             SendNotificationsToReviewers(contentItem, nextState, stateTransaction, WorkflowActionTypes.CompleteState, new PortalSettings(workflow.PortalID));
-            
+
             DeleteWorkflowNotifications(contentItem, currentState);
 
             // after-change action
@@ -620,10 +620,10 @@ namespace DotNetNuke.Entities.Content.Workflow
 
             var isFirstState = workflow.FirstState.StateID == contentItem.StateID;
             var isLastState = workflow.LastState.StateID == contentItem.StateID;
-            
+
             if (isLastState)
             {
-                throw new WorkflowInvalidOperationException(Localization.GetExceptionMessage("WorkflowCannotDiscard", "Cannot discard on last workflow state")); 
+                throw new WorkflowInvalidOperationException(Localization.GetExceptionMessage("WorkflowCannotDiscard", "Cannot discard on last workflow state"));
             }
 
             if (!isFirstState && !_workflowSecurity.HasStateReviewerPermission(workflow.PortalID, stateTransaction.UserId, contentItem.StateID))
@@ -669,7 +669,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             // after-change action
             PerformWorkflowActionOnStateChanged(stateTransaction, WorkflowActionTypes.DiscardState);
         }
-        
+
         public bool IsWorkflowCompleted(int contentItemId)
         {
             var contentItem = _contentController.GetContentItem(contentItemId);
@@ -740,7 +740,7 @@ namespace DotNetNuke.Entities.Content.Workflow
 
             var workflow = _workflowManager.GetWorkflow(contentItem);
             UpdateContentItemWorkflowState(workflow.LastState.StateID, contentItem);
-            
+
             // Logs
             AddWorkflowCommentLog(contentItem, stateTransaction.UserId, stateTransaction.Message.UserComment);
             AddWorkflowLog(contentItem, WorkflowLogType.WorkflowApproved, stateTransaction.UserId);

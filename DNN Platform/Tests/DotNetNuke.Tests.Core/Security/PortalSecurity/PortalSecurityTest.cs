@@ -23,15 +23,15 @@ namespace DotNetNuke.Tests.Core.Security.PortalSecurity
         #endregion
 
         #region Test Methods
-        [TestCase("<source></source>", " ", 
+        [TestCase("<source></source>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        [TestCase("<source>Hi this is personal Test for source tag</source>   ", "    ", 
+        [TestCase("<source>Hi this is personal Test for source tag</source>   ", "    ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        [TestCase("<SOURCE>{Upper case}</SOURCE>", " ", 
+        [TestCase("<SOURCE>{Upper case}</SOURCE>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
@@ -39,8 +39,8 @@ namespace DotNetNuke.Tests.Core.Security.PortalSecurity
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        
-        [TestCase("<source></source>", " ", 
+
+        [TestCase("<source></source>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting)]
         [TestCase("<source>Hi this is personal Test for source tag</source>   ", "    ",
@@ -52,8 +52,8 @@ namespace DotNetNuke.Tests.Core.Security.PortalSecurity
         [TestCase("<source src=\"https://google.com\">Source with attribute</source>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting )]
-        
-        [TestCase("<source></source>", " ", 
+
+        [TestCase("<source></source>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
         [TestCase("<source>Hi this is personal Test for source tag</source>   ", "    ",
@@ -65,11 +65,11 @@ namespace DotNetNuke.Tests.Core.Security.PortalSecurity
         [TestCase("<source src=\"https://google.com\">Source with attribute</source>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        
-        [TestCase("<source></source>", "&lt;source&gt;&lt;/source&gt;", 
+
+        [TestCase("<source></source>", "&lt;source&gt;&lt;/source&gt;",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        [TestCase("<source>Hi this is personal Test for source tag</source>   ", 
+        [TestCase("<source>Hi this is personal Test for source tag</source>   ",
             "&lt;source&gt;Hi this is personal Test for source tag&lt;/source&gt;   ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
@@ -80,10 +80,10 @@ namespace DotNetNuke.Tests.Core.Security.PortalSecurity
             "&lt;source src=&quot;https://google.com&quot;&gt;Source with attribute&lt;/source&gt;",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup |
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        
-        [TestCase("<source></source>", "&lt;source&gt;&lt;/source&gt;", 
+
+        [TestCase("<source></source>", "&lt;source&gt;&lt;/source&gt;",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup )]
-        [TestCase("<source>Hi this is personal Test for source tag</source>   ", 
+        [TestCase("<source>Hi this is personal Test for source tag</source>   ",
             "&lt;source&gt;Hi this is personal Test for source tag&lt;/source&gt;   ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup )]
         [TestCase("<SOURCE>Upper case</SOURCE>", "&lt;SOURCE&gt;Upper case&lt;/SOURCE&gt;",
@@ -91,8 +91,8 @@ namespace DotNetNuke.Tests.Core.Security.PortalSecurity
         [TestCase("<source src=\"https://google.com\">Source with attribute</source>",
             "&lt;source src=&quot;https://google.com&quot;&gt;Source with attribute&lt;/source&gt;",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoMarkup )]
-        
-        [TestCase("<source></source>", " ", 
+
+        [TestCase("<source></source>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting )]
         [TestCase("<source>Hi this is personal Test for source tag</source>   ", "    ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting )]
@@ -100,18 +100,18 @@ namespace DotNetNuke.Tests.Core.Security.PortalSecurity
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting )]
         [TestCase("<source src=\"https://google.com\">Source with attribute</source>", " ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoScripting )]
-        
-        [TestCase("<source></source>", "<source></source>", 
+
+        [TestCase("<source></source>", "<source></source>",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        [TestCase("<source>Hi this is personal Test for source tag</source>   ", 
+        [TestCase("<source>Hi this is personal Test for source tag</source>   ",
             "<source>Hi this is personal Test for source tag</source>   ",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
         [TestCase("<SOURCE>Upper case</SOURCE>", "<SOURCE>Upper case</SOURCE>",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        [TestCase("<source src=\"https://google.com\">Source with attribute</source>", 
+        [TestCase("<source src=\"https://google.com\">Source with attribute</source>",
             "<source src=\"https://google.com\">Source with attribute</source>",
             DotNetNuke.Security.PortalSecurity.FilterFlag.NoAngleBrackets)]
-        public void Html_Source_Tag_Should_Not_Be_Allowed(string html, string expectedOutput, 
+        public void Html_Source_Tag_Should_Not_Be_Allowed(string html, string expectedOutput,
             DotNetNuke.Security.PortalSecurity.FilterFlag markup)
         {
             //Arrange

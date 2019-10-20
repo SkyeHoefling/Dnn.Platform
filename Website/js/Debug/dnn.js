@@ -77,7 +77,7 @@ if ($ && $.ui && $.ui.dialog) {
                 htmlElement.find('body').scrollTop(cacheScrollTop);
                 $(this).data('cacheScrollTop', null);
             }
-			var uiDialog = $(this).closest('.ui-dialog');
+            var uiDialog = $(this).closest('.ui-dialog');
             uiDialog.css({ overflow: 'initial' });
         }
     });
@@ -255,7 +255,7 @@ dnn.extend(dnn, {
         /// Allows for delay to be canceled.
         /// </summary>
         /// <param name="key" type="String">
-        /// Key to identify the particular delay. 
+        /// Key to identify the particular delay.
         /// </param>
         /// <returns />
         if (this.delay[key] != null) {
@@ -334,7 +334,7 @@ dnn.extend(dnn, {
     escapeForEval: function (s)	//needs work...
     {
         /// <summary>
-        /// Allows a string to be evaluated successfully without worry of inappropriate characters. For example ' will be replaced with \' so when evaluated it is equal to 
+        /// Allows a string to be evaluated successfully without worry of inappropriate characters. For example ' will be replaced with \' so when evaluated it is equal to
         /// </summary>
         /// <param name="s" type="String">
         /// string to escape
@@ -470,7 +470,7 @@ dnn.ScriptRequest.prototype =
 
                 this.ctl.src = this.src;
             }
-            dnn.dom.scriptElements[this.src] = this.ctl; //JON VERIFY THIS!!!			
+            dnn.dom.scriptElements[this.src] = this.ctl; //JON VERIFY THIS!!!
         }
         else {
             if (dnn.dom.browser.isType(dnn.dom.browser.Safari))
@@ -481,7 +481,7 @@ dnn.ScriptRequest.prototype =
 
         var oHeads = dnn.dom.getByTagName('HEAD');
         if (oHeads) {
-            //opera will load script twice if inline and appended to page 
+            //opera will load script twice if inline and appended to page
             if (dnn.dom.browser.isType(dnn.dom.browser.Opera) == false || this.src != null)
                 oHeads[0].appendChild(this.ctl);
         }
@@ -584,7 +584,7 @@ dnn.extend(dnn.dom, {
         /// <param name="fHandler" type="Function">
         /// Reference to the function that will react to event
         /// </param>
-        /// <returns type="Boolean" />		
+        /// <returns type="Boolean" />
         if (ctl.addEventListener) {
             var name = type.substring(2);
             ctl.addEventListener(name, function (evt) { dnn.dom.event = new dnn.dom.eventObject(evt, evt.target); return fHandler(); }, false);
@@ -601,7 +601,7 @@ dnn.extend(dnn.dom, {
         /// <param name="ctl" type="Object">
         /// Control
         /// </param>
-        /// <returns type="Number" />		
+        /// <returns type="Number" />
 
         // empty control means the cursor is at 0
         if (ctl.value.length == 0)
@@ -617,7 +617,7 @@ dnn.extend(dnn.dom, {
             var sel = window.document.selection.createRange();
             var range = ctl.createTextRange();
 
-            // if the current selection is within the edit control			
+            // if the current selection is within the edit control
             if (range == null || sel == null || ((sel.text != "") && range.inRange(sel) == false))
                 return -1;
 
@@ -790,7 +790,7 @@ dnn.extend(dnn.dom, {
         /// <param name="domain" type="String">
         /// Domain for which the cookie is valid
         /// </param>
-        /// <returns type="Boolean" />		
+        /// <returns type="Boolean" />
         if (this.getCookie(name)) {
             this.setCookie(name, '', -1, path, domain);
             return true;
@@ -803,7 +803,7 @@ dnn.extend(dnn.dom, {
         /// Utility funcion used to retrieve the attribute value of an object. Allows for a default value to be returned if null.
         /// </summary>
         /// <param name="node" type="Object">
-        /// Object to obtain attribute from 
+        /// Object to obtain attribute from
         /// </param>
         /// <param name="attr" type="String">
         /// Name of attribute to retrieve
@@ -811,7 +811,7 @@ dnn.extend(dnn.dom, {
         /// <param name="def" type="String">
         /// Default value to retrieve if attribute is null or zero-length
         /// </param>
-        /// <returns type="String" />		
+        /// <returns type="String" />
         if (node.getAttribute == null)
             return def;
         var val = node.getAttribute(attr);
@@ -833,7 +833,7 @@ dnn.extend(dnn.dom, {
         /// <param name="ctl" type="Object" optional="true">
         /// If you wish to narrow down the search, pass in the control whose children you wish to search.
         /// </param>
-        /// <returns type="Object" />		
+        /// <returns type="Object" />
         return $get(id, ctl);
     },
 
@@ -847,7 +847,7 @@ dnn.extend(dnn.dom, {
         /// <param name="ctl" type="Object" optional="true">
         /// If you wish to narrow down the search, pass in the control whose children you wish to search.
         /// </param>
-        /// <returns type="Array" />		
+        /// <returns type="Array" />
         if (ctl == null)
             ctl = document;
         if (ctl.getElementsByTagName)
@@ -868,7 +868,7 @@ dnn.extend(dnn.dom, {
         /// <param name="tag" type="String">
         /// TagName to of parent control retrieve
         /// </param>
-        /// <returns type="Object" />		
+        /// <returns type="Object" />
         var parent = ctl.parentNode;
         tag = tag.toLowerCase();
         while (parent != null) {
@@ -884,9 +884,9 @@ dnn.extend(dnn.dom, {
         /// Retrieves a cookie
         /// </summary>
         /// <param name="name" type="String">
-        /// Name of the desired cookie 
+        /// Name of the desired cookie
         /// </param>
-        /// <returns type="String" />		
+        /// <returns type="String" />
         var cookie = " " + document.cookie;
         var search = " " + name + "=";
         var ret = null;
@@ -912,7 +912,7 @@ dnn.extend(dnn.dom, {
         /// <param name="node" type="Object">
         /// Node to start looking at
         /// </param>
-        /// <returns type="Object" />		
+        /// <returns type="Object" />
         if (this.isNonTextNode(node))
             return node;
 
@@ -936,7 +936,7 @@ dnn.extend(dnn.dom, {
         /// Instance of object to invoke method on
         /// </param>
         /// <param name="method" type="String">
-        /// Method to invoke on object for event 
+        /// Method to invoke on object for event
         /// </param>
         ctl[evt] = this.getObjMethRef(obj, method);
 
@@ -971,7 +971,7 @@ dnn.extend(dnn.dom, {
         /// Instance of object to invoke method on
         /// </param>
         /// <param name="methodName" type="String">
-        /// Method to invoke on object for event 
+        /// Method to invoke on object for event
         /// </param>
         return (function (e) { e = e || window.event; return obj[methodName](e, this); });
     },
@@ -986,7 +986,7 @@ dnn.extend(dnn.dom, {
         /// <param name="offset" type="Number">
         /// How many positions removed from the passed in control to look for the sibling. For example if you wanted your immediate sibling below you would pass in 1
         /// </param>
-        /// <returns type="Object" />		
+        /// <returns type="Object" />
         if (ctl != null && ctl.parentNode != null) {
             for (var i = 0; i < ctl.parentNode.childNodes.length; i++) {
                 if (ctl.parentNode.childNodes[i].id == ctl.id) {
@@ -1005,7 +1005,7 @@ dnn.extend(dnn.dom, {
         /// <param name="node" type="Object">
         /// Node object to verify
         /// </param>
-        /// <returns type="Boolean" />		
+        /// <returns type="Boolean" />
         return (node.nodeType != 3 && node.nodeType != 8); //exclude nodeType of Text (Netscape/Mozilla) issue!
     },
 
@@ -1135,7 +1135,7 @@ dnn.extend(dnn.dom, {
         /// <param name="isSecure" type="Boolean">
         /// determines if cookie is secure
         /// </param>
-        /// <returns type="Boolean" />		
+        /// <returns type="Boolean" />
         var sExpires;
         if (days) {
             sExpires = new Date();
@@ -1148,7 +1148,7 @@ dnn.extend(dnn.dom, {
 
         }
         document.cookie = name + "=" + escape(val) + ((sExpires) ? "; expires=" + sExpires.toGMTString() : "") +
-				((path) ? "; path=" + path : "") + ((domain) ? "; domain=" + domain : "") + ((isSecure) ? "; secure" : "");
+                ((path) ? "; path=" + path : "") + ((domain) ? "; domain=" + domain : "") + ((isSecure) ? "; secure" : "");
 
         if (document.cookie.length > 0)
             return true;

@@ -41,9 +41,9 @@
         <div class="udContent dnnClear">
             <fieldset>
                 <div id="titleRow" runat="server" class="dnnFormItem">
-				    <h2 class="dnnFormSectionHead"><asp:label id="lblTitle" runat="server" /></h2>
-				    <dnn:DnnImage id="imgLockedOut" IconKey="SecurityRoles" runat="server" visible="False" />
-				    <dnn:DnnImage id="imgOnline" IconKey="UserOnline" runat="server" visible="False" />
+                    <h2 class="dnnFormSectionHead"><asp:label id="lblTitle" runat="server" /></h2>
+                    <dnn:DnnImage id="imgLockedOut" IconKey="SecurityRoles" runat="server" visible="False" />
+                    <dnn:DnnImage id="imgOnline" IconKey="UserOnline" runat="server" visible="False" />
                 </div>
                 <div id="helpRow" runat="server" visible="false" class="dnnFormItem">
                     <asp:label id="lblUserHelp" runat="server" />
@@ -60,13 +60,13 @@
         </div>
     </div>
     <div id="dnnRoleDetails" runat="server" class="dnnRoleDetails dnnClear">
- 	    <dnn:roles id="ctlRoles" runat="server"></dnn:roles>
+        <dnn:roles id="ctlRoles" runat="server"></dnn:roles>
     </div>
     <div id="dnnPasswordDetails" runat="server" class="dnnPasswordDetails dnnClear">
-    	<dnn:Password id="ctlPassword" runat="server"></dnn:Password>
+        <dnn:Password id="ctlPassword" runat="server"></dnn:Password>
     </div>
     <asp:Panel id="dnnProfileDetails" runat="server" class="dnnProfileDetails dnnClear">
-    	<dnn:Profile id="ctlProfile" runat="server"></dnn:Profile>
+        <dnn:Profile id="ctlProfile" runat="server"></dnn:Profile>
     </asp:Panel>
 </div>
 <div class="dnnForm">

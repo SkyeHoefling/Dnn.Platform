@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -38,7 +38,7 @@ namespace DotNetNuke.UI.WebControls
     /// Class:      EditControl
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// The EditControl control provides a standard UI component for editing 
+    /// The EditControl control provides a standard UI component for editing
     /// properties.
     /// </summary>
     /// <remarks>
@@ -47,13 +47,13 @@ namespace DotNetNuke.UI.WebControls
     [ValidationPropertyAttribute("Value")]
     public abstract class EditControl : WebControl, IPostBackDataHandler
     {
-		#region "Private Members"
+        #region "Private Members"
 
         private object[] _CustomAttributes;
 
-		#endregion
+        #endregion
 
-		#region "Data Properties"
+        #region "Data Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -107,23 +107,23 @@ namespace DotNetNuke.UI.WebControls
         /// -----------------------------------------------------------------------------
         public string LocalResourceFile { get; set; }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Name is the name of the field as a string
-		/// </summary>
-		/// <value>A string representing the Name of the property</value>
-		/// -----------------------------------------------------------------------------
-		public string Name { get; set; }
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Name is the name of the field as a string
+        /// </summary>
+        /// <value>A string representing the Name of the property</value>
+        /// -----------------------------------------------------------------------------
+        public string Name { get; set; }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// The Category to which this edit control belongs
-		/// </summary>
-		/// <value>A string representing the Category of the property</value>
-		/// -----------------------------------------------------------------------------
-		public string Category { get; set; }
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// The Category to which this edit control belongs
+        /// </summary>
+        /// <value>A string representing the Category of the property</value>
+        /// -----------------------------------------------------------------------------
+        public string Category { get; set; }
 
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         /// OldValue is the initial value of the field
         /// </summary>
@@ -155,10 +155,10 @@ namespace DotNetNuke.UI.WebControls
         /// -----------------------------------------------------------------------------
         public object Value { get; set; }
 
-		/// <summary>
-		/// Set Data Field of the control.
-		/// </summary>
-		public string DataField { get; set; }
+        /// <summary>
+        /// Set Data Field of the control.
+        /// </summary>
+        public string DataField { get; set; }
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -170,13 +170,13 @@ namespace DotNetNuke.UI.WebControls
 
         public UserInfo User { get; set; }
 
-	    public virtual string EditControlClientId
-	    {
-		    get
-		    {
-			    return ClientID;
-		    }
-	    }
+        public virtual string EditControlClientId
+        {
+            get
+            {
+                return ClientID;
+            }
+        }
 
         #endregion
 
@@ -214,16 +214,16 @@ namespace DotNetNuke.UI.WebControls
         }
 
         #endregion
-		
-		#region "Events"
+
+        #region "Events"
 
         public event PropertyChangedEventHandler ItemAdded;
         public event PropertyChangedEventHandler ItemDeleted;
         public event PropertyChangedEventHandler ValueChanged;
 
-		#endregion
+        #endregion
 
-		#region "Abstract Members"
+        #region "Abstract Members"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -233,9 +233,9 @@ namespace DotNetNuke.UI.WebControls
         /// -----------------------------------------------------------------------------
         protected abstract void OnDataChanged(EventArgs e);
 
-		#endregion
+        #endregion
 
-		#region "Protected Methods"
+        #region "Protected Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -340,7 +340,7 @@ namespace DotNetNuke.UI.WebControls
                 RenderViewMode(writer);
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

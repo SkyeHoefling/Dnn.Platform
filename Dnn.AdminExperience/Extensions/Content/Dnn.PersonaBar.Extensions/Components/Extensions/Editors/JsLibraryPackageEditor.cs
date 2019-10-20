@@ -17,13 +17,13 @@ namespace Dnn.PersonaBar.Extensions.Components.Editors
 
         public PackageInfoDto GetPackageDetail(int portalId, PackageInfo package)
         {
-            var usedBy = PackageController.Instance.GetPackageDependencies(d => 
+            var usedBy = PackageController.Instance.GetPackageDependencies(d =>
                             d.PackageName.Equals(package.Name, StringComparison.OrdinalIgnoreCase) &&
                             d.Version <= package.Version).Select(d => d.PackageId);
 
             var usedByPackages = from p in PackageController.Instance.GetExtensionPackages(portalId)
-                                 where usedBy.Contains(p.PackageID)
-                                 select new UsedByPackage { Id = p.PackageID, Name = p.Name, Version = p.Version.ToString() };
+                                where usedBy.Contains(p.PackageID)
+                                select new UsedByPackage { Id = p.PackageID, Name = p.Name, Version = p.Version.ToString() };
 
             var library = JavaScriptLibraryController.Instance.GetLibrary(l => l.PackageID == package.PackageID);
             var detail = new JsLibraryPackageDetailDto(portalId, package)

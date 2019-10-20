@@ -3,7 +3,7 @@
     var identifier, utility;
     var config = cf.init();
 
-    var init = function (wrapper, util, params, callback) { 
+    var init = function (wrapper, util, params, callback) {
         identifier = params.identifier;
         utility = util;
 

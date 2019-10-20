@@ -11,45 +11,45 @@ namespace DotNetNuke.Web.DDRMenu.Localisation
 
     [Obsolete("Deprecated in 9.4.0, due to limited developer support.  Scheduled removal in v10.0.0.")]
     public class Apollo : ILocalisation
-	{
-		private bool haveChecked;
-		private MethodInfo apiMember;
+    {
+        private bool haveChecked;
+        private MethodInfo apiMember;
 
         [Obsolete("Deprecated in 9.4.0, due to limited developer support.  Scheduled removal in v10.0.0.")]
         public bool HaveApi()
-		{
-			if (!haveChecked)
-			{
-				try
-				{
+        {
+            if (!haveChecked)
+            {
+                try
+                {
                     if (DesktopModuleController.GetDesktopModuleByModuleName("PageLocalization", PortalSettings.Current.PortalId) != null)
-					{
-						var api = Activator.CreateInstance("Apollo.LocalizationApi", "Apollo.DNN_Localization.LocalizeTab").Unwrap();
-						var apiType = api.GetType();
-						apiMember = apiType.GetMethod("getLocalizedTab", new[] {typeof(TabInfo)});
-					}
-				}
+                    {
+                        var api = Activator.CreateInstance("Apollo.LocalizationApi", "Apollo.DNN_Localization.LocalizeTab").Unwrap();
+                        var apiType = api.GetType();
+                        apiMember = apiType.GetMethod("getLocalizedTab", new[] {typeof(TabInfo)});
+                    }
+                }
 // ReSharper disable EmptyGeneralCatchClause
-				catch
+                catch
 // ReSharper restore EmptyGeneralCatchClause
-				{
-				}
-				haveChecked = true;
-			}
+                {
+                }
+                haveChecked = true;
+            }
 
-			return (apiMember != null);
-		}
+            return (apiMember != null);
+        }
 
         [Obsolete("Deprecated in 9.4.0, due to limited developer support.  Scheduled removal in v10.0.0.")]
         public TabInfo LocaliseTab(TabInfo tab, int portalId)
-		{
-			return apiMember.Invoke(null, new object[] {tab}) as TabInfo ?? tab;
-		}
+        {
+            return apiMember.Invoke(null, new object[] {tab}) as TabInfo ?? tab;
+        }
 
         [Obsolete("Deprecated in 9.4.0, due to limited developer support.  Scheduled removal in v10.0.0.")]
         public DNNNodeCollection LocaliseNodes(DNNNodeCollection nodes)
-		{
-			return null;
-		}
-	}
+        {
+            return null;
+        }
+    }
 }

@@ -12,14 +12,14 @@ class PageList extends Component {
     render() {
         return (
             <div className={styles.pageListBody + " dnn-persona-bar-page-body"}>
-                <div className="search-container">      
+                <div className="search-container">
                     <GridCell columnSize={65}>
                         <div>{this.props.toolbarComponents}</div>
                     </GridCell>
                     <GridCell columnSize={35} >
-                        <div className="search-filter">                                
-                            <SearchBox placeholder={Localization.get("Search")} 
-                                onSearch={this.props.onSearchKeywordChanged} 
+                        <div className="search-filter">
+                            <SearchBox placeholder={Localization.get("Search")}
+                                onSearch={this.props.onSearchKeywordChanged}
                                 maxLength={50} />
                             <div className="clear"></div>
                         </div>
@@ -28,7 +28,7 @@ class PageList extends Component {
                 <PageHierarchy
                     itemTemplate={this.props.itemTemplate}
                     dragItemTemplate={this.props.dragItemTemplate}
-                    searchKeyword={this.props.searchKeyword} 
+                    searchKeyword={this.props.searchKeyword}
                     onPageSettings={this.props.onPageSettings}
                     selectedPage={this.props.selectedPage}
                     onSelectedPagePathChanged={this.props.onSelectedPagePathChanged}

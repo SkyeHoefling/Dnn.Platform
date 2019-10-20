@@ -9,7 +9,7 @@
 /************************************************************/
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}FindBanners]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}[{objectQualifier}FindBanners]
+    drop procedure {databaseOwner}[{objectQualifier}FindBanners]
 GO
 
 create procedure {databaseOwner}{objectQualifier}FindBanners
@@ -43,7 +43,7 @@ LEFT OUTER JOIN {databaseOwner}{objectQualifier}Files ON {databaseOwner}{objectQ
 WHERE   ({databaseOwner}{objectQualifier}Banners.BannerTypeId = @BannerTypeId or @BannerTypeId is null)
 AND     ({databaseOwner}{objectQualifier}Banners.GroupName = @GroupName or @GroupName is null)
 AND     (({databaseOwner}{objectQualifier}Vendors.PortalId = @PortalId) or (@PortalId is null and {databaseOwner}{objectQualifier}Vendors.PortalId is null))
-AND     {databaseOwner}{objectQualifier}Vendors.Authorized = 1 
+AND     {databaseOwner}{objectQualifier}Vendors.Authorized = 1
 ORDER BY BannerId
 
 GO
@@ -51,4 +51,3 @@ GO
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-

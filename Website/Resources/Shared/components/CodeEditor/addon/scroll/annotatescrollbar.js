@@ -29,32 +29,32 @@
     this.computeScale();
 
     function scheduleRedraw(delay) {
-      clearTimeout(self.doRedraw);
-      self.doRedraw = setTimeout(function() { self.redraw(); }, delay);
+    clearTimeout(self.doRedraw);
+    self.doRedraw = setTimeout(function() { self.redraw(); }, delay);
     }
 
     var self = this;
     cm.on("refresh", this.resizeHandler = function() {
-      clearTimeout(self.doUpdate);
-      self.doUpdate = setTimeout(function() {
+    clearTimeout(self.doUpdate);
+    self.doUpdate = setTimeout(function() {
         if (self.computeScale()) scheduleRedraw(20);
-      }, 100);
+    }, 100);
     });
     cm.on("markerAdded", this.resizeHandler);
     cm.on("markerCleared", this.resizeHandler);
     if (options.listenForChanges !== false)
-      cm.on("change", this.changeHandler = function() {
+    cm.on("change", this.changeHandler = function() {
         scheduleRedraw(250);
-      });
+    });
   }
 
   Annotation.prototype.computeScale = function() {
     var cm = this.cm;
     var hScale = (cm.getWrapperElement().clientHeight - cm.display.barHeight - this.buttonHeight * 2) /
-      cm.heightAtLine(cm.lastLine() + 1, "local");
+    cm.heightAtLine(cm.lastLine() + 1, "local");
     if (hScale != this.hScale) {
-      this.hScale = hScale;
-      return true;
+    this.hScale = hScale;
+    return true;
     }
   };
 
@@ -73,33 +73,33 @@
     var singleLineH = wrapping && cm.defaultTextHeight() * 1.5;
     var curLine = null, curLineObj = null;
     function getY(pos, top) {
-      if (curLine != pos.line) {
+    if (curLine != pos.line) {
         curLine = pos.line;
         curLineObj = cm.getLineHandle(curLine);
-      }
-      if (wrapping && curLineObj.height > singleLineH)
+    }
+    if (wrapping && curLineObj.height > singleLineH)
         return cm.charCoords(pos, "local")[top ? "top" : "bottom"];
-      var topY = cm.heightAtLine(curLineObj, "local");
-      return topY + (top ? 0 : curLineObj.height);
+    var topY = cm.heightAtLine(curLineObj, "local");
+    return topY + (top ? 0 : curLineObj.height);
     }
 
     if (cm.display.barWidth) for (var i = 0, nextTop; i < anns.length; i++) {
-      var ann = anns[i];
-      var top = nextTop || getY(ann.from, true) * hScale;
-      var bottom = getY(ann.to, false) * hScale;
-      while (i < anns.length - 1) {
+    var ann = anns[i];
+    var top = nextTop || getY(ann.from, true) * hScale;
+    var bottom = getY(ann.to, false) * hScale;
+    while (i < anns.length - 1) {
         nextTop = getY(anns[i + 1].from, true) * hScale;
         if (nextTop > bottom + .9) break;
         ann = anns[++i];
         bottom = getY(ann.to, false) * hScale;
-      }
-      if (bottom == top) continue;
-      var height = Math.max(bottom - top, 3);
+    }
+    if (bottom == top) continue;
+    var height = Math.max(bottom - top, 3);
 
-      var elt = frag.appendChild(document.createElement("div"));
-      elt.style.cssText = "position: absolute; right: 0px; width: " + Math.max(cm.display.barWidth - 1, 2) + "px; top: "
+    var elt = frag.appendChild(document.createElement("div"));
+    elt.style.cssText = "position: absolute; right: 0px; width: " + Math.max(cm.display.barWidth - 1, 2) + "px; top: "
         + (top + this.buttonHeight) + "px; height: " + height + "px";
-      elt.className = this.options.className;
+    elt.className = this.options.className;
     }
     this.div.textContent = "";
     this.div.appendChild(frag);

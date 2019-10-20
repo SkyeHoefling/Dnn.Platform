@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -59,7 +59,7 @@ namespace DotNetNuke.Entities.Modules
     [Serializable]
     public class ModuleInfo : ContentItem, IPropertyAccess
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleInfo));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleInfo));
         private string _authorizedEditRoles;
         private string _authorizedViewRoles;
         private string _cultureCode;
@@ -149,7 +149,7 @@ namespace DotNetNuke.Entities.Modules
         {
             get {
                 return _desktopModule ??
-                       (_desktopModule = DesktopModuleID > Null.NullInteger
+                        (_desktopModule = DesktopModuleID > Null.NullInteger
                             ? DesktopModuleController.GetDesktopModule(DesktopModuleID, PortalID)
                             : new DesktopModuleInfo());
             }
@@ -233,7 +233,7 @@ namespace DotNetNuke.Entities.Modules
         {
             get {
                 return _moduleControl ??
-                       (_moduleControl = ModuleControlId > Null.NullInteger
+                        (_moduleControl = ModuleControlId > Null.NullInteger
                             ? ModuleControlController.GetModuleControl(ModuleControlId)
                             : new ModuleControlInfo());
             }
@@ -262,7 +262,7 @@ namespace DotNetNuke.Entities.Modules
         {
             get {
                 return _moduleDefinition ??
-                       (_moduleDefinition = ModuleDefID > Null.NullInteger
+                        (_moduleDefinition = ModuleDefID > Null.NullInteger
                             ? ModuleDefinitionController.GetModuleDefinitionByID(ModuleDefID)
                             : new ModuleDefinitionInfo());
             }
@@ -283,7 +283,7 @@ namespace DotNetNuke.Entities.Modules
         {
             get
             {
-                return _modulePermissions ?? 
+                return _modulePermissions ??
                     (_modulePermissions = ModuleID > 0
                             ? new ModulePermissionCollection(ModulePermissionController.GetModulePermissions(ModuleID, TabID))
                             : new ModulePermissionCollection());
@@ -551,28 +551,28 @@ namespace DotNetNuke.Entities.Modules
             CultureCode = Null.SetNullString(dr["CultureCode"]);
 
             PortalID = Null.SetNullInteger(dr["PortalID"]);
-			if (dr.GetSchemaTable().Select("ColumnName = 'OwnerPortalID'").Length > 0)
-			{
-				OwnerPortalID = Null.SetNullInteger(dr["OwnerPortalID"]);
-			}
+            if (dr.GetSchemaTable().Select("ColumnName = 'OwnerPortalID'").Length > 0)
+            {
+                OwnerPortalID = Null.SetNullInteger(dr["OwnerPortalID"]);
+            }
 
-	        ModuleDefID = Null.SetNullInteger(dr["ModuleDefID"]);
+            ModuleDefID = Null.SetNullInteger(dr["ModuleDefID"]);
             ModuleTitle = Null.SetNullString(dr["ModuleTitle"]);
             AllTabs = Null.SetNullBoolean(dr["AllTabs"]);
             IsDeleted = Null.SetNullBoolean(dr["IsDeleted"]);
             InheritViewPermissions = Null.SetNullBoolean(dr["InheritViewPermissions"]);
 
-			if (dr.GetSchemaTable().Select("ColumnName = 'IsShareable'").Length > 0)
-			{
-				IsShareable = Null.SetNullBoolean(dr["IsShareable"]);
-			}
+            if (dr.GetSchemaTable().Select("ColumnName = 'IsShareable'").Length > 0)
+            {
+                IsShareable = Null.SetNullBoolean(dr["IsShareable"]);
+            }
 
-			if (dr.GetSchemaTable().Select("ColumnName = 'IsShareableViewOnly'").Length > 0)
-			{
-				IsShareableViewOnly = Null.SetNullBoolean(dr["IsShareableViewOnly"]);
-			}
+            if (dr.GetSchemaTable().Select("ColumnName = 'IsShareableViewOnly'").Length > 0)
+            {
+                IsShareableViewOnly = Null.SetNullBoolean(dr["IsShareableViewOnly"]);
+            }
 
-	        Header = Null.SetNullString(dr["Header"]);
+            Header = Null.SetNullString(dr["Header"]);
             Footer = Null.SetNullString(dr["Footer"]);
             StartDate = Null.SetNullDateTime(dr["StartDate"]);
             EndDate = Null.SetNullDateTime(dr["EndDate"]);
@@ -1023,7 +1023,7 @@ namespace DotNetNuke.Entities.Modules
                                     };
 
             //localized properties
-	        Clone(objModuleInfo, this);
+            Clone(objModuleInfo, this);
             return objModuleInfo;
         }
 

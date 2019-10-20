@@ -21,10 +21,10 @@ class TranslatePageContent extends Component {
             basicSettings: null,
             languageBeingEdited: Object.assign({}, props.languageBeingEdited)
         };
-        this.init(); 
+        this.init();
     }
 
-    init() {        
+    init() {
         this.getProgressData = this.getProgressData.bind(this);
         this.getPageList();
         this.getBasicSettings();
@@ -200,12 +200,12 @@ class TranslatePageContent extends Component {
         const {props, state} = this;
         const { languageBeingEdited } = props;
         const hasPublishedPages = !!languageBeingEdited.PublishedPages;
-        
+
         const isEnabled = languageBeingEdited.Enabled;
         const pagesNumber = state.pageList ? state.pageList.length : 0;
         const localizablePages = +languageBeingEdited.LocalizablePages;
         const TranslatedPages = +languageBeingEdited.TranslatedPages;
-        
+
         return <PersonaBarPageBody
             className="translate-page-content"
             backToLinkProps={{

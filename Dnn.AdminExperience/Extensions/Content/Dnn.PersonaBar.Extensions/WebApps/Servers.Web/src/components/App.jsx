@@ -12,9 +12,9 @@ const restartAppButtonStyle = {
     "marginRight": "10px"
 };
 
-class App extends Component { 
+class App extends Component {
 
-    UNSAFE_componentWillReceiveProps(newProps) {       
+    UNSAFE_componentWillReceiveProps(newProps) {
         if (this.props.infoMessage !== newProps.infoMessage && newProps.infoMessage) {
             utils.notify(newProps.infoMessage);
         }
@@ -35,18 +35,18 @@ class App extends Component {
             <div className="servers-app personaBar-mainContainer">
                 <PersonaBarPage isOpen={true}>
                     <PersonaBarPageHeader title="Servers">
-                        {buttonVisible && 
-                            <Button type="secondary" size="large" 
+                        {buttonVisible &&
+                            <Button type="secondary" size="large"
                                 onClick={props.onClearCacheClicked}>{localization.get("clearCacheButtonLabel")}</Button>
                         }
-                        {buttonVisible && 
-                            <Button type="secondary" size="large" 
-                                onClick={props.onRestartApplicationClicked} 
+                        {buttonVisible &&
+                            <Button type="secondary" size="large"
+                                onClick={props.onRestartApplicationClicked}
                                 style={restartAppButtonStyle}>{localization.get("restartApplicationButtonLabel")}</Button>
-                        }                        
+                        }
                     </PersonaBarPageHeader>
                     <Body />
-                </PersonaBarPage>                
+                </PersonaBarPage>
             </div>
         );
     }

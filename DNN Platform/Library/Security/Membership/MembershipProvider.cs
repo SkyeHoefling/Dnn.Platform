@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -34,8 +34,8 @@ namespace DotNetNuke.Security.Membership
     public abstract class MembershipProvider
     {
         #region Abstract Properties
-		
-		public abstract bool CanEditProviderProperties { get; }
+
+        public abstract bool CanEditProviderProperties { get; }
         public abstract int MaxInvalidPasswordAttempts { get; set; }
         public abstract int MinPasswordLength { get; set; }
         public abstract int MinNonAlphanumericCharacters { get; set; }
@@ -46,20 +46,20 @@ namespace DotNetNuke.Security.Membership
         public abstract string PasswordStrengthRegularExpression { get; set; }
         public abstract bool RequiresQuestionAndAnswer { get; set; }
         public abstract bool RequiresUniqueEmail { get; set; }
-		
-		#endregion
-		
-		#region Shared/Static Methods
+
+        #endregion
+
+        #region Shared/Static Methods
 
         //return the provider
-		public static MembershipProvider Instance()
+        public static MembershipProvider Instance()
         {
             return ComponentFactory.GetComponent<MembershipProvider>();
         }
-		
-		#endregion
-		
-		#region Abstract Methods
+
+        #endregion
+
+        #region Abstract Methods
 
         // Users
         public abstract bool ChangePassword(UserInfo user, string oldPassword, string newPassword);
@@ -103,20 +103,20 @@ namespace DotNetNuke.Security.Membership
         public abstract UserInfo GetUserByUserName(int portalId, string username);
         public abstract ArrayList GetUnAuthorizedUsers(int portalId);
         public abstract ArrayList GetDeletedUsers(int portalId);
-        public abstract ArrayList GetUsers(int portalId, int pageIndex, int pageSize, ref int totalRecords);                     
+        public abstract ArrayList GetUsers(int portalId, int pageIndex, int pageSize, ref int totalRecords);
         public abstract ArrayList GetUsersByEmail(int portalId, string emailToMatch, int pageIndex, int pageSize, ref int totalRecords);
-        public abstract ArrayList GetUsersByUserName(int portalId, string userNameToMatch, int pageIndex, int pageSize, ref int totalRecords);       
+        public abstract ArrayList GetUsersByUserName(int portalId, string userNameToMatch, int pageIndex, int pageSize, ref int totalRecords);
         public abstract ArrayList GetUsersByProfileProperty(int portalId, string propertyName, string propertyValue, int pageIndex, int pageSize, ref int totalRecords);
-        
-		#endregion
-		
+
+        #endregion
+
         #region Virtual Methods
 
         public virtual UserInfo GetUserByDisplayName(int portalId, string displayName)
         {
             return null;
         }
-        
+
         public virtual UserInfo GetUserByVanityUrl(int portalId, string vanityUrl)
         {
             return null;
@@ -157,10 +157,10 @@ namespace DotNetNuke.Security.Membership
             throw new NotImplementedException();
         }
 
-		public virtual ArrayList GetUsersByDisplayName(int portalId, string nameToMatch, int pageIndex, int pageSize, ref int totalRecords, bool includeDeleted, bool superUsersOnly)
-		{
-			throw new NotImplementedException();
-		}
+        public virtual ArrayList GetUsersByDisplayName(int portalId, string nameToMatch, int pageIndex, int pageSize, ref int totalRecords, bool includeDeleted, bool superUsersOnly)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual ArrayList GetUsersByProfileProperty(int portalId, string propertyName, string propertyValue, int pageIndex, int pageSize, ref int totalRecords, bool includeDeleted, bool superUsersOnly)
         {
@@ -176,7 +176,7 @@ namespace DotNetNuke.Security.Membership
                                                     bool isAdmin, int pageIndex, int pageSize, string sortColumn,
                                                     bool sortAscending, string propertyNames, string propertyValues)
         {
-            throw new NotImplementedException();            
+            throw new NotImplementedException();
         }
 
         public virtual IList<UserInfo> GetUsersBasicSearch(int portalId, int pageIndex, int pageSize, string sortColumn,
@@ -190,10 +190,10 @@ namespace DotNetNuke.Security.Membership
             throw new NotImplementedException();
         }
 
-		public virtual bool ResetAndChangePassword(UserInfo user, string newPassword, string answer)
-		{
-			throw new NotImplementedException();
-		}
+        public virtual bool ResetAndChangePassword(UserInfo user, string newPassword, string answer)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public virtual void ChangeUsername(int userId, string newUsername)

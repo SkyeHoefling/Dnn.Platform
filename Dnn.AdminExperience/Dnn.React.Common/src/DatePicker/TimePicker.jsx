@@ -23,8 +23,8 @@ function getHour(number) {
     return hour;
 }
 
-const TimePicker = ({time, updateTime, className}) => 
-    <Dropdown 
+const TimePicker = ({time, updateTime, className}) =>
+    <Dropdown
         options={timeArray}
         label={time}
         onUpdate={updateTime}

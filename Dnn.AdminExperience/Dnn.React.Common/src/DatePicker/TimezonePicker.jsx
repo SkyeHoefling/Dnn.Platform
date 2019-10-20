@@ -11,7 +11,7 @@ function getDropdownLabel(value) {
 const TimezonePicker = ({value, onUpdate}) => {
     const label = getDropdownLabel(value);
     return (
-        <Dropdown 
+        <Dropdown
             options={timeZones}
             label={label}
             onUpdate={onUpdate}

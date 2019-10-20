@@ -218,18 +218,18 @@ ul.buttonList .windowslive a span {
 }
 div.dnnCaptcha
 {
-	width: 70% !important;
-	margin-left: 30%;
-	padding-left: 22px;
+    width: 70% !important;
+    margin-left: 30%;
+    padding-left: 22px;
 }
 span.dnnFormMessage.dnnFormError.dnnCaptcha
 {
-	right: 24%;
-	bottom: -55px;
+    right: 24%;
+    bottom: -55px;
 }
 a.dnnDisabledAction:link, a.dnnDisabledAction:visited, a.dnnDisabledAction:active, a.dnnDisabledAction:hover {
     text-decoration: none;
     color: Silver;
-	opacity: 0.5;
-	/*IE8*/ -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";	
+    opacity: 0.5;
+    /*IE8*/ -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }

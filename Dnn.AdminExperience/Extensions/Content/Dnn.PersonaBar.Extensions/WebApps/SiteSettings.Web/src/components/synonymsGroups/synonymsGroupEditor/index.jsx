@@ -32,12 +32,12 @@ class SynonymsGroupEditor extends Component {
         this.setState({
             group: group
         });
-    }    
+    }
 
     onSettingChange(key, event) {
         let {state, props} = this;
         let group = Object.assign({}, state.group);
-        
+
         group[key] = event.join();
 
         if (group[key] === "" && key === "SynonymsTags") {
@@ -69,7 +69,7 @@ class SynonymsGroupEditor extends Component {
 
         props.onUpdate(state.group);
     }
-    
+
     onCancel() {
         const {props} = this;
         if (props.synonymsGroupClientModified) {
@@ -86,7 +86,7 @@ class SynonymsGroupEditor extends Component {
     /* eslint-disable react/no-danger */
     render() {
         /* eslint-disable react/no-danger */
-        if (this.state.group !== undefined || this.props.id === "add") {  
+        if (this.state.group !== undefined || this.props.id === "add") {
             return (
                 <div className="synonyms-editor">
                     <InputGroup>
@@ -103,7 +103,7 @@ class SynonymsGroupEditor extends Component {
                             type="secondary"
                             onClick={this.onCancel.bind(this)}>
                             {resx.get("Cancel")}
-                        </Button>                        
+                        </Button>
                         <Button
                             type="primary"
                             onClick={this.onSave.bind(this)}>
@@ -128,7 +128,7 @@ SynonymsGroupEditor.propTypes = {
 };
 
 function mapStateToProps(state) {
-    return {              
+    return {
         synonymsGroupClientModified: state.search.synonymsGroupClientModified
     };
 }

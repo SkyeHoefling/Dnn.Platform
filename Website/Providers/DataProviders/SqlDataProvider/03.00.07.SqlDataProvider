@@ -12,17 +12,13 @@ INSERT INTO {databaseOwner}{objectQualifier}Schedule VALUES ('DotNetNuke.Service
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}PortalAlias ADD CONSTRAINT
-	IX_{objectQualifier}PortalAlias UNIQUE NONCLUSTERED 
-	(
-	HTTPAlias
-	) ON [PRIMARY]
+    IX_{objectQualifier}PortalAlias UNIQUE NONCLUSTERED
+    (
+    HTTPAlias
+    ) ON [PRIMARY]
 
 GO
 
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-
-
-
-

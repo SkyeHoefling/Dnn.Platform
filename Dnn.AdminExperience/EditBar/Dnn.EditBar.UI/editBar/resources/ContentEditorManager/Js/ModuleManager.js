@@ -81,7 +81,7 @@ if (typeof dnn === "undefined" || dnn === null) { dnn = {}; };
                 this.$pane.attr('data-name', paneName);
             }
         },
-        
+
         _injectVisualEffects: function () {
             var actionMenus = [];
             var handler = this;

@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SearchBoxControl.ascx.cs" Inherits="DotNetNuke.Modules.DigitalAssets.SearchBoxControl" %>
 
-<div id="dnnModuleDigitalAssetsSearchBox">            
+<div id="dnnModuleDigitalAssetsSearchBox">
     <input type="text" class="searchInput" placeholder='<%=LocalizeString("Search.Placeholder")%>' />
     <a href="#" title='<%=LocalizeString("Search.Title")%>' class="searchButton"></a>
 </div>

@@ -4,13 +4,13 @@ import Tooltip from "../Tooltip";
 import "./style.less";
 
 class RadioButtons extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
             value: props.value
         };
-    }    
+    }
 
     componentDidUpdate(prevProp) {
         if (this.props.value !== prevProp.value) {

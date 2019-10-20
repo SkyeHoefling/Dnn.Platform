@@ -1,6 +1,6 @@
 
 body {
-    background: #f4f4f4 url(body_bg.jpg) repeat-x 0 0; 
+    background: #f4f4f4 url(body_bg.jpg) repeat-x 0 0;
     width: 900px;
     text-align: left;
     margin-left: auto;
@@ -12,17 +12,17 @@ body {
 }
 
 span#lblDotNetNukeInstalltion {
-	font-size: 20pt;
-	font-weight: lighter;
-	color: gray;
+    font-size: 20pt;
+    font-weight: lighter;
+    color: gray;
 }
 
 .install {
     background-color: white;
     padding: 20px 20px 20px 20px;
     margin-top: 20px;
-	box-shadow: 5px 5px 20px grey;
-	/*IE8*/ -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080')";
+    box-shadow: 5px 5px 20px grey;
+    /*IE8*/ -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#808080')";
 }
 
 div#tabs {
@@ -40,8 +40,8 @@ div#tabs .tabSubTitle {
 div#tabs .installIntro {
     font-size: 1.5em;
     font-weight: lighter;
-	color: grey;
-	margin-left: -10px;
+    color: grey;
+    margin-left: -10px;
 }
 hr {
     margin: 15px 0px 5px 0px;
@@ -90,8 +90,8 @@ hr {
 
 .dnnFormMessage.dnnFormError {
     display: none;
-	background-color: rgb(255, 0, 0, 0.15);
-	background: rgb(255, 0, 0, 0.15);
+    background-color: rgb(255, 0, 0, 0.15);
+    background: rgb(255, 0, 0, 0.15);
 }
 .dnnFormMessage.dnnFormValidationSummary {
     display: none;
@@ -100,8 +100,8 @@ hr {
 A.dnnDisabledAction:link, A.dnnDisabledAction:visited, A.dnnDisabledAction:active, A.dnnDisabledAction:hover {
     text-decoration: none;
     color: Silver;
-	opacity: 0.5;
-	/*IE8*/ -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";	
+    opacity: 0.5;
+    /*IE8*/ -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 
 .permissionsCheckBoxes .aspNetDisabled, .permissionsCheckBoxe a.aspNetDisabled, .permissionsCheckBoxe .dnnDisabled, a.dnnDisabled {
@@ -111,28 +111,28 @@ A.dnnDisabledAction:link, A.dnnDisabledAction:visited, A.dnnDisabledAction:activ
 }
 
 div#installation-buttons {
-	margin-top: 1em;
+    margin-top: 1em;
     margin-bottom: 2em;
 }
 
 div#percentage {
-	font-size: smaller;
+    font-size: smaller;
     margin: 0 0 1em 0;
     color: #666;
 }
 
-div#installation-progress {	
+div#installation-progress {
     width: 520px;
     float: left;
-	margin-left: -20px;	
+    margin-left: -20px;
 }
 div#installation-progress hr {
-	margin-left: 0px;
+    margin-left: 0px;
 }
 
 div#installation-steps {
     width: 290px;
-    float: right;    
+    float: right;
     padding: 15px;
     background-color: #eee;
 }
@@ -143,7 +143,7 @@ div#installation-steps > p {
 }
 
 div#installation-steps > p > span{
-    display: inline-block;    
+    display: inline-block;
 }
 span.states-icons{
     width: 25px;
@@ -187,13 +187,13 @@ p.step-error > span.states-icons{
 div#installation-log-container{
     margin: -1.6em 0 1em 0;
     height: 15em;
-	width: 505px;
+    width: 505px;
     overflow: auto;
     border: 1px solid #aaa;
     display: none;
     padding: .5em;
 }
-div#installation-log { 
+div#installation-log {
     white-space: nowrap;
 }
 
@@ -205,95 +205,95 @@ div#installation-log {
 }
 
 .visitSiteLink {
-	float: right;
-	min-width: 150px;
+    float: right;
+    min-width: 150px;
 }
 
 .dnnFormItem hr {
-	margin-left: -20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    margin-left: -20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 #timer, #percentage {
-	font-size: smaller;
-	font-style: italic;
+    font-size: smaller;
+    font-style: italic;
 }
 img#finishImage
 {
-	border: 0;
-	padding-top: 8px;
-	padding-right: 5px;	
+    border: 0;
+    padding-top: 8px;
+    padding-right: 5px;
 }
 
 .promptMessage {
-	display: inline-block;
-	padding-top: 13px;
-	background-color: #FFFF81;
-	width: 394px;
-	text-align: center;
+    display: inline-block;
+    padding-top: 13px;
+    background-color: #FFFF81;
+    width: 394px;
+    text-align: center;
 }
 .promptMessageError{
-	display: inline-block;
-	padding-top: 13px;
-	background-color: rgba(255, 0, 0, 0.15);
-	width: 394px;
-	text-align: center;
+    display: inline-block;
+    padding-top: 13px;
+    background-color: rgba(255, 0, 0, 0.15);
+    width: 394px;
+    text-align: center;
 }
 .permission {
-	margin-top: 5px;
+    margin-top: 5px;
 }
 .permission img {
-	margin: 0 5px;
+    margin: 0 5px;
 }
 #permissionCheckMessage {
-	display: none;
+    display: none;
 }
 .permissionCheck {
-	width: 100%;
-	margin-bottom: 4px;
-	text-align: left;
-	padding-left: 4px;
+    width: 100%;
+    margin-bottom: 4px;
+    text-align: left;
+    padding-left: 4px;
 }
 .inProgress {
-	display: block;
-	width: 100%;
-	background-image: url(../images/progress.gif);
+    display: block;
+    width: 100%;
+    background-image: url(../images/progress.gif);
     background-repeat: repeat-x;
 }
 .stoppedProgress {
-	display: block;
-	width: 100%;
-	background-image: none;
+    display: block;
+    width: 100%;
+    background-image: none;
 }
 .flagimage{
-	height: 14px;
-	vertical-align: top;
-	padding-bottom: 5px;
+    height: 14px;
+    vertical-align: top;
+    padding-bottom: 5px;
 }
 .selectedFlag
 {
-	border-bottom-style: solid;
-	border-width: 1px;
-	border-color: #3792ED;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #3792ED;
 }
 .dnnFormPopup .ui-dialog-titlebar-close {
   visibility: hidden;
 }
 .dnnFormPopup .ui-dialog-titlebar {
-	cursor: default;
+    cursor: default;
 }
 a.videoLink {
-	background: url(../images/videoIcon.png) no-repeat;
-	display: inline-block;
-	padding-left: 24px;
-	height: 24px;
-	text-decoration: none;
-	color: #333;
-	font-weight: bold;
-	margin-left: 20px;
+    background: url(../images/videoIcon.png) no-repeat;
+    display: inline-block;
+    padding-left: 24px;
+    height: 24px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    margin-left: 20px;
 }
 a.videoLink:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 .accept-terms {
     position: relative;

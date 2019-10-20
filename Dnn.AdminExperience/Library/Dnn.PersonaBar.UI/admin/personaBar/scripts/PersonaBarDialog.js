@@ -69,8 +69,8 @@ define(['jquery', 'knockout', 'jquery-ui.min', 'css!cssPath/personaBarDialog.css
                         </div>\
                     </div>\
                     <div class="actions">\
-                      <span class="btn btn-accept" data-bind="visible: showAcceptBtn, text: acceptBtnLbl, click: acceptDialog"></span>\
-                      <span class="btn btn-cancel" data-bind="visible: showCancelBtn, text: cancelBtnLbl, click: closeDialog"></span>\
+                    <span class="btn btn-accept" data-bind="visible: showAcceptBtn, text: acceptBtnLbl, click: acceptDialog"></span>\
+                    <span class="btn btn-cancel" data-bind="visible: showCancelBtn, text: cancelBtnLbl, click: closeDialog"></span>\
                     </div>\
                 </div>';
         _options = null;
@@ -272,7 +272,7 @@ define(['jquery', 'knockout', 'jquery-ui.min', 'css!cssPath/personaBarDialog.css
                 };
 
                 if (!up && -delta > scrollHeight - height - scrollTop) {
-                   self.scrollTop(scrollHeight);
+                    self.scrollTop(scrollHeight);
                     return prevent();
                 } else if (up && delta > scrollTop) {
                     self.scrollTop(0);

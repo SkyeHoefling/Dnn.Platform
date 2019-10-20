@@ -2,17 +2,17 @@
 /* CSS Document */
 
 /* ---------------------------------------------------------
-	
-	* Filename:				default.css
-	* Description: 			sets typography, basic grids, 
-							and standard formstyles
-	* Version:				1.0.0 (2012-06-16)
-	* Author:				Ryan Martinez
-	
-	== INDEX ===============================================
-	
-	$__generic classes		classes used globally, should be at bottom to prevent semantic inheritance
-	
+
+    * Filename:				default.css
+    * Description: 			sets typography, basic grids,
+                            and standard formstyles
+    * Version:				1.0.0 (2012-06-16)
+    * Author:				Ryan Martinez
+
+    == INDEX ===============================================
+
+    $__generic classes		classes used globally, should be at bottom to prevent semantic inheritance
+
 ------------------------------------------------------------*/
 
 
@@ -70,10 +70,10 @@ html, button, input, select, textarea {
 }
 
 /*
-     * Remove text-shadow in selection highlight: h5bp.com/i
-     * These selection declarations have to be separate
-     * Also: hot pink! (or customize the background color to match your design)
-     */
+    * Remove text-shadow in selection highlight: h5bp.com/i
+    * These selection declarations have to be separate
+    * Also: hot pink! (or customize the background color to match your design)
+    */
 
 ::-moz-selection {
     background: rgba(2,139,255,1); /* blue */
@@ -329,7 +329,7 @@ img {
 }
 
 #dnn_dnnLOGO_imgLogo {
-     border: 0;
+    border: 0;
 }
 
 /*-------------------------------------*/
@@ -402,7 +402,7 @@ li p {
     background: none repeat scroll 0 0 #E3E3E5;
 }
 .dnnTableHeader a,
-.dnnTableHeader input, 
+.dnnTableHeader input,
 .dnnTableHeader select{
     margin: 0;
 }
@@ -669,10 +669,10 @@ legend.required:after {
 }
 
 /*
-	 * 1. Display hand cursor for clickable form elements
-	 * 2. Allow styling of clickable form elements in iOS
-	 * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
-	 */
+    * 1. Display hand cursor for clickable form elements
+    * 2. Allow styling of clickable form elements in iOS
+    * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
+    */
 
 .dnnFormItem button, .dnnFormItem input[type="button"],
 .dnnFormItem input[type="reset"],
@@ -842,7 +842,7 @@ span.dnnSecondaryAction > a.dnnSecondaryAction {
 /* Action Button behind input */
 .dnnFormItem input[type="text"] + a.dnnPrimaryAction,
 .dnnFormItem input[type="text"] + a.dnnSecondaryAction,
-.dnnFormItem input[type="text"] + a.dnnTerriaryAction { 
+.dnnFormItem input[type="text"] + a.dnnTerriaryAction {
     margin-left: 5px;
 }
 
@@ -896,9 +896,9 @@ span.dnnSecondaryAction > a.dnnSecondaryAction {
 }
 
 /*
-	 * 1. Remove default vertical scrollbar in IE6/7/8/9
-	 * 2. Allow only vertical resizing
-	 */
+    * 1. Remove default vertical scrollbar in IE6/7/8/9
+    * 2. Allow only vertical resizing
+    */
 
 .dnnFormItem textarea {
     overflow: auto;
@@ -1114,7 +1114,7 @@ ul.dnnAdminTabNav {
     right: -5px;
     top: -5px;
 }
-/*	
+/*
 
 /*-------------------------------------*/
 /* FORM ITEMS
@@ -1265,7 +1265,7 @@ td > .dnnLabel {
 
 .dnnFormHelpContent span {
     display: block;
-	word-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /*.dnnTooltip .dnnFormHelpContent span:after,
@@ -1434,7 +1434,7 @@ a.pinHelp {
     background-position: -100px 0px;
 }
 .dnnCheckbox-focus {
-	background-color: #e3e3e5;
+    background-color: #e3e3e5;
 }
 .dnnBoxLabel{ display: inline-block;}
 /* normal checkbox fix */
@@ -1489,7 +1489,7 @@ a.pinHelp {
     background-position: -100px 0px;
 }
 .dnnRadiobutton-focus {
-	background-color: #e3e3e5;
+    background-color: #e3e3e5;
 }
 /* Input RadioButton group */
 div.dnnFormRadioButtons,
@@ -1765,7 +1765,7 @@ div.dnnTagsInput > div > input.dnnTagsInvalid {
     cursor: pointer;
     font-size: 12px;
     color: #90111A !important; /* dark red*/
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 /* DNN Auto Complete */
@@ -1938,8 +1938,8 @@ div.dnnTagsInput > div > input.dnnTagsInvalid {
         list-style: none;
         margin: 0;
     }
-	.dnnButtonDropdown-ul > ul{ margin: 0;}
-	.dnnButtonDropdown-ul > ul > li{ padding-left: 16px;}
+    .dnnButtonDropdown-ul > ul{ margin: 0;}
+    .dnnButtonDropdown-ul > ul > li{ padding-left: 16px;}
 
         .dnnButtonDropdown-ul > li:last-child {
             border-bottom: none !important;
@@ -2292,7 +2292,7 @@ ul.dnnButtonGroup {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.65);
-	z-index: 9999;
+    z-index: 9999;
 }
 
 .dnnFormPopup {
@@ -2301,7 +2301,7 @@ ul.dnnButtonGroup {
     background: #fff;
     -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
     box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.75);
-	z-index: 100000;
+    z-index: 100000;
 }
     /* Popup header */
     .dnnFormPopup, .dnnFormPopup > * {
@@ -2341,20 +2341,20 @@ ul.dnnButtonGroup {
             overflow: hidden;
             -webkit-border-top-right-radius: 8px;
             -webkit-border-bottom-right-radius: 8px;
-	        border: none;
-	        outline: none;
+            border: none;
+            outline: none;
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
             background: #585858 url(../../../../../images/closeBtn.png) no-repeat;
             background-position: 8px 4px;
             text-indent: -9999em;
-	        min-width: 0 !important;
+            min-width: 0 !important;
         }
 
             .dnnFormPopup .dnnModalCtrl .ui-dialog-titlebar-close:hover {
                 background: #358EEA url(../../../../../images/closeBtn.png) no-repeat;
                 background-position: 8px 4px;
-	            cursor: pointer;
+                cursor: pointer;
             }
 
         .dnnFormPopup .dnnModalCtrl a.dnnToggleMax {
@@ -2393,7 +2393,7 @@ div.ui-dialog-titlebar > .ui-dialog-titlebar-close {
     background-position: 4px 4px;
     border: 3px solid #fff;
     text-indent: -9999em;
-	min-width: 0 !important;
+    min-width: 0 !important;
 }
 
 /* Poup Iframe styles*/
@@ -2660,7 +2660,7 @@ table.dnnASPGrid {
         padding: 4px 4px 4px 4px;
         vertical-align: middle;
         line-height: 120%;
-        text-align: center;    
+        text-align: center;
     }
 
     table.dnnPermissionsGrid tr.dnnGridItem td,
@@ -2686,7 +2686,7 @@ table.dnnASPGrid {
     }
 
     .dnnPermissionsGrid > .dnnFormItem label {
-        margin-right: 8px;        
+        margin-right: 8px;
         color: #777;
     }
 
@@ -2697,7 +2697,7 @@ table.dnnASPGrid {
         color: #777;
     }
 
-    .dnnPermissionsGrid > .dnnFormItem input {        
+    .dnnPermissionsGrid > .dnnFormItem input {
         margin-bottom: 0;
         height: 17px;
         color: #777;
@@ -2723,7 +2723,7 @@ table.dnnASPGrid {
 
     .dnnPermissionsGrid > .dnnFormItem {
         margin-bottom: 18px;
-        overflow: auto;     
+        overflow: auto;
     }
 
 .dnnGridHeader td, thead.dnnGridHeader th,  tr.dnnGridHeader th{
@@ -2882,7 +2882,7 @@ span.dnnInputFileWrapper > input[type="file"] { /* force file upload style here,
     direction: ltr;
     cursor: pointer;
     height: 100%;
-	font-size: 200px;
+    font-size: 200px;
 }
 
 span.dnnInputFileWrapper { /* Notes(by Richard): here must set !important */
@@ -2891,7 +2891,7 @@ span.dnnInputFileWrapper { /* Notes(by Richard): here must set !important */
     width: auto !important;
     display: block !important;
     float: left !important;
-	position: relative;
+    position: relative;
 }
 
     span.dnnInputFileWrapper > span.dnnSecondaryAction {
@@ -3295,59 +3295,59 @@ body:not(.dnnEditState) .DNNEmptyPane {
 .Hidden {
     display: none;
 }
-.wordwrap { 
-   white-space: pre-wrap;      /* CSS3 */   
-   white-space: -moz-pre-wrap; /* Firefox */    
-   white-space: -pre-wrap;     /* Opera <7 */   
-   white-space: -o-pre-wrap;   /* Opera 7 */    
-   word-wrap: break-word;      /* IE */
+.wordwrap {
+    white-space: pre-wrap;      /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    word-wrap: break-word;      /* IE */
 }
 /*Edit In Place Tool Bar Classes*/
 .eipbackimg {
-	position:absolute;
-	margin-top:-32px;
-	white-space:nowrap;
-	background:url(../../../../../images/eip_toolbar.png) repeat-x;
-	height:32px;
-	z-index: 1;
+    position:absolute;
+    margin-top:-32px;
+    white-space:nowrap;
+    background:url(../../../../../images/eip_toolbar.png) repeat-x;
+    height:32px;
+    z-index: 1;
 }
 .eipbackimg.editMode {
-	border: 1px solid #777777 !important;
-	background: -moz-linear-gradient(top, #303030 0%, #191919 100%) !important; /* FF3.6+ */
+    border: 1px solid #777777 !important;
+    background: -moz-linear-gradient(top, #303030 0%, #191919 100%) !important; /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#303030), color-stop(100%,#191919)) !important; /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #303030 0%,#191919 100%) !important; /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top, #303030 0%,#191919 100%) !important; /* Opera 11.10+ */
     background: -ms-linear-gradient(top, #303030 0%,#191919 100%) !important; /* IE10+ */
     background: linear-gradient(to bottom, #303030 0%,#191919 100%) !important; /* W3C */
-	opacity: 0.8;
+    opacity: 0.8;
 }
 .eipbackimg.containerTitle {
-	margin-top: -8px;
+    margin-top: -8px;
 }
 .eipbackimg.containerTitle.editMode {
-	left: auto;
-	right: 0px;
-	margin-top: 2px;
-	background: none !important;
-	border: none !important;
+    left: auto;
+    right: 0px;
+    margin-top: 2px;
+    background: none !important;
+    border: none !important;
 }
 .eipbuttonbackimg{
-	width: 32px;
-	height: 32px; 
-	cursor: pointer;
-	float:left;
-	background: url(../../../../../images/eip_toolbar.png) no-repeat;
-	
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    float:left;
+    background: url(../../../../../images/eip_toolbar.png) no-repeat;
+
 }
 .eipbackimg.editMode .eipbuttonbackimg {
-	border-left: 1px solid #1f1f1f;
-	border-right: 1px solid #393939;
-	opacity: 0.5;
+    border-left: 1px solid #1f1f1f;
+    border-right: 1px solid #393939;
+    opacity: 0.5;
 }
 
 .eipbackimg.editMode.containerTitle .eipbuttonbackimg {
-	border: none;
-	opacity: 1;
+    border: none;
+    opacity: 1;
 }
 
 .eipbuttonbackimg.eipbutton_cancel{ background-position: -32px 0;}
@@ -3364,28 +3364,28 @@ body:not(.dnnEditState) .DNNEmptyPane {
 .eipbuttonbackimg.eipbutton_createlink{ background-position: -384px 0;}
 
 .eipbackimg.containerTitle .eipbutton_cancel {
-	background: url(../../../../../images/eip_title_cancel.png) no-repeat center center;
+    background: url(../../../../../images/eip_title_cancel.png) no-repeat center center;
 }
 
 .eipbutton_edit {
-	background: url(../../../../../images/eip_edit.png) no-repeat 100% center;
-	float:left;
+    background: url(../../../../../images/eip_edit.png) no-repeat 100% center;
+    float:left;
 }
 
 .eipbutton_save {
-	background: url(../../../../../images/eip_save.png) no-repeat 100% center;
-	float:left;
+    background: url(../../../../../images/eip_save.png) no-repeat 100% center;
+    float:left;
 }
 .eipbackimg.containerTitle .eipbutton_save {
-	background-image: url(../../../../../images/eip_title_save.png);
+    background-image: url(../../../../../images/eip_title_save.png);
 }
 
 .eipbackimg.editMode .eipborderhover {
-	background-color: #333;
-	opacity: 1;
+    background-color: #333;
+    opacity: 1;
 }
 .eipbackimg.editMode.containerTitle .eipborderhover {
-	background-color: inherit;
+    background-color: inherit;
 }
 div[id$=titleLabel_tb].visible ~ span{ margin-left: 32px;}
 
@@ -3448,36 +3448,36 @@ input[type="button"].rspCollapseBarSpacer
 
 /* Login/register/reset paswsword controls in mobile view */
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView{
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	height: inherit !important;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: inherit !important;
 }
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnFormMessage{
-	margin: 0;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	padding: 10px 0 10px 0;
+    margin: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding: 10px 0 10px 0;
 }
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnFormMessage.dnnFormValidationSummary{
-	padding: 10px;
+    padding: 10px;
 }
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .LoginPanel,
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnSendPasswordContent,
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm {
     width: 100%;
-	padding: 18px 0 0 0;
+    padding: 18px 0 0 0;
     margin: 0;
-    float: none;	
-	min-width: inherit !important;	
+    float: none;
+    min-width: inherit !important;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm{
-	width: 100%;
-	margin: 0;
-	float: none;
-	min-width: inherit !important;
+    width: 100%;
+    margin: 0;
+    float: none;
+    min-width: inherit !important;
 }
 
 
@@ -3490,41 +3490,41 @@ body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem > .dnn
     font-size: 14px;
     margin: 0 0 7px 0;
     vertical-align: top;
-	padding: 0;
+    padding: 0;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnSocialRegistration{
-	display: none;
+    display: none;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnCaptcha{
-	width: 100%;
+    width: 100%;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnLeft img{
-	display: block;
-	margin: 0 0 5px 0;
+    display: block;
+    margin: 0 0 5px 0;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem > .dnnLabel a.dnnFormHelp{
-	display: none !important;
-	width: 0 !important;
-	margin: 0 !important;
+    display: none !important;
+    width: 0 !important;
+    margin: 0 !important;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem > .dnnLabel div.dnnTooltip{
-	display: none !important;
-	width: 0 !important;
-	position: static !important;
-	right: 0 !important;
-	margin: 0 !important;
+    display: none !important;
+    width: 0 !important;
+    position: static !important;
+    right: 0 !important;
+    margin: 0 !important;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem input[type="text"],
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem > input[type="password"]{
     display: block;
     box-sizing: border-box;
-	-webkit-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
     -moz-box-sizing: border-box;
     width: 100% !important;
     -webkit-border-radius: 0;
@@ -3532,76 +3532,76 @@ body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem > inpu
     -webkit-box-shadow: none;
     box-shadow: none;
     max-width: 100% !important;
-	margin-bottom: 18px;
-	min-width: 100% !important;	
+    margin-bottom: 18px;
+    min-width: 100% !important;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem > span#dnn_ctr_Login_Login_DNN_lblLogin{
-	display: none !important;
-	width: 0;
-	margin: 0;
+    display: none !important;
+    width: 0;
+    margin: 0;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnFormItem span.dnnFormMessage.dnnFormError{
-	border-radius: 0;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	right: 0;
-	width: auto;
-	max-width: 100%;
-	padding: 10px;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    right: 0;
+    width: auto;
+    max-width: 100%;
+    padding: 10px;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm.dnnLoginService a.dnnPrimaryAction,
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm.dnnLoginService a.dnnSecondaryAction{
-	width: 45%;
-	padding: 18px 0 18px 0;
-	display: block;
-	float: left;
-	margin: 0 5px 0 0;
+    width: 45%;
+    padding: 18px 0 18px 0;
+    display: block;
+    float: left;
+    margin: 0 5px 0 0;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnLoginRememberMe{
-	display: block;
-	float: left;
-	margin: 10px 0 0 5px;
+    display: block;
+    float: left;
+    margin: 10px 0 0 5px;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnLoginActions {
-	display: block;
+    display: block;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnActions a.dnnSecondaryAction,
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnActions a.dnnPrimaryAction{
-	width: 100%;
-	padding: 18px 0 18px 0;
-	display: block;
+    width: 100%;
+    padding: 18px 0 18px 0;
+    display: block;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnActions{
-	padding: 0;
+    padding: 0;
 }
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnForm .dnnActions li{
-	width: 45%;
+    width: 45%;
 }
 
 /* password strength control in iPopup */
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .password-strength-container{
-	width: 100%;
-	margin: 0 0 12px 0;
-	padding: 8px 0 8px 0;
-	display: block;
-	max-width: inherit !important;
+    width: 100%;
+    margin: 0 0 12px 0;
+    padding: 8px 0 8px 0;
+    display: block;
+    max-width: inherit !important;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .dnnFormItem .password-strength-container input[type="password"]{
-	display: block;
-	margin: 0 8px 0 8px;
-	width: calc(100% - 20px);
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-border-radius: 0;
+    display: block;
+    margin: 0 8px 0 8px;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-border-radius: 0;
     border-radius: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -3609,26 +3609,26 @@ body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .dnnFor
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .dnnFormItem .password-strength-container span.min-length-text{
-	display: block;	
-	margin: 5px 0 5px 8px;
+    display: block;
+    margin: 5px 0 5px 8px;
 }
 
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .dnnFormItem .password-strength-container div.meter{
-	float: none;	
-	width: 90%;
-	margin: 0 0 0 8px;
+    float: none;
+    width: 90%;
+    margin: 0 0 0 8px;
 }
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnFormItem input.unmatched{
-	background: none !important;
+    background: none !important;
 }
 
-body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .dnnFormItem .password-strength-tooltip, 
+body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .dnnFormItem .password-strength-tooltip,
 body.mobileView.dnnFormPopup.dnnFormPopupMobileView .dnnRegistrationForm .dnnFormItem .confirm-password-tooltip{
-	display: none !important;
+    display: none !important;
 }
 
 .mobileView .dnnFormPopup .ui-dialog-content, .mobileVie #iPopUp .ui-dialog-content {
-    max-height: none !important; 
+    max-height: none !important;
 }
 
 .mobileView .ui-widget-overlay {
@@ -3771,53 +3771,53 @@ html.mobileView {
     overflow: auto !important;
 }
 
-.mobileView .dnnFormPopup .ui-dialog-content, 
+.mobileView .dnnFormPopup .ui-dialog-content,
 .mobileView #iPopUp .ui-dialog-content {
-    max-height: none !important; 
+    max-height: none !important;
 }
 
 .dnnPlaceholder{ color: #666; }
 
 /* DNN Slider Input Style */
 div.dnnSliderInput {
-	position: relative;
-	display: inline-block;
-	width: 47%;
+    position: relative;
+    display: inline-block;
+    width: 47%;
     margin:15px 0 23px 0;
     max-width: 445px;
-	border: 1px solid #d3d3d3;
-	-ms-border-radius: 3px;
-	border-radius: 3px;
-	height: 10px;
+    border: 1px solid #d3d3d3;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    height: 10px;
 }
 
 div.dnnSliderInput .ui-slider-handle {
-	position: absolute;
+    position: absolute;
     z-index: 2;
     width: 14px;
     height: 14px;
     cursor: default;
-	border: 1px solid #aaaaaa;
+    border: 1px solid #aaaaaa;
     background-color: #cccccc;
     font-weight: normal;
     color: #555555;
-	outline: none;
-	top: -2px;
-	margin-left: -7px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+    outline: none;
+    top: -2px;
+    margin-left: -7px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 div.dnnSliderInput .dnnTooltip {
-	top: -37px;
-	margin-left: -22px;
+    top: -37px;
+    margin-left: -22px;
 }
 div.dnnSliderInput .dnnTooltip .dnnFormHelpContent {
-	visibility: visible;
-	padding: 4px 10px;
-	width: 25px;
-	text-align: center;
-	z-index: 1;
+    visibility: visible;
+    padding: 4px 10px;
+    width: 25px;
+    text-align: center;
+    z-index: 1;
 }
 /*END DNN Slider Input Style*/
 

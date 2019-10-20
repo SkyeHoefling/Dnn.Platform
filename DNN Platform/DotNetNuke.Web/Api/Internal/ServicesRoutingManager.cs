@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -40,7 +40,7 @@ namespace DotNetNuke.Web.Api.Internal
 {
     public sealed class ServicesRoutingManager : IMapRoute
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ServicesRoutingManager));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ServicesRoutingManager));
         private readonly Dictionary<string, int> _moduleUsage = new Dictionary<string, int>();
         private readonly RouteCollection _routes;
         private readonly PortalAliasRouteManager _portalAliasRouteManager;
@@ -65,8 +65,8 @@ namespace DotNetNuke.Web.Api.Internal
             if (namespaces == null || namespaces.Length == 0 || String.IsNullOrEmpty(namespaces[0]))
             {
                 throw new ArgumentException(Localization.GetExceptionMessage("ArgumentCannotBeNullOrEmpty",
-                                                                             "The argument '{0}' cannot be null or empty.",
-                                                                             "namespaces"));
+                                                                            "The argument '{0}' cannot be null or empty.",
+                                                                            "namespaces"));
             }
 
             Requires.NotNullOrEmpty("moduleFolderName", moduleFolderName);
@@ -236,7 +236,7 @@ namespace DotNetNuke.Web.Api.Internal
                 catch (Exception e)
                 {
                     Logger.ErrorFormat("{0}.RegisterRoutes threw an exception.  {1}\r\n{2}", routeMapper.GetType().FullName,
-                                 e.Message, e.StackTrace);
+                                e.Message, e.StackTrace);
                 }
             }
         }
@@ -265,7 +265,7 @@ namespace DotNetNuke.Web.Api.Internal
                 catch (Exception e)
                 {
                     Logger.ErrorFormat("Unable to create {0} while registering service routes.  {1}", routeMapperType.FullName,
-                                 e.Message);
+                                e.Message);
                     routeMapper = null;
                 }
 
@@ -289,7 +289,7 @@ namespace DotNetNuke.Web.Api.Internal
         private Route MapHttpRouteWithNamespace(string name, string url, object defaults, object constraints, string[] namespaces)
         {
             Route route = _routes.MapHttpRoute(name, url, defaults, constraints);
-            
+
             if(route.DataTokens == null)
             {
                 route.DataTokens = new RouteValueDictionary();

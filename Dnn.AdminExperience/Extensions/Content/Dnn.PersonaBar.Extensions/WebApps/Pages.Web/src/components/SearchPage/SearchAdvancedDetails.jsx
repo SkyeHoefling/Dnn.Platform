@@ -8,7 +8,7 @@ import utils from "../../utils";
 class SearchAdvancedDetails extends Component {
 
     constructor(props) {
-        super(props); 
+        super(props);
         this.state = {
             DropdownCalendarIsActive : false,
             tags : props.tags?props.tags.split(","):[]
@@ -34,7 +34,7 @@ class SearchAdvancedDetails extends Component {
         }
         return label;
     }
-    
+
     toggleDropdownCalendar() {
         this.setState({
             DropdownCalendarIsActive : !this.state.DropdownCalendarIsActive
@@ -42,10 +42,10 @@ class SearchAdvancedDetails extends Component {
     }
     getPageStatusLabel() {
         return (
-            this.props.filterByPublishStatus ? 
+            this.props.filterByPublishStatus ?
             this.props.getFilterByPageStatusOptions().find(
                 x => x.value === this.props.filterByPublishStatus.toLowerCase()
-            ).label : 
+            ).label :
             Localization.get("FilterbyPublishStatusText"));
     }
 
@@ -60,7 +60,7 @@ class SearchAdvancedDetails extends Component {
     onChangeTags(evnt) {
         this.setState({
             tags: evnt
-        },()=>this.props.updateSearchAdvancedTags(this.state.tags.join(",")));        
+        },()=>this.props.updateSearchAdvancedTags(this.state.tags.join(",")));
     }
 
     onTagClick() {
@@ -68,7 +68,7 @@ class SearchAdvancedDetails extends Component {
     }
 
     applyDateFilter() {
-        this.toggleDropdownCalendar(); 
+        this.toggleDropdownCalendar();
         this.props.onApplyChangesDropdownDayPicker();
     }
 
@@ -169,7 +169,7 @@ SearchAdvancedDetails.propTypes = {
     startAndEndDateDirty : PropTypes.bool.isRequired,
     tags : PropTypes.string.isRequired,
     filterByWorkflow : PropTypes.number,
-    collapsed : PropTypes.bool.isRequired, 
+    collapsed : PropTypes.bool.isRequired,
     clearAdvancedSearch : PropTypes.func.isRequired,
     clearAdvancedSearchDateInterval : PropTypes.func.isRequired,
     updateSearchAdvancedTags : PropTypes.func.isRequired

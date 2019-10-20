@@ -20,7 +20,7 @@ define(['jquery', 'knockout'], function ($, ko) {
             if (options.mouseWheelSpeed === 0) {
                 $(".jspPane", element).unmousewheel();
                 $(".jspPane", element).bind("mousewheel", function mouseWheelHandler(event, delta) {
-                    //Propagate the event to the parent scrolls    
+                    //Propagate the event to the parent scrolls
                     if (parentScrollSettings) {
                         var scrollOffset = 15;
                         var parentScroll = $(parentScrollSettings.selector).data("jsp");
@@ -30,10 +30,10 @@ define(['jquery', 'knockout'], function ($, ko) {
                             parentScroll.scrollByY((-1)* scrollOffset);
                         }
                     }
-                    
+
                     return false;
                 });
-            }            
+            }
         }, 0);
 
         var reinit = function () {
@@ -68,9 +68,9 @@ define(['jquery', 'knockout'], function ($, ko) {
         if (o.observableElement) {
             o.observableElement.subscribe(function (value) {
                 // use setTimeout so the DOM finishes updating before reinitialising
-                if (value) {             
+                if (value) {
                     setTimeout(reinit, 0);
-                }                
+                }
             });
         }
     };

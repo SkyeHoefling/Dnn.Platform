@@ -34,7 +34,7 @@
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend({}, DropDownList.defaults(), this.options);
 
@@ -69,7 +69,7 @@
                         .append($("<a href='javascript:void(0);' class='" + this.options.selectedValueCss + "'/>")));
             return layout;
         },
-        
+
         id: function() {
             return this.$element.attr('id');
         },
@@ -87,7 +87,7 @@
                 this._treeView.selectedId(item ? item.key : null);
             }
             this.$element.trigger("selectedItemChanged", item);
-            
+
             return item;
         },
 
@@ -108,7 +108,7 @@
             }
             return this._disabled;
         },
-        
+
         refresh: function (parentId) {
             this.options.services.parameters.parentId = parentId;
             if (this._treeView) {
@@ -185,16 +185,16 @@
             var onShowChildrenHandler = $.proxy(this._onShowChildren, this);
             var onRequestExpandHandler = $.proxy(this._onRequestExpand, this);
             $(treeView).on("onchangenode", onChangeNodeHandler)
-                       .on("onselectnode", onSelectNodeHandler)
-                       .on("ontreeloaded", onTreeLoadedHandler)
-                       .on("onloadchildren", onTreeLoadedHandler)
-                       .on("onshowchildren", onShowChildrenHandler)
-                       .on("onrequestexpand", onRequestExpandHandler);
+                        .on("onselectnode", onSelectNodeHandler)
+                        .on("ontreeloaded", onTreeLoadedHandler)
+                        .on("onloadchildren", onTreeLoadedHandler)
+                        .on("onshowchildren", onShowChildrenHandler)
+                        .on("onrequestexpand", onRequestExpandHandler);
             var item = this.selectedItem();
             treeView.selectedId(item ? item.key : null);
             return treeView;
         },
-        
+
         _onTreeLoaded: function () {
             var id = this.$element[0].id;
             if (!id) {
@@ -228,7 +228,7 @@
                 }
             }
         },
-        
+
         _onShowChildren: function () {
             this._treeView._dynamicTree.scrollToSelectedNode();
             var id = this.$element[0].id;
@@ -239,7 +239,7 @@
                 }
             }
         },
-        
+
         _onRequestExpand: function() {
             this._onTreeLoaded();
         },
@@ -336,4 +336,3 @@ dnn.createDropDownList = function (selector, options, methods) {
         }
     });
 };
-

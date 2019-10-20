@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import {
     seo as SeoActions
 } from "../../actions";
-import { 
+import {
     Button,
     GridSystem as Grid,
-    InputGroup, 
+    InputGroup,
     Label,
     MultiLineInput,
-    PagePicker, 
+    PagePicker,
     SingleLineInputWithError
 } from "@dnnsoftware/dnn-react-common";
 import "./style.less";

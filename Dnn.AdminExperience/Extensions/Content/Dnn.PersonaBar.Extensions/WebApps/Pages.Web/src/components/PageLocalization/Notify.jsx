@@ -7,7 +7,7 @@ class Notify extends Component {
     render() {
         return <div className="notify-translators">
             <h3>{Localization.get("NotifyModalHeader")}</h3>
-            <textarea 
+            <textarea
                 placeholder={Localization.get("NotifyModalPlaceholder")}
                 value={this.props.notifyMessage}
                 onChange={this.props.onUpdateMessage}

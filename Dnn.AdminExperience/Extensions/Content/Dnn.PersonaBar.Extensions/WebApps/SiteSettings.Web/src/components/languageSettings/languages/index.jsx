@@ -48,7 +48,7 @@ class LanguagesPanel extends Component {
     componentDidUpdate(prevProps) {
         let { props } = this;
 
-        if (prevProps.portalId !== props.portalId || 
+        if (prevProps.portalId !== props.portalId ||
             prevProps.contentLocalizationEnabled !== props.contentLocalizationEnabled) {
             this.loadData();
         }

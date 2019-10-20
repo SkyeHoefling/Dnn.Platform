@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -43,7 +43,7 @@ namespace DotNetNuke.Services.Log.EventLog
 {
     public class DBLoggingProvider : LoggingProvider
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DBLoggingProvider));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DBLoggingProvider));
         private const int ReaderLockTimeout = 10000;
         private const int WriterLockTimeout = 10000;
         private static readonly IList<LogQueueItem> LogQueue = new List<LogQueueItem>();
@@ -141,7 +141,7 @@ namespace DotNetNuke.Services.Log.EventLog
                 obj.Exception.FileLineNumber = Convert.ToInt32(Null.SetNull(dr["FileLineNumber"], obj.Exception.FileLineNumber));
                 obj.Exception.FileColumnNumber = Convert.ToInt32(Null.SetNull(dr["FileColumnNumber"], obj.Exception.FileColumnNumber));
                 obj.Exception.Method = Convert.ToString(Null.SetNull(dr["Method"], obj.Exception.Method));
-                 */
+                */
             }
             catch (Exception exc)
             {
@@ -193,7 +193,7 @@ namespace DotNetNuke.Services.Log.EventLog
                     response.End();
                 }
             }
-            
+
         }
 
         private static void WriteLog(LogQueueItem logQueueItem)
@@ -207,17 +207,17 @@ namespace DotNetNuke.Services.Log.EventLog
                     LogInfo objLogInfo = logQueueItem.LogInfo;
                     string logProperties = objLogInfo.LogProperties.Serialize();
                     DataProvider.Instance().AddLog(objLogInfo.LogGUID,
-                                                   objLogInfo.LogTypeKey,
-                                                   objLogInfo.LogUserID,
-                                                   objLogInfo.LogUserName,
-                                                   objLogInfo.LogPortalID,
-                                                   objLogInfo.LogPortalName,
-                                                   objLogInfo.LogCreateDate,
-                                                   objLogInfo.LogServerName,
-                                                   logProperties,
-                                                   Convert.ToInt32(objLogInfo.LogConfigID),
-												   objLogInfo.Exception,
-                                                   logTypeConfigInfo.EmailNotificationIsActive);
+                                                    objLogInfo.LogTypeKey,
+                                                    objLogInfo.LogUserID,
+                                                    objLogInfo.LogUserName,
+                                                    objLogInfo.LogPortalID,
+                                                    objLogInfo.LogPortalName,
+                                                    objLogInfo.LogCreateDate,
+                                                    objLogInfo.LogServerName,
+                                                    logProperties,
+                                                    Convert.ToInt32(objLogInfo.LogConfigID),
+                                                    objLogInfo.Exception,
+                                                    logTypeConfigInfo.EmailNotificationIsActive);
                     if (logTypeConfigInfo.EmailNotificationIsActive)
                     {
                         if (LockNotif.TryEnterWriteLock(ReaderLockTimeout))
@@ -252,8 +252,8 @@ namespace DotNetNuke.Services.Log.EventLog
 
         public override void AddLog(LogInfo logInfo)
         {
-            string configPortalID = logInfo.LogPortalID != Null.NullInteger 
-                                        ? logInfo.LogPortalID.ToString() 
+            string configPortalID = logInfo.LogPortalID != Null.NullInteger
+                                        ? logInfo.LogPortalID.ToString()
                                         : "*";
             var logTypeConfigInfo = GetLogTypeConfigInfoByKey(logInfo.LogTypeKey, configPortalID);
             if (logTypeConfigInfo == null || logTypeConfigInfo.LoggingIsActive == false)
@@ -263,7 +263,7 @@ namespace DotNetNuke.Services.Log.EventLog
             logInfo.LogConfigID = logTypeConfigInfo.ID;
             var logQueueItem = new LogQueueItem {LogInfo = logInfo, LogTypeConfigInfo = logTypeConfigInfo};
             SchedulingProvider scheduler = SchedulingProvider.Instance();
-            if (scheduler == null || logInfo.BypassBuffering || SchedulingProvider.Enabled == false 
+            if (scheduler == null || logInfo.BypassBuffering || SchedulingProvider.Enabled == false
                 || scheduler.GetScheduleStatus() == ScheduleStatus.STOPPED || !Host.EventLogBuffer)
             {
                 WriteLog(logQueueItem);
@@ -282,7 +282,7 @@ namespace DotNetNuke.Services.Log.EventLog
         }
 
         public override void AddLogTypeConfigInfo(string id, bool loggingIsActive, string logTypeKey, string logTypePortalID, string keepMostRecent, string logFileName, bool emailNotificationIsActive,
-                                                  string threshold, string thresholdTime, string thresholdTimeType, string mailFromAddress, string mailToAddress)
+                                                string threshold, string thresholdTime, string thresholdTimeType, string mailFromAddress, string mailToAddress)
         {
             int intThreshold = -1;
             int intThresholdTime = -1;
@@ -305,15 +305,15 @@ namespace DotNetNuke.Services.Log.EventLog
                 intKeepMostRecent = Convert.ToInt32(keepMostRecent);
             }
             DataProvider.Instance().AddLogTypeConfigInfo(loggingIsActive,
-                                                         logTypeKey,
-                                                         logTypePortalID,
-                                                         intKeepMostRecent,
-                                                         emailNotificationIsActive,
-                                                         intThreshold,
-                                                         intThresholdTime,
-                                                         intThresholdTimeType,
-                                                         mailFromAddress,
-                                                         mailToAddress);
+                                                        logTypeKey,
+                                                        logTypePortalID,
+                                                        intKeepMostRecent,
+                                                        emailNotificationIsActive,
+                                                        intThreshold,
+                                                        intThresholdTime,
+                                                        intThresholdTimeType,
+                                                        mailFromAddress,
+                                                        mailToAddress);
             DataCache.RemoveCache(LogTypeInfoCacheKey);
             DataCache.RemoveCache(LogTypeInfoByKeyCacheKey);
         }

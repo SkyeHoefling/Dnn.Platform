@@ -27,24 +27,24 @@ module.exports = {
     },
     module: {
         rules: [
-            { 
-                test: /\.(js|jsx)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 enforce: "pre",
                 loader: "eslint-loader",
                 options: {
                     fix: true
-                }                
+                }
             },
-            { 
-                test: /\.js$/, 
+            {
+                test: /\.js$/,
                 enforce: "pre",
                 use: [
                     "source-map-loader"
-                ] 
+                ]
             },
-            { 
-                test: /\.less$/, 
+            {
+                test: /\.less$/,
                 use: [{
                     loader: "style-loader"  // creates style nodes from JS strings
                 }, {
@@ -54,32 +54,32 @@ module.exports = {
                     loader: "less-loader"   // compiles Less to CSS
                 }]
             },
-            { 
-                test: /\.(js|jsx)$/, 
+            {
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader:"babel-loader",
-                    options: { 
-                        presets: ["@babel/preset-env", "@babel/preset-react"], 
+                    options: {
+                        presets: ["@babel/preset-env", "@babel/preset-react"],
                         "plugins": [
                             "@babel/plugin-transform-react-jsx",
                             "@babel/plugin-proposal-object-rest-spread"
-                        ] 
+                        ]
                     }
                 }
             },
             {
-                test: /\.(ttf|woff)$/, 
+                test: /\.(ttf|woff)$/,
                 use: {
                     loader: "url-loader?limit=8192"
                 }
             },
-            { 
-                test: /\.(svg)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(svg)$/,
+                exclude: /node_modules/,
                 use: [
                     "raw-loader"
-                ] 
+                ]
             }
         ]
     },

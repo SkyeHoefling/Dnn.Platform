@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -54,7 +54,7 @@ namespace DotNetNuke.Modules.Admin.Security
     /// </remarks>
     public partial class SendPassword : UserModuleBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SendPassword));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SendPassword));
 
         #region Private Members
 
@@ -83,7 +83,7 @@ namespace DotNetNuke.Modules.Admin.Security
                 }
                 else
                 {
-                
+
                 if (Convert.ToInt32(setting) <= 0)
                 {
                     if (Request.QueryString["returnurl"] != null)
@@ -106,7 +106,7 @@ namespace DotNetNuke.Modules.Admin.Security
                     }
                     if (String.IsNullOrEmpty(_RedirectURL))
                     {
-                        //redirect to current page 
+                        //redirect to current page
                         _RedirectURL = Globals.NavigateURL();
                     }
                 }
@@ -118,8 +118,8 @@ namespace DotNetNuke.Modules.Admin.Security
 
                 return _RedirectURL;
             }
-        
-		}
+
+        }
 
         /// <summary>
         /// Gets whether the Captcha control is used to validate the login
@@ -133,21 +133,21 @@ namespace DotNetNuke.Modules.Admin.Security
             }
         }
 
-	    protected bool UsernameDisabled
-	    {
-		    get
-		    {
-				return PortalController.GetPortalSettingAsBoolean("Registration_UseEmailAsUserName", PortalId, false);
-		    }
-	    }
+        protected bool UsernameDisabled
+        {
+            get
+            {
+                return PortalController.GetPortalSettingAsBoolean("Registration_UseEmailAsUserName", PortalId, false);
+            }
+        }
 
-	    private bool ShowEmailField
-	    {
-		    get
-		    {
-			    return MembershipProviderConfig.RequiresUniqueEmail || UsernameDisabled;
-		    }
-	    }
+        private bool ShowEmailField
+        {
+            get
+            {
+                return MembershipProviderConfig.RequiresUniqueEmail || UsernameDisabled;
+            }
+        }
 
         #endregion
 
@@ -156,7 +156,7 @@ namespace DotNetNuke.Modules.Admin.Security
         private void GetUser()
         {
             ArrayList arrUsers;
-			if (ShowEmailField && !String.IsNullOrEmpty(txtEmail.Text.Trim()) && (String.IsNullOrEmpty(txtUsername.Text.Trim()) || divUsername.Visible == false))
+            if (ShowEmailField && !String.IsNullOrEmpty(txtEmail.Text.Trim()) && (String.IsNullOrEmpty(txtUsername.Text.Trim()) || divUsername.Visible == false))
             {
                 arrUsers = UserController.GetUsersByEmail(PortalSettings.PortalId, txtEmail.Text, 0, Int32.MaxValue, ref _userCount);
                 if (arrUsers != null && arrUsers.Count == 1)
@@ -179,7 +179,7 @@ namespace DotNetNuke.Modules.Admin.Security
             base.OnInit(e);
 
             var isEnabled = true;
-			
+
             //both retrieval and reset now use password token resets
             if (MembershipProviderConfig.PasswordRetrievalEnabled || MembershipProviderConfig.PasswordResetEnabled)
             {
@@ -192,8 +192,8 @@ namespace DotNetNuke.Modules.Admin.Security
                 lblHelp.Text = Localization.GetString("DisabledPasswordHelp", LocalResourceFile);
                 divPassword.Visible = false;
             }
-			
-			if (!MembershipProviderConfig.PasswordResetEnabled)
+
+            if (!MembershipProviderConfig.PasswordResetEnabled)
             {
                 isEnabled = false;
                 lblHelp.Text = Localization.GetString("DisabledPasswordHelp", LocalResourceFile);
@@ -204,7 +204,7 @@ namespace DotNetNuke.Modules.Admin.Security
             {
                 lblHelp.Text += Localization.GetString("RequiresUniqueEmail", LocalResourceFile);
             }
-			
+
             if (MembershipProviderConfig.RequiresQuestionAndAnswer && isEnabled)
             {
                 lblHelp.Text += Localization.GetString("RequiresQuestionAndAnswer", LocalResourceFile);
@@ -225,10 +225,10 @@ namespace DotNetNuke.Modules.Admin.Security
             cmdSendPassword.Click += OnSendPasswordClick;
             lnkCancel.NavigateUrl = Globals.NavigateURL();
 
-            _ipAddress = UserRequestIPAddressController.Instance.GetUserRequestIPAddress(new HttpRequestWrapper(Request));            
+            _ipAddress = UserRequestIPAddressController.Instance.GetUserRequestIPAddress(new HttpRequestWrapper(Request));
 
-			divEmail.Visible = ShowEmailField;
-			divUsername.Visible = !UsernameDisabled;
+            divEmail.Visible = ShowEmailField;
+            divUsername.Visible = !UsernameDisabled;
             divCaptcha.Visible = UseCaptcha;
 
             if (UseCaptcha)
@@ -295,7 +295,7 @@ namespace DotNetNuke.Modules.Admin.Security
                         {
                             canSend = false;
                         }
-                        else 
+                        else
                         {
                             if (_user.Membership.Approved == false)
                             {
@@ -335,7 +335,7 @@ namespace DotNetNuke.Modules.Admin.Security
                         LogFailure(message);
                     }
 
-					//always hide panel so as to not reveal if username exists.
+                    //always hide panel so as to not reveal if username exists.
                     pnlRecover.Visible = false;
                     UI.Skins.Skin.AddModuleMessage(this, message, moduleMessageType);
                     liSend.Visible = false;
@@ -362,14 +362,14 @@ namespace DotNetNuke.Modules.Admin.Security
         {
             var portalSecurity = PortalSecurity.Instance;
 
-			var log = new LogInfo
+            var log = new LogInfo
             {
                 LogPortalID = PortalSettings.PortalId,
                 LogPortalName = PortalSettings.PortalName,
                 LogUserID = UserId,
                 LogUserName = portalSecurity.InputFilter(txtUsername.Text, PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoAngleBrackets | PortalSecurity.FilterFlag.NoMarkup)
             };
-			
+
             if (string.IsNullOrEmpty(message))
             {
                 log.LogTypeKey = "PASSWORD_SENT_SUCCESS";
@@ -379,9 +379,9 @@ namespace DotNetNuke.Modules.Admin.Security
                 log.LogTypeKey = "PASSWORD_SENT_FAILURE";
                 log.LogProperties.Add(new LogDetailInfo("Cause", message));
             }
-            
-			log.AddProperty("IP", _ipAddress);
-            
+
+            log.AddProperty("IP", _ipAddress);
+
             LogController.Instance.AddLog(log);
 
         }

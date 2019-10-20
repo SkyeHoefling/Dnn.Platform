@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -177,7 +177,7 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
 
             // Mark reply as read and dispatched by the sender
             var recipient = GetMessageRecipient(messageId, sender.UserID);
-            
+
             MarkMessageAsDispatched(messageId, recipient.RecipientID);
             MarkRead(conversationId, sender.UserID);
 
@@ -213,7 +213,7 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
 
         ///<summary>Last message sent by the User</summary>
         ///<returns>Message. Null when no message was sent</returns>
-        /// <param name="sender">Sender's UserInfo</param>        
+        /// <param name="sender">Sender's UserInfo</param>
         public virtual Message GetLastSentMessage(UserInfo sender)
         {
             return CBO.FillObject<Message>(_dataService.GetLastSentMessage(sender.UserID, PortalController.GetEffectivePortalId(sender.PortalID)));
@@ -235,20 +235,20 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
             return this.GetPortalSetting("MessagingAllowAttachments", portalId, "YES") == "YES";
         }
 
-        ///<summary>Maximum number of Recipients allowed</summary>        
+        ///<summary>Maximum number of Recipients allowed</summary>
         ///<returns>Count. Message to a Role is considered a single Recipient. Each User in the To list is counted as one User each.</returns>
-        /// <param name="portalId">Portal Id</param>        
+        /// <param name="portalId">Portal Id</param>
         public virtual int RecipientLimit(int portalId)
         {
             return GetPortalSettingAsInteger("MessagingRecipientLimit", portalId, 5);
         }
 
-		///<summary>Whether disable regular users to send message to user/group, default is false.</summary>        
-		/// <param name="portalId">Portal Id</param>        
-		public virtual bool DisablePrivateMessage(int portalId)
-		{
-			return GetPortalSetting("DisablePrivateMessage", portalId, "N") == "Y";
-		}
+        ///<summary>Whether disable regular users to send message to user/group, default is false.</summary>
+        /// <param name="portalId">Portal Id</param>
+        public virtual bool DisablePrivateMessage(int portalId)
+        {
+            return GetPortalSetting("DisablePrivateMessage", portalId, "N") == "Y";
+        }
 
         #endregion
 
@@ -268,7 +268,7 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
         public virtual MessageBoxView GetInbox(int userId, int afterMessageId, int numberOfRecords, string sortColumn, bool sortAscending, MessageReadStatus readStatus, MessageArchivedStatus archivedStatus)
         {
             var reader = _dataService.GetInBoxView(userId, PortalController.GetEffectivePortalId(GetCurrentUserInfo().PortalID), afterMessageId, numberOfRecords, sortColumn, sortAscending, readStatus, archivedStatus, MessageSentStatus.Received);
-            return new MessageBoxView { Conversations = CBO.FillCollection<MessageConversationView>(reader) };         
+            return new MessageBoxView { Conversations = CBO.FillCollection<MessageConversationView>(reader) };
         }
 
         public virtual MessageThreadsView GetMessageThread(int conversationId, int userId, int afterMessageId, int numberOfRecords, ref int totalRecords)
@@ -304,7 +304,7 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
                 CBO.CloseDataReader(dr, true);
             }
 
-            return messageThreadsView;            
+            return messageThreadsView;
         }
 
         public virtual MessageBoxView GetRecentInbox(int userId)
@@ -419,7 +419,7 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
         /// <returns>A list of message attachments for the given message</returns>
         public IEnumerable<MessageFileView> GetAttachments(int messageId)
         {
-           return _dataService.GetMessageAttachmentsByMessage(messageId);
+            return _dataService.GetMessageAttachmentsByMessage(messageId);
         }
 
         #endregion
@@ -502,7 +502,7 @@ namespace DotNetNuke.Services.Social.Messaging.Internal
 
         public IList<MessageRecipient> GetNextMessagesForDigestDispatch(Frequency frequency, Guid schedulerInstance, int batchSize)
         {
-            return CBO.FillCollection<MessageRecipient>(_dataService.GetNextMessagesForDigestDispatch(Convert.ToInt32(frequency), schedulerInstance, batchSize));            
+            return CBO.FillCollection<MessageRecipient>(_dataService.GetNextMessagesForDigestDispatch(Convert.ToInt32(frequency), schedulerInstance, batchSize));
         }
 
 

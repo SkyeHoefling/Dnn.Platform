@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -43,17 +43,17 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class SkinInstaller : FileInstaller
     {
-		#region "Private Members"
+        #region "Private Members"
 
         private readonly ArrayList _SkinFiles = new ArrayList();
 
         private SkinPackageInfo SkinPackage;
         private SkinPackageInfo TempSkinPackage;
         private string _SkinName = Null.NullString;
-		
-		#endregion
 
-		#region "Protected Properties"
+        #endregion
+
+        #region "Protected Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -180,10 +180,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 return "Skin";
             }
         }
-		
-		#endregion
 
-		#region "Public Properties"
+        #endregion
+
+        #region "Public Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -198,10 +198,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 return "ascx, html, htm, css, xml, js, resx, jpg, jpeg, gif, png";
             }
         }
-		
-		#endregion
 
-		#region "Private Methods"
+        #endregion
+
+        #region "Private Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -213,7 +213,7 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             try
             {
-				//Attempt to get the Authentication Service
+                //Attempt to get the Authentication Service
                 SkinPackageInfo skinPackage = SkinController.GetSkinByPackageID(Package.PackageID);
                 if (skinPackage != null)
                 {
@@ -226,10 +226,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 Log.AddFailure(ex);
             }
         }
-		
-		#endregion
 
-		#region "Protected Methods"
+        #endregion
+
+        #region "Protected Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -252,9 +252,9 @@ namespace DotNetNuke.Services.Installer.Installers
                     }
                     break;
             }
-            
-			//Call base method to set up for file processing
-			base.ProcessFile(file, nav);
+
+            //Call base method to set up for file processing
+            base.ProcessFile(file, nav);
         }
 
         /// -----------------------------------------------------------------------------
@@ -283,21 +283,21 @@ namespace DotNetNuke.Services.Installer.Installers
         /// -----------------------------------------------------------------------------
         protected override void UnInstallFile(InstallFile unInstallFile)
         {
-			//Uninstall file
+            //Uninstall file
             base.UnInstallFile(unInstallFile);
 
             if (unInstallFile.Extension == "htm" || unInstallFile.Extension == "html")
             {
-				//Try to remove "processed file"
+                //Try to remove "processed file"
                 string fileName = unInstallFile.FullName;
                 fileName = fileName.Replace(Path.GetExtension(fileName), ".ascx");
                 Util.DeleteFile(fileName, PhysicalBasePath, Log);
             }
         }
-		
-		#endregion
 
-		#region "Public Methods"
+        #endregion
+
+        #region "Public Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -308,7 +308,7 @@ namespace DotNetNuke.Services.Installer.Installers
             bool bAdd = Null.NullBoolean;
             try
             {
-				//Attempt to get the Skin Package
+                //Attempt to get the Skin Package
                 TempSkinPackage = SkinController.GetSkinPackage(SkinPackage.PortalID, SkinPackage.SkinName, SkinType);
                 if (TempSkinPackage == null)
                 {
@@ -332,12 +332,12 @@ namespace DotNetNuke.Services.Installer.Installers
                 SkinPackage.SkinType = SkinType;
                 if (bAdd)
                 {
-					//Add new skin package
+                    //Add new skin package
                     SkinPackage.SkinPackageID = SkinController.AddSkinPackage(SkinPackage);
                 }
                 else
                 {
-					//Update skin package
+                    //Update skin package
                     SkinController.UpdateSkinPackage(SkinPackage);
                 }
                 Log.AddInfo(string.Format(Util.SKIN_Registered, SkinPackage.SkinName));
@@ -385,26 +385,26 @@ namespace DotNetNuke.Services.Installer.Installers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// The Rollback method undoes the installation of the component in the event 
+        /// The Rollback method undoes the installation of the component in the event
         /// that one of the other components fails
         /// </summary>
         /// -----------------------------------------------------------------------------
         public override void Rollback()
         {
-			//If Temp Skin exists then we need to update the DataStore with this 
+            //If Temp Skin exists then we need to update the DataStore with this
             if (TempSkinPackage == null)
             {
-				//No Temp Skin - Delete newly added Skin
+                //No Temp Skin - Delete newly added Skin
                 DeleteSkinPackage();
             }
             else
             {
-				//Temp Skin - Rollback to Temp
+                //Temp Skin - Rollback to Temp
                 SkinController.UpdateSkinPackage(TempSkinPackage);
             }
-            
-			//Call base class to prcoess files
-			base.Rollback();
+
+            //Call base class to prcoess files
+            base.Rollback();
         }
 
         /// -----------------------------------------------------------------------------
@@ -419,7 +419,7 @@ namespace DotNetNuke.Services.Installer.Installers
             //Call base class to prcoess files
             base.UnInstall();
         }
-		
-		#endregion
+
+        #endregion
     }
 }

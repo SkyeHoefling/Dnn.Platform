@@ -23,15 +23,15 @@
 
 .RoundedCorners .N,
 .RoundedCorners .S
-{   
+{
     background-repeat: repeat-x;
 }
 
 .RoundedCorners .N,
 .RoundedCorners .NW,
 .RoundedCorners .W
-{   
-    background-position: left top;    
+{
+    background-position: left top;
 }
 
 .RoundedCorners .NE
@@ -54,7 +54,7 @@
 
 .RoundedCorners .NE,
 .RoundedCorners .E
-{   
+{
     background-position: right top;
 }
 

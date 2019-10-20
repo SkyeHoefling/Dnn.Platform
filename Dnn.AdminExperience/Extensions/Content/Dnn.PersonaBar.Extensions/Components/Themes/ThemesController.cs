@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -166,7 +166,7 @@ namespace Dnn.PersonaBar.Themes.Components
                     themeFile.Name = Path.GetFileNameWithoutExtension(file);
                     themeFile.Path = FormatThemePath(portalSettings, themePath, Path.GetFileName(strFile), theme.Type);
                     themeFile.CanDelete = (UserController.Instance.GetCurrentUserInfo().IsSuperUser || strSkinType == "L")
-                                          && (!fallbackSkin && canDeleteSkin);
+                                        && (!fallbackSkin && canDeleteSkin);
 
                     themeFiles.Add(themeFile);
                 }
@@ -282,7 +282,7 @@ namespace Dnn.PersonaBar.Themes.Components
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="portalSettings"></param>
         /// <param name="theme"></param>
@@ -536,7 +536,7 @@ namespace Dnn.PersonaBar.Themes.Components
             {
                 var fileName = Path.GetFileNameWithoutExtension(i);
                 return type == ThemeType.Skin ? DefaultLayoutNames.Contains(fileName, StringComparer.OrdinalIgnoreCase)
-                                              : DefaultContainerNames.Contains(fileName, StringComparer.OrdinalIgnoreCase);
+                                            : DefaultContainerNames.Contains(fileName, StringComparer.OrdinalIgnoreCase);
             });
 
             if (string.IsNullOrEmpty(defaultFile))
@@ -570,11 +570,11 @@ namespace Dnn.PersonaBar.Themes.Components
             var imageFileName = Path.GetFileName(strImage);
             if (string.IsNullOrEmpty(imageFileName) || imageFileName.StartsWith("thumbnail_"))
             {
-               strImage = Globals.ApplicationPath + "/" + strImage.Substring(strImage.IndexOf("portals\\"));
-               strImage = strImage.Replace("\\", "/");
+                strImage = Globals.ApplicationPath + "/" + strImage.Substring(strImage.IndexOf("portals\\"));
+                strImage = strImage.Replace("\\", "/");
                                 return strImage;
             }
-            
+
             var strThumbnail = strImage.Replace(Path.GetFileName(strImage), "thumbnail_" + imageFileName);
 
             if (NeedCreateThumbnail(strThumbnail, strImage))
@@ -583,7 +583,7 @@ namespace Dnn.PersonaBar.Themes.Components
                 {
                     if (NeedCreateThumbnail(strThumbnail, strImage))
                     {
-                        const int intSize = 150; //size of the thumbnail 
+                        const int intSize = 150; //size of the thumbnail
                         try
                         {
                             var objImage = Image.FromFile(strImage);
@@ -594,14 +594,14 @@ namespace Dnn.PersonaBar.Themes.Components
                             double dblScale;
                             if (objImage.Height > objImage.Width)
                             {
-                                //The height was larger, so scale the width 
+                                //The height was larger, so scale the width
                                 dblScale = (double)intSize / objImage.Height;
                                 intHeight = intSize;
                                 intWidth = Convert.ToInt32(objImage.Width * dblScale);
                             }
                             else
                             {
-                                //The width was larger, so scale the height 
+                                //The width was larger, so scale the height
                                 dblScale = (double)intSize / objImage.Width;
                                 intWidth = intSize;
                                 intHeight = Convert.ToInt32(objImage.Height * dblScale);
@@ -616,7 +616,7 @@ namespace Dnn.PersonaBar.Themes.Components
                                 File.Delete(strThumbnail);
                             }
 
-                            //save the thumbnail image 
+                            //save the thumbnail image
                             objThumbnail.Save(strThumbnail, objImage.RawFormat);
 
                             //set the file attributes
@@ -634,7 +634,7 @@ namespace Dnn.PersonaBar.Themes.Components
                     }
                 }
             }
-            
+
             strThumbnail = Globals.ApplicationPath + "/" + strThumbnail.Substring(strThumbnail.IndexOf("portals\\"));
             strThumbnail = strThumbnail.Replace("\\", "/");
 

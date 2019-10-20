@@ -208,7 +208,7 @@ const siteInfoActions = {
                 dispatch({
                     type: ActionTypes.CLEARED_SEO_SITEMAP_CACHE,
                     data: {
-                        
+
                     }
                 });
                 if (callback) {
@@ -242,7 +242,7 @@ const siteInfoActions = {
                 dispatch({
                     type: ActionTypes.UPDATED_SEO_SITEMAP_PROVIDER,
                     data: {
-                        
+
                     }
                 });
                 if (callback) {
@@ -276,7 +276,7 @@ const siteInfoActions = {
                 dispatch({
                     type: ActionTypes.UPDATED_SEO_EXTENSION_URL_PROVIDER,
                     data: {
-                        
+
                     }
                 });
                 if (callback) {
@@ -295,7 +295,7 @@ const siteInfoActions = {
                 dispatch({
                     type: ActionTypes.CREATED_SEO_SITEMAP_VERIFICATION,
                     data: {
-                        
+
                     }
                 });
                 if (callback) {

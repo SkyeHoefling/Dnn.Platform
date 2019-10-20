@@ -76,7 +76,7 @@ namespace DotNetNuke.Web.UI.WebControls
             base.OnInit(e);
 
             ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
-            jQuery.RegisterFileUpload(Page);            
+            jQuery.RegisterFileUpload(Page);
         }
 
         protected override void OnPreRender(EventArgs e)

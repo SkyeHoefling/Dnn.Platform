@@ -41,12 +41,12 @@ class ListView extends Component {
         };
 
         event = Object.assign(event, settings);
-        
+
         let portalsettings = {
             portalId: portal.PortalID,
             cultureCode: this.props.culture
         }
-        
+
         event2 = Object.assign(event2, portalsettings);
 
         utilities.loadPanel(this.props.siteSettingModule, {
@@ -79,7 +79,7 @@ class ListView extends Component {
             },
             referrer: this.props.sitesModule,
             referrerText: Localization.get("BackToSites"),
-            backToReferrerFunc: this.backToSites.bind(this)            
+            backToReferrerFunc: this.backToSites.bind(this)
         };
 
         event = Object.assign(event, settings);

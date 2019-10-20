@@ -10,7 +10,7 @@ import panels  from "../constants/panels";
 export default function visiblePanel(state = {
     selectedPage: panels.MAIN_PANEL
 }, action) {
-    
+
     switch (action.type) {
 
         case PageActionTypes.SAVED_PAGE:
@@ -28,7 +28,7 @@ export default function visiblePanel(state = {
             return { ...state,
                 selectedPage: panels.ADD_MULTIPLE_PAGES_PANEL
             };
-            
+
         case TemplateActionTypes.LOAD_SAVE_AS_TEMPLATE:
             return { ...state,
                 selectedPage: panels.SAVE_AS_TEMPLATE_PANEL
@@ -47,7 +47,7 @@ export default function visiblePanel(state = {
             return { ...state,
                 selectedPage: action.data.panelId
             };
-        
+
         default:
             return state;
     }

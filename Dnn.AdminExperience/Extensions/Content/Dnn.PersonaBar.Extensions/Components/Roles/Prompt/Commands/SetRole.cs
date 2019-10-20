@@ -44,7 +44,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
-            
+
             RoleId = GetFlagValue(FlagId, "Role Id", -1, true, true, true);
             RoleName = GetFlagValue(FlagRoleName, "Role Name", string.Empty);
             Description = GetFlagValue(FlagDescription, "Description", string.Empty);
@@ -66,7 +66,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
                     Status = null;
                     break;
             }
-            
+
             if ((string.IsNullOrEmpty(RoleName)) && string.IsNullOrEmpty(Description) && !IsPublic.HasValue && !AutoAssign.HasValue && string.IsNullOrEmpty(status))
             {
                 AddMessage(LocalizeString("Prompt_NothingToUpdate"));

@@ -15,7 +15,7 @@ var countColumn = function(string, end, tabSize, startIndex, startValue) {
   for (var i = startIndex || 0, n = startValue || 0;;) {
     var nextTab = string.indexOf("\t", i);
     if (nextTab < 0 || nextTab >= end)
-      return n + (end - i);
+    return n + (end - i);
     n += nextTab - i;
     n += tabSize - (n % tabSize);
     i = nextTab + 1;
@@ -36,7 +36,7 @@ StringStream.prototype = {
   peek: function() {return this.string.charAt(this.pos) || undefined;},
   next: function() {
     if (this.pos < this.string.length)
-      return this.string.charAt(this.pos++);
+    return this.string.charAt(this.pos++);
   },
   eat: function(match) {
     var ch = this.string.charAt(this.pos);
@@ -62,28 +62,28 @@ StringStream.prototype = {
   backUp: function(n) {this.pos -= n;},
   column: function() {
     if (this.lastColumnPos < this.start) {
-      this.lastColumnValue = countColumn(this.string, this.start, this.tabSize, this.lastColumnPos, this.lastColumnValue);
-      this.lastColumnPos = this.start;
+    this.lastColumnValue = countColumn(this.string, this.start, this.tabSize, this.lastColumnPos, this.lastColumnValue);
+    this.lastColumnPos = this.start;
     }
     return this.lastColumnValue - (this.lineStart ? countColumn(this.string, this.lineStart, this.tabSize) : 0);
   },
   indentation: function() {
     return countColumn(this.string, null, this.tabSize) -
-      (this.lineStart ? countColumn(this.string, this.lineStart, this.tabSize) : 0);
+    (this.lineStart ? countColumn(this.string, this.lineStart, this.tabSize) : 0);
   },
   match: function(pattern, consume, caseInsensitive) {
     if (typeof pattern == "string") {
-      var cased = function(str) {return caseInsensitive ? str.toLowerCase() : str;};
-      var substr = this.string.substr(this.pos, pattern.length);
-      if (cased(substr) == cased(pattern)) {
+    var cased = function(str) {return caseInsensitive ? str.toLowerCase() : str;};
+    var substr = this.string.substr(this.pos, pattern.length);
+    if (cased(substr) == cased(pattern)) {
         if (consume !== false) this.pos += pattern.length;
         return true;
-      }
+    }
     } else {
-      var match = this.string.slice(this.pos).match(pattern);
-      if (match && match.index > 0) return null;
-      if (match && consume !== false) this.pos += match[0].length;
-      return match;
+    var match = this.string.slice(this.pos).match(pattern);
+    if (match && match.index > 0) return null;
+    if (match && consume !== false) this.pos += match[0].length;
+    return match;
     }
   },
   current: function(){return this.string.slice(this.start, this.pos);},
@@ -126,7 +126,7 @@ function copyObj(obj, target, overwrite) {
   if (!target) target = {};
   for (var prop in obj)
     if (obj.hasOwnProperty(prop) && (overwrite !== false || !target.hasOwnProperty(prop)))
-      target[prop] = obj[prop];
+    target[prop] = obj[prop];
   return target;
 }
 
@@ -146,9 +146,9 @@ exports.getMode = function(options, spec) {
   if (modeExtensions.hasOwnProperty(spec.name)) {
     var exts = modeExtensions[spec.name];
     for (var prop in exts) {
-      if (!exts.hasOwnProperty(prop)) continue;
-      if (modeObj.hasOwnProperty(prop)) modeObj["_" + prop] = modeObj[prop];
-      modeObj[prop] = exts[prop];
+    if (!exts.hasOwnProperty(prop)) continue;
+    if (modeObj.hasOwnProperty(prop)) modeObj["_" + prop] = modeObj[prop];
+    modeObj[prop] = exts[prop];
     }
   }
   modeObj.name = spec.name;
@@ -168,9 +168,9 @@ exports.runMode = function(string, modespec, callback, options) {
     var stream = new exports.StringStream(lines[i]);
     if (!stream.string && mode.blankLine) mode.blankLine(state);
     while (!stream.eol()) {
-      var style = mode.token(stream, state);
-      callback(stream.current(), style, i, stream.start, state);
-      stream.start = stream.pos;
+    var style = mode.token(stream, state);
+    callback(stream.current(), style, i, stream.start, state);
+    stream.start = stream.pos;
     }
   }
 };

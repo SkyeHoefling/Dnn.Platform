@@ -35,7 +35,7 @@ class SingleLineInput extends Component {
                 onKeyUp={getHandler(props.onKeyUp, props.enabled)}
                 value={props.value}
                 tabIndex={props.tabIndex}
-                style={props.style} 
+                style={props.style}
                 placeholder={props.placeholder}
                 autoComplete={props.autoComplete}
                 maxLength={props.maxLength}
@@ -43,7 +43,7 @@ class SingleLineInput extends Component {
                 ref={this.props.inputRef}
                 {...getOptions(props.enabled)} />
         );
-    } 
+    }
 }
 
 SingleLineInput.propTypes = {
@@ -54,7 +54,7 @@ SingleLineInput.propTypes = {
     onKeyDown: PropTypes.func,
     onKeyPress: PropTypes.func,
     onKeyUp: PropTypes.func,
-    value: PropTypes.any,    
+    value: PropTypes.any,
     enabled: PropTypes.bool,
     tabIndex: PropTypes.number,
     style: PropTypes.object,

@@ -17,177 +17,177 @@
     var bracesMode = null;
 
     if (config.bracesMode)
-      bracesMode = CodeMirror.getMode(config, config.bracesMode);
+    bracesMode = CodeMirror.getMode(config, config.bracesMode);
 
     return {
-      startState: function () {
+    startState: function () {
         return {
-          stringType: null,
-          commentType: null,
-          braced: 0,
-          lhs: true,
-          localState: null,
-          stack: [],
-          inDefinition: false
+        stringType: null,
+        commentType: null,
+        braced: 0,
+        lhs: true,
+        localState: null,
+        stack: [],
+        inDefinition: false
         };
-      },
-      token: function (stream, state) {
+    },
+    token: function (stream, state) {
         if (!stream) return;
 
         //check for state changes
         if (state.stack.length === 0) {
-          //strings
-          if ((stream.peek() == '"') || (stream.peek() == "'")) {
+        //strings
+        if ((stream.peek() == '"') || (stream.peek() == "'")) {
             state.stringType = stream.peek();
             stream.next(); // Skip quote
             state.stack.unshift(stateType._string);
-          } else if (stream.match(/^\/\*/)) { //comments starting with /*
+        } else if (stream.match(/^\/\*/)) { //comments starting with /*
             state.stack.unshift(stateType.comment);
             state.commentType = commentType.slash;
-          } else if (stream.match(/^\(\*/)) { //comments starting with (*
+        } else if (stream.match(/^\(\*/)) { //comments starting with (*
             state.stack.unshift(stateType.comment);
             state.commentType = commentType.parenthesis;
-          }
+        }
         }
 
         //return state
         //stack has
         switch (state.stack[0]) {
         case stateType._string:
-          while (state.stack[0] === stateType._string && !stream.eol()) {
+        while (state.stack[0] === stateType._string && !stream.eol()) {
             if (stream.peek() === state.stringType) {
-              stream.next(); // Skip quote
-              state.stack.shift(); // Clear flag
+            stream.next(); // Skip quote
+            state.stack.shift(); // Clear flag
             } else if (stream.peek() === "\\") {
-              stream.next();
-              stream.next();
+            stream.next();
+            stream.next();
             } else {
-              stream.match(/^.[^\\\"\']*/);
+            stream.match(/^.[^\\\"\']*/);
             }
-          }
-          return state.lhs ? "property string" : "string"; // Token style
+        }
+        return state.lhs ? "property string" : "string"; // Token style
 
         case stateType.comment:
-          while (state.stack[0] === stateType.comment && !stream.eol()) {
+        while (state.stack[0] === stateType.comment && !stream.eol()) {
             if (state.commentType === commentType.slash && stream.match(/\*\//)) {
-              state.stack.shift(); // Clear flag
-              state.commentType = null;
+            state.stack.shift(); // Clear flag
+            state.commentType = null;
             } else if (state.commentType === commentType.parenthesis && stream.match(/\*\)/)) {
-              state.stack.shift(); // Clear flag
-              state.commentType = null;
+            state.stack.shift(); // Clear flag
+            state.commentType = null;
             } else {
-              stream.match(/^.[^\*]*/);
+            stream.match(/^.[^\*]*/);
             }
-          }
-          return "comment";
+        }
+        return "comment";
 
         case stateType.characterClass:
-          while (state.stack[0] === stateType.characterClass && !stream.eol()) {
+        while (state.stack[0] === stateType.characterClass && !stream.eol()) {
             if (!(stream.match(/^[^\]\\]+/) || stream.match(/^\\./))) {
-              state.stack.shift();
+            state.stack.shift();
             }
-          }
-          return "operator";
+        }
+        return "operator";
         }
 
         var peek = stream.peek();
 
         if (bracesMode !== null && (state.braced || peek === "{")) {
-          if (state.localState === null)
+        if (state.localState === null)
             state.localState = bracesMode.startState();
 
-          var token = bracesMode.token(stream, state.localState),
-          text = stream.current();
+        var token = bracesMode.token(stream, state.localState),
+        text = stream.current();
 
-          if (!token) {
+        if (!token) {
             for (var i = 0; i < text.length; i++) {
-              if (text[i] === "{") {
+            if (text[i] === "{") {
                 if (state.braced === 0) {
-                  token = "matchingbracket";
+                token = "matchingbracket";
                 }
                 state.braced++;
-              } else if (text[i] === "}") {
+            } else if (text[i] === "}") {
                 state.braced--;
                 if (state.braced === 0) {
-                  token = "matchingbracket";
+                token = "matchingbracket";
                 }
-              }
             }
-          }
-          return token;
+            }
+        }
+        return token;
         }
 
         //no stack
         switch (peek) {
         case "[":
-          stream.next();
-          state.stack.unshift(stateType.characterClass);
-          return "bracket";
+        stream.next();
+        state.stack.unshift(stateType.characterClass);
+        return "bracket";
         case ":":
         case "|":
         case ";":
-          stream.next();
-          return "operator";
+        stream.next();
+        return "operator";
         case "%":
-          if (stream.match("%%")) {
+        if (stream.match("%%")) {
             return "header";
-          } else if (stream.match(/[%][A-Za-z]+/)) {
+        } else if (stream.match(/[%][A-Za-z]+/)) {
             return "keyword";
-          } else if (stream.match(/[%][}]/)) {
+        } else if (stream.match(/[%][}]/)) {
             return "matchingbracket";
-          }
-          break;
+        }
+        break;
         case "/":
-          if (stream.match(/[\/][A-Za-z]+/)) {
-          return "keyword";
+        if (stream.match(/[\/][A-Za-z]+/)) {
+        return "keyword";
         }
         case "\\":
-          if (stream.match(/[\][a-z]+/)) {
+        if (stream.match(/[\][a-z]+/)) {
             return "string-2";
-          }
+        }
         case ".":
-          if (stream.match(".")) {
+        if (stream.match(".")) {
             return "atom";
-          }
+        }
         case "*":
         case "-":
         case "+":
         case "^":
-          if (stream.match(peek)) {
+        if (stream.match(peek)) {
             return "atom";
-          }
+        }
         case "$":
-          if (stream.match("$$")) {
+        if (stream.match("$$")) {
             return "builtin";
-          } else if (stream.match(/[$][0-9]+/)) {
+        } else if (stream.match(/[$][0-9]+/)) {
             return "variable-3";
-          }
+        }
         case "<":
-          if (stream.match(/<<[a-zA-Z_]+>>/)) {
+        if (stream.match(/<<[a-zA-Z_]+>>/)) {
             return "builtin";
-          }
+        }
         }
 
         if (stream.match(/^\/\//)) {
-          stream.skipToEnd();
-          return "comment";
+        stream.skipToEnd();
+        return "comment";
         } else if (stream.match(/return/)) {
-          return "operator";
+        return "operator";
         } else if (stream.match(/^[a-zA-Z_][a-zA-Z0-9_]*/)) {
-          if (stream.match(/(?=[\(.])/)) {
+        if (stream.match(/(?=[\(.])/)) {
             return "variable";
-          } else if (stream.match(/(?=[\s\n]*[:=])/)) {
+        } else if (stream.match(/(?=[\s\n]*[:=])/)) {
             return "def";
-          }
-          return "variable-2";
+        }
+        return "variable-2";
         } else if (["[", "]", "(", ")"].indexOf(stream.peek()) != -1) {
-          stream.next();
-          return "bracket";
+        stream.next();
+        return "bracket";
         } else if (!stream.eatSpace()) {
-          stream.next();
+        stream.next();
         }
         return null;
-      }
+    }
     };
   });
 

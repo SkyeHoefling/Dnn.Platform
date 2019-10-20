@@ -9,14 +9,14 @@
   <Target Name="AfterBuild" DependsOnTargets="RunYarn;CopyBin;GetFiles;DebugProject;Package"></Target>
   <Target Name="GetFiles">
     <ItemGroup>
-      <PersonaBar-views Include="admin/**/*.html" />
-      <PersonaBar-images Include="admin/**/images/**/*" />
-      <PersonaBar-data Include="admin/**/data/*.resources" />
-      <PersonaBar-css Include="admin/**/css/**/*" />
-      <PersonaBar-resources Include="admin/**/App_LocalResources/*.resx" />
-      <PersonaBar-controls Include="admin/**/UserControls/*.ascx" />
-      <PersonaBar-scripts Include="admin/**/scripts/*;admin/**/scripts/**/*" />
-      <Resources Include="@(PersonaBar-views);@(PersonaBar-images);@(PersonaBar-css);@(PersonaBar-scripts);@(PersonaBar-data);@(PersonaBar-resources);@(PersonaBar-controls)"  Exclude="**/node_modules/**/*" />
+    <PersonaBar-views Include="admin/**/*.html" />
+    <PersonaBar-images Include="admin/**/images/**/*" />
+    <PersonaBar-data Include="admin/**/data/*.resources" />
+    <PersonaBar-css Include="admin/**/css/**/*" />
+    <PersonaBar-resources Include="admin/**/App_LocalResources/*.resx" />
+    <PersonaBar-controls Include="admin/**/UserControls/*.ascx" />
+    <PersonaBar-scripts Include="admin/**/scripts/*;admin/**/scripts/**/*" />
+    <Resources Include="@(PersonaBar-views);@(PersonaBar-images);@(PersonaBar-css);@(PersonaBar-scripts);@(PersonaBar-data);@(PersonaBar-resources);@(PersonaBar-controls)"  Exclude="**/node_modules/**/*" />
     </ItemGroup>
   </Target>
   <Target Name="CopyBin">
@@ -34,16 +34,16 @@
   </Target>
   <Target Name="RunYarn" Condition="$(YarnWorkingDirectory.Length) > 0 AND '$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <ItemGroup>
-      <_YarnWorkingDirectory Include="$(YarnWorkingDirectory)" Exclude="**/node_modules/**/*" />
+    <_YarnWorkingDirectory Include="$(YarnWorkingDirectory)" Exclude="**/node_modules/**/*" />
     </ItemGroup>
 
     <MSBuild Projects="$(MSBuildProjectFile)" Targets="RunYarnWorkspace" Properties="WorkingDirectory=%(_YarnWorkingDirectory.RootDir)%(_YarnWorkingDirectory.Directory);" />
   </Target>
 
   <Target Name="RunYarnWorkspace">
-	  <Message Importance="high" Text="Running Yarn for $(WorkingDirectory)" />
+    <Message Importance="high" Text="Running Yarn for $(WorkingDirectory)" />
 
-	  <Yarn Command="install" WorkingDirectory="$(WorkingDirectory)" IgnoreExitCode="false" Condition="$(WorkingDirectory.Length) > 0" />
-	<Yarn Command="lerna run build --parallel" WorkingDirectory="$(WorkingDirectory)" IgnoreExitCode="false" Condition="$(WorkingDirectory.Length) > 0" />
+    <Yarn Command="install" WorkingDirectory="$(WorkingDirectory)" IgnoreExitCode="false" Condition="$(WorkingDirectory.Length) > 0" />
+    <Yarn Command="lerna run build --parallel" WorkingDirectory="$(WorkingDirectory)" IgnoreExitCode="false" Condition="$(WorkingDirectory.Length) > 0" />
   </Target>
 </Project>

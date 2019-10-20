@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -38,8 +38,8 @@ namespace Dnn.PersonaBar.Library.AppEvents
 
         private static readonly object LockThis = new object();
         private static bool _isInitialized;
-        
-        #region 
+
+        #region
 
         protected override Func<IEventsController> GetFactory()
         {
@@ -110,7 +110,7 @@ namespace Dnn.PersonaBar.Library.AppEvents
                 catch (Exception e)
                 {
                     Logger.ErrorFormat("Unable to create {0} while calling Application start implementors.  {1}",
-                                       type.FullName, e.Message);
+                                        type.FullName, e.Message);
                     appEventHandler = null;
                 }
 
@@ -121,16 +121,16 @@ namespace Dnn.PersonaBar.Library.AppEvents
             }
         }
 
-        private static IEnumerable<Type> GetAllEventTypes<T>() where T : class 
+        private static IEnumerable<Type> GetAllEventTypes<T>() where T : class
         {
             var typeLocator = new TypeLocator();
             return typeLocator.GetAllMatchingTypes(
                 t => t != null &&
-                     t.IsClass &&
-                     !t.IsAbstract &&
-                     t.IsVisible &&
-                     typeof (T).IsAssignableFrom(t) &&
-                     (IgnoreVersionMatchCheck(t) || VersionMatched(t)));
+                    t.IsClass &&
+                    !t.IsAbstract &&
+                    t.IsVisible &&
+                    typeof (T).IsAssignableFrom(t) &&
+                    (IgnoreVersionMatchCheck(t) || VersionMatched(t)));
         }
 
         private static bool IgnoreVersionMatchCheck(Type type)
@@ -144,12 +144,12 @@ namespace Dnn.PersonaBar.Library.AppEvents
             var typeVersion = t.Assembly.GetName().Version;
 
             var matched = currentVersion.Major == typeVersion.Major &&
-                   currentVersion.Minor == typeVersion.Minor &&
-                   currentVersion.Build == typeVersion.Build;
+                    currentVersion.Minor == typeVersion.Minor &&
+                    currentVersion.Build == typeVersion.Build;
 
             if (!matched)
             {
-                Logger.InfoFormat("Type \"{0}\"'s version ({1}) doesn't match current version({2}) so ignored", 
+                Logger.InfoFormat("Type \"{0}\"'s version ({1}) doesn't match current version({2}) so ignored",
                     t.FullName, typeVersion, currentVersion);
             }
 

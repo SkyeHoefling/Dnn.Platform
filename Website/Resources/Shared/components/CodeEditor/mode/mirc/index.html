@@ -51,12 +51,12 @@ alias -l NickNames.display {
 alias -l NickNamesAdd {
   if ($hget(NickNames,$2)) {
     if (!$regex($hget(NickNames,$2),/~\Q $+ $replacecs($1,\E,\E\\E\Q) $+ \E~/i)) {
-      if ($gettok($hget(NickNames,$2),0,126) <= $MaxNicks) {
+    if ($gettok($hget(NickNames,$2),0,126) <= $MaxNicks) {
         hadd NickNames $2 $+($hget(NickNames,$2),$1,~)
-      }
-      else {
+    }
+    else {
         hadd NickNames $2 $+($mid($hget(NickNames,$2),$pos($hget(NickNames,$2),~,2)),$1,~)
-      }
+    }
     }
   }
   else {
@@ -67,8 +67,8 @@ alias -l Fix.All.MindUser {
   var %Fix.Count = $hfind(NickNames,/[^~]+[0-9]{4}~/,0,r).data
   while (%Fix.Count) {
     if ($Fix.MindUser($hget(NickNames,$hfind(NickNames,/[^~]+[0-9]{4}~/,%Fix.Count,r).data))) {
-      echo -ag Record %Fix.Count - $v1 - Was Cleaned
-      hadd NickNames $hfind(NickNames,/[^~]+[0-9]{4}~/,%Fix.Count,r).data $v1
+    echo -ag Record %Fix.Count - $v1 - Was Cleaned
+    hadd NickNames $hfind(NickNames,/[^~]+[0-9]{4}~/,%Fix.Count,r).data $v1
     }
     dec %Fix.Count
   }
@@ -79,7 +79,7 @@ menu nicklist,query {
   .AKA
   ..Check $$1: {
     if ($gettok($hget(NickNames,$+($network,$address($1,2))),0,126) > 1) {
-      NickNames.display $1 $active $network $address($1,2)
+    NickNames.display $1 $active $network $address($1,2)
     }
     else { echo -ag $AKALogo $+(09,$1) 07has not been known by any other nicknames while I have been watching. }
   }
@@ -115,8 +115,8 @@ On *:Dialog:Aka_Search:Sclick:2,7,9: {
     did -r $dname 6
     var %search $+(*,$v1,*), %type $iif($did($dname,5).state,data,item), %matches = $hfind(NickNames,%search,0,w). [ $+ [ %type ] ]
     while (%matches) {
-      did -a $dname 6 $hfind(NickNames,%search,%matches,w). [ $+ [ %type ] ]
-      dec %matches
+    did -a $dname 6 $hfind(NickNames,%search,%matches,w). [ $+ [ %type ] ]
+    dec %matches
     }
     did -c $dname 6 1
   }
@@ -146,13 +146,13 @@ Raw 315:*: {
 
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         theme: "twilight",
         lineNumbers: true,
         matchBrackets: true,
         indentUnit: 4,
         mode: "text/mirc"
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/mirc</code>.</p>

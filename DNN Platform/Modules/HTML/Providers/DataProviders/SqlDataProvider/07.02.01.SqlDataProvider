@@ -13,24 +13,24 @@
 
 IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}HtmlText_ModuleID_Version' AND object_id = OBJECT_ID('{objectQualifier}HtmlText'))
     BEGIN
-        CREATE NONCLUSTERED INDEX [IX_{objectQualifier}HtmlText_ModuleID_Version] ON {databaseOwner}[{objectQualifier}HtmlText] 
-			(
-				[ModuleID],
-				[Version]
-			)
+        CREATE NONCLUSTERED INDEX [IX_{objectQualifier}HtmlText_ModuleID_Version] ON {databaseOwner}[{objectQualifier}HtmlText]
+            (
+                [ModuleID],
+                [Version]
+            )
     END
 GO
 
 IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}HtmlTextLog_ItemID' AND object_id = OBJECT_ID('{objectQualifier}HtmlTextLog'))
     BEGIN
-        CREATE NONCLUSTERED INDEX [IX_{objectQualifier}HtmlTextLog_ItemID] ON {databaseOwner}[{objectQualifier}HtmlTextLog] 
-			(
-				[ItemID]
-			)
-			INCLUDE 
-			(
-				[HtmlTextLogID]
-			)
+        CREATE NONCLUSTERED INDEX [IX_{objectQualifier}HtmlTextLog_ItemID] ON {databaseOwner}[{objectQualifier}HtmlTextLog]
+            (
+                [ItemID]
+            )
+            INCLUDE
+            (
+                [HtmlTextLogID]
+            )
     END
 GO
 

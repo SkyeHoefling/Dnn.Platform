@@ -34,27 +34,27 @@ CodeMirror.defineMode("pig", function(_config, parserConfig) {
     var isEnd = false;
     var ch;
     while(ch = stream.next()) {
-      if(ch == "/" && isEnd) {
+    if(ch == "/" && isEnd) {
         state.tokenize = tokenBase;
         break;
-      }
-      isEnd = (ch == "*");
+    }
+    isEnd = (ch == "*");
     }
     return "comment";
   }
 
   function tokenString(quote) {
     return function(stream, state) {
-      var escaped = false, next, end = false;
-      while((next = stream.next()) != null) {
+    var escaped = false, next, end = false;
+    while((next = stream.next()) != null) {
         if (next == quote && !escaped) {
-          end = true; break;
+        end = true; break;
         }
         escaped = !escaped && next == "\\";
-      }
-      if (end || !(escaped || multiLineStrings))
+    }
+    if (end || !(escaped || multiLineStrings))
         state.tokenize = tokenBase;
-      return "error";
+    return "error";
     };
   }
 
@@ -64,74 +64,74 @@ CodeMirror.defineMode("pig", function(_config, parserConfig) {
 
     // is a start of string?
     if (ch == '"' || ch == "'")
-      return chain(stream, state, tokenString(ch));
+    return chain(stream, state, tokenString(ch));
     // is it one of the special chars
     else if(/[\[\]{}\(\),;\.]/.test(ch))
-      return null;
+    return null;
     // is it a number?
     else if(/\d/.test(ch)) {
-      stream.eatWhile(/[\w\.]/);
-      return "number";
+    stream.eatWhile(/[\w\.]/);
+    return "number";
     }
     // multi line comment or operator
     else if (ch == "/") {
-      if (stream.eat("*")) {
+    if (stream.eat("*")) {
         return chain(stream, state, tokenComment);
-      }
-      else {
+    }
+    else {
         stream.eatWhile(isOperatorChar);
         return "operator";
-      }
+    }
     }
     // single line comment or operator
     else if (ch=="-") {
-      if(stream.eat("-")){
+    if(stream.eat("-")){
         stream.skipToEnd();
         return "comment";
-      }
-      else {
+    }
+    else {
         stream.eatWhile(isOperatorChar);
         return "operator";
-      }
+    }
     }
     // is it an operator
     else if (isOperatorChar.test(ch)) {
-      stream.eatWhile(isOperatorChar);
-      return "operator";
+    stream.eatWhile(isOperatorChar);
+    return "operator";
     }
     else {
-      // get the while word
-      stream.eatWhile(/[\w\$_]/);
-      // is it one of the listed keywords?
-      if (keywords && keywords.propertyIsEnumerable(stream.current().toUpperCase())) {
+    // get the while word
+    stream.eatWhile(/[\w\$_]/);
+    // is it one of the listed keywords?
+    if (keywords && keywords.propertyIsEnumerable(stream.current().toUpperCase())) {
         //keywords can be used as variables like flatten(group), group.$0 etc..
         if (!stream.eat(")") && !stream.eat("."))
-          return "keyword";
-      }
-      // is it one of the builtin functions?
-      if (builtins && builtins.propertyIsEnumerable(stream.current().toUpperCase()))
+        return "keyword";
+    }
+    // is it one of the builtin functions?
+    if (builtins && builtins.propertyIsEnumerable(stream.current().toUpperCase()))
         return "variable-2";
-      // is it one of the listed types?
-      if (types && types.propertyIsEnumerable(stream.current().toUpperCase()))
+    // is it one of the listed types?
+    if (types && types.propertyIsEnumerable(stream.current().toUpperCase()))
         return "variable-3";
-      // default is a 'variable'
-      return "variable";
+    // default is a 'variable'
+    return "variable";
     }
   }
 
   // Interface
   return {
     startState: function() {
-      return {
+    return {
         tokenize: tokenBase,
         startOfLine: true
-      };
+    };
     },
 
     token: function(stream, state) {
-      if(stream.eatSpace()) return null;
-      var style = state.tokenize(stream, state);
-      return style;
+    if(stream.eatSpace()) return null;
+    var style = state.tokenize(stream, state);
+    return style;
     }
   };
 });

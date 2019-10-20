@@ -9,7 +9,7 @@ class App extends Component {
     constructor() {
         super();
     }
-    
+
     render() {
         const {props} = this;
         return (

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Label, InputGroup } from "@dnnsoftware/dnn-react-common";
 
 export default class InfoBlock extends Component {
-    
+
     render() {
         const {props} = this;
 

@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -40,7 +40,7 @@ namespace DotNetNuke.Entities.Urls
 
         private readonly IHostController _hostControllerInstance = HostController.Instance;
 
-        //894 : new switch to disable custom url provider 
+        //894 : new switch to disable custom url provider
         private bool? _allowDebugCode;
         private bool? _autoAsciiConvert;
         private bool? _checkForDuplicateUrls;
@@ -255,9 +255,9 @@ namespace DotNetNuke.Entities.Urls
                 //661 : do not include in path
                 //742 : was not reading and saving value when 'doNotIncludeInPathRegex' used
                 return _doNotIncludeInPathRegex ??
-                       (_doNotIncludeInPathRegex =
-                           GetStringSetting(KeepInQueryStringRegexSetting,
-                               @"/nomo/\d+|/runningDefault/[^/]+|/popup/(?:true|false)|/(?:page|category|sort|tags)/[^/]+|tou/[^/]+|(/utm[^/]+/[^/]+)+"));
+                        (_doNotIncludeInPathRegex =
+                            GetStringSetting(KeepInQueryStringRegexSetting,
+                                @"/nomo/\d+|/runningDefault/[^/]+|/popup/(?:true|false)|/(?:page|category|sort|tags)/[^/]+|tou/[^/]+|(/utm[^/]+/[^/]+)+"));
             }
             internal set { _doNotIncludeInPathRegex = value; }
         }
@@ -288,8 +288,8 @@ namespace DotNetNuke.Entities.Urls
             get
             {
                 return _doNotRewriteRegex ??
-                       (_doNotRewriteRegex =
-                           GetStringSetting(DoNotRewriteRegExSetting, @"/DesktopModules/|/Providers/|/LinkClick\.aspx|/profilepic\.ashx|/DnnImageHandler\.ashx|/__browserLink/|/API/"));
+                        (_doNotRewriteRegex =
+                            GetStringSetting(DoNotRewriteRegExSetting, @"/DesktopModules/|/Providers/|/LinkClick\.aspx|/profilepic\.ashx|/DnnImageHandler\.ashx|/__browserLink/|/API/"));
             }
             internal set { _doNotRewriteRegex = value; }
         }
@@ -366,9 +366,9 @@ namespace DotNetNuke.Entities.Urls
             get
             {
                 return _ignoreRegex ??
-                       (_ignoreRegex =
-                           GetStringSetting(IgnoreRegexSetting,
-                               @"(?<!linkclick\.aspx.+)(?:(?<!\?.+)(\.pdf$|\.gif$|\.png($|\?)|\.css($|\?)|\.js($|\?)|\.jpg$|\.axd($|\?)|\.swf$|\.flv$|\.ico$|\.xml($|\?)|\.txt$))"));
+                        (_ignoreRegex =
+                            GetStringSetting(IgnoreRegexSetting,
+                                @"(?<!linkclick\.aspx.+)(?:(?<!\?.+)(\.pdf$|\.gif$|\.png($|\?)|\.css($|\?)|\.js($|\?)|\.jpg$|\.axd($|\?)|\.swf$|\.flv$|\.ico$|\.xml($|\?)|\.txt$))"));
             }
             internal set { _ignoreRegex = value; }
         }
@@ -631,9 +631,9 @@ namespace DotNetNuke.Entities.Urls
             get
             {
                 return _useSiteUrlsRegex ??
-                       (_useSiteUrlsRegex =
-                           GetStringSetting(SiteUrlsOnlyRegexSetting,
-                               @"/rss\.aspx|Telerik.RadUploadProgressHandler\.ashx|BannerClickThrough\.aspx|(?:/[^/]+)*/Tabid/\d+/.*default\.aspx"));
+                        (_useSiteUrlsRegex =
+                            GetStringSetting(SiteUrlsOnlyRegexSetting,
+                                @"/rss\.aspx|Telerik.RadUploadProgressHandler\.ashx|BannerClickThrough\.aspx|(?:/[^/]+)*/Tabid/\d+/.*default\.aspx"));
             }
             internal set { _useSiteUrlsRegex = value; }
         }
@@ -644,7 +644,7 @@ namespace DotNetNuke.Entities.Urls
             {
                 //893 : new extensionless Urls check for validating urls which have no extension but aren't 404
                 return _validExtensionlessUrlsRegex ??
-                       (_validExtensionlessUrlsRegex = GetStringSetting(UrlsWithNoExtensionRegexSetting, @"\.asmx/|\.ashx/|\.svc/|\.aspx/|\.axd/"));
+                        (_validExtensionlessUrlsRegex = GetStringSetting(UrlsWithNoExtensionRegexSetting, @"\.asmx/|\.ashx/|\.svc/|\.aspx/|\.axd/"));
             }
             internal set { _validExtensionlessUrlsRegex = value; }
         }

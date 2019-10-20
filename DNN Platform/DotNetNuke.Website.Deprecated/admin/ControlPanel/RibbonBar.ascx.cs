@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -118,12 +118,12 @@ namespace DotNetNuke.UI.ControlPanels
         }
 
         private void SetLanguage(bool update)
-		{
-			if (update)
-			{
-				DotNetNuke.Services.Personalization.Personalization.SetProfile("Usability", "UICulture", ddlUICulture.SelectedValue);
-			}
-		}
+        {
+            if (update)
+            {
+                DotNetNuke.Services.Personalization.Personalization.SetProfile("Usability", "UICulture", ddlUICulture.SelectedValue);
+            }
+        }
 
         protected string GetButtonConfirmMessage(string toolName)
         {
@@ -192,8 +192,8 @@ namespace DotNetNuke.UI.ControlPanels
         {
             base.OnLoad(e);
 
-			ddlMode.SelectedIndexChanged += ddlMode_SelectedIndexChanged;
-			ddlUICulture.SelectedIndexChanged += ddlUICulture_SelectedIndexChanged;
+            ddlMode.SelectedIndexChanged += ddlMode_SelectedIndexChanged;
+            ddlUICulture.SelectedIndexChanged += ddlUICulture_SelectedIndexChanged;
 
             try
             {
@@ -206,7 +206,7 @@ namespace DotNetNuke.UI.ControlPanels
                     ClientResourceManager.RegisterScript(this.Page, "~/Resources/ControlPanel/ControlPanel.debug.js");
                 }
 
-				JavaScript.RequestRegistration(CommonJs.DnnPlugins);
+                JavaScript.RequestRegistration(CommonJs.DnnPlugins);
 
                 Control copyPageButton = CurrentPagePanel.FindControl("CopyPage");
                 if ((copyPageButton != null))
@@ -225,10 +225,10 @@ namespace DotNetNuke.UI.ControlPanels
                     }
                 }
 
-				if (IsPageAdmin())
-				{
-					ControlPanel.Visible = true;
-					BodyPanel.Visible = true;
+                if (IsPageAdmin())
+                {
+                    ControlPanel.Visible = true;
+                    BodyPanel.Visible = true;
 
                     if ((DotNetNukeContext.Current.Application.Name == "DNNCORP.CE"))
                     {
@@ -243,52 +243,52 @@ namespace DotNetNuke.UI.ControlPanels
 
                     Localize();
 
-					if (!Page.IsPostBack)
-					{
-						UserInfo objUser = UserController.Instance.GetCurrentUserInfo();
-						if ((objUser != null))
-						{
-							if (objUser.IsSuperUser)
-							{
-								hypMessage.ImageUrl = Upgrade.UpgradeIndicator(DotNetNukeContext.Current.Application.Version, Request.IsLocal, Request.IsSecureConnection);
-								if (!string.IsNullOrEmpty(hypMessage.ImageUrl))
-								{
-									hypMessage.ToolTip = Localization.GetString("hypUpgrade.Text", LocalResourceFile);
-									hypMessage.NavigateUrl = Upgrade.UpgradeRedirect();
-								}
-							}
-							else
-							{
-								if (PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName) && Host.DisplayCopyright)
-								{
-									hypMessage.ImageUrl = "~/images/branding/iconbar_logo.png";
-									hypMessage.ToolTip = DotNetNukeContext.Current.Application.Description;
-									hypMessage.NavigateUrl = Localization.GetString("hypMessageUrl.Text", LocalResourceFile);
-								}
-								else
-								{
-									hypMessage.Visible = false;
-								}
+                    if (!Page.IsPostBack)
+                    {
+                        UserInfo objUser = UserController.Instance.GetCurrentUserInfo();
+                        if ((objUser != null))
+                        {
+                            if (objUser.IsSuperUser)
+                            {
+                                hypMessage.ImageUrl = Upgrade.UpgradeIndicator(DotNetNukeContext.Current.Application.Version, Request.IsLocal, Request.IsSecureConnection);
+                                if (!string.IsNullOrEmpty(hypMessage.ImageUrl))
+                                {
+                                    hypMessage.ToolTip = Localization.GetString("hypUpgrade.Text", LocalResourceFile);
+                                    hypMessage.NavigateUrl = Upgrade.UpgradeRedirect();
+                                }
+                            }
+                            else
+                            {
+                                if (PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName) && Host.DisplayCopyright)
+                                {
+                                    hypMessage.ImageUrl = "~/images/branding/iconbar_logo.png";
+                                    hypMessage.ToolTip = DotNetNukeContext.Current.Application.Description;
+                                    hypMessage.NavigateUrl = Localization.GetString("hypMessageUrl.Text", LocalResourceFile);
+                                }
+                                else
+                                {
+                                    hypMessage.Visible = false;
+                                }
 
                                 if (!TabPermissionController.CanAddContentToPage())
                                 {
                                     CommonTasksPanel.Visible = false;
                                 }
-							}
-							if (PortalSettings.AllowUserUICulture)
-							{
-								object oCulture = DotNetNuke.Services.Personalization.Personalization.GetProfile("Usability", "UICulture");
-								string currentCulture;
-								if (oCulture != null)
-								{
-									currentCulture = oCulture.ToString();
-								}
-								else
-								{
-									Localization l = new Localization();
-									currentCulture = l.CurrentUICulture;
-								}
-								//Localization.LoadCultureDropDownList(ddlUICulture, CultureDropDownTypes.NativeName, currentCulture);
+                            }
+                            if (PortalSettings.AllowUserUICulture)
+                            {
+                                object oCulture = DotNetNuke.Services.Personalization.Personalization.GetProfile("Usability", "UICulture");
+                                string currentCulture;
+                                if (oCulture != null)
+                                {
+                                    currentCulture = oCulture.ToString();
+                                }
+                                else
+                                {
+                                    Localization l = new Localization();
+                                    currentCulture = l.CurrentUICulture;
+                                }
+                                //Localization.LoadCultureDropDownList(ddlUICulture, CultureDropDownTypes.NativeName, currentCulture);
                                 IEnumerable<ListItem> cultureListItems = Localization.LoadCultureInListItems(CultureDropDownTypes.NativeName, currentCulture, "", false);
                                 foreach (var cultureItem in cultureListItems)
                                 {
@@ -301,84 +301,84 @@ namespace DotNetNuke.UI.ControlPanels
                                     selectedCultureItem.Selected = true;
                                 }
 
-								//only show language selector if more than one language
-								if (ddlUICulture.Items.Count > 1)
-								{
-									lblUILanguage.Visible = true;
-									ddlUICulture.Visible = true;
+                                //only show language selector if more than one language
+                                if (ddlUICulture.Items.Count > 1)
+                                {
+                                    lblUILanguage.Visible = true;
+                                    ddlUICulture.Visible = true;
 
-									if (oCulture == null)
-									{
-										SetLanguage(true);
-									}
-								}
-							}
-						}
-						SetMode(false);
-					}
-				}
-				else if (IsModuleAdmin())
-				{
-					ControlPanel.Visible = true;
-					BodyPanel.Visible = false;
-					adminMenus.Visible = false;
-					if (!Page.IsPostBack)
-					{
-						SetMode(false);
-					}
-				}
-				else
-				{
-					ControlPanel.Visible = false;
-				}
-			}
-			catch (Exception exc)
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
+                                    if (oCulture == null)
+                                    {
+                                        SetLanguage(true);
+                                    }
+                                }
+                            }
+                        }
+                        SetMode(false);
+                    }
+                }
+                else if (IsModuleAdmin())
+                {
+                    ControlPanel.Visible = true;
+                    BodyPanel.Visible = false;
+                    adminMenus.Visible = false;
+                    if (!Page.IsPostBack)
+                    {
+                        SetMode(false);
+                    }
+                }
+                else
+                {
+                    ControlPanel.Visible = false;
+                }
+            }
+            catch (Exception exc)
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
 
-		protected void ddlMode_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Page.IsCallback)
-			{
-				return;
-			}
-			SetMode(true);
-			Response.Redirect(Request.RawUrl, true);
-		}
+        protected void ddlMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Page.IsCallback)
+            {
+                return;
+            }
+            SetMode(true);
+            Response.Redirect(Request.RawUrl, true);
+        }
 
-		private void ddlUICulture_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Page.IsCallback)
-			{
-				return;
-			}
-			SetLanguage(true);
-			Response.Redirect(Request.RawUrl, true);
-		}
+        private void ddlUICulture_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Page.IsCallback)
+            {
+                return;
+            }
+            SetLanguage(true);
+            Response.Redirect(Request.RawUrl, true);
+        }
 
-		#endregion
+        #endregion
 
-		#region "Protected Methods"
+        #region "Protected Methods"
 
-		protected string PreviewPopup()
-		{
-			var previewUrl = string.Format("{0}/Default.aspx?ctl={1}&previewTab={2}&TabID={2}", 
-										Globals.AddHTTP(PortalSettings.PortalAlias.HTTPAlias), 
-										"MobilePreview",
-										PortalSettings.ActiveTab.TabID);
+        protected string PreviewPopup()
+        {
+            var previewUrl = string.Format("{0}/Default.aspx?ctl={1}&previewTab={2}&TabID={2}",
+                                        Globals.AddHTTP(PortalSettings.PortalAlias.HTTPAlias),
+                                        "MobilePreview",
+                                        PortalSettings.ActiveTab.TabID);
 
-			if(PortalSettings.EnablePopUps)
-			{
-				return UrlUtils.PopUpUrl(previewUrl, this, PortalSettings, true, false, 660, 800);
-			}
-			else
-			{
-				return string.Format("location.href = \"{0}\"", previewUrl);
-			}
-		}
+            if(PortalSettings.EnablePopUps)
+            {
+                return UrlUtils.PopUpUrl(previewUrl, this, PortalSettings, true, false, 660, 800);
+            }
+            else
+            {
+                return string.Format("location.href = \"{0}\"", previewUrl);
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

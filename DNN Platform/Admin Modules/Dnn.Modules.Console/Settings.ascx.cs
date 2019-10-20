@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -44,7 +44,7 @@ namespace Dnn.Modules.Console
 
     public partial class Settings : ModuleSettingsBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Settings));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Settings));
 
         private void BindTabs(int tabId, bool includeParent)
         {
@@ -113,7 +113,7 @@ namespace Dnn.Modules.Console
                     parentTabRow.Visible = true;
                     includeParentRow.Visible = true;
                     tabVisibilityRow.Visible = true;
-                   break;
+                    break;
             }
 
             ParentTab.SelectedPage = TabController.Instance.GetTab(parentTabId, PortalId);
@@ -163,10 +163,10 @@ namespace Dnn.Modules.Console
                     {
                         ShowTooltip.Checked = Convert.ToBoolean(Settings["ShowTooltip"]);
                     }
-					if (Settings.ContainsKey("OrderTabsByHierarchy"))
-					{
-						OrderTabsByHierarchy.Checked = Convert.ToBoolean(Settings["OrderTabsByHierarchy"]);
-					}
+                    if (Settings.ContainsKey("OrderTabsByHierarchy"))
+                    {
+                        OrderTabsByHierarchy.Checked = Convert.ToBoolean(Settings["OrderTabsByHierarchy"]);
+                    }
                     if (Settings.ContainsKey("IncludeHiddenPages"))
                     {
                         IncludeHiddenPages.Checked = Convert.ToBoolean(Settings["IncludeHiddenPages"]);
@@ -190,7 +190,7 @@ namespace Dnn.Modules.Console
         {
             try
             {
-				//validate console width value
+                //validate console width value
                 var wdth = string.Empty;
                 if ((ConsoleWidth.Text.Trim().Length > 0))
                 {
@@ -229,8 +229,8 @@ namespace Dnn.Modules.Console
                 {
                     if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                     {
-	                    var tabPath = (item.FindControl("tabPath") as HiddenField).Value;
-						var visibility = (item.FindControl("tabVisibility") as DnnComboBox).SelectedValue;
+                        var tabPath = (item.FindControl("tabPath") as HiddenField).Value;
+                        var visibility = (item.FindControl("tabVisibility") as DnnComboBox).SelectedValue;
 
                         var key = String.Format("TabVisibility{0}", tabPath.Replace("//","-"));
                         ModuleController.Instance.UpdateModuleSetting(ModuleId, key, visibility);
@@ -301,7 +301,7 @@ namespace Dnn.Modules.Console
                 var key = String.Format("TabVisibility{0}", tab.TabPath.Replace("//", "-"));
                 SelectDropDownListItem(ref visibilityDropDown, key);
             }
-        }    
+        }
 
         private void SelectDropDownListItem(ref DnnComboBox ddl, string key)
         {

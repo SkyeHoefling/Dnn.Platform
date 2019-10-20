@@ -1,9 +1,9 @@
 ﻿#region Copyright
 
-// 
+//
 // Copyright (c) _YEAR_
 // by _OWNER_
-// 
+//
 
 #endregion
 

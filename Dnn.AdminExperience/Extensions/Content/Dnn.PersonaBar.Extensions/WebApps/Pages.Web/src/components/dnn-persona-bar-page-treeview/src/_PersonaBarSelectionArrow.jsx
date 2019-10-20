@@ -52,7 +52,7 @@ export default class PersonaBarSelectionArrow extends Component {
             onMouseEnter={this.onMouseEnter.bind(this)}
             onMouseLeave={this.onMouseLeave.bind(this)}>
                 <div dangerouslySetInnerHTML={{ __html: SvgIcons.MoreMenuIcon }} ></div>
-                {this.state.showMenu && 
+                {this.state.showMenu &&
                     <PersonaBarTreeInContextMenu {...this.props} onClose={this.onMouseLeave.bind(this)} />
                 }
         </div>;
@@ -62,10 +62,10 @@ export default class PersonaBarSelectionArrow extends Component {
         const { item } = this.props;
         /*eslint-disable react/no-danger*/
         return (
-            <div id={`menu-item-${item.name} ${item.selected}`} 
+            <div id={`menu-item-${item.name} ${item.selected}`}
             className="selection-arrow">
                 {item.selected ? <div dangerouslySetInnerHTML={{ __html: SvgIcons.ArrowForward }} /> : <div></div>}
-                {item.selected ? this.renderMoreActions() : <div></div>}                
+                {item.selected ? this.renderMoreActions() : <div></div>}
             </div>
         );
     }

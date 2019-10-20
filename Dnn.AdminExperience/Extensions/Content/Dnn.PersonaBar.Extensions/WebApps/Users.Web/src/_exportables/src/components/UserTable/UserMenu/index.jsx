@@ -125,7 +125,7 @@ class UserMenu extends Component {
                 break;
         }
     }
-    
+
     onViewProfile() {
         utilities.closePersonaBar(() => {
             window.top.location = this.state.userDetails.profileUrl;
@@ -184,11 +184,11 @@ class UserMenu extends Component {
         if (close)
             this.props.onClose();
     }
-    
+
     render() {
 
         let visibleMenus = [{ key:"ViewProfile", title:  Localization.get("ViewProfile"), index: 10 }];
-        
+
         if (canPromoteDemote(this.props.appSettings.applicationSettings.settings, this.state.userDetails.userId))
         {
             if (!this.state.userDetails.isSuperUser) {
@@ -221,7 +221,7 @@ class UserMenu extends Component {
         {
             if (this.state.userDetails.authorized) {
                 visibleMenus = [{ key:"cmdUnAuthorize", title:  Localization.get("cmdUnAuthorize"), index: 50 }].concat(visibleMenus);
-            } 
+            }
             else
             {
                 visibleMenus = [{ key:"cmdAuthorize", title:  Localization.get("cmdAuthorize"), index: 50 }].concat(visibleMenus);
@@ -230,12 +230,12 @@ class UserMenu extends Component {
                 visibleMenus = [{ key:"cmdUnLock", title:  Localization.get("cmUnlockUser"), index: 100 }].concat(visibleMenus);
             }
         }
-       
+
         visibleMenus = visibleMenus.concat((this.props.getUserMenu && this.props.getUserMenu(this.state.userDetails)) || []);
 
         visibleMenus = this.sort(visibleMenus, "index");
         let showMenu = this.showMenu;
-        
+
         if (showMenu)
         {
             return (

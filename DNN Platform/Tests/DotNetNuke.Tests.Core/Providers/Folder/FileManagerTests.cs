@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -98,7 +98,7 @@ namespace DotNetNuke.Tests.Core.Providers.Folder
             _pathUtils = new Mock<IPathUtils>();
             _mockFileLockingController = new Mock<IFileLockingController>();
             _mockFileDeletionController = new Mock<IFileDeletionController>();
-            
+
             EventLogController.SetTestableInstance(Mock.Of<IEventLogController>());
             FolderManager.RegisterInstance(_folderManager.Object);
             FolderPermissionController.SetTestableInstance(_folderPermissionController.Object);
@@ -192,7 +192,7 @@ namespace DotNetNuke.Tests.Core.Providers.Folder
             _folderMappingController.Setup(fmc => fmc.GetFolderMapping(Constants.CONTENT_ValidPortalId, Constants.FOLDER_ValidFolderMappingID)).Returns(folderMapping);
 
             _portalController.Setup(pc => pc.HasSpaceAvailable(Constants.CONTENT_ValidPortalId, fileContent.Length)).Returns(false);
-            
+
             _mockFileManager.Setup(fm => fm.CreateFileContentItem()).Returns(new ContentItem());
             _mockFileManager.Setup(fm => fm.IsAllowedExtension(Constants.FOLDER_ValidFileName)).Returns(true);
 
@@ -345,7 +345,7 @@ namespace DotNetNuke.Tests.Core.Providers.Folder
             _folderInfo.Setup(fi => fi.PhysicalPath).Returns(Constants.FOLDER_ValidFolderPath);
             _folderInfo.Setup(fi => fi.FolderMappingID).Returns(Constants.FOLDER_ValidFolderMappingID);
             _folderInfo.Setup(fi => fi.WorkflowID).Returns(Null.NullInteger);
-            
+
             var fileContent = new MemoryStream();
 
             _portalController.Setup(pc => pc.HasSpaceAvailable(Constants.CONTENT_ValidPortalId, fileContent.Length)).Returns(true);
@@ -369,34 +369,34 @@ namespace DotNetNuke.Tests.Core.Providers.Folder
             _mockData.Setup(
                 md =>
                 md.AddFile(It.IsAny<int>(),
-                           It.IsAny<Guid>(),
-                           It.IsAny<Guid>(),
-                           It.IsAny<string>(),
-                           It.IsAny<string>(),
-                           It.IsAny<long>(),
-                           It.IsAny<int>(),
-                           It.IsAny<int>(),
-                           It.IsAny<string>(),
-                           It.IsAny<string>(),
-                           It.IsAny<int>(),
-                           It.IsAny<int>(),
-                           It.IsAny<string>(),
-                           It.IsAny<DateTime>(),
-                           It.IsAny<string>(),
-                           It.IsAny<string>(),
-                           It.IsAny<DateTime>(),
-                           It.IsAny<DateTime>(),
-                           It.IsAny<bool>(),
-                           It.IsAny<int>()))
-               .Returns(Constants.FOLDER_ValidFileId);
-            
+                            It.IsAny<Guid>(),
+                            It.IsAny<Guid>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<long>(),
+                            It.IsAny<int>(),
+                            It.IsAny<int>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<int>(),
+                            It.IsAny<int>(),
+                            It.IsAny<string>(),
+                            It.IsAny<DateTime>(),
+                            It.IsAny<string>(),
+                            It.IsAny<string>(),
+                            It.IsAny<DateTime>(),
+                            It.IsAny<DateTime>(),
+                            It.IsAny<bool>(),
+                            It.IsAny<int>()))
+                .Returns(Constants.FOLDER_ValidFileId);
+
             _mockData.Setup(md => md.UpdateFileLastModificationTime(It.IsAny<int>(), It.IsAny<DateTime>()));
 
             _mockFileManager.Object.AddFile(_folderInfo.Object, Constants.FOLDER_ValidFileName, fileContent, false, false, Constants.CONTENTTYPE_ValidContentType);
 
             _mockFolder.Verify(mf => mf.AddFile(It.IsAny<IFolderInfo>(), It.IsAny<string>(), It.IsAny<Stream>()), Times.Never());
         }
-        
+
         #endregion
 
         #region CopyFile
@@ -499,7 +499,7 @@ namespace DotNetNuke.Tests.Core.Providers.Folder
             _fileInfo.Setup(fi => fi.FolderId).Returns(Constants.FOLDER_ValidFolderId);
 
             _mockFileDeletionController.Setup(mfdc => mfdc.DeleteFile(_fileInfo.Object))
-                                       .Throws<FolderProviderException>();
+                                        .Throws<FolderProviderException>();
 
             _mockFileManager.Object.DeleteFile(_fileInfo.Object);
         }
@@ -1195,6 +1195,6 @@ namespace DotNetNuke.Tests.Core.Providers.Folder
         }
 
 
-        #endregion        
+        #endregion
     }
 }

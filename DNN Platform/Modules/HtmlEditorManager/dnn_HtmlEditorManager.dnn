@@ -1,22 +1,22 @@
 ﻿<dotnetnuke type="Package" version="6.0">
   <packages>
     <package name="DotNetNuke.HtmlEditorManager" type="Module" >
-      <friendlyName>Html Editor Management</friendlyName>
-      <iconFile>Images/HtmlEditorManager_Standard_32x32.png</iconFile>
-      <description>A module used to configure toolbar items, behavior, and other options used in the DotNetNuke HtmlEditor Provider.</description>
-      <owner>
-          <name>DNN</name>
-          <organization>DNN Corp.</organization>
-          <url>http://www.dnnsoftware.com</url>
-          <email>support@dnnsoftware.com</email>
-      </owner>
-      <azureCompatible>true</azureCompatible>
-      <dependencies>
+    <friendlyName>Html Editor Management</friendlyName>
+    <iconFile>Images/HtmlEditorManager_Standard_32x32.png</iconFile>
+    <description>A module used to configure toolbar items, behavior, and other options used in the DotNetNuke HtmlEditor Provider.</description>
+    <owner>
+        <name>DNN</name>
+        <organization>DNN Corp.</organization>
+        <url>http://www.dnnsoftware.com</url>
+        <email>support@dnnsoftware.com</email>
+    </owner>
+    <azureCompatible>true</azureCompatible>
+    <dependencies>
         <dependency type="CoreVersion">09.01.00</dependency>
-      </dependencies>
-      <components>
+    </dependencies>
+    <components>
         <component type="Module">
-          <desktopModule>
+        <desktopModule>
             <moduleName>DotNetNuke.HtmlEditorManager</moduleName>
             <foldername>Admin/HtmlEditorManager</foldername>
             <businessControllerClass>DotNetNuke.Modules.HtmlEditorManager.Components.UpgradeController, DotNetNuke.Modules.HtmlEditorManager</businessControllerClass>
@@ -24,11 +24,11 @@
             <isPremium>false</isPremium>
             <isAdmin>true</isAdmin>
             <moduleDefinitions>
-              <moduleDefinition>
+            <moduleDefinition>
                 <friendlyName>Html Editor Management</friendlyName>
                 <defaultCacheTime>0</defaultCacheTime>
                 <moduleControls>
-                  <moduleControl>
+                <moduleControl>
                     <controlKey/>
                     <controlSrc>DesktopModules/Admin/HtmlEditorManager/Views/ProviderConfiguration.ascx</controlSrc>
                     <supportsPopUps>True</supportsPopUps>
@@ -38,38 +38,38 @@
                     <iconFile />
                     <helpUrl>http://www.dnnsoftware.com/help</helpUrl>
                     <viewOrder>0</viewOrder>
-                  </moduleControl>
+                </moduleControl>
                 </moduleControls>
-              </moduleDefinition>
+            </moduleDefinition>
             </moduleDefinitions>
-          </desktopModule>
-          <eventMessage>
+        </desktopModule>
+        <eventMessage>
             <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
             <processorCommand>UpgradeModule</processorCommand>
             <attributes>
-              <businessControllerClass>DotNetNuke.Modules.HtmlEditorManager.Components.UpgradeController, DotNetNuke.Modules.HtmlEditorManager</businessControllerClass>
-              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>07.04.00,09.01.01,09.02.00,09.02.01</upgradeVersionsList>
+            <businessControllerClass>DotNetNuke.Modules.HtmlEditorManager.Components.UpgradeController, DotNetNuke.Modules.HtmlEditorManager</businessControllerClass>
+            <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+            <upgradeVersionsList>07.04.00,09.01.01,09.02.00,09.02.01</upgradeVersionsList>
             </attributes>
-          </eventMessage>
+        </eventMessage>
         </component>
         <component type="Assembly">
-          <assemblies>
+        <assemblies>
             <assembly>
-              <path>bin</path>
-              <name>DotNetNuke.Modules.HtmlEditorManager.dll</name>
+            <path>bin</path>
+            <name>DotNetNuke.Modules.HtmlEditorManager.dll</name>
             </assembly>
-          </assemblies>
+        </assemblies>
         </component>
         <component type="ResourceFile">
-          <resourceFiles>
+        <resourceFiles>
             <basePath>DesktopModules\Admin\HtmlEditorManager</basePath>
             <resourceFile>
-              <name>Resources.zip</name>
+            <name>Resources.zip</name>
             </resourceFile>
-          </resourceFiles>
+        </resourceFiles>
         </component>
-      </components>
+    </components>
     </package>
   </packages>
 </dotnetnuke>

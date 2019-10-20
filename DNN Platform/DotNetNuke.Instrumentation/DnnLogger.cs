@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -50,9 +50,9 @@ namespace DotNetNuke.Instrumentation
         internal static Level LevelError;
         internal static Level LevelFatal;
         //add custom logging levels (below trace value of 20000)
-        internal static Level LevelLogInfo = new Level(10001, "LogInfo"); 
+        internal static Level LevelLogInfo = new Level(10001, "LogInfo");
         internal static Level LevelLogError = new Level(10002, "LogError");
-           
+
 
         #endregion
 
@@ -70,9 +70,9 @@ namespace DotNetNuke.Instrumentation
             {
                 int frameDepth = 0;
                 Type methodType = stack[frameDepth].GetMethod().ReflectedType;
-				#pragma warning disable 612,618
+                #pragma warning disable 612,618
                 while (methodType == _dnnExceptionType || methodType == typeof(DnnLogger) || methodType == typeof(DnnLog) || methodType == typeof(Control))
-				#pragma warning restore 612,618
+                #pragma warning restore 612,618
                 {
                     frameDepth++;
                     methodType = stack[frameDepth].GetMethod().ReflectedType;
@@ -109,8 +109,8 @@ namespace DotNetNuke.Instrumentation
             LevelFatal = levelMap.LookupWithDefault(Level.Fatal);
             LevelLogError = levelMap.LookupWithDefault(LevelLogError);
             LevelLogInfo = levelMap.LookupWithDefault(LevelLogInfo);
-            
-            
+
+
             //// Register custom logging levels with the default LoggerRepository
             LogManager.GetRepository().LevelMap.Add(LevelLogInfo);
             LogManager.GetRepository().LevelMap.Add(LevelLogError);
@@ -136,19 +136,19 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     This method first checks if this logger is <c>DEBUG</c>
-        ///     enabled by comparing the level of this logger with the 
+        ///     enabled by comparing the level of this logger with the
         ///     <c>DEBUG</c> level. If this logger is
         ///     <c>DEBUG</c> enabled, then it converts the message object
         ///     (passed as parameter) to a string by invoking the appropriate
-        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then 
-        ///     proceeds to call all the registered appenders in this logger 
-        ///     and also higher in the hierarchy depending on the value of the 
+        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then
+        ///     proceeds to call all the registered appenders in this logger
+        ///     and also higher in the hierarchy depending on the value of the
         ///     additivity flag.
         ///   </para>
         ///   <para>
-        ///     <b>WARNING</b> Note that passing an <see cref = "Exception" /> 
-        ///     to this method will print the name of the <see cref = "Exception" /> 
-        ///     but no stack trace. To print a stack trace use the 
+        ///     <b>WARNING</b> Note that passing an <see cref = "Exception" />
+        ///     to this method will print the name of the <see cref = "Exception" />
+        ///     but no stack trace. To print a stack trace use the
         ///     <see cref = "Error(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
@@ -215,19 +215,19 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     This method first checks if this logger is <c>INFO</c>
-        ///     enabled by comparing the level of this logger with the 
+        ///     enabled by comparing the level of this logger with the
         ///     <c>INFO</c> level. If this logger is
         ///     <c>INFO</c> enabled, then it converts the message object
         ///     (passed as parameter) to a string by invoking the appropriate
-        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then 
-        ///     proceeds to call all the registered appenders in this logger 
-        ///     and also higher in the hierarchy depending on the value of 
+        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then
+        ///     proceeds to call all the registered appenders in this logger
+        ///     and also higher in the hierarchy depending on the value of
         ///     the additivity flag.
         ///   </para>
         ///   <para>
-        ///     <b>WARNING</b> Note that passing an <see cref = "Exception" /> 
-        ///     to this method will print the name of the <see cref = "Exception" /> 
-        ///     but no stack trace. To print a stack trace use the 
+        ///     <b>WARNING</b> Note that passing an <see cref = "Exception" />
+        ///     to this method will print the name of the <see cref = "Exception" />
+        ///     but no stack trace. To print a stack trace use the
         ///     <see cref = "Error(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
@@ -311,19 +311,19 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     This method first checks if this logger is <c>WARN</c>
-        ///     enabled by comparing the level of this logger with the 
+        ///     enabled by comparing the level of this logger with the
         ///     <c>WARN</c> level. If this logger is
         ///     <c>WARN</c> enabled, then it converts the message object
         ///     (passed as parameter) to a string by invoking the appropriate
-        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then 
-        ///     proceeds to call all the registered appenders in this logger and 
-        ///     also higher in the hierarchy depending on the value of the 
+        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then
+        ///     proceeds to call all the registered appenders in this logger and
+        ///     also higher in the hierarchy depending on the value of the
         ///     additivity flag.
         ///   </para>
         ///   <para>
         ///     <b>WARNING</b> Note that passing an <see cref = "Exception" /> to this
         ///     method will print the name of the <see cref = "Exception" /> but no
-        ///     stack trace. To print a stack trace use the 
+        ///     stack trace. To print a stack trace use the
         ///     <see cref = "Warn(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
@@ -340,7 +340,7 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     Logs a message object with the <c>WARN</c> level including
-        ///     the stack trace of the <see cref = "Exception" /> <paramref name = "exception" /> 
+        ///     the stack trace of the <see cref = "Exception" /> <paramref name = "exception" />
         ///     passed as a parameter.
         ///   </para>
         ///   <para>
@@ -410,19 +410,19 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     This method first checks if this logger is <c>ERROR</c>
-        ///     enabled by comparing the level of this logger with the 
+        ///     enabled by comparing the level of this logger with the
         ///     <c>ERROR</c> level. If this logger is
         ///     <c>ERROR</c> enabled, then it converts the message object
         ///     (passed as parameter) to a string by invoking the appropriate
-        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then 
-        ///     proceeds to call all the registered appenders in this logger and 
-        ///     also higher in the hierarchy depending on the value of the 
+        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then
+        ///     proceeds to call all the registered appenders in this logger and
+        ///     also higher in the hierarchy depending on the value of the
         ///     additivity flag.
         ///   </para>
         ///   <para>
         ///     <b>WARNING</b> Note that passing an <see cref = "Exception" /> to this
         ///     method will print the name of the <see cref = "Exception" /> but no
-        ///     stack trace. To print a stack trace use the 
+        ///     stack trace. To print a stack trace use the
         ///     <see cref = "Error(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
@@ -439,7 +439,7 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     Logs a message object with the <c>ERROR</c> level including
-        ///     the stack trace of the <see cref = "Exception" /> <paramref name = "exception" /> 
+        ///     the stack trace of the <see cref = "Exception" /> <paramref name = "exception" />
         ///     passed as a parameter.
         ///   </para>
         ///   <para>
@@ -509,19 +509,19 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     This method first checks if this logger is <c>FATAL</c>
-        ///     enabled by comparing the level of this logger with the 
+        ///     enabled by comparing the level of this logger with the
         ///     <c>FATAL</c> level. If this logger is
         ///     <c>FATAL</c> enabled, then it converts the message object
         ///     (passed as parameter) to a string by invoking the appropriate
-        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then 
-        ///     proceeds to call all the registered appenders in this logger and 
-        ///     also higher in the hierarchy depending on the value of the 
+        ///     <see cref = "log4net.ObjectRenderer.IObjectRenderer" />. It then
+        ///     proceeds to call all the registered appenders in this logger and
+        ///     also higher in the hierarchy depending on the value of the
         ///     additivity flag.
         ///   </para>
         ///   <para>
         ///     <b>WARNING</b> Note that passing an <see cref = "Exception" /> to this
         ///     method will print the name of the <see cref = "Exception" /> but no
-        ///     stack trace. To print a stack trace use the 
+        ///     stack trace. To print a stack trace use the
         ///     <see cref = "Fatal(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
@@ -538,7 +538,7 @@ namespace DotNetNuke.Instrumentation
         /// <remarks>
         ///   <para>
         ///     Logs a message object with the <c>FATAL</c> level including
-        ///     the stack trace of the <see cref = "Exception" /> <paramref name = "exception" /> 
+        ///     the stack trace of the <see cref = "Exception" /> <paramref name = "exception" />
         ///     passed as a parameter.
         ///   </para>
         ///   <para>
@@ -611,7 +611,7 @@ namespace DotNetNuke.Instrumentation
         {
             Logger.Log(_stackBoundary, LevelLogError, message, exception);
         }
-        
+
         public void InstallLogErrorFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelLogError, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);

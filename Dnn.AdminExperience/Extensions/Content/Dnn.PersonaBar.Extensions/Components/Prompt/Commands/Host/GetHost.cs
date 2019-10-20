@@ -16,7 +16,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Host
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
-            
+
             var sbErrors = new StringBuilder();
 
             // HOST-ONLY ACCESS
@@ -50,4 +50,3 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Host
 
     }
 }
-

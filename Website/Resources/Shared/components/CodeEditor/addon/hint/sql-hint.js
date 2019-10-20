@@ -33,13 +33,13 @@
   function getItem(list, item) {
     if (!list.slice) return list[item];
     for (var i = list.length - 1; i >= 0; i--) if (getText(list[i]) == item)
-      return list[i];
+    return list[i];
   }
 
   function shallowClone(object) {
     var result = {};
     for (var key in object) if (object.hasOwnProperty(key))
-      result[key] = object[key];
+    result[key] = object[key];
     return result;
   }
 
@@ -51,17 +51,17 @@
 
   function addMatches(result, search, wordlist, formatter) {
     for (var word in wordlist) {
-      if (!wordlist.hasOwnProperty(word)) continue;
-      if (wordlist.slice) word = wordlist[word];
+    if (!wordlist.hasOwnProperty(word)) continue;
+    if (wordlist.slice) word = wordlist[word];
 
-      if (match(search, word)) result.push(formatter(word));
+    if (match(search, word)) result.push(formatter(word));
     }
   }
 
   function cleanName(name) {
     // Get rid name from backticks(`) and preceding dot(.)
     if (name.charAt(0) == ".") {
-      name = name.substr(1);
+    name = name.substr(1);
     }
     return name.replace(/`/g, "");
   }
@@ -69,7 +69,7 @@
   function insertBackticks(name) {
     var nameParts = getText(name).split(".");
     for (var i = 0; i < nameParts.length; i++)
-      nameParts[i] = "`" + nameParts[i] + "`";
+    nameParts[i] = "`" + nameParts[i] + "`";
     var escaped = nameParts.join(".");
     if (typeof name == "string") return escaped;
     name = shallowClone(name);
@@ -84,28 +84,28 @@
     var start = token.start;
     var cont = true;
     while (cont) {
-      cont = (token.string.charAt(0) == ".");
-      useBacktick = useBacktick || (token.string.charAt(0) == "`");
+    cont = (token.string.charAt(0) == ".");
+    useBacktick = useBacktick || (token.string.charAt(0) == "`");
 
-      start = token.start;
-      nameParts.unshift(cleanName(token.string));
+    start = token.start;
+    nameParts.unshift(cleanName(token.string));
 
-      token = editor.getTokenAt(Pos(cur.line, token.start));
-      if (token.string == ".") {
+    token = editor.getTokenAt(Pos(cur.line, token.start));
+    if (token.string == ".") {
         cont = true;
         token = editor.getTokenAt(Pos(cur.line, token.start));
-      }
+    }
     }
 
     // Try to complete table names
     var string = nameParts.join(".");
     addMatches(result, string, tables, function(w) {
-      return useBacktick ? insertBackticks(w) : w;
+    return useBacktick ? insertBackticks(w) : w;
     });
 
     // Try to complete columns from defaultTable
     addMatches(result, string, defaultTable, function(w) {
-      return useBacktick ? insertBackticks(w) : w;
+    return useBacktick ? insertBackticks(w) : w;
     });
 
     // Try to complete columns
@@ -116,27 +116,27 @@
     var aliasTable = table;
     // Check if table is available. If not, find table by Alias
     if (!getItem(tables, table)) {
-      var oldTable = table;
-      table = findTableByAlias(table, editor);
-      if (table !== oldTable) alias = true;
+    var oldTable = table;
+    table = findTableByAlias(table, editor);
+    if (table !== oldTable) alias = true;
     }
 
     var columns = getItem(tables, table);
     if (columns && columns.columns)
-      columns = columns.columns;
+    columns = columns.columns;
 
     if (columns) {
-      addMatches(result, string, columns, function(w) {
+    addMatches(result, string, columns, function(w) {
         var tableInsert = table;
         if (alias == true) tableInsert = aliasTable;
         if (typeof w == "string") {
-          w = tableInsert + "." + w;
+        w = tableInsert + "." + w;
         } else {
-          w = shallowClone(w);
-          w.text = tableInsert + "." + w.text;
+        w = shallowClone(w);
+        w.text = tableInsert + "." + w.text;
         }
         return useBacktick ? insertBackticks(w) : w;
-      });
+    });
     }
 
     return start;
@@ -147,7 +147,7 @@
     var excepted = /[,;]/g;
     var words = lineText.split(" ");
     for (var i = 0; i < words.length; i++) {
-      f(words[i]?words[i].replace(excepted, '') : '');
+    f(words[i]?words[i].replace(excepted, '') : '');
     }
   }
 
@@ -168,15 +168,15 @@
     var table = "";
     var separator = [];
     var validRange = {
-      start: Pos(0, 0),
-      end: Pos(editor.lastLine(), editor.getLineHandle(editor.lastLine()).length)
+    start: Pos(0, 0),
+    end: Pos(editor.lastLine(), editor.getLineHandle(editor.lastLine()).length)
     };
 
     //add separator
     var indexOfSeparator = fullQuery.indexOf(CONS.QUERY_DIV);
     while(indexOfSeparator != -1) {
-      separator.push(doc.posFromIndex(indexOfSeparator));
-      indexOfSeparator = fullQuery.indexOf(CONS.QUERY_DIV, indexOfSeparator+1);
+    separator.push(doc.posFromIndex(indexOfSeparator));
+    indexOfSeparator = fullQuery.indexOf(CONS.QUERY_DIV, indexOfSeparator+1);
     }
     separator.unshift(Pos(0, 0));
     separator.push(Pos(editor.lastLine(), editor.getLineHandle(editor.lastLine()).text.length));
@@ -185,26 +185,26 @@
     var prevItem = 0;
     var current = convertCurToNumber(editor.getCursor());
     for (var i=0; i< separator.length; i++) {
-      var _v = convertCurToNumber(separator[i]);
-      if (current > prevItem && current <= _v) {
+    var _v = convertCurToNumber(separator[i]);
+    if (current > prevItem && current <= _v) {
         validRange = { start: convertNumberToCur(prevItem), end: convertNumberToCur(_v) };
         break;
-      }
-      prevItem = _v;
+    }
+    prevItem = _v;
     }
 
     var query = doc.getRange(validRange.start, validRange.end, false);
 
     for (var i = 0; i < query.length; i++) {
-      var lineText = query[i];
-      eachWord(lineText, function(word) {
+    var lineText = query[i];
+    eachWord(lineText, function(word) {
         var wordUpperCase = word.toUpperCase();
         if (wordUpperCase === aliasUpperCase && getItem(tables, previousWord))
-          table = previousWord;
+        table = previousWord;
         if (wordUpperCase !== CONS.ALIAS_KEYWORD)
-          previousWord = word;
-      });
-      if (table) break;
+        previousWord = word;
+    });
+    if (table) break;
     }
     return table;
   }
@@ -217,35 +217,35 @@
     keywords = keywords || getKeywords(editor);
 
     if (defaultTableName && !defaultTable)
-      defaultTable = findTableByAlias(defaultTableName, editor);
+    defaultTable = findTableByAlias(defaultTableName, editor);
 
     defaultTable = defaultTable || [];
 
     if (defaultTable.columns)
-      defaultTable = defaultTable.columns;
+    defaultTable = defaultTable.columns;
 
     var cur = editor.getCursor();
     var result = [];
     var token = editor.getTokenAt(cur), start, end, search;
     if (token.end > cur.ch) {
-      token.end = cur.ch;
-      token.string = token.string.slice(0, cur.ch - token.start);
+    token.end = cur.ch;
+    token.string = token.string.slice(0, cur.ch - token.start);
     }
 
     if (token.string.match(/^[.`\w@]\w*$/)) {
-      search = token.string;
-      start = token.start;
-      end = token.end;
+    search = token.string;
+    start = token.start;
+    end = token.end;
     } else {
-      start = end = cur.ch;
-      search = "";
+    start = end = cur.ch;
+    search = "";
     }
     if (search.charAt(0) == "." || search.charAt(0) == "`") {
-      start = nameCompletion(cur, token, result, editor);
+    start = nameCompletion(cur, token, result, editor);
     } else {
-      addMatches(result, search, tables, function(w) {return w;});
-      addMatches(result, search, defaultTable, function(w) {return w;});
-      if (!disableKeywords)
+    addMatches(result, search, tables, function(w) {return w;});
+    addMatches(result, search, defaultTable, function(w) {return w;});
+    if (!disableKeywords)
         addMatches(result, search, keywords, function(w) {return w.toUpperCase();});
     }
 

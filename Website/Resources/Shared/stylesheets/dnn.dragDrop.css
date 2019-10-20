@@ -1,4 +1,4 @@
-﻿.dnnSortable.ui-sortable, 
+﻿.dnnSortable.ui-sortable,
 .dnnSortable.ui-droppable {
     padding: 0;
 }
@@ -10,8 +10,8 @@
 .dnnDropTarget {
     display:block;
     visibility: visible !important;
-	border: 1px dashed #4577a2;
-	background: #d9eeff;
+    border: 1px dashed #4577a2;
+    background: #d9eeff;
     height: 110px !important;
     width: 100%;
 }
@@ -28,7 +28,3 @@
     outline: 1px dashed #ccc !important;
     min-width: 110px !important;
 }
-
-
-
-

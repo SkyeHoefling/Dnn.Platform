@@ -10,17 +10,17 @@ const style = {
         padding: 0,
         display: "inline-block"
     },
-    input: {            
+    input: {
         position: "absolute",
         border: "none",
         backgroundColor: "transparent",
-        color: "inherit",        
+        color: "inherit",
         paddingLeft: 20,
         width: "100%",
         height: "100%"
     },
     magnifyingGlass: {
-        cursor: "pointer", 
+        cursor: "pointer",
         position: "absolute",
         width: 24,
         height: 24,
@@ -37,26 +37,26 @@ class SearchBox extends Component {
             text: ""
         };
     }
-    
+
     UNSAFE_componentWillMount() {
         this.debouncedSearch = debounce(this.search, 1000);
     }
-    
+
     search() {
         // TODO: do not search if no text, except if the text has been deleted
         // if (this.state.text.trim() === "") {
         //     return;
         // }
-        
-        this.props.onSearch(this.state.text);                
-    }    
-    
+
+        this.props.onSearch(this.state.text);
+    }
+
     onTextChanged(e) {
         this.setState({text: e.target.value}, () => {
             this.debouncedSearch();
-        });     
+        });
     }
-    
+
     render() {
         return (
             <div className={"dnn-search-box" + (this.props.className ? " " + this.props.className : "")} style={{...style.main, ...this.props.style}}>

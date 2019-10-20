@@ -34,7 +34,7 @@ new File( 'd:\\scripts' ).eachFileMatch(p) {f ->
   f.eachLine {
     // condition to detect an import instruction
     ln -> if ( ln =~ '^import .*' ) {
-      imports << "${ln - 'import '}"
+    imports << "${ln - 'import '}"
     }
   }
   // print thmen
@@ -65,19 +65,19 @@ def plural(word, count) {
 
 def change(currency, amount) {
   currency.values().inject([]){ list, coin ->
-     int count = amount / coin.value
-     amount = amount % coin.value
-     list += "$count ${plural(coin.toString(), count)}"
+    int count = amount / coin.value
+    amount = amount % coin.value
+    list += "$count ${plural(coin.toString(), count)}"
   }
 }
 </textarea></form>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-groovy"
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-groovy</code></p>

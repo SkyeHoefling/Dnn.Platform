@@ -18,7 +18,7 @@ class Pager extends Component {
             totalPages: 0,
             startIndex: 0,
             endIndex: props.numericCounters !== undefined ? props.numericCounters : 0
-        };        
+        };
     }
 
     componentDidMount() {
@@ -29,7 +29,7 @@ class Pager extends Component {
         if (prevProps.totalRecords !== this.props.totalRecords)
             this.calculateTotalPages(this.props);
     }
-    
+
     formatCommaSeparate(number) {
         let numbersSeparatorByLocale = this.getNumbersSeparatorByLocale();
         while (/(\d+)(\d{3})/.test(number.toString())) {
@@ -320,7 +320,7 @@ Pager.defaultProps = {
 };
 /*
 showPageSizeOptions and showPageInfo are mutually exclusive.
-Preferred value for numericCounters is odd. 
+Preferred value for numericCounters is odd.
 */
 
 /*Sample onPageChanged method*/

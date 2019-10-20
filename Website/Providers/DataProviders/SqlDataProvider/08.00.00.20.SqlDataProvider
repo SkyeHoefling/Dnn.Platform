@@ -1,19 +1,19 @@
 /* DNN-7162 - Content Items Indexes */
 
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}ContentItems_MetaData]') AND name = N'IX_{objectQualifier}ContentItems_MetaData_ContentItemId')
-	DROP INDEX [IX_{objectQualifier}ContentItems_MetaData_ContentItemId] ON {databaseOwner}[{objectQualifier}ContentItems_MetaData]
+    DROP INDEX [IX_{objectQualifier}ContentItems_MetaData_ContentItemId] ON {databaseOwner}[{objectQualifier}ContentItems_MetaData]
 GO
 CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ContentItems_MetaData_ContentItemId] ON {databaseOwner}[{objectQualifier}ContentItems_MetaData]
 (
-	[ContentItemID]
+    [ContentItemID]
 )
 GO
 
 IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}ContentWorkflowLogs]') AND name = N'IX_{objectQualifier}ContentWorkflowLogs_ContentItemId')
-	DROP INDEX [IX_{objectQualifier}ContentWorkflowLogs_ContentItemId] ON {databaseOwner}[{objectQualifier}ContentWorkflowLogs]
+    DROP INDEX [IX_{objectQualifier}ContentWorkflowLogs_ContentItemId] ON {databaseOwner}[{objectQualifier}ContentWorkflowLogs]
 GO
-CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ContentWorkflowLogs_ContentItemId] ON {databaseOwner}[{objectQualifier}ContentWorkflowLogs] 
+CREATE NONCLUSTERED INDEX [IX_{objectQualifier}ContentWorkflowLogs_ContentItemId] ON {databaseOwner}[{objectQualifier}ContentWorkflowLogs]
 (
-	[ContentItemID]
+    [ContentItemID]
 )
 GO

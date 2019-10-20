@@ -26,7 +26,7 @@ var requirejs, require, define;
         // then 'complete'. The UA check is unfortunate, but not sure how
         //to feature test w/o causing perf issues.
         readyRegExp = isBrowser && navigator.platform === 'PLAYSTATION 3' ?
-                      /^complete$/ : /^(complete|loaded)$/,
+                    /^complete$/ : /^(complete|loaded)$/,
         defContextName = '_',
         //Oh the tragedy, detecting opera. See the usage of isOpera for reason.
         isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]',
@@ -49,9 +49,9 @@ var requirejs, require, define;
     }
 
     /**
-     * Helper function for iterating over an array. If the func returns
-     * a true value, it will break out of the loop.
-     */
+    * Helper function for iterating over an array. If the func returns
+    * a true value, it will break out of the loop.
+    */
     function each(ary, func) {
         if (ary) {
             var i;
@@ -64,9 +64,9 @@ var requirejs, require, define;
     }
 
     /**
-     * Helper function for iterating over an array backwards. If the func
-     * returns a true value, it will break out of the loop.
-     */
+    * Helper function for iterating over an array backwards. If the func
+    * returns a true value, it will break out of the loop.
+    */
     function eachReverse(ary, func) {
         if (ary) {
             var i;
@@ -87,10 +87,10 @@ var requirejs, require, define;
     }
 
     /**
-     * Cycles over properties in an object and calls a function for each
-     * property value. If the function returns a truthy value, then the
-     * iteration is stopped.
-     */
+    * Cycles over properties in an object and calls a function for each
+    * property value. If the function returns a truthy value, then the
+    * iteration is stopped.
+    */
     function eachProp(obj, func) {
         var prop;
         for (prop in obj) {
@@ -103,9 +103,9 @@ var requirejs, require, define;
     }
 
     /**
-     * Simple function to mix in properties from source into target,
-     * but only if target does not already have a property of the same name.
-     */
+    * Simple function to mix in properties from source into target,
+    * but only if target does not already have a property of the same name.
+    */
     function mixin(target, source, force, deepStringMixin) {
         if (source) {
             eachProp(source, function (value, prop) {
@@ -157,13 +157,13 @@ var requirejs, require, define;
     }
 
     /**
-     * Constructs an error with a pointer to an URL with more information.
-     * @param {String} id the error ID that maps to an ID on a web page.
-     * @param {String} message human readable error.
-     * @param {Error} [err] the original error, if there is one.
-     *
-     * @returns {Error}
-     */
+    * Constructs an error with a pointer to an URL with more information.
+    * @param {String} id the error ID that maps to an ID on a web page.
+    * @param {String} message human readable error.
+    * @param {Error} [err] the original error, if there is one.
+    *
+    * @returns {Error}
+    */
     function makeError(id, msg, err, requireModules) {
         var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id);
         e.requireType = id;
@@ -225,14 +225,14 @@ var requirejs, require, define;
             unnormalizedCounter = 1;
 
         /**
-         * Trims the . and .. from an array of path segments.
-         * It will keep a leading path segment if a .. will become
-         * the first path segment, to help with module name lookups,
-         * which act like paths, but can be remapped. But the end result,
-         * all paths that use this function should look normalized.
-         * NOTE: this method MODIFIES the input array.
-         * @param {Array} ary the array of path segments.
-         */
+        * Trims the . and .. from an array of path segments.
+        * It will keep a leading path segment if a .. will become
+        * the first path segment, to help with module name lookups,
+        * which act like paths, but can be remapped. But the end result,
+        * all paths that use this function should look normalized.
+        * NOTE: this method MODIFIES the input array.
+        * @param {Array} ary the array of path segments.
+        */
         function trimDots(ary) {
             var i, part;
             for (i = 0; i < ary.length; i++) {
@@ -257,15 +257,15 @@ var requirejs, require, define;
         }
 
         /**
-         * Given a relative module name, like ./something, normalize it to
-         * a real name that can be mapped to a path.
-         * @param {String} name the relative name
-         * @param {String} baseName a real name that the name arg is relative
-         * to.
-         * @param {Boolean} applyMap apply the map config to the value. Should
-         * only be done if this normalization is for a dependency ID.
-         * @returns {String} normalized name
-         */
+        * Given a relative module name, like ./something, normalize it to
+        * a real name that can be mapped to a path.
+        * @param {String} name the relative name
+        * @param {String} baseName a real name that the name arg is relative
+        * to.
+        * @param {Boolean} applyMap apply the map config to the value. Should
+        * only be done if this normalization is for a dependency ID.
+        * @returns {String} normalized name
+        */
         function normalize(name, baseName, applyMap) {
             var pkgMain, mapValue, nameParts, i, j, nameSegment, lastIndex,
                 foundMap, foundI, foundStarMap, starI, normalizedBaseParts,
@@ -399,20 +399,20 @@ var requirejs, require, define;
         }
 
         /**
-         * Creates a module mapping that includes plugin prefix, module
-         * name, and path. If parentModuleMap is provided it will
-         * also normalize the name via require.normalize()
-         *
-         * @param {String} name the module name
-         * @param {String} [parentModuleMap] parent module map
-         * for the module name, used to resolve relative names.
-         * @param {Boolean} isNormalized: is the ID already normalized.
-         * This is true if this call is done for a define() module ID.
-         * @param {Boolean} applyMap: apply the map config to the ID.
-         * Should only be true if this map is for a dependency.
-         *
-         * @returns {Object}
-         */
+        * Creates a module mapping that includes plugin prefix, module
+        * name, and path. If parentModuleMap is provided it will
+        * also normalize the name via require.normalize()
+        *
+        * @param {String} name the module name
+        * @param {String} [parentModuleMap] parent module map
+        * for the module name, used to resolve relative names.
+        * @param {Boolean} isNormalized: is the ID already normalized.
+        * This is true if this call is done for a define() module ID.
+        * @param {Boolean} applyMap: apply the map config to the ID.
+        * Should only be true if this map is for a dependency.
+        *
+        * @returns {Object}
+        */
         function makeModuleMap(name, parentModuleMap, isNormalized, applyMap) {
             var url, pluginModule, suffix, nameParts,
                 prefix = null,
@@ -456,8 +456,8 @@ var requirejs, require, define;
                         // loading of a loader plugin. But for now, fixes the
                         // common uses. Details in #1131
                         normalizedName = name.indexOf('!') === -1 ?
-                                         normalize(name, parentName, applyMap) :
-                                         name;
+                                        normalize(name, parentName, applyMap) :
+                                        name;
                     }
                 } else {
                     //A regular module.
@@ -479,8 +479,8 @@ var requirejs, require, define;
             //normalization, stamp it with a unique ID so two matching relative
             //ids that may conflict can be separate.
             suffix = prefix && !pluginModule && !isNormalized ?
-                     '_unnormalized' + (unnormalizedCounter += 1) :
-                     '';
+                    '_unnormalized' + (unnormalizedCounter += 1) :
+                    '';
 
             return {
                 prefix: prefix,
@@ -552,9 +552,9 @@ var requirejs, require, define;
         }
 
         /**
-         * Internal method to transfer globalQueue items to this context's
-         * defQueue.
-         */
+        * Internal method to transfer globalQueue items to this context's
+        * defQueue.
+        */
         function takeGlobalQueue() {
             //Push all the globalDefQueue items into the context's defQueue
             if (globalDefQueue.length) {
@@ -735,8 +735,8 @@ var requirejs, require, define;
             this.depCount = 0;
 
             /* this.exports this.factory
-               this.depMaps = [],
-               this.enabled, this.fetched
+                this.depMaps = [],
+                this.enabled, this.fetched
             */
         };
 
@@ -836,9 +836,9 @@ var requirejs, require, define;
             },
 
             /**
-             * Checks if the module is ready to define itself, and if so,
-             * define it.
-             */
+            * Checks if the module is ready to define itself, and if so,
+            * define it.
+            */
             check: function () {
                 if (!this.enabled || this.enabling) {
                     return;
@@ -974,8 +974,8 @@ var requirejs, require, define;
                         //prefix and name should already be normalized, no need
                         //for applying map config again either.
                         normalizedMap = makeModuleMap(map.prefix + '!' + name,
-                                                      this.map.parentMap,
-                                                      true);
+                                                    this.map.parentMap,
+                                                    true);
                         on(normalizedMap,
                             'defined', bind(this, function (value) {
                                 this.map.normalizedMap = normalizedMap;
@@ -1067,10 +1067,10 @@ var requirejs, require, define;
                             req.exec(text);
                         } catch (e) {
                             return onError(makeError('fromtexteval',
-                                             'fromText eval for ' + id +
+                                            'fromText eval for ' + id +
                                             ' failed: ' + e,
-                                             e,
-                                             [id]));
+                                            e,
+                                            [id]));
                         }
 
                         if (hasInteractive) {
@@ -1117,9 +1117,9 @@ var requirejs, require, define;
                         //Dependency needs to be converted to a depMap
                         //and wired up to this module.
                         depMap = makeModuleMap(depMap,
-                                               (this.map.isDefine ? this.map : this.map.parentMap),
-                                               false,
-                                               !this.skipMap);
+                                                (this.map.isDefine ? this.map : this.map.parentMap),
+                                                false,
+                                                !this.skipMap);
                         this.depMaps[i] = depMap;
 
                         handler = getOwn(handlers, depMap.id);
@@ -1220,11 +1220,11 @@ var requirejs, require, define;
         }
 
         /**
-         * Given an event from a script node, get the requirejs info from it,
-         * and then removes the event listeners on the node.
-         * @param {Event} evt
-         * @returns {Object}
-         */
+        * Given an event from a script node, get the requirejs info from it,
+        * and then removes the event listeners on the node.
+        * @param {Event} evt
+        * @returns {Object}
+        */
         function getScriptData(evt) {
             //Using currentTarget instead of target for Firefox 2.0's sake. Not
             //all old browsers will be supported, but this one was easy enough
@@ -1276,9 +1276,9 @@ var requirejs, require, define;
             onError: onError,
 
             /**
-             * Set a configuration for the context.
-             * @param {Object} cfg config object to integrate.
-             */
+            * Set a configuration for the context.
+            * @param {Object} cfg config object to integrate.
+            */
             configure: function (cfg) {
                 //Make sure the baseUrl ends in a slash.
                 if (cfg.baseUrl) {
@@ -1363,8 +1363,8 @@ var requirejs, require, define;
                         //envs have different conventions: some use a module name,
                         //some use a file name.
                         config.pkgs[name] = pkgObj.name + '/' + (pkgObj.main || 'main')
-                                     .replace(currDirRegExp, '')
-                                     .replace(jsSuffixRegExp, '');
+                                    .replace(currDirRegExp, '')
+                                    .replace(jsSuffixRegExp, '');
                     });
                 }
 
@@ -1471,10 +1471,10 @@ var requirejs, require, define;
                     isBrowser: isBrowser,
 
                     /**
-                     * Converts a module name + .extension into an URL path.
-                     * *Requires* the use of a module name. It does not support using
-                     * plain URLs like nameToUrl.
-                     */
+                    * Converts a module name + .extension into an URL path.
+                    * *Requires* the use of a module name. It does not support using
+                    * plain URLs like nameToUrl.
+                    */
                     toUrl: function (moduleNamePlusExt) {
                         var ext,
                             index = moduleNamePlusExt.lastIndexOf('.'),
@@ -1546,11 +1546,11 @@ var requirejs, require, define;
             },
 
             /**
-             * Called to enable a module if it is still in the registry
-             * awaiting enablement. A second arg, parent, the parent module,
-             * is passed in for context, when this method is overridden by
-             * the optimizer. Not shown here to keep code compact.
-             */
+            * Called to enable a module if it is still in the registry
+            * awaiting enablement. A second arg, parent, the parent module,
+            * is passed in for context, when this method is overridden by
+            * the optimizer. Not shown here to keep code compact.
+            */
             enable: function (depMap) {
                 var mod = getOwn(registry, depMap.id);
                 if (mod) {
@@ -1559,11 +1559,11 @@ var requirejs, require, define;
             },
 
             /**
-             * Internal method used by environment adapters to complete a load event.
-             * A load event could be a script load or just a load pass from a synchronous
-             * load call.
-             * @param {String} moduleName the name of the module to potentially complete.
-             */
+            * Internal method used by environment adapters to complete a load event.
+            * A load event could be a script load or just a load pass from a synchronous
+            * load call.
+            * @param {String} moduleName the name of the module to potentially complete.
+            */
             completeLoad: function (moduleName) {
                 var found, args, mod,
                     shim = getOwn(config.shim, moduleName) || {},
@@ -1601,9 +1601,9 @@ var requirejs, require, define;
                             return;
                         } else {
                             return onError(makeError('nodefine',
-                                             'No define call for ' + moduleName,
-                                             null,
-                                             [moduleName]));
+                                            'No define call for ' + moduleName,
+                                            null,
+                                            [moduleName]));
                         }
                     } else {
                         //A script that does not call define(), so just simulate
@@ -1616,12 +1616,12 @@ var requirejs, require, define;
             },
 
             /**
-             * Converts a module name to a file path. Supports cases where
-             * moduleName may actually be just an URL.
-             * Note that it **does not** call normalize on the moduleName,
-             * it is assumed to have already been normalized. This is an
-             * internal API, not a public one. Use toUrl for the public API.
-             */
+            * Converts a module name to a file path. Supports cases where
+            * moduleName may actually be just an URL.
+            * Note that it **does not** call normalize on the moduleName,
+            * it is assumed to have already been normalized. This is an
+            * internal API, not a public one. Use toUrl for the public API.
+            */
             nameToUrl: function (moduleName, ext, skipExt) {
                 var paths, syms, i, parentModule, url,
                     parentPath, bundleId,
@@ -1676,7 +1676,7 @@ var requirejs, require, define;
                 }
 
                 return config.urlArgs && !/^blob\:/.test(url) ?
-                       url + config.urlArgs(moduleName, url) : url;
+                        url + config.urlArgs(moduleName, url) : url;
             },
 
             //Delegates to req.load. Broken out as a separate function to
@@ -1686,22 +1686,22 @@ var requirejs, require, define;
             },
 
             /**
-             * Executes a module callback function. Broken out as a separate function
-             * solely to allow the build system to sequence the files in the built
-             * layer in the right sequence.
-             *
-             * @private
-             */
+            * Executes a module callback function. Broken out as a separate function
+            * solely to allow the build system to sequence the files in the built
+            * layer in the right sequence.
+            *
+            * @private
+            */
             execCb: function (name, callback, args, exports) {
                 return callback.apply(exports, args);
             },
 
             /**
-             * callback for script loads, used to check status of loading.
-             *
-             * @param {Event} evt the event from the browser for the script
-             * that was loaded.
-             */
+            * callback for script loads, used to check status of loading.
+            *
+            * @param {Event} evt the event from the browser for the script
+            * that was loaded.
+            */
             onScriptLoad: function (evt) {
                 //Using currentTarget instead of target for Firefox 2.0's sake. Not
                 //all old browsers will be supported, but this one was easy enough
@@ -1719,8 +1719,8 @@ var requirejs, require, define;
             },
 
             /**
-             * Callback for script errors.
-             */
+            * Callback for script errors.
+            */
             onScriptError: function (evt) {
                 var data = getScriptData(evt);
                 if (!hasPathFallback(data.id)) {
@@ -1736,9 +1736,9 @@ var requirejs, require, define;
                         }
                     });
                     return onError(makeError('scripterror', 'Script error for "' + data.id +
-                                             (parents.length ?
-                                             '", needed by: ' + parents.join(', ') :
-                                             '"'), evt, [data.id]));
+                                            (parents.length ?
+                                            '", needed by: ' + parents.join(', ') :
+                                            '"'), evt, [data.id]));
                 }
             }
         };
@@ -1748,19 +1748,19 @@ var requirejs, require, define;
     }
 
     /**
-     * Main entry point.
-     *
-     * If the only argument to require is a string, then the module that
-     * is represented by that string is fetched for the appropriate context.
-     *
-     * If the first argument is an array, then it will be treated as an array
-     * of dependency string names to fetch. An optional function callback can
-     * be specified to execute when all of those dependencies are available.
-     *
-     * Make a local req variable to help Caja compliance (it assumes things
-     * on a require that are not standardized), and to give a short
-     * name for minification/local scope use.
-     */
+    * Main entry point.
+    *
+    * If the only argument to require is a string, then the module that
+    * is represented by that string is fetched for the appropriate context.
+    *
+    * If the first argument is an array, then it will be treated as an array
+    * of dependency string names to fetch. An optional function callback can
+    * be specified to execute when all of those dependencies are available.
+    *
+    * Make a local req variable to help Caja compliance (it assumes things
+    * on a require that are not standardized), and to give a short
+    * name for minification/local scope use.
+    */
     req = requirejs = function (deps, callback, errback, optional) {
 
         //Find the right context, use default
@@ -1798,26 +1798,26 @@ var requirejs, require, define;
     };
 
     /**
-     * Support require.config() to make it easier to cooperate with other
-     * AMD loaders on globally agreed names.
-     */
+    * Support require.config() to make it easier to cooperate with other
+    * AMD loaders on globally agreed names.
+    */
     req.config = function (config) {
         return req(config);
     };
 
     /**
-     * Execute something after the current tick
-     * of the event loop. Override for other envs
-     * that have a better solution than setTimeout.
-     * @param  {Function} fn function to execute later.
-     */
+    * Execute something after the current tick
+    * of the event loop. Override for other envs
+    * that have a better solution than setTimeout.
+    * @param  {Function} fn function to execute later.
+    */
     req.nextTick = typeof setTimeout !== 'undefined' ? function (fn) {
         setTimeout(fn, 4);
     } : function (fn) { fn(); };
 
     /**
-     * Export require as a global, but only if it does not already exist.
-     */
+    * Export require as a global, but only if it does not already exist.
+    */
     if (!require) {
         require = req;
     }
@@ -1863,15 +1863,15 @@ var requirejs, require, define;
     }
 
     /**
-     * Any errors that require explicitly generates will be passed to this
-     * function. Intercept/override it if you want custom error handling.
-     * @param {Error} err the error object.
-     */
+    * Any errors that require explicitly generates will be passed to this
+    * function. Intercept/override it if you want custom error handling.
+    * @param {Error} err the error object.
+    */
     req.onError = defaultOnError;
 
     /**
-     * Creates the node for the load command. Only used in browser envs.
-     */
+    * Creates the node for the load command. Only used in browser envs.
+    */
     req.createNode = function (config, moduleName, url) {
         var node = config.xhtml ?
                 document.createElementNS('http://www.w3.org/1999/xhtml', 'html:script') :
@@ -1883,14 +1883,14 @@ var requirejs, require, define;
     };
 
     /**
-     * Does the request to load a module for the browser case.
-     * Make this a separate function to allow other environments
-     * to override it.
-     *
-     * @param {Object} context the require context to find state.
-     * @param {String} moduleName the name of the module.
-     * @param {Object} url the URL to the module.
-     */
+    * Does the request to load a module for the browser case.
+    * Make this a separate function to allow other environments
+    * to override it.
+    *
+    * @param {Object} context the require context to find state.
+    * @param {String} moduleName the name of the module.
+    * @param {Object} url the URL to the module.
+    */
     req.load = function (context, moduleName, url) {
         var config = (context && context.config) || {},
             node;
@@ -2052,12 +2052,12 @@ var requirejs, require, define;
     }
 
     /**
-     * The function that handles definitions of modules. Differs from
-     * require() in that a string for the module should be the first argument,
-     * and the function to execute after dependencies are loaded should
-     * return a value to define the module corresponding to the first argument's
-     * name.
-     */
+    * The function that handles definitions of modules. Differs from
+    * require() in that a string for the module should be the first argument,
+    * and the function to execute after dependencies are loaded should
+    * return a value to define the module corresponding to the first argument's
+    * name.
+    */
     define = function (name, deps, callback) {
         var node, context;
 
@@ -2130,11 +2130,11 @@ var requirejs, require, define;
     };
 
     /**
-     * Executes the text. Normally just uses eval, but can be modified
-     * to use a better, environment-specific call. Only used for transpiling
-     * loader plugins, not for plain JS modules.
-     * @param {String} text the text to execute/evaluate.
-     */
+    * Executes the text. Normally just uses eval, but can be modified
+    * to use a better, environment-specific call. Only used for transpiling
+    * loader plugins, not for plain JS modules.
+    * @param {String} text the text to execute/evaluate.
+    */
     req.exec = function (text) {
         /*jslint evil: true */
         return eval(text);

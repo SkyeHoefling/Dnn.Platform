@@ -14,7 +14,7 @@ export default class RadioButtonBlock extends Component {
                 label={props.label} style={{width: "auto"}}/>
             {props.isGlobal && <GlobalIcon /> }
             <RadioButtons
-                options={props.options}                
+                options={props.options}
                 value={props.value}
                 onChange={props.onChange} />
         </InputGroup>;

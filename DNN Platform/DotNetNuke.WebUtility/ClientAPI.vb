@@ -3,18 +3,18 @@
 ' Copyright (c) 2002-2018
 ' by DotNetNuke Corporation
 '
-' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-' documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-' the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+' Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+' documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+' the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 ' to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 '
-' The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+' The above copyright notice and this permission notice shall be included in all copies or substantial portions
 ' of the Software.
 '
-' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-' TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-' THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-' CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+' TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+' THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+' CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ' DEALINGS IN THE SOFTWARE.
 '
 
@@ -406,11 +406,11 @@ Namespace DotNetNuke.UI.Utilities
                             'First check whether we have checked this browser before
                             If objCaps.FunctionalityDictionary.ContainsKey(strUserAgent) = False Then
                                 Dim strBrowser As String = objRequest.Browser.Browser
-                                'if no version present, Framework dies, hence need for try 
+                                'if no version present, Framework dies, hence need for try
                                 Dim dblVersion As Double = CDbl(objRequest.Browser.MajorVersion + objRequest.Browser.MinorVersion)
                                 Dim iBitValue As Integer = 0
                                 Dim objFuncInfo As FunctionalityInfo = Nothing
-                                'loop through all functionalities for this UserAgent and determine the bitvalue 
+                                'loop through all functionalities for this UserAgent and determine the bitvalue
                                 For Each eFunc As ClientFunctionality In System.Enum.GetValues(GetType(ClientFunctionality))
                                     objFuncInfo = objCaps.Functionality(eFunc)
                                     If Not objFuncInfo Is Nothing AndAlso objFuncInfo.HasMatch(strUserAgent, strBrowser, dblVersion) Then
@@ -537,7 +537,7 @@ Namespace DotNetNuke.UI.Utilities
 
         ''' -----------------------------------------------------------------------------
         ''' <summary>
-        ''' Escapes string to be safely used in client side javascript.  
+        ''' Escapes string to be safely used in client side javascript.
         ''' </summary>
         ''' <param name="strString">String to escape</param>
         ''' <returns>Escaped string</returns>
@@ -1012,7 +1012,7 @@ Namespace DotNetNuke.UI.Utilities
             End If
             Dim methodParams As ParameterInfo() = mi.GetParameters
 
-            'only allow methods with attribute to be called 
+            'only allow methods with attribute to be called
             Dim methAttr As ControlMethodAttribute = DirectCast(Attribute.GetCustomAttribute(mi, GetType(ControlMethodAttribute)), ControlMethodAttribute)
             If methAttr Is Nothing OrElse args.Count <> methodParams.Length Then
                 Throw New Exception(String.Format("Class: {0} does not have the method: {1}", controlType.FullName, methodName))

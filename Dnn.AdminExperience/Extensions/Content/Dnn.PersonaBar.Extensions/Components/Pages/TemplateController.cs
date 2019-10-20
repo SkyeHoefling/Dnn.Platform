@@ -56,7 +56,7 @@ namespace Dnn.PersonaBar.Pages.Components
                 //Serialize tabs
                 var nodeTabs = nodePortal.AppendChild(xmlTemplate.CreateElement("tabs"));
                 SerializeTab(template, xmlTemplate, nodeTabs);
-           
+
                 //add file to Files table
                 using (var fileContent = new MemoryStream(Encoding.UTF8.GetBytes(xmlTemplate.OuterXml)))
                 {
@@ -104,7 +104,7 @@ namespace Dnn.PersonaBar.Pages.Components
         {
             var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
             var templateFolder = FolderManager.Instance.GetFolder(portalSettings.PortalId, TemplatesFolderPath);
-           
+
             return LoadTemplates(portalSettings.PortalId, templateFolder);
         }
 

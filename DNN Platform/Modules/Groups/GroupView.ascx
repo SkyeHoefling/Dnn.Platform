@@ -11,7 +11,7 @@
 <script type="text/javascript">
 
     jQuery(document).ready(function ($) {
-        
+
         $('#JoinGroup-<%=GroupId %>').click(function (event) {
             event.preventDefault();
             var groupId = $(this).attr('groupId');
@@ -31,11 +31,11 @@
             data.roleId = id;
             groupPost('LeaveGroup', data, groupLeaveComplete, id);
         }
-        
+
         function groupLeaveComplete(result, id) {
             window.location.href = window.location.href;
         }
-        
+
 
         function groupJoin(id, groupViewTabId) {
             var data = {};
@@ -43,7 +43,7 @@
             data.groupViewTabId = groupViewTabId;
             groupPost('JoinGroup', data, groupJoinComplete, id);
         }
-        
+
         function groupJoinComplete(result, id) {
             if (result.URL != '' && typeof (result.URL) != 'undefined') {
                 window.location.href = result.URL;
@@ -55,7 +55,7 @@
                 .click(function (event) { event.preventDefault });
             }
         }
-        
+
         function groupPost(method, data, callback, groupId) {
             var sf = $.ServicesFramework(<%=ModuleId %>);
 
@@ -74,9 +74,9 @@
                 }
             });
         }
-        
+
     });
-    
+
 </script>
 
 <%} %>

@@ -5,7 +5,7 @@
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <div class="dnnForm dnnViewSource dnnClear">
     <fieldset>
-		<div class="dnnFormItem">
+        <div class="dnnFormItem">
             <dnn:Label id="plFile" runat="Server" />
             <%--<asp:DropDownList ID="cboFile" runat="server" AutoPostBack="true" />--%>
             <dnn:DnnComboBox ID="cboFile" runat="server" AutoPostBack="true" />

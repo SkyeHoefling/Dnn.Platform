@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -76,7 +76,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                 return;
             }
 
-            //URL validation 
+            //URL validation
             //check for ".." escape characters commonly used by hackers to traverse the folder tree on the server
             //the application should always use the exact relative location of the resource it is requesting
             var strURL = request.Url.AbsolutePath;
@@ -194,7 +194,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                         if (String.IsNullOrEmpty(portalAlias))
                         {
                             //if the TabId is not for the correct domain
-                            //see if the correct domain can be found and redirect it 
+                            //see if the correct domain can be found and redirect it
                             portalAliasInfo = PortalAliasController.Instance.GetPortalAlias(domainName);
                             if (portalAliasInfo != null && !request.Url.LocalPath.ToLowerInvariant().EndsWith("/linkclick.aspx"))
                             {
@@ -272,10 +272,10 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                 app.Context.Items.Add("HostSettingsDictionary", HostController.Instance.GetSettingsDictionary());
 
 
-                if (portalSettings.PortalAliasMappingMode == PortalSettings.PortalAliasMapping.Redirect 
+                if (portalSettings.PortalAliasMappingMode == PortalSettings.PortalAliasMapping.Redirect
                     && portalAliasInfo != null && !portalAliasInfo.IsPrimary
                     && !string.IsNullOrWhiteSpace(portalSettings.DefaultPortalAlias) // don't redirect if no primary alias is defined
-                ) 
+                )
                 {
                     //Permanently Redirect
                     response.StatusCode = 301;
@@ -331,7 +331,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                     //if SSL is enforced
                     if (portalSettings.SSLEnforced)
                     {
-                        //if page is not secure and connection is secure 
+                        //if page is not secure and connection is secure
                         if ((!portalSettings.ActiveTab.IsSecure && request.IsSecureConnection))
                         {
                             //check if connection has already been forced to secure orelse ssloffload is disabled
@@ -355,12 +355,12 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                             //when switching to an unsecure page, use a clientside redirector to avoid the browser security warning
                         {
                             response.Clear();
-                            //add a refresh header to the response 
+                            //add a refresh header to the response
                             response.AddHeader("Refresh", "0;URL=" + strURL);
                             //add the clientside javascript redirection script
                             response.Write("<html><head><title></title>");
                             response.Write("<!-- <script language=\"javascript\">window.location.replace(\"" + strURL +
-                                           "\")</script> -->");
+                                            "\")</script> -->");
                             response.Write("</head><body></body></html>");
                             //send the response
                             response.End();
@@ -450,17 +450,17 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                 requestedPath = requestedPath.Replace(app.Request.Url.Query, "");
             }
 
-            //get url rewriting rules 
+            //get url rewriting rules
             RewriterRuleCollection rules = RewriterConfiguration.GetConfig().Rules;
 
             //iterate through list of rules
             int matchIndex = -1;
             for (int ruleIndex = 0; ruleIndex <= rules.Count - 1; ruleIndex++)
             {
-                //check for the existence of the LookFor value 
+                //check for the existence of the LookFor value
                 string pattern = "^" +
-                                 RewriterUtils.ResolveUrl(app.Context.Request.ApplicationPath, rules[ruleIndex].LookFor) +
-                                 "$";
+                                RewriterUtils.ResolveUrl(app.Context.Request.ApplicationPath, rules[ruleIndex].LookFor) +
+                                "$";
                 Match objMatch = Regex.Match(requestedPath, pattern, RegexOptions.IgnoreCase);
 
                 //if there is a match
@@ -468,7 +468,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                 {
                     //create a new URL using the SendTo regex value
                     sendTo = RewriterUtils.ResolveUrl(app.Context.Request.ApplicationPath,
-                                                      Regex.Replace(requestedPath, pattern, rules[ruleIndex].SendTo,
+                                                    Regex.Replace(requestedPath, pattern, rules[ruleIndex].SendTo,
                                                                     RegexOptions.IgnoreCase));
 
                     string parameters = objMatch.Groups[2].Value;
@@ -481,7 +481,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                         //icreate a well formed querystring based on the array of parameters
                         for (int parameterIndex = 0; parameterIndex < splitParameters.Length; parameterIndex++)
                         {
-                            //ignore the page name 
+                            //ignore the page name
                             if (
                                 splitParameters[parameterIndex].IndexOf(".aspx",
                                                                         StringComparison.InvariantCultureIgnoreCase) ==
@@ -491,12 +491,12 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                                 string parameterName = splitParameters[parameterIndex].Trim();
                                 if (parameterName.Length > 0)
                                 {
-                                    //add parameter to SendTo if it does not exist already  
+                                    //add parameter to SendTo if it does not exist already
                                     if (
                                         sendTo.IndexOf("?" + parameterName + "=",
-                                                       StringComparison.InvariantCultureIgnoreCase) == -1 &&
+                                                        StringComparison.InvariantCultureIgnoreCase) == -1 &&
                                         sendTo.IndexOf("&" + parameterName + "=",
-                                                       StringComparison.InvariantCultureIgnoreCase) == -1)
+                                                        StringComparison.InvariantCultureIgnoreCase) == -1)
                                     {
                                         //get parameter delimiter
                                         string parameterDelimiter = sendTo.IndexOf("?", StringComparison.Ordinal) != -1 ? "&" : "?";
@@ -544,8 +544,8 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                     {
                         //add parameter to SendTo value
                         sendTo = sendTo.IndexOf("?", StringComparison.Ordinal) != -1
-                                     ? sendTo + "&" + parameters[parameterIndex]
-                                     : sendTo + "?" + parameters[parameterIndex];
+                                    ? sendTo + "&" + parameters[parameterIndex]
+                                    : sendTo + "?" + parameters[parameterIndex];
                     }
                 }
             }
@@ -570,7 +570,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                 string url;
                 if (Globals.UsePortNumber() &&
                     ((app.Request.Url.Port != 80 && !app.Request.IsSecureConnection) ||
-                     (app.Request.Url.Port != 443 && app.Request.IsSecureConnection)))
+                    (app.Request.Url.Port != 443 && app.Request.IsSecureConnection)))
                 {
                     url = app.Request.Url.Host + ":" + app.Request.Url.Port + app.Request.Url.LocalPath;
                 }
@@ -584,7 +584,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                     if (objPortalAlias != null)
                     {
                         int portalID = objPortalAlias.PortalID;
-                        //Identify Tab Name 
+                        //Identify Tab Name
                         string tabPath = url;
                         if (tabPath.StartsWith(myAlias))
                         {
@@ -623,14 +623,14 @@ namespace DotNetNuke.HttpModules.UrlRewrite
 
                         // Check to see if the tab exists (if localization is enable, check for the specified culture)
                         int tabID = TabController.GetTabByTabPath(portalID,
-                                                                  tabPath.Replace("/", "//").Replace(".aspx", ""),
-                                                                  cultureCode);
+                                                                tabPath.Replace("/", "//").Replace(".aspx", ""),
+                                                                cultureCode);
 
                         // Check to see if neutral culture tab exists
                         if ((tabID == Null.NullInteger && cultureCode.Length > 0))
                         {
                             tabID = TabController.GetTabByTabPath(portalID,
-                                                                  tabPath.Replace("/", "//").Replace(".aspx", ""), "");
+                                                                tabPath.Replace("/", "//").Replace(".aspx", ""), "");
                         }
                         //End of patch
 
@@ -670,14 +670,14 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                                 if (!string.IsNullOrEmpty(requestQuery))
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.LoginTabId + "&" + requestQuery);
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.LoginTabId + "&" + requestQuery);
                                 }
                                 else
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.LoginTabId);
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.LoginTabId);
                                 }
                             }
                             else
@@ -685,15 +685,15 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                                 if (!string.IsNullOrEmpty(requestQuery))
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.HomeTabId + "&portalid=" + portalID + "&ctl=login&" +
-                                                             requestQuery);
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.HomeTabId + "&portalid=" + portalID + "&ctl=login&" +
+                                                            requestQuery);
                                 }
                                 else
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.HomeTabId + "&portalid=" + portalID + "&ctl=login");
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.HomeTabId + "&portalid=" + portalID + "&ctl=login");
                                 }
                             }
                             return;
@@ -705,15 +705,15 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                                 if (!string.IsNullOrEmpty(requestQuery))
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.RegisterTabId + "&portalid=" + portalID + "&" +
-                                                             requestQuery);
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.RegisterTabId + "&portalid=" + portalID + "&" +
+                                                            requestQuery);
                                 }
                                 else
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.RegisterTabId + "&portalid=" + portalID);
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.RegisterTabId + "&portalid=" + portalID);
                                 }
                             }
                             else
@@ -721,16 +721,16 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                                 if (!string.IsNullOrEmpty(requestQuery))
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.HomeTabId + "&portalid=" + portalID +
-                                                             "&ctl=Register&" + requestQuery);
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.HomeTabId + "&portalid=" + portalID +
+                                                            "&ctl=Register&" + requestQuery);
                                 }
                                 else
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" +
-                                                             portal.HomeTabId + "&portalid=" + portalID +
-                                                             "&ctl=Register");
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" +
+                                                            portal.HomeTabId + "&portalid=" + portalID +
+                                                            "&ctl=Register");
                                 }
                             }
                             return;
@@ -740,14 +740,14 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                             if (!string.IsNullOrEmpty(requestQuery))
                             {
                                 RewriterUtils.RewriteUrl(app.Context,
-                                                         "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
-                                                         "&portalid=" + portalID + "&ctl=Terms&" + requestQuery);
+                                                        "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
+                                                        "&portalid=" + portalID + "&ctl=Terms&" + requestQuery);
                             }
                             else
                             {
                                 RewriterUtils.RewriteUrl(app.Context,
-                                                         "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
-                                                         "&portalid=" + portalID + "&ctl=Terms");
+                                                        "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
+                                                        "&portalid=" + portalID + "&ctl=Terms");
                             }
                             return;
                         }
@@ -756,14 +756,14 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                             if (!string.IsNullOrEmpty(requestQuery))
                             {
                                 RewriterUtils.RewriteUrl(app.Context,
-                                                         "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
-                                                         "&portalid=" + portalID + "&ctl=Privacy&" + requestQuery);
+                                                        "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
+                                                        "&portalid=" + portalID + "&ctl=Privacy&" + requestQuery);
                             }
                             else
                             {
                                 RewriterUtils.RewriteUrl(app.Context,
-                                                         "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
-                                                         "&portalid=" + portalID + "&ctl=Privacy");
+                                                        "~/" + Globals.glbDefaultPage + "?TabID=" + portal.HomeTabId +
+                                                        "&portalid=" + portalID + "&ctl=Privacy");
                             }
                             return;
                         }
@@ -777,13 +777,13 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                                 if ((!String.IsNullOrEmpty(app.Request.Url.Query)))
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" + kvp.Value.TabID +
-                                                             "&" + app.Request.Url.Query.TrimStart('?'));
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" + kvp.Value.TabID +
+                                                            "&" + app.Request.Url.Query.TrimStart('?'));
                                 }
                                 else
                                 {
                                     RewriterUtils.RewriteUrl(app.Context,
-                                                             "~/" + Globals.glbDefaultPage + "?TabID=" + kvp.Value.TabID);
+                                                            "~/" + Globals.glbDefaultPage + "?TabID=" + kvp.Value.TabID);
                                 }
                                 return;
                             }

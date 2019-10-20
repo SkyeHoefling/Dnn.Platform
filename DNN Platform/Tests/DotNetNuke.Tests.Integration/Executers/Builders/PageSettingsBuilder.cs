@@ -78,7 +78,7 @@ namespace DotNetNuke.Tests.Integration.Executers.Builders
             Set(x => x.Description, description);
             return this;
         }
-        
+
         public PageSettingsBuilder WithUrl(string url)
         {
             Set(x => x.Url, url);

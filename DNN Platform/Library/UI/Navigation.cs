@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -97,7 +97,7 @@ namespace DotNetNuke.UI
                 }
                 else
                 {
-                    //if action is visible and user has permission 
+                    //if action is visible and user has permission
                     if (action.Visible &&
                         (action.Secure != SecurityAccessLevel.Anonymous ||
                             (!ModuleHost.IsViewMode(actionControl.ModuleControl.ModuleContext.Configuration, PortalSettings.Current))
@@ -319,7 +319,7 @@ namespace DotNetNuke.UI
         }
 
         private static void ProcessTab(DNNNode objRootNode, TabInfo objTab, Hashtable objTabLookup, Hashtable objBreadCrumbs, int intLastBreadCrumbId, ToolTipSource eToolTips, int intStartTabId,
-                                       int intDepth, int intNavNodeOptions, IDictionary<string, DNNNode> nodesLookup)
+                                        int intDepth, int intNavNodeOptions, IDictionary<string, DNNNode> nodesLookup)
         {
             PortalSettings objPortalSettings = PortalController.Instance.GetCurrentPortalSettings();
             bool showHidden = (intNavNodeOptions & (int)NavNodeOptions.IncludeHiddenNodes) == (int)NavNodeOptions.IncludeHiddenNodes;
@@ -384,7 +384,7 @@ namespace DotNetNuke.UI
                     }
                     else if ((intNavNodeOptions & (int) NavNodeOptions.IncludeSelf) == 0 && objTab.ParentId == intStartTabId)
                     {
-                        //if not including self and parent is the start id then add 
+                        //if not including self and parent is the start id then add
                         AddNode(objTab, objParentNodes, objBreadCrumbs, objPortalSettings, eToolTips, nodesLookup);
                     }
                 }
@@ -406,7 +406,7 @@ namespace DotNetNuke.UI
             return ((tab.IsVisible || showHidden) && tab.HasAVisibleVersion && !tab.IsDeleted &&
                     (!tab.DisableLink || showDisabled) &&
                     (((tab.StartDate < DateTime.Now || tab.StartDate == Null.NullDate) &&
-                      (tab.EndDate > DateTime.Now || tab.EndDate == Null.NullDate)) || isAdminMode) &&
+                    (tab.EndDate > DateTime.Now || tab.EndDate == Null.NullDate)) || isAdminMode) &&
                     TabPermissionController.CanNavigateToPage(tab));
         }
 
@@ -451,7 +451,7 @@ namespace DotNetNuke.UI
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// This function provides a central location to obtain a generic node collection of the actions associated 
+        /// This function provides a central location to obtain a generic node collection of the actions associated
         /// to a module based off of the current user's context
         /// </summary>
         /// <param name="objActionRoot">Root module action</param>
@@ -486,7 +486,7 @@ namespace DotNetNuke.UI
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// This function provides a central location to obtain a generic node collection of the actions associated 
+        /// This function provides a central location to obtain a generic node collection of the actions associated
         /// to a module based off of the current user's context
         /// </summary>
         /// <param name="objActionRoot">Root module action</param>

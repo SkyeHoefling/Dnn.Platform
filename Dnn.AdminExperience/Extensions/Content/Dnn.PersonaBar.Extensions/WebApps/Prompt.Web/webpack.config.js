@@ -51,17 +51,17 @@ module.exports = {
                     loader: "less-loader"   // compiles Less to CSS
                 }]
             },
-            { 
+            {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: { 
+                use: {
                     loader: "babel-loader",
                     options: {
                         presets: ["@babel/preset-env","@babel/preset-react"]
                     }
                 }
             },
-            { 
+            {
                 test: /\.(ttf|woff)$/,
                 use: {
                     loader: "url-loader?limit=8192"

@@ -17,7 +17,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns HTML markup for each property in the object that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// The HTML markup for each property in the object that is represented by the expression.
         /// </returns>
@@ -30,7 +30,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns HTML markup for each property in the object that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// The HTML markup for each property.
         /// </returns>

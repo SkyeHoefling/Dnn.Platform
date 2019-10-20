@@ -8,18 +8,18 @@
             <dnn:Label id="scriptsLabel" runat="Server" controlname="scriptList" />
             <asp:DropDownList ID="scriptList" runat="server" AutoPostBack="true" />
         </div>
-		<div class="dnnFormItem razorHostModSource"><asp:Label ID="lblSourceFile" runat="server" /></div>
+        <div class="dnnFormItem razorHostModSource"><asp:Label ID="lblSourceFile" runat="server" /></div>
         <div class="dnnFormItem razorHostModSource"><asp:Label ID="lblModuleControl" runat="server" /></div>
         <div class="dnnFormItem">
             <dnn:label id="plFolder" controlname="txtFolder" runat="server" />
             <asp:TextBox ID="txtFolder" runat="server" />
-            <asp:RequiredFieldValidator ID="valFolder" runat="server" resourceKey="valFolder" ControlToValidate="txtFolder" 
+            <asp:RequiredFieldValidator ID="valFolder" runat="server" resourceKey="valFolder" ControlToValidate="txtFolder"
                 CssClass="dnnFormError" EnableClientScript="true" Display="Dynamic" />
         </div>
         <div class="dnnFormItem">
             <dnn:label id="plName" controlname="txtName" runat="server" />
             <asp:TextBox ID="txtName" runat="server" />
-            <asp:RequiredFieldValidator ID="valName" runat="server" resourceKey="valName" ControlToValidate="txtName" 
+            <asp:RequiredFieldValidator ID="valName" runat="server" resourceKey="valName" ControlToValidate="txtName"
             CssClass="dnnFormError" EnableClientScript="true" Display="Dynamic" />
         </div>
         <div class="dnnFormItem">

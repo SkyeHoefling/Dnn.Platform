@@ -37,12 +37,12 @@
             if (next.hasClass('dnnFormRequired'))
                 $(this).find('span').addClass('dnnFormRequired');
         });
-		
-		// SOCIAL-2069: fix for WP8
-		if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-			$(window.parent).resize(function () {				
-				$('.dnnFormItem .dnnFormMessage.dnnFormError').hide();
-			});
-		}		
+
+        // SOCIAL-2069: fix for WP8
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+            $(window.parent).resize(function () {
+                $('.dnnFormItem .dnnFormMessage.dnnFormError').hide();
+            });
+        }
     });
 </script>

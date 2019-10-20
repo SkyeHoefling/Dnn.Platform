@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -45,47 +45,47 @@ namespace DotNetNuke.Services.Sitemap
 
         private const string SITEMAP_VERSION = "0.9";
         private readonly PortalSettings PortalSettings;
-		private string _cacheFileName;
-		private string _cacheIndexFileNameFormat;
+        private string _cacheFileName;
+        private string _cacheIndexFileNameFormat;
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-	    public string CacheFileName
-	    {
-		    get
-		    {
-			    if (string.IsNullOrEmpty(_cacheFileName))
-			    {
+        public string CacheFileName
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_cacheFileName))
+                {
                     var currentCulture = PortalSettings.CultureCode?.ToLowerInvariant();
                     if (string.IsNullOrEmpty(currentCulture))
                     {
                         currentCulture = Localization.Localization.GetPageLocale(PortalSettings).Name.ToLowerInvariant();
                     }
 
-					_cacheFileName = string.Format("sitemap" + ".{0}.xml", currentCulture);   
-			    }
+                    _cacheFileName = string.Format("sitemap" + ".{0}.xml", currentCulture);
+                }
 
-			    return _cacheFileName;
-		    }
-	    }
+                return _cacheFileName;
+            }
+        }
 
-		public string CacheIndexFileNameFormat
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(_cacheIndexFileNameFormat))
-				{
-					var currentCulture = Localization.Localization.GetPageLocale(PortalSettings).Name.ToLowerInvariant();
-					_cacheIndexFileNameFormat = string.Format("sitemap_{{0}}" + ".{0}.xml", currentCulture);
-				}
+        public string CacheIndexFileNameFormat
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_cacheIndexFileNameFormat))
+                {
+                    var currentCulture = Localization.Localization.GetPageLocale(PortalSettings).Name.ToLowerInvariant();
+                    _cacheIndexFileNameFormat = string.Format("sitemap_{{0}}" + ".{0}.xml", currentCulture);
+                }
 
-				return _cacheIndexFileNameFormat;
-			}
-		}
+                return _cacheIndexFileNameFormat;
+            }
+        }
 
-		#endregion
+        #endregion
 
         /// <summary>
         ///   Creates an instance of the sitemap builder class
@@ -111,15 +111,15 @@ namespace DotNetNuke.Services.Sitemap
         {
             int cacheDays = Int32.Parse(PortalController.GetPortalSetting("SitemapCacheDays", PortalSettings.PortalId, "1"));
             bool cached = cacheDays > 0;
-			  
+
             if (cached && CacheIsValid())
             {
-				WriteSitemapFileToOutput(CacheFileName, output);
+                WriteSitemapFileToOutput(CacheFileName, output);
                 return;
             }
 
             var allUrls = new List<SitemapUrl>();
-            
+
 
             // excluded urls by priority
             float excludePriority = 0;
@@ -214,7 +214,7 @@ namespace DotNetNuke.Services.Sitemap
 
             if (cached)
             {
-				WriteSitemapFileToOutput(CacheFileName, output);
+                WriteSitemapFileToOutput(CacheFileName, output);
             }
         }
 
@@ -228,7 +228,7 @@ namespace DotNetNuke.Services.Sitemap
         /// </remarks>
         public void GetSitemapIndexFile(string index, TextWriter output)
         {
-			var currentCulture = Localization.Localization.GetPageLocale(PortalSettings).Name.ToLowerInvariant();
+            var currentCulture = Localization.Localization.GetPageLocale(PortalSettings).Name.ToLowerInvariant();
             WriteSitemapFileToOutput(string.Format("sitemap_{0}.{1}.xml", index, currentCulture), output);
         }
 
@@ -240,7 +240,7 @@ namespace DotNetNuke.Services.Sitemap
         /// <param name = "index">For sitemapindex files the number of the file being generated, 0 otherwise</param>
         /// <param name = "allUrls">The list of urls to be included in the file</param>
         /// <remarks>
-        ///   If the output should be cached it will generate a file under the portal directory (portals\[portalid]\sitemaps\) with 
+        ///   If the output should be cached it will generate a file under the portal directory (portals\[portalid]\sitemaps\) with
         ///   the result of the generation. If the file is part of a sitemap, <paramref name = "index">index</paramref> will be appended to the
         ///   filename cached on disk ("sitemap_1.xml")
         /// </remarks>
@@ -256,7 +256,7 @@ namespace DotNetNuke.Services.Sitemap
                     {
                         Directory.CreateDirectory(PortalSettings.HomeSystemDirectoryMapPath + "Sitemap");
                     }
-                    var cachedFile = (index > 0) ? string.Format(CacheIndexFileNameFormat, index) : CacheFileName;                
+                    var cachedFile = (index > 0) ? string.Format(CacheIndexFileNameFormat, index) : CacheFileName;
                     sitemapOutput = new StreamWriter(PortalSettings.HomeSystemDirectoryMapPath + "Sitemap\\" + cachedFile, false, Encoding.UTF8);
                 }
 

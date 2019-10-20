@@ -15,7 +15,7 @@ class GridRow extends Component {
 
     componentDidMount() {
         this.columnHeight = this.node.offsetHeight;
-    }   
+    }
 
     getHeaderColumnText() {
         const {props} = this;
@@ -162,7 +162,7 @@ class GridRow extends Component {
         const {props} = this;
         const {roleColumnWidth, columnWidth, actionsWidth} = props;
         let self = this;
-       
+
         return (
             <GridCell className="grid-row" ref={node => this.node = node}>
                 <GridCell columnSize={roleColumnWidth}><span title={this.getHeaderColumnText() }>{this.getHeaderColumnText() }</span></GridCell>
@@ -181,7 +181,7 @@ class GridRow extends Component {
                     }
 
                     return (
-                        
+
                         <GridCell style={{"height":self.columnHeight+"px"}} columnSize={columnWidth} key={def.permissionId} >
                             <StatusSwitch permission={permission} status={status} onChange={self.onStatusChanged.bind(self, def) } />
                         </GridCell>

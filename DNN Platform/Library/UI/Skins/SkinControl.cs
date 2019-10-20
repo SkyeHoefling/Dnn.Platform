@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -39,8 +39,8 @@ namespace DotNetNuke.UI.Skins
 {
     public class SkinControl : UserControlBase
     {
-		#region "Private Members"	
-		
+        #region "Private Members"
+
         private string _DefaultKey = "System";
         private string _SkinRoot;
         private string _SkinSrc;
@@ -51,10 +51,10 @@ namespace DotNetNuke.UI.Skins
         protected CommandButton cmdPreview;
         protected RadioButton optHost;
         protected RadioButton optSite;
-		
-		#endregion
 
-		#region "Public Properties"
+        #endregion
+
+        #region "Public Properties"
 
         public string DefaultKey
         {
@@ -131,10 +131,10 @@ namespace DotNetNuke.UI.Skins
                 _localResourceFile = value;
             }
         }
-		
-		#endregion
 
-		#region "Private Methods"
+        #endregion
+
+        #region "Private Methods"
 
         private void LoadSkins()
         {
@@ -171,16 +171,16 @@ namespace DotNetNuke.UI.Skins
                 }
             }
         }
-		
-		#endregion
 
-		#region "Event Handlers"
+        #endregion
+
+        #region "Event Handlers"
 
         /// <summary>
-		/// The Page_Load server event handler on this page is used
+        /// The Page_Load server event handler on this page is used
         /// to populate the role information for the page
-		/// </summary>
-		protected override void OnLoad(EventArgs e)
+        /// </summary>
+        protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
@@ -194,7 +194,7 @@ namespace DotNetNuke.UI.Skins
 
             try
             {
-				if (Request.QueryString["pid"] != null && (Globals.IsHostTab(PortalSettings.ActiveTab.TabID) || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
+                if (Request.QueryString["pid"] != null && (Globals.IsHostTab(PortalSettings.ActiveTab.TabID) || UserController.Instance.GetCurrentUserInfo().IsSuperUser))
                 {
                     _objPortal = PortalController.Instance.GetPortal(Int32.Parse(Request.QueryString["pid"]));
                 }
@@ -204,18 +204,18 @@ namespace DotNetNuke.UI.Skins
                 }
                 if (!Page.IsPostBack)
                 {
-					//save persistent values
+                    //save persistent values
                     ViewState["SkinControlWidth"] = _Width;
                     ViewState["SkinRoot"] = _SkinRoot;
                     ViewState["SkinSrc"] = _SkinSrc;
-					
-					//set width of control
+
+                    //set width of control
                     if (!String.IsNullOrEmpty(_Width))
                     {
                         cboSkin.Width = Unit.Parse(_Width);
                     }
-					
-					//set selected skin
+
+                    //set selected skin
                     if (!String.IsNullOrEmpty(_SkinSrc))
                     {
                         switch (_SkinSrc.Substring(0, 3))
@@ -232,7 +232,7 @@ namespace DotNetNuke.UI.Skins
                     }
                     else
                     {
-						//no skin selected, initialized to site skin if any exists
+                        //no skin selected, initialized to site skin if any exists
                         string strRoot = _objPortal.HomeDirectoryMapPath + SkinRoot;
                         if (Directory.Exists(strRoot) && Directory.GetDirectories(strRoot).Length > 0)
                         {
@@ -277,7 +277,7 @@ namespace DotNetNuke.UI.Skins
                 Response.Redirect(strURL, true);
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

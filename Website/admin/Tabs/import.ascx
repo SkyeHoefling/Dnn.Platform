@@ -18,9 +18,9 @@
     <div class="dnnFormItem">
         <dnn:label id="plMode" runat="server" controlname="optMode" />
         <asp:radiobuttonlist id="optMode" runat="server" repeatdirection="Horizontal" repeatlayout="Flow" autopostback="True" CssClass="dnnTIRadioButtons">
-			<asp:listitem value="ADD" resourcekey="ModeAdd" Selected="True" />
-			<asp:listitem value="REPLACE" resourcekey="ModeReplace" />
-		</asp:radiobuttonlist>
+            <asp:listitem value="ADD" resourcekey="ModeAdd" Selected="True" />
+            <asp:listitem value="REPLACE" resourcekey="ModeReplace" />
+        </asp:radiobuttonlist>
     </div>
     <div class="dnnFormItem" id="divTabName" runat="server" visible="false">
         <dnn:label id="plTabName" runat="server" controlname="txtTabName" />
@@ -40,9 +40,9 @@
     <div class="dnnFormItem">
         <dnn:label id="plRedirect" runat="server" controlname="optRedirect" />
         <asp:radiobuttonlist id="optRedirect" runat="server" repeatdirection="Horizontal" repeatlayout="Flow" CssClass="dnnTIRadioButtons">
-			<asp:listitem value="VIEW" resourcekey="ModeView" Selected="True" />
-			<asp:listitem value="SETTINGS" resourcekey="ModeSettings" />
-		</asp:radiobuttonlist>
+            <asp:listitem value="VIEW" resourcekey="ModeView" Selected="True" />
+            <asp:listitem value="SETTINGS" resourcekey="ModeSettings" />
+        </asp:radiobuttonlist>
     </div>
     <ul class="dnnActions dnnClear">
         <li><asp:LinkButton id="cmdImport" resourcekey="cmdImport" runat="server" cssclass="dnnPrimaryAction" /></li>

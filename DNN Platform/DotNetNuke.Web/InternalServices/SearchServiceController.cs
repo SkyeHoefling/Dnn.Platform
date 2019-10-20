@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -115,7 +115,7 @@ namespace DotNetNuke.Web.InternalServices
         private ModuleInfo GetSearchModule()
         {
             var arrModules = GetModulesByDefinition(PortalSettings.PortalId, "Search Results");
-	        ModuleInfo findModule = null;
+            ModuleInfo findModule = null;
             if (arrModules.Count > 1)
             {
                 findModule = arrModules.Cast<ModuleInfo>().FirstOrDefault(searchModule => searchModule.CultureCode == PortalSettings.CultureCode);
@@ -184,7 +184,7 @@ namespace DotNetNuke.Web.InternalServices
             if (portalId == -1) portalId = PortalSettings.ActiveTab.PortalID;
             if (portalId > -1 && !list.Contains(portalId)) list.Add(portalId);
 
-            //Add Host 
+            //Add Host
             var userInfo = UserInfo;
             if (userInfo.IsSuperUser)
                 list.Add(-1);
@@ -279,7 +279,7 @@ namespace DotNetNuke.Web.InternalServices
 
             var groups = new List<GroupedDetailView>();
             var tabGroups = new Dictionary<string, IList<SearchResult>>();
-           
+
             foreach (var result in searchResults.Results)
             {
                 //var key = result.TabId + result.Url;
@@ -395,7 +395,7 @@ namespace DotNetNuke.Web.InternalServices
                     if (match.Success)
                     {
                         var userid = Convert.ToInt32(match.Groups[2].Value);
-                        var user = UserController.Instance.GetUserById(portalId, userid); 
+                        var user = UserController.Instance.GetUserById(portalId, userid);
                         if (user != null)
                         {
                             preview.Attributes.Add("Avatar", user.Profile.PhotoURL);
@@ -508,7 +508,7 @@ namespace DotNetNuke.Web.InternalServices
             var tags = SearchQueryStringParser.Instance.GetTags(keywords, out cleanedKeywords);
             var beginModifiedTimeUtc = SearchQueryStringParser.Instance.GetLastModifiedDate(cleanedKeywords, out cleanedKeywords);
             var searchTypes = SearchQueryStringParser.Instance.GetSearchTypeList(keywords, out cleanedKeywords);
-            
+
             var contentSources = GetSearchContentSources(searchTypes);
             var settings = GetSearchModuleSettings();
             var searchTypeIds = GetSearchTypeIds(settings, contentSources);
@@ -535,7 +535,7 @@ namespace DotNetNuke.Web.InternalServices
                     TitleSnippetLength = 40,
                     BodySnippetLength = 100,
                     CultureCode = culture,
-                    WildCardSearch = forceWild > 0 
+                    WildCardSearch = forceWild > 0
                 };
 
                 try
@@ -571,7 +571,7 @@ namespace DotNetNuke.Web.InternalServices
             var more = false;
             var totalHits = 0;
             var results = new List<GroupedDetailView>();
-            if (portalIds.Any() && searchTypeIds.Any() && 
+            if (portalIds.Any() && searchTypeIds.Any() &&
                 (!string.IsNullOrEmpty(cleanedKeywords) || tags.Any()))
             {
                 var query = new SearchQuery
@@ -604,7 +604,7 @@ namespace DotNetNuke.Web.InternalServices
 
             return Request.CreateResponse(HttpStatusCode.OK, new { results, totalHits, more });
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [SupportedModules("SearchAdmin")]

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -60,11 +60,11 @@ using Reflection = DotNetNuke.Framework.Reflection;
 
 namespace DotNetNuke.UI.ControlPanel
 {
-	using System.Web.UI.WebControls;
+    using System.Web.UI.WebControls;
 
-	public partial class AddModule : UserControlBase, IDnnRibbonBarTool
-	{
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AddModule));
+    public partial class AddModule : UserControlBase, IDnnRibbonBarTool
+    {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AddModule));
         private bool _enabled = true;
 
         /// <summary>
@@ -104,30 +104,30 @@ namespace DotNetNuke.UI.ControlPanel
 
         #region Event Handlers
 
-		protected void AddNewOrExisting_OnClick(Object sender, EventArgs e)
-		{
-			LoadAllLists();
-		}
+        protected void AddNewOrExisting_OnClick(Object sender, EventArgs e)
+        {
+            LoadAllLists();
+        }
 
-		protected void PaneLstSelectedIndexChanged(Object sender, EventArgs e)
-		{
-			LoadPositionList();
-			LoadPaneModulesList();
-		}
+        protected void PaneLstSelectedIndexChanged(Object sender, EventArgs e)
+        {
+            LoadPositionList();
+            LoadPaneModulesList();
+        }
 
-		protected void PageLstSelectedIndexChanged(Object sender, EventArgs e)
-		{
-			LoadModuleList();
-		}
+        protected void PageLstSelectedIndexChanged(Object sender, EventArgs e)
+        {
+            LoadModuleList();
+        }
 
-		protected void PositionLstSelectedIndexChanged(Object sender, EventArgs e)
-		{
-			PaneModulesLst.Enabled = PositionLst.SelectedValue == "ABOVE" || PositionLst.SelectedValue == "BELOW";
-		}
+        protected void PositionLstSelectedIndexChanged(Object sender, EventArgs e)
+        {
+            PaneModulesLst.Enabled = PositionLst.SelectedValue == "ABOVE" || PositionLst.SelectedValue == "BELOW";
+        }
 
-		protected override void OnLoad(EventArgs e)
-		{
-			base.OnLoad(e);
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
 
             // Is there more than one site in this group?
             var multipleSites = GetCurrentPortalsGroup().Count() > 1;
@@ -136,63 +136,63 @@ namespace DotNetNuke.UI.ControlPanel
             ServicesFramework.Instance.RequestAjaxAntiForgerySupport();
 
             cmdAddModule.Click += CmdAddModuleClick;
-			AddNewModule.CheckedChanged += AddNewOrExisting_OnClick;
-			AddExistingModule.CheckedChanged += AddNewOrExisting_OnClick;
+            AddNewModule.CheckedChanged += AddNewOrExisting_OnClick;
+            AddExistingModule.CheckedChanged += AddNewOrExisting_OnClick;
             SiteList.SelectedIndexChanged += SiteList_SelectedIndexChanged;
-			CategoryList.SelectedIndexChanged += CategoryListSelectedIndexChanged;
-			PageLst.SelectedIndexChanged += PageLstSelectedIndexChanged;
-			PaneLst.SelectedIndexChanged += PaneLstSelectedIndexChanged;
-			PositionLst.SelectedIndexChanged += PositionLstSelectedIndexChanged;
+            CategoryList.SelectedIndexChanged += CategoryListSelectedIndexChanged;
+            PageLst.SelectedIndexChanged += PageLstSelectedIndexChanged;
+            PaneLst.SelectedIndexChanged += PaneLstSelectedIndexChanged;
+            PositionLst.SelectedIndexChanged += PositionLstSelectedIndexChanged;
 
             try
-			{
-				if ((Visible))
-				{
-					cmdAddModule.Enabled = Enabled;
-					AddExistingModule.Enabled = Enabled;
-					AddNewModule.Enabled = Enabled;
-					Title.Enabled = Enabled;
-					PageLst.Enabled = Enabled;
-					ModuleLst.Enabled = Enabled;
-					VisibilityLst.Enabled = Enabled;
-					PaneLst.Enabled = Enabled;
-					PositionLst.Enabled = Enabled;
-					PaneModulesLst.Enabled = Enabled;
+            {
+                if ((Visible))
+                {
+                    cmdAddModule.Enabled = Enabled;
+                    AddExistingModule.Enabled = Enabled;
+                    AddNewModule.Enabled = Enabled;
+                    Title.Enabled = Enabled;
+                    PageLst.Enabled = Enabled;
+                    ModuleLst.Enabled = Enabled;
+                    VisibilityLst.Enabled = Enabled;
+                    PaneLst.Enabled = Enabled;
+                    PositionLst.Enabled = Enabled;
+                    PaneModulesLst.Enabled = Enabled;
 
-					UserInfo objUser = UserController.Instance.GetCurrentUserInfo();
-					if ((objUser != null))
-					{
-						if (objUser.IsSuperUser)
-						{
+                    UserInfo objUser = UserController.Instance.GetCurrentUserInfo();
+                    if ((objUser != null))
+                    {
+                        if (objUser.IsSuperUser)
+                        {
                             var objModule = ModuleController.Instance.GetModuleByDefinition(-1, "Extensions");
-							if (objModule != null)
-							{
-								var strURL = Globals.NavigateURL(objModule.TabID, true);
-								hlMoreExtensions.NavigateUrl = strURL + "#moreExtensions";
-							}
-							else
-							{
-								hlMoreExtensions.Enabled = false;
-							}
-							hlMoreExtensions.Text = GetString("hlMoreExtensions");
-							hlMoreExtensions.Visible = true;
-						}
-					}
-				}
+                            if (objModule != null)
+                            {
+                                var strURL = Globals.NavigateURL(objModule.TabID, true);
+                                hlMoreExtensions.NavigateUrl = strURL + "#moreExtensions";
+                            }
+                            else
+                            {
+                                hlMoreExtensions.Enabled = false;
+                            }
+                            hlMoreExtensions.Text = GetString("hlMoreExtensions");
+                            hlMoreExtensions.Visible = true;
+                        }
+                    }
+                }
 
-				if ((!IsPostBack && Visible && Enabled))
-				{
-				    AddNewModule.Checked = true;
-					LoadAllLists();
-				}
-			}
-			catch (Exception exc)
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
+                if ((!IsPostBack && Visible && Enabled))
+                {
+                    AddNewModule.Checked = true;
+                    LoadAllLists();
+                }
+            }
+            catch (Exception exc)
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
 
-	    private void CmdConfirmAddModuleClick(object sender, EventArgs e)
+        private void CmdConfirmAddModuleClick(object sender, EventArgs e)
         {
             CmdAddModuleClick(sender, e);
         }
@@ -203,169 +203,169 @@ namespace DotNetNuke.UI.ControlPanel
             LoadPageList();
         }
 
-	    private void CategoryListSelectedIndexChanged(object sender, EventArgs e)
-		{
-			LoadModuleList();
-		}
+        private void CategoryListSelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadModuleList();
+        }
 
-		protected void CmdAddModuleClick(object sender, EventArgs e)
-		{
-			if (TabPermissionController.CanAddContentToPage() && CanAddModuleToPage())
-			{
-				int permissionType;
-				try
-				{
-					permissionType = int.Parse(VisibilityLst.SelectedValue);
-				}
-				catch (Exception exc)
-				{
-					Logger.Error(exc);
+        protected void CmdAddModuleClick(object sender, EventArgs e)
+        {
+            if (TabPermissionController.CanAddContentToPage() && CanAddModuleToPage())
+            {
+                int permissionType;
+                try
+                {
+                    permissionType = int.Parse(VisibilityLst.SelectedValue);
+                }
+                catch (Exception exc)
+                {
+                    Logger.Error(exc);
 
-					permissionType = 0;
-				}
+                    permissionType = 0;
+                }
 
-				int position = -1;
-				switch (PositionLst.SelectedValue)
-				{
-					case "TOP":
-						position = 0;
-						break;
-					case "ABOVE":
-						if (!string.IsNullOrEmpty(PaneModulesLst.SelectedValue))
-						{
-							try
-							{
-								position = int.Parse(PaneModulesLst.SelectedValue) - 1;
-							}
-							catch (Exception exc)
-							{
-								Logger.Error(exc);
+                int position = -1;
+                switch (PositionLst.SelectedValue)
+                {
+                    case "TOP":
+                        position = 0;
+                        break;
+                    case "ABOVE":
+                        if (!string.IsNullOrEmpty(PaneModulesLst.SelectedValue))
+                        {
+                            try
+                            {
+                                position = int.Parse(PaneModulesLst.SelectedValue) - 1;
+                            }
+                            catch (Exception exc)
+                            {
+                                Logger.Error(exc);
 
-								position = -1;
-							}
-						}
-						else
-						{
-							position = 0;
-						}
-						break;
-					case "BELOW":
-						if (!string.IsNullOrEmpty(PaneModulesLst.SelectedValue))
-						{
-							try
-							{
-								position = int.Parse(PaneModulesLst.SelectedValue) + 1;
-							}
-							catch (Exception exc)
-							{
-								Logger.Error(exc);
+                                position = -1;
+                            }
+                        }
+                        else
+                        {
+                            position = 0;
+                        }
+                        break;
+                    case "BELOW":
+                        if (!string.IsNullOrEmpty(PaneModulesLst.SelectedValue))
+                        {
+                            try
+                            {
+                                position = int.Parse(PaneModulesLst.SelectedValue) + 1;
+                            }
+                            catch (Exception exc)
+                            {
+                                Logger.Error(exc);
 
-								position = -1;
-							}
-						}
-						else
-						{
-							position = -1;
-						}
-						break;
-					case "BOTTOM":
-						position = -1;
-						break;
-				}
+                                position = -1;
+                            }
+                        }
+                        else
+                        {
+                            position = -1;
+                        }
+                        break;
+                    case "BOTTOM":
+                        position = -1;
+                        break;
+                }
 
-				int moduleLstID;
-				try
-				{
-					moduleLstID = int.Parse(ModuleLst.SelectedValue);
-				}
-				catch (Exception exc)
-				{
-					Logger.Error(exc);
+                int moduleLstID;
+                try
+                {
+                    moduleLstID = int.Parse(ModuleLst.SelectedValue);
+                }
+                catch (Exception exc)
+                {
+                    Logger.Error(exc);
 
-					moduleLstID = -1;
-				}
+                    moduleLstID = -1;
+                }
 
-				if ((moduleLstID > -1))
-				{
-					if ((AddExistingModule.Checked))
-					{
-						int pageID;
-						try
-						{
-							pageID = int.Parse(PageLst.SelectedValue);
-						}
-						catch (Exception exc)
-						{
-							Logger.Error(exc);
+                if ((moduleLstID > -1))
+                {
+                    if ((AddExistingModule.Checked))
+                    {
+                        int pageID;
+                        try
+                        {
+                            pageID = int.Parse(PageLst.SelectedValue);
+                        }
+                        catch (Exception exc)
+                        {
+                            Logger.Error(exc);
 
-							pageID = -1;
-						}
+                            pageID = -1;
+                        }
 
-						if ((pageID > -1))
-						{
-							DoAddExistingModule(moduleLstID, pageID, PaneLst.SelectedValue, position, "", chkCopyModule.Checked);
-						}
-					}
-					else
-					{
-						DoAddNewModule(Title.Text, moduleLstID, PaneLst.SelectedValue, position, permissionType, "");
-					}
-				}
+                        if ((pageID > -1))
+                        {
+                            DoAddExistingModule(moduleLstID, pageID, PaneLst.SelectedValue, position, "", chkCopyModule.Checked);
+                        }
+                    }
+                    else
+                    {
+                        DoAddNewModule(Title.Text, moduleLstID, PaneLst.SelectedValue, position, permissionType, "");
+                    }
+                }
 
-				//set view mode to edit after add module.
-				if (PortalSettings.UserMode != PortalSettings.Mode.Edit)
-				{
-					Personalization.SetProfile("Usability", "UserMode" + PortalSettings.PortalId, "EDIT");
-				}
-				Response.Redirect(Request.RawUrl, true);
-			}
-		}
+                //set view mode to edit after add module.
+                if (PortalSettings.UserMode != PortalSettings.Mode.Edit)
+                {
+                    Personalization.SetProfile("Usability", "UserMode" + PortalSettings.PortalId, "EDIT");
+                }
+                Response.Redirect(Request.RawUrl, true);
+            }
+        }
 
-	    #endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		public override bool Visible
-		{
-			get
-			{
-				return base.Visible && TabPermissionController.CanAddContentToPage();
-			}
-			set
-			{
-				base.Visible = value;
-			}
-		}
+        public override bool Visible
+        {
+            get
+            {
+                return base.Visible && TabPermissionController.CanAddContentToPage();
+            }
+            set
+            {
+                base.Visible = value;
+            }
+        }
 
-		public bool Enabled
-		{
-			get
-			{
-				return _enabled && CanAddModuleToPage();
-			}
-			set
-			{
-				_enabled = value;
-			}
-		}
+        public bool Enabled
+        {
+            get
+            {
+                return _enabled && CanAddModuleToPage();
+            }
+            set
+            {
+                _enabled = value;
+            }
+        }
 
-		public string ToolName
-		{
-			get
-			{
-				return "QuickAddModule";
-			}
-			set
-			{
-				throw new NotSupportedException("Set ToolName not supported");
-			}
-		}
+        public string ToolName
+        {
+            get
+            {
+                return "QuickAddModule";
+            }
+            set
+            {
+                throw new NotSupportedException("Set ToolName not supported");
+            }
+        }
 
         /// <summary>The currently-selected module.</summary>
-	    protected DesktopModuleInfo SelectedModule
-	    {
-	        get
-	        {
+        protected DesktopModuleInfo SelectedModule
+        {
+            get
+            {
                 if (AddExistingModule.Checked)
                 {
                     var tabId = -1;
@@ -403,12 +403,12 @@ namespace DotNetNuke.UI.ControlPanel
                 }
 
                 return null;
-	        }
-	    } 
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         private static ModulePermissionInfo AddModulePermission(ModuleInfo objModule, PermissionInfo permission, int roleId, int userId, bool allowAccess)
         {
@@ -456,7 +456,7 @@ namespace DotNetNuke.UI.ControlPanel
                         case ModuleSharing.Unsupported:
                             // Should never happen since the module should not be listed in the first place.
                             throw new ApplicationException(string.Format("Module '{0}' does not support Shareable and should not be listed in Add Existing Module from a different source site",
-                                                                         moduleInfo.DesktopModule.FriendlyName));
+                                                                        moduleInfo.DesktopModule.FriendlyName));
                         case ModuleSharing.Supported:
                             break;
                         default:
@@ -478,7 +478,7 @@ namespace DotNetNuke.UI.ControlPanel
                 if ((cloneModule))
                 {
                     newModule.ModuleID = Null.NullInteger;
-                    
+
                     //copy module settings and tab module settings
                     newModule.ModuleSettings.Clear();
                     foreach (var key in moduleInfo.ModuleSettings.Keys)
@@ -550,11 +550,11 @@ namespace DotNetNuke.UI.ControlPanel
             }
         }
 
-	    private static void SetCloneModuleContext(bool cloneModuleContext)
-	    {
-	        Thread.SetData(Thread.GetNamedDataSlot("CloneModuleContext"),
-	            cloneModuleContext ? bool.TrueString : bool.FalseString);
-	    }
+        private static void SetCloneModuleContext(bool cloneModuleContext)
+        {
+            Thread.SetData(Thread.GetNamedDataSlot("CloneModuleContext"),
+                cloneModuleContext ? bool.TrueString : bool.FalseString);
+        }
 
         private static void DoAddNewModule(string title, int desktopModuleId, string paneName, int position, int permissionType, string align)
         {
@@ -628,10 +628,10 @@ namespace DotNetNuke.UI.ControlPanel
             var groups = PortalGroupController.Instance.GetPortalGroups().ToArray();
 
             var result = (from @group in groups
-                          select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
-                              into portals
-                              where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
-                              select portals.ToArray()).FirstOrDefault();
+                        select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
+                            into portals
+                            where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
+                            select portals.ToArray()).FirstOrDefault();
 
             // Are we in a group of one?
             if (result == null || result.Length == 0)
@@ -673,16 +673,16 @@ namespace DotNetNuke.UI.ControlPanel
         }
 
         private void LoadAllLists()
-		{
-		    LoadSiteList();
-			LoadCategoryList();
-			LoadPageList();
-			LoadModuleList();
-			LoadVisibilityList();
-			LoadPaneList();
-			LoadPositionList();
-			LoadPaneModulesList();
-		}
+        {
+            LoadSiteList();
+            LoadCategoryList();
+            LoadPageList();
+            LoadModuleList();
+            LoadVisibilityList();
+            LoadPaneList();
+            LoadPositionList();
+            LoadPaneModulesList();
+        }
 
         private void LoadCategoryList()
         {
@@ -722,7 +722,7 @@ namespace DotNetNuke.UI.ControlPanel
             {
                 ModuleLst.Filter = CategoryList.SelectedValue == "All"
                                         ? (kvp => true)
-                                         : (Func<KeyValuePair<string, PortalDesktopModuleInfo>, bool>)(kvp => kvp.Value.DesktopModule.Category == CategoryList.SelectedValue);
+                                        : (Func<KeyValuePair<string, PortalDesktopModuleInfo>, bool>)(kvp => kvp.Value.DesktopModule.Category == CategoryList.SelectedValue);
                 ModuleLst.BindAllPortalDesktopModules();
             }
 
@@ -730,24 +730,24 @@ namespace DotNetNuke.UI.ControlPanel
         }
 
         private void LoadPageList()
-		{
-			PageListPanel.Visible = AddExistingModule.Checked;
-			TitlePanel.Enabled = !AddExistingModule.Checked;
-			chkCopyModule.Visible = AddExistingModule.Checked;
+        {
+            PageListPanel.Visible = AddExistingModule.Checked;
+            TitlePanel.Enabled = !AddExistingModule.Checked;
+            chkCopyModule.Visible = AddExistingModule.Checked;
 
-			if ((AddExistingModule.Checked))
-			{
-				chkCopyModule.Text = Localization.GetString("CopyModuleDefault.Text", LocalResourceFile);
-			}
+            if ((AddExistingModule.Checked))
+            {
+                chkCopyModule.Text = Localization.GetString("CopyModuleDefault.Text", LocalResourceFile);
+            }
 
-	        var portalSettings = SelectedPortalSettings;
+            var portalSettings = SelectedPortalSettings;
 
-	        PageLst.Items.Clear();
+            PageLst.Items.Clear();
 
             if (PageListPanel.Visible)
             {
                 PageLst.DataValueField = "TabID";
-				PageLst.DataTextField = "IndentedTabName";
+                PageLst.DataTextField = "IndentedTabName";
                 if(PortalSettings.PortalId == SelectedPortalSettings.PortalId)
                 {
                     PageLst.DataSource = TabController.GetPortalTabs(portalSettings.PortalId, portalSettings.ActiveTab.TabID, true, string.Empty, true, false, false, false, true);
@@ -756,9 +756,9 @@ namespace DotNetNuke.UI.ControlPanel
                 {
                     PageLst.DataSource = TabController.GetPortalTabs(portalSettings.PortalId, Null.NullInteger, true, string.Empty, true, false, false, false, true);
                 }
-				PageLst.DataBind();
-			}
-		}
+                PageLst.DataBind();
+            }
+        }
 
         private void LoadPaneList()
         {
@@ -828,12 +828,12 @@ namespace DotNetNuke.UI.ControlPanel
         private void LoadPositionList()
         {
             var items = new Dictionary<string, string>
-							{
-								{"TOP", GetString("Top")},
-								{"ABOVE", GetString("Above")},
-								{"BELOW", GetString("Below")},
-								{"BOTTOM", GetString("Bottom")}
-							};
+                            {
+                                {"TOP", GetString("Top")},
+                                {"ABOVE", GetString("Above")},
+                                {"BELOW", GetString("Below")},
+                                {"BOTTOM", GetString("Bottom")}
+                            };
 
             PositionLst.Items.Clear();
             PositionLst.DataValueField = "key";
@@ -863,20 +863,20 @@ namespace DotNetNuke.UI.ControlPanel
             }
         }
 
-		private void LoadVisibilityList()
-		{
-			VisibilityLst.Enabled = !AddExistingModule.Checked;
-			if ((VisibilityLst.Enabled))
-			{
-				var items = new Dictionary<string, string> {{"0", GetString("PermissionView")}, {"1", GetString("PermissionEdit")}};
+        private void LoadVisibilityList()
+        {
+            VisibilityLst.Enabled = !AddExistingModule.Checked;
+            if ((VisibilityLst.Enabled))
+            {
+                var items = new Dictionary<string, string> {{"0", GetString("PermissionView")}, {"1", GetString("PermissionEdit")}};
 
-				VisibilityLst.Items.Clear();
-				VisibilityLst.DataValueField = "key";
-				VisibilityLst.DataTextField = "value";
-				VisibilityLst.DataSource = items;
-				VisibilityLst.DataBind();
-			}
-		}
+                VisibilityLst.Items.Clear();
+                VisibilityLst.DataValueField = "key";
+                VisibilityLst.DataTextField = "value";
+                VisibilityLst.DataSource = items;
+                VisibilityLst.DataBind();
+            }
+        }
 
         private string LocalResourceFile
         {
@@ -900,7 +900,7 @@ namespace DotNetNuke.UI.ControlPanel
             }
         }
 
-		#endregion
+        #endregion
 
 
         public bool CanAddModuleToPage()

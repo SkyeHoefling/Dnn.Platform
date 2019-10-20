@@ -10,9 +10,9 @@
 
 /***** PAE-217: add icon file column. *****/
 IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{objectQualifier}PersonaBarMenu' AND  COLUMN_NAME = 'IconFile')
-   BEGIN
+    BEGIN
         ALTER TABLE {databaseOwner}{objectQualifier}PersonaBarMenu ADD IconFile NVARCHAR(260) NULL
-    END 
+    END
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}PersonaBar_SavePersonaBarMenu') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
@@ -39,7 +39,7 @@ BEGIN
     IF EXISTS(SELECT Identifier FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] WHERE Identifier = @Identifier)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenu]
-            SET 
+            SET
                 ModuleName = @ModuleName,
                 FolderName = @FolderName,
                 ResourceKey = @ResourceKey,
@@ -108,26 +108,26 @@ GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_GetPersonaBarMenu]
 AS
-	SELECT 
-        MenuId, 
-        Identifier, 
-        ModuleName, 
+    SELECT
+        MenuId,
+        Identifier,
+        ModuleName,
         FolderName,
-        Controller, 
-        ResourceKey, 
-        Path, 
-        Link, 
-        CssClass, 
+        Controller,
+        ResourceKey,
+        Path,
+        Link,
+        CssClass,
         IconFile,
-        ParentId, 
-        [Order], 
-        AllowHost, 
-        Enabled, 
-        CreatedByUserId, 
-        CreatedOnDate, 
-        LastModifiedByUserId, 
-        LastModifiedOnDate 
-        
+        ParentId,
+        [Order],
+        AllowHost,
+        Enabled,
+        CreatedByUserId,
+        CreatedOnDate,
+        LastModifiedByUserId,
+        LastModifiedOnDate
+
     FROM {databaseOwner}[{objectQualifier}PersonaBarMenu]
 GO
 

@@ -103,7 +103,7 @@
 
 if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn || {};
 
-// the semi-colon before function invocation is a safety net against concatenated 
+// the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
 (function ($, window, document, undefined) {
 
@@ -140,7 +140,7 @@ if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn |
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend({}, PrefixInput.defaults(), this.options);
 
@@ -215,7 +215,7 @@ if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn |
 }).apply(dnn, [jQuery, window, document]);
 
 
-// the semi-colon before function invocation is a safety net against concatenated 
+// the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
 (function ($, window, document, undefined) {
 
@@ -246,7 +246,7 @@ if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn |
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend({}, Resizer.defaults(), this.options);
 
@@ -358,4 +358,3 @@ if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn |
     };
 
 }).apply(dnn, [jQuery, window, document]);
-

@@ -1,13 +1,13 @@
 /*
 ' Copyright (c) 2011  DotNetNuke Corporation
 '  All rights reserved.
-' 
+'
 ' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
 ' TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
 ' THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
 ' CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 ' DEALINGS IN THE SOFTWARE.
-' 
+'
 */
 
 using System;
@@ -46,7 +46,7 @@ namespace DotNetNuke.Modules.Journal {
                         drpDefaultPageSize.SelectedIndex = drpDefaultPageSize.Items.IndexOf(drpDefaultPageSize.Items.FindByValue(Settings[Constants.DefaultPageSize].ToString()));
                     } else {
                         drpDefaultPageSize.SelectedIndex = drpDefaultPageSize.Items.IndexOf(drpDefaultPageSize.Items.FindByValue("20"));
-                        
+
                     }
                     if (Settings.ContainsKey(Constants.MaxCharacters)) {
                         drpMaxMessageLength.SelectedIndex = drpMaxMessageLength.Items.IndexOf(drpMaxMessageLength.Items.FindByValue(Settings[Constants.MaxCharacters].ToString()));
@@ -147,7 +147,7 @@ namespace DotNetNuke.Modules.Journal {
                             jc.SaveFilters(PortalId, ModuleId, Convert.ToInt32(li.Value));
                             journalTypes += li.Value + ";";
                         }
-                        
+
                     }
                 }
                 ModuleController.Instance.UpdateModuleSetting(this.ModuleId, Constants.JournalFilters, journalTypes);
@@ -170,4 +170,3 @@ namespace DotNetNuke.Modules.Journal {
     }
 
 }
-

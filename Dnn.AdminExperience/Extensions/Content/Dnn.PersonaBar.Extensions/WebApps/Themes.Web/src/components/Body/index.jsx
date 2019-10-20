@@ -60,7 +60,7 @@ class Body extends Component {
             installPortalTheme: {},
             referrer: "Dnn.Themes",
             referrerText: Localization.get("BackToThemes"),
-            backToReferrerFunc: this.backToThemes.bind(this)            
+            backToReferrerFunc: this.backToThemes.bind(this)
         };
 
         event = Object.assign(event, settings);

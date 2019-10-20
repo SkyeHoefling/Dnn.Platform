@@ -16,13 +16,13 @@ IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddSetting]', 'P') 
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}ExportImportSettings]', N'U') IS NOT NULL
-	DROP TABLE {databaseOwner}[{objectQualifier}ExportImportSettings]
+    DROP TABLE {databaseOwner}[{objectQualifier}ExportImportSettings]
 GO
 
 IF EXISTS ( SELECT 1 FROM {databaseOwner}{objectQualifier}Schedule
-			WHERE TypeFullName = N'Dnn.ExportImport.Components.Scheduler.ExportImportScheduler, DotNetNuke.SiteExportImport')
-	DELETE FROM {databaseOwner}{objectQualifier}Schedule
-	WHERE TypeFullName = N'Dnn.ExportImport.Components.Scheduler.ExportImportScheduler, DotNetNuke.SiteExportImport'
+            WHERE TypeFullName = N'Dnn.ExportImport.Components.Scheduler.ExportImportScheduler, DotNetNuke.SiteExportImport')
+    DELETE FROM {databaseOwner}{objectQualifier}Schedule
+    WHERE TypeFullName = N'Dnn.ExportImport.Components.Scheduler.ExportImportScheduler, DotNetNuke.SiteExportImport'
 GO
 
 IF object_id(N'{databaseOwner}[{objectQualifier}Export_GenericUpdateRecordChangers]', 'P') IS NOT NULL
@@ -90,15 +90,15 @@ IF object_id(N'{databaseOwner}[{objectQualifier}ExportImportCheckpoints_GetByJob
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}ExportImportJobLogs]', N'U') IS NOT NULL
-	DROP TABLE {databaseOwner}[{objectQualifier}ExportImportJobLogs]
+    DROP TABLE {databaseOwner}[{objectQualifier}ExportImportJobLogs]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}ExportImportCheckpoints]', N'U') IS NOT NULL
-	DROP TABLE {databaseOwner}[{objectQualifier}ExportImportCheckpoints]
+    DROP TABLE {databaseOwner}[{objectQualifier}ExportImportCheckpoints]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}ExportImportJobs]', N'U') IS NOT NULL
-	DROP TABLE {databaseOwner}[{objectQualifier}ExportImportJobs]
+    DROP TABLE {databaseOwner}[{objectQualifier}ExportImportJobs]
 GO
 
 -- Users Import/Export
@@ -123,7 +123,7 @@ IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddUpdateUsersBulk]
 GO
 
 IF EXISTS (SELECT 1 FROM sys.objects WHERE type = N'TT' AND name LIKE N'TT_{objectQualifier}ExportImportUserType%')
-	DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserType]
+    DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserType]
 GO
 
 IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddUpdateUsersBulkData]', 'P') IS NOT NULL
@@ -131,7 +131,7 @@ IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddUpdateUsersBulkD
 GO
 
 IF EXISTS (SELECT 1 FROM sys.objects WHERE type = N'TT' AND name LIKE N'TT_{objectQualifier}ExportImportUserDataType%')
-	DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserDataType]
+    DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserDataType]
 GO
 
 IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddUpdateUserRolesBulk]', 'P') IS NOT NULL
@@ -139,7 +139,7 @@ IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddUpdateUserRolesB
 GO
 
 IF EXISTS (SELECT 1 FROM sys.objects WHERE type = N'TT' AND name LIKE N'TT_{objectQualifier}ExportImportUserRoleType%')
-	DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserRoleType]
+    DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserRoleType]
 GO
 
 IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddUpdateUsersProfilesBulk]', 'P') IS NOT NULL
@@ -147,7 +147,7 @@ IF object_id(N'{databaseOwner}[{objectQualifier}ExportImport_AddUpdateUsersProfi
 GO
 
 IF EXISTS (SELECT 1 FROM sys.objects WHERE type = N'TT' AND name LIKE N'TT_{objectQualifier}ExportImportUserProfileType%')
-	DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserProfileType]
+    DROP TYPE {databaseOwner}[{objectQualifier}ExportImportUserProfileType]
 GO
 
 --Profile Properties

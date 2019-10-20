@@ -12,7 +12,7 @@
 
         this.servicesFramework = $.ServicesFramework(settings.moduleId);
 
-        // Actual table of localized strings and their values.    
+        // Actual table of localized strings and their values.
         this.stringTable = {};
 
         // Load a localization string table for the specified view.
@@ -38,7 +38,7 @@
             var params = {
                 culture: settings.culture
             };
-            
+
             $.ajax({
                 type: 'get',
                 url: root.servicesFramework.getServiceRoot('CoreMessaging') + 'Subscriptions/GetLocalizationTable',
@@ -64,7 +64,7 @@
 
             return value;
         };
-	    
-		this.loadTable();
+
+        this.loadTable();
     };
 })(window.jQuery);

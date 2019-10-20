@@ -2,10 +2,10 @@
     <div class="fm-explorer-wrap dnnLeft">
         <div class="fm-breadcrumb">
         <p>
-          <span data-bind="foreach: currentBreadcrumbs">
+        <span data-bind="foreach: currentBreadcrumbs">
             <span data-bind="visible: id === $root.chosenFolderId(), text: name"></span>
             <span data-bind="visible: id !== $root.chosenFolderId()"><a href="#" data-bind="text: name, click: $root.goToFolder" aria-label="Visit"></a> /</span>
-          </span>
+        </span>
         </p>
         </div>
         <div class="fm-explorer">

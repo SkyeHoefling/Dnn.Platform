@@ -16,21 +16,21 @@
     var dialog;
     dialog = wrap.appendChild(document.createElement("div"));
     if (bottom)
-      dialog.className = "CodeMirror-dialog CodeMirror-dialog-bottom";
+    dialog.className = "CodeMirror-dialog CodeMirror-dialog-bottom";
     else
-      dialog.className = "CodeMirror-dialog CodeMirror-dialog-top";
+    dialog.className = "CodeMirror-dialog CodeMirror-dialog-top";
 
     if (typeof template == "string") {
-      dialog.innerHTML = template;
+    dialog.innerHTML = template;
     } else { // Assuming it's a detached DOM element.
-      dialog.appendChild(template);
+    dialog.appendChild(template);
     }
     return dialog;
   }
 
   function closeNotification(cm, newVal) {
     if (cm.state.currentNotificationClose)
-      cm.state.currentNotificationClose();
+    cm.state.currentNotificationClose();
     cm.state.currentNotificationClose = newVal;
   }
 
@@ -42,54 +42,54 @@
     var dialog = dialogDiv(this, template, options.bottom);
     var closed = false, me = this;
     function close(newVal) {
-      if (typeof newVal == 'string') {
+    if (typeof newVal == 'string') {
         inp.value = newVal;
-      } else {
+    } else {
         if (closed) return;
         closed = true;
         dialog.parentNode.removeChild(dialog);
         me.focus();
 
         if (options.onClose) options.onClose(dialog);
-      }
+    }
     }
 
     var inp = dialog.getElementsByTagName("input")[0], button;
     if (inp) {
-      if (options.value) {
+    if (options.value) {
         inp.value = options.value;
         if (options.selectValueOnOpen !== false) {
-          inp.select();
+        inp.select();
         }
-      }
+    }
 
-      if (options.onInput)
+    if (options.onInput)
         CodeMirror.on(inp, "input", function(e) { options.onInput(e, inp.value, close);});
-      if (options.onKeyUp)
+    if (options.onKeyUp)
         CodeMirror.on(inp, "keyup", function(e) {options.onKeyUp(e, inp.value, close);});
 
-      CodeMirror.on(inp, "keydown", function(e) {
+    CodeMirror.on(inp, "keydown", function(e) {
         if (options && options.onKeyDown && options.onKeyDown(e, inp.value, close)) { return; }
         if (e.keyCode == 27 || (options.closeOnEnter !== false && e.keyCode == 13)) {
-          inp.blur();
-          CodeMirror.e_stop(e);
-          close();
+        inp.blur();
+        CodeMirror.e_stop(e);
+        close();
         }
         if (e.keyCode == 13) callback(inp.value, e);
-      });
+    });
 
-      if (options.closeOnBlur !== false) CodeMirror.on(inp, "blur", close);
+    if (options.closeOnBlur !== false) CodeMirror.on(inp, "blur", close);
 
-      inp.focus();
+    inp.focus();
     } else if (button = dialog.getElementsByTagName("button")[0]) {
-      CodeMirror.on(button, "click", function() {
+    CodeMirror.on(button, "click", function() {
         close();
         me.focus();
-      });
+    });
 
-      if (options.closeOnBlur !== false) CodeMirror.on(button, "blur", close);
+    if (options.closeOnBlur !== false) CodeMirror.on(button, "blur", close);
 
-      button.focus();
+    button.focus();
     }
     return close;
   });
@@ -100,37 +100,37 @@
     var buttons = dialog.getElementsByTagName("button");
     var closed = false, me = this, blurring = 1;
     function close() {
-      if (closed) return;
-      closed = true;
-      dialog.parentNode.removeChild(dialog);
-      me.focus();
+    if (closed) return;
+    closed = true;
+    dialog.parentNode.removeChild(dialog);
+    me.focus();
     }
     buttons[0].focus();
     for (var i = 0; i < buttons.length; ++i) {
-      var b = buttons[i];
-      (function(callback) {
+    var b = buttons[i];
+    (function(callback) {
         CodeMirror.on(b, "click", function(e) {
-          CodeMirror.e_preventDefault(e);
-          close();
-          if (callback) callback(me);
+        CodeMirror.e_preventDefault(e);
+        close();
+        if (callback) callback(me);
         });
-      })(callbacks[i]);
-      CodeMirror.on(b, "blur", function() {
+    })(callbacks[i]);
+    CodeMirror.on(b, "blur", function() {
         --blurring;
         setTimeout(function() { if (blurring <= 0) close(); }, 200);
-      });
-      CodeMirror.on(b, "focus", function() { ++blurring; });
+    });
+    CodeMirror.on(b, "focus", function() { ++blurring; });
     }
   });
 
   /*
-   * openNotification
-   * Opens a notification, that can be closed with an optional timer
-   * (default 5000ms timer) and always closes on click.
-   *
-   * If a notification is opened while another is opened, it will close the
-   * currently opened one and open the new one immediately.
-   */
+    * openNotification
+    * Opens a notification, that can be closed with an optional timer
+    * (default 5000ms timer) and always closes on click.
+    *
+    * If a notification is opened while another is opened, it will close the
+    * currently opened one and open the new one immediately.
+    */
   CodeMirror.defineExtension("openNotification", function(template, options) {
     closeNotification(this, close);
     var dialog = dialogDiv(this, template, options && options.bottom);
@@ -138,19 +138,19 @@
     var duration = options && typeof options.duration !== "undefined" ? options.duration : 5000;
 
     function close() {
-      if (closed) return;
-      closed = true;
-      clearTimeout(doneTimer);
-      dialog.parentNode.removeChild(dialog);
+    if (closed) return;
+    closed = true;
+    clearTimeout(doneTimer);
+    dialog.parentNode.removeChild(dialog);
     }
 
     CodeMirror.on(dialog, 'click', function(e) {
-      CodeMirror.e_preventDefault(e);
-      close();
+    CodeMirror.e_preventDefault(e);
+    close();
     });
 
     if (duration)
-      doneTimer = setTimeout(close, duration);
+    doneTimer = setTimeout(close, duration);
 
     return close;
   });

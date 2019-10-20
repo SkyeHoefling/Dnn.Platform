@@ -20,16 +20,16 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: { loader: "eslint-loader", options: { fix: true } },
-                enforce: "pre"               
+                enforce: "pre"
             },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: { 
+                use: {
                     loader: "babel-loader"
                 }
             },
-            { 
+            {
                 test: /\.less$/,
                 use: [{
                     loader: "style-loader"
@@ -40,16 +40,16 @@ module.exports = {
                     loader: "less-loader"
                 }]
             },
-            { 
+            {
                 test: /\.css$/,
                 use: [{
                     loader: "style-loader"
                 },{
                     loader: "css-loader",
                     options: { modules: "global"}
-                }]            
+                }]
             },
-            { 
+            {
                 test: /\.(ttf|woff|gif|png)$/,
                 use: {
                     loader: "url-loader?limit=8192"

@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import {
     seo as SeoActions
 } from "../../actions";
-import { 
-    InputGroup, 
-    SingleLineInputWithError, 
-    GridSystem as Grid, 
-    Dropdown, 
+import {
+    InputGroup,
+    SingleLineInputWithError,
+    GridSystem as Grid,
+    Dropdown,
     Label,
     Switch, Button
 } from "@dnnsoftware/dnn-react-common";

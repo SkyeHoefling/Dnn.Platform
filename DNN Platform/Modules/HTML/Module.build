@@ -11,7 +11,7 @@
   <Import Project="$(BuildScriptsPath)\Module.Build"/>
   <Target Name="UpdateFiles">
     <ItemGroup>
-      <Resources Remove="web.config" />
+    <Resources Remove="web.config" />
     </ItemGroup>
   </Target>
 </Project>

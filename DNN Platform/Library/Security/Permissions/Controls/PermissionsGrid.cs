@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -53,7 +53,7 @@ namespace DotNetNuke.Security.Permissions.Controls
         protected const string PermissionTypeNull = "Null";
 
         #endregion
-        
+
         #region Private Members
 
         private ArrayList _permissions;
@@ -65,7 +65,7 @@ namespace DotNetNuke.Security.Permissions.Controls
         private Label lblGroups;
         private Label lblSelectRole;
         private Label lblErrorMessage;
-        private Panel pnlPermissions;        
+        private Panel pnlPermissions;
         private TextBox txtUser;
         private HiddenField hiddenUserIds;
         private HiddenField roleField;
@@ -91,14 +91,14 @@ namespace DotNetNuke.Security.Permissions.Controls
         {
             get { return unAuthUsersRoleId; }
         }
-        
+
         private int allUsersRoleId = Int32.Parse(Globals.glbRoleAllUsers);
         private int AllUsersRoleId
         {
             get
             {
-                return allUsersRoleId;                
-            }            
+                return allUsersRoleId;
+            }
         }
         #endregion
 
@@ -326,7 +326,7 @@ namespace DotNetNuke.Security.Permissions.Controls
         #endregion
 
         #region Private Methods
-        
+
         private void BindData()
         {
             EnsureChildControls();
@@ -455,7 +455,7 @@ namespace DotNetNuke.Security.Permissions.Controls
                             }
                         }
                         dtUserPermissions.Rows.Add(row);
-                    }                    
+                    }
                     userPermissionsGrid.DataSource = dtUserPermissions;
                     userPermissionsGrid.DataBind();
                 }
@@ -464,7 +464,7 @@ namespace DotNetNuke.Security.Permissions.Controls
                     dtUserPermissions.Rows.Clear();
                     userPermissionsGrid.DataSource = dtUserPermissions;
                     userPermissionsGrid.DataBind();
-                    userPermissionsGrid.Visible = false;                    
+                    userPermissionsGrid.Visible = false;
                 }
             }
         }
@@ -482,23 +482,23 @@ namespace DotNetNuke.Security.Permissions.Controls
             var checkedRoles = GetCheckedRoles();
             var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
             Roles = new ArrayList(RoleController.Instance.GetRoles(portalSettings.PortalId, r => r.SecurityMode != SecurityMode.SocialGroup && r.Status == RoleStatus.Approved && checkedRoles.Contains(r.RoleID)).ToArray());
-        
+
             if (checkedRoles.Contains(UnAuthUsersRoleId))
             {
-                Roles.Add(new RoleInfo { RoleID = UnAuthUsersRoleId, RoleName = Globals.glbRoleUnauthUserName });                    
-            }            
+                Roles.Add(new RoleInfo { RoleID = UnAuthUsersRoleId, RoleName = Globals.glbRoleUnauthUserName });
+            }
             if (checkedRoles.Contains(AllUsersRoleId))
             {
-                Roles.Add(new RoleInfo { RoleID = AllUsersRoleId, PortalID = portalSettings.PortalId, RoleName=Globals.glbRoleAllUsersName });                    
+                Roles.Add(new RoleInfo { RoleID = AllUsersRoleId, PortalID = portalSettings.PortalId, RoleName=Globals.glbRoleAllUsersName });
             }
 
             //Administrators Role always has implicit permissions, then it should be always in
             EnsureRole(RoleController.Instance.GetRoleById(portalSettings.PortalId, portalSettings.AdministratorRoleId));
-            
+
             //Show also default roles
             EnsureRole(RoleController.Instance.GetRoleById(portalSettings.PortalId, portalSettings.RegisteredRoleId));
             EnsureRole(new RoleInfo { RoleID = AllUsersRoleId, PortalID = portalSettings.PortalId, RoleName = Globals.glbRoleAllUsersName });
-            
+
             Roles.Reverse();
             Roles.Sort(new RoleComparer());
         }
@@ -519,7 +519,7 @@ namespace DotNetNuke.Security.Permissions.Controls
                                 {
                                     HeaderText = permissionHeaderText,
                                     DataField = nameColumnDataField
-                                };            
+                                };
             nameColumn.ItemStyle.CssClass = "permissionHeader";
             nameColumn.HeaderStyle.CssClass = "permissionHeader";
             grid.Columns.Add(nameColumn);
@@ -546,7 +546,7 @@ namespace DotNetNuke.Security.Permissions.Controls
                 var locName = (permission.ModuleDefID <= 0) ? Localization.GetString(permission.PermissionName + ".Permission", PermissionProvider.Instance().LocalResourceFile) //system permission
                                                             : (!String.IsNullOrEmpty(ResourceFile) ? Localization.GetString(permission.PermissionName + ".Permission", ResourceFile) //custom permission
                                                                                                     : "");
-                templateCol.HeaderText = !String.IsNullOrEmpty(locName) ? locName : permission.PermissionName;                
+                templateCol.HeaderText = !String.IsNullOrEmpty(locName) ? locName : permission.PermissionName;
                 templateCol.HeaderStyle.Wrap = true;
                 grid.Columns.Add(templateCol);
             }
@@ -637,21 +637,21 @@ namespace DotNetNuke.Security.Permissions.Controls
         private void FillSelectRoleComboBox(int selectedRoleGroupId)
         {
             cboSelectRole.Items.Clear();
-            var portalSettings = PortalController.Instance.GetCurrentPortalSettings();            
+            var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
             var groupRoles = (selectedRoleGroupId > -2) ? RoleController.Instance.GetRoles(portalSettings.PortalId, r => r.RoleGroupID == selectedRoleGroupId && r.SecurityMode != SecurityMode.SocialGroup && r.Status == RoleStatus.Approved)
                 : RoleController.Instance.GetRoles(portalSettings.PortalId, r => r.SecurityMode != SecurityMode.SocialGroup && r.Status == RoleStatus.Approved);
 
             if (selectedRoleGroupId < 0)
-            {                
-                groupRoles.Add(new RoleInfo { RoleID = UnAuthUsersRoleId, RoleName = Globals.glbRoleUnauthUserName });                                
-                groupRoles.Add(new RoleInfo { RoleID = AllUsersRoleId, RoleName = Globals.glbRoleAllUsersName });            
+            {
+                groupRoles.Add(new RoleInfo { RoleID = UnAuthUsersRoleId, RoleName = Globals.glbRoleUnauthUserName });
+                groupRoles.Add(new RoleInfo { RoleID = AllUsersRoleId, RoleName = Globals.glbRoleAllUsersName });
             }
-            
+
             foreach (var role in groupRoles.OrderBy( r => r.RoleName))
             {
                 cboSelectRole.Items.Add(new ListItem(role.RoleName, role.RoleID.ToString(CultureInfo.InvariantCulture)));
-            }            
-            int[] defaultRoleIds = {AllUsersRoleId, portalSettings.RegisteredRoleId, portalSettings.AdministratorRoleId};            
+            }
+            int[] defaultRoleIds = {AllUsersRoleId, portalSettings.RegisteredRoleId, portalSettings.AdministratorRoleId};
             var itemToSelect = cboSelectRole.Items.Cast<ListItem>().FirstOrDefault(i => !defaultRoleIds.Contains(int.Parse(i.Value)));
             if (itemToSelect != null)
             {
@@ -816,7 +816,7 @@ namespace DotNetNuke.Security.Permissions.Controls
             var item = e.Item;
 
             if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem || item.ItemType == ListItemType.SelectedItem)
-            {                
+            {
                 var roleID = Int32.Parse(((DataRowView)item.DataItem)[0].ToString());
                 if (roleID == PortalSettings.Current.AdministratorRoleId || roleID == AllUsersRoleId || roleID == PortalSettings.Current.RegisteredRoleId)
                 {
@@ -856,7 +856,7 @@ namespace DotNetNuke.Security.Permissions.Controls
 
             lblSelectRole = new Label { Text = Localization.GetString("RoleSelect") };
             cboSelectRole = new DropDownList { ID = "cboSelectRole", ViewStateMode = ViewStateMode.Disabled };
-            lblSelectRole.AssociatedControlID = cboSelectRole.ID;            
+            lblSelectRole.AssociatedControlID = cboSelectRole.ID;
             divSelectRole.Controls.Add(lblSelectRole);
 
             FillSelectRoleComboBox(-1); //Default Role Group is Global Roles
@@ -1063,7 +1063,7 @@ namespace DotNetNuke.Security.Permissions.Controls
             }
         }
 
-        
+
 
         protected virtual void ParsePermissionKeys(PermissionInfoBase permission, string[] Settings)
         {
@@ -1177,7 +1177,7 @@ namespace DotNetNuke.Security.Permissions.Controls
                     {
                         continue;
                     }
-                    for (int i = 2; i <= dgi.Cells.Count - 2; i++) 
+                    for (int i = 2; i <= dgi.Cells.Count - 2; i++)
                     {
                         //all except first two cells which is role names and role ids and last column is Actions
                         if (dgi.Cells[i].Controls.Count > 0)
@@ -1207,7 +1207,7 @@ namespace DotNetNuke.Security.Permissions.Controls
             {
                 var usersList = _users.Cast<UserInfo>().ToList();
                 foreach (DataGridItem dgi in userPermissionsGrid.Items)
-                {                    
+                {
                     var userId = int.Parse(dgi.Cells[1].Text);
                     if (usersList.All(u => u.UserID != userId))
                     {
@@ -1283,7 +1283,7 @@ namespace DotNetNuke.Security.Permissions.Controls
                 return;
             }
 
-            //verify role         
+            //verify role
             var role = GetSelectedRole(selectedRoleId);
             if (role != null)
             {
@@ -1294,7 +1294,7 @@ namespace DotNetNuke.Security.Permissions.Controls
             {
                 //role does not exist
                 SetErrorMessage("RoleNotFound");
-            }            
+            }
         }
 
         private RoleInfo GetSelectedRole(int selectedRoleId)

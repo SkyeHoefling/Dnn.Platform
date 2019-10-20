@@ -7,7 +7,7 @@ class ApplicationService {
         sf.controller = controller;
 
         return sf;
-    }    
+    }
 
     getProduct(callback) {
         const sf = this.getServiceFramework("Licensing");

@@ -45,7 +45,7 @@ class LanguageSettingsPanelBody extends Component {
         const { props } = this;
         if (props.languageSettings) {
             let portalIdChanged = false;
-            let cultureCodeChanged = false;            
+            let cultureCodeChanged = false;
             if (props.portalId === undefined || prevProps.portalId === props.portalId) {
                 portalIdChanged = false;
             }

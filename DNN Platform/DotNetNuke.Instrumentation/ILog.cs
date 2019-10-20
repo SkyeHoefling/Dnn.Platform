@@ -7,10 +7,10 @@ namespace DotNetNuke.Instrumentation
         bool IsDebugEnabled { get; }
         bool IsInfoEnabled { get; }
         bool IsTraceEnabled { get; }
-        bool IsWarnEnabled { get; } 
+        bool IsWarnEnabled { get; }
         bool IsErrorEnabled { get; }
         bool IsFatalEnabled { get; }
-        
+
         void Debug(object message);
         void Debug(object message, Exception exception);
         void DebugFormat(string format, params object[] args);

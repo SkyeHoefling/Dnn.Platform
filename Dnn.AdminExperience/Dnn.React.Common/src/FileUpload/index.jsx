@@ -80,7 +80,7 @@ export default class FileUpload extends Component {
                 this.updateStateAndReloadImage(file);
             }
         }
-        if (props.portalId !== prevProps.portalId) {         
+        if (props.portalId !== prevProps.portalId) {
             this.setState({ showFolderPicker: false });
         }
     }
@@ -485,5 +485,3 @@ FileUpload.defaultProps = {
     fileText: "File",
     folderText: "Folder"
 };
-
-

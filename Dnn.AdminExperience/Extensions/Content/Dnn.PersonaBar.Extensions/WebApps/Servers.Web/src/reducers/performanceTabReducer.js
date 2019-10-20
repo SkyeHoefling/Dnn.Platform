@@ -28,14 +28,14 @@ export default function webTabReducer(state = {
                 performanceSettings: {},
                 loading: false,
                 errorMessage:  action.payload.errorMessage
-            }; 
+            };
         case ActionTypes.CHANGE_PERFORMANCE_SETTINGS_VALUE: {
             const field = action.payload.field;
             const value = action.payload.value;
             const performanceSettings = {
                 ...state.performanceSettings
             };
-        
+
             performanceSettings[field] = value;
             return { ...state, performanceSettings};
         }
@@ -44,8 +44,8 @@ export default function webTabReducer(state = {
                 saving: true,
                 errorMessage: "",
                 infoMessage: ""
-            }; 
-        case ActionTypes.SAVED_PERFORMANCE_SETTINGS: 
+            };
+        case ActionTypes.SAVED_PERFORMANCE_SETTINGS:
             return { ...state,
                 saving: false,
                 errorMessage: "",
@@ -61,8 +61,8 @@ export default function webTabReducer(state = {
             return { ...state,
                 incrementingVersion: true,
                 infoMessage: ""
-            }; 
-        case ActionTypes.INCREMENTED_VERSION: 
+            };
+        case ActionTypes.INCREMENTED_VERSION:
             return { ...state,
                 incrementingVersion: false,
                 infoMessage: localization.get("VersionIncrementedConfirmation")
@@ -74,6 +74,6 @@ export default function webTabReducer(state = {
                 infoMessage: ""
             };
         default:
-            return state;     
+            return state;
     }
 }

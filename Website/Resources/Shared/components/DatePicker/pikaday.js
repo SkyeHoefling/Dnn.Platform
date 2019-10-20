@@ -28,8 +28,8 @@
     'use strict';
 
     /**
-     * feature detection and helper functions
-     */
+    * feature detection and helper functions
+    */
     var hasMoment = typeof moment === 'function',
 
     hasEventListeners = !!window.addEventListener,
@@ -159,8 +159,8 @@
     },
 
     /**
-     * defaults and localisation
-     */
+    * defaults and localisation
+    */
     defaults = {
         // bind the picker to a form field
         field: null,
@@ -273,8 +273,8 @@
 
 
     /**
-     * templating functions to abstract HTML rendering
-     */
+    * templating functions to abstract HTML rendering
+    */
     renderDayName = function (opts, day, abbr) {
         day += opts.firstDay;
         while (day >= 7) {
@@ -313,11 +313,11 @@
             arr.push('is-endrange');
         }
         return '<td data-day="' + opts.day + '" class="' + arr.join(' ') + '" aria-selected="' + ariaSelected + '">' +
-                 '<button class="pika-button pika-day" type="button" ' +
+                '<button class="pika-button pika-day" type="button" ' +
                     'data-pika-year="' + opts.year + '" data-pika-month="' + opts.month + '" data-pika-day="' + opts.day + '">' +
                         opts.day +
-                 '</button>' +
-               '</td>';
+                '</button>' +
+                '</td>';
     },
 
     renderWeek = function (d, m, y) {
@@ -453,8 +453,8 @@
 
 
     /**
-     * Pikaday constructor
-     */
+    * Pikaday constructor
+    */
     Pikaday = function (options) {
         var self = this,
             opts = self.config(options);
@@ -693,12 +693,12 @@
 
 
     /**
-     * public Pikaday API
-     */
+    * public Pikaday API
+    */
     Pikaday.prototype = {
         /**
-         * configure functionality
-         */
+        * configure functionality
+        */
         config: function (options) {
             if (!this._o) {
                 this._o = extend({}, defaults, true);
@@ -768,22 +768,22 @@
         },
 
         /**
-         * return a formatted string of the current selection (using Moment.js if available)
-         */
+        * return a formatted string of the current selection (using Moment.js if available)
+        */
         toString: function (format) {
             return !isDate(this._d) ? '' : hasMoment ? moment(this._d).format(format || this._o.format) : this._o.showTime ? this._d.toString() : this._d.toDateString();
         },
 
         /**
-         * return a Moment.js object of the current selection (if available)
-         */
+        * return a Moment.js object of the current selection (if available)
+        */
         getMoment: function () {
             return hasMoment ? moment(this._d) : null;
         },
 
         /**
-         * set the current selection from a Moment.js object (if available)
-         */
+        * set the current selection from a Moment.js object (if available)
+        */
         setMoment: function (date, preventOnSelect) {
             if (hasMoment && moment.isMoment(date)) {
                 this.setDate(date.toDate(), preventOnSelect);
@@ -791,16 +791,16 @@
         },
 
         /**
-         * return a Date object of the current selection with fallback for the current date
-         */
+        * return a Date object of the current selection with fallback for the current date
+        */
         getDate: function () {
             return isDate(this._d) ? new Date(this._d.getTime()) : new Date();
         },
 
         /**
-         * set time components
-         * Currently defaulting to setting date to today if not set
-         */
+        * set time components
+        * Currently defaulting to setting date to today if not set
+        */
         setTime: function (hours, minutes, seconds) {
             if (!this._d) {
                 this._d = new Date();
@@ -819,8 +819,8 @@
         },
 
         /**
-         * set the current selection
-         */
+        * set the current selection
+        */
         setDate: function (date, preventOnSelect) {
             if (!date) {
                 this._d = null;
@@ -868,8 +868,8 @@
         },
 
         /**
-         * change view to a specific date
-         */
+        * change view to a specific date
+        */
         gotoDate: function (date) {
             var newCalendar = true;
 
@@ -943,8 +943,8 @@
         },
 
         /**
-         * change view to a specific month (zero-index, e.g. 0: January)
-         */
+        * change view to a specific month (zero-index, e.g. 0: January)
+        */
         gotoMonth: function (month) {
             if (!isNaN(month)) {
                 this.calendars[0].month = parseInt(month, 10);
@@ -963,8 +963,8 @@
         },
 
         /**
-         * change view to a specific full year (e.g. "2012")
-         */
+        * change view to a specific full year (e.g. "2012")
+        */
         gotoYear: function (year) {
             if (!isNaN(year)) {
                 this.calendars[0].year = parseInt(year, 10);
@@ -973,8 +973,8 @@
         },
 
         /**
-         * change the minDate
-         */
+        * change the minDate
+        */
         setMinDate: function (value) {
             if (value instanceof Date) {
                 if (!this._o.showTime) setToStartOfDay(value);
@@ -991,8 +991,8 @@
         },
 
         /**
-         * change the maxDate
-         */
+        * change the maxDate
+        */
         setMaxDate: function (value) {
             if (value instanceof Date) {
                 if (!this._o.showTime) setToStartOfDay(value);
@@ -1017,8 +1017,8 @@
         },
 
         /**
-         * refresh the HTML
-         */
+        * refresh the HTML
+        */
         draw: function (force) {
             if (!this._v && !force) {
                 return;
@@ -1132,8 +1132,8 @@
         },
 
         /**
-         * render HTML for a particular month
-         */
+        * render HTML for a particular month
+        */
         render: function (year, month, randId) {
             var opts = this._o,
                 now = new Date(),
@@ -1176,9 +1176,9 @@
                     isEndRange = opts.endRange && compareDates(opts.endRange, day),
                     isInRange = opts.startRange && opts.endRange && opts.startRange < day && day < opts.endRange,
                     isDisabled = (minDate_date && day < minDate_date) ||
-                                 (maxDate_date && day > maxDate_date) ||
-                                 (opts.disableWeekends && isWeekend(day)) ||
-                                 (opts.disableDayFn && opts.disableDayFn(day));
+                                (maxDate_date && day > maxDate_date) ||
+                                (opts.disableWeekends && isWeekend(day)) ||
+                                (opts.disableDayFn && opts.disableDayFn(day));
 
                 if (isEmpty) {
                     if (i < before) {
@@ -1257,8 +1257,8 @@
         },
 
         /**
-         * GAME OVER
-         */
+        * GAME OVER
+        */
         destroy: function () {
             this.hide();
             removeEvent(this.el, 'mousedown', this._onMouseDown, true);

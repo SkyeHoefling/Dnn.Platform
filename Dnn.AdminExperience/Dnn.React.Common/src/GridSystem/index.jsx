@@ -16,7 +16,7 @@ class GridSystem extends Component {
         getColumns() method.
         This method calculates the width of each column based on the number of columns specified.
         If no number is specified, then the width is calculated via the length of the children inside.
-     */
+    */
     getColumns() {
         const {props} = this;
         let children = [];

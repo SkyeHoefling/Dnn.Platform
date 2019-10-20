@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -40,16 +40,16 @@ namespace DotNetNuke.UI.Skins.Controls
     {
         private static readonly Regex SrcRegex = new Regex("src=[']?", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-		#region "Private Members"
+        #region "Private Members"
 
         private string _alignment;
         private bool _forceLinks = true;
         private bool _includeActiveTab = true;
         private string _level;
 
-		#endregion
+        #endregion
 
-		#region "Public Members"
+        #region "Public Members"
 
         public string Alignment
         {
@@ -104,10 +104,10 @@ namespace DotNetNuke.UI.Skins.Controls
                 _includeActiveTab = value;
             }
         }
-		
-		#endregion
-		
-		#region "Event Handlers"
+
+        #endregion
+
+        #region "Event Handlers"
 
         protected override void OnLoad(EventArgs e)
         {
@@ -126,34 +126,34 @@ namespace DotNetNuke.UI.Skins.Controls
             {
                 if (Separator.IndexOf("src=", StringComparison.Ordinal) != -1)
                 {
-					//Add the skinpath to image paths
+                    //Add the skinpath to image paths
                     Separator = SrcRegex.Replace(Separator, "$&" + PortalSettings.ActiveTab.SkinPath);
                 }
-				
-				//Wrap in a span
+
+                //Wrap in a span
                 Separator = string.Format("<span class=\"{0}\">{1}</span>", strCssClass, Separator);
             }
             else
             {
                 Separator = " ";
             }
-			
+
             //build links
             string strLinks = "";
 
             strLinks = BuildLinks(Level, strSeparator, strCssClass);
-			
-			//Render links, even if nothing is returned with the currently set level
+
+            //Render links, even if nothing is returned with the currently set level
             if (String.IsNullOrEmpty(strLinks) && ForceLinks)
             {
                 strLinks = BuildLinks("", strSeparator, strCssClass);
             }
             lblLinks.Text = strLinks;
         }
-		
-		#endregion
-		
-		#region "Private Methods"
+
+        #endregion
+
+        #region "Private Methods"
 
         private string BuildLinks(string strLevel, string strSeparator, string strCssClass)
         {
@@ -214,7 +214,7 @@ namespace DotNetNuke.UI.Skins.Controls
 
         private string ProcessLink(string sLink, int iLinksLength)
         {
-			//wrap in a div if set to vertical
+            //wrap in a div if set to vertical
             if (String.IsNullOrEmpty(sLink))
             {
                 return "";
@@ -225,7 +225,7 @@ namespace DotNetNuke.UI.Skins.Controls
             }
             else if (!String.IsNullOrEmpty(Separator) && iLinksLength > 0)
             {
-				//If not vertical, then render the separator
+                //If not vertical, then render the separator
                 sLink = string.Concat(Separator, sLink);
             }
             return sLink;
@@ -235,7 +235,7 @@ namespace DotNetNuke.UI.Skins.Controls
         {
             return string.Format("<a class=\"{0}\" href=\"{1}\">{2}</a>", strCssClass, strURL, strTabName);
         }
-		
-		#endregion
+
+        #endregion
     }
 }

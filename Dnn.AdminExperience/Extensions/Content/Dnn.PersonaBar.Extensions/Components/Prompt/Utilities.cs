@@ -193,5 +193,3 @@ namespace Dnn.PersonaBar.Prompt.Components
         }
     }
 }
-
-

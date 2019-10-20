@@ -7,10 +7,10 @@ import style from "./style.less";
 import Localization from "localization";
 
 class PermissionGrid extends Component {
-        
+
     onPermissionsChanged(permissions) {
-        
-        const p = { 
+
+        const p = {
             ...this.props.permissions,
             ...permissions
         };
@@ -19,10 +19,10 @@ class PermissionGrid extends Component {
     }
 
     render() {
-        const serviceFramework = utils.getServiceFramework(); 
+        const serviceFramework = utils.getServiceFramework();
         return (
             <div className={style.permissionGrid}>
-                <DnnPermissionGrid 
+                <DnnPermissionGrid
                     localization={{
                         permissionsByRole: Localization.get("PermissionsByRole"),
                         permissionsByUser: Localization.get("PermissionsByUser"),
@@ -40,7 +40,7 @@ class PermissionGrid extends Component {
                         ViewTab: Localization.get("ViewTab"),
                         EditTab: Localization.get("EditTab")
                     }}
-                    permissions={cloneDeep(this.props.permissions)} 
+                    permissions={cloneDeep(this.props.permissions)}
                     onPermissionsChanged={this.onPermissionsChanged.bind(this)}
                     service={serviceFramework} />
                 <div style={{clear:"both"}} />

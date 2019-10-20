@@ -15,7 +15,7 @@ as
 if @PortalID is null
 begin
   select Users.*,
-         'FullName' = Users.FirstName + ' ' + Users.LastName
+        'FullName' = Users.FirstName + ' ' + Users.LastName
   from   Users
   order by UserID
 end
@@ -24,21 +24,21 @@ begin
   if @Filter = '-'
   begin
     select Users.UserID,
-           Users.Username,
-           Users.Email,
-           'FullName' = Users.FirstName + ' ' + Users.LastName,
-           Users.FirstName,
-           Users.LastName,
-           Users.Unit,
-           Users.Street,
-           Users.City,
-           Users.Region,
-           Users.PostalCode,
-           Users.Country,
-           Users.Telephone,
-           'Authorized' = 'N',
-           UserPortals.CreatedDate,
-           UserPortals.LastLoginDate
+            Users.Username,
+            Users.Email,
+            'FullName' = Users.FirstName + ' ' + Users.LastName,
+            Users.FirstName,
+            Users.LastName,
+            Users.Unit,
+            Users.Street,
+            Users.City,
+            Users.Region,
+            Users.PostalCode,
+            Users.Country,
+            Users.Telephone,
+            'Authorized' = 'N',
+            UserPortals.CreatedDate,
+            UserPortals.LastLoginDate
     from   Users
     inner join UserPortals on Users.UserId = UserPortals.UserId
     where  UserPortals.PortalId = @PortalId
@@ -48,21 +48,21 @@ begin
   else
   begin
     select Users.UserID,
-           users.Username,
-           Users.Email,
-           'FullName' = Users.FirstName + ' ' + Users.LastName,
-           Users.FirstName,
-           Users.LastName,
-           Users.Unit,
-           Users.Street,
-           Users.City,
-           Users.Region,
-           Users.PostalCode,
-           Users.Country,
-           Users.Telephone,
-           'Authorized' = case when UserPortals.Authorized = 1 then 'Y' else 'N' end,
-           UserPortals.CreatedDate,
-           UserPortals.LastLoginDate
+            users.Username,
+            Users.Email,
+            'FullName' = Users.FirstName + ' ' + Users.LastName,
+            Users.FirstName,
+            Users.LastName,
+            Users.Unit,
+            Users.Street,
+            Users.City,
+            Users.Region,
+            Users.PostalCode,
+            Users.Country,
+            Users.Telephone,
+            'Authorized' = case when UserPortals.Authorized = 1 then 'Y' else 'N' end,
+            UserPortals.CreatedDate,
+            UserPortals.LastLoginDate
     from   Users
     inner join UserPortals on Users.UserId = UserPortals.UserId
     where  UserPortals.PortalId = @PortalId
@@ -74,14 +74,14 @@ end
 GO
 
 ALTER TABLE Users
-	DROP CONSTRAINT IX_Users
+    DROP CONSTRAINT IX_Users
 GO
 
 ALTER TABLE Users ADD CONSTRAINT
-	IX_Users UNIQUE NONCLUSTERED 
-	(
-	Username
-	) ON [PRIMARY]
+    IX_Users UNIQUE NONCLUSTERED
+    (
+    Username
+    ) ON [PRIMARY]
 
 GO
 
@@ -112,17 +112,17 @@ select @UserID = null
 
 select	@UserID = UserID
 from 	Users
-where	Username = @Username 
+where	Username = @Username
 
 if @UserID is null
 begin
   insert into Users (
     FirstName,
     LastName,
-    Unit, 
-    Street, 
+    Unit,
+    Street,
     City,
-    Region, 
+    Region,
     PostalCode,
     Country,
     Telephone,
@@ -167,8 +167,8 @@ end
 GO
 
 ALTER TABLE ModuleDefinitions ADD
-	AdminTabIcon nvarchar(100) NULL,
-	EditModuleIcon nvarchar(100) NULL
+    AdminTabIcon nvarchar(100) NULL,
+    EditModuleIcon nvarchar(100) NULL
 GO
 
 drop procedure GetPortalSettings
@@ -222,48 +222,48 @@ begin
   from Tabs
   inner join Portals on Tabs.PortalID = Portals.PortalID
   where Portals.PortalID = @PortalID
-  and Tabs.TabOrder = 1  
+  and Tabs.TabOrder = 1
 end
 
 /* First, get Out Params */
 select Portals.PortalAlias,
-       Portals.PortalID,
-       Portals.GUID,
-       Portals.PortalName,
-       Portals.LogoFile,
-       Portals.FooterText,
-       Portals.ExpiryDate,
-       Portals.UserRegistration,
-       Portals.BannerAdvertising,
-       Portals.Currency,
-       Portals.AdministratorId,
-       Users.Email,
-       Portals.HostFee,
-       Portals.HostSpace,
-       Portals.AdministratorRoleId,
-       Portals.RegisteredRoleId,
-       Portals.Description,
-       Portals.KeyWords,
-       Portals.BackgroundFile,
-       Portals.SiteLogHistory,
-       'AdminTabId' = ( select TabID from Tabs where PortalId = @PortalId and TabName = 'Admin' ),
-       'SuperUserId' = ( select UserID from Users where IsSuperUser = 1 ),
-       'SuperTabId' = ( select TabID from Tabs where PortalId is null and ParentId is null ),
-       Tabs.TabID,
-       Tabs.TabOrder,
-       Tabs.TabName,
-       Tabs.MobileTabName,
-       Tabs.AuthorizedRoles,
-       Tabs.AdministratorRoles,
-       Tabs.ShowMobile,
-       Tabs.LeftPaneWidth,
-       Tabs.RightPaneWidth,
-       Tabs.IsVisible,
-       'ParentId' = isnull(Tabs.ParentID,-1),
-       Tabs.Level,
-       Tabs.IconFile,
-       'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName ),
-       'HasChildren' = case when exists (select 1 from Tabs T2 where T2.ParentId = Tabs.TabId) then 'true' else 'false' end
+        Portals.PortalID,
+        Portals.GUID,
+        Portals.PortalName,
+        Portals.LogoFile,
+        Portals.FooterText,
+        Portals.ExpiryDate,
+        Portals.UserRegistration,
+        Portals.BannerAdvertising,
+        Portals.Currency,
+        Portals.AdministratorId,
+        Users.Email,
+        Portals.HostFee,
+        Portals.HostSpace,
+        Portals.AdministratorRoleId,
+        Portals.RegisteredRoleId,
+        Portals.Description,
+        Portals.KeyWords,
+        Portals.BackgroundFile,
+        Portals.SiteLogHistory,
+        'AdminTabId' = ( select TabID from Tabs where PortalId = @PortalId and TabName = 'Admin' ),
+        'SuperUserId' = ( select UserID from Users where IsSuperUser = 1 ),
+        'SuperTabId' = ( select TabID from Tabs where PortalId is null and ParentId is null ),
+        Tabs.TabID,
+        Tabs.TabOrder,
+        Tabs.TabName,
+        Tabs.MobileTabName,
+        Tabs.AuthorizedRoles,
+        Tabs.AdministratorRoles,
+        Tabs.ShowMobile,
+        Tabs.LeftPaneWidth,
+        Tabs.RightPaneWidth,
+        Tabs.IsVisible,
+        'ParentId' = isnull(Tabs.ParentID,-1),
+        Tabs.Level,
+        Tabs.IconFile,
+        'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName ),
+        'HasChildren' = case when exists (select 1 from Tabs T2 where T2.ParentId = Tabs.TabId) then 'true' else 'false' end
 from   Tabs
 inner join Portals on Portals.PortalID = @PortalID
 inner join Users on Portals.AdministratorId = Users.UserId
@@ -271,31 +271,31 @@ where  TabID = @TabID
 
 /* Get Tabs list */
 select TabName,
-       AuthorizedRoles,
-       AdministratorRoles,
-       TabID,
-       TabOrder,
-       IsVisible,
-       'ParentId' = isnull(Tabs.ParentID,-1),
-       Tabs.Level,
-       Tabs.IconFile,
-       'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName ),
-       'HasChildren' = case when exists (select 1 from Tabs T2 where T2.ParentId = Tabs.TabId) then 'true' else 'false' end
+        AuthorizedRoles,
+        AdministratorRoles,
+        TabID,
+        TabOrder,
+        IsVisible,
+        'ParentId' = isnull(Tabs.ParentID,-1),
+        Tabs.Level,
+        Tabs.IconFile,
+        'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName ),
+        'HasChildren' = case when exists (select 1 from Tabs T2 where T2.ParentId = Tabs.TabId) then 'true' else 'false' end
 from   Tabs
 where  PortalID = @PortalId
 order  by TabOrder, TabName
 
 /* Get Mobile Tabs list */
 select MobileTabName,
-       AuthorizedRoles,
-       AdministratorRoles,
-       TabID,
-       IsVisible,
-       'ParentId' = isnull(Tabs.ParentID,-1),
-       Tabs.Level,
-       Tabs.IconFile,
-       'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName ),
-       'HasChildren' = case when exists (select 1 from Tabs T2 where T2.ParentId = Tabs.TabId) then 'true' else 'false' end
+        AuthorizedRoles,
+        AdministratorRoles,
+        TabID,
+        IsVisible,
+        'ParentId' = isnull(Tabs.ParentID,-1),
+        Tabs.Level,
+        Tabs.IconFile,
+        'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName ),
+        'HasChildren' = case when exists (select 1 from Tabs T2 where T2.ParentId = Tabs.TabId) then 'true' else 'false' end
 from   Tabs
 where  PortalID = @PortalID
 and    ShowMobile = 1
@@ -337,19 +337,19 @@ create procedure GetTabsByParentId
 as
 
 select TabID,
-       TabOrder,
-       PortalID,
-       TabName,
-       MobileTabName,
-       AuthorizedRoles,
-       ShowMobile,
-       LeftPaneWidth,
-       RightPaneWidth,
-       IsVisible,
-       Level,
-       IconFile,
-       AdministratorRoles,
-       'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName )
+        TabOrder,
+        PortalID,
+        TabName,
+        MobileTabName,
+        AuthorizedRoles,
+        ShowMobile,
+        LeftPaneWidth,
+        RightPaneWidth,
+        IsVisible,
+        Level,
+        IconFile,
+        AdministratorRoles,
+        'AdminTabIcon' = ( select AdminTabIcon from ModuleDefinitions where ModuleDefinitions.FriendlyName = Tabs.TabName )
 from   Tabs
 where  ParentId = @ParentId
 order by TabOrder
@@ -436,7 +436,7 @@ end
 GO
 
 ALTER TABLE Announcements ADD
-	ViewOrder int NULL
+    ViewOrder int NULL
 GO
 
 drop procedure AddAnnouncement
@@ -491,14 +491,14 @@ create procedure GetAnnouncements
 as
 
 select ItemID,
-       CreatedByUser,
-       CreatedDate,
-       Title,
-       URL,
-       Syndicate,
-       ExpireDate,
-       Description,
-       ViewOrder
+        CreatedByUser,
+        CreatedDate,
+        Title,
+        URL,
+        Syndicate,
+        ExpireDate,
+        Description,
+        ViewOrder
 from   Announcements
 where  ModuleID = @ModuleID
 and    (ExpireDate > GetDate() or ExpireDate is null)
@@ -516,14 +516,14 @@ create procedure GetSingleAnnouncement
 as
 
 select Title,
-       URL,
-       Syndicate,
-       ExpireDate,
-       Description,
-       Clicks,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Announcements.CreatedDate,
-       ViewOrder
+        URL,
+        Syndicate,
+        ExpireDate,
+        Description,
+        Clicks,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Announcements.CreatedDate,
+        ViewOrder
 from   Announcements
 left outer join Users on Announcements.CreatedByUser = Users.UserID
 where  ItemID = @ItemID
@@ -549,13 +549,13 @@ as
 
 update Announcements
 set    CreatedByUser = @UserName,
-       CreatedDate   = GetDate(),
-       Title         = @Title,
-       URL           = @URL,
-       Syndicate     = @Syndicate,
-       ExpireDate    = @ExpireDate,
-       Description   = @Description,
-       ViewOrder     = @ViewOrder
+        CreatedDate   = GetDate(),
+        Title         = @Title,
+        URL           = @URL,
+        Syndicate     = @Syndicate,
+        ExpireDate    = @ExpireDate,
+        Description   = @Description,
+        ViewOrder     = @ViewOrder
 where  ItemID = @ItemID
 
 GO

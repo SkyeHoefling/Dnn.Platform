@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./style.less";
-import { 
+import {
     Label,
     Button,
     Switch,
@@ -354,7 +354,7 @@ class SchedulerEditor extends Component {
                 </div>
             </div>;
 
-            return ( 
+            return (
                 <div className="scheduler-setting-editor">
                     <div className="scheduler-item-container">
                         <div className="scheduler-item-column">

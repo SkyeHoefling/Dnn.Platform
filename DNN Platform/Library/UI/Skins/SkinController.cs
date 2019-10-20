@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -57,7 +57,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public class SkinController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinController));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinController));
         private const string GlobalSkinPrefix = "[G]";
         private const string PortalSystemSkinPrefix = "[S]";
         private const string PortalSkinPrefix = "[L]";
@@ -65,8 +65,8 @@ namespace DotNetNuke.UI.Skins
         private static readonly Regex SdirRegex = new Regex("\\[s]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         private static readonly Regex LdirRegex = new Regex("\\[l]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
-		#region Public Shared Properties
-		
+        #region Public Shared Properties
+
         public static string RootSkin
         {
             get
@@ -82,10 +82,10 @@ namespace DotNetNuke.UI.Skins
                 return "Containers";
             }
         }
-		
-		#endregion
 
-		#region Public Shared Methods
+        #endregion
+
+        #region Public Shared Methods
 
         private static void AddSkinFiles(List<KeyValuePair<string, string>> skins, string skinRoot, string skinFolder, string skinPrefix)
         {
@@ -93,10 +93,10 @@ namespace DotNetNuke.UI.Skins
             {
                 string folder = skinFolder.Substring(skinFolder.LastIndexOf("\\") + 1);
 
-				string key = (skinPrefix == PortalSystemSkinPrefix || skinPrefix == PortalSkinPrefix ? "Site: " : "Host: ") 
-								+ FormatSkinName(folder, Path.GetFileNameWithoutExtension(skinFile));
-				string value = skinPrefix + skinRoot + "/" + folder + "/" + Path.GetFileName(skinFile);
-                skins.Add(new KeyValuePair<string, string>(key, value)); 
+                string key = (skinPrefix == PortalSystemSkinPrefix || skinPrefix == PortalSkinPrefix ? "Site: " : "Host: ")
+                                + FormatSkinName(folder, Path.GetFileNameWithoutExtension(skinFile));
+                string value = skinPrefix + skinRoot + "/" + folder + "/" + Path.GetFileName(skinFile);
+                skins.Add(new KeyValuePair<string, string>(key, value));
             }
         }
 
@@ -123,7 +123,7 @@ namespace DotNetNuke.UI.Skins
             var skins = new List<KeyValuePair<string, string>>();
 
             if (portalInfo != null)
-            {                
+            {
                 ProcessSkinsFolder(skins, portalInfo.HomeSystemDirectoryMapPath + skinRoot, skinRoot, PortalSystemSkinPrefix);
                 ProcessSkinsFolder(skins, portalInfo.HomeDirectoryMapPath + skinRoot, skinRoot, PortalSkinPrefix); //to be compliant with all versions
             }
@@ -131,12 +131,12 @@ namespace DotNetNuke.UI.Skins
         }
 
         private static void ProcessSkinsFolder(List<KeyValuePair<string, string>> skins, string skinsFolder, string skinRoot, string skinPrefix)
-        {            
+        {
             if (Directory.Exists(skinsFolder))
             {
                 foreach (string skinFolder in Directory.GetDirectories(skinsFolder))
                 {
-					AddSkinFiles(skins, skinRoot, skinFolder, skinPrefix);
+                    AddSkinFiles(skins, skinRoot, skinFolder, skinPrefix);
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace DotNetNuke.UI.Skins
             }
             if (canDelete)
             {
-				//Check if used for Tabs or Modules
+                //Check if used for Tabs or Modules
                 canDelete = DataProvider.Instance().CanDeleteSkin(skinType, skinFolder);
             }
             return canDelete;
@@ -216,18 +216,18 @@ namespace DotNetNuke.UI.Skins
             string message = title;
             if (isError)
             {
-				message = "<span class=\"NormalRed\">" + title + "</span>";
+                message = "<span class=\"NormalRed\">" + title + "</span>";
             }
             switch (level)
             {
                 case -1:
-					message = "<hr /><br /><strong>" + message + "</strong>";
+                    message = "<hr /><br /><strong>" + message + "</strong>";
                     break;
                 case 0:
-					message = "<br /><br /><strong>" + message + "</strong>";
+                    message = "<br /><br /><strong>" + message + "</strong>";
                     break;
                 case 1:
-					message = "<br /><strong>" + message + "</strong>";
+                    message = "<br /><strong>" + message + "</strong>";
                     break;
                 default:
                     message = "<br /><li>" + message + "</li>";
@@ -334,10 +334,10 @@ namespace DotNetNuke.UI.Skins
             {
                 // host folder
                 return skinFile;
-                
+
             }
-			
-			//portal folder
+
+            //portal folder
             switch (skinFile.ToLowerInvariant())
             {
                 case "skin":
@@ -363,7 +363,7 @@ namespace DotNetNuke.UI.Skins
             return skinSrc.Contains(Globals.HostPath);
         }
 
-      
+
         public static void SetSkin(string skinRoot, int portalId, SkinType skinType, string skinSrc)
         {
             var selectedCultureCode = LocaleController.Instance.GetCurrentLocale(portalId).Code;
@@ -428,11 +428,11 @@ namespace DotNetNuke.UI.Skins
         public static void UpdateSkinPackage(SkinPackageInfo skinPackage)
         {
             DataProvider.Instance().UpdateSkinPackage(skinPackage.SkinPackageID,
-                                                      skinPackage.PackageID,
-                                                      skinPackage.PortalID,
-                                                      skinPackage.SkinName,
-                                                      skinPackage.SkinType,
-                                                      UserController.Instance.GetCurrentUserInfo().UserID);
+                                                    skinPackage.PackageID,
+                                                    skinPackage.PortalID,
+                                                    skinPackage.SkinName,
+                                                    skinPackage.SkinType,
+                                                    UserController.Instance.GetCurrentUserInfo().UserID);
             EventLogController.Instance.AddLog(skinPackage, PortalController.Instance.GetCurrentPortalSettings(), UserController.Instance.GetCurrentUserInfo().UserID, "", EventLogController.EventLogType.SKINPACKAGE_UPDATED);
             foreach (KeyValuePair<int, string> kvp in skinPackage.Skins)
             {
@@ -469,13 +469,13 @@ namespace DotNetNuke.UI.Skins
             {
                 if (!objZipEntry.IsDirectory)
                 {
-					//validate file extension
+                    //validate file extension
                     strExtension = objZipEntry.Name.Substring(objZipEntry.Name.LastIndexOf(".") + 1);
                     var extraExtensions = new List<string> {".ASCX", ".HTM", ".HTML", ".CSS", ".SWF", ".RESX", ".XAML", ".JS"};
                     if(Host.AllowedExtensionWhitelist.IsAllowedExtension(strExtension, extraExtensions))
                     {
                         //process embedded zip files
-						if (objZipEntry.Name.Equals(RootSkin.ToLowerInvariant() + ".zip", StringComparison.InvariantCultureIgnoreCase))
+                        if (objZipEntry.Name.Equals(RootSkin.ToLowerInvariant() + ".zip", StringComparison.InvariantCultureIgnoreCase))
                         {
                             using (var objMemoryStream = new MemoryStream())
                             {
@@ -513,18 +513,18 @@ namespace DotNetNuke.UI.Skins
                                 strMessage += FormatMessage(CREATE_DIR, Path.GetDirectoryName(strFileName), 2, false);
                                 Directory.CreateDirectory(Path.GetDirectoryName(strFileName));
                             }
-							
-							//remove the old file
+
+                            //remove the old file
                             if (File.Exists(strFileName))
                             {
                                 File.SetAttributes(strFileName, FileAttributes.Normal);
                                 File.Delete(strFileName);
                             }
-							
-							//create the new file
+
+                            //create the new file
                             objFileStream = File.Create(strFileName);
-							
-							//unzip the file
+
+                            //unzip the file
                             strMessage += FormatMessage(WRITE_FILE, Path.GetFileName(strFileName), 2, false);
                             intSize = objZipInputStream.Read(arrData, 0, arrData.Length);
                             while (intSize > 0)
@@ -563,8 +563,8 @@ namespace DotNetNuke.UI.Skins
             //process the list of skin files
             var NewSkin = new SkinFileProcessor(rootPath, skinRoot, skinName);
             strMessage += NewSkin.ProcessList(arrSkinFiles, SkinParser.Portable);
-			
-			//log installation event
+
+            //log installation event
             try
             {
                 var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
@@ -583,7 +583,7 @@ namespace DotNetNuke.UI.Skins
             }
             return strMessage;
         }
-		
-		#endregion
+
+        #endregion
     }
 }

@@ -94,7 +94,7 @@ namespace Dnn.PersonaBar.Extensions.Components
             var uniqueName = true;
             foreach (var package in PackageController.Instance.GetExtensionPackages(Null.NullInteger))
             {
-                if (package.Name.Equals(createModuleDto.ModuleName, StringComparison.OrdinalIgnoreCase) 
+                if (package.Name.Equals(createModuleDto.ModuleName, StringComparison.OrdinalIgnoreCase)
                     || package.FriendlyName.Equals(createModuleDto.ModuleName, StringComparison.OrdinalIgnoreCase))
                 {
                     uniqueName = false;
@@ -138,7 +138,7 @@ namespace Dnn.PersonaBar.Extensions.Components
 
                 var packageInfo = PackageController.Instance.GetExtensionPackage(Null.NullInteger, p =>
                                     p.Name.Equals(createModuleDto.ModuleName, StringComparison.OrdinalIgnoreCase)
-                                     || p.FriendlyName.Equals(createModuleDto.ModuleName, StringComparison.OrdinalIgnoreCase));
+                                    || p.FriendlyName.Equals(createModuleDto.ModuleName, StringComparison.OrdinalIgnoreCase));
                 if (packageInfo != null)
                 {
                     errorMessage = "NonuniqueName";

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -54,7 +54,7 @@ namespace DotNetNuke.Modules.Admin.Users
     /// </remarks>
     public partial class ManageUsers : UserModuleBase, IActionable
     {
-		#region Protected Members
+        #region Protected Members
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -79,11 +79,11 @@ namespace DotNetNuke.Modules.Admin.Users
             {
                 string _RedirectURL = "";
 
-				if (PortalSettings.Registration.RedirectAfterRegistration == Null.NullInteger)
+                if (PortalSettings.Registration.RedirectAfterRegistration == Null.NullInteger)
                 {
                     if (Request.QueryString["returnurl"] != null)
                     {
-						//return to the url passed to register
+                        //return to the url passed to register
                         _RedirectURL = HttpUtility.UrlDecode(Request.QueryString["returnurl"]);
 
                         //clean the return url to avoid possible XSS attack.
@@ -99,13 +99,13 @@ namespace DotNetNuke.Modules.Admin.Users
                     }
                     if (String.IsNullOrEmpty(_RedirectURL))
                     {
-						//redirect to current page 
+                        //redirect to current page
                         _RedirectURL = Globals.NavigateURL();
                     }
                 }
                 else //redirect to after registration page
                 {
-					_RedirectURL = Globals.NavigateURL(PortalSettings.Registration.RedirectAfterRegistration);
+                    _RedirectURL = Globals.NavigateURL(PortalSettings.Registration.RedirectAfterRegistration);
                 }
                 return _RedirectURL;
             }
@@ -161,8 +161,8 @@ namespace DotNetNuke.Modules.Admin.Users
                 bool editProfile;
 
                 return !string.IsNullOrEmpty(Request.QueryString["editProfile"])
-                       && bool.TryParse(Request["editProfile"], out editProfile)
-                       && editProfile;
+                        && bool.TryParse(Request["editProfile"], out editProfile)
+                        && editProfile;
             }
         }
 
@@ -190,8 +190,8 @@ namespace DotNetNuke.Modules.Admin.Users
                 ViewState["PageNo"] = value;
             }
         }
-		
-		#endregion
+
+        #endregion
 
         #region IActionable Members
 
@@ -245,18 +245,18 @@ namespace DotNetNuke.Modules.Admin.Users
 
         #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         private void BindData()
         {
             if (User != null)
             {
-				//If trying to add a SuperUser - check that user is a SuperUser
+                //If trying to add a SuperUser - check that user is a SuperUser
                 if (VerifyUserPermissions()==false)
                 {
                     return;
                 }
-				
+
                 if (AddUser)
                 {
                     cmdAdd.Text = Localization.GetString("AddUser", LocalResourceFile);
@@ -308,7 +308,7 @@ namespace DotNetNuke.Modules.Admin.Users
                 DisableForm();
                 return false;
             }
-				
+
             //Check if User is a member of the Current Portal (or a member of the MasterPortal if PortalGroups enabled)
             if (User.PortalID != Null.NullInteger && User.PortalID != PortalId)
             {
@@ -316,7 +316,7 @@ namespace DotNetNuke.Modules.Admin.Users
                 DisableForm();
                 return false;
             }
-				
+
             //Check if User is a SuperUser and that the current User is a SuperUser
             if (User.IsSuperUser && !UserInfo.IsSuperUser)
             {
@@ -382,7 +382,7 @@ namespace DotNetNuke.Modules.Admin.Users
             //Bind the Membership
             if (AddUser || (!IsAdmin))
             {
-				membershipRow.Visible = false;
+                membershipRow.Visible = false;
             }
             else
             {
@@ -465,16 +465,16 @@ namespace DotNetNuke.Modules.Admin.Users
             if(EditProfileMode)
             {
                 adminTabNav.Visible =
-                    dnnUserDetails.Visible = 
-                    dnnRoleDetails.Visible = 
+                    dnnUserDetails.Visible =
+                    dnnRoleDetails.Visible =
                     dnnPasswordDetails.Visible =
                     actionsRow.Visible = false;
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -661,9 +661,9 @@ namespace DotNetNuke.Modules.Admin.Users
             try
             {
                 AddModuleMessage("UserAuthorized", ModuleMessage.ModuleMessageType.GreenSuccess, true);
-                
-				//Send Notification to User
-				if (string.IsNullOrEmpty(User.Membership.Password) && !MembershipProviderConfig.RequiresQuestionAndAnswer && MembershipProviderConfig.PasswordRetrievalEnabled)
+
+                //Send Notification to User
+                if (string.IsNullOrEmpty(User.Membership.Password) && !MembershipProviderConfig.RequiresQuestionAndAnswer && MembershipProviderConfig.PasswordRetrievalEnabled)
                 {
                     UserInfo user = User;
                     User.Membership.Password = UserController.GetPassword(ref user, "");
@@ -839,18 +839,18 @@ namespace DotNetNuke.Modules.Admin.Users
 
             if (status == PasswordUpdateStatus.Success)
             {
-				//Send Notification to User
+                //Send Notification to User
                 try
                 {
                     var accessingUser = (UserInfo) HttpContext.Current.Items["UserInfo"];
                     if (accessingUser.UserID != User.UserID)
                     {
-						//The password was changed by someone else 
+                        //The password was changed by someone else
                         Mail.SendMail(User, MessageType.PasswordUpdated, PortalSettings);
                     }
                     else
                     {
-						//The User changed his own password
+                        //The User changed his own password
                         Mail.SendMail(User, MessageType.UserUpdatedOwnPassword, PortalSettings);
                     }
                     AddModuleMessage("PasswordChanged", ModuleMessage.ModuleMessageType.GreenSuccess, true);
@@ -879,7 +879,7 @@ namespace DotNetNuke.Modules.Admin.Users
             {
                 return;
             }
-			
+
             //Redirect to same page (this will update all controls for any changes to profile
             //and leave us at Page 0 (User Credentials)
             Response.Redirect(Request.RawUrl, true);
@@ -991,7 +991,7 @@ namespace DotNetNuke.Modules.Admin.Users
         {
             AddModuleMessage(e.Message, ModuleMessage.ModuleMessageType.RedError, true);
         }
-		
-		#endregion
+
+        #endregion
     }
 }

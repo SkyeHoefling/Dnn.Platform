@@ -7,74 +7,74 @@
 Type.registerNamespace('dnn.controls');
 
 dnn.extend(dnn.controls, {
-    initLabelEdit: function (ctl) 
+    initLabelEdit: function (ctl)
     {
         if (ctl && dnn.controls.controls[ctl.id] == null)
-	    {
-		    var lbl = new dnn.controls.DNNLabelEdit(ctl);
-		    lbl.initialize();
-		    return lbl;
-	    }
+        {
+            var lbl = new dnn.controls.DNNLabelEdit(ctl);
+            lbl.initialize();
+            return lbl;
+        }
     }
 });
 
 //------- Constructor -------//
 dnn.controls.DNNLabelEdit = function (o)
 {
-	dnn.controls.DNNLabelEdit.initializeBase(this, [o]);	
+    dnn.controls.DNNLabelEdit.initializeBase(this, [o]);
 
     this.control = this.container;//backwards compat
-    
-	this.editWrapper = null;	//stores dnn wrapper for abstracted edit control
-	this.editContainer = null; //stores container of the control (necessary for iframe controls)
-	this.editControl = null; //stores reference to underlying edit control (input, span, textarea)
-	this.prevText = '';	
-		
-	this.onblurSave = (this.getProp('blursave', '1') == '1');
-	
-	this.toolbarId = this.getProp('tbId', '');
-	this.nsPrefix = this.getProp('nsPrefix', '');
-	this.toolbarEventName = this.getProp('tbEvent', 'onmousemove');
-	this.toolbar = null;
-	//this.scriptPath = dnn.dom.getScriptPath();
-	//var oThisScript = dnn.dom.getScript('dnn.controls.dnnlabeledit.js');
-	//if (oThisScript)
-	//	this.scriptPath = oThisScript.src.replace('dnn.controls.dnnlabeledit.js', '');
-		
-	this.css = o.className;	
-	this.cssEdit = this.getProp('cssEdit', '');
-	this.cssWork = this.getProp('cssWork', '');
-	this.cssOver = this.getProp('cssOver', '');
-	this.sysImgPath = this.getProp('sysimgpath', '');
-	this.callBack = this.getProp('callback', '');
-	this.callBackStatFunc = this.getProp('callbackSF', '');
-	if (this.callBackStatFunc.length > 0)
-	    this.add_handler('callBackStatus', eval(this.callBackStatFunc));
-	
-	this.beforeSaveFunc = this.getProp('beforeSaveF', '');
-	if (this.beforeSaveFunc.length > 0)
-	    this.add_handler('beforeSave', eval(this.beforeSaveFunc));
-	    
-	this.eventName = this.getProp('eventName', 'onclick');
-	//this.editEnabled = dnn.dom.getAttr(o, 'editEnabled', '1') == '1';
-	this.multiLineEnabled = this.getProp('multiline', '0') == '1';
-	this.saveOnEnter = this.getProp('saveonenter', '1') == '1';
-	this.richTextEnabled = this.getProp('richtext', '0') == '1';
-	this.supportsCE = (document.body.contentEditable != null);
-	if (dnn.dom.browser.isType(dnn.dom.browser.Safari) || dnn.dom.browser.isType(dnn.dom.browser.Opera))		
-		this.supportsCE = false;//Safari content editable still buggy...
-	this.supportsRichText = (this.supportsCE || (dnn.dom.browser.isType(dnn.dom.browser.Mozilla) && navigator.productSub >= '20050111'));	//i belive firefox only works well with 1.5 or later, need a better way to detect this!
-	
-	if (this.eventName != 'none')
-	    this.addHandlers(o, this.getDynamicEventObject(this._getEventName(this.eventName), this.performEdit), this);
-	
-	if (this.toolbarId.length > 0)
-	    this.addHandlers(o, this.getDynamicEventObject(this._getEventName(this.toolbarEventName), this.showToolBar), this);
 
-    this.addHandlers(o, {'mousemove': this.mouseMove, 
+    this.editWrapper = null;	//stores dnn wrapper for abstracted edit control
+    this.editContainer = null; //stores container of the control (necessary for iframe controls)
+    this.editControl = null; //stores reference to underlying edit control (input, span, textarea)
+    this.prevText = '';
+
+    this.onblurSave = (this.getProp('blursave', '1') == '1');
+
+    this.toolbarId = this.getProp('tbId', '');
+    this.nsPrefix = this.getProp('nsPrefix', '');
+    this.toolbarEventName = this.getProp('tbEvent', 'onmousemove');
+    this.toolbar = null;
+    //this.scriptPath = dnn.dom.getScriptPath();
+    //var oThisScript = dnn.dom.getScript('dnn.controls.dnnlabeledit.js');
+    //if (oThisScript)
+    //	this.scriptPath = oThisScript.src.replace('dnn.controls.dnnlabeledit.js', '');
+
+    this.css = o.className;
+    this.cssEdit = this.getProp('cssEdit', '');
+    this.cssWork = this.getProp('cssWork', '');
+    this.cssOver = this.getProp('cssOver', '');
+    this.sysImgPath = this.getProp('sysimgpath', '');
+    this.callBack = this.getProp('callback', '');
+    this.callBackStatFunc = this.getProp('callbackSF', '');
+    if (this.callBackStatFunc.length > 0)
+        this.add_handler('callBackStatus', eval(this.callBackStatFunc));
+
+    this.beforeSaveFunc = this.getProp('beforeSaveF', '');
+    if (this.beforeSaveFunc.length > 0)
+        this.add_handler('beforeSave', eval(this.beforeSaveFunc));
+
+    this.eventName = this.getProp('eventName', 'onclick');
+    //this.editEnabled = dnn.dom.getAttr(o, 'editEnabled', '1') == '1';
+    this.multiLineEnabled = this.getProp('multiline', '0') == '1';
+    this.saveOnEnter = this.getProp('saveonenter', '1') == '1';
+    this.richTextEnabled = this.getProp('richtext', '0') == '1';
+    this.supportsCE = (document.body.contentEditable != null);
+    if (dnn.dom.browser.isType(dnn.dom.browser.Safari) || dnn.dom.browser.isType(dnn.dom.browser.Opera))
+        this.supportsCE = false;//Safari content editable still buggy...
+    this.supportsRichText = (this.supportsCE || (dnn.dom.browser.isType(dnn.dom.browser.Mozilla) && navigator.productSub >= '20050111'));	//i belive firefox only works well with 1.5 or later, need a better way to detect this!
+
+    if (this.eventName != 'none')
+        this.addHandlers(o, this.getDynamicEventObject(this._getEventName(this.eventName), this.performEdit), this);
+
+    if (this.toolbarId.length > 0)
+        this.addHandlers(o, this.getDynamicEventObject(this._getEventName(this.toolbarEventName), this.showToolBar), this);
+
+    this.addHandlers(o, {'mousemove': this.mouseMove,
                         'mouseout': this.mouseOut}, this);
 
-    this._toolbarActionDelegate = dnn.createDelegate(this, this.toolbarAction);                        
+    this._toolbarActionDelegate = dnn.createDelegate(this, this.toolbarAction);
     this._initToolbarDelegate = dnn.createDelegate(this, this.initToolbar);
     this._performEditDelegate = dnn.createDelegate(this, this.performEdit);
 }
@@ -280,7 +280,7 @@ dnn.controls.DNNLabelEdit.prototype =
         ctx.callBackStatus(result, ctx);
         ctx.invoke_handler('callBackSuccess', new dnn.controls.DNNCallbackEventArgs(result, ctx, req));
         ctx.showLabel();
-	    ctx.flashLabel();
+        ctx.flashLabel();
     },
 
     //obsolete
@@ -307,17 +307,17 @@ dnn.controls.DNNLabelEdit.prototype =
                 if (typeof btn == 'function')	//safeguard against other js frameworks
                     continue;
 
-	            if (key == 'edit') {
-	            	btn.visible = !inEdit;
-		            if (btn.visible) {
-			            this.toolbar.css = this.toolbar.css.replace(" editMode", "");
-		            } else {
-			            this.toolbar.css = this.toolbar.css + " editMode";
-		            }
-	            } else if (this.isFormatButton(key))
-		            btn.visible = (inEdit && this.editWrapper && this.editWrapper.isRichText);
-	            else
-		            btn.visible = inEdit;
+                if (key == 'edit') {
+                    btn.visible = !inEdit;
+                    if (btn.visible) {
+                        this.toolbar.css = this.toolbar.css.replace(" editMode", "");
+                    } else {
+                        this.toolbar.css = this.toolbar.css + " editMode";
+                    }
+                } else if (this.isFormatButton(key))
+                    btn.visible = (inEdit && this.editWrapper && this.editWrapper.isRichText);
+                else
+                    btn.visible = inEdit;
 
             }
             this.toolbar.refresh();
@@ -339,17 +339,17 @@ dnn.controls.DNNLabelEdit.prototype =
         this.editContainer.style.display = 'none';
         this.handleToolbarDisplay();
     },
-    
+
     flashLabel: function () {
-    	var handler = this;
-	    this.container.style.backgroundColor = "#fffacd";
-	    setTimeout(function () {
-		    handler.container.style.backgroundColor = "#fffff0";
-		    setTimeout(function () {
-			    handler.container.style.backgroundColor = "transparent";
+        var handler = this;
+        this.container.style.backgroundColor = "#fffacd";
+        setTimeout(function () {
+            handler.container.style.backgroundColor = "#fffff0";
+            setTimeout(function () {
+                handler.container.style.backgroundColor = "transparent";
             }, 300);
         }, 2500);
-	},
+    },
 
     callBackFail: function(result, ctx, req)
     {

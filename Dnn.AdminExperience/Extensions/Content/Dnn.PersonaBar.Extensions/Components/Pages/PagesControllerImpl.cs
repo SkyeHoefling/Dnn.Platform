@@ -65,23 +65,23 @@ namespace Dnn.PersonaBar.Pages.Components
         private readonly IPortalController _portalController;
 
         public const string PageTagsVocabulary = "PageTags";
-        private static readonly IList<string> TabSettingKeys = new List<string> { "CustomStylesheet" };        
+        private static readonly IList<string> TabSettingKeys = new List<string> { "CustomStylesheet" };
 
         private PortalSettings PortalSettings { get; set; }
 
         public PagesControllerImpl()
             : this(
-                  TabController.Instance,
-                  ModuleController.Instance,
-                  PageUrlsController.Instance,
-                  TemplateController.Instance,
-                  DefaultPortalThemeController.Instance,
-                  CloneModuleExecutionContext.Instance,
-                  new UrlRewriterUtilsWrapper(),
-                  new FriendlyUrlWrapper(),
-                  new ContentVerifier(),
-                  PortalController.Instance
-                  )
+                TabController.Instance,
+                ModuleController.Instance,
+                PageUrlsController.Instance,
+                TemplateController.Instance,
+                DefaultPortalThemeController.Instance,
+                CloneModuleExecutionContext.Instance,
+                new UrlRewriterUtilsWrapper(),
+                new FriendlyUrlWrapper(),
+                new ContentVerifier(),
+                PortalController.Instance
+                )
         {
         }
 
@@ -396,18 +396,18 @@ namespace Dnn.PersonaBar.Pages.Components
                     var bIsMatch = true;
                     if (!string.IsNullOrEmpty(tabTitle))
                         bIsMatch = bIsMatch &
-                                   Regex.IsMatch(tab.Title, tabTitle.Replace("*", ".*"), RegexOptions.IgnoreCase);
+                                    Regex.IsMatch(tab.Title, tabTitle.Replace("*", ".*"), RegexOptions.IgnoreCase);
                     if (!string.IsNullOrEmpty(tabName))
                         bIsMatch = bIsMatch &
-                                   Regex.IsMatch(tab.TabName, tabName.Replace("*", ".*"), RegexOptions.IgnoreCase);
+                                    Regex.IsMatch(tab.TabName, tabName.Replace("*", ".*"), RegexOptions.IgnoreCase);
                     if (!string.IsNullOrEmpty(tabPath))
                         bIsMatch = bIsMatch &
-                                   Regex.IsMatch(tab.TabPath, tabPath.Replace("*", ".*"), RegexOptions.IgnoreCase);
+                                    Regex.IsMatch(tab.TabPath, tabPath.Replace("*", ".*"), RegexOptions.IgnoreCase);
                     if (!string.IsNullOrEmpty(tabSkin))
                     {
                         var escapedString = Regex.Replace(tabSkin, "([^\\w^\\*\\s]+)+", @"\$1", RegexOptions.Compiled|RegexOptions.ECMAScript|RegexOptions.IgnoreCase|RegexOptions.Multiline);
                         bIsMatch = bIsMatch &
-                                   Regex.IsMatch(tab.SkinSrc, escapedString.Replace("*", ".*"), RegexOptions.IgnoreCase);
+                                    Regex.IsMatch(tab.SkinSrc, escapedString.Replace("*", ".*"), RegexOptions.IgnoreCase);
                     }
 
                     if (bIsMatch)
@@ -603,7 +603,7 @@ namespace Dnn.PersonaBar.Pages.Components
             }
 
             bool modified;
-            //Clean Url            
+            //Clean Url
             var options = _urlRewriterUtilsWrapper.GetExtendOptionsForURLs(portalSettings.PortalId);
             urlPath = GetLocalPath(urlPath);
             urlPath = _friendlyUrlWrapper.CleanNameForUrl(urlPath, options, out modified);
@@ -787,8 +787,8 @@ namespace Dnn.PersonaBar.Pages.Components
                 //get all terms info
                 var allTerms = new List<Term>();
                 var vocabularies = from v in vocabularyController.GetVocabularies()
-                                   where (v.ScopeType.ScopeType == "Portal" && v.ScopeId == tab.PortalID && !v.Name.Equals("Tags", StringComparison.OrdinalIgnoreCase))
-                                   select v;
+                                    where (v.ScopeType.ScopeType == "Portal" && v.ScopeId == tab.PortalID && !v.Name.Equals("Tags", StringComparison.OrdinalIgnoreCase))
+                                    select v;
                 foreach (var v in vocabularies)
                 {
                     allTerms.AddRange(termController.GetTermsByVocabulary(v.VocabularyId));
@@ -827,7 +827,7 @@ namespace Dnn.PersonaBar.Pages.Components
             {
                 tab.IconFileLarge = null;
             }
-            
+
         }
 
         private string GetContainerSrc(PageSettings pageSettings)
@@ -919,8 +919,8 @@ namespace Dnn.PersonaBar.Pages.Components
 
             var url = pageSettings.Url;
             var tabUrl = tab.TabUrls.SingleOrDefault(t => t.IsSystem
-                                                          && t.HttpStatus == "200"
-                                                          && t.SeqNum == 0);
+                                                        && t.HttpStatus == "200"
+                                                        && t.SeqNum == 0);
 
             var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
             if (!String.IsNullOrEmpty(url) && url != "/")
@@ -1069,7 +1069,7 @@ namespace Dnn.PersonaBar.Pages.Components
             {
                 throw new PageNotFoundException();
             }
-           
+
             var page = Converters.ConvertToPageSettings<PageSettings>(tab);
             page.Modules = GetModules(page.TabId).Select(Converters.ConvertToModuleItem);
             page.PageUrls = GetPageUrls(page.TabId);
@@ -1158,8 +1158,8 @@ namespace Dnn.PersonaBar.Pages.Components
             var typeController = new ContentTypeController();
             var contentType =
                 (from t in typeController.GetContentTypes()
-                 where t.ContentType == "Tab"
-                 select t).SingleOrDefault();
+                where t.ContentType == "Tab"
+                select t).SingleOrDefault();
 
 
             if (contentType != null)
@@ -1267,8 +1267,8 @@ namespace Dnn.PersonaBar.Pages.Components
         {
             var portalSettings = PortalController.Instance.GetCurrentPortalSettings();
             return permissions.RolePermissions != null && (bool)permissions.RolePermissions?.Any(permission =>
-               permission.RoleId == portalSettings.AdministratorRoleId &&
-               permission.Permissions.Count != 0);
+                permission.RoleId == portalSettings.AdministratorRoleId &&
+                permission.Permissions.Count != 0);
         }
 
         public virtual PageSettings GetDefaultSettings(int pageId = 0)

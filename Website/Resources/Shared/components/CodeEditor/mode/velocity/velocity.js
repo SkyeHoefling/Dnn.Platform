@@ -19,9 +19,9 @@ CodeMirror.defineMode("velocity", function() {
     }
 
     var keywords = parseWords("#end #else #break #stop #[[ #]] " +
-                              "#{end} #{else} #{break} #{stop}");
+                            "#{end} #{else} #{break} #{stop}");
     var functions = parseWords("#if #elseif #foreach #set #include #parse #macro #define #evaluate " +
-                               "#{if} #{elseif} #{foreach} #{set} #{include} #{parse} #{macro} #{define} #{evaluate}");
+                                "#{if} #{elseif} #{foreach} #{set} #{include} #{parse} #{macro} #{define} #{evaluate}");
     var specials = parseWords("$foreach.count $foreach.hasNext $foreach.first $foreach.last $foreach.topmost $foreach.parent.count $foreach.parent.hasNext $foreach.parent.first $foreach.parent.last $foreach.parent $velocityCount $!bodyContent $bodyContent");
     var isOperatorChar = /[+\-*&%=<>!?:\/|]/;
 
@@ -109,7 +109,7 @@ CodeMirror.defineMode("velocity", function() {
             // is it one of the listed functions?
             if (functions && functions.propertyIsEnumerable(word) ||
                     (stream.current().match(/^#@?[a-z0-9_]+ *$/i) && stream.peek()=="(") &&
-                     !(functions && functions.propertyIsEnumerable(word.toLowerCase()))) {
+                    !(functions && functions.propertyIsEnumerable(word.toLowerCase()))) {
                 state.beforeParams = true;
                 state.lastTokenWasBuiltin = false;
                 return "keyword";

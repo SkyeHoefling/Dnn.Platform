@@ -4,6 +4,6 @@
     <div class="heading_wrapper">
         <h3><dnn:TITLE runat="server" id="dnnTITLE" CssClass="TitleH3" /></h3>
         <div id="ContentPane" runat="server"></div>
-	    <div class="clear"></div>
+        <div class="clear"></div>
     </div>
 </div>

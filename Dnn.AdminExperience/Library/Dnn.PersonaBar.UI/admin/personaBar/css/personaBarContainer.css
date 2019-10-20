@@ -1,13 +1,13 @@
 ﻿/* Person Bar iFrame */
 .dnnEditState iframe#personaBar-iframe{
-	width: 85px;
+    width: 85px;
 }
 iframe#personaBar-iframe{
-	width: 0; 
-	position: fixed; 
-	left: 0; top: 0; 
-	height: 100%; 
-	z-index: 9999999;
+    width: 0;
+    position: fixed;
+    left: 0; top: 0;
+    height: 100%;
+    z-index: 9999999;
 }
 
 .pb-scroll-wrapper {

@@ -32,8 +32,8 @@ CodeMirror.defineMode("vb", function(conf, parserConf) {
     var operatorKeywords = ['and', 'or', 'not', 'xor', 'in'];
     var wordOperators = wordRegexp(operatorKeywords);
     var commonKeywords = ['as', 'dim', 'break',  'continue','optional', 'then',  'until',
-                          'goto', 'byval','byref','new','handles','property', 'return',
-                          'const','private', 'protected', 'friend', 'public', 'shared', 'static', 'true','false'];
+                        'goto', 'byval','byref','new','handles','property', 'return',
+                        'const','private', 'protected', 'friend', 'public', 'shared', 'static', 'true','false'];
     var commontypes = ['integer','string','double','decimal','boolean','short','char', 'float','single'];
 
     var keywords = wordRegexp(commonKeywords);
@@ -52,11 +52,11 @@ CodeMirror.defineMode("vb", function(conf, parserConf) {
                                 .concat(operatorKeywords).concat(commonKeywords).concat(commontypes));
 
     function indent(_stream, state) {
-      state.currentIndent++;
+    state.currentIndent++;
     }
 
     function dedent(_stream, state) {
-      state.currentIndent--;
+    state.currentIndent--;
     }
     // tokenizers
     function tokenBase(stream, state) {
@@ -133,9 +133,9 @@ CodeMirror.defineMode("vb", function(conf, parserConf) {
         }
         if (stream.match(opening)) {
             if (! state.doInCurrentLine)
-              indent(stream,state);
+            indent(stream,state);
             else
-              state.doInCurrentLine = false;
+            state.doInCurrentLine = false;
             return 'keyword';
         }
         if (stream.match(middle)) {
@@ -234,21 +234,21 @@ CodeMirror.defineMode("vb", function(conf, parserConf) {
         electricChars:"dDpPtTfFeE ",
         startState: function() {
             return {
-              tokenize: tokenBase,
-              lastToken: null,
-              currentIndent: 0,
-              nextLineIndent: 0,
-              doInCurrentLine: false
+            tokenize: tokenBase,
+            lastToken: null,
+            currentIndent: 0,
+            nextLineIndent: 0,
+            doInCurrentLine: false
 
 
-          };
+        };
         },
 
         token: function(stream, state) {
             if (stream.sol()) {
-              state.currentIndent += state.nextLineIndent;
-              state.nextLineIndent = 0;
-              state.doInCurrentLine = 0;
+            state.currentIndent += state.nextLineIndent;
+            state.nextLineIndent = 0;
+            state.doInCurrentLine = 0;
             }
             var style = tokenLexer(stream, state);
 

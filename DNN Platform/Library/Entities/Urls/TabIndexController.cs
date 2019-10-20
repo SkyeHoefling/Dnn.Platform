@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -187,8 +187,8 @@ namespace DotNetNuke.Entities.Urls
                         //when adding a blank custom Url, also add in a standard tab path url, because any url that also includes querystring data will use the standard tab path
                         string tabPath = GetTabPath(tab, options, parentTraceId);
                         string stdDictRewritePath = RedirectTokens.AddRedirectReasonToRewritePath(rewritePath,
-                                                                                                  ActionType.CheckFor301,
-                                                                                                  RedirectReason.Custom_Tab_Alias);
+                                                                                                ActionType.CheckFor301,
+                                                                                                RedirectReason.Custom_Tab_Alias);
                         AddToTabDict(tabIndex,
                                         dupCheck,
                                         redirectAlias,
@@ -213,8 +213,8 @@ namespace DotNetNuke.Entities.Urls
                         //838 : disabled tabs with custom aliases - still load the settings page without redirect
                         //disabled / not active by date / external url pages cannot navigate to settings page
                         if (tab.DisableLink || !string.IsNullOrEmpty(tab.Url) ||
-                           (tab.EndDate < DateTime.Now && tab.EndDate > DateTime.MinValue) ||
-                           (tab.StartDate > DateTime.Now && tab.StartDate > DateTime.MinValue))
+                            (tab.EndDate < DateTime.Now && tab.EndDate > DateTime.MinValue) ||
+                            (tab.StartDate > DateTime.Now && tab.StartDate > DateTime.MinValue))
                         {
                             string settingsUrl = tabPath + "/ctl/Tab";
                             string settingsRewritePath = CreateRewritePath(tab.TabID, redirect.CultureCode, "ctl=Tab");
@@ -345,15 +345,15 @@ namespace DotNetNuke.Entities.Urls
                 {
                     int tempPathDepth = 0;
                     AddToTabDict(tabIndex,
-                                 dupCheck,
-                                 httpAlias,
-                                 "*",
-                                 "",
-                                 -1,
-                                 UrlEnums.TabKeyPreference.TabOK,
-                                 ref tempPathDepth,
-                                 false,
-                                 false);
+                                dupCheck,
+                                httpAlias,
+                                "*",
+                                "",
+                                -1,
+                                UrlEnums.TabKeyPreference.TabOK,
+                                ref tempPathDepth,
+                                false,
+                                false);
                 }
 
                 pathSizes.SetAliasDepth(httpAlias);
@@ -378,7 +378,7 @@ namespace DotNetNuke.Entities.Urls
                 cultureRewritePath += "&language=" + cultureCode;
             }
             //hard coded page paths - using 'tabDeleted' in case there is a clash with an existing page (ie, someone has created a page that takes place of the standard page, created page has preference)
-            
+
             //need check custom login/register page set in portal and redirect to the specific page.
             var portal = PortalController.Instance.GetPortal(portalId);
             var loginRewritePath = portalRewritePath + "&ctl=Login" + cultureRewritePath;
@@ -482,10 +482,10 @@ namespace DotNetNuke.Entities.Urls
             //determine the rewrite parameter
             //for deleted or pages not enabled yet, direct to the home page if the setting is enabled
             //534 : tab is disabled, mark as deleted (don't want to cause duplicate tab warnings)
-			//DNN-6186: add expired pages in dictionary as admin/host user should able to visit/edit them.
+            //DNN-6186: add expired pages in dictionary as admin/host user should able to visit/edit them.
             bool isDeleted = (tab.IsDeleted || tab.DisableLink);
             if (isDeleted)
-            // don't care what setting is, redirect code will decide whether to redirect or 404 - just mark as page deleted && 
+            // don't care what setting is, redirect code will decide whether to redirect or 404 - just mark as page deleted &&
             // settings.DeletedTabHandlingValue == DeletedTabHandlingTypes.Do301RedirectToPortalHome)
             {
                 //777: force 404 result for all deleted pages instead of relying on 'not found'
@@ -494,8 +494,8 @@ namespace DotNetNuke.Entities.Urls
                                     ? ActionType.Output404
                                     : ActionType.Redirect301;
                 rewritePath = tab.DisableLink
-                                  ? CreateRewritePath(homeTabId, cultureCode, action, RedirectReason.Disabled_Page)
-                                  : CreateRewritePath(homeTabId, cultureCode, action, RedirectReason.Deleted_Page);
+                                ? CreateRewritePath(homeTabId, cultureCode, action, RedirectReason.Disabled_Page)
+                                : CreateRewritePath(homeTabId, cultureCode, action, RedirectReason.Deleted_Page);
             }
             else
             {
@@ -558,7 +558,7 @@ namespace DotNetNuke.Entities.Urls
             if (tabPath.Replace("//", "/") != tab.TabPath.Replace("//", "/"))
             {
                 //when the generated tab path is different to the standard tab path, character substituion has happened
-                //this entry is going to have space substitution in it, so it is added into the dictionary with a delete notification and a 301 replaced 
+                //this entry is going to have space substitution in it, so it is added into the dictionary with a delete notification and a 301 replaced
                 //this entry is the 'original' (spaces removed) version ie mypage
                 string substituteRewritePath = rewritePath;
                 if (!isDeleted)
@@ -612,8 +612,8 @@ namespace DotNetNuke.Entities.Urls
 
             // disabled / not active by date / external url pages cannot navigate to settings page
             if (tab.DisableLink || !string.IsNullOrEmpty(tab.Url) ||
-               (tab.EndDate < DateTime.Now && tab.EndDate > DateTime.MinValue) ||
-               (tab.StartDate > DateTime.Now && tab.StartDate > DateTime.MinValue))
+                (tab.EndDate < DateTime.Now && tab.EndDate > DateTime.MinValue) ||
+                (tab.StartDate > DateTime.Now && tab.StartDate > DateTime.MinValue))
             {
                 string settingsUrl = tabPath.Replace("//", "/") + "/ctl/Tab";
                 string settingsRewritePath = CreateRewritePath(tab.TabID, "", "ctl=tab");
@@ -629,7 +629,7 @@ namespace DotNetNuke.Entities.Urls
                                 isDeleted);
             }
 
-            //777: every tab is added to the dictionary, including those that are deleted 
+            //777: every tab is added to the dictionary, including those that are deleted
 
             //inspect the optional tab redirects and add them as well, keeping track if any are '200' status, meaning the standard Url will be 301, if replaced unfriendly is switched on
             //589 : tab with custom 200 redirects not changing base url to 301 statusa
@@ -784,7 +784,7 @@ namespace DotNetNuke.Entities.Urls
                                             bool checkForDupUrls,
                                             bool isDeleted)
         {
-            //remove leading '/' and convert to lower for all keys 
+            //remove leading '/' and convert to lower for all keys
             string tabPathSimple = tabPath.Replace("//", "/").ToLowerInvariant();
             //the tabpath depth is only set if it's higher than the running highest tab path depth
             int thisTabPathDepth = tabPathSimple.Length - tabPathSimple.Replace("/", "").Length;
@@ -797,7 +797,7 @@ namespace DotNetNuke.Entities.Urls
                 tabPathSimple = tabPathSimple.Substring(1);
             }
 
-            //Contruct the tab key for the dictionary. Using :: allows for separation of portal alias and tab path. 
+            //Contruct the tab key for the dictionary. Using :: allows for separation of portal alias and tab path.
             string tabKey = (httpAlias + "::" + tabPathSimple).ToLowerInvariant();
 
             //construct the duplicate key check
@@ -812,11 +812,11 @@ namespace DotNetNuke.Entities.Urls
             {
                 if (tabIndex.ContainsKey(tabKey))
                 {
-                    //it's possible for a tab to be deleted and the tab path repeated. 
-                    //the dictionary must be checked to ascertain whether the existing tab 
+                    //it's possible for a tab to be deleted and the tab path repeated.
+                    //the dictionary must be checked to ascertain whether the existing tab
                     //should be replaced or not.  If the action is 'TabOK' it means
                     //replace the entry regardless.  If the action is 'TabRedirected' it means
-                    //replace the existing dictionary ONLY if the existing dictionary entry is a 
+                    //replace the existing dictionary ONLY if the existing dictionary entry is a
                     //deleted tab.
                     bool replaceTab = (keyDupAction == UrlEnums.TabKeyPreference.TabOK); //default, replace the tab
                     if (replaceTab == false)
@@ -840,9 +840,9 @@ namespace DotNetNuke.Entities.Urls
                     }
                     if (replaceTab && !isDeleted) //don't replace if the incoming tab is deleted
                     {
-                        //remove the previous one 
+                        //remove the previous one
                         tabIndex.Remove(tabKey);
-                        //add the new one 
+                        //add the new one
                         tabIndex.Add(tabKey, Globals.glbDefaultPage + rewrittenPath);
                     }
                 }
@@ -866,10 +866,10 @@ namespace DotNetNuke.Entities.Urls
                     if (checkForDupUrls && foundTAb.TabIdOriginal != tabId.ToString())
                     //dont' show message for where same tab is being added twice)
                     {
-                        //there is a naming conflict where this alias/tab path could be mistaken 
+                        //there is a naming conflict where this alias/tab path could be mistaken
                         int tabIdOriginal;
                         string tab1Name = "", tab2Name = "";
-	                    var dupInSameCulture = false;
+                        var dupInSameCulture = false;
                         if (int.TryParse(foundTAb.TabIdOriginal, out tabIdOriginal))
                         {
                             Dictionary<int, int> portalDic = PortalController.GetPortalDictionary();
@@ -890,47 +890,47 @@ namespace DotNetNuke.Entities.Urls
                                 tab2Name = tab2.TabName + " [" + tab2.TabPath + "]";
                             }
 
-	                        if (tab1 != null && tab2 != null)
-	                        {
-		                        dupInSameCulture = !PortalController.GetPortalSettingAsBoolean("ContentLocalizationEnabled", portalId, false)
-													|| tab1.CultureCode == tab2.CultureCode;
-	                        }
+                            if (tab1 != null && tab2 != null)
+                            {
+                                dupInSameCulture = !PortalController.GetPortalSettingAsBoolean("ContentLocalizationEnabled", portalId, false)
+                                                    || tab1.CultureCode == tab2.CultureCode;
+                            }
                         }
 
 
-	                    if (dupInSameCulture)
-	                    {
-		                    string msg = "Page naming conflict. Url of (" + foundTAb.TabPath +
-		                                 ") resolves to two separate pages (" + tab1Name + " [tabid = " +
-		                                 foundTAb.TabIdOriginal + "], " + tab2Name + " [tabid = " + tabId.ToString() +
-		                                 "]). Only the second page will be shown for the url.";
-		                    const string msg2 =
-			                    "PLEASE NOTE : this is an information message only, this message does not affect site operations in any way.";
+                        if (dupInSameCulture)
+                        {
+                            string msg = "Page naming conflict. Url of (" + foundTAb.TabPath +
+                                        ") resolves to two separate pages (" + tab1Name + " [tabid = " +
+                                        foundTAb.TabIdOriginal + "], " + tab2Name + " [tabid = " + tabId.ToString() +
+                                        "]). Only the second page will be shown for the url.";
+                            const string msg2 =
+                                "PLEASE NOTE : this is an information message only, this message does not affect site operations in any way.";
 
-		                    //771 : change to admin alert instead of exception
-		                    //log a host alert
-		                    var log = new LogInfo {LogTypeKey = "HOST_ALERT"};
-		                    log.AddProperty("Advanced Friendly URL Provider Duplicate URL Warning", "Page Naming Conflict");
-		                    log.AddProperty("Duplicate Page Details", msg);
-		                    log.AddProperty("Warning Information", msg2);
-		                    log.AddProperty("Suggested Action", "Rename one or both of the pages to ensure a unique URL");
-		                    log.AddProperty("Hide this message",
-			                    "To stop this message from appearing in the log, uncheck the option for 'Produce an Exception in the Site Log if two pages have the same name/path?' in the Advanced Url Rewriting settings.");
-		                    log.AddProperty("Thread Id", Thread.CurrentThread.ManagedThreadId.ToString());
-		                    LogController.Instance.AddLog(log);
-	                    }
+                            //771 : change to admin alert instead of exception
+                            //log a host alert
+                            var log = new LogInfo {LogTypeKey = "HOST_ALERT"};
+                            log.AddProperty("Advanced Friendly URL Provider Duplicate URL Warning", "Page Naming Conflict");
+                            log.AddProperty("Duplicate Page Details", msg);
+                            log.AddProperty("Warning Information", msg2);
+                            log.AddProperty("Suggested Action", "Rename one or both of the pages to ensure a unique URL");
+                            log.AddProperty("Hide this message",
+                                "To stop this message from appearing in the log, uncheck the option for 'Produce an Exception in the Site Log if two pages have the same name/path?' in the Advanced Url Rewriting settings.");
+                            log.AddProperty("Thread Id", Thread.CurrentThread.ManagedThreadId.ToString());
+                            LogController.Instance.AddLog(log);
+                        }
                     }
                 }
                 else
                 {
                     dupCheckDict.Remove(dupKey);
-                    //add this tab to the duplicate key dictionary 
+                    //add this tab to the duplicate key dictionary
                     dupCheckDict.Add(dupKey, new DupKeyCheck(dupKey, tabId.ToString(), dupKey, isDeleted));
                 }
             }
             else
             {
-                //add this tab to the duplicate key dictionary - the dup key check dict is always maintained 
+                //add this tab to the duplicate key dictionary - the dup key check dict is always maintained
                 //regardless of whether checking is employed or not
                 dupCheckDict.Add(dupKey, new DupKeyCheck(dupKey, tabId.ToString(), dupKey, isDeleted));
             }
@@ -938,12 +938,12 @@ namespace DotNetNuke.Entities.Urls
 
         private static OrderedDictionary BuildPortalAliasesDictionary()
         {
-           var aliases = PortalAliasController.Instance.GetPortalAliases();
+            var aliases = PortalAliasController.Instance.GetPortalAliases();
             //create a new OrderedDictionary.  We use this because we
             //want to key by the correct regex pattern and return the
             //portalAlias that matches, and we want to preserve the
             //order of the items, such that the item with the most path separators (/)
-            //is at the front of the list.  
+            //is at the front of the list.
             var aliasList = new OrderedDictionary(aliases.Count);
             var pathLengths = new List<int>();
             foreach (string aliasKey in aliases.Keys)
@@ -983,7 +983,7 @@ namespace DotNetNuke.Entities.Urls
                     //work out how many path separators there are in the portalAlias (ie myalias/mychild = 1 path)
                     int pathLength = plainAlias.Split('/').GetUpperBound(0);
                     //now work out where in the list we should put this portalAlias regex pattern
-                    //the list is to be sorted so that those aliases with the most paths 
+                    //the list is to be sorted so that those aliases with the most paths
                     //are at the front of the list : ie, they are tested first
                     int insertPoint = pathLengths.Count - 1;
                     //walk through the existing list of path lengths,
@@ -1074,7 +1074,7 @@ namespace DotNetNuke.Entities.Urls
                 //add in any internal aliases as valid aliase
                 AddInternalAliases(settings, usingHttpAliases);
 
-                //loop through each tab and add all of the various Url paths that the tab can be found with, 
+                //loop through each tab and add all of the various Url paths that the tab can be found with,
                 //for all aliases the tab will be used with
                 foreach (TabInfo tab in tabs.Values)
                 {
@@ -1139,7 +1139,7 @@ namespace DotNetNuke.Entities.Urls
                             {
                                 if (!isExcluded)
                                 {
-                                    //Add this tab to the dictionary 
+                                    //Add this tab to the dictionary
                                     //750 : user profile action not returned as buildPortalId not used
                                     tabPathDepth = AddTabToTabDict(tabIndex,
                                                                     dupCheck,
@@ -1162,7 +1162,7 @@ namespace DotNetNuke.Entities.Urls
                                     bool excludeFriendlyUrls = true;
                                     //549 : detect excluded friendly urls by putting a known pattern into the dictionary
                                     //add this tab to the dictionary, but with the hack pattern [UseBase] to capture the fact it's a base Url
-                                    //then, if there's redirects for it, add those as well.  It's possible to exclude a tab from friendly urls, but 
+                                    //then, if there's redirects for it, add those as well.  It's possible to exclude a tab from friendly urls, but
                                     //give it custom redirects
                                     string rewritePath = null;
                                     if (tab.TabUrls.Count > 0)
@@ -1209,7 +1209,7 @@ namespace DotNetNuke.Entities.Urls
                             else
                             {
                                 //ignoring this tab because the alias culture doesn't match to the tab culture
-                                //however, we need to add it to the dictionary in case there's an old link (pre-translation/pre-friendly url/pre-alias&culture linked) 
+                                //however, we need to add it to the dictionary in case there's an old link (pre-translation/pre-friendly url/pre-alias&culture linked)
                                 string rewritePath = CreateRewritePath(tab.TabID, tabCulture);
                                 AddToTabDict(tabIndex,
                                                 dupCheck,
@@ -1236,7 +1236,7 @@ namespace DotNetNuke.Entities.Urls
                 foreach (string httpAlias in usingHttpAliases)
                 {
                     //750 : using -1 instead of buildPortalId
-                    //850 : set culture code based on httpALias, where specific culture 
+                    //850 : set culture code based on httpALias, where specific culture
                     //is being associated with httpAlias
                     string cultureCode = null;
                     if (chosenAliasesCultures.ContainsKey(httpAlias))
@@ -1353,7 +1353,7 @@ namespace DotNetNuke.Entities.Urls
                 customHttpAlias = tab.CustomAliases[currentCulture].ToLowerInvariant();
             }
             customAliasUsed = httpAliases.Contains(customHttpAlias);
-            //if there is a custom alias for this tab, and it's not one of the ones in the alias list, put it in 
+            //if there is a custom alias for this tab, and it's not one of the ones in the alias list, put it in
             //so that this tab will be put into the dictionary with not only the standard alias(es) but also
             //the custom alias.  Other logic will decide if to redirect the 'wrong' alias if requested with this tab.
             if (customAliasUsed == false && customHttpAlias != "")
@@ -1394,7 +1394,7 @@ namespace DotNetNuke.Entities.Urls
         /// <returns></returns>
         private static bool PortalExistsInIndex(SharedDictionary<int, PathSizes> portalDepths, int portalId)
         {
-            bool result = false;    
+            bool result = false;
 
             if (portalDepths != null)
             {
@@ -1406,25 +1406,25 @@ namespace DotNetNuke.Entities.Urls
             return result;
         }
 
-        /// <summary> 
-        /// Gets the Tab Dictionary from the DataCache memory location, if it's empty or missing, builds a new one. 
+        /// <summary>
+        /// Gets the Tab Dictionary from the DataCache memory location, if it's empty or missing, builds a new one.
         /// </summary>
         /// <param name="portalId"></param>
-        /// <param name="minTabPathDepth">ByRef parameter to return the minimum tab path depth (the number of '/' in the tab path)</param> 
-        /// <param name="maxTabPathDepth">ByRef parameter to return the maximum tab path depth (the number of '/' in the tab path)</param> 
-        /// <param name="minAliasPathDepth">ByRef parameter to return the minimum alias path depth (the number of '/' in the alias path</param> 
+        /// <param name="minTabPathDepth">ByRef parameter to return the minimum tab path depth (the number of '/' in the tab path)</param>
+        /// <param name="maxTabPathDepth">ByRef parameter to return the maximum tab path depth (the number of '/' in the tab path)</param>
+        /// <param name="minAliasPathDepth">ByRef parameter to return the minimum alias path depth (the number of '/' in the alias path</param>
         /// <param name="maxAliasPathDepth">ByRef parameter to return the maximum alias path depth (the number of '/' in the alias path)</param>
         /// <param name="settings"></param>
         /// <param name="forceRebuild"></param>
         /// <param name="bypassCache"></param>
         /// <param name="parentTraceId"></param>
-        /// <returns>Dictionary (string, string) of Tab paths in tab key, with the rewrite path as the value</returns> 
+        /// <returns>Dictionary (string, string) of Tab paths in tab key, with the rewrite path as the value</returns>
         /// <remarks>
         /// Changes
         /// Task 608 : Incrementally build tab dictionary instead of building entire dicitionary all at once
         /// Task 609 : If usePortalAlias is specified, only build dictionary with specific portal alias : ignore others
         /// Task 791 : allow for specification of true/false for using thread locking to prevent multiple rebuilds on threads
-        /// </remarks> 
+        /// </remarks>
         internal static SharedDictionary<string, string> FetchTabDictionary(int portalId,
                                                                                 out int minTabPathDepth,
                                                                                 out int maxTabPathDepth,
@@ -1436,7 +1436,7 @@ namespace DotNetNuke.Entities.Urls
                                                                                 Guid parentTraceId)
         {
             PathSizes depthInfo;
-            SharedDictionary<int, PathSizes> portalDepths = null; 
+            SharedDictionary<int, PathSizes> portalDepths = null;
             SharedDictionary<string, string> dict = null;
             SharedDictionary<string, string> portalTabPathDictionary = null;
             string reason = "";
@@ -1450,10 +1450,10 @@ namespace DotNetNuke.Entities.Urls
 
             if (dict == null || portalDepths == null || portalTabPathDictionary == null || !PortalExistsInIndex(portalDepths, portalId) || forceRebuild)
             {
-                //place threadlock to prevent two threads getting a null object. Use the same lock object that is used to 
+                //place threadlock to prevent two threads getting a null object. Use the same lock object that is used to
                 lock (tabPathDictBuildLock)
                 {
-                    //check for the tab dictionary in the DataCache again as it could have been cached by another thread 
+                    //check for the tab dictionary in the DataCache again as it could have been cached by another thread
                     //while waiting for the lock to become available.
                     if (bypassCache == false)
                     {
@@ -1587,7 +1587,7 @@ namespace DotNetNuke.Entities.Urls
             {
                 //collection to hold aliases sorted by length, longest first
                 var aliases = (from p in portalAliasCollection
-                               select p.HTTPAlias).ToList();
+                                select p.HTTPAlias).ToList();
 
                 //get aliases sorted by length of alias
                 aliases.Sort(new StringLengthComparer());

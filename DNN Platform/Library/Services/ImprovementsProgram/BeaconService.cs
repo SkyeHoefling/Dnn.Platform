@@ -56,7 +56,7 @@ namespace DotNetNuke.Services.ImprovementsProgram
                 var roles = GetUserRolesBitValues(user);
                 var tabPath = TabController.CurrentPage.TabPath;
                 enabled = (roles & (RolesEnum.Host | RolesEnum.Admin)) != 0 &&
-                          (tabPath.StartsWith("//Admin") || tabPath.StartsWith("//Host"));
+                        (tabPath.StartsWith("//Admin") || tabPath.StartsWith("//Host"));
             }
 
             return enabled;

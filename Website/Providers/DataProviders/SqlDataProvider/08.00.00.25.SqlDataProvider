@@ -6,14 +6,14 @@
 /*****************************/
 
 IF  NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'{databaseOwner}{objectQualifier}OutputCache') AND OBJECTPROPERTY(id, N'IsTable') = 1)
-	CREATE TABLE {databaseOwner}{objectQualifier}OutputCache
-	(
-		[CacheKey]   VarChar (36)  NOT NULL,
-		[ItemId]     Int           NOT NULL,
-		[Data]       nVarChar(Max) NOT NULL,
-		[Expiration] DateTime      NOT NULL,
-		CONSTRAINT [PK_{objectQualifier}OutputCache] PRIMARY KEY CLUSTERED ([CacheKey] ASC)
-	)
+    CREATE TABLE {databaseOwner}{objectQualifier}OutputCache
+    (
+        [CacheKey]   VarChar (36)  NOT NULL,
+        [ItemId]     Int           NOT NULL,
+        [Data]       nVarChar(Max) NOT NULL,
+        [Expiration] DateTime      NOT NULL,
+        CONSTRAINT [PK_{objectQualifier}OutputCache] PRIMARY KEY CLUSTERED ([CacheKey] ASC)
+    )
 GO
 
 /* Add New OutputCacheGetItem  */
@@ -22,14 +22,14 @@ GO
 IF EXISTS (SELECT * FROM sys.procedures WHERE object_id = object_id(N'{databaseOwner}[{objectQualifier}OutputCacheGetItem]'))
   DROP PROCEDURE {databaseOwner}{objectQualifier}OutputCacheGetItem
 GO
-	
+
 CREATE PROCEDURE {databaseOwner}{objectQualifier}OutputCacheGetItem
-	@CacheKey VarChar (36)
+    @CacheKey VarChar (36)
 AS
 BEGIN
     SELECT *
-     FROM  {databaseOwner}{objectQualifier}OutputCache
-     WHERE CacheKey = @CacheKey
+    FROM  {databaseOwner}{objectQualifier}OutputCache
+    WHERE CacheKey = @CacheKey
 END
 GO
 
@@ -41,22 +41,22 @@ IF EXISTS (SELECT * FROM sys.procedures WHERE object_id = object_id(N'{databaseO
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}OutputCacheAddItem
-	@ItemId     Int,
-	@CacheKey   VarChar ( 36),
-	@Data	    nVarChar(Max),
-	@Expiration DateTime
+    @ItemId     Int,
+    @CacheKey   VarChar ( 36),
+    @Data	    nVarChar(Max),
+    @Expiration DateTime
 AS
 BEGIN
     INSERT INTO {databaseOwner}{objectQualifier}OutputCache
-    (	ItemId, 
-	CacheKey, 
-	Data, 
-	Expiration
-    ) VALUES 
-    (   @ItemId, 
-	@CacheKey, 
-	@Data, 
-	@Expiration
+    (	ItemId,
+    CacheKey,
+    Data,
+    Expiration
+    ) VALUES
+    (   @ItemId,
+    @CacheKey,
+    @Data,
+    @Expiration
     )
 END
 GO
@@ -69,12 +69,12 @@ IF EXISTS (SELECT * FROM sys.procedures WHERE object_id = object_id(N'{databaseO
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}OutputCacheGetItemCount
-	@ItemId int
+    @ItemId int
 AS
 BEGIN
     SELECT COUNT(*) N
-     FROM  {databaseOwner}{objectQualifier}OutputCache
-     WHERE ItemId = @ItemId
+    FROM  {databaseOwner}{objectQualifier}OutputCache
+    WHERE ItemId = @ItemId
 END
 GO
 
@@ -89,7 +89,7 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}OutputCachePurgeCache
 AS
 BEGIN
     DELETE
-     FROM  {databaseOwner}{objectQualifier}OutputCache
+    FROM  {databaseOwner}{objectQualifier}OutputCache
 END
 GO
 
@@ -101,12 +101,12 @@ IF EXISTS (SELECT * FROM sys.procedures WHERE object_id = object_id(N'{databaseO
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}OutputCachePurgeExpiredItems
-	@CurrentUtcDateTime DateTime
+    @CurrentUtcDateTime DateTime
 AS
 BEGIN
     DELETE
-     FROM  {databaseOwner}{objectQualifier}OutputCache
-     WHERE Expiration <= @CurrentUtcDateTime
+    FROM  {databaseOwner}{objectQualifier}OutputCache
+    WHERE Expiration <= @CurrentUtcDateTime
 END
 GO
 
@@ -118,7 +118,7 @@ IF EXISTS (SELECT * FROM sys.procedures WHERE object_id = object_id(N'{databaseO
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}OutputCacheRemoveItem
-	@ItemId Int
+    @ItemId Int
 AS
 BEGIN
     DELETE
@@ -135,12 +135,12 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}OutputCacheGetKeys
-	@ItemId Int
+    @ItemId Int
 AS
 BEGIN
     DELETE
-     FROM  {databaseOwner}{objectQualifier}OutputCache
-     WHERE ItemId = @ItemId OR @ItemId IS NULL
+    FROM  {databaseOwner}{objectQualifier}OutputCache
+    WHERE ItemId = @ItemId OR @ItemId IS NULL
 END
 GO
 
@@ -148,41 +148,41 @@ GO
 /*************************************/
 IF NOT EXISTS(SELECT 1 FROM {databaseOwner}{objectQualifier}Schedule WHERE TypeFullName = 'DotNetNuke.Services.OutputCache.PurgeOutputCache, DotNetNuke')
 BEGIN
-	INSERT INTO {databaseOwner}{objectQualifier}Schedule
-	(   [TypeFullName]
-	   ,[TimeLapse]
-	   ,[TimeLapseMeasurement]
-	   ,[RetryTimeLapse]
-	   ,[RetryTimeLapseMeasurement]
-	   ,[RetainHistoryNum]
-	   ,[AttachToEvent]
-	   ,[CatchUpEnabled]
-	   ,[Enabled]
-	   ,[ObjectDependencies]
-	   ,[Servers]
-	   ,[CreatedByUserID]
-	   ,[CreatedOnDate]
-	   ,[LastModifiedByUserID]
-	   ,[LastModifiedOnDate]
-	   ,[FriendlyName]
-	) VALUES
+    INSERT INTO {databaseOwner}{objectQualifier}Schedule
+    (   [TypeFullName]
+        ,[TimeLapse]
+        ,[TimeLapseMeasurement]
+        ,[RetryTimeLapse]
+        ,[RetryTimeLapseMeasurement]
+        ,[RetainHistoryNum]
+        ,[AttachToEvent]
+        ,[CatchUpEnabled]
+        ,[Enabled]
+        ,[ObjectDependencies]
+        ,[Servers]
+        ,[CreatedByUserID]
+        ,[CreatedOnDate]
+        ,[LastModifiedByUserID]
+        ,[LastModifiedOnDate]
+        ,[FriendlyName]
+    ) VALUES
     (	'DotNetNuke.Services.OutputCache.PurgeOutputCache, DotNetNuke'
-	   ,1
-	   ,N'm'
-	   ,30
-	   ,N's'
-	   ,10
-	   ,N''
-	   ,0
-	   ,0
-	   ,N'OutputCache'
-	   ,NULL
-	   ,NULL
-	   ,NULL
-	   ,NULL
-	   ,NULL
-	   ,N'Purge Output Cache'
-	 )
+        ,1
+        ,N'm'
+        ,30
+        ,N's'
+        ,10
+        ,N''
+        ,0
+        ,0
+        ,N'OutputCache'
+        ,NULL
+        ,NULL
+        ,NULL
+        ,NULL
+        ,NULL
+        ,N'Purge Output Cache'
+    )
 END
 GO
 
@@ -200,7 +200,7 @@ GO
 DECLARE @MaxLen SmallInt = 0;
 SELECT @MaxLen = max_length FROM Sys.Columns WHERE Object_ID = Object_ID(N'{databaseOwner}[{objectQualifier}Tabs]') AND Name = 'IconFileLarge'
 IF @MaxLen > 0 AND @MaxLen < 255
-   ALTER TABLE {databaseOwner}[{objectQualifier}Tabs] ALTER COLUMN IconFileLarge nVarChar(255);
+    ALTER TABLE {databaseOwner}[{objectQualifier}Tabs] ALTER COLUMN IconFileLarge nVarChar(255);
 GO
 
 IF EXISTS (SELECT * FROM sys.procedures WHERE object_id = object_id(N'{databaseOwner}[{objectQualifier}AddTab]'))
@@ -402,14 +402,14 @@ BEGIN
     IF (@OldParentId <> @ParentId) BEGIN
         -- update TabOrder of Tabs with same original Parent
         UPDATE {databaseOwner}[{objectQualifier}Tabs]
-           SET TabOrder = TabOrder - 2
-         WHERE (ParentId = @OldParentId)
-           AND TabOrder > @TabOrder
+            SET TabOrder = TabOrder - 2
+        WHERE (ParentId = @OldParentId)
+            AND TabOrder > @TabOrder
 
         -- Update Tab with new TabOrder
         UPDATE {databaseOwner}[{objectQualifier}Tabs]
-           SET TabOrder = @NewTabOrder
-         WHERE TabID = @TabId
+            SET TabOrder = @NewTabOrder
+        WHERE TabID = @TabId
     END /* IF */
 
     EXEC {databaseOwner}{objectQualifier}BuildTabLevelAndPath @TabId, 1
@@ -457,10 +457,10 @@ BEGIN
 
     -- Update TabOrders for all Tabs higher than @TabOrder
     UPDATE {databaseOwner}{objectQualifier}Tabs
-       SET TabOrder = TabOrder + 2
-     WHERE (ParentId = @ParentID OR (ParentId IS NULL AND @ParentID IS NULL))
-       AND TabOrder > @TabOrder
-       AND (PortalId = @PortalID OR (PortalId IS NULL AND @PortalID IS NULL))
+        SET TabOrder = TabOrder + 2
+    WHERE (ParentId = @ParentID OR (ParentId IS NULL AND @ParentID IS NULL))
+        AND TabOrder > @TabOrder
+        AND (PortalId = @PortalID OR (PortalId IS NULL AND @PortalID IS NULL))
 
     -- Create Tab
     SET @TabOrder = @TabOrder + 2
@@ -497,8 +497,8 @@ BEGIN
 
     -- Update Content Item
     UPDATE {databaseOwner}{objectQualifier}ContentItems
-       SET TabID = @TabId
-     WHERE ContentItemID = @ContentItemID;
+        SET TabID = @TabId
+    WHERE ContentItemID = @ContentItemID;
 
     SELECT @TabId;
 END /* Procedure */
@@ -545,10 +545,10 @@ BEGIN
 
     -- Update TabOrders for all Tabs higher than @TabOrder
     UPDATE {databaseOwner}{objectQualifier}Tabs
-       SET TabOrder = TabOrder + 2
-     WHERE (ParentId = @ParentId OR (ParentID IS NULL AND @ParentID IS NULL))
-       AND TabOrder >= @TabOrder
-       AND (PortalId = @PortalId OR (PortalID IS NULL AND @PortalID IS NULL))
+        SET TabOrder = TabOrder + 2
+    WHERE (ParentId = @ParentId OR (ParentID IS NULL AND @ParentID IS NULL))
+        AND TabOrder >= @TabOrder
+        AND (PortalId = @PortalId OR (PortalID IS NULL AND @PortalID IS NULL))
 
     -- Create Tab
     EXECUTE @TabId = {databaseOwner}{objectQualifier}AddTab
@@ -584,8 +584,8 @@ BEGIN
 
     -- Update Content Item
     UPDATE {databaseOwner}{objectQualifier}ContentItems
-       SET TabID = @TabId
-     WHERE ContentItemID = @ContentItemID;
+        SET TabID = @TabId
+    WHERE ContentItemID = @ContentItemID;
 
     SELECT @TabId;
 END /* Procedure */
@@ -629,8 +629,8 @@ BEGIN
     DECLARE @TabId Int
     DECLARE @TabOrder Int
     SET @TabOrder = (SELECT MAX(TabOrder) FROM {databaseOwner}{objectQualifier}Tabs
-                     WHERE (PortalId = @PortalID OR (PortalID IS NULL AND @PortalID IS NULL))
-                       AND (ParentId = @ParentID OR (ParentID IS NULL AND @ParentID IS NULL))
+                    WHERE (PortalId = @PortalID OR (PortalID IS NULL AND @PortalID IS NULL))
+                        AND (ParentId = @ParentID OR (ParentID IS NULL AND @ParentID IS NULL))
                     )
     IF @TabOrder IS NULL
         SET @TabOrder = 1
@@ -671,8 +671,8 @@ BEGIN
 
     -- Update Content Item
     UPDATE {databaseOwner}{objectQualifier}ContentItems
-       SET TabID = @TabId
-     WHERE ContentItemID = @ContentItemID;
+        SET TabID = @TabId
+    WHERE ContentItemID = @ContentItemID;
 
     SELECT @TabId;
 END /* Procedure */
@@ -748,20 +748,20 @@ GO
 /*********************************************************************/
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetUserByHmacAppId]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetUserByHmacAppId]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetUserByHmacAppId]
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetHmacSecretByHmacAppId]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetHmacSecretByHmacAppId]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetHmacSecretByHmacAppId]
 GO
 
 IF EXISTS (SELECT * FROM Sys.Views WHERE (name = N'{objectQualifier}vw_Users'))
-	DROP VIEW {databaseOwner}[{objectQualifier}vw_Users]
+    DROP VIEW {databaseOwner}[{objectQualifier}vw_Users]
 GO
 
 CREATE VIEW {databaseOwner}[{objectQualifier}vw_Users]
 AS
-	SELECT  U.UserId,
+    SELECT  U.UserId,
         UP.PortalId,
         U.Username,
         U.FirstName,
@@ -782,79 +782,79 @@ AS
         U.CreatedOnDate,
         U.LastModifiedByUserId,
         U.LastModifiedOnDate
-	FROM       {databaseOwner}[{objectQualifier}Users]       AS U
-		LEFT JOIN {databaseOwner}[{objectQualifier}UserPortals] AS UP 
-			ON CASE WHEN U.IsSuperuser = 1 THEN 0 ELSE U.UserId END = UP.UserId
+    FROM       {databaseOwner}[{objectQualifier}Users]       AS U
+        LEFT JOIN {databaseOwner}[{objectQualifier}UserPortals] AS UP
+            ON CASE WHEN U.IsSuperuser = 1 THEN 0 ELSE U.UserId END = UP.UserId
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}UpdateUser]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateUser]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateUser]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateUser]
-	@UserID         int,
-	@PortalID		int,
-	@FirstName		nvarchar(50),
-	@LastName		nvarchar(50),
-	@IsSuperUser    bit,
-	@Email          nvarchar(256),
-	@DisplayName    nvarchar(100),
-	@VanityUrl		nvarchar(100),
-	@UpdatePassword	bit,
-	@Authorised		bit,
-	@RefreshRoles	bit,
-	@LastIPAddress	nvarchar(50),
-	@passwordResetToken uniqueidentifier,
-	@passwordResetExpiration datetime,
-	@IsDeleted		bit,
-	@LastModifiedByUserID int
+    @UserID         int,
+    @PortalID		int,
+    @FirstName		nvarchar(50),
+    @LastName		nvarchar(50),
+    @IsSuperUser    bit,
+    @Email          nvarchar(256),
+    @DisplayName    nvarchar(100),
+    @VanityUrl		nvarchar(100),
+    @UpdatePassword	bit,
+    @Authorised		bit,
+    @RefreshRoles	bit,
+    @LastIPAddress	nvarchar(50),
+    @passwordResetToken uniqueidentifier,
+    @passwordResetExpiration datetime,
+    @IsDeleted		bit,
+    @LastModifiedByUserID int
 AS
-	UPDATE {databaseOwner}{objectQualifier}Users
-		SET
-			FirstName = @FirstName,
-			LastName = @LastName,
-			IsSuperUser = @IsSuperUser,
-			Email = @Email,
-			DisplayName = @DisplayName,
-			UpdatePassword = @UpdatePassword,
-			PasswordResetToken=@passwordResetToken,
-			PasswordResetExpiration=@passwordResetExpiration,
-			LastIPAddress = @LastIPAddress,
-			LastModifiedByUserID = @LastModifiedByUserID,
-			LastModifiedOnDate = getdate()
-		WHERE  UserId = @UserID
-	
-	IF @PortalID IS NULL
-		BEGIN
-			UPDATE {databaseOwner}{objectQualifier}Users
-				SET
-					IsDeleted = @IsDeleted
-				WHERE  UserId = @UserID
-		END
-	ELSE
-		BEGIN
-			UPDATE {databaseOwner}{objectQualifier}UserPortals
-				SET
-					Authorised = @Authorised,
-					RefreshRoles = @RefreshRoles,
-					VanityUrl = @VanityUrl,
-					IsDeleted = @IsDeleted
-				WHERE  UserId = @UserID
-					AND PortalId = @PortalID
-		END
+    UPDATE {databaseOwner}{objectQualifier}Users
+        SET
+            FirstName = @FirstName,
+            LastName = @LastName,
+            IsSuperUser = @IsSuperUser,
+            Email = @Email,
+            DisplayName = @DisplayName,
+            UpdatePassword = @UpdatePassword,
+            PasswordResetToken=@passwordResetToken,
+            PasswordResetExpiration=@passwordResetExpiration,
+            LastIPAddress = @LastIPAddress,
+            LastModifiedByUserID = @LastModifiedByUserID,
+            LastModifiedOnDate = getdate()
+        WHERE  UserId = @UserID
+
+    IF @PortalID IS NULL
+        BEGIN
+            UPDATE {databaseOwner}{objectQualifier}Users
+                SET
+                    IsDeleted = @IsDeleted
+                WHERE  UserId = @UserID
+        END
+    ELSE
+        BEGIN
+            UPDATE {databaseOwner}{objectQualifier}UserPortals
+                SET
+                    Authorised = @Authorised,
+                    RefreshRoles = @RefreshRoles,
+                    VanityUrl = @VanityUrl,
+                    IsDeleted = @IsDeleted
+                WHERE  UserId = @UserID
+                    AND PortalId = @PortalID
+        END
 GO
 
-IF EXISTS (SELECT * FROM Sys.columns 
-			WHERE name = N'HmacAppId'
-			AND object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Users]'))
-	ALTER TABLE {databaseOwner}[{objectQualifier}Users]
-	DROP COLUMN HmacAppId
+IF EXISTS (SELECT * FROM Sys.columns
+            WHERE name = N'HmacAppId'
+            AND object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Users]'))
+    ALTER TABLE {databaseOwner}[{objectQualifier}Users]
+    DROP COLUMN HmacAppId
 GO
 
-IF EXISTS (SELECT * FROM Sys.columns 
-			WHERE name = N'HmacAppSecret'
-			AND object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Users]'))
-	ALTER TABLE {databaseOwner}[{objectQualifier}Users]
-	DROP COLUMN HmacAppSecret
-GO 
+IF EXISTS (SELECT * FROM Sys.columns
+            WHERE name = N'HmacAppSecret'
+            AND object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}Users]'))
+    ALTER TABLE {databaseOwner}[{objectQualifier}Users]
+    DROP COLUMN HmacAppSecret
+GO
 /*********************************************************************/

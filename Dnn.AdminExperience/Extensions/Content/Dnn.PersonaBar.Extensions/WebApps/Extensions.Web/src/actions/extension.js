@@ -364,7 +364,7 @@ const extensionActions = {
                 if (callback) {
                     callback();
                 }
-            }, errorCallback); 
+            }, errorCallback);
         };
     },
     getPackageUsage(portalId, packageId, callback) {

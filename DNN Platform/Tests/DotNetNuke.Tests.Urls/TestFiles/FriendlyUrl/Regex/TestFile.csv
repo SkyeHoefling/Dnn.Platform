@@ -1,4 +1,4 @@
-﻿Test,								Setting,						Value,				Scheme,		Page Name,		Params,					Expected Url,	
+﻿Test,								Setting,						Value,				Scheme,		Page Name,		Params,					Expected Url,
 Ignore Empty,						IgnoreRegex,					,					http://,	About Us,		,						http://{alias}/AboutUs
 DoNotRewriteRegex Empty,			DoNotRewriteRegex,				,					http://,	About Us,		,						http://{alias}/AboutUs
 UseSiteUrlsRegex Empty,				UseSiteUrlsRegex,				,					http://,	About Us,		,						http://{alias}/AboutUs

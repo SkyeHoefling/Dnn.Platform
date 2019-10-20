@@ -46,7 +46,7 @@ class AddPages extends Component {
                 endDate={bulkPage.endDate}
                 onChangeValue={this.onChangeValue.bind(this)} />
         ];
-        
+
         const additionalComponents = this.props.components;
 
         this.insertElementsInArray(defaultLeftColumnComponents, additionalComponents);
@@ -59,13 +59,13 @@ class AddPages extends Component {
             let index = this.getInteger(elements[i].order);
             const Component = elements[i].component;
             const instance = <div className="input-group">
-                <Component bulkPage={this.props.bulkPage} onChange={this.onChangeValue.bind(this)} 
+                <Component bulkPage={this.props.bulkPage} onChange={this.onChangeValue.bind(this)}
                     store={elements[i].store} /></div>;
-         
+
             if (index || index === 0) {
                 index = Math.min(array.length, Math.max(0, index));
                 array.splice(index, 0, instance);
-            }            
+            }
         }
     }
 
@@ -77,9 +77,9 @@ class AddPages extends Component {
             return parseInt(value.toString());
         }
         return value;
-    } 
-    
- 
+    }
+
+
     render() {
         const {bulkPage, onCancel, onValidate, onSave} = this.props;
 
@@ -136,7 +136,7 @@ AddPages.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onValidate: PropTypes.func.isRequired,
     onSave: PropTypes.func.isRequired,
-    onChangeField: PropTypes.func.isRequired, 
+    onChangeField: PropTypes.func.isRequired,
     components: PropTypes.array.isRequired
 };
 

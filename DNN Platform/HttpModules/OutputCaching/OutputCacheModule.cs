@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -63,7 +63,7 @@ namespace DotNetNuke.HttpModules.OutputCaching
 
         private bool IsInstallInProgress(HttpApplication app)
         {
-            return InstallBlocker.Instance.IsInstallInProgress();            
+            return InstallBlocker.Instance.IsInstallInProgress();
         }
 
         private void OnResolveRequestCache(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace DotNetNuke.HttpModules.OutputCaching
             {
                 return;
             }
-            
+
             if (IsInstallInProgress(_app))
             {
                 return;
@@ -124,7 +124,7 @@ namespace DotNetNuke.HttpModules.OutputCaching
             includeVaryByKeys.Add("tabid");
             includeVaryByKeys.Add("portalid");
             includeVaryByKeys.Add("locale");
-			includeVaryByKeys.Add("alias");
+            includeVaryByKeys.Add("alias");
             //make sure to always add keys in lowercase only
 
             if (includeExclude == IncludeExcludeType.ExcludeByDefault)
@@ -191,7 +191,7 @@ namespace DotNetNuke.HttpModules.OutputCaching
                         includeVaryByKeys.Add(varyKey);
                     }
                 }
-                
+
             }
             if (! (varyBy.ContainsKey("portalid")))
             {
@@ -205,10 +205,10 @@ namespace DotNetNuke.HttpModules.OutputCaching
             {
                 varyBy.Add("locale", locale);
             }
-			if (!(varyBy.ContainsKey("alias")))
-			{
-				varyBy.Add("alias", portalSettings.PortalAlias.HTTPAlias);
-			}
+            if (!(varyBy.ContainsKey("alias")))
+            {
+                varyBy.Add("alias", portalSettings.PortalAlias.HTTPAlias);
+            }
 
 
             string cacheKey = OutputCachingProvider.Instance(tabOutputCacheProvider).GenerateCacheKey(tabId, includeVaryByKeys, excludeVaryByKeys, varyBy);
@@ -217,8 +217,8 @@ namespace DotNetNuke.HttpModules.OutputCaching
 
             if (returnedFromCache)
             {
-				//output the content type heade when read content from cache.
-				_app.Context.Response.AddHeader("Content-Type", string.Format("{0}; charset={1}", _app.Response.ContentType, _app.Response.Charset));
+                //output the content type heade when read content from cache.
+                _app.Context.Response.AddHeader("Content-Type", string.Format("{0}; charset={1}", _app.Response.ContentType, _app.Response.Charset));
                 //This is to give a site owner the ability
                 //to visually verify that a page was rendered via
                 //the output cache.  Use FireFox FireBug or another
@@ -243,10 +243,10 @@ namespace DotNetNuke.HttpModules.OutputCaching
                     var duration = new TimeSpan(0, 0, seconds);
 
                     OutputCacheResponseFilter responseFilter = OutputCachingProvider.Instance(_app.Context.Items[ContextKeyTabOutputCacheProvider].ToString()).GetResponseFilter(Convert.ToInt32(_app.Context.Items[ContextKeyTabId]),
-                                                                                                                                                                                 maxCachedVariationsForTab,
-                                                                                                                                                                                 _app.Response.Filter,
-                                                                                                                                                                                 cacheKey,
-                                                                                                                                                                                 duration);
+                                                                                                                                                                                maxCachedVariationsForTab,
+                                                                                                                                                                                _app.Response.Filter,
+                                                                                                                                                                                cacheKey,
+                                                                                                                                                                                duration);
                     _app.Context.Items[ContextKeyResponseFilter] = responseFilter;
                     _app.Context.Response.Filter = responseFilter;
                 }

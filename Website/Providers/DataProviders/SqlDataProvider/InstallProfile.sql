@@ -27,7 +27,7 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Applications')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   RAISERROR('The table ''aspnet_Applications'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
@@ -35,31 +35,31 @@ END
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Users')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   RAISERROR('The table ''aspnet_Users'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Applications_CreateApplication')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Applications_CreateApplication')
+                AND (type = 'P')))
 BEGIN
   RAISERROR('The stored procedure ''aspnet_Applications_CreateApplication'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Users_CreateUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Users_CreateUser')
+                AND (type = 'P')))
 BEGIN
   RAISERROR('The stored procedure ''aspnet_Users_CreateUser'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Users_DeleteUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Users_DeleteUser')
+                AND (type = 'P')))
 BEGIN
   RAISERROR('The stored procedure ''aspnet_Users_DeleteUser'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
@@ -73,7 +73,7 @@ END
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Profile')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   PRINT 'Creating the aspnet_Profile table...'
   CREATE TABLE dbo.aspnet_Profile (
@@ -90,9 +90,9 @@ END
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Profile_GetProperties')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Profile_GetProperties')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Profile_GetProperties
 GO
 
@@ -134,9 +134,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Profile_SetProperties')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Profile_SetProperties')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Profile_SetProperties
 GO
 
@@ -161,11 +161,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-       BEGIN TRANSACTION
-       SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     EXEC dbo.aspnet_Applications_CreateApplication @ApplicationName, @ApplicationId OUTPUT
 
@@ -203,15 +203,15 @@ BEGIN
     END
 
     IF (EXISTS( SELECT *
-               FROM   dbo.aspnet_Profile
-               WHERE  UserId = @UserId))
+                FROM   dbo.aspnet_Profile
+                WHERE  UserId = @UserId))
         UPDATE dbo.aspnet_Profile
         SET    PropertyNames=@PropertyNames, PropertyValuesString = @PropertyValuesString,
-               PropertyValuesBinary = @PropertyValuesBinary, LastUpdatedDate=@CurrentTimeUtc
+                PropertyValuesBinary = @PropertyValuesBinary, LastUpdatedDate=@CurrentTimeUtc
         WHERE  UserId = @UserId
     ELSE
         INSERT INTO dbo.aspnet_Profile(UserId, PropertyNames, PropertyValuesString, PropertyValuesBinary, LastUpdatedDate)
-             VALUES (@UserId, @PropertyNames, @PropertyValuesString, @PropertyValuesBinary, @CurrentTimeUtc)
+            VALUES (@UserId, @PropertyNames, @PropertyValuesString, @PropertyValuesBinary, @CurrentTimeUtc)
 
     IF( @@ERROR <> 0 )
     BEGIN
@@ -221,8 +221,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-    	SET @TranStarted = 0
-    	COMMIT TRANSACTION
+        SET @TranStarted = 0
+        COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -232,7 +232,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -242,9 +242,9 @@ GO
 /*************************************************************/
 /*************************************************************/
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Profile_DeleteProfiles')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Profile_DeleteProfiles')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Profile_DeleteProfiles
 GO
 
@@ -272,7 +272,7 @@ BEGIN
         SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     WHILE (@CurrentPos <= LEN(@UserNames))
     BEGIN
@@ -299,8 +299,8 @@ BEGIN
     SELECT @NumDeleted
     IF (@TranStarted = 1)
     BEGIN
-    	SET @TranStarted = 0
-    	COMMIT TRANSACTION
+        SET @TranStarted = 0
+        COMMIT TRANSACTION
     END
     SET @TranStarted = 0
 
@@ -310,7 +310,7 @@ Cleanup:
     IF (@TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
     RETURN @ErrorCode
 END
@@ -319,9 +319,9 @@ GO
 /*************************************************************/
 /*************************************************************/
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Profile_DeleteInactiveProfiles')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Profile_DeleteInactiveProfiles')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Profile_DeleteInactiveProfiles
 GO
 
@@ -349,8 +349,8 @@ BEGIN
                         AND (LastActivityDate <= @InactiveSinceDate)
                         AND (
                                 (@ProfileAuthOptions = 2)
-                             OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
-                             OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
+                            OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
+                            OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
                             )
             )
 
@@ -361,9 +361,9 @@ GO
 /*************************************************************/
 /*************************************************************/
  IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Profile_GetNumberOfInactiveProfiles')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Profile_GetNumberOfInactiveProfiles')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Profile_GetNumberOfInactiveProfiles
 GO
 
@@ -399,9 +399,9 @@ GO
 /*************************************************************/
 /*************************************************************/
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Profile_GetProfiles')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Profile_GetProfiles')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Profile_GetProfiles
 GO
 
@@ -442,9 +442,9 @@ BEGIN
             AND u.UserId = p.UserId
             AND (@InactiveSinceDate IS NULL OR LastActivityDate <= @InactiveSinceDate)
             AND (     (@ProfileAuthOptions = 2)
-                   OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
-                   OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
-                 )
+                    OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
+                    OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
+                )
             AND (@UserNameToMatch IS NULL OR LoweredUserName LIKE LOWER(@UserNameToMatch))
         ORDER BY UserName
 
@@ -465,15 +465,15 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'vw_aspnet_Profiles')
-                  AND (type = 'V')))
+                AND (type = 'V')))
 BEGIN
   PRINT 'Creating the vw_aspnet_Profiles view...'
   EXEC(N'
   CREATE VIEW [dbo].[vw_aspnet_Profiles]
   AS SELECT [UserId], [LastUpdatedDate],
-      [DataSize]=  DATALENGTH([PropertyNames])
-                 + DATALENGTH([PropertyValuesString])
-                 + DATALENGTH([PropertyValuesBinary])
+    [DataSize]=  DATALENGTH([PropertyNames])
+                + DATALENGTH([PropertyValuesString])
+                + DATALENGTH([PropertyValuesBinary])
   FROM [dbo].[aspnet_Profile]
   ')
 END
@@ -502,21 +502,21 @@ GO
 --
 
 IF ( NOT EXISTS ( SELECT name
-                  FROM sys.database_principals
-                  WHERE [type] = 'R'
-                  AND name = N'aspnet_Profile_FullAccess' ) )
+                FROM sys.database_principals
+                WHERE [type] = 'R'
+                AND name = N'aspnet_Profile_FullAccess' ) )
 CREATE ROLE aspnet_Profile_FullAccess
 
 IF ( NOT EXISTS ( SELECT name
-                  FROM sys.database_principals
-                  WHERE [type] = 'R'
-                  AND name = N'aspnet_Profile_BasicAccess' ) )
+                FROM sys.database_principals
+                WHERE [type] = 'R'
+                AND name = N'aspnet_Profile_BasicAccess' ) )
 CREATE ROLE aspnet_Profile_BasicAccess
 
 IF ( NOT EXISTS ( SELECT name
-                  FROM sys.database_principals
-                  WHERE [type] = 'R'
-                  AND name = N'aspnet_Profile_ReportingAccess' ) )
+                FROM sys.database_principals
+                WHERE [type] = 'R'
+                AND name = N'aspnet_Profile_ReportingAccess' ) )
 CREATE ROLE aspnet_Profile_ReportingAccess
 GO
 

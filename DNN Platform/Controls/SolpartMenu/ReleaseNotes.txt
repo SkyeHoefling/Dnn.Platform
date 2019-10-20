@@ -32,7 +32,7 @@ Enhancements
 ----------------------------------------------------------
 - Fixed issue with Safari (IFrame trick caused menu not to show)
 - Fixed function naming for Netscape/FireFox/Mozilla
-  when control has '-' character in it.  
+  when control has '-' character in it.
 
 ==========================================================
 SolpartMenu v1.4.0.3 - Notes
@@ -40,7 +40,7 @@ SolpartMenu v1.4.0.3 - Notes
 ----------------------------------------------------------
 Enhancements
 ----------------------------------------------------------
-- Fixed issue with IFRAME trick and SSL (void(0) no longer 
+- Fixed issue with IFRAME trick and SSL (void(0) no longer
   works no using src=spacer.gif
 
 ==========================================================
@@ -49,11 +49,11 @@ SolpartMenu v1.4.0.2 - Notes
 ----------------------------------------------------------
 Enhancements
 ----------------------------------------------------------
-- Fixed minor issue with rendering vertical menu and it 
-  scrolled off page.  
-- Fixed error When rendering ForceFullMenuList and no child nodes 
+- Fixed minor issue with rendering vertical menu and it
+  scrolled off page.
+- Fixed error When rendering ForceFullMenuList and no child nodes
   exist
-- Fixed issue that stopped menu from being used in a 
+- Fixed issue that stopped menu from being used in a
   Trust=Medium
 
 ==========================================================
@@ -63,13 +63,13 @@ SolpartMenu v1.4.0.0 - Notes
 Enhancements
 ----------------------------------------------------------
 - Fixed issues with Safari
-	- sub-menu alignment (Safari bug workaround)
-	- mouseout delay always set to 5 sec
-	- Browser identification sometimes rendered downlevel
+    - sub-menu alignment (Safari bug workaround)
+    - mouseout delay always set to 5 sec
+    - Browser identification sometimes rendered downlevel
 
 - applying keeping saved css class on hover
 - Applying submenu class to menu when forcefullmenuList on
-- reading in zindex for menu and incrementing 1 higher for 
+- reading in zindex for menu and incrementing 1 higher for
   iframe trick.
 
 
@@ -105,12 +105,12 @@ Enhancements
 - Fixed issue with IE5/5.5 for pages with menus that were set
   to be invisible.
 - Absolute positioned menu support added!
-- Default way of handling windowed controls now is using an 
+- Default way of handling windowed controls now is using an
   IFRAME.  Therefore you will no longer see your SELECT and
   OBJECT tags disappear when the menu overlaps.
-  It should be noted that this idea originated from 
+  It should be noted that this idea originated from
   http://dotnetjunkies.com/WebLog/jking/archive/2003/07/21/488.aspx
-- New CSS class ability ItemSelectedCss - for specifying a 
+- New CSS class ability ItemSelectedCss - for specifying a
   different class for the selected item than the default MenuItemSel
 - Allowing Seperators to contain HTML - new overloaded methods
   for AddBreak now accepts HTML parameter
@@ -129,16 +129,16 @@ SolpartMenu v1.2.0.3 - Notes
 ----------------------------------------------------------
 Enhancements
 ----------------------------------------------------------
-- Added new method FindMenuItem.  Useful for applying a 
+- Added new method FindMenuItem.  Useful for applying a
   specific style to selected menu item.
 - Now hiding overlapping OBJECT tags (along with SELECT tags)
-- Fixed issue with submenus positioning when root menu items 
+- Fixed issue with submenus positioning when root menu items
   scrolled off page
 - Fixed issue with Mozilla/NS/Opera where submenu would scroll
   off page
-- ItemStyle now applying to TDs in addition to the TR 
+- ItemStyle now applying to TDs in addition to the TR
   WARNING:  MAY CAUSE DISPLAY CHANGES IF PROPERTY WAS USED!
-- Added ItemCss to go along with ItemStyle so that special 
+- Added ItemCss to go along with ItemStyle so that special
   class can be applied on item level.
 - Fixed minor issue with savecss (for menuitem css).
 
@@ -166,16 +166,16 @@ Enhancements
 - Added ToolTip functionality
 - When menu detects there is not enough room to display
   it will automatically add a scroll menu item to the top
-  and bottom when applicable.  
-- New MenuCSS.MenuScroll class to customize display 
+  and bottom when applicable.
+- New MenuCSS.MenuScroll class to customize display
 - Fixed Mozilla/Netscape border color issues
 - Minor fixes to ALT text of images
 - Fixed issue with menu designer where left/righthtml
   not safely encoded
-- If menu detects dir="rtl" it will cause sub-menus to be 
+- If menu detects dir="rtl" it will cause sub-menus to be
   displayed on the left instead of right.  IE seems to work
   correctly, Mozilla/Netscape seem to have problems.
-  
+
 
 ==========================================================
 SolpartMenu v1.1.1.2 - Notes
@@ -187,12 +187,12 @@ Enhancements
 
 - Added functionality to detect Crawlers and have menu
   render in a fashion that the Crawler can detect
-- Added property ForceFullMenuList - to force output to 
+- Added property ForceFullMenuList - to force output to
   render as if Crawler is requesting the page
 - Added DataBindMappings collection to allow for any menu
   item attribute to be bound to datasource
 - Fixed Netscape 7.1 problem where doesn't report 'this'
-  onclick of menu item (now runat server works for this 
+  onclick of menu item (now runat server works for this
   browser)
 - Fixed Opera 7 postbacks (cannot access name property on client)
 - Added root level menubreak
@@ -212,17 +212,17 @@ Enhancements
 - Fixed Shadow issue when no transition style specified
 - Fixed problem with sending duplicate styles down after postback
 - renamed attributes to be under 15 characters to allow
-  getAttribute to work with Konqueror and Safari. 
+  getAttribute to work with Konqueror and Safari.
   (SystemImagesPath --> SysImgPath)
 - Allowing Data binding to have non-numeric keys
 - Fixed positioning when window is scrolled
 - Updated Safari support
 - Fixed problem when SmartNavigation is turned on
-	- Problem:  postback with SmartNav enabled does 
-		    not fire the readystate event
-	- Solution: when smartnav is enabled menu will 
-		    use setTimeout to continually poll
-		    the page until readyState is complete
+    - Problem:  postback with SmartNav enabled does
+            not fire the readystate event
+    - Solution: when smartnav is enabled menu will
+            use setTimeout to continually poll
+            the page until readyState is complete
 
 ==========================================================
 SolpartMenu v1.1.0.7 - Notes
@@ -232,13 +232,13 @@ SolpartMenu v1.1.0.7 - Notes
 Enhancements
 ----------------------------------------------------------
 - Support for new Mac browser Safari
-	- Problem:  Safari doesn't report offsetWidths/heights of some elements 
-	- Solution:  go to parent to get width/height
-	- Problem:  Safari needs to include BODY when getting element positions via offsetTop/Left 
-	- Solution:  apparently only the root menu items need to include Body offset
-	- Problem:  a bug in Safari where the HTMLcollection object returned for cells is always empty
-	- Solution:  none, safari menus cannot display selected border colors until its resolved by safari development team.
-			this has been entered into the Safari bug tracking system (#3426081)
+    - Problem:  Safari doesn't report offsetWidths/heights of some elements
+    - Solution:  go to parent to get width/height
+    - Problem:  Safari needs to include BODY when getting element positions via offsetTop/Left
+    - Solution:  apparently only the root menu items need to include Body offset
+    - Problem:  a bug in Safari where the HTMLcollection object returned for cells is always empty
+    - Solution:  none, safari menus cannot display selected border colors until its resolved by safari development team.
+            this has been entered into the Safari bug tracking system (#3426081)
 
 - Added new property MenuItems to access collection of SPMenuItemNode
 - Added script to handle lack of events firing when SmartNavigation is enabled
@@ -276,28 +276,28 @@ Enhancements
 ----------------------------------------------------------
 Properties of interest
 ----------------------------------------------------------
-- Menu Object 
--- IconImagesPath – Location of the icon images (in DNN this would be the GUID location) – if not specified defaults to SystemImagePath
--- SystemImagesPath – Location of the images specific to the rendering of the menu (i.e. spacer.gif)
+- Menu Object
+-- IconImagesPath ï¿½ Location of the icon images (in DNN this would be the GUID location) ï¿½ if not specified defaults to SystemImagePath
+-- SystemImagesPath ï¿½ Location of the images specific to the rendering of the menu (i.e. spacer.gif)
 -- MenuBarLeftHTML - allows custom HTML to be placed to the left of the menu bar
 -- MenuBarRightHTML - allows custom HTML to be placed to the right of the menu bar
 -- MenuCSSPlaceHolderControl - allows a placeholder tag to be specified so menu's css properties can be set within the <HEAD> tag.
 
 -MenuItem Object
--- ImagePath – If icon is not coming from the IconImagesPath then specify a path here.  This is for admin icons.
--- LeftHTML – Allows for a custom HTML to be displayed to the left of the menuitem’s Title. 
--- RightHTML – Allows for a custom HTML to be displayed to the right of the menuitem’s Title.  This is for the selected menu item image.
+-- ImagePath ï¿½ If icon is not coming from the IconImagesPath then specify a path here.  This is for admin icons.
+-- LeftHTML ï¿½ Allows for a custom HTML to be displayed to the left of the menuitemï¿½s Title.
+-- RightHTML ï¿½ Allows for a custom HTML to be displayed to the right of the menuitemï¿½s Title.  This is for the selected menu item image.
 
 
 
 ----------------------------------------------------------
 The following browsers will render the UpLevel menu
 ----------------------------------------------------------
-IE 5.0 				- uses JSXMLArray 
+IE 5.0 				- uses JSXMLArray
 IE5.5 				- uses XML DataIslands (for superior caching)
 IE6 				- uses XML DataIslands (for superior caching)
 Mozilla (Mac/Win/Linux) 	- uses XML Parser
-Netscape 6 (Mac/Win/Linux)	- uses XML Parser 
+Netscape 6 (Mac/Win/Linux)	- uses XML Parser
 Netscape 7 (Mac/Win/Linux)	- uses XML Parser
 Opera 7    (Win/Linux)		- uses JSXMLArray - DNN HTML Layout issues causes transparent menus
 Konqueror(Linux)		- minor positioning issues
@@ -307,17 +307,17 @@ Safari (Mac) 			- trying...
 The following browsers will render the DownLevel menu
 ----------------------------------------------------------
 IE5 (Mac) 			- Absolute positioning issues
-NS 4				- 
-Opera 6 			- 
+NS 4				-
+Opera 6 			-
 Any other browser		-
 
 
 ----------------------------------------------------------
 IMPORTANT! MenuCSSPlaceHolderControl
 ----------------------------------------------------------
-I have added a property called MenuCSSPlaceHolderControl which is set to SPMenuStyle.  This allows the menu's 
+I have added a property called MenuCSSPlaceHolderControl which is set to SPMenuStyle.  This allows the menu's
 CSS style to be inserted at the desired location within the <HEAD> tag.  It is highly
-recommended that you place the following tag within the <HEAD> section. 
+recommended that you place the following tag within the <HEAD> section.
 <style id="SPMenuStyle" runat="server"></style>
 Failure to do so will result in the menu placing its style at the very beginning of the output stream,
 which I believe is not valid in some browsers.
@@ -340,9 +340,6 @@ Well what can I say?  After many attempts at getting this to work in an uplevel 
 made some headway but not enough.  I have determined that this is not going to hold up my release
 any longer, so for now the menu will render downlevel.  On a positive note I have determined
 what was causing the css not to render properly (extra spaces in the class property).  Unfortunately,
-I have not been able to resolve the positioning yet (you should only need to modify the spm_elementTop 
+I have not been able to resolve the positioning yet (you should only need to modify the spm_elementTop
 and spm_elementLeft functions in the .js file).  I want to say thank you to everyone who has
-helped out with this issue, especially Davor and Erin. 
-
-
-
+helped out with this issue, especially Davor and Erin.

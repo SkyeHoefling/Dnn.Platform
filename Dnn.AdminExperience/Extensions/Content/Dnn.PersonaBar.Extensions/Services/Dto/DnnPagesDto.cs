@@ -46,7 +46,7 @@ namespace Dnn.PersonaBar.Pages.Services.Dto
         public bool Error1(int moduleId, Guid uniqueId, string cultureCode)
         {
             return Modules.Any(dm => dm.UniqueId != uniqueId &&
-                                     dm.Modules.Any(mm => mm.ModuleId == moduleId && mm.CultureCode != cultureCode));
+                                    dm.Modules.Any(mm => mm.ModuleId == moduleId && mm.CultureCode != cultureCode));
         }
 
         public void RemoveLocale(string cultureCode)

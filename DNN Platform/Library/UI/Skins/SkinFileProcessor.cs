@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -56,7 +56,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public class SkinFileProcessor
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinFileProcessor));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinFileProcessor));
         #region "Private Members"
 
         private readonly string DUPLICATE_DETAIL = Util.GetLocalizedString("DuplicateSkinObject.Detail");
@@ -319,7 +319,7 @@ namespace DotNetNuke.UI.Skins
         /// -----------------------------------------------------------------------------
         /// Project	 : DotNetNuke
         /// Class	 : SkinFileProcessor.ControlParser
-        /// 
+        ///
         /// -----------------------------------------------------------------------------
         /// <summary>
         ///     Parsing functionality for token replacement in new skin files.
@@ -524,11 +524,11 @@ namespace DotNetNuke.UI.Skins
                                 {
                                     //append the formatted attribute to the inner contents of the control statement
                                     Messages += SkinController.FormatMessage(TOKEN_FORMAT,
-                                                                             xmlSkinAttribute.SelectSingleNode("Name").InnerText + "=\"" + xmlSkinAttribute.SelectSingleNode("Value").InnerText + "\"",
-                                                                             2,
-                                                                             false);
+                                                                            xmlSkinAttribute.SelectSingleNode("Name").InnerText + "=\"" + xmlSkinAttribute.SelectSingleNode("Value").InnerText + "\"",
+                                                                            2,
+                                                                            false);
                                     SkinControl += " " + xmlSkinAttribute.SelectSingleNode("Name").InnerText + "=\"" + xmlSkinAttribute.SelectSingleNode("Value").InnerText.Replace("\"", "&quot;") +
-                                                   "\"";
+                                                    "\"";
                                 }
                             }
                         }
@@ -587,7 +587,7 @@ namespace DotNetNuke.UI.Skins
         /// -----------------------------------------------------------------------------
         /// Project	 : DotNetNuke
         /// Class	 : SkinFileProcessor.ObjectParser
-        /// 
+        ///
         /// -----------------------------------------------------------------------------
         /// <summary>
         ///     Parsing functionality for token replacement in new skin files.
@@ -724,7 +724,7 @@ namespace DotNetNuke.UI.Skins
             ///     it encounters.  The returned value of the handler is substituted for the
             ///     original match.  So the handler properly formats the replacement for the
             ///     object and returns it instead.  If an unknown object is encountered, the object
-            ///     is unmodified.  This can happen if an object is a client-side object or 
+            ///     is unmodified.  This can happen if an object is a client-side object or
             ///     has not yet been installed.
             /// </remarks>
             /// -----------------------------------------------------------------------------
@@ -802,7 +802,7 @@ namespace DotNetNuke.UI.Skins
                         Parameters = Parameters.Replace("\" value", "");
                         Parameters = Parameters.Replace("/>", "");
 
-                        //convert multiple spaces and carriage returns into single spaces 
+                        //convert multiple spaces and carriage returns into single spaces
                         Parameters = MultiSpaceRegex.Replace(Parameters, " ");
 
                         if (ControlList.ContainsKey(Token))
@@ -867,7 +867,7 @@ namespace DotNetNuke.UI.Skins
         /// -----------------------------------------------------------------------------
         /// Project	 : DotNetNuke
         /// Class	 : SkinFileProcessor.PathParser
-        /// 
+        ///
         /// -----------------------------------------------------------------------------
         /// <summary>
         ///     Parsing functionality for path replacement in new skin files.
@@ -875,7 +875,7 @@ namespace DotNetNuke.UI.Skins
         /// <remarks>
         ///     This class encapsulates the data and methods necessary to appropriately
         ///     handle all the path replacement parsing needs for new skin files. Parsing
-        ///     supported for CSS syntax and HTML syntax (which covers ASCX files also). 
+        ///     supported for CSS syntax and HTML syntax (which covers ASCX files also).
         /// </remarks>
         /// -----------------------------------------------------------------------------
         private class PathParser
@@ -1057,7 +1057,7 @@ namespace DotNetNuke.UI.Skins
                             //if the tag does not contain a reference to the skinpath
                             if (strNewTag.IndexOf("<%= skinpath %>", StringComparison.InvariantCultureIgnoreCase) == -1)
                             {
-                                //insert the skinpath 
+                                //insert the skinpath
                                 strNewTag = m.Groups["tag"].Value + "<%= SkinPath %>" + m.Groups["content"].Value + m.Groups["endtag"].Value;
                             }
 
@@ -1118,7 +1118,7 @@ namespace DotNetNuke.UI.Skins
             /// <remarks>
             ///     The constructor primes the utility class with basic file information.
             ///     It also checks for the existentce of a skinfile level attribute file
-            ///     and read it in, if found.  
+            ///     and read it in, if found.
             /// </remarks>
             /// -----------------------------------------------------------------------------
             public SkinFile(string SkinContents, XmlDocument SkinAttributes)
@@ -1137,7 +1137,7 @@ namespace DotNetNuke.UI.Skins
             /// <remarks>
             ///     The constructor primes the utility class with basic file information.
             ///     It also checks for the existentce of a skinfile level attribute file
-            ///     and read it in, if found.  
+            ///     and read it in, if found.
             /// </remarks>
             /// -----------------------------------------------------------------------------
             public SkinFile(string SkinRoot, string FileName, XmlDocument SkinAttributes)
@@ -1170,7 +1170,7 @@ namespace DotNetNuke.UI.Skins
                             m_Messages += SkinController.FormatMessage(FILE_FORMAT_ERROR, string.Format(FILE_FORMAT_ERROR, FileName), 2, true);
                         }
 
-                        //Check for existence of and load skin file level attribute information 
+                        //Check for existence of and load skin file level attribute information
                         if (File.Exists(FileName.Replace(FileExtension, ".xml")))
                         {
                             try

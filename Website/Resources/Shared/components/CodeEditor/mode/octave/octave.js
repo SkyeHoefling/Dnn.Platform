@@ -45,9 +45,9 @@ CodeMirror.defineMode("octave", function() {
   // tokenizers
   function tokenTranspose(stream, state) {
     if (!stream.sol() && stream.peek() === '\'') {
-      stream.next();
-      state.tokenize = tokenBase;
-      return 'operator';
+    stream.next();
+    state.tokenize = tokenBase;
+    return 'operator';
     }
     state.tokenize = tokenBase;
     return tokenBase(stream, state);
@@ -56,8 +56,8 @@ CodeMirror.defineMode("octave", function() {
 
   function tokenComment(stream, state) {
     if (stream.match(/^.*%}/)) {
-      state.tokenize = tokenBase;
-      return 'comment';
+    state.tokenize = tokenBase;
+    return 'comment';
     };
     stream.skipToEnd();
     return 'comment';
@@ -69,23 +69,23 @@ CodeMirror.defineMode("octave", function() {
 
     // Handle one line Comments
     if (stream.match('%{')){
-      state.tokenize = tokenComment;
-      stream.skipToEnd();
-      return 'comment';
+    state.tokenize = tokenComment;
+    stream.skipToEnd();
+    return 'comment';
     }
 
     if (stream.match(/^[%#]/)){
-      stream.skipToEnd();
-      return 'comment';
+    stream.skipToEnd();
+    return 'comment';
     }
 
     // Handle Number Literals
     if (stream.match(/^[0-9\.+-]/, false)) {
-      if (stream.match(/^[+-]?0x[0-9a-fA-F]+[ij]?/)) {
+    if (stream.match(/^[+-]?0x[0-9a-fA-F]+[ij]?/)) {
         stream.tokenize = tokenBase;
         return 'number'; };
-      if (stream.match(/^[+-]?\d*\.\d+([EeDd][+-]?\d+)?[ij]?/)) { return 'number'; };
-      if (stream.match(/^[+-]?\d+([EeDd][+-]?\d+)?[ij]?/)) { return 'number'; };
+    if (stream.match(/^[+-]?\d*\.\d+([EeDd][+-]?\d+)?[ij]?/)) { return 'number'; };
+    if (stream.match(/^[+-]?\d+([EeDd][+-]?\d+)?[ij]?/)) { return 'number'; };
     }
     if (stream.match(wordRegexp(['nan','NaN','inf','Inf']))) { return 'number'; };
 
@@ -102,8 +102,8 @@ CodeMirror.defineMode("octave", function() {
     if (stream.match(singleDelimiters) || stream.match(doubleDelimiters) || stream.match(tripleDelimiters)) { return null; };
 
     if (stream.match(expressionEnd)) {
-      state.tokenize = tokenTranspose;
-      return null;
+    state.tokenize = tokenTranspose;
+    return null;
     };
 
 
@@ -115,17 +115,17 @@ CodeMirror.defineMode("octave", function() {
 
   return {
     startState: function() {
-      return {
+    return {
         tokenize: tokenBase
-      };
+    };
     },
 
     token: function(stream, state) {
-      var style = state.tokenize(stream, state);
-      if (style === 'number' || style === 'variable'){
+    var style = state.tokenize(stream, state);
+    if (style === 'number' || style === 'variable'){
         state.tokenize = tokenTranspose;
-      }
-      return style;
+    }
+    return style;
     }
   };
 });

@@ -1,5 +1,5 @@
 ﻿.horizontal-bar-chart{
-	height: 360px;
+    height: 360px;
     margin-top: 10px;
 }
 
@@ -16,11 +16,11 @@
 }
 
 .horizontal-bar-chart text.label {
-    text-anchor: start;    
+    text-anchor: start;
 }
 
 .horizontal-bar-chart text.count {
-    text-anchor: end;    
+    text-anchor: end;
 }
 
 .axis path,
@@ -33,14 +33,14 @@
 .axis text {
     fill: #b2aeae;
     font-size: 10px;
-	font-family: sourcecodepro_semibold;
+    font-family: sourcecodepro_semibold;
     letter-spacing: 1px;
 }
 
 text.y-axis-label {
     fill: #b2aeae;
     font-size: 12px;
-	font-family: sourcecodepro_semibold;
+    font-family: sourcecodepro_semibold;
     letter-spacing: 1px;
     text-anchor: middle;
 }
@@ -65,15 +65,15 @@ text.y-axis-label {
 }
 
 .donut-chart path{
-	stroke-width: 0;
-	stroke: #fff;
+    stroke-width: 0;
+    stroke: #fff;
 }
 
 ul.graph-legend {
     background-color: #eeeeee;
     border-radius: 3px;
     display: inline-block;
-    padding: 9px 15px;    
+    padding: 9px 15px;
     font-weight: bold;
     color: #878383;
     float: right;
@@ -88,7 +88,7 @@ ul.graph-legend > li {
 }
 
 ul.graph-legend > li > span{
-	font-family: sourcecodepro_semibold;
+    font-family: sourcecodepro_semibold;
     font-size: 11px;
     letter-spacing: 1px;
     font-weight: normal;
@@ -114,8 +114,8 @@ ul.graph-legend li.checked > div {
 
 .chart-container {
     position: relative;
-	margin-top: -35px;
-	margin-bottom: 30px;
+    margin-top: -35px;
+    margin-bottom: 30px;
 }
 
 #average-time-on-page.chart-container {
@@ -142,15 +142,15 @@ ul.graph-legend li.checked > div {
 
 .line-chart-tooltip > span.title {
     color: #c8c8c8;
-	font-family: sourcecodepro_semibold;
+    font-family: sourcecodepro_semibold;
     display: block;
-	margin-bottom: 5px;
+    margin-bottom: 5px;
     letter-spacing: 1px;
 }
 
 .line-chart-tooltip > span.info {
-    color: #ffffff;  
-	font-family: sourcecodepro_semibold;
+    color: #ffffff;
+    font-family: sourcecodepro_semibold;
     display: block;
     letter-spacing: 1px;
     line-height: 1.5em;
@@ -173,4 +173,3 @@ ul.graph-legend li.checked > div {
     position: absolute;
     width: 0;
 }
-

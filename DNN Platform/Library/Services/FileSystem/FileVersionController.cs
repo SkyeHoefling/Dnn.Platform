@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -45,7 +45,7 @@ namespace DotNetNuke.Services.FileSystem
         public string AddFileVersion(IFileInfo file, int userId, bool published, bool removeOldestVersions, Stream content = null)
         {
             Requires.NotNull("file", file);
-            
+
             byte[] fileContent = null;
 
             if (content != null)
@@ -64,28 +64,28 @@ namespace DotNetNuke.Services.FileSystem
             }
 
             var newVersion = DataProvider.Instance()
-                                             .AddFileVersion(file.FileId,
-                                                             file.UniqueId,
-                                                             file.VersionGuid,
-                                                             file.FileName,
-                                                             file.Extension,
-                                                             file.Size,
-                                                             file.Width,
-                                                             file.Height,
-                                                             file.ContentType,
-                                                             file.Folder,
-                                                             file.FolderId,
-                                                             userId,
-                                                             file.SHA1Hash,
-                                                             file.LastModificationTime,
-                                                             file.Title,
-                                                             file.EnablePublishPeriod,
-                                                             file.StartDate,
-                                                             file.EndDate,
-                                                             file.ContentItemID,
-                                                             published,
-                                                             fileContent);
-            
+                                            .AddFileVersion(file.FileId,
+                                                            file.UniqueId,
+                                                            file.VersionGuid,
+                                                            file.FileName,
+                                                            file.Extension,
+                                                            file.Size,
+                                                            file.Width,
+                                                            file.Height,
+                                                            file.ContentType,
+                                                            file.Folder,
+                                                            file.FolderId,
+                                                            userId,
+                                                            file.SHA1Hash,
+                                                            file.LastModificationTime,
+                                                            file.Title,
+                                                            file.EnablePublishPeriod,
+                                                            file.StartDate,
+                                                            file.EndDate,
+                                                            file.ContentItemID,
+                                                            published,
+                                                            fileContent);
+
             DataCache.RemoveCache("GetFileById" + file.FileId);
 
             if (removeOldestVersions)
@@ -101,23 +101,23 @@ namespace DotNetNuke.Services.FileSystem
 
             return GetVersionedFilename(file, newVersion);
         }
-       
+
         public void SetPublishedVersion(IFileInfo file, int newPublishedVersion)
         {
             DataProvider.Instance().SetPublishedVersion(file.FileId, newPublishedVersion);
             DataCache.RemoveCache("GetFileById" + file.FileId);
 
-            // Rename the original file to the versioned name            
+            // Rename the original file to the versioned name
             // Rename the new versioned name to the original file name
             var folderMapping = FolderMappingController.Instance.GetFolderMapping(file.PortalId, file.FolderMappingID);
             if (folderMapping == null) return;
             var folderProvider = FolderProvider.Instance(folderMapping.FolderProviderType);
 
-            folderProvider.RenameFile(file, GetVersionedFilename(file, file.PublishedVersion));            
+            folderProvider.RenameFile(file, GetVersionedFilename(file, file.PublishedVersion));
             folderProvider.RenameFile(
-                    new FileInfo { FileName = GetVersionedFilename(file, newPublishedVersion), Folder = file.Folder, FolderId = file.FolderId, FolderMappingID = folderMapping.FolderMappingID, PortalId = folderMapping.PortalID }, 
+                    new FileInfo { FileName = GetVersionedFilename(file, newPublishedVersion), Folder = file.Folder, FolderId = file.FolderId, FolderMappingID = folderMapping.FolderMappingID, PortalId = folderMapping.PortalID },
                     file.FileName);
-            
+
             // Notify File Changed
             OnFileChanged(file, UserController.Instance.GetCurrentUserInfo().UserID);
         }
@@ -139,7 +139,7 @@ namespace DotNetNuke.Services.FileSystem
                 newVersion = DataProvider.Instance().DeleteFileVersion(file.FileId, version);
 
                 folderProvider.RenameFile(
-                    new FileInfo { FileId = file.FileId, FileName = GetVersionedFilename(file, newVersion), Folder = file.Folder, FolderId = file.FolderId, FolderMappingID = folderMapping.FolderMappingID, PortalId = folderMapping.PortalID }, 
+                    new FileInfo { FileId = file.FileId, FileName = GetVersionedFilename(file, newVersion), Folder = file.Folder, FolderId = file.FolderId, FolderMappingID = folderMapping.FolderMappingID, PortalId = folderMapping.PortalID },
                     file.FileName);
 
                 //Update the Last Modification Time
@@ -154,8 +154,8 @@ namespace DotNetNuke.Services.FileSystem
             }
             else
             {
-                newVersion = DataProvider.Instance().DeleteFileVersion(file.FileId, version);             
-                folderProvider.DeleteFile(new FileInfo { FileName = GetVersionedFilename(file, version), Folder = file.Folder, FolderMappingID = folderMapping.FolderMappingID, PortalId = folderMapping.PortalID, FolderId = file.FolderId });                
+                newVersion = DataProvider.Instance().DeleteFileVersion(file.FileId, version);
+                folderProvider.DeleteFile(new FileInfo { FileName = GetVersionedFilename(file, version), Folder = file.Folder, FolderMappingID = folderMapping.FolderMappingID, PortalId = folderMapping.PortalID, FolderId = file.FolderId });
             }
 
             DataCache.RemoveCache("GetFileById" + file.FileId);
@@ -258,7 +258,7 @@ namespace DotNetNuke.Services.FileSystem
 
             RemoveOldestsVersions(file);
         }
-        
+
         #endregion
 
         #region helper methods
@@ -281,7 +281,7 @@ namespace DotNetNuke.Services.FileSystem
         {
             var portalId = FolderManager.Instance.GetFolder(file.FolderId).PortalID;
             var versions = GetFileVersions(file);
-            var maxVersions = MaxFileVersions(portalId) - 1; // The published version is not in the FileVersions collection            
+            var maxVersions = MaxFileVersions(portalId) - 1; // The published version is not in the FileVersions collection
             if (versions.Count() > maxVersions)
             {
                 foreach (var v in versions.OrderBy(v => v.Version).Take(versions.Count() - maxVersions))
@@ -293,7 +293,7 @@ namespace DotNetNuke.Services.FileSystem
 
         internal static string GetVersionedFilename(IFileInfo file, int version)
         {
-            return string.Format("{0}_{1}.v.resources", file.FileId, version);            
+            return string.Format("{0}_{1}.v.resources", file.FileId, version);
         }
 
         private static void RenameFile(IFileInfo file, string newFileName)

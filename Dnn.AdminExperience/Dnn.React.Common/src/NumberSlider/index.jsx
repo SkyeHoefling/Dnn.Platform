@@ -16,12 +16,12 @@ export default class NumberSlider extends Component {
         const value = this.props.value;
 
         const className = "slider-container" + (this.props.withMinMax ? " with-min-max": "");
-        
+
         return (
             <div className={className}>
                 {this.props.withMinMax && <span>{minimum}</span>}
-                <ReactSlider 
-                    min={minimum} 
+                <ReactSlider
+                    min={minimum}
                     value={value}
                     max={maximum}
                     step={step}
@@ -30,7 +30,7 @@ export default class NumberSlider extends Component {
                     withBars={true}>
                     {!this.props.hideValue && <div>{value}</div>}
                 </ReactSlider>
-                    
+
                 {this.props.withMinMax && <span>{maximum}</span>}
             </div>
         );
@@ -38,7 +38,7 @@ export default class NumberSlider extends Component {
 }
 
 NumberSlider.propTypes = {
-    min: PropTypes.number.isRequired, 
+    min: PropTypes.number.isRequired,
     max: PropTypes.number.isRequired,
     step: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,

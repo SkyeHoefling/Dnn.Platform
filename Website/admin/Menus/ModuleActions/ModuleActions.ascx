@@ -10,7 +10,7 @@
                 <div class="qsHeader"><%=Localization.GetSafeJSString("QuickSettings", Localization.SharedResourceFile) %></div>
                 <div class="qsContainer">
                     <asp:Panel id="quickSettings" runat="server">
-    
+
                     </asp:Panel>
                 </div>
                 <div class="qsFooter">
@@ -131,7 +131,7 @@
                                         }
                                     }
                                 }
-                               
+
                             }
                         }
                     });
@@ -141,7 +141,7 @@
             );
         });
 
-        // Webkit based browsers (like Chrome and Safari) can access images width and height properties only after images have been fully loaded. 
+        // Webkit based browsers (like Chrome and Safari) can access images width and height properties only after images have been fully loaded.
         // It will cause menu action out of scope, TO fix this, use $(window).load instead of $(document).ready
         $(window).on('load', function () {
             setUpActions();
@@ -150,7 +150,7 @@
                 $(window).resize();
             });
             $(window).resize();
-        });        
+        });
 
     } (jQuery));
 </script>

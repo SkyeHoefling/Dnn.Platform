@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -59,7 +59,7 @@ namespace DotNetNuke.Entities.Modules
     /// -----------------------------------------------------------------------------
     public class DesktopModuleController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DesktopModuleController));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DesktopModuleController));
         #region Private Methods
 
         private static readonly DataProvider DataProvider = DataProvider.Instance();
@@ -133,9 +133,9 @@ namespace DotNetNuke.Entities.Modules
             {
                 var vocabularyController = Util.GetVocabularyController();
                 var vocabulary = (from v in vocabularyController.GetVocabularies()
-                                  where v.Name == "Module_Categories"
-                                  select v)
-                                  .FirstOrDefault();
+                                where v.Name == "Module_Categories"
+                                select v)
+                                .FirstOrDefault();
 
                 if (vocabulary != null)
                 {
@@ -167,10 +167,10 @@ namespace DotNetNuke.Entities.Modules
         {
             DataProvider.DeleteDesktopModule(desktopModuleID);
             EventLogController.Instance.AddLog("DesktopModuleID",
-                               desktopModuleID.ToString(),
-                               PortalController.Instance.GetCurrentPortalSettings(),
-                               UserController.Instance.GetCurrentUserInfo().UserID,
-                               EventLogController.EventLogType.DESKTOPMODULE_DELETED);
+                                desktopModuleID.ToString(),
+                                PortalController.Instance.GetCurrentPortalSettings(),
+                                UserController.Instance.GetCurrentUserInfo().UserID,
+                                EventLogController.EventLogType.DESKTOPMODULE_DELETED);
             DataCache.ClearHostCache(true);
         }
 
@@ -205,16 +205,16 @@ namespace DotNetNuke.Entities.Modules
         public static DesktopModuleInfo GetDesktopModule(int desktopModuleID, int portalID)
         {
             var module = (from kvp in GetDesktopModulesInternal(portalID)
-                          where kvp.Value.DesktopModuleID == desktopModuleID
-                          select kvp.Value)
-                   .FirstOrDefault();
+                        where kvp.Value.DesktopModuleID == desktopModuleID
+                        select kvp.Value)
+                    .FirstOrDefault();
 
             if (module == null)
             {
                 module = (from kvp in GetDesktopModulesInternal(Null.NullInteger)
-                          where kvp.Value.DesktopModuleID == desktopModuleID
-                          select kvp.Value)
-                   .FirstOrDefault();
+                        where kvp.Value.DesktopModuleID == desktopModuleID
+                        select kvp.Value)
+                    .FirstOrDefault();
             }
 
             if (module == null)
@@ -232,8 +232,8 @@ namespace DotNetNuke.Entities.Modules
         public static DesktopModuleInfo GetDesktopModuleByPackageID(int packageID)
         {
             DesktopModuleInfo desktopModuleByPackageID = (from kvp in GetDesktopModulesInternal(Null.NullInteger)
-                                                          where kvp.Value.PackageID == packageID
-                                                          select kvp.Value)
+                                                        where kvp.Value.PackageID == packageID
+                                                        select kvp.Value)
                 .FirstOrDefault();
 
             if (desktopModuleByPackageID == null)
@@ -255,8 +255,8 @@ namespace DotNetNuke.Entities.Modules
         public static DesktopModuleInfo GetDesktopModuleByModuleName(string moduleName, int portalID)
         {
             DesktopModuleInfo desktopModuleByModuleName = (from kvp in GetDesktopModulesInternal(portalID)
-                                                           where kvp.Value.ModuleName == moduleName
-                                                           select kvp.Value).FirstOrDefault();
+                                                            where kvp.Value.ModuleName == moduleName
+                                                            select kvp.Value).FirstOrDefault();
 
             if (desktopModuleByModuleName == null)
                 Logger.WarnFormat("Unable to find module by name. Name:{0} portalId:{1}", moduleName, portalID);
@@ -333,24 +333,24 @@ namespace DotNetNuke.Entities.Modules
                 }
 
                 DataProvider.UpdateDesktopModule(desktopModule.DesktopModuleID,
-                                                 desktopModule.PackageID,
-                                                 desktopModule.ModuleName,
-                                                 desktopModule.FolderName,
-                                                 desktopModule.FriendlyName,
-                                                 desktopModule.Description,
-                                                 desktopModule.Version,
-                                                 desktopModule.IsPremium,
-                                                 desktopModule.IsAdmin,
-                                                 desktopModule.BusinessControllerClass,
-                                                 desktopModule.SupportedFeatures,
-                                                 (int)desktopModule.Shareable,
-                                                 desktopModule.CompatibleVersions,
-                                                 desktopModule.Dependencies,
-                                                 desktopModule.Permissions,
-                                                 desktopModule.ContentItemId,
-                                                 UserController.Instance.GetCurrentUserInfo().UserID,
-                                                 desktopModule.AdminPage,
-                                                 desktopModule.HostPage);
+                                                desktopModule.PackageID,
+                                                desktopModule.ModuleName,
+                                                desktopModule.FolderName,
+                                                desktopModule.FriendlyName,
+                                                desktopModule.Description,
+                                                desktopModule.Version,
+                                                desktopModule.IsPremium,
+                                                desktopModule.IsAdmin,
+                                                desktopModule.BusinessControllerClass,
+                                                desktopModule.SupportedFeatures,
+                                                (int)desktopModule.Shareable,
+                                                desktopModule.CompatibleVersions,
+                                                desktopModule.Dependencies,
+                                                desktopModule.Permissions,
+                                                desktopModule.ContentItemId,
+                                                UserController.Instance.GetCurrentUserInfo().UserID,
+                                                desktopModule.AdminPage,
+                                                desktopModule.HostPage);
 
                 //Update Tags
                 if (saveTerms)
@@ -410,13 +410,13 @@ namespace DotNetNuke.Entities.Modules
             {
                 Config.Touch();
             }
-            
+
         }
 
         private void CheckInterfacesImplementation(ref DesktopModuleInfo desktopModuleInfo)
         {
             var businessController = Reflection.CreateType(desktopModuleInfo.BusinessControllerClass);
-            var controller = Reflection.CreateObject(desktopModuleInfo.BusinessControllerClass, desktopModuleInfo.BusinessControllerClass);   
+            var controller = Reflection.CreateObject(desktopModuleInfo.BusinessControllerClass, desktopModuleInfo.BusinessControllerClass);
 
             desktopModuleInfo.IsPortable = businessController.GetInterfaces().Contains(typeof (IPortable));
 #pragma warning disable 0618
@@ -452,10 +452,10 @@ namespace DotNetNuke.Entities.Modules
             {
                 portalDesktopModuleID = DataProvider.Instance().AddPortalDesktopModule(portalId, desktopModuleId, UserController.Instance.GetCurrentUserInfo().UserID);
                 EventLogController.Instance.AddLog("PortalDesktopModuleID",
-                                   portalDesktopModuleID.ToString(),
-                                   PortalController.Instance.GetCurrentPortalSettings(),
-                                   UserController.Instance.GetCurrentUserInfo().UserID,
-                                   EventLogController.EventLogType.PORTALDESKTOPMODULE_CREATED);
+                                    portalDesktopModuleID.ToString(),
+                                    PortalController.Instance.GetCurrentPortalSettings(),
+                                    UserController.Instance.GetCurrentUserInfo().UserID,
+                                    EventLogController.EventLogType.PORTALDESKTOPMODULE_CREATED);
                 if (addPermissions)
                 {
                     ArrayList permissions = PermissionController.GetPermissionsByPortalDesktopModule();
@@ -506,7 +506,7 @@ namespace DotNetNuke.Entities.Modules
                     {
                         AddDesktopModuleToPortal(portalId, desktopModule.DesktopModuleID, !desktopModule.IsAdmin, false);
                     }
-                    
+
                 }
             }
             DataCache.ClearPortalCache(portalId, true);
@@ -548,10 +548,10 @@ namespace DotNetNuke.Entities.Modules
         {
             DataProvider.Instance().DeletePortalDesktopModules(portalId, desktopModuleId);
             EventLogController.Instance.AddLog("DesktopModuleID",
-                               desktopModuleId.ToString(),
-                               PortalController.Instance.GetCurrentPortalSettings(),
-                               UserController.Instance.GetCurrentUserInfo().UserID,
-                               EventLogController.EventLogType.PORTALDESKTOPMODULE_DELETED);
+                                desktopModuleId.ToString(),
+                                PortalController.Instance.GetCurrentPortalSettings(),
+                                UserController.Instance.GetCurrentUserInfo().UserID,
+                                EventLogController.EventLogType.PORTALDESKTOPMODULE_DELETED);
             if (clearCache)
             {
                 DataCache.ClearPortalCache(portalId, false);
@@ -562,10 +562,10 @@ namespace DotNetNuke.Entities.Modules
         {
             DataProvider.Instance().DeletePortalDesktopModules(Null.NullInteger, desktopModuleId);
             EventLogController.Instance.AddLog("DesktopModuleID",
-                               desktopModuleId.ToString(),
-                               PortalController.Instance.GetCurrentPortalSettings(),
-                               UserController.Instance.GetCurrentUserInfo().UserID,
-                               EventLogController.EventLogType.PORTALDESKTOPMODULE_DELETED);
+                                desktopModuleId.ToString(),
+                                PortalController.Instance.GetCurrentPortalSettings(),
+                                UserController.Instance.GetCurrentUserInfo().UserID,
+                                EventLogController.EventLogType.PORTALDESKTOPMODULE_DELETED);
             DataCache.ClearHostCache(true);
         }
 
@@ -573,10 +573,10 @@ namespace DotNetNuke.Entities.Modules
         {
             DataProvider.Instance().DeletePortalDesktopModules(portalId, Null.NullInteger);
             EventLogController.Instance.AddLog("PortalID",
-                               portalId.ToString(),
-                               PortalController.Instance.GetCurrentPortalSettings(),
-                               UserController.Instance.GetCurrentUserInfo().UserID,
-                               EventLogController.EventLogType.PORTALDESKTOPMODULE_DELETED);
+                                portalId.ToString(),
+                                PortalController.Instance.GetCurrentPortalSettings(),
+                                UserController.Instance.GetCurrentUserInfo().UserID,
+                                EventLogController.EventLogType.PORTALDESKTOPMODULE_DELETED);
             DataCache.ClearPortalCache(portalId, true);
         }
 

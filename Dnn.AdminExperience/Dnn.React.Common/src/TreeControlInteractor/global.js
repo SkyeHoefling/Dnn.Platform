@@ -58,10 +58,10 @@ export const global = {
         }) => {
             return {
                 margin: `
-                              ${all || vertical || top}px
-                              ${all || horizontal || right}px
-                              ${all || vertical || bottom}px
-                              ${all || horizontal || left}px`
+                            ${all || vertical || top}px
+                            ${all || horizontal || right}px
+                            ${all || vertical || bottom}px
+                            ${all || horizontal || left}px`
             };
         },
 

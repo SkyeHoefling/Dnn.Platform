@@ -23,37 +23,37 @@
 
     var self = this;
     CodeMirror.on(this.inner, "mousedown", function(e) {
-      if (e.which != 1) return;
-      CodeMirror.e_preventDefault(e);
-      var axis = self.orientation == "horizontal" ? "pageX" : "pageY";
-      var start = e[axis], startpos = self.pos;
-      function done() {
+    if (e.which != 1) return;
+    CodeMirror.e_preventDefault(e);
+    var axis = self.orientation == "horizontal" ? "pageX" : "pageY";
+    var start = e[axis], startpos = self.pos;
+    function done() {
         CodeMirror.off(document, "mousemove", move);
         CodeMirror.off(document, "mouseup", done);
-      }
-      function move(e) {
+    }
+    function move(e) {
         if (e.which != 1) return done();
         self.moveTo(startpos + (e[axis] - start) * (self.total / self.size));
-      }
-      CodeMirror.on(document, "mousemove", move);
-      CodeMirror.on(document, "mouseup", done);
+    }
+    CodeMirror.on(document, "mousemove", move);
+    CodeMirror.on(document, "mouseup", done);
     });
 
     CodeMirror.on(this.node, "click", function(e) {
-      CodeMirror.e_preventDefault(e);
-      var innerBox = self.inner.getBoundingClientRect(), where;
-      if (self.orientation == "horizontal")
+    CodeMirror.e_preventDefault(e);
+    var innerBox = self.inner.getBoundingClientRect(), where;
+    if (self.orientation == "horizontal")
         where = e.clientX < innerBox.left ? -1 : e.clientX > innerBox.right ? 1 : 0;
-      else
+    else
         where = e.clientY < innerBox.top ? -1 : e.clientY > innerBox.bottom ? 1 : 0;
-      self.moveTo(self.pos + where * self.screen);
+    self.moveTo(self.pos + where * self.screen);
     });
 
     function onWheel(e) {
-      var moved = CodeMirror.wheelEventPixels(e)[self.orientation == "horizontal" ? "x" : "y"];
-      var oldPos = self.pos;
-      self.moveTo(self.pos + moved);
-      if (self.pos != oldPos) CodeMirror.e_preventDefault(e);
+    var moved = CodeMirror.wheelEventPixels(e)[self.orientation == "horizontal" ? "x" : "y"];
+    var oldPos = self.pos;
+    self.moveTo(self.pos + moved);
+    if (self.pos != oldPos) CodeMirror.e_preventDefault(e);
     }
     CodeMirror.on(this.node, "mousewheel", onWheel);
     CodeMirror.on(this.node, "DOMMouseScroll", onWheel);
@@ -65,7 +65,7 @@
     if (pos == this.pos) return;
     this.pos = pos;
     this.inner.style[this.orientation == "horizontal" ? "left" : "top"] =
-      (pos * (this.size / this.total)) + "px";
+    (pos * (this.size / this.total)) + "px";
     if (update !== false) this.scroll(pos, this.orientation);
   };
 
@@ -78,13 +78,13 @@
 
     var buttonSize = this.screen * (this.size / this.total);
     if (buttonSize < minButtonSize) {
-      this.size -= minButtonSize - buttonSize;
-      buttonSize = minButtonSize;
+    this.size -= minButtonSize - buttonSize;
+    buttonSize = minButtonSize;
     }
     this.inner.style[this.orientation == "horizontal" ? "width" : "height"] =
-      buttonSize + "px";
+    buttonSize + "px";
     this.inner.style[this.orientation == "horizontal" ? "left" : "top"] =
-      this.pos * (this.size / this.total) + "px";
+    this.pos * (this.size / this.total) + "px";
   };
 
   function SimpleScrollbars(cls, place, scroll) {
@@ -98,8 +98,8 @@
 
   SimpleScrollbars.prototype.update = function(measure) {
     if (this.width == null) {
-      var style = window.getComputedStyle ? window.getComputedStyle(this.horiz.node) : this.horiz.node.currentStyle;
-      if (style) this.width = parseInt(style.height);
+    var style = window.getComputedStyle ? window.getComputedStyle(this.horiz.node) : this.horiz.node.currentStyle;
+    if (style) this.width = parseInt(style.height);
     }
     var width = this.width || 0;
 
@@ -109,16 +109,16 @@
     this.horiz.node.style.display = needsH ? "block" : "none";
 
     if (needsV) {
-      this.vert.update(measure.scrollHeight, measure.clientHeight,
-                       measure.viewHeight - (needsH ? width : 0));
-      this.vert.node.style.display = "block";
-      this.vert.node.style.bottom = needsH ? width + "px" : "0";
+    this.vert.update(measure.scrollHeight, measure.clientHeight,
+                        measure.viewHeight - (needsH ? width : 0));
+    this.vert.node.style.display = "block";
+    this.vert.node.style.bottom = needsH ? width + "px" : "0";
     }
     if (needsH) {
-      this.horiz.update(measure.scrollWidth, measure.clientWidth,
+    this.horiz.update(measure.scrollWidth, measure.clientWidth,
                         measure.viewWidth - (needsV ? width : 0) - measure.barLeft);
-      this.horiz.node.style.right = needsV ? width + "px" : "0";
-      this.horiz.node.style.left = measure.barLeft + "px";
+    this.horiz.node.style.right = needsV ? width + "px" : "0";
+    this.horiz.node.style.left = measure.barLeft + "px";
     }
 
     return {right: needsV ? width : 0, bottom: needsH ? width : 0};

@@ -1,6 +1,6 @@
 ﻿; if (typeof dnn === "undefined" || dnn === null) { dnn = {}; };  //var dnn = dnn || {}; IE 8 doesn't respect var
 
-// the semi-colon before function invocation is a safety net against concatenated 
+// the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
 (function ($, window, document, undefined) {
     "use strict";
@@ -30,7 +30,7 @@
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend({}, InputComparer.defaults(), this.options);
 
@@ -54,7 +54,7 @@
 
         _onFocusOut: function (eventObject) {
             if (eventObject.type === 'propertychange' && eventObject.originalEvent.propertyName.toLowerCase() !== 'value') {
-		        return;
+                return;
             }
 
             if (eventObject.target === this._$firstElement[0]) {
@@ -124,14 +124,14 @@
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
 
             this.$this = $(this);
 
             this._$container = $(this.options.containerSelector);
             this._comparer = new InputComparer(this._$container, this.options);
-            
+
             if (!this._comparer.valid) {
                 return;
             }

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -36,10 +36,10 @@ namespace DotNetNuke.UI.Containers
     /// -----------------------------------------------------------------------------
     /// Project	 : DotNetNuke
     /// Class	 : Containers.Icon
-    /// 
+    ///
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// Contains the attributes of an Icon.  
+    /// Contains the attributes of an Icon.
     /// These are read into the PortalModuleBase collection as attributes for the icons within the module controls.
     /// </summary>
     /// <remarks>
@@ -47,13 +47,13 @@ namespace DotNetNuke.UI.Containers
     /// -----------------------------------------------------------------------------
     public partial class PrintModule : ActionBase
     {
-		#region "Public Members"
-		
+        #region "Public Members"
+
         public string PrintIcon { get; set; }
-		
-		#endregion
-		
-		#region "Event Handlers"
+
+        #endregion
+
+        #region "Event Handlers"
 
         protected override void OnLoad(EventArgs e)
         {
@@ -64,7 +64,7 @@ namespace DotNetNuke.UI.Containers
                 {
                     DisplayAction(action);
                 }
-				
+
                 //set visibility
                 if (Controls.Count > 0)
                 {
@@ -80,43 +80,43 @@ namespace DotNetNuke.UI.Containers
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
-	
-	private void DisplayAction(ModuleAction action)
-	{
-	    if (action.CommandName == ModuleActionType.PrintModule)
-	    {
-		if (action.Visible)
-		{
-		    if ((PortalSettings.UserMode == PortalSettings.Mode.Edit) || (action.Secure == SecurityAccessLevel.Anonymous || action.Secure == SecurityAccessLevel.View))
-		    {
-			if (ModuleContext.Configuration.DisplayPrint)
-			{
-			    var ModuleActionIcon = new ImageButton();
-			    if (!String.IsNullOrEmpty(PrintIcon))
-			    {
-				ModuleActionIcon.ImageUrl = ModuleContext.Configuration.ContainerPath.Substring(0, ModuleContext.Configuration.ContainerPath.LastIndexOf("/") + 1) + PrintIcon;
-			    }
-			    else
-			    {
-				ModuleActionIcon.ImageUrl = "~/images/" + action.Icon;
-			    }
-			    ModuleActionIcon.ToolTip = action.Title;
-			    ModuleActionIcon.ID = "ico" + action.ID;
-			    ModuleActionIcon.CausesValidation = false;
 
-			    ModuleActionIcon.Click += IconAction_Click;
+    private void DisplayAction(ModuleAction action)
+    {
+        if (action.CommandName == ModuleActionType.PrintModule)
+        {
+        if (action.Visible)
+        {
+            if ((PortalSettings.UserMode == PortalSettings.Mode.Edit) || (action.Secure == SecurityAccessLevel.Anonymous || action.Secure == SecurityAccessLevel.View))
+            {
+            if (ModuleContext.Configuration.DisplayPrint)
+            {
+                var ModuleActionIcon = new ImageButton();
+                if (!String.IsNullOrEmpty(PrintIcon))
+                {
+                ModuleActionIcon.ImageUrl = ModuleContext.Configuration.ContainerPath.Substring(0, ModuleContext.Configuration.ContainerPath.LastIndexOf("/") + 1) + PrintIcon;
+                }
+                else
+                {
+                ModuleActionIcon.ImageUrl = "~/images/" + action.Icon;
+                }
+                ModuleActionIcon.ToolTip = action.Title;
+                ModuleActionIcon.ID = "ico" + action.ID;
+                ModuleActionIcon.CausesValidation = false;
 
-			    Controls.Add(ModuleActionIcon);
-			}
-		    }
-		}
-	    }
-	    
-	    foreach (ModuleAction subAction in action.Actions) 
-	    {
-	    	DisplayAction(subAction);
-	    }
-	}
+                ModuleActionIcon.Click += IconAction_Click;
+
+                Controls.Add(ModuleActionIcon);
+            }
+            }
+        }
+        }
+
+        foreach (ModuleAction subAction in action.Actions)
+        {
+            DisplayAction(subAction);
+        }
+    }
 
         private void IconAction_Click(object sender, ImageClickEventArgs e)
         {
@@ -129,7 +129,7 @@ namespace DotNetNuke.UI.Containers
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

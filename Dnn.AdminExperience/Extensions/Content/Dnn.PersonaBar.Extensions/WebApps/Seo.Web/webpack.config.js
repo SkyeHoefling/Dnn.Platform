@@ -27,16 +27,16 @@ module.exports = {
     },
     module: {
         rules: [
-            { 
-                test: /\.(js|jsx)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 enforce: "pre",
                 use: [
                     "eslint-loader"
-                ] 
+                ]
             },
-            { 
-                test: /\.less$/, 
+            {
+                test: /\.less$/,
                 use: [{
                     loader: "style-loader"  // creates style nodes from JS strings
                 }, {
@@ -46,18 +46,18 @@ module.exports = {
                     loader: "less-loader"   // compiles Less to CSS
                 }]
             },
-            { 
-                test: /\.(js|jsx)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
                     options: {
                         presets: ["@babel/preset-env","@babel/preset-react"]
                     }
-                } 
+                }
             },
-            { 
-                test: /\.(ttf|woff)$/, 
+            {
+                test: /\.(ttf|woff)$/,
                 use: {
                     loader: "url-loader?limit=8192"
                 }

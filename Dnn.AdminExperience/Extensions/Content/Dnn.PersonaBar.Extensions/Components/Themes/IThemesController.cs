@@ -46,7 +46,7 @@ namespace Dnn.PersonaBar.Themes.Components
         void DeleteTheme(PortalSettings portalSettings, ThemeFileInfo themeFile);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="portalSettings"></param>
         /// <param name="theme"></param>
@@ -68,7 +68,7 @@ namespace Dnn.PersonaBar.Themes.Components
         void ParseTheme(PortalSettings portalSettings, ThemeInfo theme, ParseType parseType);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="portalSettings"></param>
         /// <param name="filePath"></param>

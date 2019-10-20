@@ -4,7 +4,7 @@ import { Label, InputGroup, Dropdown } from "@dnnsoftware/dnn-react-common";
 import GlobalIcon from "./GlobalIcon";
 
 export default class DropdownBlock extends Component {
-    
+
     render() {
         const {props} = this;
 

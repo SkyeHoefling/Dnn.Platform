@@ -22,7 +22,7 @@
                 self.EmptyAboutMeText = '<%=Localization.GetSafeJSString(LocalizeString("EmptyAboutMe")) %>';
                 self.EmptyLocationText = '<%=Localization.GetSafeJSString(LocalizeString("EmptyLocation")) %>';
                 self.EmptyGetInTouchText = '<%=Localization.GetSafeJSString(LocalizeString("EmptyGetInTouch")) %>';
-            
+
                 <% = ProfileProperties %>
 
                 self.Location = ko.computed(function() {
@@ -72,4 +72,3 @@
         });
     </script>
 </asp:Panel>
-

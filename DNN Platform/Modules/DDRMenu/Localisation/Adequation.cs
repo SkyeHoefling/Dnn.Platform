@@ -8,30 +8,30 @@ using DotNetNuke.UI.WebControls;
 
 namespace DotNetNuke.Web.DDRMenu.Localisation
 {
-	public class Adequation : ILocalisation
-	{
-		private bool haveChecked;
-		private bool found;
+    public class Adequation : ILocalisation
+    {
+        private bool haveChecked;
+        private bool found;
 
-		public bool HaveApi()
-		{
-			if (!haveChecked)
-			{
-				found = (new DesktopModuleController().GetDesktopModuleByModuleName("Localization Extensions Configuration") != null);
-				haveChecked = true;
-			}
+        public bool HaveApi()
+        {
+            if (!haveChecked)
+            {
+                found = (new DesktopModuleController().GetDesktopModuleByModuleName("Localization Extensions Configuration") != null);
+                haveChecked = true;
+            }
 
-			return found;
-		}
+            return found;
+        }
 
-		public TabInfo LocaliseTab(TabInfo tab, int portalId)
-		{
-			return null;
-		}
+        public TabInfo LocaliseTab(TabInfo tab, int portalId)
+        {
+            return null;
+        }
 
-		public DNNNodeCollection LocaliseNodes(DNNNodeCollection nodes)
-		{
-			return LE.Instance.ProcessNavigationNodes(nodes);
-		}
-	}
+        public DNNNodeCollection LocaliseNodes(DNNNodeCollection nodes)
+        {
+            return LE.Instance.ProcessNavigationNodes(nodes);
+        }
+    }
 }

@@ -11,7 +11,7 @@
 insert into {objectQualifier}HostSettings (
   SettingName,
   SettingValue
-) 
+)
 values (
   'UseCustomErrorMessages',
   'Y'
@@ -30,10 +30,10 @@ create procedure {databaseOwner}{objectQualifier}GetModuleControlsByKey
 as
 
 select {objectQualifier}ModuleDefinitions.*,
-       ControlTitle,
-       ControlSrc,
-       IconFile,
-       ControlType
+        ControlTitle,
+        ControlSrc,
+        IconFile,
+        ControlType
 from   {objectQualifier}ModuleControls
 left outer join {objectQualifier}ModuleDefinitions on {objectQualifier}ModuleControls.ModuleDefId = {objectQualifier}ModuleDefinitions.ModuleDefId
 where  ((ControlKey is null and @ControlKey is null) or (ControlKey = @ControlKey))
@@ -96,7 +96,7 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}AddSiteLog
 
-@DateTime                      datetime, 
+@DateTime                      datetime,
 @PortalId                      int,
 @UserId                        int                   = null,
 @Referrer                      nvarchar(255)         = null,
@@ -108,10 +108,10 @@ create procedure {databaseOwner}{objectQualifier}AddSiteLog
 @AffiliateId                   int                   = null
 
 as
- 
+
 declare @SiteLogHistory int
 
-insert into {objectQualifier}SiteLog ( 
+insert into {objectQualifier}SiteLog (
   DateTime,
   PortalId,
   UserId,
@@ -140,7 +140,7 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}DeleteSiteLog
 
-@DateTime                      datetime, 
+@DateTime                      datetime,
 @PortalId                      int
 
 as
@@ -162,8 +162,8 @@ create procedure {databaseOwner}{objectQualifier}GetVendorClassifications
 as
 
 select ClassificationId,
-       ClassificationName,
-       'IsAssociated' = case when exists ( select 1 from {objectQualifier}VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = {objectQualifier}Classification.ClassificationId ) then 1 else 0 end
+        ClassificationName,
+        'IsAssociated' = case when exists ( select 1 from {objectQualifier}VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = {objectQualifier}Classification.ClassificationId ) then 1 else 0 end
 from {objectQualifier}Classification
 GO
 
@@ -206,11 +206,11 @@ and    ModuleDefId is null
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Roles ADD CONSTRAINT
-	IX_RoleName UNIQUE NONCLUSTERED 
-	(
-	PortalID,
-	RoleName
-	) ON [PRIMARY]
+    IX_RoleName UNIQUE NONCLUSTERED
+    (
+    PortalID,
+    RoleName
+    ) ON [PRIMARY]
 GO
 
 drop procedure {databaseOwner}{objectQualifier}DeleteUserDefinedData
@@ -218,12 +218,12 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}DeleteUserDefinedData
 
-@UserDefinedRowId    int, 
+@UserDefinedRowId    int,
 @UserDefinedFieldId  int
 
 as
 
-delete 
+delete
 from {objectQualifier}UserDefinedData
 where  UserDefinedFieldId = @UserDefinedFieldId
 and    UserDefinedRowId = @UserDefinedRowId
@@ -248,25 +248,25 @@ create procedure {databaseOwner}{objectQualifier}GetUserByUsername
 @Username nvarchar(100)
 
 as
- 
+
 select {objectQualifier}Users.UserId,
-       {objectQualifier}Users.Username,
-       {objectQualifier}Users.Password,
-       {objectQualifier}Users.Email,
-       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Users.FirstName,
-       {objectQualifier}Users.LastName,
-       {objectQualifier}Users.Unit,
-       {objectQualifier}Users.Street,
-       {objectQualifier}Users.City,
-       {objectQualifier}Users.Region,
-       {objectQualifier}Users.PostalCode,
-       {objectQualifier}Users.Country,
-       {objectQualifier}Users.Telephone,
-       {objectQualifier}Users.IsSuperUser,
-       {objectQualifier}UserPortals.Authorized,
-       {objectQualifier}UserPortals.CreatedDate,
-       {objectQualifier}UserPortals.LastLoginDate
+        {objectQualifier}Users.Username,
+        {objectQualifier}Users.Password,
+        {objectQualifier}Users.Email,
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Users.FirstName,
+        {objectQualifier}Users.LastName,
+        {objectQualifier}Users.Unit,
+        {objectQualifier}Users.Street,
+        {objectQualifier}Users.City,
+        {objectQualifier}Users.Region,
+        {objectQualifier}Users.PostalCode,
+        {objectQualifier}Users.Country,
+        {objectQualifier}Users.Telephone,
+        {objectQualifier}Users.IsSuperUser,
+        {objectQualifier}UserPortals.Authorized,
+        {objectQualifier}UserPortals.CreatedDate,
+        {objectQualifier}UserPortals.LastLoginDate
 from {objectQualifier}Users
 left outer join {objectQualifier}UserPortals on {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId
 where  username = @Username
@@ -277,7 +277,3 @@ GO
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-
-
-
-

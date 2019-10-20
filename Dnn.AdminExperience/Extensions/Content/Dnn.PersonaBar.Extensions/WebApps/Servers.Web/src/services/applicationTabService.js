@@ -13,4 +13,4 @@ const applicationTabService = {
     getApplicationInfo: getApplicationInfo
 };
 
-export default applicationTabService; 
+export default applicationTabService;

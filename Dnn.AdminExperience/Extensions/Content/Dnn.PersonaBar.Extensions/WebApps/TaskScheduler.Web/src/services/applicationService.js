@@ -27,22 +27,22 @@ class ApplicationService {
     }
 
     startSchedule(callback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.post("StartSchedule", {}, callback);
     }
 
     stopSchedule(callback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.post("StopSchedule", {}, callback);
     }
 
     getSchedulerSettings(callback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.get("GetSchedulerSettings", {}, callback);
     }
 
     updateSchedulerSettings(payload, callback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.post("UpdateSchedulerSettings", payload, callback);
     }
 
@@ -76,22 +76,22 @@ class ApplicationService {
     }
 
     deleteScheduleItem(payload, callback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.post("DeleteSchedule", payload, callback);
     }
 
     createScheduleItem(payload, callback, failureCallback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.post("CreateScheduleItem", payload, callback, failureCallback);
     }
 
     updateScheduleItem(payload, callback, failureCallback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.post("UpdateScheduleItem", payload, callback, failureCallback);
     }
 
     runScheduleItem(payload, callback) {
-        const sf = this.getServiceFramework("TaskScheduler");        
+        const sf = this.getServiceFramework("TaskScheduler");
         sf.post("RunSchedule", payload, callback);
     }
 }

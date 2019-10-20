@@ -76,7 +76,7 @@ require(['jquery', 'knockout', '../util', '../sf', '../config', '../eventEmitter
                 return;
             }
 
-            
+
             var initMethod = 'init';
             var requiredArray = ['../' + loaderName];
             if (item.customLayout) {
@@ -219,7 +219,7 @@ require(['jquery', 'knockout', '../util', '../sf', '../config', '../eventEmitter
         util.loadResx(function() {
             loadMenus();
         });
-        
+
         // Register a PersonaBar object in the parent window global scope
         // to allow easy integration between the site and the persona bar
         window.parent.dnn.EditBar = new Gateway(util);

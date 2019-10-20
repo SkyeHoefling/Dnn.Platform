@@ -19,7 +19,7 @@ class LanguageVerifierRow extends Component {
         else {
             this.props.OpenCollapse(this.props.id);
         }
-    }    
+    }
 
     /* eslint-disable react/no-danger */
     render() {
@@ -31,7 +31,7 @@ class LanguageVerifierRow extends Component {
                     <div className={"row"}>
                         <div className="verifier-item item-row-name">
                             {props.text}
-                        </div>     
+                        </div>
                         <div className="arrow-icon" dangerouslySetInnerHTML={{ __html: SvgIcons.ArrowDownIcon }} onClick={this.toggle.bind(this)} />
                     </div>
                 </div>

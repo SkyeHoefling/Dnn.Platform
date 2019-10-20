@@ -50,7 +50,7 @@
 <div class="dnnFormItem" style="display: none;" id="trListPageSize">
     <dnn:label controlname="txtPageSize" resourcekey="GroupListPageSize" Text="Group List Page Size" Suffix=":" runat="server" />
     <asp:TextBox ID="txtPageSize" runat="server" />
-    <asp:RangeValidator runat="server" ID="rangePageSize" CssClass="dnnFormMessage dnnFormError" Display="Dynamic" 
+    <asp:RangeValidator runat="server" ID="rangePageSize" CssClass="dnnFormMessage dnnFormError" Display="Dynamic"
         ControlToValidate="txtPageSize" resourcekey="PageSizeValidation" MinimumValue="1"
         MaximumValue="9999" Type="Integer"></asp:RangeValidator>
 </div>

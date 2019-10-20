@@ -168,7 +168,7 @@ export default class DateInput extends Component {
         if (hour === false && this.state && this.state.period) {
             return this.state.period;
         }
-        
+
         if (hour > 11) {
             return "PM";
         }

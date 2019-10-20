@@ -12,7 +12,7 @@
     var repliesPageSize = 2;
     var notificationsPageSize = 10;
     var containerElement = null;
-	var refreshInterval = 60000; //refresh inbox status every 1 minute.
+    var refreshInterval = 60000; //refresh inbox status every 1 minute.
 
     function displayMessage(placeholderSelector, message, cssclass) {
         var messageNode = $("<div/>")
@@ -182,7 +182,7 @@
     function coreMessagingViewModel() {
         var self = this;
 
-	    self.disablePrivateMessage = ko.observable(settings.disablePrivateMessage);
+        self.disablePrivateMessage = ko.observable(settings.disablePrivateMessage);
         self.messages = ko.observableArray([]);
         self.notifications = ko.observableArray([]);
 
@@ -212,7 +212,7 @@
 
         //use an observable value to show/hide the replies list
         self.showReplies = ko.observable(false);
-        
+
         //use an observable value to decide if a reply is possible
         self.replyHasRecipients = ko.observable(true);
 
@@ -319,7 +319,7 @@
                 self.replyHasRecipients(true);
             }
         };
-        
+
         self.sendThreadRequestHandler = function (conversationId, afterMessageId) {
             self.checkReplyHasRecipients(conversationId);
             $.ajax({
@@ -653,7 +653,7 @@
 
         self.loadNotificationsTabHandler = function () {
             self.loadingData(true);
-            
+
             $.ajax({
                 type: "GET",
                 url: notificationspath,
@@ -825,7 +825,7 @@
 
                     self.TotalNotifications(self.TotalNotifications() - 1);
                     displayMessage("#dnnCoreNotification", settings.actionPerformedText, "dnnFormSuccess");
-                    
+
                     if (data.Link) {
                         location.href = data.Link;
                     }
@@ -1032,7 +1032,7 @@
                 stateview = "notifications";
             }
         }
-        
+
         if (stateview === "notifications") {
             // load initial state of notifications
             $(element + ' #smMainContent').dnnTabs({ selected: 1 });

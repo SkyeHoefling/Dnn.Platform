@@ -1,8 +1,8 @@
 ﻿/*
-   SQL Database Install Script
-   for _MODULE_ Module
-   Copyright (c) _YEAR_
-   by _OWNER_
+    SQL Database Install Script
+    for _MODULE_ Module
+    Copyright (c) _YEAR_
+    by _OWNER_
 */
 
 CREATE TABLE [dbo]._OWNER___MODULE_s
@@ -21,15 +21,15 @@ CREATE TABLE [dbo]._OWNER___MODULE_s
 
 GO
 
-ALTER TABLE [dbo]._OWNER___MODULE_s 
+ALTER TABLE [dbo]._OWNER___MODULE_s
     ADD CONSTRAINT
-	FK__OWNER___MODULE_s_Modules FOREIGN KEY
-	(
-	    ModuleID
-	) REFERENCES dbo.Modules
-	(
-	    ModuleID
-	) ON UPDATE NO ACTION 
-	  ON DELETE CASCADE 
-	  NOT FOR REPLICATION
+    FK__OWNER___MODULE_s_Modules FOREIGN KEY
+    (
+        ModuleID
+    ) REFERENCES dbo.Modules
+    (
+        ModuleID
+    ) ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    NOT FOR REPLICATION
 GO

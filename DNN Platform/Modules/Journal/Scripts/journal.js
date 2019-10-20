@@ -18,7 +18,7 @@ function attachPhoto(fileId, path, isImage) {
         $('.filePreviewArea').empty();
         $('#tbar-attach-Area').show();
     });
-  
+
     if (photoTool.hasClass('selected') && isImage) {
         journalItem.JournalType = 'photo';
     } else {
@@ -59,7 +59,7 @@ function bindConfirm() {
             if (typeof $._data($this[0], "events") != "undefined") {
                 for (var i = 0; i < $._data($this[0], "events").click.length; i++) {
                     var handler = $._data($this[0], "events").click[i].handler;
-                    var functionName = handler.name || handler.toString().match(/^function\s*([^\s(]+)/)[1]; 
+                    var functionName = handler.name || handler.toString().match(/^function\s*([^\s(]+)/)[1];
                     if (typeof functionName != "undefined" && functionName.length > 0) {
                         clickFuncs.push(handler);
                         break;
@@ -101,7 +101,7 @@ function buildLikes(data, journalId) {
 
 function getItems(sf) {
     var rows = $(".journalrow").get();
-        
+
     data = {};
     data.ProfileId = pid;
     data.GroupId = gid;
@@ -176,21 +176,21 @@ function journalRemove(data, jid) {
 
 function pluginInit() {
     var sf = journalOptions.servicesFramework;
-    
+
     $('.jcmt').each(function () {
         if($(this).data("journalCommentsBinded")) {
             return;
         }
         $(this).data("journalCommentsBinded", true);
-            
+
         $(this).journalComments(commentOpts);
     });
-        
+
     var rows = $(".journalrow");
     if (rows.length == pagesize) {
         $("#getMore").show();
     }
-        
+
     $('a[id^="cmtbtn-"]').each(function () {
         if($(this).data("clickBinded")) {
             return;
@@ -269,7 +269,7 @@ function pluginInit() {
     }
 
 
-    
+
     $.fn.journalTools = function (options) {
         $.fn.journalTools.defaultOptions = {
             placeHolder: '#journalPlaceholder',
@@ -304,7 +304,7 @@ function pluginInit() {
             $maxLength = opts.maxLength,
             $securityMenu = $wrap.find(opts.securityMenu),
             $userFileManager = $wrap.find(opts.fileManagerSelector);
-        
+
         photoTool = $photoTool;
 
         var isDirtyHandler = function (event) {
@@ -362,7 +362,7 @@ function pluginInit() {
             $attachArea.hide();
             $optionsArea.hide();
             $('#tbar span').removeClass('selected');
-            
+
             var linkArea = $('#linkArea');
             $('#linkArea #imagePreviewer').hide();
             linkArea.find('#linkInfo b').text('');
@@ -410,7 +410,7 @@ function pluginInit() {
                 $optionsArea.hide();
                 $attachArea.hide();
                 $attachTool.off('click');
-                 $('.filePreviewArea').empty();
+                $('.filePreviewArea').empty();
                 resetJournalItem();
                 $attachTool.click(function() {
                     attachToolClick();
@@ -440,7 +440,7 @@ function pluginInit() {
                 $attachArea.hide();
                 $optionsArea.hide();
                 resetJournalItem();
-                 journalItem.ItemData = null;
+                journalItem.ItemData = null;
             } else {
                 if ($contentShow == false) {
                     showContent();
@@ -464,7 +464,7 @@ function pluginInit() {
             e.preventDefault();
             var data = {};
             data.text = encodeURIComponent($content.val());
-           
+
             data.profileId = pid;
             data.groupId = gid;
 

@@ -151,7 +151,7 @@
                             } else {
                                 self.addItem(value);
                             }
-                            
+
                             if (self.settings.closeAfterSelect) {
                                 self.close();
                             } else if (!self.settings.hideSelected && e.type && /mouse/.test(e.type)) {

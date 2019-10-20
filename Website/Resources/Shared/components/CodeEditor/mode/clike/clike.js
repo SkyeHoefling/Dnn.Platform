@@ -13,19 +13,19 @@
 
 CodeMirror.defineMode("clike", function(config, parserConfig) {
   var indentUnit = config.indentUnit,
-      statementIndentUnit = parserConfig.statementIndentUnit || indentUnit,
-      dontAlignCalls = parserConfig.dontAlignCalls,
-      keywords = parserConfig.keywords || {},
-      types = parserConfig.types || {},
-      builtin = parserConfig.builtin || {},
-      blockKeywords = parserConfig.blockKeywords || {},
-      defKeywords = parserConfig.defKeywords || {},
-      atoms = parserConfig.atoms || {},
-      hooks = parserConfig.hooks || {},
-      multiLineStrings = parserConfig.multiLineStrings,
-      indentStatements = parserConfig.indentStatements !== false,
-      indentSwitch = parserConfig.indentSwitch !== false,
-      namespaceSeparator = parserConfig.namespaceSeparator;
+    statementIndentUnit = parserConfig.statementIndentUnit || indentUnit,
+    dontAlignCalls = parserConfig.dontAlignCalls,
+    keywords = parserConfig.keywords || {},
+    types = parserConfig.types || {},
+    builtin = parserConfig.builtin || {},
+    blockKeywords = parserConfig.blockKeywords || {},
+    defKeywords = parserConfig.defKeywords || {},
+    atoms = parserConfig.atoms || {},
+    hooks = parserConfig.hooks || {},
+    multiLineStrings = parserConfig.multiLineStrings,
+    indentStatements = parserConfig.indentStatements !== false,
+    indentSwitch = parserConfig.indentSwitch !== false,
+    namespaceSeparator = parserConfig.namespaceSeparator;
   var isOperatorChar = /[+\-*&%=<>!?|\/]/;
 
   var curPunc, isDefKeyword;
@@ -33,49 +33,49 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
   function tokenBase(stream, state) {
     var ch = stream.next();
     if (hooks[ch]) {
-      var result = hooks[ch](stream, state);
-      if (result !== false) return result;
+    var result = hooks[ch](stream, state);
+    if (result !== false) return result;
     }
     if (ch == '"' || ch == "'") {
-      state.tokenize = tokenString(ch);
-      return state.tokenize(stream, state);
+    state.tokenize = tokenString(ch);
+    return state.tokenize(stream, state);
     }
     if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
-      curPunc = ch;
-      return null;
+    curPunc = ch;
+    return null;
     }
     if (/\d/.test(ch)) {
-      stream.eatWhile(/[\w\.]/);
-      return "number";
+    stream.eatWhile(/[\w\.]/);
+    return "number";
     }
     if (ch == "/") {
-      if (stream.eat("*")) {
+    if (stream.eat("*")) {
         state.tokenize = tokenComment;
         return tokenComment(stream, state);
-      }
-      if (stream.eat("/")) {
+    }
+    if (stream.eat("/")) {
         stream.skipToEnd();
         return "comment";
-      }
+    }
     }
     if (isOperatorChar.test(ch)) {
-      stream.eatWhile(isOperatorChar);
-      return "operator";
+    stream.eatWhile(isOperatorChar);
+    return "operator";
     }
     stream.eatWhile(/[\w\$_\xa1-\uffff]/);
     if (namespaceSeparator) while (stream.match(namespaceSeparator))
-      stream.eatWhile(/[\w\$_\xa1-\uffff]/);
+    stream.eatWhile(/[\w\$_\xa1-\uffff]/);
 
     var cur = stream.current();
     if (keywords.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      if (defKeywords.propertyIsEnumerable(cur)) isDefKeyword = true;
-      return "keyword";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    if (defKeywords.propertyIsEnumerable(cur)) isDefKeyword = true;
+    return "keyword";
     }
     if (types.propertyIsEnumerable(cur)) return "variable-3";
     if (builtin.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "builtin";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "builtin";
     }
     if (atoms.propertyIsEnumerable(cur)) return "atom";
     return "variable";
@@ -83,25 +83,25 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
 
   function tokenString(quote) {
     return function(stream, state) {
-      var escaped = false, next, end = false;
-      while ((next = stream.next()) != null) {
+    var escaped = false, next, end = false;
+    while ((next = stream.next()) != null) {
         if (next == quote && !escaped) {end = true; break;}
         escaped = !escaped && next == "\\";
-      }
-      if (end || !(escaped || multiLineStrings))
+    }
+    if (end || !(escaped || multiLineStrings))
         state.tokenize = null;
-      return "string";
+    return "string";
     };
   }
 
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+    if (ch == "/" && maybeEnd) {
         state.tokenize = null;
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return "comment";
   }
@@ -119,13 +119,13 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
   function pushContext(state, col, type) {
     var indent = state.indented;
     if (state.context && isStatement(state.context.type) && !isStatement(type))
-      indent = state.context.indented;
+    indent = state.context.indented;
     return state.context = new Context(indent, col, type, null, state.context);
   }
   function popContext(state) {
     var t = state.context.type;
     if (t == ")" || t == "]" || t == "}")
-      state.indented = state.context.indented;
+    state.indented = state.context.indented;
     return state.context = state.context.prev;
   }
 
@@ -136,9 +136,9 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
 
   function isTopScope(context) {
     for (;;) {
-      if (!context || context.type == "top") return true;
-      if (context.type == "}" && context.prev.type != "namespace") return false;
-      context = context.prev;
+    if (!context || context.type == "top") return true;
+    if (context.type == "}" && context.prev.type != "namespace") return false;
+    context = context.prev;
     }
   }
 
@@ -146,82 +146,82 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
 
   return {
     startState: function(basecolumn) {
-      return {
+    return {
         tokenize: null,
         context: new Context((basecolumn || 0) - indentUnit, 0, "top", false),
         indented: 0,
         startOfLine: true,
         prevToken: null
-      };
+    };
     },
 
     token: function(stream, state) {
-      var ctx = state.context;
-      if (stream.sol()) {
+    var ctx = state.context;
+    if (stream.sol()) {
         if (ctx.align == null) ctx.align = false;
         state.indented = stream.indentation();
         state.startOfLine = true;
-      }
-      if (stream.eatSpace()) return null;
-      curPunc = isDefKeyword = null;
-      var style = (state.tokenize || tokenBase)(stream, state);
-      if (style == "comment" || style == "meta") return style;
-      if (ctx.align == null) ctx.align = true;
+    }
+    if (stream.eatSpace()) return null;
+    curPunc = isDefKeyword = null;
+    var style = (state.tokenize || tokenBase)(stream, state);
+    if (style == "comment" || style == "meta") return style;
+    if (ctx.align == null) ctx.align = true;
 
-      if ((curPunc == ";" || curPunc == ":" || curPunc == ","))
+    if ((curPunc == ";" || curPunc == ":" || curPunc == ","))
         while (isStatement(state.context.type)) popContext(state);
-      else if (curPunc == "{") pushContext(state, stream.column(), "}");
-      else if (curPunc == "[") pushContext(state, stream.column(), "]");
-      else if (curPunc == "(") pushContext(state, stream.column(), ")");
-      else if (curPunc == "}") {
+    else if (curPunc == "{") pushContext(state, stream.column(), "}");
+    else if (curPunc == "[") pushContext(state, stream.column(), "]");
+    else if (curPunc == "(") pushContext(state, stream.column(), ")");
+    else if (curPunc == "}") {
         while (isStatement(ctx.type)) ctx = popContext(state);
         if (ctx.type == "}") ctx = popContext(state);
         while (isStatement(ctx.type)) ctx = popContext(state);
-      }
-      else if (curPunc == ctx.type) popContext(state);
-      else if (indentStatements &&
-               (((ctx.type == "}" || ctx.type == "top") && curPunc != ";") ||
+    }
+    else if (curPunc == ctx.type) popContext(state);
+    else if (indentStatements &&
+                (((ctx.type == "}" || ctx.type == "top") && curPunc != ";") ||
                 (isStatement(ctx.type) && curPunc == "newstatement"))) {
         var type = "statement";
         if (curPunc == "newstatement" && indentSwitch && stream.current() == "switch")
-          type = "switchstatement";
+        type = "switchstatement";
         else if (style == "keyword" && stream.current() == "namespace")
-          type = "namespace";
+        type = "namespace";
         pushContext(state, stream.column(), type);
-      }
+    }
 
-      if (style == "variable" &&
-          ((state.prevToken == "def" ||
+    if (style == "variable" &&
+        ((state.prevToken == "def" ||
             (parserConfig.typeFirstDefinitions && typeBefore(stream, state) &&
-             isTopScope(state.context) && stream.match(/^\s*\(/, false)))))
+            isTopScope(state.context) && stream.match(/^\s*\(/, false)))))
         style = "def";
 
-      if (hooks.token) {
+    if (hooks.token) {
         var result = hooks.token(stream, state, style);
         if (result !== undefined) style = result;
-      }
+    }
 
-      if (style == "def" && parserConfig.styleDefs === false) style = "variable";
+    if (style == "def" && parserConfig.styleDefs === false) style = "variable";
 
-      state.startOfLine = false;
-      state.prevToken = isDefKeyword ? "def" : style || curPunc;
-      return style;
+    state.startOfLine = false;
+    state.prevToken = isDefKeyword ? "def" : style || curPunc;
+    return style;
     },
 
     indent: function(state, textAfter) {
-      if (state.tokenize != tokenBase && state.tokenize != null) return CodeMirror.Pass;
-      var ctx = state.context, firstChar = textAfter && textAfter.charAt(0);
-      if (isStatement(ctx.type) && firstChar == "}") ctx = ctx.prev;
-      var closing = firstChar == ctx.type;
-      var switchBlock = ctx.prev && ctx.prev.type == "switchstatement";
-      if (isStatement(ctx.type))
+    if (state.tokenize != tokenBase && state.tokenize != null) return CodeMirror.Pass;
+    var ctx = state.context, firstChar = textAfter && textAfter.charAt(0);
+    if (isStatement(ctx.type) && firstChar == "}") ctx = ctx.prev;
+    var closing = firstChar == ctx.type;
+    var switchBlock = ctx.prev && ctx.prev.type == "switchstatement";
+    if (isStatement(ctx.type))
         return ctx.indented + (firstChar == "{" ? 0 : statementIndentUnit);
-      if (ctx.align && (!dontAlignCalls || ctx.type != ")"))
+    if (ctx.align && (!dontAlignCalls || ctx.type != ")"))
         return ctx.column + (closing ? 0 : 1);
-      if (ctx.type == ")" && !closing)
+    if (ctx.type == ")" && !closing)
         return ctx.indented + statementIndentUnit;
 
-      return ctx.indented + (closing ? 0 : indentUnit) +
+    return ctx.indented + (closing ? 0 : indentUnit) +
         (!closing && switchBlock && !/^(?:case|default)\b/.test(textAfter) ? indentUnit : 0);
     },
 
@@ -246,17 +246,17 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
   function cppHook(stream, state) {
     if (!state.startOfLine) return false;
     for (;;) {
-      if (stream.skipTo("\\")) {
+    if (stream.skipTo("\\")) {
         stream.next();
         if (stream.eol()) {
-          state.tokenize = cppHook;
-          break;
+        state.tokenize = cppHook;
+        break;
         }
-      } else {
+    } else {
         stream.skipToEnd();
         state.tokenize = null;
         break;
-      }
+    }
     }
     return "meta";
   }
@@ -270,20 +270,20 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     stream.backUp(1);
     // Raw strings.
     if (stream.match(/(R|u8R|uR|UR|LR)/)) {
-      var match = stream.match(/"([^\s\\()]{0,16})\(/);
-      if (!match) {
+    var match = stream.match(/"([^\s\\()]{0,16})\(/);
+    if (!match) {
         return false;
-      }
-      state.cpp11RawStringDelim = match[1];
-      state.tokenize = tokenRawString;
-      return tokenRawString(stream, state);
+    }
+    state.cpp11RawStringDelim = match[1];
+    state.tokenize = tokenRawString;
+    return tokenRawString(stream, state);
     }
     // Unicode strings/chars.
     if (stream.match(/(u8|u|U|L)/)) {
-      if (stream.match(/["']/, /* eat */ false)) {
+    if (stream.match(/["']/, /* eat */ false)) {
         return "string";
-      }
-      return false;
+    }
+    return false;
     }
     // Ignore this hook.
     stream.next();
@@ -299,10 +299,10 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
   function tokenAtString(stream, state) {
     var next;
     while ((next = stream.next()) != null) {
-      if (next == '"' && !stream.eat('"')) {
+    if (next == '"' && !stream.eat('"')) {
         state.tokenize = null;
         break;
-      }
+    }
     }
     return "string";
   }
@@ -314,9 +314,9 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     var delim = state.cpp11RawStringDelim.replace(/[^\w\s]/g, '\\$&');
     var match = stream.match(new RegExp(".*?\\)" + delim + '"'));
     if (match)
-      state.tokenize = null;
+    state.tokenize = null;
     else
-      stream.skipToEnd();
+    stream.skipToEnd();
     return "string";
   }
 
@@ -324,7 +324,7 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     if (typeof mimes == "string") mimes = [mimes];
     var words = [];
     function add(obj) {
-      if (obj) for (var prop in obj) if (obj.hasOwnProperty(prop))
+    if (obj) for (var prop in obj) if (obj.hasOwnProperty(prop))
         words.push(prop);
     }
     add(mode.keywords);
@@ -332,20 +332,20 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     add(mode.builtin);
     add(mode.atoms);
     if (words.length) {
-      mode.helperType = mimes[0];
-      CodeMirror.registerHelper("hintWords", mimes[0], words);
+    mode.helperType = mimes[0];
+    CodeMirror.registerHelper("hintWords", mimes[0], words);
     }
 
     for (var i = 0; i < mimes.length; ++i)
-      CodeMirror.defineMIME(mimes[i], mode);
+    CodeMirror.defineMIME(mimes[i], mode);
   }
 
   def(["text/x-csrc", "text/x-c", "text/x-chdr"], {
     name: "clike",
     keywords: words(cKeywords),
     types: words(cTypes + " bool _Complex _Bool float_t double_t intptr_t intmax_t " +
-                 "int8_t int16_t int32_t int64_t uintptr_t uintmax_t uint8_t uint16_t " +
-                 "uint32_t uint64_t"),
+                "int8_t int16_t int32_t int64_t uintptr_t uintmax_t uint8_t uint16_t " +
+                "uint32_t uint64_t"),
     blockKeywords: words("case do else for if switch while struct"),
     defKeywords: words("struct"),
     typeFirstDefinitions: true,
@@ -367,19 +367,19 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     typeFirstDefinitions: true,
     atoms: words("true false null"),
     hooks: {
-      "#": cppHook,
-      "*": pointerHook,
-      "u": cpp11StringHook,
-      "U": cpp11StringHook,
-      "L": cpp11StringHook,
-      "R": cpp11StringHook,
-      token: function(stream, state, style) {
+    "#": cppHook,
+    "*": pointerHook,
+    "u": cpp11StringHook,
+    "U": cpp11StringHook,
+    "L": cpp11StringHook,
+    "R": cpp11StringHook,
+    token: function(stream, state, style) {
         if (style == "variable" && stream.peek() == "(" &&
             (state.prevToken == ";" || state.prevToken == null ||
-             state.prevToken == "}") &&
+            state.prevToken == "}") &&
             cppLooksLikeConstructor(stream.current()))
-          return "def";
-      }
+        return "def";
+    }
     },
     namespaceSeparator: "::",
     modeProps: {fold: ["brace", "include"]}
@@ -393,16 +393,16 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
                     "return static strictfp super switch synchronized this throw throws transient " +
                     "try volatile while"),
     types: words("byte short int long float double boolean char void Boolean Byte Character Double Float " +
-                 "Integer Long Number Object Short String StringBuffer StringBuilder Void"),
+                "Integer Long Number Object Short String StringBuffer StringBuilder Void"),
     blockKeywords: words("catch class do else finally for if switch try while"),
     defKeywords: words("class interface package enum"),
     typeFirstDefinitions: true,
     atoms: words("true false null"),
     hooks: {
-      "@": function(stream) {
+    "@": function(stream) {
         stream.eatWhile(/[\w\$_]/);
         return "meta";
-      }
+    }
     },
     modeProps: {fold: ["brace", "import"]}
   });
@@ -417,33 +417,33 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
                     " unsafe using virtual void volatile while add alias ascending descending dynamic from get" +
                     " global group into join let orderby partial remove select set value var yield"),
     types: words("Action Boolean Byte Char DateTime DateTimeOffset Decimal Double Func" +
-                 " Guid Int16 Int32 Int64 Object SByte Single String Task TimeSpan UInt16 UInt32" +
-                 " UInt64 bool byte char decimal double short int long object"  +
-                 " sbyte float string ushort uint ulong"),
+                " Guid Int16 Int32 Int64 Object SByte Single String Task TimeSpan UInt16 UInt32" +
+                " UInt64 bool byte char decimal double short int long object"  +
+                " sbyte float string ushort uint ulong"),
     blockKeywords: words("catch class do else finally for foreach if struct switch try while"),
     defKeywords: words("class interface namespace struct var"),
     typeFirstDefinitions: true,
     atoms: words("true false null"),
     hooks: {
-      "@": function(stream, state) {
+    "@": function(stream, state) {
         if (stream.eat('"')) {
-          state.tokenize = tokenAtString;
-          return tokenAtString(stream, state);
+        state.tokenize = tokenAtString;
+        return tokenAtString(stream, state);
         }
         stream.eatWhile(/[\w\$_]/);
         return "meta";
-      }
+    }
     }
   });
 
   function tokenTripleString(stream, state) {
     var escaped = false;
     while (!stream.eol()) {
-      if (!escaped && stream.match('"""')) {
+    if (!escaped && stream.match('"""')) {
         state.tokenize = null;
         break;
-      }
-      escaped = stream.next() == "\\" && !escaped;
+    }
+    escaped = stream.next() == "\\" && !escaped;
     }
     return "string";
   }
@@ -452,30 +452,30 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     name: "clike",
     keywords: words(
 
-      /* scala */
-      "abstract case catch class def do else extends false final finally for forSome if " +
-      "implicit import lazy match new null object override package private protected return " +
-      "sealed super this throw trait try type val var while with yield _ : = => <- <: " +
-      "<% >: # @ " +
+    /* scala */
+    "abstract case catch class def do else extends false final finally for forSome if " +
+    "implicit import lazy match new null object override package private protected return " +
+    "sealed super this throw trait try type val var while with yield _ : = => <- <: " +
+    "<% >: # @ " +
 
-      /* package scala */
-      "assert assume require print println printf readLine readBoolean readByte readShort " +
-      "readChar readInt readLong readFloat readDouble " +
+    /* package scala */
+    "assert assume require print println printf readLine readBoolean readByte readShort " +
+    "readChar readInt readLong readFloat readDouble " +
 
-      ":: #:: "
+    ":: #:: "
     ),
     types: words(
-      "AnyVal App Application Array BufferedIterator BigDecimal BigInt Char Console Either " +
-      "Enumeration Equiv Error Exception Fractional Function IndexedSeq Integral Iterable " +
-      "Iterator List Map Numeric Nil NotNull Option Ordered Ordering PartialFunction PartialOrdering " +
-      "Product Proxy Range Responder Seq Serializable Set Specializable Stream StringBuilder " +
-      "StringContext Symbol Throwable Traversable TraversableOnce Tuple Unit Vector " +
+    "AnyVal App Application Array BufferedIterator BigDecimal BigInt Char Console Either " +
+    "Enumeration Equiv Error Exception Fractional Function IndexedSeq Integral Iterable " +
+    "Iterator List Map Numeric Nil NotNull Option Ordered Ordering PartialFunction PartialOrdering " +
+    "Product Proxy Range Responder Seq Serializable Set Specializable Stream StringBuilder " +
+    "StringContext Symbol Throwable Traversable TraversableOnce Tuple Unit Vector " +
 
-      /* package java.lang */
-      "Boolean Byte Character CharSequence Class ClassLoader Cloneable Comparable " +
-      "Compiler Double Exception Float Integer Long Math Number Object Package Pair Process " +
-      "Runtime Runnable SecurityManager Short StackTraceElement StrictMath String " +
-      "StringBuffer System Thread ThreadGroup ThreadLocal Throwable Triple Void"
+    /* package java.lang */
+    "Boolean Byte Character CharSequence Class ClassLoader Cloneable Comparable " +
+    "Compiler Double Exception Float Integer Long Math Number Object Package Pair Process " +
+    "Runtime Runnable SecurityManager Short StackTraceElement StrictMath String " +
+    "StringBuffer System Thread ThreadGroup ThreadLocal Throwable Triple Void"
     ),
     multiLineStrings: true,
     blockKeywords: words("catch class do else finally for forSome if match switch try while"),
@@ -484,19 +484,19 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     indentStatements: false,
     indentSwitch: false,
     hooks: {
-      "@": function(stream) {
+    "@": function(stream) {
         stream.eatWhile(/[\w\$_]/);
         return "meta";
-      },
-      '"': function(stream, state) {
+    },
+    '"': function(stream, state) {
         if (!stream.match('""')) return false;
         state.tokenize = tokenTripleString;
         return state.tokenize(stream, state);
-      },
-      "'": function(stream) {
+    },
+    "'": function(stream) {
         stream.eatWhile(/[\w\$_\xa1-\uffff]/);
         return "atom";
-      }
+    }
     },
     modeProps: {closeBrackets: {triples: '"'}}
   });
@@ -510,8 +510,8 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
                     "for while do if else struct " +
                     "in out inout"),
     types: words("float int bool void " +
-                 "vec2 vec3 vec4 ivec2 ivec3 ivec4 bvec2 bvec3 bvec4 " +
-                 "mat2 mat3 mat4"),
+                "vec2 vec3 vec4 ivec2 ivec3 ivec4 bvec2 bvec3 bvec4 " +
+                "mat2 mat3 mat4"),
     blockKeywords: words("for while do if else struct"),
     builtin: words("radians degrees sin cos tan asin acos atan " +
                     "pow exp log exp2 sqrt inversesqrt " +
@@ -579,11 +579,11 @@ CodeMirror.defineMode("clike", function(config, parserConfig) {
     types: words(cTypes),
     atoms: words("YES NO NULL NILL ON OFF true false"),
     hooks: {
-      "@": function(stream) {
+    "@": function(stream) {
         stream.eatWhile(/[\w\$]/);
         return "keyword";
-      },
-      "#": cppHook
+    },
+    "#": cppHook
     },
     modeProps: {fold: "brace"}
   });

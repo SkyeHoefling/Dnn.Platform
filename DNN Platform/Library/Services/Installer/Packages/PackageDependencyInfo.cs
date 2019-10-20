@@ -1,6 +1,6 @@
 #region Copyright
 //
-// DotNetNuke® - http://www.dotnetnuke.com
+// DotNetNukeï¿½ - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
 //
@@ -26,9 +26,9 @@ namespace DotNetNuke.Services.Installer.Packages
     [Serializable]
     public class PackageDependencyInfo
     {
-	    public int PackageDependencyId { get; set; }
-	    public int PackageId { get; set; }
-	    public string PackageName { get; set; }
-	    public Version Version { get; set; }
+        public int PackageDependencyId { get; set; }
+        public int PackageId { get; set; }
+        public string PackageName { get; set; }
+        public Version Version { get; set; }
     }
 }

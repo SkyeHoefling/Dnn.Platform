@@ -19,7 +19,7 @@
 </div>
 
 <div class="dnnFormItem">
-    <dnn:label controlname="chkAllowResize" resourcekey="AllowResize" Text="Allow Resize Photos" Suffix=":" runat="server" />    
+    <dnn:label controlname="chkAllowResize" resourcekey="AllowResize" Text="Allow Resize Photos" Suffix=":" runat="server" />
     <asp:CheckBox id="chkAllowResize" runat="server" />
 </div>
 
@@ -46,20 +46,20 @@
         <asp:ListItem Value="2000">2000</asp:ListItem>
         <asp:ListItem Value="-1" resourcekey="MessageLength_Unlimited"></asp:ListItem>
     </asp:DropDownList>
-  
+
 </div>
 <div class="dnnFormItem">
     <dnn:label  resourcekey="JournalFilters" Suffix=":" runat="server" />
     <asp:CheckBoxList ID="chkJournalFilters" runat="server" />
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {        
+    $(document).ready(function () {
         $('#<%=chkEnableEditor.ClientID %>').click(function (event) {
             if (this.checked) {
                 $('#<%=chkAllowFiles.ClientID %>').removeAttr("disabled");
                 $('#<%=chkAllowPhotos.ClientID %>').removeAttr("disabled");
                 if ($('#<%=chkAllowPhotos.ClientID %>')[0].checked) {
-                    $('#<%=chkAllowResize.ClientID %>').removeAttr("disabled");                    
+                    $('#<%=chkAllowResize.ClientID %>').removeAttr("disabled");
                 }
             } else {
                 $('#<%=chkAllowFiles.ClientID %>').attr("disabled", true);
@@ -70,8 +70,8 @@
 
         $('#<%=chkAllowPhotos.ClientID %>').click(function(event) {
             if (this.checked) {
-                $('#<%=chkAllowResize.ClientID %>').removeAttr("disabled");                
-            } else {                
+                $('#<%=chkAllowResize.ClientID %>').removeAttr("disabled");
+            } else {
                 $('#<%=chkAllowResize.ClientID %>').attr("disabled", true);
             }
         });

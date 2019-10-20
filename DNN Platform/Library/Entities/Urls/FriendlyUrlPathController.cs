@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -151,13 +151,13 @@ namespace DotNetNuke.Entities.Urls
         /// <param name="changeToSiteRoot"></param>
         /// <param name="parentTraceId"></param>
         /// <returns></returns>
-        internal static bool CheckParameterRegexReplacement(string parameterPath, 
+        internal static bool CheckParameterRegexReplacement(string parameterPath,
                                                             TabInfo tab,
-                                                            FriendlyUrlSettings settings, 
+                                                            FriendlyUrlSettings settings,
                                                             int portalId,
-                                                            out string replacedPath, 
+                                                            out string replacedPath,
                                                             ref List<string> messages,
-                                                            out bool changeToSiteRoot, 
+                                                            out bool changeToSiteRoot,
                                                             Guid parentTraceId)
         {
             bool replaced = false;
@@ -202,7 +202,7 @@ namespace DotNetNuke.Entities.Urls
                         {
                             //do a regex on the 'lookFor' in the parameter path
                             var parmRegex = RegexUtils.GetCachedRegex(parmReplace.LookFor,
-                                                      RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+                                                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
                             if (parmRegex.IsMatch(parameterPath))
                             {
                                 replacedPath = parmRegex.Replace(parameterPath, parmReplace.ReplaceWith);
@@ -257,7 +257,7 @@ namespace DotNetNuke.Entities.Urls
             {
                 int userId;
                 string rawUserId, remainingPath;
-                //split the userid and other profile parameters from the friendly url path, 
+                //split the userid and other profile parameters from the friendly url path,
                 //and return the userid and remaining parts as separate items
                 SplitUserIdFromFriendlyUrlPath(newPath,
                                                 "UserId",
@@ -273,8 +273,8 @@ namespace DotNetNuke.Entities.Urls
                     meessages.Add("User Profile Url : RawUserId = " + "null" + " remainingPath = " + remainingPath);
                 }
 
-                //the rawuserid is just the string representation of the userid from the path.  
-                //It should be considered 'untrusted' until cleaned up, 
+                //the rawuserid is just the string representation of the userid from the path.
+                //It should be considered 'untrusted' until cleaned up,
                 //converted to an int and checked against the database
                 if (!String.IsNullOrEmpty(rawUserId) && Int32.TryParse(rawUserId, out userId))
                 {
@@ -305,7 +305,7 @@ namespace DotNetNuke.Entities.Urls
                                 string profilePagePath = TabIndexController.GetTabPath(profilePage, options, parentTraceId);
                                 if (childTabPath.Contains(profilePagePath))
                                 {
-                                    //only replace when the child tab path contains the parent path - if it's a custom url that 
+                                    //only replace when the child tab path contains the parent path - if it's a custom url that
                                     //doesn't incorporate the parent path, then leave it alone
                                     childTabPath = childTabPath.Replace(profilePagePath, "");
                                     childTabPath = childTabPath.Replace("//", "/");

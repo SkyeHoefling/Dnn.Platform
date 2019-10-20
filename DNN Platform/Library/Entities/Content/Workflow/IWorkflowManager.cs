@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -25,13 +25,13 @@ using System.Collections.Generic;
 namespace DotNetNuke.Entities.Content.Workflow
 {
     /// <summary>
-    /// This class is responsible to manage the workflows of the portal. 
-    /// It provides CRUD operation methods and methods to know the usage of the workflow 
+    /// This class is responsible to manage the workflows of the portal.
+    /// It provides CRUD operation methods and methods to know the usage of the workflow
     /// </summary>
     public interface IWorkflowManager
     {
         /// <summary>
-        /// This method returns the paginated list of Items that are associated with a workflow 
+        /// This method returns the paginated list of Items that are associated with a workflow
         /// </summary>
         /// <param name="workflowId">Workflow Id</param>
         /// <param name="pageIndex">Page index (where 1 is the index of the first page)</param>
@@ -45,14 +45,14 @@ namespace DotNetNuke.Entities.Content.Workflow
         /// <param name="workflowId">Workflow Id</param>
         /// <returns>Total count of Content Items that are using the specified workflow</returns>
         int GetWorkflowUsageCount(int workflowId);
-        
+
         /// <summary>
         /// This method return the list of the Workflows defined for the portal
         /// </summary>
         /// <param name="portalId">Portal Id</param>
         /// <returns>List of the Workflows for the portal</returns>
         IEnumerable<Entities.Workflow> GetWorkflows(int portalId);
-        
+
         /// <summary>
         /// This method adds a new workflow. It automatically add two system states: "Draft" and "Published"
         /// </summary>

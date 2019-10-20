@@ -3,7 +3,7 @@ const utils = {
         if (!utilities) {
             throw new Error("Utilities is undefined.");
         }
-        this.utilities = utilities;      
+        this.utilities = utilities;
     },
     utilities: null
 };

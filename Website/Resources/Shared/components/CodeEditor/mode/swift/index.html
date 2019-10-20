@@ -9,7 +9,7 @@
 <script src="../../addon/edit/matchbrackets.js"></script>
 <script src="./swift.js"></script>
 <style>
-	.CodeMirror { border: 2px inset #dee; }
+    .CodeMirror { border: 2px inset #dee; }
     </style>
 <div id=nav>
   <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
@@ -35,51 +35,51 @@
 //  Created by Main Account on 12/18/14.
 //  Copyright (c) 2014 Razeware LLC. All rights reserved.
 //
- 
+
 import Foundation
- 
+
 class TipCalculatorModel {
- 
+
   var total: Double
   var taxPct: Double
   var subtotal: Double {
     get {
-      return total / (taxPct + 1)
+    return total / (taxPct + 1)
     }
   }
- 
+
   init(total: Double, taxPct: Double) {
     self.total = total
     self.taxPct = taxPct
   }
- 
+
   func calcTipWithTipPct(tipPct: Double) -> Double {
     return subtotal * tipPct
   }
- 
+
   func returnPossibleTips() -> [Int: Double] {
- 
+
     let possibleTipsInferred = [0.15, 0.18, 0.20]
     let possibleTipsExplicit:[Double] = [0.15, 0.18, 0.20]
- 
+
     var retval = [Int: Double]()
     for possibleTip in possibleTipsInferred {
-      let intPct = Int(possibleTip*100)
-      retval[intPct] = calcTipWithTipPct(possibleTip)
+    let intPct = Int(possibleTip*100)
+    retval[intPct] = calcTipWithTipPct(possibleTip)
     }
     return retval
- 
+
   }
- 
+
 }
 </textarea></form>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-swift"
-      });
+    });
     </script>
 
     <p>A simple mode for Swift</p>

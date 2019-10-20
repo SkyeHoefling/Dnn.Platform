@@ -177,7 +177,7 @@ namespace DotNetNuke.Web.DDRMenu
             {
                 child.RemoveAll(filteredNodes);
             }
-        }        
+        }
 
         public bool HasChildren()
         {

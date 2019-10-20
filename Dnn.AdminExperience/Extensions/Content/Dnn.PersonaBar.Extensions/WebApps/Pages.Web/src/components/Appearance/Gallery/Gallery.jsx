@@ -7,7 +7,7 @@ class Gallery extends Component {
 
     getElementSize() {
         const { size } = this.props;
-        return size === "big" ? 198 : 130;        
+        return size === "big" ? 198 : 130;
     }
 
     calculateGalleryWidth() {
@@ -16,14 +16,14 @@ class Gallery extends Component {
     }
 
     scrollToSelectedItem(scrollToIndex) {
-        const indexToScroll = scrollToIndex !== -1 ? scrollToIndex : 0; 
+        const indexToScroll = scrollToIndex !== -1 ? scrollToIndex : 0;
         const scrollbars = this.scrollbarsRef;
         if (scrollbars) {
             const scrollClientWidth = scrollbars.getClientWidth();
             const scrollLeft = indexToScroll * this.getElementSize();
             const currentScrollLeft = scrollbars.getScrollLeft();
             const lowBoundary = currentScrollLeft;
-            const highBoundary = currentScrollLeft + scrollClientWidth;        
+            const highBoundary = currentScrollLeft + scrollClientWidth;
             if (scrollLeft > lowBoundary && scrollLeft < highBoundary) {
                 return;
             }
@@ -34,13 +34,13 @@ class Gallery extends Component {
     componentDidUpdate() {
         setTimeout(() => this.scrollToSelectedItem(this.props.scrollToIndex), 0);
     }
-    
+
     componentDidMount() {
         setTimeout(() => this.scrollToSelectedItem(this.props.scrollToIndex), 0);
     }
 
-    render() {  
-        const width = this.calculateGalleryWidth();    
+    render() {
+        const width = this.calculateGalleryWidth();
         return (
             <div className={style.moduleContainer}>
                 <Scrollbars ref={this.scrollbarsRef}

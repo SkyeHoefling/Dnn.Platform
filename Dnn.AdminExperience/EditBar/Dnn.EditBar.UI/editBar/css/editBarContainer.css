@@ -7,13 +7,13 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-	z-index: 1105 !important;
+    z-index: 1105 !important;
 }
 .editBarFrameContainer.personabar-shown {
     left: 80px;
 }
 iframe#editBar-iframe{
-	height: 80px;
+    height: 80px;
     width: 100%;
     vertical-align: top;
 }
@@ -26,4 +26,3 @@ iframe#editBar-iframe.middle {
 iframe#editBar-iframe.large {
     height: 100%;
 }
-

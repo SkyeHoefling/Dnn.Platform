@@ -14,34 +14,34 @@
 CodeMirror.defineMode('tiki', function(config) {
   function inBlock(style, terminator, returnTokenizer) {
     return function(stream, state) {
-      while (!stream.eol()) {
+    while (!stream.eol()) {
         if (stream.match(terminator)) {
-          state.tokenize = inText;
-          break;
+        state.tokenize = inText;
+        break;
         }
         stream.next();
-      }
+    }
 
-      if (returnTokenizer) state.tokenize = returnTokenizer;
+    if (returnTokenizer) state.tokenize = returnTokenizer;
 
-      return style;
+    return style;
     };
   }
 
   function inLine(style) {
     return function(stream, state) {
-      while(!stream.eol()) {
+    while(!stream.eol()) {
         stream.next();
-      }
-      state.tokenize = inText;
-      return style;
+    }
+    state.tokenize = inText;
+    return style;
     };
   }
 
   function inText(stream, state) {
     function chain(parser) {
-      state.tokenize = parser;
-      return parser(stream, state);
+    state.tokenize = parser;
+    return parser(stream, state);
     }
 
     var sol = stream.sol();
@@ -50,76 +50,76 @@ CodeMirror.defineMode('tiki', function(config) {
     //non start of line
     switch (ch) { //switch is generally much faster than if, so it is used here
     case "{": //plugin
-      stream.eat("/");
-      stream.eatSpace();
-      stream.eatWhile(/[^\s\u00a0=\"\'\/?(}]/);
-      state.tokenize = inPlugin;
-      return "tag";
+    stream.eat("/");
+    stream.eatSpace();
+    stream.eatWhile(/[^\s\u00a0=\"\'\/?(}]/);
+    state.tokenize = inPlugin;
+    return "tag";
     case "_": //bold
-      if (stream.eat("_"))
+    if (stream.eat("_"))
         return chain(inBlock("strong", "__", inText));
-      break;
+    break;
     case "'": //italics
-      if (stream.eat("'"))
+    if (stream.eat("'"))
         return chain(inBlock("em", "''", inText));
-      break;
+    break;
     case "(":// Wiki Link
-      if (stream.eat("("))
+    if (stream.eat("("))
         return chain(inBlock("variable-2", "))", inText));
-      break;
+    break;
     case "[":// Weblink
-      return chain(inBlock("variable-3", "]", inText));
-      break;
+    return chain(inBlock("variable-3", "]", inText));
+    break;
     case "|": //table
-      if (stream.eat("|"))
+    if (stream.eat("|"))
         return chain(inBlock("comment", "||"));
-      break;
+    break;
     case "-":
-      if (stream.eat("=")) {//titleBar
+    if (stream.eat("=")) {//titleBar
         return chain(inBlock("header string", "=-", inText));
-      } else if (stream.eat("-")) {//deleted
+    } else if (stream.eat("-")) {//deleted
         return chain(inBlock("error tw-deleted", "--", inText));
-      }
-      break;
+    }
+    break;
     case "=": //underline
-      if (stream.match("=="))
+    if (stream.match("=="))
         return chain(inBlock("tw-underline", "===", inText));
-      break;
+    break;
     case ":":
-      if (stream.eat(":"))
+    if (stream.eat(":"))
         return chain(inBlock("comment", "::"));
-      break;
+    break;
     case "^": //box
-      return chain(inBlock("tw-box", "^"));
-      break;
+    return chain(inBlock("tw-box", "^"));
+    break;
     case "~": //np
-      if (stream.match("np~"))
+    if (stream.match("np~"))
         return chain(inBlock("meta", "~/np~"));
-      break;
+    break;
     }
 
     //start of line types
     if (sol) {
-      switch (ch) {
-      case "!": //header at start of line
+    switch (ch) {
+    case "!": //header at start of line
         if (stream.match('!!!!!')) {
-          return chain(inLine("header string"));
+        return chain(inLine("header string"));
         } else if (stream.match('!!!!')) {
-          return chain(inLine("header string"));
+        return chain(inLine("header string"));
         } else if (stream.match('!!!')) {
-          return chain(inLine("header string"));
+        return chain(inLine("header string"));
         } else if (stream.match('!!')) {
-          return chain(inLine("header string"));
+        return chain(inLine("header string"));
         } else {
-          return chain(inLine("header string"));
+        return chain(inLine("header string"));
         }
         break;
-      case "*": //unordered list line item, or <li /> at start of line
-      case "#": //ordered list line item, or <li /> at start of line
-      case "+": //ordered list line item, or <li /> at start of line
+    case "*": //unordered list line item, or <li /> at start of line
+    case "#": //ordered list line item, or <li /> at start of line
+    case "+": //ordered list line item, or <li /> at start of line
         return chain(inLine("tw-listitem bracket"));
         break;
-      }
+    }
     }
 
     //stream.eatWhile(/[&{]/); was eating up plugins, turned off to act less like html and more like tiki
@@ -135,60 +135,60 @@ CodeMirror.defineMode('tiki', function(config) {
     var peek = stream.peek();
 
     if (ch == "}") {
-      state.tokenize = inText;
-      //type = ch == ")" ? "endPlugin" : "selfclosePlugin"; inPlugin
-      return "tag";
+    state.tokenize = inText;
+    //type = ch == ")" ? "endPlugin" : "selfclosePlugin"; inPlugin
+    return "tag";
     } else if (ch == "(" || ch == ")") {
-      return "bracket";
+    return "bracket";
     } else if (ch == "=") {
-      type = "equals";
+    type = "equals";
 
-      if (peek == ">") {
+    if (peek == ">") {
         ch = stream.next();
         peek = stream.peek();
-      }
+    }
 
-      //here we detect values directly after equal character with no quotes
-      if (!/[\'\"]/.test(peek)) {
+    //here we detect values directly after equal character with no quotes
+    if (!/[\'\"]/.test(peek)) {
         state.tokenize = inAttributeNoQuote();
-      }
-      //end detect values
+    }
+    //end detect values
 
-      return "operator";
+    return "operator";
     } else if (/[\'\"]/.test(ch)) {
-      state.tokenize = inAttribute(ch);
-      return state.tokenize(stream, state);
+    state.tokenize = inAttribute(ch);
+    return state.tokenize(stream, state);
     } else {
-      stream.eatWhile(/[^\s\u00a0=\"\'\/?]/);
-      return "keyword";
+    stream.eatWhile(/[^\s\u00a0=\"\'\/?]/);
+    return "keyword";
     }
   }
 
   function inAttribute(quote) {
     return function(stream, state) {
-      while (!stream.eol()) {
+    while (!stream.eol()) {
         if (stream.next() == quote) {
-          state.tokenize = inPlugin;
-          break;
+        state.tokenize = inPlugin;
+        break;
         }
-      }
-      return "string";
+    }
+    return "string";
     };
   }
 
   function inAttributeNoQuote() {
     return function(stream, state) {
-      while (!stream.eol()) {
+    while (!stream.eol()) {
         var ch = stream.next();
         var peek = stream.peek();
         if (ch == " " || ch == "," || /[ )}]/.test(peek)) {
-      state.tokenize = inPlugin;
-      break;
+    state.tokenize = inPlugin;
+    break;
     }
   }
   return "string";
 };
-                     }
+                    }
 
 var curState, setStyle;
 function pass() {
@@ -220,10 +220,10 @@ function element(type) {
   else if (type == "closePlugin") {
     var err = false;
     if (curState.context) {
-      err = curState.context.pluginName != pluginName;
-      popContext();
+    err = curState.context.pluginName != pluginName;
+    popContext();
     } else {
-      err = true;
+    err = true;
     }
     if (err) setStyle = "error";
     return cont(endcloseplugin(err));
@@ -239,10 +239,10 @@ function element(type) {
 function endplugin(startOfLine) {
   return function(type) {
     if (
-      type == "selfclosePlugin" ||
+    type == "selfclosePlugin" ||
         type == "endPlugin"
     )
-      return cont();
+    return cont();
     if (type == "endPlugin") {pushContext(curState.pluginName, startOfLine); return cont();}
     return cont();
   };
@@ -276,19 +276,19 @@ return {
   },
   token: function(stream, state) {
     if (stream.sol()) {
-      state.startOfLine = true;
-      state.indented = stream.indentation();
+    state.startOfLine = true;
+    state.indented = stream.indentation();
     }
     if (stream.eatSpace()) return null;
 
     setStyle = type = pluginName = null;
     var style = state.tokenize(stream, state);
     if ((style || type) && style != "comment") {
-      curState = state;
-      while (true) {
+    curState = state;
+    while (true) {
         var comb = state.cc.pop() || element;
         if (comb(type || style)) break;
-      }
+    }
     }
     state.startOfLine = false;
     return setStyle || style;
@@ -299,10 +299,10 @@ return {
     if (context && /^{\//.test(textAfter))
         context = context.prev;
         while (context && !context.startOfLine)
-          context = context.prev;
+        context = context.prev;
         if (context) return context.indent + indentUnit;
         else return 0;
-       },
+        },
     electricChars: "/"
   };
 });

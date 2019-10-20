@@ -55,7 +55,7 @@ class App extends Component {
             referralText: "",
             busy: false,
             headerDropdownSelection: "Save Page Template",
-            
+
             inSearch: false,
             searchTerm: "",
             filtersUpdated: false,
@@ -95,7 +95,7 @@ class App extends Component {
         this.props.getPageList().then(() => {
             const selectedPageId = utils.getCurrentPageId();
             selectedPageId && !utils.getIsAdminHostSystemPage() && this.onLoadPage(selectedPageId);
-        
+
             if (viewName === "edit") {
                 this.onLoadPage(utils.getCurrentPageId());
             }
@@ -151,7 +151,7 @@ class App extends Component {
             this.updateReferral(viewParams.referral, viewParams.referralText);
         }
     }
-    
+
     componentWillUnmount() {
         document.removeEventListener("viewPageSettings", this.resolveTabBeingViewed);
     }
@@ -412,7 +412,7 @@ class App extends Component {
         });
     }
 
-    
+
     onLoadPage(pageId, callback) {
         const self = this;
         this.props.onLoadPage(pageId).then((data) => {
@@ -425,7 +425,7 @@ class App extends Component {
     _addPageToTree(parentId) {
         let runUpdateStore = null;
         let pageList = null;
-        
+
         if(parentId !== null && parentId !== -1) {
             this._traverse((item, list, updateStore) => {
                 if (item.id === parentId) {
@@ -434,7 +434,7 @@ class App extends Component {
                     item.childCount++;
                     const newPageChildItems = item.childListItems.concat(this.props.selectedPage);
                     item.childListItems = newPageChildItems;
-                    updateStore(list);        
+                    updateStore(list);
                 }
             });
 
@@ -442,9 +442,9 @@ class App extends Component {
             this._traverse((item, list, updateStore) => {
                 item.selected = false;
                 runUpdateStore = updateStore;
-                pageList = list;                
+                pageList = list;
             });
-            const newPageList = pageList.concat(this.props.selectedPage);    
+            const newPageList = pageList.concat(this.props.selectedPage);
             runUpdateStore(newPageList);
         }
     }
@@ -491,33 +491,33 @@ class App extends Component {
             this.clearEmptyStateMessage();
             this.selectPageSettingTab(0);
             this.props.clearSelectedPage();
-    
+
             this.props.onLoadAddMultiplePages();
-        });  
-        
+        });
+
     }
-    
+
     /**
-     * When on edit mode
-     */
+    * When on edit mode
+    */
     onEditMode() {
         const {selectedPage, selectedView, selectedPageDirty} = this.props;
         return ((selectedPage && selectedPage.tabId === 0) || selectedPageDirty
             || selectedView === panels.SAVE_AS_TEMPLATE_PANEL
-            || selectedView === panels.ADD_MULTIPLE_PAGES_PANEL 
+            || selectedView === panels.ADD_MULTIPLE_PAGES_PANEL
             || selectedView === panels.CUSTOM_PAGE_DETAIL_PANEL);
     }
 
     onAddPage(parentPage) {
         this.clearEmptyStateMessage();
         this.selectPageSettingTab(0);
-        
+
         const addPage = () => {
             const { props } = this;
             const { selectedPage } = props;
             let runUpdateStore = null;
             let pageList = null;
-        
+
             this._traverse((item, list, updateStore) => {
                 item.selected = false;
                 pageList = list;
@@ -527,7 +527,7 @@ class App extends Component {
 
             const onConfirm = () => {
                 this.props.changeSelectedPagePath([]);
-                
+
                 this.props.getNewPage(parentPage).then(()=>{
                     if (parentPage && parentPage.id) {
                         this.props.getChildPageList(parentPage.id)
@@ -548,14 +548,14 @@ class App extends Component {
                             pageList = list;
                             runUpdateStore = updateStore;
                         });
-                        const newPageList = pageList.concat(this.props.selectedPage);    
+                        const newPageList = pageList.concat(this.props.selectedPage);
                         runUpdateStore(newPageList);
                     }
 
                     this.setState({inDuplicateMode: false});
-                }); 
+                });
             };
-       
+
 
             if (selectedPage && selectedPage.tabId !== 0 && props.selectedPageDirty) {
                 utils.confirm(
@@ -567,11 +567,11 @@ class App extends Component {
             } else {
                 onConfirm();
             }
-            
+
             setTimeout(()=>{
                 if (this.node.querySelector("#name")) {
                     this.node.querySelector("#name").focus();
-                }    
+                }
             },100);
         };
 
@@ -582,7 +582,7 @@ class App extends Component {
     onCancelSettings() {
         const { props } = this;
         if (props.selectedPageDirty) {
-            
+
             this.showCancelWithoutSavingDialog();
         }
         else {
@@ -722,7 +722,7 @@ class App extends Component {
             Localization.get("AddPage") :
             selectedPage.name;
     }
-    
+
     _testDirtyPage(callback) {
         const {selectedPage, selectedPageDirty} = this.props;
         const onConfirm = () => {
@@ -758,7 +758,7 @@ class App extends Component {
     getSettingsButtons() {
         const { selectedPage, settingsButtonComponents, onLoadSavePageAsTemplate, onShowPageSettings, onHidePageSettings } = this.props;
         const SaveAsTemplateButton = settingsButtonComponents.SaveAsTemplateButton || Button;
-        
+
         return (
             <div className="heading-buttons">
                 <Sec permission={permissionTypes.EXPORT_PAGE} selectedPage={selectedPage}>
@@ -782,21 +782,21 @@ class App extends Component {
         this.props.selectPageSettingTab(index);
     }
 
-    onSaveMultiplePages(){    
+    onSaveMultiplePages(){
         return this.props.onSaveMultiplePages(()=>{
             this.props.getPageList();
         });
     }
-    
-    onValidateMultiplePages(){    
+
+    onValidateMultiplePages(){
         return this.props.onValidateMultiplePages(()=>{
             // stay on same page
         });
     }
-    
+
     onCancelAddMultiplePages(){
         const { props } = this;
-        
+
         if (props.dirtyBulkPage) {
             const onConfirm = () => {
                 props.onCancelAddMultiplePages();
@@ -809,7 +809,7 @@ class App extends Component {
                 onConfirm);
         } else {
             props.onCancelAddMultiplePages();
-        }    
+        }
     }
 
     getAddPages() {
@@ -845,10 +845,10 @@ class App extends Component {
     onChangeCustomDetail() {
 
     }
-    
+
     onCancelSavePageAsTemplate() {
         const { props } = this;
-        
+
         if (props.dirtyTemplate) {
             const onConfirm = () => {
                 props.onCancelSavePageAsTemplate();
@@ -865,7 +865,7 @@ class App extends Component {
     }
 
     getSaveAsTemplatePage() {
-        
+
         return (
                 <SaveAsTemplate
                     onCancel={this.onCancelSavePageAsTemplate.bind(this)} />);
@@ -952,7 +952,7 @@ class App extends Component {
                 item.selected = true;
                 item.isOpen = true;
                 updateStore(list);
-            } 
+            }
         });
     }
 
@@ -996,7 +996,7 @@ class App extends Component {
 
             } else {
                 this.props.onDuplicatePage(false).then(data=>{
-                    
+
                     this._addPageToTree(data.parentId);
                 });
             }
@@ -1063,7 +1063,7 @@ class App extends Component {
         this.noPermissionSelectionPageId = null;
         this.setState({ emptyStateMessage: null });
     }
-    
+
     onDayClick(newDay, isEndDate) {
         this.setState({ startAndEndDateDirty: true });
         const right = () => {
@@ -1089,7 +1089,7 @@ class App extends Component {
         filterByPageType ? filters.push({ ref: "filterByPageType", tag: `${Localization.get("PageType")}: ${this.getPageTypeLabel(filterByPageType)}` }) : null;
         filterByPublishStatus ? filters.push({ ref: "filterByPublishStatus", tag: `${Localization.get("lblPublishStatus")}: ${this.getPublishStatusLabel(filterByPublishStatus)}` }) : null;
         filterByWorkflow ? filters.push({ ref: "filterByWorkflow", tag: `${Localization.get("WorkflowTitle")}: ${filterByWorkflowName}` }) : null;
-        
+
         if (startAndEndDateDirty) {
             let dateRangeText = Localization.get(utils.isPlatform() ? "ModifiedDateRange" : "PublishedDateRange");
             const fullStartDate = utils.formatDate(startDate);
@@ -1105,7 +1105,7 @@ class App extends Component {
         return new Promise((resolve) => this.setState({ searchFields }, () => resolve()));
     }
 
-    
+
     onSearch(term) {
         let newTerm = (term !== undefined) ? term : this.state.searchTerm;
         this.setState({
@@ -1130,7 +1130,7 @@ class App extends Component {
                 }
                 else {
                     this.doSearch();
-                }          
+                }
             }
             this.setState({ DropdownCalendarIsActive: null});
         });
@@ -1152,34 +1152,34 @@ class App extends Component {
             tags = tags[tags.length - 1] === "," ? tags.split(",").filter(t => !!t).join() : tags;
         }
 
-        let search = { 
-            tags: tags, 
-            searchKey: searchTerm, 
-            pageType: filterByPageType, 
-            publishStatus: filterByPublishStatus, 
+        let search = {
+            tags: tags,
+            searchKey: searchTerm,
+            pageType: filterByPageType,
+            publishStatus: filterByPublishStatus,
             workflowId: filterByWorkflow,
-            pageSize: 10 
+            pageSize: 10
         };
-        
+
         search = Object.assign({}, search, searchDateRange);
         for (let prop in search) {
             if (!search[prop]) {
                 delete search[prop];
             }
         }
-        
+
         search = Object.assign({},search,{pageIndex:this.state.pageIndex});
-        
+
         this.generateFilters();
         const filterUp = this.state.filtersUpdated;
         const filterPage = this.state.pageIndex;
-        
+
         this.saveSearchFilters(search).then(() => {
             this.props.searchAndFilterPagedPageList(search,filterUp,filterPage);
-        });        
-        this.setState({ 
-            inSearch: true, 
-            filtersUpdated: false 
+        });
+        this.setState({
+            inSearch: true,
+            filtersUpdated: false
         });
     }
 
@@ -1190,7 +1190,7 @@ class App extends Component {
             this.doSearch();
         });
     }
-    
+
     clearAdvancedSearch() {
         let date = new Date();
         this.setState({
@@ -1218,7 +1218,7 @@ class App extends Component {
             startAndEndDateDirty:false
         });
     }
-    
+
     clearSearch(callback) {
         let date = new Date();
         this.setState({
@@ -1277,7 +1277,7 @@ class App extends Component {
                         return;
                     }
                 });
-                
+
                 selectedPath.push({ name: page.name, tabId: (page.id !== pageId ? page.id : null) });
                 const left = () => {
                     addNode(page.parentId);
@@ -1390,7 +1390,7 @@ class App extends Component {
             <PageList onPageSettings={this.onPageSettings.bind(this)} />
         );
     }
-    
+
     getFilterByPageTypeOptions() {
         return [
             { value: "", label: Localization.get("lblNone") },
@@ -1438,14 +1438,14 @@ class App extends Component {
         const condition = !startAndEndDateDirty && fullStartDate === fullEndDate;
         condition ? this.setState({ startAndEndDateDirty: true, DropdownCalendarIsActive: null }) : this.setState({ DropdownCalendarIsActive: null });
     }
-    
-    updateFilterByPageTypeOptions(data) { 
-        this.setState({ filterByPageType: data.value, filtersUpdated: true,pageIndex:0 }); 
+
+    updateFilterByPageTypeOptions(data) {
+        this.setState({ filterByPageType: data.value, filtersUpdated: true,pageIndex:0 });
     }
-    
+
     updateFilterByPageStatusOptions(data) {
         this.setState({ filterByPublishStatus: data.value, filtersUpdated: true, pageIndex:0 });
-    } 
+    }
     updateFilterByWorkflowOptions(data) {
         this.setState({ filterByWorkflow: data.value, filterByWorkflowName: data.label, filtersUpdated: true, pageIndex:0});
     }
@@ -1461,13 +1461,13 @@ class App extends Component {
 
     render_searchResults() {
         return (
-            <SearchResult 
-                filters={this.state.filters} 
+            <SearchResult
+                filters={this.state.filters}
                 tags={this.state.tags}
                 filterPageByType={this.state.filterByPageType}
                 filterByPublishStatus={this.state.filterByPublishStatus}
                 filtersUpdated={this.state.filtersUpdated}
-                startDate={this.state.startDate} 
+                startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 getPageTypeLabel={this.getPageTypeLabel.bind(this)}
                 getPublishStatusLabel={this.getPublishStatusLabel.bind(this)}
@@ -1486,7 +1486,7 @@ class App extends Component {
                 clearSearch={this.clearSearch.bind(this)}
                 clearAdvancedSearch={this.clearAdvancedSearch.bind(this)}
                 clearAdvancedSearchDateInterval={this.clearAdvancedSearchDateInterval.bind(this)}
-                buildBreadCrumbPath={this.buildBreadCrumbPath.bind(this)} 
+                buildBreadCrumbPath={this.buildBreadCrumbPath.bind(this)}
                 setEmptyStateMessage={this.setEmptyStateMessage.bind(this)}
                 onViewPage={this.onViewPage.bind(this)}
                 onViewEditPage={this.onViewEditPage.bind(this)}
@@ -1500,12 +1500,12 @@ class App extends Component {
             />
         );
     }
-    
+
     getAdditionalPageSettings() {
         const additionalPageSettings = [];
 
         const { props } = this;
-        
+
         if (props.customPageSettingsComponents) {
             for (let i = 0; i < props.customPageSettingsComponents.length; i++) {
                 const customPageSettings = props.customPageSettingsComponents[i];
@@ -1513,7 +1513,7 @@ class App extends Component {
                     const Component = customPageSettings.component;
                     additionalPageSettings.push(
                         <Component
-                            onCancel={this.onCancelSaveCustomDetail(this.props.onCancelSavePageAsTemplate)} 
+                            onCancel={this.onCancelSaveCustomDetail(this.props.onCancelSavePageAsTemplate)}
                             onChange={this.props.onChangeCustomDetails}
                             selectedPage={props.selectedPage}
                             disabled={this.onEditMode()}
@@ -1525,7 +1525,7 @@ class App extends Component {
 
         return additionalPageSettings;
     }
-    
+
     render_details() {
         const {selectedPage} = this.props;
         const {inSearch} = this.state;
@@ -1553,8 +1553,8 @@ class App extends Component {
         const { selectedPage } = props;
         const { inSearch } = this.state;
         const isListPagesAllowed = securityService.canSeePagesList();
-       
-         /* eslint-disable react/no-danger */
+
+        /* eslint-disable react/no-danger */
         return (
 
             <div ref={node => this.node = node} className="pages-app personaBar-mainContainer">
@@ -1567,14 +1567,14 @@ class App extends Component {
                                     <Button type="secondary" disabled={ this.onEditMode() || this.state.inSearch } size="large" onClick={this.onAddMultiplePage.bind(this)}>{Localization.get("AddMultiplePages")}</Button>
                                 </div>
                             }
-                            { 
+                            {
                                 selectedPage && this.getSettingsButtons()
-                            }                            
+                            }
                             {!inSearch && <BreadCrumbs items={this.props.selectedPagePath || []} onSelectedItem={this.onSelection.bind(this)} />}
                         </PersonaBarPageHeader>
                         <GridCell columnSize={100} style={{ padding: "30px 30px 16px 30px" }}>
-                            <SearchPageInput 
-                                inSearch={this.state.inSearch} 
+                            <SearchPageInput
+                                inSearch={this.state.inSearch}
                                 onSearch={this.onSearch.bind(this)}
                                 clearSearch={this.clearSearch.bind(this)}  />
                         </GridCell>
@@ -1612,7 +1612,7 @@ class App extends Component {
                         </GridCell>
                     </PersonaBarPage>
                 }
-               
+
             </div>
         );
     }
@@ -1631,7 +1631,7 @@ App.propTypes = {
     selectedTemplateDirty: PropTypes.bool,
     filtersUpdated: PropTypes.bool,
     bulkPage: PropTypes.object,
-    dirtyBulkPage : PropTypes.bool, 
+    dirtyBulkPage : PropTypes.bool,
     editingSettingModuleId: PropTypes.number,
     onCancelPage: PropTypes.func.isRequired,
     onCreatePage: PropTypes.func.isRequired,
@@ -1751,7 +1751,7 @@ function mapDispatchToProps(dispatch) {
         onLoadSavePageAsTemplate: TemplateActions.loadSavePageAsTemplate,
         onCancelSavePageAsTemplate: TemplateActions.cancelSavePageAsTemplate,
         onDuplicatePage: PageActions.duplicatePage,
-        onShowPanel: VisiblePanelActions.showPanel, 
+        onShowPanel: VisiblePanelActions.showPanel,
         onHidePanel: VisiblePanelActions.hidePanel,
         onShowPageSettings: VisiblePageSettingsActions.showCustomPageSettings,
         onHidePageSettings: VisiblePageSettingsActions.hideCustomPageSettings,

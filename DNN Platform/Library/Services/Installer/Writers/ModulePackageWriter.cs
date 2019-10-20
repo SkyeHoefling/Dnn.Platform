@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -48,8 +48,8 @@ namespace DotNetNuke.Services.Installer.Writers
     /// -----------------------------------------------------------------------------
     public class ModulePackageWriter : PackageWriterBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModulePackageWriter));
-		#region "Constructors"
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModulePackageWriter));
+        #region "Constructors"
 
         public ModulePackageWriter(XPathNavigator manifestNav, InstallerInfo installer)
         {
@@ -99,10 +99,10 @@ namespace DotNetNuke.Services.Installer.Writers
             DesktopModule = desktopModule;
             Initialize(desktopModule.FolderName);
         }
-		
-		#endregion
 
-		#region "Protected Properties"
+        #endregion
+
+        #region "Protected Properties"
 
         protected override Dictionary<string, string> Dependencies
         {
@@ -120,23 +120,23 @@ namespace DotNetNuke.Services.Installer.Writers
                 return dependencies;
             }
         }
-		
-		#endregion
 
-		#region "Public Properties"
+        #endregion
+
+        #region "Public Properties"
 
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets the associated Desktop Module
-		/// </summary>
-		/// <value>A DesktopModuleInfo object</value>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the associated Desktop Module
+        /// </summary>
+        /// <value>A DesktopModuleInfo object</value>
+        /// -----------------------------------------------------------------------------
         public DesktopModuleInfo DesktopModule { get; set; }
 
-		#endregion
+        #endregion
 
-		#region "Private Methods"
+        #region "Private Methods"
 
         private void Initialize(string folder)
         {
@@ -156,7 +156,7 @@ namespace DotNetNuke.Services.Installer.Writers
             string controlSrc = Util.ReadElement(controlNav, "src");
             if (!(controlSrc.StartsWith("desktopmodules", StringComparison.InvariantCultureIgnoreCase) || !controlSrc.EndsWith(".ascx", StringComparison.InvariantCultureIgnoreCase)))
             {
-				//this code allows a developer to reference an ASCX file in a different folder than the module folder ( good for ASCX files shared between modules where you want only a single copy )
+                //this code allows a developer to reference an ASCX file in a different folder than the module folder ( good for ASCX files shared between modules where you want only a single copy )
                 //or it allows the developer to use webcontrols rather than usercontrols
 
                 controlSrc = Path.Combine("DesktopModules", Path.Combine(moduleFolder, controlSrc));
@@ -202,7 +202,7 @@ namespace DotNetNuke.Services.Installer.Writers
 
         private void ProcessModuleFiles(string folder, string basePath)
         {
-			//we are going to drill down through the folders to add the files
+            //we are going to drill down through the folders to add the files
             foreach (string fileName in Directory.GetFiles(folder))
             {
                 string name = fileName.Replace(basePath + "\\", "");
@@ -212,12 +212,12 @@ namespace DotNetNuke.Services.Installer.Writers
 
         private void ProcessModuleFolders(string folder, string basePath)
         {
-			//Process Folders recursively
+            //Process Folders recursively
             foreach (string directoryName in Directory.GetDirectories(folder))
             {
                 ProcessModuleFolders(directoryName, basePath);
             }
-			
+
             //process files
             ProcessModuleFiles(folder, basePath);
         }
@@ -232,7 +232,7 @@ namespace DotNetNuke.Services.Installer.Writers
             {
                 definition.DefaultCacheTime = int.Parse(cacheTime);
             }
-			
+
             //Process legacy controls Node
             foreach (XPathNavigator controlNav in moduleNav.Select("controls/control"))
             {
@@ -245,7 +245,7 @@ namespace DotNetNuke.Services.Installer.Writers
         {
             if (processModule)
             {
-				//Version 2 of legacy manifest
+                //Version 2 of legacy manifest
                 string name = Util.ReadElement(folderNav, "name");
                 DesktopModule.FolderName = name;
                 DesktopModule.ModuleName = name;
@@ -295,7 +295,7 @@ namespace DotNetNuke.Services.Installer.Writers
                     ProcessModules(moduleNav, DesktopModule.FolderName);
                 }
             }
-			
+
             //Process legacy files Node
             foreach (XPathNavigator fileNav in folderNav.Select("files/file"))
             {
@@ -307,7 +307,7 @@ namespace DotNetNuke.Services.Installer.Writers
                 string sourceFileName;
                 if (filePath.Contains("[app_code]"))
                 {
-					//Special case for App_code - files can be in App_Code\ModuleName or root
+                    //Special case for App_code - files can be in App_Code\ModuleName or root
                     sourceFileName = Path.Combine(filePath, fileName).Replace("[app_code]", "App_Code\\" + DesktopModule.FolderName);
                 }
                 else
@@ -319,8 +319,8 @@ namespace DotNetNuke.Services.Installer.Writers
                 {
                     sourceFileName = fileName;
                 }
-				
-				//In Legacy Modules the assembly is always in "bin" - ignore the path element
+
+                //In Legacy Modules the assembly is always in "bin" - ignore the path element
                 if (fileName.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase))
                 {
                     AddFile("bin/" + fileName, sourceFileName);
@@ -330,7 +330,7 @@ namespace DotNetNuke.Services.Installer.Writers
                     AddFile(Path.Combine(filePath, fileName), sourceFileName);
                 }
             }
-			
+
             //Process resource file Node
             if (!string.IsNullOrEmpty(Util.ReadElement(folderNav, "resourcefile")))
             {
@@ -340,7 +340,7 @@ namespace DotNetNuke.Services.Installer.Writers
 
         private void WriteEventMessage(XmlWriter writer)
         {
-			//Start Start eventMessage
+            //Start Start eventMessage
             writer.WriteStartElement("eventMessage");
 
             //Write Processor Type
@@ -380,7 +380,7 @@ namespace DotNetNuke.Services.Installer.Writers
 
         private void WriteModuleComponent(XmlWriter writer)
         {
-			//Start component Element
+            //Start component Element
             writer.WriteStartElement("component");
             writer.WriteAttributeString("type", "Module");
 
@@ -396,21 +396,21 @@ namespace DotNetNuke.Services.Installer.Writers
             {
                 WriteEventMessage(writer);
             }
-			
+
             //End component Element
             writer.WriteEndElement();
         }
-		
-		#endregion
 
-		#region "Protected Methods"
+        #endregion
+
+        #region "Protected Methods"
 
         protected override void WriteManifestComponent(XmlWriter writer)
         {
-			//Write Module Component
+            //Write Module Component
             WriteModuleComponent(writer);
         }
-		
-		#endregion
+
+        #endregion
     }
 }

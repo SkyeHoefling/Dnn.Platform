@@ -1,10 +1,10 @@
 #region Apache License
 //
-// Licensed to the Apache Software Foundation (ASF) under one or more 
+// Licensed to the Apache Software Foundation (ASF) under one or more
 // contributor license agreements. See the NOTICE file distributed with
-// this work for additional information regarding copyright ownership. 
+// this work for additional information regarding copyright ownership.
 // The ASF licenses this file to you under the Apache License, Version 2.0
-// (the "License"); you may not use this file except in compliance with 
+// (the "License"); you may not use this file except in compliance with
 // the License. You may obtain a copy of the License at
 //
 // http://www.apache.org/licenses/LICENSE-2.0
@@ -25,66 +25,66 @@ using log4net.Util;
 
 namespace log4net.Layout
 {
-	/// <summary>
-	/// Extract the value of a property from the <see cref="LoggingEvent"/>
-	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// Extract the value of a property from the <see cref="LoggingEvent"/>
-	/// </para>
-	/// </remarks>
-	/// <author>Nicko Cadell</author>
-	public class RawPropertyLayout : IRawLayout
-	{
-		#region Constructors
+    /// <summary>
+    /// Extract the value of a property from the <see cref="LoggingEvent"/>
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Extract the value of a property from the <see cref="LoggingEvent"/>
+    /// </para>
+    /// </remarks>
+    /// <author>Nicko Cadell</author>
+    public class RawPropertyLayout : IRawLayout
+    {
+        #region Constructors
 
-		/// <summary>
-		/// Constructs a RawPropertyLayout
-		/// </summary>
-		public RawPropertyLayout()
-		{
-		}
+        /// <summary>
+        /// Constructs a RawPropertyLayout
+        /// </summary>
+        public RawPropertyLayout()
+        {
+        }
 
-		#endregion
+        #endregion
 
-		private string m_key;
+        private string m_key;
 
-		/// <summary>
-		/// The name of the value to lookup in the LoggingEvent Properties collection.
-		/// </summary>
-		/// <value>
-		/// Value to lookup in the LoggingEvent Properties collection
-		/// </value>
-		/// <remarks>
-		/// <para>
-		/// String name of the property to lookup in the <see cref="LoggingEvent"/>.
-		/// </para>
-		/// </remarks>
-		public string Key
-		{
-			get { return m_key; }
-			set { m_key = value; }
-		}
-  
-		#region Implementation of IRawLayout
+        /// <summary>
+        /// The name of the value to lookup in the LoggingEvent Properties collection.
+        /// </summary>
+        /// <value>
+        /// Value to lookup in the LoggingEvent Properties collection
+        /// </value>
+        /// <remarks>
+        /// <para>
+        /// String name of the property to lookup in the <see cref="LoggingEvent"/>.
+        /// </para>
+        /// </remarks>
+        public string Key
+        {
+            get { return m_key; }
+            set { m_key = value; }
+        }
 
-		/// <summary>
-		/// Lookup the property for <see cref="Key"/>
-		/// </summary>
-		/// <param name="loggingEvent">The event to format</param>
-		/// <returns>returns property value</returns>
-		/// <remarks>
-		/// <para>
-		/// Looks up and returns the object value of the property
-		/// named <see cref="Key"/>. If there is no property defined
-		/// with than name then <c>null</c> will be returned.
-		/// </para>
-		/// </remarks>
-		public virtual object Format(LoggingEvent loggingEvent)
-		{
-			return loggingEvent.LookupProperty(m_key);
-		}
+        #region Implementation of IRawLayout
 
-		#endregion
-	}
+        /// <summary>
+        /// Lookup the property for <see cref="Key"/>
+        /// </summary>
+        /// <param name="loggingEvent">The event to format</param>
+        /// <returns>returns property value</returns>
+        /// <remarks>
+        /// <para>
+        /// Looks up and returns the object value of the property
+        /// named <see cref="Key"/>. If there is no property defined
+        /// with than name then <c>null</c> will be returned.
+        /// </para>
+        /// </remarks>
+        public virtual object Format(LoggingEvent loggingEvent)
+        {
+            return loggingEvent.LookupProperty(m_key);
+        }
+
+        #endregion
+    }
 }

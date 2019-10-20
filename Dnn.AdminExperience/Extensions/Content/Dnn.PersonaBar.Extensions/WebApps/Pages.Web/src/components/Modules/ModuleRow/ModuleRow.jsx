@@ -24,7 +24,7 @@ class ModuleRow extends Component {
             <div className={styles.moduleRow} >
                 {showCopySettings &&
                     <GridCell columnSize={10}>
-                        <Checkbox value={module.includedInCopy !== null ? module.includedInCopy : true} 
+                        <Checkbox value={module.includedInCopy !== null ? module.includedInCopy : true}
                         onChange={onCopyChange.bind(this, module.id, "includedInCopy")} />
                     </GridCell>
                 }
@@ -37,14 +37,14 @@ class ModuleRow extends Component {
                 {!showCopySettings &&
                     <GridCell columnSize={10} >
                         <div className="extension-action" dangerouslySetInnerHTML={{ __html: SvgIcons.TrashIcon }} onClick={onDelete.bind(this, module)}></div>
-                        <div 
-                            className={editClassName} 
-                            onClick={onSetting.bind(this, module)} 
+                        <div
+                            className={editClassName}
+                            onClick={onSetting.bind(this, module)}
                             dangerouslySetInnerHTML={{ __html: SvgIcons.SettingsIcon }}></div>
                         {module.allTabs === false && module.editContentUrl &&
-                            <div 
-                                className={editClassName} 
-                                onClick={onEditing.bind(this, module)} 
+                            <div
+                                className={editClassName}
+                                onClick={onEditing.bind(this, module)}
                                 dangerouslySetInnerHTML={{ __html: SvgIcons.EditIcon }}></div>}
                     </GridCell>
                 }

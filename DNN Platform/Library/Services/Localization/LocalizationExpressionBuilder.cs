@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -47,12 +47,12 @@ namespace DotNetNuke.Services.Localization
         public override CodeExpression GetCodeExpression(BoundPropertyEntry entry, object parsedData, ExpressionBuilderContext context)
         {
             var inputParams = new CodeExpression[]
-                                  {
-                                      new CodePrimitiveExpression(entry.Expression.Trim()), 
-                                      new CodeTypeOfExpression(entry.DeclaringType), 
-                                      new CodePrimitiveExpression(entry.PropertyInfo.Name),
-                                      new CodePrimitiveExpression(context.VirtualPath)
-                                  };
+                                {
+                                    new CodePrimitiveExpression(entry.Expression.Trim()),
+                                    new CodeTypeOfExpression(entry.DeclaringType),
+                                    new CodePrimitiveExpression(entry.PropertyInfo.Name),
+                                    new CodePrimitiveExpression(context.VirtualPath)
+                                };
 
             return new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(GetType()), "GetLocalizedResource", inputParams);
         }
@@ -86,7 +86,7 @@ namespace DotNetNuke.Services.Localization
                 PropertyDescriptor propDesc = TypeDescriptor.GetProperties(targetType)[propertyName];
                 if (propDesc != null && propDesc.PropertyType != value.GetType())
                 {
-                    // Type mismatch - make sure that the value can be converted to the Web control property type 
+                    // Type mismatch - make sure that the value can be converted to the Web control property type
                     if (propDesc.Converter != null)
                     {
                         if (propDesc.Converter.CanConvertFrom(value.GetType()) == false)
@@ -98,7 +98,7 @@ namespace DotNetNuke.Services.Localization
                 }
             }
 
-            // If we reach here, no type mismatch - return the value 
+            // If we reach here, no type mismatch - return the value
             return value;
         }
 

@@ -53,7 +53,7 @@ class ProfilePropertyEditor extends Component {
 
         if (!props.profileProperty) {
             return;
-        }        
+        }
 
         let updateState = false;
         Object.keys(props.profileProperty).forEach((key) => {
@@ -71,10 +71,10 @@ class ProfilePropertyEditor extends Component {
         else {
             error.name["required"] = false;
         }
-        
+
         if (props.id === ADD_PROPERTY_FLAG && !this.isValidName(props.profileProperty["PropertyName"])) {
-            error.name["noSpecialCharacter"] = true; 
-        } 
+            error.name["noSpecialCharacter"] = true;
+        }
         else {
             error.name["noSpecialCharacter"] = false;
         }
@@ -126,11 +126,11 @@ class ProfilePropertyEditor extends Component {
 
     _chooseNameError() {
         if (this.state.error.name.required) {
-            return resx.get("ProfilePropertyDefinition_PropertyName.Required"); 
+            return resx.get("ProfilePropertyDefinition_PropertyName.Required");
         }
         return resx.get("ProfilePropertyDefinition_PropertyName.NoSpecialCharacters");
     }
-    
+
     isValidLength(val) {
         let { props } = this;
         if (props.profileProperty) {
@@ -163,8 +163,8 @@ class ProfilePropertyEditor extends Component {
         }
 
         if (this.props.id === ADD_PROPERTY_FLAG && !this.isValidName(profileProperty["PropertyName"])) {
-            state.error.name["noSpecialCharacter"] = true; 
-        } 
+            state.error.name["noSpecialCharacter"] = true;
+        }
         else {
             state.error.name["noSpecialCharacter"] = false;
         }
@@ -457,8 +457,8 @@ class ProfilePropertyEditor extends Component {
                         <Label
                             labelType="inline"
                             tooltipMessage={resx.get("ProfilePropertyDefinition_Required.Help")}
-                            label={resx.get("ProfilePropertyDefinition_Required")}                            
-                            tooltipStyle={{ width: "1%" }}   
+                            label={resx.get("ProfilePropertyDefinition_Required")}
+                            tooltipStyle={{ width: "1%" }}
                         />
                         <Switch
                             onText={resx.get("SwitchOn")}
@@ -501,8 +501,8 @@ class ProfilePropertyEditor extends Component {
                         TODO: remove the style once the underlying issue is resolved */}
                     <Label
                         tooltipMessage={resx.get("ProfilePropertyDefinition_DataType.Help")}
-                        label={resx.get("ProfilePropertyDefinition_DataType") + "*"}                        
-                        tooltipStyle={{ float: "", width: "52%" }}                        
+                        label={resx.get("ProfilePropertyDefinition_DataType") + "*"}
+                        tooltipStyle={{ float: "", width: "52%" }}
                     />
                     <DropdownWithError
                         options={this.getProfileDataTypeOptions()}
@@ -673,7 +673,7 @@ class ProfilePropertyEditor extends Component {
                                     onClick={this.onCancel.bind(this)}>
                                     {resx.get("Cancel")}
                                 </Button>
-                                <Button                                    
+                                <Button
                                     type="primary"
                                     onClick={this.onListNext.bind(this)}>
                                     {resx.get("Next")}

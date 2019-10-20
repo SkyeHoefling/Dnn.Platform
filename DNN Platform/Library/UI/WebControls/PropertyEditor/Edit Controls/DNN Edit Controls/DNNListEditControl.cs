@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -50,7 +50,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:DNNListEditControl runat=server></{0}:DNNListEditControl>")]
     public class DNNListEditControl : EditControl, IPostBackEventHandler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DNNListEditControl));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DNNListEditControl));
         private List<ListEntryInfo> _listEntries;
         private string _listName = "";
 
@@ -75,7 +75,7 @@ namespace DotNetNuke.UI.WebControls
         /// </summary>
         /// -----------------------------------------------------------------------------
         protected bool SortAlphabetically { get; set; }
-        
+
         #region "Protected Properties"
 
         /// -----------------------------------------------------------------------------
@@ -89,11 +89,11 @@ namespace DotNetNuke.UI.WebControls
             get
             {
                 int intValue = Null.NullInteger;
-				if (Value == null || string.IsNullOrEmpty((string)Value))
-				{
-					return intValue;
-				}
-				try
+                if (Value == null || string.IsNullOrEmpty((string)Value))
+                {
+                    return intValue;
+                }
+                try
                 {
                     intValue = Convert.ToInt32(Value);
                 }
@@ -178,11 +178,11 @@ namespace DotNetNuke.UI.WebControls
                 int intValue = Null.NullInteger;
                 if (OldValue == null || string.IsNullOrEmpty(OldValue.ToString()))
                 {
-					return intValue;
-	            }
-	            try
+                    return intValue;
+                }
+                try
                 {
-					//Try and cast the value to an Integer
+                    //Try and cast the value to an Integer
                     intValue = Convert.ToInt32(OldValue);
                 }
                 catch (Exception exc)
@@ -247,18 +247,18 @@ namespace DotNetNuke.UI.WebControls
             {
                 if (ValueField == ListBoundField.Id)
                 {
-					//Integer type field
+                    //Integer type field
                     Value = Int32.Parse(value);
                 }
                 else
                 {
-					//String type Field
+                    //String type Field
                     Value = value;
                 }
             }
         }
-		
-		#endregion
+
+        #endregion
 
         #region IPostBackEventHandler Members
 
@@ -273,31 +273,31 @@ namespace DotNetNuke.UI.WebControls
         #endregion
 
         public event PropertyChangedEventHandler ItemChanged;
-		
-		#region "Private Methods"
+
+        #region "Private Methods"
 
         private PropertyEditorEventArgs GetEventArgs()
         {
             var args = new PropertyEditorEventArgs(Name);
             if (ValueField == ListBoundField.Id)
             {
-				//This is an Integer Value
+                //This is an Integer Value
                 args.Value = IntegerValue;
                 args.OldValue = OldIntegerValue;
             }
             else
             {
-				//This is a String Value
+                //This is a String Value
                 args.Value = StringValue;
                 args.OldValue = OldStringValue;
             }
             args.StringValue = StringValue;
             return args;
         }
-		
-		#endregion
 
-		#region "Protected Methods"
+        #endregion
+
+        #region "Protected Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -306,7 +306,7 @@ namespace DotNetNuke.UI.WebControls
         /// -----------------------------------------------------------------------------
         protected override void OnAttributesChanged()
         {
-			//Get the List settings out of the "Attributes"
+            //Get the List settings out of the "Attributes"
             if ((CustomAttributes != null))
             {
                 foreach (Attribute attribute in CustomAttributes)
@@ -392,8 +392,8 @@ namespace DotNetNuke.UI.WebControls
             {
                 writer.Write(entryText);
             }
-			
-			//Close Select Tag
+
+            //Close Select Tag
             writer.RenderEndTag();
         }
 
@@ -409,10 +409,10 @@ namespace DotNetNuke.UI.WebControls
             ControlStyle.AddAttributesToRender(writer);
             writer.AddAttribute(HtmlTextWriterAttribute.Name, UniqueID);
             writer.AddAttribute(HtmlTextWriterAttribute.Id, ClientID);
-			writer.AddAttribute("data-name", Name);
-			writer.AddAttribute("data-list", ListName);
-			writer.AddAttribute("data-category", Category);
-			writer.AddAttribute("data-editor", "DNNListEditControl");
+            writer.AddAttribute("data-name", Name);
+            writer.AddAttribute("data-list", ListName);
+            writer.AddAttribute("data-category", Category);
+            writer.AddAttribute("data-editor", "DNNListEditControl");
             if (AutoPostBack)
             {
                 writer.AddAttribute(HtmlTextWriterAttribute.Onchange, Page.ClientScript.GetPostBackEventReference(this, ID));
@@ -430,7 +430,7 @@ namespace DotNetNuke.UI.WebControls
             }
             if (StringValue == Null.NullString)
             {
-				//Add the Selected Attribute
+                //Add the Selected Attribute
                 writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
             }
 
@@ -438,13 +438,13 @@ namespace DotNetNuke.UI.WebControls
             writer.RenderBeginTag(HtmlTextWriterTag.Option);
             writer.Write(defaultText);
             writer.RenderEndTag();
-            
+
             foreach (ListEntryInfo item in ListEntries)
             {
                 string itemValue = Null.NullString;
-                
-				//Add the Value Attribute
-				switch (ValueField)
+
+                //Add the Value Attribute
+                switch (ValueField)
                 {
                     case ListBoundField.Id:
                         itemValue = item.EntryID.ToString();
@@ -459,12 +459,12 @@ namespace DotNetNuke.UI.WebControls
                 writer.AddAttribute(HtmlTextWriterAttribute.Value, itemValue);
                 if (StringValue == itemValue)
                 {
-					//Add the Selected Attribute
+                    //Add the Selected Attribute
                     writer.AddAttribute(HtmlTextWriterAttribute.Selected, "selected");
                 }
-                
-				//Render Option Tag
-				writer.RenderBeginTag(HtmlTextWriterTag.Option);
+
+                //Render Option Tag
+                writer.RenderBeginTag(HtmlTextWriterTag.Option);
                 switch (TextField)
                 {
                     case ListBoundField.Id:
@@ -479,11 +479,11 @@ namespace DotNetNuke.UI.WebControls
                 }
                 writer.RenderEndTag();
             }
-            
-			//Close Select Tag
-			writer.RenderEndTag();
+
+            //Close Select Tag
+            writer.RenderEndTag();
         }
-		
-		#endregion
+
+        #endregion
     }
 }

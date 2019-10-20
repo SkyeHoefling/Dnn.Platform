@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -73,38 +73,38 @@ namespace DotNetNuke.Services.Sitemap
                 currentLanguage = Localization.Localization.GetPageLocale(ps).Name;
             }
             var languagePublished = LocaleController.Instance.GetLocale(ps.PortalId, currentLanguage).IsPublished;
-	        var tabs = TabController.Instance.GetTabsByPortal(portalId).Values
-						.Where(t => !t.IsSystem
-									&& !ps.ContentLocalizationEnabled || (languagePublished && t.CultureCode.Equals(currentLanguage, StringComparison.InvariantCultureIgnoreCase)));
-			foreach (TabInfo tab in tabs)
-			{
-	            try
-	            {
-	                if (!tab.IsDeleted && !tab.DisableLink && tab.TabType == TabType.Normal &&
-	                    (Null.IsNull(tab.StartDate) || tab.StartDate < DateTime.Now) &&
-	                    (Null.IsNull(tab.EndDate) || tab.EndDate > DateTime.Now) && IsTabPublic(tab.TabPermissions))
-	                {
-	                    if ((includeHiddenPages || tab.IsVisible) && tab.HasBeenPublished)
-	                    {
-							try
-							{
-								pageUrl = GetPageUrl(tab, currentLanguage, ps);
-								urls.Add(pageUrl);
-							}
-							catch (Exception)
-							{
-								Logger.ErrorFormat("Error has occurred getting PageUrl for {0}", tab.TabName);
-							}
-	                    }
-	                }
-	            }
-	            catch (Exception ex)
-	            {
-	                Services.Exceptions.Exceptions.LogException(new Exception(Localization.Localization.GetExceptionMessage("SitemapUrlGenerationError",
-	                            "URL sitemap generation for page '{0} - {1}' caused an exception: {2}",
-	                            tab.TabID, tab.TabName, ex.Message)));
-	            }
-	        }
+            var tabs = TabController.Instance.GetTabsByPortal(portalId).Values
+                        .Where(t => !t.IsSystem
+                                    && !ps.ContentLocalizationEnabled || (languagePublished && t.CultureCode.Equals(currentLanguage, StringComparison.InvariantCultureIgnoreCase)));
+            foreach (TabInfo tab in tabs)
+            {
+                try
+                {
+                    if (!tab.IsDeleted && !tab.DisableLink && tab.TabType == TabType.Normal &&
+                        (Null.IsNull(tab.StartDate) || tab.StartDate < DateTime.Now) &&
+                        (Null.IsNull(tab.EndDate) || tab.EndDate > DateTime.Now) && IsTabPublic(tab.TabPermissions))
+                    {
+                        if ((includeHiddenPages || tab.IsVisible) && tab.HasBeenPublished)
+                        {
+                            try
+                            {
+                                pageUrl = GetPageUrl(tab, currentLanguage, ps);
+                                urls.Add(pageUrl);
+                            }
+                            catch (Exception)
+                            {
+                                Logger.ErrorFormat("Error has occurred getting PageUrl for {0}", tab.TabName);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Services.Exceptions.Exceptions.LogException(new Exception(Localization.Localization.GetExceptionMessage("SitemapUrlGenerationError",
+                                "URL sitemap generation for page '{0} - {1}' caused an exception: {2}",
+                                tab.TabID, tab.TabName, ex.Message)));
+                }
+            }
 
             return urls;
         }
@@ -181,8 +181,8 @@ namespace DotNetNuke.Services.Sitemap
         }
 
         /// <summary>
-        ///   When page level priority is used, the priority for each page will be computed from 
-        ///   the hierarchy level of the page. 
+        ///   When page level priority is used, the priority for each page will be computed from
+        ///   the hierarchy level of the page.
         ///   Top level pages will have a value of 1, second level 0.9, third level 0.8, ...
         /// </summary>
         /// <param name = "objTab">The page being indexed</param>

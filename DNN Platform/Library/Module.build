@@ -15,30 +15,30 @@
 
   <Target Name="GetFiles">
     <ItemGroup>
-      <Templates Include="..\Website\Templates\*.*" />
-      <Database Include="..\Website\App_Data\Database.mdf" />
-      <RadSpell Include="..\Components\Telerik\App_Data\RadSpell\*.tdf" />
-      <ExportImport Include="..\Website\App_Data\ExportImport\PlaceHolder.txt" />
-      <ConfigFiles Include="..\Website\Config\*.*" />
-      <CleanupFiles Include="..\Website\Install\Cleanup\*.*" />
-      <InstallFiles Include="..\Website\Install\InstallWizard*.*" />
-      <ConfigMergeFiles Include="..\Website\Install\Config\*.*" />
-      <ProviderFiles Include="..\Website\Install\Provider\*.*" />
-      <ModuleFiles Include="..\Website\Install\Module\*.*" />
-      <SkinFiles Include="..\Website\Install\Skin\*.*" />
-      <WebConfig Include="$(WebsitePath)\we*.config" />
-      <WebsiteDatabase Include="$(WebsiteAppDataPath)\Data*ase.mdf" />
-      <WebsiteRadSpell Include="$(WebsiteRadSpellPath)\*.tdf" />
-      <WebsiteTemplates Include="$(WebsiteHostPortalPath)\Default Website*.*" />
-      <WebsiteConfig Include="$(WebsiteConfigPath)\*.config" />
-      <WebsiteCleanup Include="$(WebsiteCleanupPath)\0*.txt" />
-      <WebsiteConfigMerge Include="$(WebsiteConfigMergePath)\*.config" />
-      <Knockout Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\Knockout\*.*" />
-      <jQuery Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\jQuery\*.*" />
-      <jQueryUI Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\jQueryUI\*.*" />
-      <jQueryMigrate Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\jQueryMigrate\*.*" />
-      <KnockoutMapping Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\KnockoutMapping\*.*" />
-      <Selectize Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\Selectize\*.*" />
+    <Templates Include="..\Website\Templates\*.*" />
+    <Database Include="..\Website\App_Data\Database.mdf" />
+    <RadSpell Include="..\Components\Telerik\App_Data\RadSpell\*.tdf" />
+    <ExportImport Include="..\Website\App_Data\ExportImport\PlaceHolder.txt" />
+    <ConfigFiles Include="..\Website\Config\*.*" />
+    <CleanupFiles Include="..\Website\Install\Cleanup\*.*" />
+    <InstallFiles Include="..\Website\Install\InstallWizard*.*" />
+    <ConfigMergeFiles Include="..\Website\Install\Config\*.*" />
+    <ProviderFiles Include="..\Website\Install\Provider\*.*" />
+    <ModuleFiles Include="..\Website\Install\Module\*.*" />
+    <SkinFiles Include="..\Website\Install\Skin\*.*" />
+    <WebConfig Include="$(WebsitePath)\we*.config" />
+    <WebsiteDatabase Include="$(WebsiteAppDataPath)\Data*ase.mdf" />
+    <WebsiteRadSpell Include="$(WebsiteRadSpellPath)\*.tdf" />
+    <WebsiteTemplates Include="$(WebsiteHostPortalPath)\Default Website*.*" />
+    <WebsiteConfig Include="$(WebsiteConfigPath)\*.config" />
+    <WebsiteCleanup Include="$(WebsiteCleanupPath)\0*.txt" />
+    <WebsiteConfigMerge Include="$(WebsiteConfigMergePath)\*.config" />
+    <Knockout Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\Knockout\*.*" />
+    <jQuery Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\jQuery\*.*" />
+    <jQueryUI Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\jQueryUI\*.*" />
+    <jQueryMigrate Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\jQueryMigrate\*.*" />
+    <KnockoutMapping Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\KnockoutMapping\*.*" />
+    <Selectize Include="$(MSBuildProjectDirectory)\..\JavaScript Libraries\Selectize\*.*" />
     </ItemGroup>
   </Target>
 
@@ -74,9 +74,9 @@
 
     <!-- Copy development.config or release.config to web.config -->
     <Copy SourceFiles="$(WebsitePath)\development.config" DestinationFiles="$(WebsitePath)\web.config"
-          Condition="'@(WebConfig)' == '' And '$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"/>
+        Condition="'@(WebConfig)' == '' And '$(Configuration)|$(Platform)' == 'Debug|AnyCPU'"/>
     <Copy SourceFiles="$(WebsitePath)\release.config" DestinationFiles="$(WebsitePath)\web.config"
-          Condition="'@(WebConfig)' == '' And '$(Configuration)|$(Platform)' == 'Release|AnyCPU'"/>
+        Condition="'@(WebConfig)' == '' And '$(Configuration)|$(Platform)' == 'Release|AnyCPU'"/>
 
   </Target>
 
@@ -103,7 +103,7 @@
             Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
             XPath="dotnetnuke/packages/package/@version"
             XmlFileName="..\Components\Telerik\DotNetNuke.Telerik.Web.dnn">
-      <Output TaskParameter="Value" PropertyName="TelerikVersion" />
+    <Output TaskParameter="Value" PropertyName="TelerikVersion" />
     </XmlRead>
     <Copy SourceFiles="..\Components\Telerik\bin\Telerik.Web.UI.dll" DestinationFolder="..\Components\Telerik\Package\bin" />
     <Copy SourceFiles="..\Components\Telerik\bin\Telerik.Web.UI.Skins.dll" DestinationFolder="..\Components\Telerik\Package\bin" />
@@ -111,7 +111,7 @@
     <Copy SourceFiles="..\Components\Telerik\Telerik_EULA.pdf" DestinationFolder="..\Components\Telerik\Package\Documentation" />
     <Copy SourceFiles="..\Components\Telerik\App_Data\RadSpell\en-US.tdf" DestinationFolder="..\Components\Telerik\Package\App_Data\RadSpell" />
     <CreateItem Include="..\Components\Telerik\Package\**\*.*">
-      <Output TaskParameter="Include" ItemName="TelerikContent" />
+    <Output TaskParameter="Include" ItemName="TelerikContent" />
     </CreateItem>
     <Zip Files="@(TelerikContent)" WorkingDirectory="..\Components\Telerik\Package" ZipFileName="$(WebsiteInstallPath)\Module\Telerik_$(TelerikVersion)_Install.zip" />
     <RemoveDir Directories ="..\Components\Telerik\Package" />
@@ -120,13 +120,13 @@
             Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
             XPath="dotnetnuke/packages/package/@version"
             XmlFileName="..\Components\Newtonsoft\DotNetNuke.Newtonsoft.Json.dnn">
-      <Output TaskParameter="Value" PropertyName="NewtonsoftVersion" />
+    <Output TaskParameter="Value" PropertyName="NewtonsoftVersion" />
     </XmlRead>
     <Copy SourceFiles="bin\Newtonsoft.Json.dll" DestinationFolder="..\Components\Newtonsoft\Package\bin" />
     <Copy SourceFiles="..\Components\Newtonsoft\DotNetNuke.Newtonsoft.Json.dnn" DestinationFolder="..\Components\Newtonsoft\Package" />
     <Copy SourceFiles="..\Components\Newtonsoft\License.txt" DestinationFolder="..\Components\Newtonsoft\Package" />
     <CreateItem Include="..\Components\Newtonsoft\Package\**\*.*">
-      <Output TaskParameter="Include" ItemName="NewtonsoftContent" />
+    <Output TaskParameter="Include" ItemName="NewtonsoftContent" />
     </CreateItem>
     <Zip Files="@(NewtonsoftContent)" WorkingDirectory="..\Components\Newtonsoft\Package" ZipFileName="$(WebsiteInstallPath)\Module\Newtonsoft.Json_$(NewtonsoftVersion)_Install.zip" />
     <RemoveDir Directories ="..\Components\Newtonsoft\Package" />
@@ -135,14 +135,14 @@
             Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
             XPath="dotnetnuke/packages/package/@version"
             XmlFileName="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dnn">
-      <Output TaskParameter="Value" PropertyName="DotNetCompilerVersion" />
+    <Output TaskParameter="Value" PropertyName="DotNetCompilerVersion" />
     </XmlRead>
     <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package\bin" />
     <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\roslyn.zip" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package" />
-      <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dnn" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package" />
-      <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\releaseNotes.txt" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package" />
+    <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dnn" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package" />
+    <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\releaseNotes.txt" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package" />
     <CreateItem Include="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package\**\*.*">
-      <Output TaskParameter="Include" ItemName="DotNetCompilerContent" />
+    <Output TaskParameter="Include" ItemName="DotNetCompilerContent" />
     </CreateItem>
     <Zip Files="@(DotNetCompilerContent)" WorkingDirectory="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package" ZipFileName="$(WebsiteInstallPath)\Library\Microsoft.CodeDom.Providers.DotNetCompilerPlatform_$(DotNetCompilerVersion)_Install.resources" />
     <RemoveDir Directories ="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform\Package" />
@@ -151,14 +151,14 @@
             Namespace="http://schemas.microsoft.com/developer/msbuild/2003"
             XPath="dotnetnuke/packages/package/@version"
             XmlFileName="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dnn">
-      <Output TaskParameter="Value" PropertyName="DotNetCompilerVersionNet46" />
+    <Output TaskParameter="Value" PropertyName="DotNetCompilerVersionNet46" />
     </XmlRead>
     <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package\bin" />
     <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\roslyn.zip" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package" />
-      <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dnn" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package" />
-      <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\releaseNotes.txt" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package" />
+    <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dnn" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package" />
+    <Copy SourceFiles="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\releaseNotes.txt" DestinationFolder="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package" />
     <CreateItem Include="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package\**\*.*">
-      <Output TaskParameter="Include" ItemName="DotNetCompilerContentNet46" />
+    <Output TaskParameter="Include" ItemName="DotNetCompilerContentNet46" />
     </CreateItem>
     <Zip Files="@(DotNetCompilerContentNet46)" WorkingDirectory="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package" ZipFileName="$(WebsiteInstallPath)\Library\Microsoft.CodeDom.Providers.DotNetCompilerPlatform_$(DotNetCompilerVersionNet46)_net46_Install.resources" />
     <RemoveDir Directories ="..\Components\Microsoft.CodeDom.Providers.DotNetCompilerPlatform-net46\Package" />

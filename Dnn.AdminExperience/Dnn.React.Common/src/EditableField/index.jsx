@@ -15,7 +15,7 @@ class EditableField extends Component {
         };
         this.uniqueId = "editableField-" + (Date.now() * Math.random());
     }
-    
+
     toggleEditMode() {
         this.setState({
             editMode: !this.state.editMode

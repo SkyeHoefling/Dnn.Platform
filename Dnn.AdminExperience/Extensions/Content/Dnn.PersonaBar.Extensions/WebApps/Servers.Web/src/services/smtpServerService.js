@@ -5,15 +5,15 @@ function getControllerName() {
     return utils.isHostUser() ? "ServerSettingsSmtpHost" : "ServerSettingsSmtpAdmin";
 }
 
-const getSmtpSettings = function () {    
+const getSmtpSettings = function () {
     return serviceFramework.get(getControllerName(), "GetSmtpSettings");
 };
 
-const updateSmtpSettings = function (parameters) {    
+const updateSmtpSettings = function (parameters) {
     return serviceFramework.post(getControllerName(), "UpdateSmtpSettings", parameters);
 };
 
-const sendTestEmail = function (parameters) {    
+const sendTestEmail = function (parameters) {
     return serviceFramework.post(getControllerName(), "SendTestEmail", parameters);
 };
 
@@ -23,4 +23,4 @@ const smtpServerService = {
     sendTestEmail
 };
 
-export default smtpServerService; 
+export default smtpServerService;

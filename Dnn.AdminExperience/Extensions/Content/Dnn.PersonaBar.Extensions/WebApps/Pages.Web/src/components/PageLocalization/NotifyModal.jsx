@@ -9,7 +9,7 @@ import "./NotifyModal.less";
 class NotifyModal extends Component {
     render() {
         return <TransitionModal onCloseModal={this.props.onClose}>
-            <Notify 
+            <Notify
                 onSend={this.props.onSend}
                 onUpdateMessage={this.props.onUpdateMessage}
                 notifyMessage={this.props.notifyMessage}

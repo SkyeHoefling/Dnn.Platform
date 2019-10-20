@@ -80,7 +80,7 @@ class SynonymsGroupsPanel extends Component {
             });
 
             if (this.props.synonymsGroups.SynonymsGroups.length > 0) {
-                return <div className="header-row">{tableHeaders}</div>;                
+                return <div className="header-row">{tableHeaders}</div>;
             }
             else {
                 return <div className="header-row-no-border">{tableHeaders}</div>;

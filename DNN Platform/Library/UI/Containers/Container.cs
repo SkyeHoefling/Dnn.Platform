@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -69,9 +69,9 @@ namespace DotNetNuke.UI.Containers
         private ModuleInfo _moduleConfiguration;
         private ModuleHost _moduleHost;
 
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
 
         /// <summary>
         /// Gets the Content Pane Control (Id="ContentPane")
@@ -97,10 +97,10 @@ namespace DotNetNuke.UI.Containers
                 return PortalController.Instance.GetCurrentPortalSettings();
             }
         }
-		
-		#endregion
 
-		#region Public Properties
+        #endregion
+
+        #region Public Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -155,7 +155,7 @@ namespace DotNetNuke.UI.Containers
         {
             get
             {
-				//This finds a reference to the containing skin
+                //This finds a reference to the containing skin
                 return Skins.Skin.GetParentSkin(this);
             }
         }
@@ -181,10 +181,10 @@ namespace DotNetNuke.UI.Containers
         public string ContainerSrc { get; set; }
 
         internal bool InjectActionMenu { get; set; }
-		
-		#endregion
 
-		#region Private Helper Methods
+        #endregion
+
+        #region Private Helper Methods
 
         private void AddAdministratorOnlyHighlighting(string message)
         {
@@ -204,7 +204,7 @@ namespace DotNetNuke.UI.Containers
             ISkinControl skinControl;
             foreach (Control childControl in control.Controls)
             {
-				//check if control is an action control
+                //check if control is an action control
                 actions = childControl as IActionControl;
                 if (actions != null)
                 {
@@ -219,7 +219,7 @@ namespace DotNetNuke.UI.Containers
                     actionLink.ModuleControl = ModuleControl;
                 }
 
-				//check if control is a skin control
+                //check if control is a skin control
                 skinControl = childControl as ISkinControl;
                 if (skinControl != null)
                 {
@@ -227,7 +227,7 @@ namespace DotNetNuke.UI.Containers
                 }
                 if (childControl.HasControls())
                 {
-					//recursive call for child controls
+                    //recursive call for child controls
                     ProcessChildControls(childControl);
                 }
             }
@@ -247,9 +247,9 @@ namespace DotNetNuke.UI.Containers
             SetBorder();
 
             //display visual indicator if module is only visible to administrators
-			string viewRoles = ModuleConfiguration.InheritViewPermissions
-                                   ? TabPermissionController.GetTabPermissions(ModuleConfiguration.TabID, ModuleConfiguration.PortalID).ToString("VIEW")
-                                   : ModuleConfiguration.ModulePermissions.ToString("VIEW");
+            string viewRoles = ModuleConfiguration.InheritViewPermissions
+                                    ? TabPermissionController.GetTabPermissions(ModuleConfiguration.TabID, ModuleConfiguration.PortalID).ToString("VIEW")
+                                    : ModuleConfiguration.ModulePermissions.ToString("VIEW");
 
             string pageEditRoles = TabPermissionController.GetTabPermissions(ModuleConfiguration.TabID, ModuleConfiguration.PortalID).ToString("EDIT");
             string moduleEditRoles = ModuleConfiguration.ModulePermissions.ToString("EDIT");
@@ -290,13 +290,13 @@ namespace DotNetNuke.UI.Containers
         /// </summary>
         private void ProcessFooter()
         {
-			//inject the footer
+            //inject the footer
             if (!String.IsNullOrEmpty(ModuleConfiguration.Footer))
             {
                 var footer = new Literal {Text = ModuleConfiguration.Footer};
                 ContentPane.Controls.Add(footer);
             }
-			
+
             //inject an end comment around the module content
             if (!Globals.IsAdminControl())
             {
@@ -312,10 +312,10 @@ namespace DotNetNuke.UI.Containers
         {
             if (!Globals.IsAdminControl())
             {
-				//inject a start comment around the module content
+                //inject a start comment around the module content
                 ContentPane.Controls.Add(new LiteralControl("<!-- Start_Module_" + ModuleConfiguration.ModuleID + " -->"));
             }
-			
+
             //inject the header
             if (!String.IsNullOrEmpty(ModuleConfiguration.Header))
             {
@@ -335,7 +335,7 @@ namespace DotNetNuke.UI.Containers
 
             if (ContentPane != null)
             {
-				//Process Content Pane Attributes
+                //Process Content Pane Attributes
                 ProcessContentPane();
 
                 // always add the actions menu as the first item in the content pane.
@@ -360,31 +360,31 @@ namespace DotNetNuke.UI.Containers
 
                 //Process Module Footer
                 ProcessFooter();
-				
-				//Process the Action Controls
+
+                //Process the Action Controls
                 if (ModuleHost != null && ModuleControl != null)
                 {
                     ProcessChildControls(this);
                 }
-				
-				//Add Module Stylesheets
+
+                //Add Module Stylesheets
                 ProcessStylesheets(ModuleHost != null);
             }
             if (_tracelLogger.IsDebugEnabled)
                 _tracelLogger.Debug($"Container.ProcessModule End (TabId:{PortalSettings.ActiveTab.TabID},ModuleID: {ModuleConfiguration.ModuleDefinition.DesktopModuleID}): Module FriendlyName: '{ModuleConfiguration.ModuleDefinition.FriendlyName}')");
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// ProcessStylesheets processes the Module and Container stylesheets and adds
-		/// them to the Page.
-		/// </summary>
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// ProcessStylesheets processes the Module and Container stylesheets and adds
+        /// them to the Page.
+        /// </summary>
         private void ProcessStylesheets(bool includeModuleCss)
         {
             ClientResourceManager.RegisterStyleSheet(Page, ContainerPath + "container.css", FileOrder.Css.ContainerCss);
             ClientResourceManager.RegisterStyleSheet(Page, ContainerSrc.Replace(".ascx", ".css"), FileOrder.Css.SpecificContainerCss);
 
-            //process the base class module properties 
+            //process the base class module properties
             if (includeModuleCss)
             {
                 string controlSrc = ModuleConfiguration.ModuleControl.ControlSrc;
@@ -445,10 +445,10 @@ namespace DotNetNuke.UI.Containers
                 ContentPane.Style["border-left"] = String.Format("{0}px #000000 solid", ModuleConfiguration.Border);
             }
         }
-		
-		#endregion
 
-		#region Protected Methods
+        #endregion
+
+        #region Protected Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -464,7 +464,7 @@ namespace DotNetNuke.UI.Containers
         /// <summary>
         /// OnLoad runs when the Container is loaded.
         /// </summary>
-       protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
@@ -506,10 +506,10 @@ namespace DotNetNuke.UI.Containers
                 }
             }
         }
-		
-		#endregion
 
-		#region Public Methods
+        #endregion
+
+        #region Public Methods
 
         public void SetModuleConfiguration(ModuleInfo configuration)
         {
@@ -517,35 +517,35 @@ namespace DotNetNuke.UI.Containers
             ProcessModule();
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// ModuleAction_Click runs when a ModuleAction is clicked.
         /// </summary>
-        /// <remarks>The Module Action must be configured to fire an event (it may be configured 
+        /// <remarks>The Module Action must be configured to fire an event (it may be configured
         /// to redirect to a new url).  The event handler finds the Parent Container and invokes each
         /// registered ModuleActionEventListener delegate.
-        /// 
+        ///
         /// Note: with the refactoring of this to the Container, this could be handled at the container level.
         /// However, for legacy purposes this is left this way, as many modules would have registered their
         /// listeners on the Container directly, rather than through the helper method in PortalModuleBase.</remarks>
         private void ModuleActionClick(object sender, ActionEventArgs e)
         {
-			//Search through the listeners
+            //Search through the listeners
             foreach (ModuleActionEventListener listener in ParentSkin.ActionEventListeners)
-            {			
-				//If the associated module has registered a listener
+            {
+                //If the associated module has registered a listener
                 if (e.ModuleConfiguration.ModuleID == listener.ModuleID)
                 {
-					//Invoke the listener to handle the ModuleAction_Click event
+                    //Invoke the listener to handle the ModuleAction_Click event
                     listener.ActionEvent.Invoke(sender, e);
                 }
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

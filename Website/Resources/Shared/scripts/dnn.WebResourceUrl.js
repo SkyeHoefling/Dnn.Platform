@@ -83,7 +83,7 @@
     };
 
     WebResourceUrl.encodeParameterValue = function(decodedValue) {
-        // So encodeURIComponent encodes + correctly 
+        // So encodeURIComponent encodes + correctly
         // we don't need workaround as in DecodeParameterValue.
         return encodeURIComponent(decodedValue);
     };

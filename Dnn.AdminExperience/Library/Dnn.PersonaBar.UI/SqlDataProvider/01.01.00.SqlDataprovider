@@ -32,7 +32,7 @@ BEGIN
     IF EXISTS(SELECT Identifier FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] WHERE Identifier = @Identifier)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenu]
-            SET 
+            SET
                 ModuleName = @ModuleName,
                 FolderName = @FolderName,
                 ResourceKey = @ResourceKey,
@@ -103,7 +103,7 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_UpdateMenuControlle
 AS
 BEGIN
     UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenu]
-        SET 
+        SET
             Controller = @Controller,
             LastModifiedByUserId = CASE WHEN @CurrentUserId = -1 THEN NULL ELSE @CurrentUserId END,
             LastModifiedOnDate = GETDATE()

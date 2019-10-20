@@ -93,4 +93,3 @@ DropdownDayPicker.propTypes = {
     toggleDropdownCalendar: PropTypes.func.isRequired,
     label: PropTypes.string.isRequired
 };
-

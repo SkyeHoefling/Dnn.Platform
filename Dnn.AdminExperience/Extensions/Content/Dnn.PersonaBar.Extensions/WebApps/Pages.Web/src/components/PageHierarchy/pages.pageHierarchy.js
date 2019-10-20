@@ -49,7 +49,7 @@ window.dnn.pages = window.dnn.pages || {};
                 if (handler._lastWindowHeight === newHeight) {
                     return;
                 }
-                
+
                 var RESIZE_CONTAINER_DELAY = 400;
                 setTimeout(function onResizeContainer() {
                     handler._resizeContentContainer(true);
@@ -65,8 +65,8 @@ window.dnn.pages = window.dnn.pages || {};
             this._initCallback = initCallback;
             this._currentTabId = null;
             this._siteRoot = null;
-            this._loadRootPageList();       
-            this._initialized = true;     
+            this._loadRootPageList();
+            this._initialized = true;
         },
 
         getElement: function() {
@@ -89,11 +89,11 @@ window.dnn.pages = window.dnn.pages || {};
                 viewModel.dragPage(newPage);
             }
 
-            if (typeof this.options.onRefresh === "function") {			
+            if (typeof this.options.onRefresh === "function") {
                 this.options.onRefresh(this.panel);
             }
         },
-        
+
         editPage: function(newPage) {
             this._updatePageData(newPage.id, newPage);
         },
@@ -183,12 +183,12 @@ window.dnn.pages = window.dnn.pages || {};
                 viewModel.pagesList.push({
                     parentId: -1,
                     level: 0,
-                    pages: ko.observableArray(data)                    
+                    pages: ko.observableArray(data)
                 });
 
                 handler._resizeContentContainer(true);
                 handler._initDrag();
-                if (typeof handler.options.onRefresh === "function") {				
+                if (typeof handler.options.onRefresh === "function") {
                     handler.options.onRefresh(handler.panel);
                 }
 
@@ -218,7 +218,7 @@ window.dnn.pages = window.dnn.pages || {};
                     self.addClass('removeMe');
                 }
             });
-            
+
             nextLevel = viewModel.pagesList().length;
             viewModel.pagesList.push({
                 parentId: parentPage.id,
@@ -254,7 +254,7 @@ window.dnn.pages = window.dnn.pages || {};
 
                     handler._initDrag();
                     handler.getElement().trigger('childpagesloaded');
-                    if (typeof handler.options.onRefresh === "function") {			
+                    if (typeof handler.options.onRefresh === "function") {
                         handler.options.onRefresh(handler.panel);
                     }
                 });
@@ -265,9 +265,9 @@ window.dnn.pages = window.dnn.pages || {};
             if ($(e.target).hasClass('btn_pages')) {
                 return;
             }
-            
+
             if (typeof this.options.onUnload === "function") {
-                this.options.onUnload(this.panel);            
+                this.options.onUnload(this.panel);
             }
         },
 
@@ -287,9 +287,9 @@ window.dnn.pages = window.dnn.pages || {};
 
         _enterEditMode: function (pageData) {
             var handler = this;
-            setTimeout(function () {            
+            setTimeout(function () {
                 if (typeof handler.options.onUnload === "function") {
-                    handler.options.onUnload(handler.panel);            
+                    handler.options.onUnload(handler.panel);
                 }
                 handler._getService().post('EditModeForPage?id=' + pageData.id, {}, function() {
                     handler.utility.closePersonaBar(function() {
@@ -297,7 +297,7 @@ window.dnn.pages = window.dnn.pages || {};
                     });
                 });
             }, 100);
-            
+
         },
 
         _settingsPageClickHandler: function (pageData, e) {
@@ -319,8 +319,8 @@ window.dnn.pages = window.dnn.pages || {};
             this.utility.confirm(confirmText, deleteText, cancelText, function () {
                 handler._getService().post('DeletePage', { id: pageData.id }, function () {
                     if (pageData.id === handler._currentTabId) {
-                         window.top.location.href = handler._siteRoot;
-                         return;
+                        window.top.location.href = handler._siteRoot;
+                        return;
                     }
 
                     handler.utility.notify(handler.resx['PageDeletedMessage']);
@@ -401,7 +401,7 @@ window.dnn.pages = window.dnn.pages || {};
 
         _inDragChanged: function (inDrag) {
             var handler = this;
-			this._removeHiddenLists();
+            this._removeHiddenLists();
             this._removeListScrollView();
 
             this.container.find('.pages-list-container').width(20000);
@@ -521,7 +521,7 @@ window.dnn.pages = window.dnn.pages || {};
 
             for (var prop in data) {
                 clone[prop] = data[prop];
-            }  
+            }
             clone.timestamp = (new Date()).getTime();
 
             return clone;
@@ -565,7 +565,7 @@ window.dnn.pages = window.dnn.pages || {};
         },
 
         _resizeContentContainer: function(resetContainer) {
-            var $body = this.panel.closest(".dnn-persona-bar-page-body");             
+            var $body = this.panel.closest(".dnn-persona-bar-page-body");
             var pageHierarchyContainer = $body.find(".pagehierarchy-container");
             var restHeight = pageHierarchyContainer.position().top;
 
@@ -986,7 +986,7 @@ window.dnn.pages = window.dnn.pages || {};
 
                         handler._getService().post('MovePage', params, function(data) {
                             var pageData, sourceParentFindB, sourceParentData, targetId, targetFind, targetFindB;
-                        
+
                             if (data.Status > 0) {
                                 handler.utility.notifyError(handler.resx['Error_' + data.Message]);
                                 $self.sortable('cancel');
@@ -1148,15 +1148,15 @@ window.dnn.pages = window.dnn.pages || {};
             var selectedPagePathLenght = selectedPagePath().length;
             if (!selectedPagePathLenght) {
                 selectedPagePath.push(selectedPage);
-                return;    
+                return;
             }
 
-            while (selectedPagePathLenght > 0 && 
-                   selectedPagePath()[selectedPagePathLenght - 1].id !== selectedPage.parentId) {
+            while (selectedPagePathLenght > 0 &&
+                    selectedPagePath()[selectedPagePathLenght - 1].id !== selectedPage.parentId) {
                 selectedPagePath.pop();
-                -- selectedPagePathLenght;           
+                -- selectedPagePathLenght;
             }
-            
+
             selectedPagePath.push(selectedPage);
         },
 
@@ -1180,7 +1180,7 @@ window.dnn.pages = window.dnn.pages || {};
 
                 this._viewModel.selectedPage.subscribe($.proxy(this._selectedPageChanged, this));
                 this._viewModel.inDrag.subscribe($.proxy(this._inDragChanged, this));
-                
+
                 this._viewModel.pageItemClick = $.proxy(this._pageItemClickHandler, this);
                 this._viewModel.viewPageClick = $.proxy(this._viewPageClickHandler, this);
                 this._viewModel.editPageClick = $.proxy(this._editPageClickHandler, this);
@@ -1196,11 +1196,11 @@ window.dnn.pages = window.dnn.pages || {};
                         } else {
                             this._viewModel[prop] = window.dnn.pages.viewModelExtension[prop];
                         }
-                    }                
+                    }
                 }
             }
             return this._viewModel;
-        },       
+        },
         _getOverridableService() {
             this.utility.sf.moduleRoot = "PersonaBar";
             this.utility.sf.controller =  window.dnn.pages.apiController;
@@ -1213,7 +1213,7 @@ window.dnn.pages = window.dnn.pages || {};
 
             return this.utility.sf;
         }
-    };    
+    };
 
     pageHierarchyDefaultOptions = {
         delayTime: 500,

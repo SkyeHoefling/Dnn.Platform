@@ -158,8 +158,8 @@
                     });
                     $actionList.appendTo($div);
 
-                	// finds button pane in scope of the plugin
-	                $wrap.dialog("widget").find('.ui-dialog-buttonpane').empty();
+                    // finds button pane in scope of the plugin
+                    $wrap.dialog("widget").find('.ui-dialog-buttonpane').empty();
                     $div.appendTo($wrap.dialog("widget").find('.ui-dialog-buttonpane'));
                     $wrap.dialog("widget").find('.ui-dialog-buttonset').hide();
                     if (typeof $.ui.dialog.prototype.options.open == 'function') {

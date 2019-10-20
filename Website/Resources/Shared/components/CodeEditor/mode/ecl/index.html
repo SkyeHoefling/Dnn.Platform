@@ -33,17 +33,17 @@ this is a multiline comment!
 //  this is a singleline comment!
 
 import ut;
-r := 
+r :=
   record
-   string22 s1 := '123';
-   integer4 i1 := 123;
+    string22 s1 := '123';
+    integer4 i1 := 123;
   end;
 #option('tmp', true);
 d := dataset('tmp::qb', r, thor);
 output(d);
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
     </script>
 
     <p>Based on CodeMirror's clike mode.  For more information see <a href="http://hpccsystems.com">HPCC Systems</a> web site.</p>

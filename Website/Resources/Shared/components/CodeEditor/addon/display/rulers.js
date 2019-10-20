@@ -13,19 +13,19 @@
 
   CodeMirror.defineOption("rulers", false, function(cm, val, old) {
     if (old && old != CodeMirror.Init) {
-      clearRulers(cm);
-      cm.off("refresh", refreshRulers);
+    clearRulers(cm);
+    cm.off("refresh", refreshRulers);
     }
     if (val && val.length) {
-      setRulers(cm);
-      cm.on("refresh", refreshRulers);
+    setRulers(cm);
+    cm.on("refresh", refreshRulers);
     }
   });
 
   function clearRulers(cm) {
     for (var i = cm.display.lineSpace.childNodes.length - 1; i >= 0; i--) {
-      var node = cm.display.lineSpace.childNodes[i];
-      if (/(^|\s)CodeMirror-ruler($|\s)/.test(node.className))
+    var node = cm.display.lineSpace.childNodes[i];
+    if (/(^|\s)CodeMirror-ruler($|\s)/.test(node.className))
         node.parentNode.removeChild(node);
     }
   }
@@ -36,23 +36,23 @@
     var left = cm.charCoords(CodeMirror.Pos(cm.firstLine(), 0), "div").left;
     var minH = cm.display.scroller.offsetHeight + 30;
     for (var i = 0; i < val.length; i++) {
-      var elt = document.createElement("div");
-      elt.className = "CodeMirror-ruler";
-      var col, conf = val[i];
-      if (typeof conf == "number") {
+    var elt = document.createElement("div");
+    elt.className = "CodeMirror-ruler";
+    var col, conf = val[i];
+    if (typeof conf == "number") {
         col = conf;
-      } else {
+    } else {
         col = conf.column;
         if (conf.className) elt.className += " " + conf.className;
         if (conf.color) elt.style.borderColor = conf.color;
         if (conf.lineStyle) elt.style.borderLeftStyle = conf.lineStyle;
         if (conf.width) elt.style.borderLeftWidth = conf.width;
-      }
-      elt.style.left = (left + col * cw) + "px";
-      elt.style.top = "-50px";
-      elt.style.bottom = "-20px";
-      elt.style.minHeight = minH + "px";
-      cm.display.lineSpace.insertBefore(elt, cm.display.cursorDiv);
+    }
+    elt.style.left = (left + col * cw) + "px";
+    elt.style.top = "-50px";
+    elt.style.bottom = "-20px";
+    elt.style.minHeight = minH + "px";
+    cm.display.lineSpace.insertBefore(elt, cm.display.cursorDiv);
     }
   }
 

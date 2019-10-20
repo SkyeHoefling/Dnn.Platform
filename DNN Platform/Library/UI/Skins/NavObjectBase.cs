@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -35,8 +35,8 @@ namespace DotNetNuke.UI.Skins
 {
     public class NavObjectBase : SkinObjectBase
     {
-		#region "Private Members"
-		
+        #region "Private Members"
+
         private readonly List<CustomAttribute> m_objCustomAttributes = new List<CustomAttribute>();
         private bool m_blnPopulateNodesFromClient = true;
         private int m_intExpandDepth = -1;
@@ -121,11 +121,11 @@ namespace DotNetNuke.UI.Skins
         private string m_strToolTip = "";
         private string m_strWorkImage;
 
-		#endregion
+        #endregion
 
-		#region "Public Properties"
-		//JH - 2/5/07 - support for custom attributes
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content), PersistenceMode(PersistenceMode.InnerProperty)]
+        #region "Public Properties"
+        //JH - 2/5/07 - support for custom attributes
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content), PersistenceMode(PersistenceMode.InnerProperty)]
         public List<CustomAttribute> CustomAttributes
         {
             get
@@ -135,7 +135,7 @@ namespace DotNetNuke.UI.Skins
         }
 
         public bool ShowHiddenTabs { get; set; }
-      
+
         public string ProviderName
         {
             get
@@ -2250,11 +2250,11 @@ namespace DotNetNuke.UI.Skins
             }
         }
 
-		#endregion
+        #endregion
 
-		#region "Public Methods"
+        #region "Public Methods"
 
-		public DNNNodeCollection GetNavigationNodes(DNNNode objNode)
+        public DNNNodeCollection GetNavigationNodes(DNNNode objNode)
         {
             int intRootParent = PortalSettings.ActiveTab.TabID;
             DNNNodeCollection objNodes = null;
@@ -2319,11 +2319,11 @@ namespace DotNetNuke.UI.Skins
             return objNodes;
         }
 
-		#endregion
+        #endregion
 
-		#region "Protected Methods"
+        #region "Protected Methods"
 
-		protected string GetValue(string strVal, string strDefault)
+        protected string GetValue(string strVal, string strDefault)
         {
             if (String.IsNullOrEmpty(strVal))
             {
@@ -2348,11 +2348,11 @@ namespace DotNetNuke.UI.Skins
             objParent.Controls.Add(Control.NavigationControl);
         }
 
-		#endregion
+        #endregion
 
-		#region "Private Methods"
+        #region "Private Methods"
 
-		private void AssignControlProperties()
+        private void AssignControlProperties()
         {
             if (!String.IsNullOrEmpty(m_strPathSystemImage))
             {
@@ -2708,10 +2708,10 @@ namespace DotNetNuke.UI.Skins
                 }
             }
             return strPath;
-		}
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 
     public class CustomAttribute
     {

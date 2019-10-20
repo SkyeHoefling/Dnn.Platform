@@ -12,15 +12,15 @@
   CodeMirror.defineOption("placeholder", "", function(cm, val, old) {
     var prev = old && old != CodeMirror.Init;
     if (val && !prev) {
-      cm.on("blur", onBlur);
-      cm.on("change", onChange);
-      onChange(cm);
+    cm.on("blur", onBlur);
+    cm.on("change", onChange);
+    onChange(cm);
     } else if (!val && prev) {
-      cm.off("blur", onBlur);
-      cm.off("change", onChange);
-      clearPlaceholder(cm);
-      var wrapper = cm.getWrapperElement();
-      wrapper.className = wrapper.className.replace(" CodeMirror-empty", "");
+    cm.off("blur", onBlur);
+    cm.off("change", onChange);
+    clearPlaceholder(cm);
+    var wrapper = cm.getWrapperElement();
+    wrapper.className = wrapper.className.replace(" CodeMirror-empty", "");
     }
 
     if (val && !cm.hasFocus()) onBlur(cm);
@@ -28,8 +28,8 @@
 
   function clearPlaceholder(cm) {
     if (cm.state.placeholder) {
-      cm.state.placeholder.parentNode.removeChild(cm.state.placeholder);
-      cm.state.placeholder = null;
+    cm.state.placeholder.parentNode.removeChild(cm.state.placeholder);
+    cm.state.placeholder = null;
     }
   }
   function setPlaceholder(cm) {

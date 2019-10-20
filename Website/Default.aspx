@@ -12,14 +12,14 @@
     <meta id="MetaCopyright" runat="Server" name="COPYRIGHT" Visible="False"/>
     <meta id="MetaGenerator" runat="Server" name="GENERATOR" Visible="False"/>
     <meta id="MetaAuthor" runat="Server" name="AUTHOR" Visible="False"/>
-    <meta id="MetaRobots" runat="server" name="ROBOTS" Visible="False" />    
+    <meta id="MetaRobots" runat="server" name="ROBOTS" Visible="False" />
     <asp:PlaceHolder runat="server" ID="ClientDependencyHeadCss"></asp:PlaceHolder>
     <asp:PlaceHolder runat="server" ID="ClientDependencyHeadJs"></asp:PlaceHolder>
     <asp:placeholder id="CSS" runat="server" />
     <asp:placeholder id="SCRIPTS" runat="server" />
 </head>
 <body id="Body" runat="server">
-    
+
     <dnn:Form ID="Form" runat="server" ENCTYPE="multipart/form-data">
         <asp:PlaceHolder ID="BodySCRIPTS" runat="server" />
         <asp:Label ID="SkinError" runat="server" CssClass="NormalRed" Visible="False"></asp:Label>

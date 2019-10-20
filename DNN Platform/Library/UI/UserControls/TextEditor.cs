@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -74,7 +74,7 @@ namespace DotNetNuke.UI.UserControls
 
         #endregion
 
-		#region Properties
+        #region Properties
 
         ///<summary>Enables/Disables the option to allow the user to select between Rich/Basic Mode, Default is true.</summary>
         public bool ChooseMode { get; set; }
@@ -83,7 +83,7 @@ namespace DotNetNuke.UI.UserControls
         public bool ChooseRender { get; set; }
 
         ///<summary>Gets/Sets the Default mode of the control, either "RICH" or "BASIC", Defaults to Rich</summary>
-		public string DefaultMode
+        public string DefaultMode
         {
             get
             {
@@ -103,13 +103,13 @@ namespace DotNetNuke.UI.UserControls
         }
 
         ///<summary>Gets/Sets the Height of the control</summary>
-		public Unit Height { get; set; }
+        public Unit Height { get; set; }
 
         ///<summary>Turns on HtmlEncoding of text.  If this option is on the control will assume, it is being passed encoded text and will decode.</summary>
         public bool HtmlEncode { get; set; }
 
         ///<summary>The current mode of the control "RICH",  "BASIC"</summary>
-		public string Mode
+        public string Mode
         {
             get
             {
@@ -124,8 +124,8 @@ namespace DotNetNuke.UI.UserControls
                         strMode = Convert.ToString(Personalization.GetProfile("DotNetNuke.TextEditor", "PreferredTextEditor"));
                     }
                 }
-				
-				//If no Preference Check if Viewstate has been saved
+
+                //If no Preference Check if Viewstate has been saved
                 if (String.IsNullOrEmpty(strMode))
                 {
                     if (ViewState["DesktopMode"] != null && !String.IsNullOrEmpty(ViewState["DesktopMode"].ToString()))
@@ -133,8 +133,8 @@ namespace DotNetNuke.UI.UserControls
                         strMode = Convert.ToString(ViewState["DesktopMode"]);
                     }
                 }
-				
-				//Finally if still no value Use default
+
+                //Finally if still no value Use default
                 if (String.IsNullOrEmpty(strMode))
                 {
                     strMode = DefaultMode;
@@ -172,7 +172,7 @@ namespace DotNetNuke.UI.UserControls
         }
 
         ///<summary>Gets/Sets the Text of the control</summary>
-		public string Text
+        public string Text
         {
             get
             {
@@ -197,7 +197,7 @@ namespace DotNetNuke.UI.UserControls
             }
             set
             {
-				TxtDesktopHTML.Text = HtmlUtils.ConvertToText(Decode(value));
+                TxtDesktopHTML.Text = HtmlUtils.ConvertToText(Decode(value));
                 if (IsRichEditorAvailable)
                 {
                     _richTextEditor.Text = Decode(value);
@@ -206,7 +206,7 @@ namespace DotNetNuke.UI.UserControls
         }
 
         ///<summary>Sets the render mode for Basic mode.  {Raw | HTML | Text}</summary>
-		public string TextRenderMode
+        public string TextRenderMode
         {
             get
             {
@@ -224,7 +224,7 @@ namespace DotNetNuke.UI.UserControls
         }
 
         ///<summary>Gets/Sets the Width of the control</summary>
-		public Unit Width { get; set; }
+        public Unit Width { get; set; }
 
         public bool IsRichEditorAvailable
         {
@@ -235,7 +235,7 @@ namespace DotNetNuke.UI.UserControls
         }
 
         ///<summary>Allows public access ot the HtmlEditorProvider</summary>
-		public HtmlEditorProvider RichText
+        public HtmlEditorProvider RichText
         {
             get
             {
@@ -266,10 +266,10 @@ namespace DotNetNuke.UI.UserControls
                 return TemplateSourceDirectory + "/" + Localization.LocalResourceDirectory + "/" + MyFileName;
             }
         }
-		
-		#endregion
 
-		#region Private Methods
+        #endregion
+
+        #region Private Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -345,8 +345,8 @@ namespace DotNetNuke.UI.UserControls
             {
                 OptView.SelectedIndex = 0;
             }
-			
-			//Set the text render mode for basic mode
+
+            //Set the text render mode for basic mode
             if (OptRender.SelectedIndex != -1)
             {
                 TextRenderMode = OptRender.SelectedItem.Value;
@@ -374,10 +374,10 @@ namespace DotNetNuke.UI.UserControls
         }
 
         private static string RemoveBaseTags(String strInput)
-		{
+        {
             return Globals.BaseTagRegex.Replace(strInput, " ");
-		}
-		#endregion
+        }
+        #endregion
 
         #region Public Methods
 
@@ -422,10 +422,10 @@ namespace DotNetNuke.UI.UserControls
 
             OptRender.SelectedIndexChanged += OptRenderSelectedIndexChanged;
             OptView.SelectedIndexChanged += OptViewSelectedIndexChanged;
-            
+
             try
             {
-				//Populate Radio Button Lists
+                //Populate Radio Button Lists
                 PopulateLists();
 
                 //Get the current user
@@ -526,8 +526,8 @@ namespace DotNetNuke.UI.UserControls
             }
             SetPanels();
         }
-		
-		#endregion
+
+        #endregion
 
     }
 }

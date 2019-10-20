@@ -56,12 +56,12 @@ class SearchResultCard extends Component {
             this.props.onSearch();
         }
     }
-    
+
     handlePagePublishStatus() {
         if (this.props.filterByPublishStatus !== this.props.item.publishStatus) {
             this.props.updateFilterByPageStatusOptions({value:this.props.item.publishStatus});
             this.props.onSearch();
-        } 
+        }
     }
 
     handlePublishDate() {
@@ -78,19 +78,19 @@ class SearchResultCard extends Component {
     handleWorkflow() {
         if (this.props.filterByWorkflow !== this.props.item.workflowId) {
             this.props.updateFilterByWorkflowOptions({ value: this.props.item.workflowId, name: this.props.item.workflowName});
-            this.props.onSearch();  
-        } 
+            this.props.onSearch();
+        }
     }
 
     renderCustomComponent() {
         const item = this.props.item;
-        if (!this.thumbRendered && this.props.pageTypeSelectorComponents && this.props.pageTypeSelectorComponents.length > 0) { 
+        if (!this.thumbRendered && this.props.pageTypeSelectorComponents && this.props.pageTypeSelectorComponents.length > 0) {
             return this.props.pageTypeSelectorComponents.map(function (component, index) {
                 const Component = component.component;
                 return <div className="search-item-thumbnail" key={"search-item-thumbnail-" + index}><Component page={item} /></div>;
             });
         }
-        this.thumbRendered = true;                             
+        this.thumbRendered = true;
     }
 
     /* eslint-disable react/no-danger */
@@ -109,7 +109,7 @@ class SearchResultCard extends Component {
         const tabPath = this.getTabPath(this.props.item.tabpath);
 
         return (
-            
+
             <GridCell columnSize={100}>
                 <div className="search-item-card">
                     {this.renderCustomComponent()}
@@ -142,7 +142,7 @@ class SearchResultCard extends Component {
                         <div className="search-item-details-list">
                             <ul>
                                 {!utils.isPlatform() && <li>
-                                    <p >{Localization.get("WorkflowTitle")}:</p>    
+                                    <p >{Localization.get("WorkflowTitle")}:</p>
                                     <p title={this.props.item.workflowName} onClick={this.handleWorkflow.bind(this)}>{this.props.item.workflowName}</p>
                                 </li>
                                 }
@@ -198,7 +198,7 @@ SearchResultCard.propTypes = {
     updateSearchAdvancedTags : PropTypes.func.isRequired,
     filterByWorkflow : PropTypes.number,
     buildTree : PropTypes.func
-    
+
 };
 
 export default SearchResultCard;

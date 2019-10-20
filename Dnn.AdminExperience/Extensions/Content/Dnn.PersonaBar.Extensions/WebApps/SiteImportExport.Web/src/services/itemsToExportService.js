@@ -1,6 +1,6 @@
 const itemsToExport = [];
 
-const itemsToExportService = {    
+const itemsToExportService = {
     registerItemToExport(item) {
         itemsToExport.push(item);
     },

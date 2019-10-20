@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -48,7 +48,7 @@ namespace DotNetNuke.Services.Installer
         private IDictionary<string, XmlDocument> _pendingDocuments;
 
         #endregion
-        
+
         #region "Constructors"
 
         /// -----------------------------------------------------------------------------
@@ -113,8 +113,8 @@ namespace DotNetNuke.Services.Installer
             Sender = sender;
             SourceConfig = sourceDoc;
         }
-		
-		#endregion
+
+        #endregion
 
         #region "Public Properties"
 
@@ -181,7 +181,7 @@ namespace DotNetNuke.Services.Installer
 
         #endregion
 
-		#region "Private Methods"
+        #region "Private Methods"
 
         private bool AddNode(XmlNode rootNode, XmlNode actionNode)
         {
@@ -191,7 +191,7 @@ namespace DotNetNuke.Services.Installer
                 if (child.NodeType == XmlNodeType.Element || child.NodeType == XmlNodeType.Comment)
                 {
                     rootNode.AppendChild(TargetConfig.ImportNode(child, true));
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "AddNode:" + child.InnerXml.ToString());
+                    DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "AddNode:" + child.InnerXml.ToString());
                     changedNode = true;
                 }
             }
@@ -225,7 +225,7 @@ namespace DotNetNuke.Services.Installer
             {
                 if (child.NodeType == XmlNodeType.Element || child.NodeType == XmlNodeType.Comment)
                 {
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "InsertNode:" + child.InnerXml.ToString());
+                    DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "InsertNode:" + child.InnerXml.ToString());
                     switch (mode)
                     {
                         case NodeInsertType.Before:
@@ -248,14 +248,14 @@ namespace DotNetNuke.Services.Installer
             Debug.Assert(node.Attributes != null, "node.Attributes != null");
 
             XmlNode rootNode = FindMatchingNode(targetRoot, node, "path");
-            
+
             string nodeAction = node.Attributes["action"].Value.ToLowerInvariant();
 
-			if (rootNode == null)
-			{
-			    return false; //not every TargetRoot will contain every target node
-			}
-            
+            if (rootNode == null)
+            {
+                return false; //not every TargetRoot will contain every target node
+            }
+
             switch (nodeAction)
             {
                 case "add":
@@ -305,7 +305,7 @@ namespace DotNetNuke.Services.Installer
             {
                 adjustedPath = ".";
             }
-            
+
             return adjustedPath;
         }
 
@@ -339,7 +339,7 @@ namespace DotNetNuke.Services.Installer
                         {
                             continue;
                         }
-                        
+
                         if(hits.Count == 1)
                         {
                             changedNodes = ProcessNode(node, hits[0]) || changedNodes;
@@ -364,7 +364,7 @@ namespace DotNetNuke.Services.Installer
                         }
                     }
                 }
-                
+
                 if (saveConfig && changedNodes)
                 {
                     Config.Save(TargetConfig, TargetFileName);
@@ -415,7 +415,7 @@ namespace DotNetNuke.Services.Installer
         private IEnumerable<XmlNode> GetTargetRoots()
         {
             yield return TargetConfig.DocumentElement;
-            
+
             var locations = TargetConfig.SelectNodes("/configuration/location");
             if (locations != null)
             {
@@ -440,7 +440,7 @@ namespace DotNetNuke.Services.Installer
                     if (rootNode.Attributes[attributeName] != null)
                     {
                         rootNode.Attributes.Remove(rootNode.Attributes[attributeName]);
-						DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveAttribute:attributeName=" + attributeName.ToString());
+                        DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveAttribute:attributeName=" + attributeName.ToString());
                         changedNode = true;
                     }
                 }
@@ -461,7 +461,7 @@ namespace DotNetNuke.Services.Installer
                 if (parentNode != null)
                 {
                     parentNode.RemoveChild(node);
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveNode:" + node.InnerXml.ToString());
+                    DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveNode:" + node.InnerXml.ToString());
                     changedNode = true;
                 }
             }
@@ -481,7 +481,7 @@ namespace DotNetNuke.Services.Installer
                 string attributeValue = actionNode.Attributes["value"].Value;
                 if (!string.IsNullOrEmpty(attributeName))
                 {
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateAttribute:attributeName=" + attributeName.ToString());
+                    DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateAttribute:attributeName=" + attributeName.ToString());
                     if (rootNode.Attributes[attributeName] == null)
                     {
                         rootNode.Attributes.Append(TargetConfig.CreateAttribute(attributeName));
@@ -509,7 +509,7 @@ namespace DotNetNuke.Services.Installer
             if (actionNode.Attributes["key"] != null)
             {
                 keyAttribute = actionNode.Attributes["key"].Value;
-				DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateNode: keyAttribute=" + keyAttribute.ToString());
+                DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateNode: keyAttribute=" + keyAttribute.ToString());
             }
             foreach (XmlNode child in actionNode.ChildNodes)
             {
@@ -550,14 +550,14 @@ namespace DotNetNuke.Services.Installer
                             break;
                         case "save":
                             string commentHeaderText = string.Format(Localization.Localization.GetString("XMLMERGE_Upgrade", Localization.Localization.SharedResourceFile),
-                                                                     Environment.NewLine,
-                                                                     Sender,
-                                                                     Version,
-                                                                     DateTime.Now);
+                                                                    Environment.NewLine,
+                                                                    Sender,
+                                                                    Version,
+                                                                    DateTime.Now);
                             XmlComment commentHeader = TargetConfig.CreateComment(commentHeaderText);
 
-		                    var targetNodeContent = GetNodeContentWithoutComment(targetNode);
-							XmlComment commentNode = TargetConfig.CreateComment(targetNodeContent);
+                            var targetNodeContent = GetNodeContentWithoutComment(targetNode);
+                            XmlComment commentNode = TargetConfig.CreateComment(targetNodeContent);
                             var newChild = this.TargetConfig.ImportNode(child, true);
                             rootNode.ReplaceChild(newChild, targetNode);
                             rootNode.InsertBefore(commentHeader, newChild);
@@ -573,38 +573,38 @@ namespace DotNetNuke.Services.Installer
             return changedNode;
         }
 
-	    private string GetNodeContentWithoutComment(XmlNode node)
-	    {
-		    var cloneNode = node.Clone();
-		    RemoveCommentNodes(cloneNode);
+        private string GetNodeContentWithoutComment(XmlNode node)
+        {
+            var cloneNode = node.Clone();
+            RemoveCommentNodes(cloneNode);
 
-		    return cloneNode.OuterXml;
-	    }
+            return cloneNode.OuterXml;
+        }
 
-	    private void RemoveCommentNodes(XmlNode node)
-	    {
-		    var commentNodes = new List<XmlNode>();
-		    foreach (XmlNode childNode in node.ChildNodes)
-		    {
-			    if (childNode.NodeType == XmlNodeType.Comment)
-			    {
-				    commentNodes.Add(childNode);
-			    }
-				else if (childNode.HasChildNodes)
-				{
-					RemoveCommentNodes(childNode);
-				}
-		    }
+        private void RemoveCommentNodes(XmlNode node)
+        {
+            var commentNodes = new List<XmlNode>();
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                if (childNode.NodeType == XmlNodeType.Comment)
+                {
+                    commentNodes.Add(childNode);
+                }
+                else if (childNode.HasChildNodes)
+                {
+                    RemoveCommentNodes(childNode);
+                }
+            }
 
-		    if (commentNodes.Count > 0)
-		    {
-			    commentNodes.ForEach(n => { node.RemoveChild(n); });
-		    }
-	    }
-		
-		#endregion
+            if (commentNodes.Count > 0)
+            {
+                commentNodes.ForEach(n => { node.RemoveChild(n); });
+            }
+        }
 
-		#region "Public Methods"
+        #endregion
+
+        #region "Public Methods"
 
 
         /// -----------------------------------------------------------------------------
@@ -649,7 +649,7 @@ namespace DotNetNuke.Services.Installer
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// The UpdateConfigs method processes the source file and updates the various config 
+        /// The UpdateConfigs method processes the source file and updates the various config
         /// files
         /// </summary>
         /// -----------------------------------------------------------------------------

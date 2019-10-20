@@ -27,7 +27,7 @@ class ControlFields extends Component {
                             tooltipMessage={Localization.get("AddModuleControl_Key.HelpText")}
                             value={props.controlBeingEdited.key}
                             onChange={props.onChange.bind(this, "key")} />
-                      
+
                     </div>
                     <div>
                         <SingleLineInputWithError
@@ -118,7 +118,7 @@ class ControlFields extends Component {
                             offText={Localization.get("SwitchOff")}
                             tooltipMessage={Localization.get("AddModuleControl_SupportsPopups.HelpText")}
                             onChange={props.onChange.bind(this, "supportPopups")} />
- 
+
                     </div>
                     <div>
                         <SingleLineInputWithError

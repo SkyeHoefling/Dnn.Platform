@@ -1,9 +1,9 @@
 #region Copyright
 
-// 
+//
 // Copyright (c) _YEAR_
 // by _OWNER_
-// 
+//
 
 #endregion
 
@@ -28,4 +28,4 @@ namespace _OWNER_._MODULE_
             return Request.CreateResponse(HttpStatusCode.OK, "Hello World!");
         }
     }
-} 
+}

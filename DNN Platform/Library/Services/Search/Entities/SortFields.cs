@@ -14,7 +14,7 @@
         /// Sort by DateTime Modified. Latest come first
         /// </summary>
         LastModified = 1,
-        
+
         /// <summary>
         /// Sort by Title.
         /// </summary>

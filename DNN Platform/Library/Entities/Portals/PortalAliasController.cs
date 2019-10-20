@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -41,14 +41,14 @@ using DotNetNuke.Services.Log.EventLog;
 
 namespace DotNetNuke.Entities.Portals
 {
-	/// <summary>
-	/// PortalAliasController provides method to manage portal alias.
-	/// </summary>
-	/// <remarks>
-	/// For DotNetNuke to know what site a request should load, it uses a system of portal aliases. 
-	/// When a request is recieved by DotNetNuke from IIS, it extracts the domain name portion and does a comparison against 
-	/// the list of portal aliases and then redirects to the relevant portal to load the approriate page. 
-	/// </remarks>
+    /// <summary>
+    /// PortalAliasController provides method to manage portal alias.
+    /// </summary>
+    /// <remarks>
+    /// For DotNetNuke to know what site a request should load, it uses a system of portal aliases.
+    /// When a request is recieved by DotNetNuke from IIS, it extracts the domain name portion and does a comparison against
+    /// the list of portal aliases and then redirects to the relevant portal to load the approriate page.
+    /// </remarks>
     public partial class PortalAliasController : ServiceLocator<IPortalAliasController, PortalAliasController>, IPortalAliasController
     {
         protected override Func<IPortalAliasController> GetFactory()
@@ -74,13 +74,13 @@ namespace DotNetNuke.Entities.Portals
             }
         }
 
-	    private PortalAliasInfo GetPortalAliasLookupInternal(string alias)
-	    {
+        private PortalAliasInfo GetPortalAliasLookupInternal(string alias)
+        {
             return GetPortalAliasesInternal().SingleOrDefault(pa => pa.Key == alias).Value;
         }
 
         private PortalAliasInfo GetPortalAliasInternal(string httpAlias)
-	    {
+        {
             string strPortalAlias;
 
             //try the specified alias first
@@ -101,7 +101,7 @@ namespace DotNetNuke.Entities.Portals
                 //perform the lookup
                 portalAlias = GetPortalAliasLookupInternal(strPortalAlias.ToLowerInvariant());
             }
-            //allow domain wildcards 
+            //allow domain wildcards
             if (portalAlias == null)
             {
                 //remove the domain prefix ( ie. anything.domain.com = domain.com )
@@ -115,7 +115,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 //try an explicit lookup using the wildcard entry ( ie. *.domain.com )
                 portalAlias = GetPortalAliasLookupInternal("*." + strPortalAlias.ToLowerInvariant()) ??
-                              GetPortalAliasLookupInternal(strPortalAlias.ToLowerInvariant());
+                            GetPortalAliasLookupInternal(strPortalAlias.ToLowerInvariant());
 
                 if (portalAlias == null)
                 {
@@ -133,10 +133,10 @@ namespace DotNetNuke.Entities.Portals
                     //relate the PortalAlias to the default portal on a fresh database installation
                     DataProvider.Instance().UpdatePortalAlias(httpAlias.ToLowerInvariant().Trim('/'), UserController.Instance.GetCurrentUserInfo().UserID);
                     EventLogController.Instance.AddLog("PortalAlias",
-                                       httpAlias,
-                                       PortalController.Instance.GetCurrentPortalSettings(),
-                                       UserController.Instance.GetCurrentUserInfo().UserID,
-                                       EventLogController.EventLogType.PORTALALIAS_UPDATED);
+                                        httpAlias,
+                                        PortalController.Instance.GetCurrentPortalSettings(),
+                                        UserController.Instance.GetCurrentUserInfo().UserID,
+                                        EventLogController.EventLogType.PORTALALIAS_UPDATED);
 
                     //clear the cachekey "GetPortalByAlias" otherwise portalalias "_default" stays in cache after first install
                     DataCache.RemoveCache("GetPortalByAlias");
@@ -145,8 +145,8 @@ namespace DotNetNuke.Entities.Portals
                 }
             }
             return portalAlias;
-	        
-	    }
+
+        }
 
         private static void LogEvent(PortalAliasInfo portalAlias, EventLogController.EventLogType logType)
         {
@@ -179,12 +179,12 @@ namespace DotNetNuke.Entities.Portals
             //Add Alias
             var dataProvider = DataProvider.Instance();
             int Id = dataProvider.AddPortalAlias(portalAlias.PortalID,
-                                                 portalAlias.HTTPAlias.ToLowerInvariant().Trim('/'),
-                                                 portalAlias.CultureCode,
-                                                 portalAlias.Skin,
-                                                 portalAlias.BrowserType.ToString(),
-                                                 portalAlias.IsPrimary,
-                                                 UserController.Instance.GetCurrentUserInfo().UserID);
+                                                portalAlias.HTTPAlias.ToLowerInvariant().Trim('/'),
+                                                portalAlias.CultureCode,
+                                                portalAlias.Skin,
+                                                portalAlias.BrowserType.ToString(),
+                                                portalAlias.IsPrimary,
+                                                UserController.Instance.GetCurrentUserInfo().UserID);
 
             //Log Event
             LogEvent(portalAlias, EventLogController.EventLogType.PORTALALIAS_CREATED);
@@ -233,7 +233,7 @@ namespace DotNetNuke.Entities.Portals
             return GetPortalAliasesInternal().SingleOrDefault(pa => pa.Value.PortalAliasID == portalAliasId).Value;
         }
 
-	    internal Dictionary<string, PortalAliasInfo> GetPortalAliasesInternal()
+        internal Dictionary<string, PortalAliasInfo> GetPortalAliasesInternal()
         {
             return CBO.GetCachedObject<Dictionary<string, PortalAliasInfo>>(new CacheItemArgs(DataCache.PortalAliasCacheKey,
                                                                                         DataCache.PortalAliasCacheTimeOut,
@@ -247,13 +247,13 @@ namespace DotNetNuke.Entities.Portals
                                                                 true);
         }
 
-	    public PortalAliasCollection GetPortalAliases()
-	    {
-	        var aliasCollection = new PortalAliasCollection();
-	        foreach (var alias in GetPortalAliasesInternal().Values)
-	        {
-	            aliasCollection.Add(alias.HTTPAlias, alias);
-	        }
+        public PortalAliasCollection GetPortalAliases()
+        {
+            var aliasCollection = new PortalAliasCollection();
+            foreach (var alias in GetPortalAliasesInternal().Values)
+            {
+                aliasCollection.Add(alias.HTTPAlias, alias);
+            }
 
             return aliasCollection;
         }

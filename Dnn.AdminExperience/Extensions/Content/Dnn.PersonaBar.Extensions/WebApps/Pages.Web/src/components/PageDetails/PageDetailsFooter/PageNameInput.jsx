@@ -7,7 +7,7 @@ class PageNameInput extends Component {
 
     render() {
         const {props} = this;
-        return <div> 
+        return <div>
             <SingleLineInputWithError
                 label={Localization.get("Name") + "*"}
                 tooltipMessage={Localization.get("NameTooltip")}

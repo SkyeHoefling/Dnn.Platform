@@ -31,9 +31,9 @@ class EditProfile extends Component {
         }));
     }
     render() {
-            return <iframe 
+            return <iframe
             className="edit-profile" seamless
-            src={this.state.userDetails !== undefined && this.state.userDetails.editProfileUrl !== undefined ? 
+            src={this.state.userDetails !== undefined && this.state.userDetails.editProfileUrl !== undefined ?
                 this.state.userDetails.editProfileUrl : ""}
             />;
     }

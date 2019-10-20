@@ -122,7 +122,7 @@ namespace DotNetNuke.Web.UI.WebControls.Internal
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Set this property to 'true 'if you don't have reference to jQuery lib on your page/master page. 
+        /// Set this property to 'true 'if you don't have reference to jQuery lib on your page/master page.
         /// Set it to 'false' otherwise (or you'll get not working control)
         /// </para>
         /// <para>
@@ -149,7 +149,7 @@ namespace DotNetNuke.Web.UI.WebControls.Internal
         /// Whether to use 'OK' and 'Cancel' for initiating postbacks
         /// </summary>
         /// <remarks>
-        /// If 'true' - corresponding buttons will be displayed within drop down box. Clicking 'OK' causes postback, 
+        /// If 'true' - corresponding buttons will be displayed within drop down box. Clicking 'OK' causes postback,
         /// the value of the AutoPostBack property is irrelivant in this case.
         /// </remarks>
         [PersistenceMode(PersistenceMode.Attribute)]
@@ -708,7 +708,7 @@ namespace DotNetNuke.Web.UI.WebControls.Internal
             if (viewState != null)
             {
                 savedState =
-                   ((IStateManager)viewState).SaveViewState();
+                    ((IStateManager)viewState).SaveViewState();
             }
             return savedState;
         }

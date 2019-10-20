@@ -36,19 +36,19 @@
   </head>
   <body>
     <h1>
-      {{ page.title|capfirst }}
+    {{ page.title|capfirst }}
     </h1>
     <ul class="my-list">
-      {# traverse a list of items and produce links to their views. #}
-      {% for item in items %}
-      <li>
+    {# traverse a list of items and produce links to their views. #}
+    {% for item in items %}
+    <li>
         <a href="{% url 'item_view' item.name|slugify %}">
-          {{ item.name }}
+        {{ item.name }}
         </a>
-      </li>
-      {% empty %}
-      <li>You have no items in your list.</li>
-      {% endfor %}
+    </li>
+    {% empty %}
+    <li>You have no items in your list.</li>
+    {% endfor %}
     </ul>
     {% comment "this is a forgotten footer" %}
     <footer></footer>
@@ -58,13 +58,13 @@
 </textarea></form>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         mode: "django",
         indentUnit: 2,
         indentWithTabs: true,
         theme: "mdn-like"
-      });
+    });
     </script>
 
     <p>Mode for HTML with embedded Django template markup.</p>

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -42,8 +42,8 @@ namespace DotNetNuke.Services.Installer.Writers
     /// -----------------------------------------------------------------------------
     public class SkinControlPackageWriter : PackageWriterBase
     {
-		#region "Constructors"
-		
+        #region "Constructors"
+
         public SkinControlPackageWriter(PackageInfo package) : base(package)
         {
             SkinControl = SkinControlController.GetSkinControlByPackageID(package.PackageID);
@@ -75,20 +75,20 @@ namespace DotNetNuke.Services.Installer.Writers
             BasePath = Path.Combine("DesktopModules", Package.Name.ToLowerInvariant()).Replace("/", "\\");
             AppCodePath = Path.Combine("App_Code", Package.Name.ToLowerInvariant()).Replace("/", "\\");
         }
-		
-		#endregion
 
-		#region "Public Properties"
+        #endregion
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets the associated SkinControl
-		/// </summary>
-		/// <value>A SkinControlInfo object</value>
-		/// -----------------------------------------------------------------------------
+        #region "Public Properties"
+
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the associated SkinControl
+        /// </summary>
+        /// <value>A SkinControlInfo object</value>
+        /// -----------------------------------------------------------------------------
         public SkinControlInfo SkinControl { get; set; }
-		
-		#endregion
+
+        #endregion
 
         private void ReadLegacyManifest(XPathNavigator legacyManifest, bool processModule)
         {
@@ -111,7 +111,7 @@ namespace DotNetNuke.Services.Installer.Writers
                     }
                 }
             }
-			
+
             //Process legacy files Node
             foreach (XPathNavigator fileNav in folderNav.Select("files/file"))
             {
@@ -120,7 +120,7 @@ namespace DotNetNuke.Services.Installer.Writers
 
                 AddFile(Path.Combine(filePath, fileName), fileName);
             }
-			
+
             //Process resource file Node
             if (!string.IsNullOrEmpty(Util.ReadElement(folderNav, "resourcefile")))
             {
@@ -128,11 +128,11 @@ namespace DotNetNuke.Services.Installer.Writers
             }
         }
 
-		#region "Protected Methods"
-		
+        #region "Protected Methods"
+
         protected override void WriteManifestComponent(XmlWriter writer)
         {
-			//Start component Element
+            //Start component Element
             writer.WriteStartElement("component");
             writer.WriteAttributeString("type", "SkinObject");
 
@@ -142,7 +142,7 @@ namespace DotNetNuke.Services.Installer.Writers
             //End component Element
             writer.WriteEndElement();
         }
-		
-		#endregion
+
+        #endregion
     }
 }

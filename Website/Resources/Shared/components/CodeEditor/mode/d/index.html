@@ -38,14 +38,14 @@ Macros:
 Copyright: Copyright Digital Mars 2007 - 2009.
 License:   <a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
 Authors:   $(WEB digitalmars.com, Walter Bright),
-           Don Clugston
+            Don Clugston
 Source:    $(PHOBOSSRC std/_metastrings.d)
 */
 /*
-         Copyright Digital Mars 2007 - 2009.
+        Copyright Digital Mars 2007 - 2009.
 Distributed under the Boost Software License, Version 1.0.
-   (See accompanying file LICENSE_1_0.txt or copy at
-         http://www.boost.org/LICENSE_1_0.txt)
+    (See accompanying file LICENSE_1_0.txt or copy at
+        http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.metastrings;
 
@@ -205,12 +205,12 @@ Parse integer literal optionally preceded by $(D '-') from the start
 of string $(D s).
 
 Returns:
-   .value = the integer literal as a string,
-   .rest = the string following the integer literal
+    .value = the integer literal as a string,
+    .rest = the string following the integer literal
 
 Otherwise:
-   .value = null,
-   .rest = s
+    .value = null,
+    .rest = s
 */
 
 template parseInteger(const(char)[] s)
@@ -258,12 +258,12 @@ deprecated alias parseUinteger ParseInteger;
 </textarea></form>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
         indentUnit: 4,
         mode: "text/x-d"
-      });
+    });
     </script>
 
     <p>Simple mode that handle D-Syntax (<a href="http://www.dlang.org">DLang Homepage</a>).</p>

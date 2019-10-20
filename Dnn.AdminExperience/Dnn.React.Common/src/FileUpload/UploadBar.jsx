@@ -19,7 +19,7 @@ export default class UploadBar extends Component {
     componentDidMount() {
         setTimeout(this.increase.bind(this), 100);
     }
-    
+
     componentDidUpdate(prevProps) {
         const { props } = this;
         if (props.uploadComplete && props.uploadComplete !== prevProps.uploadComplete) {
@@ -63,7 +63,7 @@ export default class UploadBar extends Component {
 }
 
 UploadBar.propTypes = {
-    errorText: PropTypes.string.isRequired, 
+    errorText: PropTypes.string.isRequired,
     fileName: PropTypes.string.isRequired,
     uploadComplete: PropTypes.bool.isRequired,
 

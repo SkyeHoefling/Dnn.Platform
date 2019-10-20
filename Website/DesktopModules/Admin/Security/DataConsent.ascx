@@ -12,11 +12,11 @@
  </asp:Panel>
  <ul class="dnnActions dnnClear">
   <li>
-   <asp:Button ID="cmdSubmit" CssClass="dnnPrimaryAction" runat="server" resourcekey="cmdSubmit" /></li>
+    <asp:Button ID="cmdSubmit" CssClass="dnnPrimaryAction" runat="server" resourcekey="cmdSubmit" /></li>
   <li>
-   <asp:Button ID="cmdCancel" CssClass="dnnSecondaryAction" runat="server" resourcekey="cmdCancel" /></li>
+    <asp:Button ID="cmdCancel" CssClass="dnnSecondaryAction" runat="server" resourcekey="cmdCancel" /></li>
   <li>
-   <asp:Button ID="cmdDeleteMe" CssClass="dnnSecondaryAction" runat="server" resourcekey="cmdDeleteMe" /></li>
+    <asp:Button ID="cmdDeleteMe" CssClass="dnnSecondaryAction" runat="server" resourcekey="cmdDeleteMe" /></li>
  </ul>
 </div>
 
@@ -26,7 +26,7 @@
  });
  document.getElementById('<%=cmdDeleteMe.ClientID%>').addEventListener("click", function (e) {
   if (!confirm('<%=DeleteMeConfirmString%>')) {
-   e.preventDefault();
+    e.preventDefault();
   };
  });
 </script>

@@ -204,8 +204,8 @@ class LogSettingEditor extends Component {
                     { Localization.get("plIsActive") }
                 </div>
                 <div className="right">
-                    <Switch 
-                        value={this.getEnabledStatus("Logging") } 
+                    <Switch
+                        value={this.getEnabledStatus("Logging") }
                         onChange={this.OnCheckboxChanged.bind(this, "LoggingIsActive") }
                         onText={Localization.get("SwitchOn")}
                         offText={Localization.get("SwitchOff")}
@@ -239,8 +239,8 @@ class LogSettingEditor extends Component {
                     {  Localization.get("plEmailNotificationStatus") }
                 </div>
                 <div className="right">
-                    <Switch 
-                        value={this.getEnabledStatus("EmailNotification") } 
+                    <Switch
+                        value={this.getEnabledStatus("EmailNotification") }
                         onChange={this.OnCheckboxChanged.bind(this, "EmailNotificationIsActive") }
                         onText={Localization.get("SwitchOn")}
                         offText={Localization.get("SwitchOff")}

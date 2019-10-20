@@ -24,9 +24,9 @@
     </div>
     <div class="dnnClear"></div>
     <div class="dnnFormItem">
-         <asp:Panel runat="server" ID="dnnFileUploadProgressBar" CssClass="ui-progressbar">
-             <div class="ui-progressbar-value"></div>
-         </asp:Panel>
+        <asp:Panel runat="server" ID="dnnFileUploadProgressBar" CssClass="ui-progressbar">
+            <div class="ui-progressbar-value"></div>
+        </asp:Panel>
     </div>
 </asp:Panel>
 <dnn:DnnScriptBlock runat="server">
@@ -49,7 +49,7 @@
         $(initDnnFileUploader);
 
         // microsoft ajax registered - to fix microsoft ajax update panel post back
-        if(typeof Sys != 'undefined') 
+        if(typeof Sys != 'undefined')
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(initDnnFileUploader);
 
     })(jQuery);

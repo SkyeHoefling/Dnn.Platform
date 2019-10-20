@@ -14,7 +14,7 @@ export class PersonaBarPageTreeParentExpand extends Component {
     render_tree(childListItems){
         const {getChildListItems} = this.props;
         return (
-             <PersonaBarPageTreeParentExpand listItems={childListItems} getChildListItems={getChildListItems} />
+            <PersonaBarPageTreeParentExpand listItems={childListItems} getChildListItems={getChildListItems} />
         );
     }
 
@@ -28,7 +28,7 @@ export class PersonaBarPageTreeParentExpand extends Component {
         const {getChildListItems}  = this.props;
         return (
             <div className="parent-expand-button" onClick={()=>{getChildListItems(item.id);}} >
-             { item.childCount > 0  ? this.render_parentExpandIcon(item) : <div className="parent-expand-icon"></div> }
+            { item.childCount > 0  ? this.render_parentExpandIcon(item) : <div className="parent-expand-icon"></div> }
             </div>
         );
     }

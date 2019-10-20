@@ -14,7 +14,7 @@ namespace Dnn.PersonaBar.CssEditor.MenuControllers
     {
         public void UpdateParameters(MenuItem menuItem)
         {
-            
+
         }
 
         public bool Visible(MenuItem menuItem)

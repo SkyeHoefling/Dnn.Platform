@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -59,7 +59,7 @@ namespace DotNetNuke.Common.Utilities
     /// -----------------------------------------------------------------------------
     public class DataCache
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DataCache));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DataCache));
         //Host keys
         public const string SecureHostSettingsCacheKey = "SecureHostSettings";
         public const string UnSecureHostSettingsCacheKey = "UnsecureHostSettings";
@@ -84,9 +84,9 @@ namespace DotNetNuke.Common.Utilities
         public const CacheItemPriority PortalCachePriority = CacheItemPriority.High;
         public const int PortalCacheTimeOut = 20;
 
-		public const string AllPortalsCacheKey = "AllPortals";
-		public const CacheItemPriority AllPortalsCachePriority = CacheItemPriority.High;
-		public const int AllPortalsCacheTimeOut = 20;
+        public const string AllPortalsCacheKey = "AllPortals";
+        public const CacheItemPriority AllPortalsCachePriority = CacheItemPriority.High;
+        public const int AllPortalsCacheTimeOut = 20;
 
         public const string PortalUserCountCacheKey = "PortalUserCount{0}";
         public const CacheItemPriority PortalUserCountCachePriority = CacheItemPriority.High;
@@ -122,7 +122,7 @@ namespace DotNetNuke.Common.Utilities
         public const string TabVersionDetailsCacheKey = "Tab_TabVersionDetails{0}";
         public const CacheItemPriority TabVersionDetailsCachePriority = CacheItemPriority.High;
         public const int TabVersionDetailsCacheTimeOut = 20;
-        
+
         public const string AuthenticationServicesCacheKey = "AuthenticationServices";
         public const CacheItemPriority AuthenticationServicesCachePriority = CacheItemPriority.NotRemovable;
         public const int AuthenticationServicesCacheTimeOut = 20;
@@ -250,13 +250,13 @@ namespace DotNetNuke.Common.Utilities
         public const CacheItemPriority BannersCachePriority = CacheItemPriority.Normal;
         public const int BannersCacheTimeOut = 20;
 
-		public const string RedirectionsCacheKey = "Redirections:{0}";
-		public const CacheItemPriority RedirectionsCachePriority = CacheItemPriority.Default;
-		public const int RedirectionsCacheTimeOut = 20;
+        public const string RedirectionsCacheKey = "Redirections:{0}";
+        public const CacheItemPriority RedirectionsCachePriority = CacheItemPriority.Default;
+        public const int RedirectionsCacheTimeOut = 20;
 
-		public const string PreviewProfilesCacheKey = "PreviewProfiles:{0}";
-		public const CacheItemPriority PreviewProfilesCachePriority = CacheItemPriority.Default;
-		public const int PreviewProfilesCacheTimeOut = 20;
+        public const string PreviewProfilesCacheKey = "PreviewProfiles:{0}";
+        public const CacheItemPriority PreviewProfilesCachePriority = CacheItemPriority.Default;
+        public const int PreviewProfilesCacheTimeOut = 20;
 
         public const string RelationshipTypesCacheKey = "RelationshipTypes";
         public const CacheItemPriority RelationshipTypesCachePriority = CacheItemPriority.Default;
@@ -291,10 +291,10 @@ namespace DotNetNuke.Common.Utilities
         public const CacheItemPriority SubscriptionTypesCachePriority = CacheItemPriority.Default;
         public const int SubscriptionTypesTimeOut = 20;
 
-		public const string PackagesCacheKey = "Packages_{0}";
+        public const string PackagesCacheKey = "Packages_{0}";
         public const string PackageDependenciesCacheKey = "Packages_Dependencies";
         public const CacheItemPriority PackagesCachePriority = CacheItemPriority.Default;
-		public const int PackagesCacheTimeout = 20;
+        public const int PackagesCacheTimeout = 20;
 
         public const string ContentTypesCacheKey = "ContentTypes";
         public const CacheItemPriority ContentTypesCachePriority = CacheItemPriority.AboveNormal;
@@ -308,9 +308,9 @@ namespace DotNetNuke.Common.Utilities
         public const CacheItemPriority PackageTypesCachePriority = CacheItemPriority.AboveNormal;
         public const int PackageTypesCacheTimeout = 20;
 
-	    public const string JavaScriptLibrariesCacheKey = "JavaScriptLibraries";
-	    public const CacheItemPriority JavaScriptLibrariesCachePriority = CacheItemPriority.AboveNormal;
-	    public const int JavaScriptLibrariesCacheTimeout = 20;
+        public const string JavaScriptLibrariesCacheKey = "JavaScriptLibraries";
+        public const CacheItemPriority JavaScriptLibrariesCachePriority = CacheItemPriority.AboveNormal;
+        public const int JavaScriptLibrariesCacheTimeout = 20;
 
         public const string CaptchaCacheKey = "Captcha_{0}";
         public const CacheItemPriority CaptchaCachePriority = CacheItemPriority.NotRemovable;
@@ -385,7 +385,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception exc)
             {
-                //Swallow exception            
+                //Swallow exception
                 Logger.Error(exc);
             }
         }
@@ -510,10 +510,10 @@ namespace DotNetNuke.Common.Utilities
             RemoveCache(String.Format(UserPersonalizationCacheKey, portalId, userId));
         }
 
-		public static void ClearPackagesCache(int portalId)
-		{
-			RemoveCache(String.Format(PackagesCacheKey, portalId));
-		}
+        public static void ClearPackagesCache(int portalId)
+        {
+            RemoveCache(String.Format(PackagesCacheKey, portalId));
+        }
 
         private static object GetCachedDataFromRuntimeCache(CacheItemArgs cacheItemArgs, CacheItemExpiredCallback cacheItemExpired)
         {
@@ -554,12 +554,12 @@ namespace DotNetNuke.Common.Utilities
                         {
                             // save the object in the cache
                             SetCache(cacheItemArgs.CacheKey,
-                                     objObject,
-                                     cacheItemArgs.CacheDependency,
-                                     Cache.NoAbsoluteExpiration,
-                                     TimeSpan.FromMinutes(timeOut),
-                                     cacheItemArgs.CachePriority,
-                                     cacheItemArgs.CacheCallback);
+                                    objObject,
+                                    cacheItemArgs.CacheDependency,
+                                    Cache.NoAbsoluteExpiration,
+                                    TimeSpan.FromMinutes(timeOut),
+                                    cacheItemArgs.CachePriority,
+                                    cacheItemArgs.CacheCallback);
 
                             // check if the item was actually saved in the cache
 
@@ -627,9 +627,9 @@ namespace DotNetNuke.Common.Utilities
 
         internal static TObject GetCachedData<TObject>(CacheItemArgs cacheItemArgs, CacheItemExpiredCallback cacheItemExpired, bool storeInDictionary)
         {
-            object objObject = storeInDictionary 
-                                   ? GetCachedDataFromDictionary(cacheItemArgs, cacheItemExpired) 
-                                   : GetCachedDataFromRuntimeCache(cacheItemArgs, cacheItemExpired);
+            object objObject = storeInDictionary
+                                    ? GetCachedDataFromDictionary(cacheItemArgs, cacheItemExpired)
+                                    : GetCachedDataFromRuntimeCache(cacheItemArgs, cacheItemExpired);
 
             // return the object
             if (objObject == null)
@@ -766,6 +766,6 @@ namespace DotNetNuke.Common.Utilities
                 }
                 CachingProvider.Instance().Insert(GetDnnCacheKey(CacheKey), objObject, objDependency, AbsoluteExpiration, SlidingExpiration, Priority, OnRemoveCallback);
             }
-        }       
+        }
     }
 }

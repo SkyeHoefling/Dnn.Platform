@@ -11,35 +11,35 @@
 /** Drop stored procedures, tables, etc. **/
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}JsonWebTokens_GetById]', N'P') IS NOT NULL
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_GetById]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_GetById]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}JsonWebTokens_GetUserTokens]', N'P') IS NOT NULL
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_GetUserTokens]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_GetUserTokens]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}JsonWebTokens_Add]', N'P') IS NOT NULL
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_Add]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_Add]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}JsonWebTokens_Update]', N'P') IS NOT NULL
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_Update]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_Update]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}JsonWebTokens_DeleteById]', N'P') IS NOT NULL
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_DeleteById]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_DeleteById]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}JsonWebTokens_DeleteByUser]', N'P') IS NOT NULL
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_DeleteByUser]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_DeleteByUser]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}[{objectQualifier}JsonWebTokens_DeleteExpired]', N'P') IS NOT NULL
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_DeleteExpired]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}JsonWebTokens_DeleteExpired]
 GO
 
 IF OBJECT_ID(N'{databaseOwner}{objectQualifier}JsonWebTokens', N'U') IS NOT NULL
-	DROP TABLE {databaseOwner}[{objectQualifier}JsonWebTokens]
+    DROP TABLE {databaseOwner}[{objectQualifier}JsonWebTokens]
 GO
 
 /************************************************************/

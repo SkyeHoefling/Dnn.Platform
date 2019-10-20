@@ -3,7 +3,7 @@ const applicationSettings = {
         if (!applicationSettings) {
             this.applicationSettings = {};
         }
-        this.applicationSettings = applicationSettings;      
+        this.applicationSettings = applicationSettings;
     },
     applicationSettings: null
 };

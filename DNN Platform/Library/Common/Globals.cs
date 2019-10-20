@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -85,7 +85,7 @@ namespace DotNetNuke.Common
     [StandardModule]
     public sealed class Globals
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Globals));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Globals));
 
         public static readonly Regex EmailValidatorRegex = new Regex(glbEmailRegEx, RegexOptions.Compiled);
         public static readonly Regex NonAlphanumericCharacters = new Regex("[^A-Za-z0-9]", RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -98,7 +98,7 @@ namespace DotNetNuke.Common
         public static readonly Regex FileValidNameRegex = new Regex(@"^(?!(?:PRN|AUX|CLOCK\$|NUL|CON|COM\d|LPT\d)(?:\..+)?$)[^\x00-\x1F\xA5\\?*:\"";|\/<>]+(?<![\s.])$", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         public static readonly Regex ServicesFrameworkRegex = new Regex("/API/|DESKTOPMODULES/.+/API/", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
         public static readonly string USERNAME_UNALLOWED_ASCII = "!\"#$%&'()*+,/:;<=>?[\\]^`{|}";
-        
+
         #region PerformanceSettings enum
 
         /// <summary>
@@ -147,13 +147,13 @@ namespace DotNetNuke.Common
         /// </summary>
         /// <remarks>
         /// <para>NoRegistration: Disabled registration in portal.</para>
-        /// <para>PrivateRegistration: Once user's account information has been submitted, 
-        /// the portal Administrator will be notified and user's application will be subjected to a screening procedure. 
+        /// <para>PrivateRegistration: Once user's account information has been submitted,
+        /// the portal Administrator will be notified and user's application will be subjected to a screening procedure.
         /// If user's application is authorized, the user will receive notification of access to the portal environment.</para>
-        /// <para>PublicRegistration: Once user's account information has been submitted, 
+        /// <para>PublicRegistration: Once user's account information has been submitted,
         /// user will be immediately granted access to the portal environment.</para>
-        /// <para>VerifiedRegistration: Once user's account information has been submitted, 
-        /// user will receive an email containing unique Verification Code. 
+        /// <para>VerifiedRegistration: Once user's account information has been submitted,
+        /// user will receive an email containing unique Verification Code.
         /// The Verification Code will be required the first time when user attempt to sign in to the portal environment.</para>
         /// </remarks>
         public enum PortalRegistrationType
@@ -615,13 +615,13 @@ namespace DotNetNuke.Common
                     {
                         if (IsInstalled())
                         {
-                            //Errors connecting to the database after an initial installation should be treated as errors.				
+                            //Errors connecting to the database after an initial installation should be treated as errors.
                             tempStatus = UpgradeStatus.Error;
                         }
                         else
                         {
-                            //An error that occurs before the database has been installed should be treated as a new install				
-                           tempStatus = UpgradeStatus.Install;
+                            //An error that occurs before the database has been installed should be treated as a new install
+                            tempStatus = UpgradeStatus.Install;
                         }
                     }
                     else if (DataBaseVersion == null)
@@ -643,13 +643,13 @@ namespace DotNetNuke.Common
                             tempStatus = UpgradeStatus.Upgrade;
                         }
                         else if (version.Major == DataBaseVersion.Major && version.Minor == DataBaseVersion.Minor &&
-                                 version.Build > DataBaseVersion.Build)
+                                version.Build > DataBaseVersion.Build)
                         {
                             //Upgrade Required (Build Version Upgrade)
                             tempStatus = UpgradeStatus.Upgrade;
                         }
                         else if (version.Major == DataBaseVersion.Major && version.Minor == DataBaseVersion.Minor &&
-                                 version.Build == DataBaseVersion.Build && IncrementalVersionExists(version))
+                                version.Build == DataBaseVersion.Build && IncrementalVersionExists(version))
                         {
                             //Upgrade Required (Build Version Upgrade)
                             tempStatus = UpgradeStatus.Upgrade;
@@ -677,7 +677,7 @@ namespace DotNetNuke.Common
                 if (Directory.Exists(providerpath))
                 {
                     var incrementalcount = Directory.GetFiles(providerpath, Upgrade.GetStringVersion(version) + ".*." + Upgrade.DefaultProvider).Length;
-                   
+
                     if (incrementalcount > Globals.GetLastAppliedIteration(version))
                     {
                         return true;
@@ -693,7 +693,7 @@ namespace DotNetNuke.Common
         /// </summary>
         /// <returns></returns>
         /// <remarks>
-        /// If DotNetNuke has been installed, then we should treat database connection errors as real errors.  
+        /// If DotNetNuke has been installed, then we should treat database connection errors as real errors.
         /// If DotNetNuke has not been installed, then we should expect to have database connection problems
         /// since the connection string may not have been configured yet, which can occur during the installation
         /// wizard.
@@ -712,7 +712,7 @@ namespace DotNetNuke.Common
 
             bool isInstalled =  (!IsInstallationURL()) && ((installationdatefactor + dataproviderfactor + htmlmodulefactor + portaldirectoryfactor + localexecutionfactor) >= c_PassingScore);
 
-            // we need to tighten this check. We now are enforcing the existence of the InstallVersion value in web.config. If 
+            // we need to tighten this check. We now are enforcing the existence of the InstallVersion value in web.config. If
             // this value exists, then DNN was previously installed, and we should never try to re-install it
             return isInstalled || HasInstallVersion();
         }
@@ -861,7 +861,7 @@ namespace DotNetNuke.Common
         /// <param name="NumericValueColumn">The numeric value column.</param>
         /// <returns>the dataset instance</returns>
         public static DataSet BuildCrossTabDataSet(string DataSetName, IDataReader result, string FixedColumns, string VariableColumns, string KeyColumn, string FieldColumn, string FieldTypeColumn,
-                                                   string StringValueColumn, string NumericValueColumn)
+                                                    string StringValueColumn, string NumericValueColumn)
         {
             return BuildCrossTabDataSet(DataSetName, result, FixedColumns, VariableColumns, KeyColumn, FieldColumn, FieldTypeColumn, StringValueColumn, NumericValueColumn, CultureInfo.CurrentCulture);
         }
@@ -883,7 +883,7 @@ namespace DotNetNuke.Common
         /// <returns>The generated DataSet</returns>
         /// -----------------------------------------------------------------------------
         public static DataSet BuildCrossTabDataSet(string DataSetName, IDataReader result, string FixedColumns, string VariableColumns, string KeyColumn, string FieldColumn, string FieldTypeColumn,
-                                                   string StringValueColumn, string NumericValueColumn, CultureInfo Culture)
+                                                    string StringValueColumn, string NumericValueColumn, CultureInfo Culture)
         {
             string[] arrFixedColumns = null;
             string[] arrVariableColumns = null;
@@ -1030,7 +1030,7 @@ namespace DotNetNuke.Common
             }
             finally
             {
-			    reader.Close();
+                reader.Close();
             }
 
             return objDataSet;
@@ -1041,42 +1041,42 @@ namespace DotNetNuke.Common
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <returns>the datatable instance</returns>
-		public static DataTable ConvertDataReaderToDataTable(IDataReader reader)
+        public static DataTable ConvertDataReaderToDataTable(IDataReader reader)
         {
-	        return ConvertDataReaderToDataTable(reader, true);
+            return ConvertDataReaderToDataTable(reader, true);
         }
 
-		/// <summary>
-		/// Converts the datareader to datatable.
-		/// </summary>
-		/// <param name="reader">The reader.</param>
-		/// <param name="closeReader">Whether close reader.</param>
-		/// <returns>the datatable instance</returns>
+        /// <summary>
+        /// Converts the datareader to datatable.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="closeReader">Whether close reader.</param>
+        /// <returns>the datatable instance</returns>
         public static DataTable ConvertDataReaderToDataTable(IDataReader reader, bool closeReader)
         {
-		    try
-		    {
+            try
+            {
                 // create datatable from datareader
                 var objDataTable = new DataTable();
-		        int intFieldCount = reader.FieldCount;
-		        int intCounter;
-		        for (intCounter = 0; intCounter <= intFieldCount - 1; intCounter++)
-		        {
-		            objDataTable.Columns.Add(reader.GetName(intCounter), reader.GetFieldType(intCounter));
-		        }
-		        // populate datatable
-		        objDataTable.BeginLoadData();
-		        var objValues = new object[intFieldCount];
-		        while (reader.Read())
-		        {
-		            reader.GetValues(objValues);
-		            objDataTable.LoadDataRow(objValues, true);
-		        }
-		        objDataTable.EndLoadData();
-		        return objDataTable;
-		    }
-		    finally
-		    {
+                int intFieldCount = reader.FieldCount;
+                int intCounter;
+                for (intCounter = 0; intCounter <= intFieldCount - 1; intCounter++)
+                {
+                    objDataTable.Columns.Add(reader.GetName(intCounter), reader.GetFieldType(intCounter));
+                }
+                // populate datatable
+                objDataTable.BeginLoadData();
+                var objValues = new object[intFieldCount];
+                while (reader.Read())
+                {
+                    reader.GetValues(objValues);
+                    objDataTable.LoadDataRow(objValues, true);
+                }
+                objDataTable.EndLoadData();
+                return objDataTable;
+            }
+            finally
+            {
                 if (closeReader)
                 {
                     reader.Close();
@@ -1204,26 +1204,26 @@ namespace DotNetNuke.Common
         /// </summary>
         /// <param name="version">The version.</param>
         /// <param name="increment">The increment.</param>
-       public static void UpdateDataBaseVersionIncrement(Version version,int increment)
+        public static void UpdateDataBaseVersionIncrement(Version version,int increment)
         {
             //update the version and increment
-           DataProvider.Instance().UpdateDatabaseVersionIncrement(version.Major, version.Minor, version.Build, increment, DotNetNukeContext.Current.Application.Name);
+            DataProvider.Instance().UpdateDatabaseVersionIncrement(version.Major, version.Minor, version.Build, increment, DotNetNukeContext.Current.Application.Name);
             _dataBaseVersion = version;
         }
 
-       public static int GetLastAppliedIteration(Version version)
-       {
-           try
-           {
-               return DataProvider.Instance().GetLastAppliedIteration(version.Major, version.Minor, version.Build);           
-           }
-           catch (Exception)
-           {
+        public static int GetLastAppliedIteration(Version version)
+        {
+            try
+            {
+                return DataProvider.Instance().GetLastAppliedIteration(version.Major, version.Minor, version.Build);
+            }
+            catch (Exception)
+            {
 
-               return 0;
-           }
-           
-       }
+                return 0;
+            }
+
+        }
 
         /// <summary>
         /// Adds the port.
@@ -1500,7 +1500,7 @@ namespace DotNetNuke.Common
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Returns the folder path under the root for the portal 
+        /// Returns the folder path under the root for the portal
         /// </summary>
         /// <param name="strFileNamePath">The folder the absolute path</param>
         /// <param name="portalId">Portal Id.</param>
@@ -1559,7 +1559,7 @@ namespace DotNetNuke.Common
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// ImportFile - converts a file url (/Portals/0/somefile.gif) to the appropriate 
+        /// ImportFile - converts a file url (/Portals/0/somefile.gif) to the appropriate
         /// FileID=xx identification for use in importing portals, tabs and modules
         /// </summary>
         /// <remarks>
@@ -1893,7 +1893,7 @@ namespace DotNetNuke.Common
                     Int32.TryParse(HttpContext.Current.Request.QueryString["mid"], out ModuleID);
                 }
                 _IsAdminSkin = (!String.IsNullOrEmpty(ControlKey) && ControlKey != "view" && ModuleID != -1) ||
-                               (!String.IsNullOrEmpty(ControlKey) && AdminKeys.IndexOf(ControlKey) != -1 && ModuleID == -1);
+                                (!String.IsNullOrEmpty(ControlKey) && AdminKeys.IndexOf(ControlKey) != -1 && ModuleID == -1);
             }
             return _IsAdminSkin;
         }
@@ -1992,11 +1992,11 @@ namespace DotNetNuke.Common
             if (strRSS.Length == 0)
             {
                 strRSS.Append("<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>" + Environment.NewLine + "<rss version=\"0.91\">" + Environment.NewLine + "  <channel>" + Environment.NewLine + "  <title>" +
-                         _portalSettings.PortalName + "</title>" + Environment.NewLine + "  <link>" + DomainName + "</link>" + Environment.NewLine + "  <description>" +
-                         _portalSettings.PortalName + "</description>" + Environment.NewLine + "  <language>en-us</language>" + Environment.NewLine + "  <copyright>" +
-                         (!string.IsNullOrEmpty(_portalSettings.FooterText) ? _portalSettings.FooterText.Replace("[year]", DateTime.Now.Year.ToString()) : string.Empty) +
-                         "</copyright>" + Environment.NewLine + "  <webMaster>" + _portalSettings.Email + "</webMaster>" + Environment.NewLine + strRSS + "   </channel>" + Environment.NewLine +
-                         "</rss>");
+                        _portalSettings.PortalName + "</title>" + Environment.NewLine + "  <link>" + DomainName + "</link>" + Environment.NewLine + "  <description>" +
+                        _portalSettings.PortalName + "</description>" + Environment.NewLine + "  <language>en-us</language>" + Environment.NewLine + "  <copyright>" +
+                        (!string.IsNullOrEmpty(_portalSettings.FooterText) ? _portalSettings.FooterText.Replace("[year]", DateTime.Now.Year.ToString()) : string.Empty) +
+                        "</copyright>" + Environment.NewLine + "  <webMaster>" + _portalSettings.Email + "</webMaster>" + Environment.NewLine + strRSS + "   </channel>" + Environment.NewLine +
+                        "</rss>");
                 File.WriteAllText(FileName, strRSS.ToString());
             }
             else
@@ -2112,8 +2112,8 @@ namespace DotNetNuke.Common
         /// <param name="strControlName">Name of control to look for</param>
         /// <returns></returns>
         /// <remarks>
-        /// This differs from FindControlRecursive in that it looks down the control hierarchy, whereas, the 
-        /// FindControlRecursive starts at the passed in control and walks the tree up.  Therefore, this function is 
+        /// This differs from FindControlRecursive in that it looks down the control hierarchy, whereas, the
+        /// FindControlRecursive starts at the passed in control and walks the tree up.  Therefore, this function is
         /// more a expensive task.
         /// </remarks>
         /// -----------------------------------------------------------------------------
@@ -2153,7 +2153,7 @@ namespace DotNetNuke.Common
                     }
                     else
                     {
-                        //Create JavaScript 
+                        //Create JavaScript
                         var sb = new StringBuilder();
                         sb.Append("<script type=\"text/javascript\">");
                         sb.Append("<!--");
@@ -2176,7 +2176,7 @@ namespace DotNetNuke.Common
                         sb.Append("// -->");
                         sb.Append(Environment.NewLine);
                         sb.Append("</script>");
-                        // Register Client Script 
+                        // Register Client Script
                         ClientAPI.RegisterClientScriptBlock(control.Page, "InitialFocus", sb.ToString());
                     }
                 }
@@ -2289,7 +2289,7 @@ namespace DotNetNuke.Common
                 Logger.Error(ex);
             }
         }
-        
+
         private static void DeleteFolder(string strRoot)
         {
             try
@@ -2365,7 +2365,7 @@ namespace DotNetNuke.Common
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// CleanName - removes characters from Module/Tab names that are being used for file names
-        /// in Module/Tab Import/Export.  
+        /// in Module/Tab Import/Export.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -2385,9 +2385,9 @@ namespace DotNetNuke.Common
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        ///   CreateValidClass - removes characters from Module/Tab names which are invalid  
+        ///   CreateValidClass - removes characters from Module/Tab names which are invalid
         ///   for use as an XHTML class attribute / CSS class selector value and optionally
-        ///   prepends the letter 'A' if the first character is not alphabetic.  This differs 
+        ///   prepends the letter 'A' if the first character is not alphabetic.  This differs
         ///   from <see>CreateValidID</see> which replaces invalid characters with an underscore
         ///   and replaces the first letter with an 'A' if it is not alphabetic
         /// </summary>
@@ -2404,7 +2404,7 @@ namespace DotNetNuke.Common
 
             //Regex is expensive so we will cache the results in a lookup table
             var validClassLookupDictionary = CBO.GetCachedObject<SharedDictionary<string, string>>(new CacheItemArgs("ValidClassLookup", 200, CacheItemPriority.NotRemovable),
-                                                                                                   (CacheItemArgs cacheItemArgs) => new SharedDictionary<string, string>());
+                                                                                                    (CacheItemArgs cacheItemArgs) => new SharedDictionary<string, string>());
 
             bool idFound = Null.NullBoolean;
             using (ISharedCollectionLock readLock = validClassLookupDictionary.GetReadLock())
@@ -2431,7 +2431,7 @@ namespace DotNetNuke.Common
                         // If we're asked to validate the first character...
                         if ((validateFirstChar))
                         {
-                            // classes should begin with a letter ([A-Za-z])' 
+                            // classes should begin with a letter ([A-Za-z])'
                             // prepend a starting non-letter character with an A
                             if ((InvalidCharacters.IsMatch(returnValue)))
                             {
@@ -2485,7 +2485,7 @@ namespace DotNetNuke.Common
                         // Replace all characters that aren't in the list with an underscore
                         returnValue = InvalidCharacters.Replace(inputValue, "_");
 
-                        // identifiers '... must begin with a letter ([A-Za-z])' 
+                        // identifiers '... must begin with a letter ([A-Za-z])'
                         // replace a starting non-letter character with an A
                         returnValue = InvalidInitialCharacters.Replace(returnValue, "A");
 
@@ -2571,7 +2571,7 @@ namespace DotNetNuke.Common
             {
                 return (ApplicationURL(_portalSettings.ActiveTab.TabID));
             }
-            return (ApplicationURL(-1));            
+            return (ApplicationURL(-1));
         }
 
         /// -----------------------------------------------------------------------------
@@ -2693,7 +2693,7 @@ namespace DotNetNuke.Common
         /// Generates the correctly formatted friendly URL
         /// </summary>
         /// <remarks>
-        /// This overload includes an optional page to include in the URL, and the portal 
+        /// This overload includes an optional page to include in the URL, and the portal
         /// settings for the site
         /// </remarks>
         /// <param name="tab">The current tab</param>
@@ -2710,7 +2710,7 @@ namespace DotNetNuke.Common
         /// Generates the correctly formatted friendly url
         /// </summary>
         /// <remarks>
-        /// This overload includes an optional page to include in the url, and the portal 
+        /// This overload includes an optional page to include in the url, and the portal
         /// alias for the site
         /// </remarks>
         /// <param name="tab">The current tab</param>
@@ -2756,7 +2756,7 @@ namespace DotNetNuke.Common
         /// <summary>
         /// Url's as internal links to Files, Tabs and Users should only be imported if
         /// those files, tabs and users exist. This function parses the url, and checks
-        /// whether the internal links exist. 
+        /// whether the internal links exist.
         /// If the link does not exist, the function will return an empty string
         /// </summary>
         /// <param name="ModuleId">Integer</param>
@@ -2864,8 +2864,8 @@ namespace DotNetNuke.Common
                     string strMessage = string.Format("error={0}", Localization.GetString("NoLoginControl", Localization.GlobalResourceFile));
                     //No account module so use portal tab
                     loginUrl = string.IsNullOrEmpty(returnUrl)
-                                 ? NavigateURL(portalSettings.ActiveTab.TabID, "Login", strMessage, popUpParameter)
-                                 : NavigateURL(portalSettings.ActiveTab.TabID, "Login", returnUrl, strMessage, popUpParameter);
+                                ? NavigateURL(portalSettings.ActiveTab.TabID, "Login", strMessage, popUpParameter)
+                                : NavigateURL(portalSettings.ActiveTab.TabID, "Login", returnUrl, strMessage, popUpParameter);
                 }
             }
             else
@@ -3389,7 +3389,7 @@ namespace DotNetNuke.Common
                     strLink = ApplicationPath + "/LinkClick.aspx?fileticket=" + UrlUtils.EncryptParameter(UrlUtils.GetParameterValue(Link), portalGuid);
                     if (PortalId == Null.NullInteger) //To track Host files
                     {
-                        strLink += "&hf=1";                        
+                        strLink += "&hf=1";
                     }
                 }
                 if (String.IsNullOrEmpty(strLink))
@@ -3580,32 +3580,32 @@ namespace DotNetNuke.Common
         /// <returns><c>true</c> if the tab contains "Account Login" module, otherwise, <c>false</c>.</returns>
         public static bool ValidateLoginTabID(int tabId)
         {
-	        return ValidateModuleInTab(tabId, "Account Login");
+            return ValidateModuleInTab(tabId, "Account Login");
         }
 
-		/// <summary>
-		/// Check whether the tab contains specific module.
-		/// </summary>
-		/// <param name="tabId">The tab id.</param>
-		/// <param name="moduleName">The module need to check.</param>
-		/// <returns><c>true</c> if the tab contains the module, otherwise, <c>false</c>.</returns>
-		public static bool ValidateModuleInTab(int tabId, string moduleName)
-		{
-			bool hasModule = Null.NullBoolean;
+        /// <summary>
+        /// Check whether the tab contains specific module.
+        /// </summary>
+        /// <param name="tabId">The tab id.</param>
+        /// <param name="moduleName">The module need to check.</param>
+        /// <returns><c>true</c> if the tab contains the module, otherwise, <c>false</c>.</returns>
+        public static bool ValidateModuleInTab(int tabId, string moduleName)
+        {
+            bool hasModule = Null.NullBoolean;
             foreach (ModuleInfo objModule in ModuleController.Instance.GetTabModules(tabId).Values)
             {
-				if (objModule.ModuleDefinition.FriendlyName == moduleName)
+                if (objModule.ModuleDefinition.FriendlyName == moduleName)
                 {
                     //We need to ensure that Anonymous Users or All Users have View permissions to the login page
                     TabInfo tab = TabController.Instance.GetTab(tabId, objModule.PortalID, false);
                     if (TabPermissionController.CanViewPage(tab))
                     {
-						hasModule = true;
+                        hasModule = true;
                         break;
                     }
                 }
             }
-			return hasModule;
+            return hasModule;
         }
 
         /// <summary>
@@ -3616,7 +3616,7 @@ namespace DotNetNuke.Common
         /// <returns><c>true</c> if the Filename matches extensions, otherwise, <c>false</c>.</returns>
         private static bool FilenameMatchesExtensions(string filename, string strExtensions)
         {
-			bool result = string.IsNullOrEmpty(strExtensions);
+            bool result = string.IsNullOrEmpty(strExtensions);
             if (!result)
             {
                 filename = filename.ToUpper();
@@ -3769,8 +3769,8 @@ namespace DotNetNuke.Common
 
         /// <summary>
         /// Return User Profile Picture Formatted Url. UserId, width and height can be passed to build a formatted Avatar Url.
-        /// </summary>        
-        /// <returns>Formatted url,  e.g. http://www.mysite.com/DnnImageHandler.ashx?mode=profilepic&amp;userid={0}&amp;h={1}&amp;w={2} 
+        /// </summary>
+        /// <returns>Formatted url,  e.g. http://www.mysite.com/DnnImageHandler.ashx?mode=profilepic&amp;userid={0}&amp;h={1}&amp;w={2}
         /// </returns>
         /// <remarks>Usage: ascx - &lt;asp:Image ID="avatar" runat="server" CssClass="SkinObject" /&gt;
         /// code behind - avatar.ImageUrl = string.Format(Globals.UserProfilePicFormattedUrl(), userInfo.UserID, 32, 32)
@@ -3784,18 +3784,18 @@ namespace DotNetNuke.Common
                 avatarUrl = HttpContext.Current.Request.Url.Host;
             }
             avatarUrl = string.Format("{0}://{1}{2}",
-                                      UrlUtils.IsSecureConnectionOrSslOffload(HttpContext.Current.Request) ? "https" : "http",
-                                      avatarUrl,
-                                      !HttpContext.Current.Request.Url.IsDefaultPort && !avatarUrl.Contains(":") ? ":" + HttpContext.Current.Request.Url.Port : string.Empty);
+                                    UrlUtils.IsSecureConnectionOrSslOffload(HttpContext.Current.Request) ? "https" : "http",
+                                    avatarUrl,
+                                    !HttpContext.Current.Request.Url.IsDefaultPort && !avatarUrl.Contains(":") ? ":" + HttpContext.Current.Request.Url.Port : string.Empty);
 
-            avatarUrl += "/DnnImageHandler.ashx?mode=profilepic&userId={0}&h={1}&w={2}";            
+            avatarUrl += "/DnnImageHandler.ashx?mode=profilepic&userId={0}&h={1}&w={2}";
 
             return avatarUrl;
         }
 
         /// <summary>
         /// Return User Profile Picture relative Url. UserId, width and height can be passed to build a formatted relative Avatar Url.
-        /// </summary>        
+        /// </summary>
         /// <returns>Formatted url,  e.g. /DnnImageHandler.ashx?userid={0}&amp;h={1}&amp;w={2} considering child portal
         /// </returns>
         /// <remarks>Usage: ascx - &lt;asp:Image ID="avatar" runat="server" CssClass="SkinObject" /&gt;
@@ -3809,7 +3809,7 @@ namespace DotNetNuke.Common
 
         /// <summary>
         /// Return User Profile Picture relative Url. UserId, width and height can be passed to build a formatted relative Avatar Url.
-        /// </summary>        
+        /// </summary>
         /// <param name="includeCdv">Indicates if cdv (Cache Delayed Verification) has to be included in the returned URL.</param>
         /// <returns>Formatted url,  e.g. /DnnImageHandler.ashx?userid={0}&amp;h={1}&amp;w={2} considering child portal
         /// </returns>
@@ -3836,9 +3836,9 @@ namespace DotNetNuke.Common
             return ApplicationPath + childPortalAlias + query + cdv;
 
         }
-        
+
         #region "Obsolete - retained for Binary Compatability"
-        
+
         // ****************************************************************************************
         // Constants are inlined in code and would require a rebuild of any module or skinobject
         // that may be using these constants.
@@ -3878,7 +3878,7 @@ namespace DotNetNuke.Common
         [Obsolete("This method has been deprecated. . Scheduled removal in v11.0.0.")]
         public static ArrayList GetFileList(DirectoryInfo CurrentDirectory, [Optional, DefaultParameterValue("")] // ERROR: Optional parameters aren't supported in C#
                                                                                 string strExtensions, [Optional, DefaultParameterValue(true)] // ERROR: Optional parameters aren't supported in C#
-                                                                                                          bool NoneSpecified)
+                                                                                                        bool NoneSpecified)
         {
             var arrFileList = new ArrayList();
             string strExtension = "";

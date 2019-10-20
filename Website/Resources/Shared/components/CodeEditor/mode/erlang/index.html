@@ -37,7 +37,7 @@
 -module('ex').
 -author('mats cronqvist').
 -export([demo/0,
-         rec_info/1]).
+        rec_info/1]).
 
 -record(demo,{a="One",b="Two",c="Three",d="Four"}).
 
@@ -51,25 +51,25 @@ expand_recs(M,Tup) when is_tuple(Tup) ->
   case tuple_size(Tup) of
     L when L < 1 -> Tup;
     L ->
-      try
+    try
         Fields = M:rec_info(element(1,Tup)),
         L = length(Fields)+1,
         lists:zip(Fields,expand_recs(M,tl(tuple_to_list(Tup))))
-      catch
+    catch
         _:_ -> list_to_tuple(expand_recs(M,tuple_to_list(Tup)))
-      end
+    end
   end;
 expand_recs(_,Term) ->
   Term.
 </textarea></form>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
         extraKeys: {"Tab":  "indentAuto"},
         theme: "erlang-dark"
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-erlang</code>.</p>

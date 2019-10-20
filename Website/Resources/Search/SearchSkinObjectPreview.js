@@ -91,7 +91,7 @@
                         return false;
                     });
 
-                    //attach see more       
+                    //attach see more
                     $('.searchSkinObjectPreview_more', $wrap).on('click', function () {
                         var $searchButton = $wrap.next();
                         if (!$searchButton.length) {

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -51,23 +51,23 @@ namespace DotNetNuke.Services.Authentication
     /// -----------------------------------------------------------------------------
     public class AuthenticationController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AuthenticationController));
-		#region "Private Members"
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AuthenticationController));
+        #region "Private Members"
 
         private static readonly DataProvider provider = DataProvider.Instance();
 
-		#endregion
+        #endregion
 
-		#region "Private Shared Methods"
+        #region "Private Shared Methods"
 
         private static object GetAuthenticationServicesCallBack(CacheItemArgs cacheItemArgs)
         {
             return CBO.FillCollection<AuthenticationInfo>(provider.GetAuthenticationServices());
         }
-		
-		#endregion
 
-		#region "Public Shared Methods"
+        #endregion
+
+        #region "Public Shared Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -79,12 +79,12 @@ namespace DotNetNuke.Services.Authentication
         {
             EventLogController.Instance.AddLog(authSystem, PortalController.Instance.GetCurrentPortalSettings(), UserController.Instance.GetCurrentUserInfo().UserID, "", EventLogController.EventLogType.AUTHENTICATION_CREATED);
             return provider.AddAuthentication(authSystem.PackageID,
-                                              authSystem.AuthenticationType,
-                                              authSystem.IsEnabled,
-                                              authSystem.SettingsControlSrc,
-                                              authSystem.LoginControlSrc,
-                                              authSystem.LogoffControlSrc,
-                                              UserController.Instance.GetCurrentUserInfo().UserID);
+                                            authSystem.AuthenticationType,
+                                            authSystem.IsEnabled,
+                                            authSystem.SettingsControlSrc,
+                                            authSystem.LoginControlSrc,
+                                            authSystem.LogoffControlSrc,
+                                            UserController.Instance.GetCurrentUserInfo().UserID);
         }
 
         /// -----------------------------------------------------------------------------
@@ -102,20 +102,20 @@ namespace DotNetNuke.Services.Authentication
             if (userAuth == null || String.IsNullOrEmpty(userAuth.AuthenticationType))
             {
                 EventLogController.Instance.AddLog("userID/authenticationType",
-                                   userID + "/" + authenticationType,
-                                   PortalController.Instance.GetCurrentPortalSettings(),
-                                   UserController.Instance.GetCurrentUserInfo().UserID,
-                                   EventLogController.EventLogType.AUTHENTICATION_USER_CREATED);
+                                    userID + "/" + authenticationType,
+                                    PortalController.Instance.GetCurrentPortalSettings(),
+                                    UserController.Instance.GetCurrentUserInfo().UserID,
+                                    EventLogController.EventLogType.AUTHENTICATION_USER_CREATED);
                 return provider.AddUserAuthentication(userID, authenticationType, authenticationToken, UserController.Instance.GetCurrentUserInfo().UserID);
             }
             else
             {
 
                 EventLogController.Instance.AddLog("userID/authenticationType already exists",
-                   userID + "/" + authenticationType,
-                   PortalController.Instance.GetCurrentPortalSettings(),
-                   UserController.Instance.GetCurrentUserInfo().UserID,
-                   EventLogController.EventLogType.AUTHENTICATION_USER_UPDATED);
+                    userID + "/" + authenticationType,
+                    PortalController.Instance.GetCurrentPortalSettings(),
+                    UserController.Instance.GetCurrentUserInfo().UserID,
+                    EventLogController.EventLogType.AUTHENTICATION_USER_UPDATED);
 
                 return userAuth.UserAuthenticationID;
             }
@@ -159,7 +159,7 @@ namespace DotNetNuke.Services.Authentication
             }
             if (authInfo == null)
             {
-				//Go to database
+                //Go to database
                 return CBO.FillObject<AuthenticationInfo>(provider.GetAuthenticationService(authenticationID));
             }
             return authInfo;
@@ -185,7 +185,7 @@ namespace DotNetNuke.Services.Authentication
             }
             if (authInfo == null)
             {
-				//Go to database
+                //Go to database
                 return CBO.FillObject<AuthenticationInfo>(provider.GetAuthenticationServiceByPackageID(packageID));
             }
             return authInfo;
@@ -211,7 +211,7 @@ namespace DotNetNuke.Services.Authentication
             }
             if (authInfo == null)
             {
-				//Go to database
+                //Go to database
                 return CBO.FillObject<AuthenticationInfo>(provider.GetAuthenticationServiceByType(authenticationType));
             }
             return authInfo;
@@ -247,10 +247,10 @@ namespace DotNetNuke.Services.Authentication
                 {
                     objAuthentication = GetAuthenticationServiceByType(HttpContext.Current.Request["authentication"]);
                 }
-				catch (Exception ex)
-				{
-					Logger.Error(ex);
-				}
+                catch (Exception ex)
+                {
+                    Logger.Error(ex);
+                }
             }
             return objAuthentication;
         }
@@ -284,11 +284,11 @@ namespace DotNetNuke.Services.Authentication
         {
             return (from a in GetEnabledAuthenticationServices()
                     let enabled = (a.AuthenticationType.Equals("Facebook")
-                                     || a.AuthenticationType.Equals("Google")
-                                     || a.AuthenticationType.Equals("Live")
-                                     || a.AuthenticationType.Equals("Twitter"))
-                                  ? IsEnabledForPortal(a, PortalSettings.Current.PortalId)
-                                  : !string.IsNullOrEmpty(a.LoginControlSrc) && ((control?.LoadControl("~/" + a.LoginControlSrc) as AuthenticationLoginBase)?.Enabled ?? true)
+                                    || a.AuthenticationType.Equals("Google")
+                                    || a.AuthenticationType.Equals("Live")
+                                    || a.AuthenticationType.Equals("Twitter"))
+                                ? IsEnabledForPortal(a, PortalSettings.Current.PortalId)
+                                : !string.IsNullOrEmpty(a.LoginControlSrc) && ((control?.LoadControl("~/" + a.LoginControlSrc) as AuthenticationLoginBase)?.Enabled ?? true)
                     where !a.AuthenticationType.Equals("DNN") && enabled
                     select a).Any();
         }
@@ -321,20 +321,20 @@ namespace DotNetNuke.Services.Authentication
             {
                 if (TabPermissionController.CanViewPage())
                 {
-					//redirect to current page (or home page if current page is a profile page to reduce redirects)
-		            if (settings.ActiveTab.TabID == settings.UserTabId || settings.ActiveTab.ParentId == settings.UserTabId)
-		            {
+                    //redirect to current page (or home page if current page is a profile page to reduce redirects)
+                    if (settings.ActiveTab.TabID == settings.UserTabId || settings.ActiveTab.ParentId == settings.UserTabId)
+                    {
                         _RedirectURL = TestableGlobals.Instance.NavigateURL(settings.HomeTabId);
-		            }
-		            else
-		            {
+                    }
+                    else
+                    {
                         _RedirectURL = (request != null && request.UrlReferrer != null) ? request.UrlReferrer.PathAndQuery : TestableGlobals.Instance.NavigateURL(settings.ActiveTab.TabID);
-		            }
+                    }
 
                 }
                 else if (settings.HomeTabId != -1)
                 {
-					//redirect to portal home page specified
+                    //redirect to portal home page specified
                     _RedirectURL = TestableGlobals.Instance.NavigateURL(settings.HomeTabId);
                 }
                 else //redirect to default portal root
@@ -344,7 +344,7 @@ namespace DotNetNuke.Services.Authentication
             }
             else //redirect to after logout page
             {
-				_RedirectURL = TestableGlobals.Instance.NavigateURL(settings.Registration.RedirectAfterLogout);
+                _RedirectURL = TestableGlobals.Instance.NavigateURL(settings.Registration.RedirectAfterLogout);
             }
             return _RedirectURL;
         }
@@ -370,7 +370,7 @@ namespace DotNetNuke.Services.Authentication
                 {
                     return;
                 }
-				
+
                 //save the authenticationmethod as a cookie
                 HttpCookie cookie = null;
                 cookie = Response.Cookies.Get("authentication");
@@ -418,16 +418,16 @@ namespace DotNetNuke.Services.Authentication
         public static void UpdateAuthentication(AuthenticationInfo authSystem)
         {
             provider.UpdateAuthentication(authSystem.AuthenticationID,
-                                          authSystem.PackageID,
-                                          authSystem.AuthenticationType,
-                                          authSystem.IsEnabled,
-                                          authSystem.SettingsControlSrc,
-                                          authSystem.LoginControlSrc,
-                                          authSystem.LogoffControlSrc,
-                                          UserController.Instance.GetCurrentUserInfo().UserID);
+                                        authSystem.PackageID,
+                                        authSystem.AuthenticationType,
+                                        authSystem.IsEnabled,
+                                        authSystem.SettingsControlSrc,
+                                        authSystem.LoginControlSrc,
+                                        authSystem.LogoffControlSrc,
+                                        UserController.Instance.GetCurrentUserInfo().UserID);
             EventLogController.Instance.AddLog(authSystem, PortalController.Instance.GetCurrentPortalSettings(), UserController.Instance.GetCurrentUserInfo().UserID, "", EventLogController.EventLogType.AUTHENTICATION_UPDATED);
         }
-		
-		#endregion
+
+        #endregion
     }
 }

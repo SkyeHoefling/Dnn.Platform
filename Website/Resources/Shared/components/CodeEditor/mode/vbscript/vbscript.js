@@ -9,7 +9,7 @@ E.G.:
     var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         isASP: true
-      });
+    });
 */
 
 (function(mod) {
@@ -41,9 +41,9 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
 
     var wordOperators = wordRegexp(['and', 'or', 'not', 'xor', 'is', 'mod', 'eqv', 'imp']);
     var commonkeywords = ['dim', 'redim', 'then',  'until', 'randomize',
-                          'byval','byref','new','property', 'exit', 'in',
-                          'const','private', 'public',
-                          'get','set','let', 'stop', 'on error resume next', 'on error goto 0', 'option explicit', 'call', 'me'];
+                        'byval','byref','new','property', 'exit', 'in',
+                        'const','private', 'public',
+                        'get','set','let', 'stop', 'on error resume next', 'on error goto 0', 'option explicit', 'call', 'me'];
 
     //This list was from: http://msdn.microsoft.com/en-us/library/f8tbc79x(v=vs.84).aspx
     var atomWords = ['true', 'false', 'nothing', 'empty', 'null'];
@@ -57,12 +57,12 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
 
     //This list was from: http://msdn.microsoft.com/en-us/library/ydz4cfk3(v=vs.84).aspx
     var builtinConsts = ['vbBlack', 'vbRed', 'vbGreen', 'vbYellow', 'vbBlue', 'vbMagenta', 'vbCyan', 'vbWhite', 'vbBinaryCompare', 'vbTextCompare',
-                         'vbSunday', 'vbMonday', 'vbTuesday', 'vbWednesday', 'vbThursday', 'vbFriday', 'vbSaturday', 'vbUseSystemDayOfWeek', 'vbFirstJan1', 'vbFirstFourDays', 'vbFirstFullWeek',
-                         'vbGeneralDate', 'vbLongDate', 'vbShortDate', 'vbLongTime', 'vbShortTime', 'vbObjectError',
-                         'vbOKOnly', 'vbOKCancel', 'vbAbortRetryIgnore', 'vbYesNoCancel', 'vbYesNo', 'vbRetryCancel', 'vbCritical', 'vbQuestion', 'vbExclamation', 'vbInformation', 'vbDefaultButton1', 'vbDefaultButton2',
-                         'vbDefaultButton3', 'vbDefaultButton4', 'vbApplicationModal', 'vbSystemModal', 'vbOK', 'vbCancel', 'vbAbort', 'vbRetry', 'vbIgnore', 'vbYes', 'vbNo',
-                         'vbCr', 'VbCrLf', 'vbFormFeed', 'vbLf', 'vbNewLine', 'vbNullChar', 'vbNullString', 'vbTab', 'vbVerticalTab', 'vbUseDefault', 'vbTrue', 'vbFalse',
-                         'vbEmpty', 'vbNull', 'vbInteger', 'vbLong', 'vbSingle', 'vbDouble', 'vbCurrency', 'vbDate', 'vbString', 'vbObject', 'vbError', 'vbBoolean', 'vbVariant', 'vbDataObject', 'vbDecimal', 'vbByte', 'vbArray'];
+                        'vbSunday', 'vbMonday', 'vbTuesday', 'vbWednesday', 'vbThursday', 'vbFriday', 'vbSaturday', 'vbUseSystemDayOfWeek', 'vbFirstJan1', 'vbFirstFourDays', 'vbFirstFullWeek',
+                        'vbGeneralDate', 'vbLongDate', 'vbShortDate', 'vbLongTime', 'vbShortTime', 'vbObjectError',
+                        'vbOKOnly', 'vbOKCancel', 'vbAbortRetryIgnore', 'vbYesNoCancel', 'vbYesNo', 'vbRetryCancel', 'vbCritical', 'vbQuestion', 'vbExclamation', 'vbInformation', 'vbDefaultButton1', 'vbDefaultButton2',
+                        'vbDefaultButton3', 'vbDefaultButton4', 'vbApplicationModal', 'vbSystemModal', 'vbOK', 'vbCancel', 'vbAbort', 'vbRetry', 'vbIgnore', 'vbYes', 'vbNo',
+                        'vbCr', 'VbCrLf', 'vbFormFeed', 'vbLf', 'vbNewLine', 'vbNullChar', 'vbNullString', 'vbTab', 'vbVerticalTab', 'vbUseDefault', 'vbTrue', 'vbFalse',
+                        'vbEmpty', 'vbNull', 'vbInteger', 'vbLong', 'vbSingle', 'vbDouble', 'vbCurrency', 'vbDate', 'vbString', 'vbObject', 'vbError', 'vbBoolean', 'vbVariant', 'vbDataObject', 'vbDecimal', 'vbByte', 'vbArray'];
     //This list was from: http://msdn.microsoft.com/en-us/library/hkc375ea(v=vs.84).aspx
     var builtinObjsWords = ['WScript', 'err', 'debug', 'RegExp'];
     var knownProperties = ['description', 'firstindex', 'global', 'helpcontext', 'helpfile', 'ignorecase', 'length', 'number', 'pattern', 'source', 'value', 'count'];
@@ -70,15 +70,15 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
 
     var aspBuiltinObjsWords = ['server', 'response', 'request', 'session', 'application'];
     var aspKnownProperties = ['buffer', 'cachecontrol', 'charset', 'contenttype', 'expires', 'expiresabsolute', 'isclientconnected', 'pics', 'status', //response
-                              'clientcertificate', 'cookies', 'form', 'querystring', 'servervariables', 'totalbytes', //request
-                              'contents', 'staticobjects', //application
-                              'codepage', 'lcid', 'sessionid', 'timeout', //session
-                              'scripttimeout']; //server
+                            'clientcertificate', 'cookies', 'form', 'querystring', 'servervariables', 'totalbytes', //request
+                            'contents', 'staticobjects', //application
+                            'codepage', 'lcid', 'sessionid', 'timeout', //session
+                            'scripttimeout']; //server
     var aspKnownMethods = ['addheader', 'appendtolog', 'binarywrite', 'end', 'flush', 'redirect', //response
-                           'binaryread', //request
-                           'remove', 'removeall', 'lock', 'unlock', //application
-                           'abandon', //session
-                           'getlasterror', 'htmlencode', 'mappath', 'transfer', 'urlencode']; //server
+                            'binaryread', //request
+                            'remove', 'removeall', 'lock', 'unlock', //application
+                            'abandon', //session
+                            'getlasterror', 'htmlencode', 'mappath', 'transfer', 'urlencode']; //server
 
     var knownWords = knownMethods.concat(knownProperties);
 
@@ -106,11 +106,11 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
 
 
     function indent(_stream, state) {
-      state.currentIndent++;
+    state.currentIndent++;
     }
 
     function dedent(_stream, state) {
-      state.currentIndent--;
+    state.currentIndent--;
     }
     // tokenizers
     function tokenBase(stream, state) {
@@ -201,9 +201,9 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
         }
         if (stream.match(opening)) {
             if (! state.doInCurrentLine)
-              indent(stream,state);
+            indent(stream,state);
             else
-              state.doInCurrentLine = false;
+            state.doInCurrentLine = false;
 
             return 'keyword';
         }
@@ -220,9 +220,9 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
         }
         if (stream.match(closing)) {
             if (! state.doInCurrentLine)
-              dedent(stream,state);
+            dedent(stream,state);
             else
-              state.doInCurrentLine = false;
+            state.doInCurrentLine = false;
 
             return 'keyword';
         }
@@ -308,22 +308,22 @@ CodeMirror.defineMode("vbscript", function(conf, parserConf) {
         electricChars:"dDpPtTfFeE ",
         startState: function() {
             return {
-              tokenize: tokenBase,
-              lastToken: null,
-              currentIndent: 0,
-              nextLineIndent: 0,
-              doInCurrentLine: false,
-              ignoreKeyword: false
+            tokenize: tokenBase,
+            lastToken: null,
+            currentIndent: 0,
+            nextLineIndent: 0,
+            doInCurrentLine: false,
+            ignoreKeyword: false
 
 
-          };
+        };
         },
 
         token: function(stream, state) {
             if (stream.sol()) {
-              state.currentIndent += state.nextLineIndent;
-              state.nextLineIndent = 0;
-              state.doInCurrentLine = 0;
+            state.currentIndent += state.nextLineIndent;
+            state.nextLineIndent = 0;
+            state.doInCurrentLine = 0;
             }
             var style = tokenLexer(stream, state);
 

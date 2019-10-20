@@ -87,7 +87,7 @@
     Telerik.Web.UI.Widgets.DocumentPreviewer.registerClass('Telerik.Web.UI.Widgets.DocumentPreviewer', Telerik.Web.UI.Widgets.FilePreviewer);
 </script>
 <div id="DocumentPreviewer" class="documentPreviewer">
-	<telerik:RadToolBar ID="EmptyToolbar" runat="Server" Height="26px" Width="100%">
-	</telerik:RadToolBar>
-	<dc:LinkManagerDialog ID="linkManager" runat="server" StandAlone="false"></dc:LinkManagerDialog>
+    <telerik:RadToolBar ID="EmptyToolbar" runat="Server" Height="26px" Width="100%">
+    </telerik:RadToolBar>
+    <dc:LinkManagerDialog ID="linkManager" runat="server" StandAlone="false"></dc:LinkManagerDialog>
 </div>

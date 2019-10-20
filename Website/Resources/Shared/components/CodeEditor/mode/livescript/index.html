@@ -75,15 +75,15 @@ export partition = (f, xs) -->
     passed = {}
     failed = {}
     for key, x of xs
-      (if f x then passed else failed)[key] = x
+    (if f x then passed else failed)[key] = x
   else
     passed = []
     failed = []
     for x in xs
-      (if f x then passed else failed)push x
+    (if f x then passed else failed)push x
     if type is \String
-      passed *= ''
-      failed *= ''
+    passed *= ''
+    failed *= ''
   [passed, failed]
 
 export find = (f, xs) -->
@@ -297,8 +297,8 @@ export zip = (xs, ys) -->
   result = []
   for zs, i in [xs, ys]
     for z, j in zs
-      result.push [] if i is 0
-      result[j]?push z
+    result.push [] if i is 0
+    result[j]?push z
   result
 
 export zipWith = (f,xs, ys) -->
@@ -312,8 +312,8 @@ export zipAll = (...xss) ->
   result = []
   for xs, i in xss
     for x, j in xs
-      result.push [] if i is 0
-      result[j]?push x
+    result.push [] if i is 0
+    result[j]?push x
   result
 
 export zipAllWith = (f, ...xss) ->
@@ -327,7 +327,7 @@ export compose = (...funcs) ->
   ->
     args = arguments
     for f in funcs
-      args = [f.apply this, args]
+    args = [f.apply this, args]
     args.0
 
 export curry = (f) ->
@@ -446,10 +446,10 @@ export installPrelude = !(target) ->
 export prelude = out$
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         theme: "solarized light",
         lineNumbers: true
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-livescript</code>.</p>

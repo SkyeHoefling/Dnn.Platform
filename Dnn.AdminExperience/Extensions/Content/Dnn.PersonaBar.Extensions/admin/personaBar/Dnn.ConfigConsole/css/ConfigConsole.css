@@ -60,12 +60,12 @@
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    padding: 11px;  
-    width: 100%;  
+    padding: 11px;
+    width: 100%;
 }
 
-.configConsolePanel .form-item select { 
-	cursor: pointer; 
+.configConsolePanel .form-item select {
+    cursor: pointer;
 }
 
 .configConsolePanel .form-item span.caption.inline + div {
@@ -82,8 +82,8 @@
     padding: 9px 22px;
 }
 
-.configConsolePanel .form-item textarea{ 
-	height: 220px;
+.configConsolePanel .form-item textarea{
+    height: 220px;
 }
 
 .configConsolePanel .actions{
@@ -106,7 +106,7 @@
     margin: 0;
     width: auto !important;
     display: inline-block;
-	position: relative;
+    position: relative;
     vertical-align: middle;
 }
 
@@ -120,23 +120,23 @@
     direction: ltr;
     cursor: pointer;
     height: 100%;
-	font-size: 200px;
+    font-size: 200px;
 }
 
 .configConsolePanel .note {
-	float: right;
-	width: 300px;
-	position: relative;
+    float: right;
+    width: 300px;
+    position: relative;
 }
 
 .configConsolePanel .caption {
-	float: left;
-	padding-right: 20px;
-	width: auto !important;
+    float: left;
+    padding-right: 20px;
+    width: auto !important;
 }
 
 .configConsolePanel .description {
-	top: 0;
+    top: 0;
     position: absolute;
 }
 .configConsolePanel div.body ul.tabs-nav {

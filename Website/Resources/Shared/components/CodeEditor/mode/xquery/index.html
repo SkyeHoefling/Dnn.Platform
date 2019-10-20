@@ -9,10 +9,10 @@
 <script src="../../lib/codemirror.js"></script>
 <script src="xquery.js"></script>
 <style type="text/css">
-	.CodeMirror {
-	  border-top: 1px solid black; border-bottom: 1px solid black;
-	  height:400px;
-	}
+    .CodeMirror {
+    border-top: 1px solid black; border-bottom: 1px solid black;
+    height:400px;
+    }
     </style>
 <div id=nav>
   <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
@@ -30,23 +30,23 @@
 
 <article>
 <h2>XQuery mode</h2>
- 
- 
-<div class="cm-s-default"> 
-	<textarea id="code" name="code"> 
+
+
+<div class="cm-s-default">
+    <textarea id="code" name="code">
 xquery version &quot;1.0-ml&quot;;
 (: this is
- : a 
-   "comment" :)
+ : a
+    "comment" :)
 let $let := &lt;x attr=&quot;value&quot;&gt;&quot;test&quot;&lt;func&gt;function() $var {function()} {$var}&lt;/func&gt;&lt;/x&gt;
 let $joe:=1
 return element element {
-	attribute attribute { 1 },
-	element test { &#39;a&#39; }, 
-	attribute foo { &quot;bar&quot; },
-	fn:doc()[ foo/@bar eq $let ],
-	//x }    
- 
+    attribute attribute { 1 },
+    element test { &#39;a&#39; },
+    attribute foo { &quot;bar&quot; },
+    fn:doc()[ foo/@bar eq $let ],
+    //x }
+
 (: a more 'evil' test :)
 (: Modified Blakeley example (: with nested comment :) ... :)
 declare private function local:declare() {()};
@@ -55,11 +55,11 @@ declare private function local:function() {()};
 declare private function local:local() {()};
 let $let := &lt;let&gt;let $let := &quot;let&quot;&lt;/let&gt;
 return element element {
-	attribute attribute { try { xdmp:version() } catch($e) { xdmp:log($e) } },
-	attribute fn:doc { &quot;bar&quot; castable as xs:string },
-	element text { text { &quot;text&quot; } },
-	fn:doc()[ child::eq/(@bar | attribute::attribute) eq $let ],
-	//fn:doc
+    attribute attribute { try { xdmp:version() } catch($e) { xdmp:log($e) } },
+    attribute fn:doc { &quot;bar&quot; castable as xs:string },
+    element text { text { &quot;text&quot; } },
+    fn:doc()[ child::eq/(@bar | attribute::attribute) eq $let ],
+    //fn:doc
 }
 
 
@@ -99,8 +99,8 @@ declare function json:atomize($x as element()) as xs:string {
   if (count($x/node()) = 0) then 'null'
   else if ($x/@type = &quot;number&quot;) then
     let $castable := $x castable as xs:float or
-                     $x castable as xs:double or
-                     $x castable as xs:decimal
+                    $x castable as xs:double or
+                    $x castable as xs:decimal
     return
     if ($castable) then xs:string($x)
     else error(concat(&quot;Not a number: &quot;, xdmp:describe($x)))
@@ -120,7 +120,7 @@ declare function json:print-value($x as element()) as xs:string {
     concat('&quot;', json:escape(xdmp:quote($x/node())), '&quot;')
   else
     string-join(('{',
-      string-join(for $i in $x/* return json:print-name-value($i), &quot;,&quot;),
+    string-join(for $i in $x/* return json:print-name-value($i), &quot;,&quot;),
     '}'), &quot;&quot;)
 };
 
@@ -137,10 +137,10 @@ declare function json:print-name-value($x as element()) as xs:string? {
     ()  (: I was handled previously :)
   else if ($first-in-array) then
     string-join(('&quot;', json:escape($name), '&quot;:[',
-      string-join((for $i in ($x, $x/following-sibling::*[name(.) = $name]) return json:print-value($i)), &quot;,&quot;),
+    string-join((for $i in ($x, $x/following-sibling::*[name(.) = $name]) return json:print-value($i)), &quot;,&quot;),
     ']'), &quot;&quot;)
-   else
-     string-join(('&quot;', json:escape($name), '&quot;:', json:print-value($x)), &quot;&quot;)
+    else
+    string-join(('&quot;', json:escape($name), '&quot;:', json:print-value($x)), &quot;&quot;)
 };
 
 (:~
@@ -183,28 +183,28 @@ declare function json:print-name-value($x as element()) as xs:string? {
 
   @author Jason Hunter
   @version 1.0.1
-  
+
   Ported to xquery 1.0-ml; double escaped backslashes in json:escape
 :)
 declare function json:serialize($x as element())  as xs:string {
   string-join(('{', json:print-name-value($x), '}'), &quot;&quot;)
 };
-  </textarea> 
-</div> 
- 
-    <script> 
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+  </textarea>
+</div>
+
+    <script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
         theme: "xq-dark"
-      });
-    </script> 
- 
-    <p><strong>MIME types defined:</strong> <code>application/xquery</code>.</p> 
- 
-    <p>Development of the CodeMirror XQuery mode was sponsored by 
-      <a href="http://marklogic.com">MarkLogic</a> and developed by 
-      <a href="https://twitter.com/mbrevoort">Mike Brevoort</a>.
+    });
+    </script>
+
+    <p><strong>MIME types defined:</strong> <code>application/xquery</code>.</p>
+
+    <p>Development of the CodeMirror XQuery mode was sponsored by
+    <a href="http://marklogic.com">MarkLogic</a> and developed by
+    <a href="https://twitter.com/mbrevoort">Mike Brevoort</a>.
     </p>
- 
+
   </article>

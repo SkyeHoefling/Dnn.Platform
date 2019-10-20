@@ -47,11 +47,11 @@ class Module extends Component {
                 {!module.IsDeleted && !isDefault && <div className="icons-container">
                     <span
                         className={`icon float-left ${(module.IsShared ? " disabled" : (module.IsLocalized ? " blue" : ""))}`}
-                        title={module.IsShared ? Localization.get("LocalizedSharedModule_tooltip") : 
+                        title={module.IsShared ? Localization.get("LocalizedSharedModule_tooltip") :
                             (module.IsLocalized ? Localization.get("ClickToDeLocalizeModule_tooltip") : Localization.get("ClickToLocalizeModule_tooltip"))}
                         onClick={this.toggleLink.bind(this) }
                         dangerouslySetInnerHTML={{ __html: SvgIcons.LinkIcon }} />
-                    {module.TranslatedVisible && 
+                    {module.TranslatedVisible &&
                         <div title={module.IsTranslated ? Localization.get("UnCheckTranslatedModule_tooltip") : Localization.get("CheckToTranslateModule_tooltip")} style={{ float: "left", display: "inline-block" }}>
                             <Checkbox
                                 value={module.IsTranslated}

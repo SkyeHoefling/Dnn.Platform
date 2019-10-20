@@ -68,38 +68,38 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-	SET @TranStarted = 0
+    SET @TranStarted = 0
 
     UPDATE dbo.aspnet_Users WITH (ROWLOCK)
     SET
-         LastActivityDate = @LastActivityDate
+        LastActivityDate = @LastActivityDate
     WHERE
-       @UserId = UserId
+        @UserId = UserId
 
     IF( @@ERROR <> 0 )
         GOTO Cleanup
 
     UPDATE dbo.aspnet_Membership WITH (ROWLOCK)
     SET
-         Email            = @Email,
-         LoweredEmail     = LOWER(@Email),
-         Comment          = @Comment,
-         IsApproved       = @IsApproved,
-         LastLoginDate    = @LastLoginDate
+        Email            = @Email,
+        LoweredEmail     = LOWER(@Email),
+        Comment          = @Comment,
+        IsApproved       = @IsApproved,
+        LastLoginDate    = @LastLoginDate
     WHERE
-       @UserId = UserId
+        @UserId = UserId
 
     IF( @@ERROR <> 0 )
         GOTO Cleanup
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -109,7 +109,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN -1
@@ -145,11 +145,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     SELECT  @UserId = u.UserId,
             @IsApproved = m.IsApproved,
@@ -249,8 +249,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -260,7 +260,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -360,11 +360,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     SELECT  @UserId = u.UserId
     FROM    dbo.aspnet_Users u, dbo.aspnet_Applications a, dbo.aspnet_Membership m
@@ -380,11 +380,11 @@ BEGIN
     END
 
     SELECT @IsLockedOut = IsLockedOut,
-           @LastLockoutDate = LastLockoutDate,
-           @FailedPasswordAttemptCount = FailedPasswordAttemptCount,
-           @FailedPasswordAttemptWindowStart = FailedPasswordAttemptWindowStart,
-           @FailedPasswordAnswerAttemptCount = FailedPasswordAnswerAttemptCount,
-           @FailedPasswordAnswerAttemptWindowStart = FailedPasswordAnswerAttemptWindowStart
+            @LastLockoutDate = LastLockoutDate,
+            @FailedPasswordAttemptCount = FailedPasswordAttemptCount,
+            @FailedPasswordAttemptWindowStart = FailedPasswordAttemptWindowStart,
+            @FailedPasswordAnswerAttemptCount = FailedPasswordAnswerAttemptCount,
+            @FailedPasswordAnswerAttemptWindowStart = FailedPasswordAnswerAttemptWindowStart
     FROM dbo.aspnet_Membership WITH ( UPDLOCK )
     WHERE @UserId = UserId
 
@@ -396,11 +396,11 @@ BEGIN
 
     UPDATE dbo.aspnet_Membership
     SET    Password = @NewPassword,
-           LastPasswordChangedDate = @CurrentTimeUtc,
-           PasswordFormat = @PasswordFormat,
-           PasswordSalt = @PasswordSalt
+            LastPasswordChangedDate = @CurrentTimeUtc,
+            PasswordFormat = @PasswordFormat,
+            PasswordSalt = @PasswordSalt
     WHERE  @UserId = UserId AND
-           ( ( @PasswordAnswer IS NULL ) OR ( LOWER( PasswordAnswer ) = LOWER( @PasswordAnswer ) ) )
+            ( ( @PasswordAnswer IS NULL ) OR ( LOWER( PasswordAnswer ) = LOWER( @PasswordAnswer ) ) )
 
     IF ( @@ROWCOUNT = 0 )
         BEGIN
@@ -453,8 +453,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -464,7 +464,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -488,11 +488,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-	SET @TranStarted = 0
+    SET @TranStarted = 0
 
     DECLARE @ErrorCode   int
     DECLARE @RowCount    int
@@ -518,7 +518,7 @@ BEGIN
         DELETE FROM dbo.aspnet_Membership WHERE @UserId = UserId
 
         SELECT @ErrorCode = @@ERROR,
-               @RowCount = @@ROWCOUNT
+                @RowCount = @@ROWCOUNT
 
         IF( @ErrorCode <> 0 )
             GOTO Cleanup
@@ -596,8 +596,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	    SET @TranStarted = 0
-	    COMMIT TRANSACTION
+        SET @TranStarted = 0
+        COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -608,7 +608,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-	    ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -682,9 +682,9 @@ BEGIN
             AND u.UserId = p.UserId
             AND (@InactiveSinceDate IS NULL OR LastActivityDate <= @InactiveSinceDate)
             AND (     (@ProfileAuthOptions = 2)
-                   OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
-                   OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
-                 )
+                    OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
+                    OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
+                )
             AND (@UserNameToMatch IS NULL OR LoweredUserName LIKE LOWER(@UserNameToMatch))
         ORDER BY UserName
 
@@ -701,128 +701,128 @@ END
 GO
 
 ALTER PROCEDURE dbo.aspnet_UsersInRoles_RemoveUsersFromRoles
-	@ApplicationName  nvarchar(256),
-	@UserNames		  nvarchar(4000),
-	@RoleNames		  nvarchar(4000)
+    @ApplicationName  nvarchar(256),
+    @UserNames		  nvarchar(4000),
+    @RoleNames		  nvarchar(4000)
 AS
 BEGIN
-	DECLARE @AppId uniqueidentifier
-	SELECT  @AppId = NULL
-	SELECT  @AppId = ApplicationId FROM aspnet_Applications WHERE LOWER(@ApplicationName) = LoweredApplicationName
-	IF (@AppId IS NULL)
-		RETURN(2)
+    DECLARE @AppId uniqueidentifier
+    SELECT  @AppId = NULL
+    SELECT  @AppId = ApplicationId FROM aspnet_Applications WHERE LOWER(@ApplicationName) = LoweredApplicationName
+    IF (@AppId IS NULL)
+        RETURN(2)
 
 
-	DECLARE @TranStarted   bit
-	SET @TranStarted = 0
+    DECLARE @TranStarted   bit
+    SET @TranStarted = 0
 
-	IF( @@TRANCOUNT = 0 )
-	BEGIN
-		BEGIN TRANSACTION
-		SET @TranStarted = 1
-	END
+    IF( @@TRANCOUNT = 0 )
+    BEGIN
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
+    END
 
-	DECLARE @tbNames  table(Name nvarchar(256) NOT NULL PRIMARY KEY)
-	DECLARE @tbRoles  table(RoleId uniqueidentifier NOT NULL PRIMARY KEY)
-	DECLARE @tbUsers  table(UserId uniqueidentifier NOT NULL PRIMARY KEY)
-	DECLARE @Num	  int
-	DECLARE @Pos	  int
-	DECLARE @NextPos  int
-	DECLARE @Name	  nvarchar(256)
-	DECLARE @CountAll int
-	DECLARE @CountU	  int
-	DECLARE @CountR	  int
-
-
-	SET @Num = 0
-	SET @Pos = 1
-	WHILE(@Pos <= LEN(@RoleNames))
-	BEGIN
-		SELECT @NextPos = CHARINDEX(N',', @RoleNames,  @Pos)
-		IF (@NextPos = 0 OR @NextPos IS NULL)
-			SELECT @NextPos = LEN(@RoleNames) + 1
-		SELECT @Name = RTRIM(LTRIM(SUBSTRING(@RoleNames, @Pos, @NextPos - @Pos)))
-		SELECT @Pos = @NextPos+1
-
-		INSERT INTO @tbNames VALUES (@Name)
-		SET @Num = @Num + 1
-	END
-
-	INSERT INTO @tbRoles
-	  SELECT RoleId
-	  FROM   dbo.aspnet_Roles ar, @tbNames t
-	  WHERE  LOWER(t.Name) = ar.LoweredRoleName AND ar.ApplicationId = @AppId
-	SELECT @CountR = @@ROWCOUNT
-
-	IF (@CountR <> @Num)
-	BEGIN
-		SELECT TOP 1 N'', Name
-		FROM   @tbNames
-		WHERE  LOWER(Name) NOT IN (SELECT ar.LoweredRoleName FROM dbo.aspnet_Roles ar,  @tbRoles r WHERE r.RoleId = ar.RoleId)
-		IF( @TranStarted = 1 )
-			ROLLBACK TRANSACTION
-		RETURN(2)
-	END
+    DECLARE @tbNames  table(Name nvarchar(256) NOT NULL PRIMARY KEY)
+    DECLARE @tbRoles  table(RoleId uniqueidentifier NOT NULL PRIMARY KEY)
+    DECLARE @tbUsers  table(UserId uniqueidentifier NOT NULL PRIMARY KEY)
+    DECLARE @Num	  int
+    DECLARE @Pos	  int
+    DECLARE @NextPos  int
+    DECLARE @Name	  nvarchar(256)
+    DECLARE @CountAll int
+    DECLARE @CountU	  int
+    DECLARE @CountR	  int
 
 
-	DELETE FROM @tbNames WHERE 1=1
-	SET @Num = 0
-	SET @Pos = 1
+    SET @Num = 0
+    SET @Pos = 1
+    WHILE(@Pos <= LEN(@RoleNames))
+    BEGIN
+        SELECT @NextPos = CHARINDEX(N',', @RoleNames,  @Pos)
+        IF (@NextPos = 0 OR @NextPos IS NULL)
+            SELECT @NextPos = LEN(@RoleNames) + 1
+        SELECT @Name = RTRIM(LTRIM(SUBSTRING(@RoleNames, @Pos, @NextPos - @Pos)))
+        SELECT @Pos = @NextPos+1
+
+        INSERT INTO @tbNames VALUES (@Name)
+        SET @Num = @Num + 1
+    END
+
+    INSERT INTO @tbRoles
+    SELECT RoleId
+    FROM   dbo.aspnet_Roles ar, @tbNames t
+    WHERE  LOWER(t.Name) = ar.LoweredRoleName AND ar.ApplicationId = @AppId
+    SELECT @CountR = @@ROWCOUNT
+
+    IF (@CountR <> @Num)
+    BEGIN
+        SELECT TOP 1 N'', Name
+        FROM   @tbNames
+        WHERE  LOWER(Name) NOT IN (SELECT ar.LoweredRoleName FROM dbo.aspnet_Roles ar,  @tbRoles r WHERE r.RoleId = ar.RoleId)
+        IF( @TranStarted = 1 )
+            ROLLBACK TRANSACTION
+        RETURN(2)
+    END
 
 
-	WHILE(@Pos <= LEN(@UserNames))
-	BEGIN
-		SELECT @NextPos = CHARINDEX(N',', @UserNames,  @Pos)
-		IF (@NextPos = 0 OR @NextPos IS NULL)
-			SELECT @NextPos = LEN(@UserNames) + 1
-		SELECT @Name = RTRIM(LTRIM(SUBSTRING(@UserNames, @Pos, @NextPos - @Pos)))
-		SELECT @Pos = @NextPos+1
+    DELETE FROM @tbNames WHERE 1=1
+    SET @Num = 0
+    SET @Pos = 1
 
-		INSERT INTO @tbNames VALUES (@Name)
-		SET @Num = @Num + 1
-	END
 
-	INSERT INTO @tbUsers
-	  SELECT UserId
-	  FROM   dbo.aspnet_Users ar, @tbNames t
-	  WHERE  LOWER(t.Name) = ar.LoweredUserName AND ar.ApplicationId = @AppId
+    WHILE(@Pos <= LEN(@UserNames))
+    BEGIN
+        SELECT @NextPos = CHARINDEX(N',', @UserNames,  @Pos)
+        IF (@NextPos = 0 OR @NextPos IS NULL)
+            SELECT @NextPos = LEN(@UserNames) + 1
+        SELECT @Name = RTRIM(LTRIM(SUBSTRING(@UserNames, @Pos, @NextPos - @Pos)))
+        SELECT @Pos = @NextPos+1
 
-	SELECT @CountU = @@ROWCOUNT
-	IF (@CountU <> @Num)
-	BEGIN
-		SELECT TOP 1 Name, N''
-		FROM   @tbNames
-		WHERE  LOWER(Name) NOT IN (SELECT au.LoweredUserName FROM dbo.aspnet_Users au,  @tbUsers u WHERE u.UserId = au.UserId)
+        INSERT INTO @tbNames VALUES (@Name)
+        SET @Num = @Num + 1
+    END
 
-		IF( @TranStarted = 1 )
-			ROLLBACK TRANSACTION
-		RETURN(1)
-	END
+    INSERT INTO @tbUsers
+    SELECT UserId
+    FROM   dbo.aspnet_Users ar, @tbNames t
+    WHERE  LOWER(t.Name) = ar.LoweredUserName AND ar.ApplicationId = @AppId
 
-	SELECT  @CountAll = COUNT(*)
-	FROM	dbo.aspnet_UsersInRoles ur, @tbUsers u, @tbRoles r
-	WHERE   ur.UserId = u.UserId AND ur.RoleId = r.RoleId
+    SELECT @CountU = @@ROWCOUNT
+    IF (@CountU <> @Num)
+    BEGIN
+        SELECT TOP 1 Name, N''
+        FROM   @tbNames
+        WHERE  LOWER(Name) NOT IN (SELECT au.LoweredUserName FROM dbo.aspnet_Users au,  @tbUsers u WHERE u.UserId = au.UserId)
 
-	IF (@CountAll <> @CountU * @CountR)
-	BEGIN
-		SELECT TOP 1 UserName, RoleName
-		FROM		 @tbUsers tu, @tbRoles tr, dbo.aspnet_Users u, dbo.aspnet_Roles r
-		WHERE		 u.UserId = tu.UserId AND r.RoleId = tr.RoleId AND
-					 tu.UserId NOT IN (SELECT ur.UserId FROM dbo.aspnet_UsersInRoles ur WHERE ur.RoleId = tr.RoleId) AND
-					 tr.RoleId NOT IN (SELECT ur.RoleId FROM dbo.aspnet_UsersInRoles ur WHERE ur.UserId = tu.UserId)
-		IF( @TranStarted = 1 )
-			ROLLBACK TRANSACTION
-		RETURN(3)
-	END
+        IF( @TranStarted = 1 )
+            ROLLBACK TRANSACTION
+        RETURN(1)
+    END
 
-	DELETE FROM dbo.aspnet_UsersInRoles
-	WHERE UserId IN (SELECT UserId FROM @tbUsers)
-	  AND RoleId IN (SELECT RoleId FROM @tbRoles)
-	IF( @TranStarted = 1 )
-		COMMIT TRANSACTION
-	RETURN(0)
+    SELECT  @CountAll = COUNT(*)
+    FROM	dbo.aspnet_UsersInRoles ur, @tbUsers u, @tbRoles r
+    WHERE   ur.UserId = u.UserId AND ur.RoleId = r.RoleId
+
+    IF (@CountAll <> @CountU * @CountR)
+    BEGIN
+        SELECT TOP 1 UserName, RoleName
+        FROM		 @tbUsers tu, @tbRoles tr, dbo.aspnet_Users u, dbo.aspnet_Roles r
+        WHERE		 u.UserId = tu.UserId AND r.RoleId = tr.RoleId AND
+                    tu.UserId NOT IN (SELECT ur.UserId FROM dbo.aspnet_UsersInRoles ur WHERE ur.RoleId = tr.RoleId) AND
+                    tr.RoleId NOT IN (SELECT ur.RoleId FROM dbo.aspnet_UsersInRoles ur WHERE ur.UserId = tu.UserId)
+        IF( @TranStarted = 1 )
+            ROLLBACK TRANSACTION
+        RETURN(3)
+    END
+
+    DELETE FROM dbo.aspnet_UsersInRoles
+    WHERE UserId IN (SELECT UserId FROM @tbUsers)
+    AND RoleId IN (SELECT RoleId FROM @tbRoles)
+    IF( @TranStarted = 1 )
+        COMMIT TRANSACTION
+    RETURN(0)
 END
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
 GO
 
 ALTER PROCEDURE dbo.aspnet_Profile_DeleteInactiveProfiles
@@ -849,8 +849,8 @@ BEGIN
                         AND (LastActivityDate <= @InactiveSinceDate)
                         AND (
                                 (@ProfileAuthOptions = 2)
-                             OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
-                             OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
+                            OR (@ProfileAuthOptions = 0 AND IsAnonymous = 1)
+                            OR (@ProfileAuthOptions = 1 AND IsAnonymous = 0)
                             )
             )
 
@@ -859,128 +859,128 @@ END
 GO
 
 ALTER VIEW [dbo].[vw_aspnet_Applications]
-AS 
-SELECT [dbo].[aspnet_Applications].[ApplicationName], 
-	[dbo].[aspnet_Applications].[LoweredApplicationName], 
-	[dbo].[aspnet_Applications].[ApplicationId], 
-	[dbo].[aspnet_Applications].[Description]
+AS
+SELECT [dbo].[aspnet_Applications].[ApplicationName],
+    [dbo].[aspnet_Applications].[LoweredApplicationName],
+    [dbo].[aspnet_Applications].[ApplicationId],
+    [dbo].[aspnet_Applications].[Description]
 FROM [dbo].[aspnet_Applications]
-  
+
 GO
 
 ALTER PROCEDURE dbo.aspnet_UsersInRoles_AddUsersToRoles
-	@ApplicationName  nvarchar(256),
-	@UserNames		  nvarchar(4000),
-	@RoleNames		  nvarchar(4000),
-	@CurrentTimeUtc   datetime
+    @ApplicationName  nvarchar(256),
+    @UserNames		  nvarchar(4000),
+    @RoleNames		  nvarchar(4000),
+    @CurrentTimeUtc   datetime
 AS
 BEGIN
-	DECLARE @AppId uniqueidentifier
-	SELECT  @AppId = NULL
-	SELECT  @AppId = ApplicationId FROM aspnet_Applications WHERE LOWER(@ApplicationName) = LoweredApplicationName
-	IF (@AppId IS NULL)
-		RETURN(2)
-	DECLARE @TranStarted   bit
-	SET @TranStarted = 0
+    DECLARE @AppId uniqueidentifier
+    SELECT  @AppId = NULL
+    SELECT  @AppId = ApplicationId FROM aspnet_Applications WHERE LOWER(@ApplicationName) = LoweredApplicationName
+    IF (@AppId IS NULL)
+        RETURN(2)
+    DECLARE @TranStarted   bit
+    SET @TranStarted = 0
 
-	IF( @@TRANCOUNT = 0 )
-	BEGIN
-		BEGIN TRANSACTION
-		SET @TranStarted = 1
-	END
+    IF( @@TRANCOUNT = 0 )
+    BEGIN
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
+    END
 
-	DECLARE @tbNames	table(Name nvarchar(256) NOT NULL PRIMARY KEY)
-	DECLARE @tbRoles	table(RoleId uniqueidentifier NOT NULL PRIMARY KEY)
-	DECLARE @tbUsers	table(UserId uniqueidentifier NOT NULL PRIMARY KEY)
-	DECLARE @Num		int
-	DECLARE @Pos		int
-	DECLARE @NextPos	int
-	DECLARE @Name		nvarchar(256)
+    DECLARE @tbNames	table(Name nvarchar(256) NOT NULL PRIMARY KEY)
+    DECLARE @tbRoles	table(RoleId uniqueidentifier NOT NULL PRIMARY KEY)
+    DECLARE @tbUsers	table(UserId uniqueidentifier NOT NULL PRIMARY KEY)
+    DECLARE @Num		int
+    DECLARE @Pos		int
+    DECLARE @NextPos	int
+    DECLARE @Name		nvarchar(256)
 
-	SET @Num = 0
-	SET @Pos = 1
-	WHILE(@Pos <= LEN(@RoleNames))
-	BEGIN
-		SELECT @NextPos = CHARINDEX(N',', @RoleNames,  @Pos)
-		IF (@NextPos = 0 OR @NextPos IS NULL)
-			SELECT @NextPos = LEN(@RoleNames) + 1
-		SELECT @Name = RTRIM(LTRIM(SUBSTRING(@RoleNames, @Pos, @NextPos - @Pos)))
-		SELECT @Pos = @NextPos+1
+    SET @Num = 0
+    SET @Pos = 1
+    WHILE(@Pos <= LEN(@RoleNames))
+    BEGIN
+        SELECT @NextPos = CHARINDEX(N',', @RoleNames,  @Pos)
+        IF (@NextPos = 0 OR @NextPos IS NULL)
+            SELECT @NextPos = LEN(@RoleNames) + 1
+        SELECT @Name = RTRIM(LTRIM(SUBSTRING(@RoleNames, @Pos, @NextPos - @Pos)))
+        SELECT @Pos = @NextPos+1
 
-		INSERT INTO @tbNames VALUES (@Name)
-		SET @Num = @Num + 1
-	END
+        INSERT INTO @tbNames VALUES (@Name)
+        SET @Num = @Num + 1
+    END
 
-	INSERT INTO @tbRoles
-	  SELECT RoleId
-	  FROM   dbo.aspnet_Roles ar, @tbNames t
-	  WHERE  LOWER(t.Name) = ar.LoweredRoleName AND ar.ApplicationId = @AppId
+    INSERT INTO @tbRoles
+    SELECT RoleId
+    FROM   dbo.aspnet_Roles ar, @tbNames t
+    WHERE  LOWER(t.Name) = ar.LoweredRoleName AND ar.ApplicationId = @AppId
 
-	IF (@@ROWCOUNT <> @Num)
-	BEGIN
-		SELECT TOP 1 Name
-		FROM   @tbNames
-		WHERE  LOWER(Name) NOT IN (SELECT ar.LoweredRoleName FROM dbo.aspnet_Roles ar,  @tbRoles r WHERE r.RoleId = ar.RoleId)
-		IF( @TranStarted = 1 )
-			ROLLBACK TRANSACTION
-		RETURN(2)
-	END
+    IF (@@ROWCOUNT <> @Num)
+    BEGIN
+        SELECT TOP 1 Name
+        FROM   @tbNames
+        WHERE  LOWER(Name) NOT IN (SELECT ar.LoweredRoleName FROM dbo.aspnet_Roles ar,  @tbRoles r WHERE r.RoleId = ar.RoleId)
+        IF( @TranStarted = 1 )
+            ROLLBACK TRANSACTION
+        RETURN(2)
+    END
 
-	DELETE FROM @tbNames WHERE 1=1
-	SET @Num = 0
-	SET @Pos = 1
+    DELETE FROM @tbNames WHERE 1=1
+    SET @Num = 0
+    SET @Pos = 1
 
-	WHILE(@Pos <= LEN(@UserNames))
-	BEGIN
-		SELECT @NextPos = CHARINDEX(N',', @UserNames,  @Pos)
-		IF (@NextPos = 0 OR @NextPos IS NULL)
-			SELECT @NextPos = LEN(@UserNames) + 1
-		SELECT @Name = RTRIM(LTRIM(SUBSTRING(@UserNames, @Pos, @NextPos - @Pos)))
-		SELECT @Pos = @NextPos+1
+    WHILE(@Pos <= LEN(@UserNames))
+    BEGIN
+        SELECT @NextPos = CHARINDEX(N',', @UserNames,  @Pos)
+        IF (@NextPos = 0 OR @NextPos IS NULL)
+            SELECT @NextPos = LEN(@UserNames) + 1
+        SELECT @Name = RTRIM(LTRIM(SUBSTRING(@UserNames, @Pos, @NextPos - @Pos)))
+        SELECT @Pos = @NextPos+1
 
-		INSERT INTO @tbNames VALUES (@Name)
-		SET @Num = @Num + 1
-	END
+        INSERT INTO @tbNames VALUES (@Name)
+        SET @Num = @Num + 1
+    END
 
-	INSERT INTO @tbUsers
-	  SELECT UserId
-	  FROM   dbo.aspnet_Users ar, @tbNames t
-	  WHERE  LOWER(t.Name) = ar.LoweredUserName AND ar.ApplicationId = @AppId
+    INSERT INTO @tbUsers
+    SELECT UserId
+    FROM   dbo.aspnet_Users ar, @tbNames t
+    WHERE  LOWER(t.Name) = ar.LoweredUserName AND ar.ApplicationId = @AppId
 
-	IF (@@ROWCOUNT <> @Num)
-	BEGIN
-		DELETE FROM @tbNames
-		WHERE LOWER(Name) IN (SELECT LoweredUserName FROM dbo.aspnet_Users au,  @tbUsers u WHERE au.UserId = u.UserId)
+    IF (@@ROWCOUNT <> @Num)
+    BEGIN
+        DELETE FROM @tbNames
+        WHERE LOWER(Name) IN (SELECT LoweredUserName FROM dbo.aspnet_Users au,  @tbUsers u WHERE au.UserId = u.UserId)
 
-		INSERT dbo.aspnet_Users (ApplicationId, UserId, UserName, LoweredUserName, IsAnonymous, LastActivityDate)
-		  SELECT @AppId, NEWID(), Name, LOWER(Name), 0, @CurrentTimeUtc
-		  FROM   @tbNames
+        INSERT dbo.aspnet_Users (ApplicationId, UserId, UserName, LoweredUserName, IsAnonymous, LastActivityDate)
+        SELECT @AppId, NEWID(), Name, LOWER(Name), 0, @CurrentTimeUtc
+        FROM   @tbNames
 
-		INSERT INTO @tbUsers
-		  SELECT  UserId
-		  FROM	dbo.aspnet_Users au, @tbNames t
-		  WHERE   LOWER(t.Name) = au.LoweredUserName AND au.ApplicationId = @AppId
-	END
+        INSERT INTO @tbUsers
+        SELECT  UserId
+        FROM	dbo.aspnet_Users au, @tbNames t
+        WHERE   LOWER(t.Name) = au.LoweredUserName AND au.ApplicationId = @AppId
+    END
 
-	IF (EXISTS (SELECT * FROM dbo.aspnet_UsersInRoles ur, @tbUsers tu, @tbRoles tr WHERE tu.UserId = ur.UserId AND tr.RoleId = ur.RoleId))
-	BEGIN
-		SELECT TOP 1 UserName, RoleName
-		FROM		 dbo.aspnet_UsersInRoles ur, @tbUsers tu, @tbRoles tr, aspnet_Users u, aspnet_Roles r
-		WHERE		u.UserId = tu.UserId AND r.RoleId = tr.RoleId AND tu.UserId = ur.UserId AND tr.RoleId = ur.RoleId
+    IF (EXISTS (SELECT * FROM dbo.aspnet_UsersInRoles ur, @tbUsers tu, @tbRoles tr WHERE tu.UserId = ur.UserId AND tr.RoleId = ur.RoleId))
+    BEGIN
+        SELECT TOP 1 UserName, RoleName
+        FROM		 dbo.aspnet_UsersInRoles ur, @tbUsers tu, @tbRoles tr, aspnet_Users u, aspnet_Roles r
+        WHERE		u.UserId = tu.UserId AND r.RoleId = tr.RoleId AND tu.UserId = ur.UserId AND tr.RoleId = ur.RoleId
 
-		IF( @TranStarted = 1 )
-			ROLLBACK TRANSACTION
-		RETURN(3)
-	END
+        IF( @TranStarted = 1 )
+            ROLLBACK TRANSACTION
+        RETURN(3)
+    END
 
-	INSERT INTO dbo.aspnet_UsersInRoles (UserId, RoleId)
-	SELECT UserId, RoleId
-	FROM @tbUsers, @tbRoles
+    INSERT INTO dbo.aspnet_UsersInRoles (UserId, RoleId)
+    SELECT UserId, RoleId
+    FROM @tbUsers, @tbRoles
 
-	IF( @TranStarted = 1 )
-		COMMIT TRANSACTION
-	RETURN(0)
-END                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+    IF( @TranStarted = 1 )
+        COMMIT TRANSACTION
+    RETURN(0)
+END
 GO
 
 ALTER PROCEDURE dbo.aspnet_Membership_GetNumberOfUsersOnline
@@ -1074,7 +1074,7 @@ BEGIN
     WHERE   @UserId = u.UserId AND u.UserId = m.UserId
 
     IF ( @@ROWCOUNT = 0 ) -- User ID not found
-       RETURN -1
+        RETURN -1
 
     RETURN 0
 END
@@ -1108,11 +1108,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     SELECT  @UserId = u.UserId,
             @Password = m.Password,
@@ -1193,8 +1193,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     IF( @ErrorCode = 0 )
@@ -1207,7 +1207,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -1236,11 +1236,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-       BEGIN TRANSACTION
-       SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     EXEC dbo.aspnet_Applications_CreateApplication @ApplicationName, @ApplicationId OUTPUT
 
@@ -1278,15 +1278,15 @@ BEGIN
     END
 
     IF (EXISTS( SELECT *
-               FROM   dbo.aspnet_Profile
-               WHERE  UserId = @UserId))
+                FROM   dbo.aspnet_Profile
+                WHERE  UserId = @UserId))
         UPDATE dbo.aspnet_Profile
         SET    PropertyNames=@PropertyNames, PropertyValuesString = @PropertyValuesString,
-               PropertyValuesBinary = @PropertyValuesBinary, LastUpdatedDate=@CurrentTimeUtc
+                PropertyValuesBinary = @PropertyValuesBinary, LastUpdatedDate=@CurrentTimeUtc
         WHERE  UserId = @UserId
     ELSE
         INSERT INTO dbo.aspnet_Profile(UserId, PropertyNames, PropertyValuesString, PropertyValuesBinary, LastUpdatedDate)
-             VALUES (@UserId, @PropertyNames, @PropertyValuesString, @PropertyValuesBinary, @CurrentTimeUtc)
+            VALUES (@UserId, @PropertyNames, @PropertyValuesString, @PropertyValuesBinary, @CurrentTimeUtc)
 
     IF( @@ERROR <> 0 )
     BEGIN
@@ -1296,8 +1296,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-    	SET @TranStarted = 0
-    	COMMIT TRANSACTION
+        SET @TranStarted = 0
+        COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -1307,7 +1307,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -1367,11 +1367,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     EXEC dbo.aspnet_Applications_CreateApplication @ApplicationName, @ApplicationId OUTPUT
 
@@ -1413,8 +1413,8 @@ BEGIN
     END
 
     IF ( EXISTS ( SELECT UserId
-                  FROM   dbo.aspnet_Membership
-                  WHERE  @NewUserId = UserId ) )
+                FROM   dbo.aspnet_Membership
+                WHERE  @NewUserId = UserId ) )
     BEGIN
         SET @ErrorCode = 6
         GOTO Cleanup
@@ -1447,43 +1447,43 @@ BEGIN
 
     INSERT INTO dbo.aspnet_Membership
                 ( ApplicationId,
-                  UserId,
-                  Password,
-                  PasswordSalt,
-                  Email,
-                  LoweredEmail,
-                  PasswordQuestion,
-                  PasswordAnswer,
-                  PasswordFormat,
-                  IsApproved,
-                  IsLockedOut,
-                  CreateDate,
-                  LastLoginDate,
-                  LastPasswordChangedDate,
-                  LastLockoutDate,
-                  FailedPasswordAttemptCount,
-                  FailedPasswordAttemptWindowStart,
-                  FailedPasswordAnswerAttemptCount,
-                  FailedPasswordAnswerAttemptWindowStart )
-         VALUES ( @ApplicationId,
-                  @UserId,
-                  @Password,
-                  @PasswordSalt,
-                  @Email,
-                  LOWER(@Email),
-                  @PasswordQuestion,
-                  @PasswordAnswer,
-                  @PasswordFormat,
-                  @IsApproved,
-                  @IsLockedOut,
-                  @CreateDate,
-                  @CreateDate,
-                  @CreateDate,
-                  @LastLockoutDate,
-                  @FailedPasswordAttemptCount,
-                  @FailedPasswordAttemptWindowStart,
-                  @FailedPasswordAnswerAttemptCount,
-                  @FailedPasswordAnswerAttemptWindowStart )
+                UserId,
+                Password,
+                PasswordSalt,
+                Email,
+                LoweredEmail,
+                PasswordQuestion,
+                PasswordAnswer,
+                PasswordFormat,
+                IsApproved,
+                IsLockedOut,
+                CreateDate,
+                LastLoginDate,
+                LastPasswordChangedDate,
+                LastLockoutDate,
+                FailedPasswordAttemptCount,
+                FailedPasswordAttemptWindowStart,
+                FailedPasswordAnswerAttemptCount,
+                FailedPasswordAnswerAttemptWindowStart )
+        VALUES ( @ApplicationId,
+                @UserId,
+                @Password,
+                @PasswordSalt,
+                @Email,
+                LOWER(@Email),
+                @PasswordQuestion,
+                @PasswordAnswer,
+                @PasswordFormat,
+                @IsApproved,
+                @IsLockedOut,
+                @CreateDate,
+                @CreateDate,
+                @CreateDate,
+                @LastLockoutDate,
+                @FailedPasswordAttemptCount,
+                @FailedPasswordAttemptWindowStart,
+                @FailedPasswordAnswerAttemptCount,
+                @FailedPasswordAnswerAttemptWindowStart )
 
     IF( @@ERROR <> 0 )
     BEGIN
@@ -1493,8 +1493,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	    SET @TranStarted = 0
-	    COMMIT TRANSACTION
+        SET @TranStarted = 0
+        COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -1504,7 +1504,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -1534,7 +1534,7 @@ BEGIN
 
     SELECT  @UserId = u.UserId, @IsLockedOut = m.IsLockedOut, @Password=Password, @PasswordFormat=PasswordFormat,
             @PasswordSalt=PasswordSalt, @FailedPasswordAttemptCount=FailedPasswordAttemptCount,
-		    @FailedPasswordAnswerAttemptCount=FailedPasswordAnswerAttemptCount, @IsApproved=IsApproved,
+            @FailedPasswordAnswerAttemptCount=FailedPasswordAnswerAttemptCount, @IsApproved=IsApproved,
             @LastActivityDate = LastActivityDate, @LastLoginDate = LastLoginDate
     FROM    dbo.aspnet_Applications a, dbo.aspnet_Users u, dbo.aspnet_Membership m
     WHERE   LOWER(@ApplicationName) = a.LoweredApplicationName AND
@@ -1549,7 +1549,7 @@ BEGIN
         RETURN 99
 
     SELECT   @Password, @PasswordFormat, @PasswordSalt, @FailedPasswordAttemptCount,
-             @FailedPasswordAnswerAttemptCount, @IsApproved, @LastLoginDate, @LastActivityDate
+            @FailedPasswordAnswerAttemptCount, @IsApproved, @LastLoginDate, @LastActivityDate
 
     IF (@UpdateLastLoginActivityDate = 1 AND @IsApproved = 1)
     BEGIN
@@ -1681,4 +1681,3 @@ GO
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-

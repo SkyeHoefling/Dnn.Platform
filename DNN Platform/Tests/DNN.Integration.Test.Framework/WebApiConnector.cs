@@ -20,7 +20,7 @@ namespace DNN.Integration.Test.Framework
 {
     internal class WebApiConnector : IWebApiConnector, IDisposable
     {
-        
+
         private static readonly Dictionary<string, CachedWebPage> CachedPages = new Dictionary<string, CachedWebPage>();
 
         public static WebApiConnector GetWebConnector(string siteUrl, string userName)
@@ -293,7 +293,7 @@ namespace DNN.Integration.Test.Framework
         public HttpResponseMessage UploadUserFile(string fileName, bool waitHttpResponse = true, int userId = -1)
         {
             EnsureLoggedIn();
-            
+
             var folder = "Users";
             if (userId > Null.NullInteger)
             {
@@ -322,7 +322,7 @@ namespace DNN.Integration.Test.Framework
         {
             using (var client = CreateHttpClient("/", true))
             {
-               
+
                 var headers = client.DefaultRequestHeaders;
                 headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 headers.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html", 0.8));
@@ -405,7 +405,7 @@ namespace DNN.Integration.Test.Framework
                 {
                     Console.WriteLine(@"Cannot find '{0}' in the page input fields (B)", RqVerifTokenName);
                 }
-                
+
                 var content = new MultipartFormDataContent();
                 var fi = new FileInfo(fileName);
                 var fileContent = new ByteArrayContent(File.ReadAllBytes(fileName));
@@ -616,7 +616,7 @@ namespace DNN.Integration.Test.Framework
             var firstField = formFields.First().Key;
             if (!inputFields.Any(f => f.Contains(firstField)))
             {
-                // the form doesn't have the proper input fields 
+                // the form doesn't have the proper input fields
                 Console.WriteLine(
                     @"Either User '{0}' has no rights to post to this page {1} or " +
                     @"this page does not contain correct form ", UserName, relativeUrl);
@@ -660,7 +660,7 @@ namespace DNN.Integration.Test.Framework
                                 if (!postParameters.ContainsKey(inputName.Value))
                                 {
                                     var value = inputValue == null ? "" : inputValue.Value;
-                                    if (formFields.ContainsKey(inputName.Value)) 
+                                    if (formFields.ContainsKey(inputName.Value))
                                         value = formFields[inputName.Value].ToString();
                                     postParameters.Add(inputName.Value, value);
                                 }
@@ -687,11 +687,11 @@ namespace DNN.Integration.Test.Framework
             if (excludedInputPrefixes != null)
             {
                 var keys = postParameters.Keys.ToArray();
-                
+
                 var filteredKeys = from prefix in excludedInputPrefixes
-                                   from key in keys
-                                   where key.StartsWith(prefix)
-                                   select key;
+                                    from key in keys
+                                    where key.StartsWith(prefix)
+                                    select key;
 
                 foreach (var key in filteredKeys)
                 {
@@ -751,7 +751,7 @@ namespace DNN.Integration.Test.Framework
                     request.Headers.Add(h.Key, h.Value);
                 }
             }
-       
+
             request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
             request.KeepAlive = true;
             request.ReadWriteTimeout = 90;
@@ -761,7 +761,7 @@ namespace DNN.Integration.Test.Framework
             // You could add authentication here as well if needed:
             // request.PreAuthenticate = true;
             // request.AuthenticationLevel = System.Net.Security.AuthenticationLevel.MutualAuthRequested;
-            // request.Headers.Add("Authorization", "Basic " + 
+            // request.Headers.Add("Authorization", "Basic " +
             //     Convert.ToBase64String(System.Text.Encoding.Default.GetBytes("username" + ":" + "password")));
 
             // Send the form data to the request.
@@ -832,10 +832,10 @@ namespace DNN.Integration.Test.Framework
         }
 
         #endregion
-    
+
         private static string CombineUrlPath(Uri domain, string path)
         {
-            if (path.StartsWith("http")) 
+            if (path.StartsWith("http"))
                 return path;
 
             var url = domain.AbsoluteUri;
@@ -854,8 +854,8 @@ namespace DNN.Integration.Test.Framework
         private static string QueryStringFromObject(object query)
         {
             var properties = from p in query.GetType().GetProperties()
-                             where p.GetValue(query, null) != null
-                             select p.Name + "=" + HttpUtility.UrlEncode(p.GetValue(query, null).ToString());
+                            where p.GetValue(query, null) != null
+                            select p.Name + "=" + HttpUtility.UrlEncode(p.GetValue(query, null).ToString());
 
             return String.Join("&", properties.ToArray());
         }

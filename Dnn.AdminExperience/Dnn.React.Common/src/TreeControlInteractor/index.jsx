@@ -22,7 +22,7 @@ export default class TreeControlInteractor extends Component {
         };
     }
 
-    componentDidMount() {        
+    componentDidMount() {
         this.init();
     }
 

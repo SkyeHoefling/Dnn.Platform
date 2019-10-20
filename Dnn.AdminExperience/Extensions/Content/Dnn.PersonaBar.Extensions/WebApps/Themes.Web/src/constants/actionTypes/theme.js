@@ -14,6 +14,6 @@ const themeActionTypes = {
     RETRIEVED_THEMES: "RETRIEVED_THEMES",
     APPLY_THEME: "APPLY_THEME",
     APPLY_DEFAULT_THEME: "APPLY_DEFAULT_THEME",
-    DELETE_THEME: "DELETE_THEME" 
+    DELETE_THEME: "DELETE_THEME"
 };
 export default themeActionTypes;

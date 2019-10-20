@@ -922,7 +922,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
         if (dataItem.IsFolder) {
             var node = getCurrentNode();
             loadSubFolders(node, false, true);
-        } else { // Update icons            
+        } else { // Update icons
             $("#" + rowId + "_ItemIcon").attr("src", dataItem.IconUrl);
             item.find("div.dnnModuleDigitalAssetsThumbnail>img")
                 .attr("src", controller.getThumbnailUrl(dataItem))
@@ -1375,7 +1375,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
             $(selectorPattern + " .permission_denied").removeClass("permission_denied");
         }
         for (var i = 0; i < permissions.length; i++) {
-            //Select all menu items that must check the current permission            
+            //Select all menu items that must check the current permission
             var itemsSelector = selectorPattern + " .permission_" + permissions[i].Key;
             $(itemsSelector).each(function() {
                 var $item = changeParent ? $(this).parent() : $(this);
@@ -2182,7 +2182,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
         selectCell.find("input[type='checkbox']").attr("checked", true);
         selectCell.find(".dnnCheckbox").addClass("dnnCheckbox-checked");
 
-        // Select corresponding listview item        
+        // Select corresponding listview item
         selectListViewItem(index);
 
         clearTimeout(updateSelectionToolBarTimeout);
@@ -2734,7 +2734,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
             title: resources.noItemsDeletedTitle.replace("[ITEMS]", selectionText(items)),
             buttons:
             [
-                 { id: "close_button", text: resources.closeText, click: function () { $(this).dialog("close"); }, "class": "dnnSecondaryAction" }
+                { id: "close_button", text: resources.closeText, click: function () { $(this).dialog("close"); }, "class": "dnnSecondaryAction" }
             ]
         });
 
@@ -3053,7 +3053,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
     }
 
     function getUrl() {
-        var items = convertToItemsFromGridItems(grid.get_selectedItems());        
+        var items = convertToItemsFromGridItems(grid.get_selectedItems());
         if (!items[0].IsFolder) {
             getUrlFromFileId(items[0]);
         }
@@ -3392,7 +3392,7 @@ dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {
 
         var selectedItems = grid.get_selectedItems();
 
-        // The selection can't be moved if any item has the same parent folder            
+        // The selection can't be moved if any item has the same parent folder
         for (var i = 0; i < selectedItems.length; i++) {
             if (selectedItems[i].get_dataItem().ParentFolderID == node.get_value()) {
                 return false;

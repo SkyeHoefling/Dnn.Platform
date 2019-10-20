@@ -34,7 +34,7 @@ BEGIN
     IF EXISTS(SELECT Identifier FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] WHERE Identifier = @Identifier)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenu]
-            SET 
+            SET
                 ModuleName = @ModuleName,
                 FolderName = @FolderName,
                 Controller = @Controller,

@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -81,13 +81,13 @@ namespace DotNetNuke.Entities.Portals
             if (callback == null) return;
 
             var args = new UserCopiedEventArgs
-                           {
-                               TotalUsers = 0,
-                               UserNo = 0,
-                               UserName = "",
-                               PortalName = portal.PortalName,
-                               Stage = "starting"
-                           };
+                            {
+                                TotalUsers = 0,
+                                UserNo = 0,
+                                UserName = "",
+                                PortalName = portal.PortalName,
+                                Stage = "starting"
+                            };
             callback(args);
         }
 
@@ -149,12 +149,12 @@ namespace DotNetNuke.Entities.Portals
             Requires.PropertyNotNegative("portalGroup", "MasterPortalId", portalGroup.MasterPortalId);
 
             OnAddPortalToGroupStart(callback, portal);
-            
+
             var users = UserController.GetUsers(portal.PortalID);
             var masterUsers = UserController.GetUsers(portalGroup.MasterPortalId);
             var totalUsers = users.Count + masterUsers.Count;
             var userNo = 0;
-            
+
             if (users.Count > 0)
             {
                 var masterPortal = _portalController.GetPortal(portalGroup.MasterPortalId);
@@ -172,9 +172,9 @@ namespace DotNetNuke.Entities.Portals
             if (masterUsers.Count > 0)
             {
                 var autoAssignRoles = RoleController.Instance.GetRoles(portal.PortalID,
-                                                                               role =>
-                                                                               role.AutoAssignment &&
-                                                                               role.Status == RoleStatus.Approved);
+                                                                                role =>
+                                                                                role.AutoAssignment &&
+                                                                                role.Status == RoleStatus.Approved);
                 foreach (UserInfo user in masterUsers)
                 {
                     userNo += 1;
@@ -196,7 +196,7 @@ namespace DotNetNuke.Entities.Portals
 
             OnAddPortalToGroupFinished(callback, portal, portalGroup, users.Count);
         }
-        
+
         private void RemoveProfileDefinitions(PortalInfo portal)
         {
             foreach (ProfilePropertyDefinition definition in ProfileController.GetPropertyDefinitionsByPortal(portal.PortalID))
@@ -221,7 +221,7 @@ namespace DotNetNuke.Entities.Portals
             var sharedModules = GetSharedModulesWithPortal(portal);
             foreach (var sharedModule in sharedModules)
             {
-                ModuleController.Instance.DeleteTabModule(sharedModule.TabID, sharedModule.ModuleID, false);                
+                ModuleController.Instance.DeleteTabModule(sharedModule.TabID, sharedModule.ModuleID, false);
             }
 
             sharedModules = GetSharedModulesByPortal(portal);
@@ -247,7 +247,7 @@ namespace DotNetNuke.Entities.Portals
                                                                                 DataCache.SharedModulesByPortalCachePriority,
                                                                                 portal),
             (p) => CBO.FillCollection<ModuleInfo>(_dataService.GetSharedModulesByPortal(portal)));
-        } 
+        }
 
         public int AddPortalGroup(PortalGroupInfo portalGroup)
         {
@@ -400,7 +400,7 @@ namespace DotNetNuke.Entities.Portals
 
             ClearCache();
         }
-        
+
         public bool IsModuleShared(int moduleId, PortalInfo portal)
         {
             if (portal == null) return false;

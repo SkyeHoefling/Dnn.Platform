@@ -352,14 +352,14 @@ namespace Dnn.ExportImport.Components.Engines
                             service.CheckCancelled = CheckCancelledCallBack;
                             service.CheckPointStageCallback = CheckpointCallback;
                             service.CheckPoint = checkpoints.FirstOrDefault(cp => cp.Category == service.Category && cp.AssemblyName == serviceAssembly)
-                                                 ?? new ExportImportChekpoint
-                                                 {
-                                                     JobId = importJob.JobId,
-                                                     AssemblyName = serviceAssembly,
-                                                     Category = service.Category,
-                                                     Progress = 0,
-                                                     StartDate = DateUtils.GetDatabaseUtcTime()
-                                                 };
+                                                ?? new ExportImportChekpoint
+                                                {
+                                                    JobId = importJob.JobId,
+                                                    AssemblyName = serviceAssembly,
+                                                    Category = service.Category,
+                                                    Progress = 0,
+                                                    StartDate = DateUtils.GetDatabaseUtcTime()
+                                                };
                             if (service.CheckPoint.StartDate == Null.NullDate)
                                 service.CheckPoint.StartDate = DateUtils.GetDatabaseUtcTime();
                             CheckpointCallback(service);
@@ -626,12 +626,12 @@ namespace Dnn.ExportImport.Components.Engines
             var typeLocator = new TypeLocator();
             var types = typeLocator.GetAllMatchingTypes(
                 t => t != null && t.IsClass && !t.IsAbstract && t.IsVisible &&
-                     typeof(BasicExportImportDto).IsAssignableFrom(t));
+                    typeof(BasicExportImportDto).IsAssignableFrom(t));
 
             foreach (var type in from type in types
-                                 let typeName = type.Name
-                                 where !CleanUpIgnoredClasses.Contains(typeName)
-                                 select type)
+                                let typeName = type.Name
+                                where !CleanUpIgnoredClasses.Contains(typeName)
+                                select type)
             {
                 try
                 {

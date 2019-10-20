@@ -92,100 +92,100 @@ CodeMirror.defineMode("mirc", function() {
     state.beforeParams = false;
     var ch = stream.next();
     if (/[\[\]{}\(\),\.]/.test(ch)) {
-      if (ch == "(" && beforeParams) state.inParams = true;
-      else if (ch == ")") state.inParams = false;
-      return null;
+    if (ch == "(" && beforeParams) state.inParams = true;
+    else if (ch == ")") state.inParams = false;
+    return null;
     }
     else if (/\d/.test(ch)) {
-      stream.eatWhile(/[\w\.]/);
-      return "number";
+    stream.eatWhile(/[\w\.]/);
+    return "number";
     }
     else if (ch == "\\") {
-      stream.eat("\\");
-      stream.eat(/./);
-      return "number";
+    stream.eat("\\");
+    stream.eat(/./);
+    return "number";
     }
     else if (ch == "/" && stream.eat("*")) {
-      return chain(stream, state, tokenComment);
+    return chain(stream, state, tokenComment);
     }
     else if (ch == ";" && stream.match(/ *\( *\(/)) {
-      return chain(stream, state, tokenUnparsed);
+    return chain(stream, state, tokenUnparsed);
     }
     else if (ch == ";" && !state.inParams) {
-      stream.skipToEnd();
-      return "comment";
+    stream.skipToEnd();
+    return "comment";
     }
     else if (ch == '"') {
-      stream.eat(/"/);
-      return "keyword";
+    stream.eat(/"/);
+    return "keyword";
     }
     else if (ch == "$") {
-      stream.eatWhile(/[$_a-z0-9A-Z\.:]/);
-      if (specials && specials.propertyIsEnumerable(stream.current().toLowerCase())) {
+    stream.eatWhile(/[$_a-z0-9A-Z\.:]/);
+    if (specials && specials.propertyIsEnumerable(stream.current().toLowerCase())) {
         return "keyword";
-      }
-      else {
-        state.beforeParams = true;
-        return "builtin";
-      }
-    }
-    else if (ch == "%") {
-      stream.eatWhile(/[^,^\s^\(^\)]/);
-      state.beforeParams = true;
-      return "string";
-    }
-    else if (isOperatorChar.test(ch)) {
-      stream.eatWhile(isOperatorChar);
-      return "operator";
     }
     else {
-      stream.eatWhile(/[\w\$_{}]/);
-      var word = stream.current().toLowerCase();
-      if (keywords && keywords.propertyIsEnumerable(word))
+        state.beforeParams = true;
+        return "builtin";
+    }
+    }
+    else if (ch == "%") {
+    stream.eatWhile(/[^,^\s^\(^\)]/);
+    state.beforeParams = true;
+    return "string";
+    }
+    else if (isOperatorChar.test(ch)) {
+    stream.eatWhile(isOperatorChar);
+    return "operator";
+    }
+    else {
+    stream.eatWhile(/[\w\$_{}]/);
+    var word = stream.current().toLowerCase();
+    if (keywords && keywords.propertyIsEnumerable(word))
         return "keyword";
-      if (functions && functions.propertyIsEnumerable(word)) {
+    if (functions && functions.propertyIsEnumerable(word)) {
         state.beforeParams = true;
         return "keyword";
-      }
-      return null;
+    }
+    return null;
     }
   }
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+    if (ch == "/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return "comment";
   }
   function tokenUnparsed(stream, state) {
     var maybeEnd = 0, ch;
     while (ch = stream.next()) {
-      if (ch == ";" && maybeEnd == 2) {
+    if (ch == ";" && maybeEnd == 2) {
         state.tokenize = tokenBase;
         break;
-      }
-      if (ch == ")")
+    }
+    if (ch == ")")
         maybeEnd++;
-      else if (ch != " ")
+    else if (ch != " ")
         maybeEnd = 0;
     }
     return "meta";
   }
   return {
     startState: function() {
-      return {
+    return {
         tokenize: tokenBase,
         beforeParams: false,
         inParams: false
-      };
+    };
     },
     token: function(stream, state) {
-      if (stream.eatSpace()) return null;
-      return state.tokenize(stream, state);
+    if (stream.eatSpace()) return null;
+    return state.tokenize(stream, state);
     }
   };
 });

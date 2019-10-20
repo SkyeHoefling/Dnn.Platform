@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -85,15 +85,15 @@ namespace DotNetNuke.Web.InternalServices
 
         #region Page Methods
         [HttpGet]
-        public HttpResponseMessage GetPageDescendants(string parentId = null, int sortOrder = 0, 
-            string searchText = "", int portalId = -1, bool includeDisabled = false, 
+        public HttpResponseMessage GetPageDescendants(string parentId = null, int sortOrder = 0,
+            string searchText = "", int portalId = -1, bool includeDisabled = false,
             bool includeAllTypes = false, bool includeActive = true, bool includeHostPages = false,
             string roles = "", bool disabledNotSelectable = false)
         {
             var response = new
             {
                 Success = true,
-                Items = GetPageDescendantsInternal(portalId, parentId, sortOrder, searchText, 
+                Items = GetPageDescendantsInternal(portalId, parentId, sortOrder, searchText,
                     includeDisabled, includeAllTypes, includeActive, includeHostPages, roles, disabledNotSelectable)
             };
             return Request.CreateResponse(HttpStatusCode.OK, response);
@@ -101,7 +101,7 @@ namespace DotNetNuke.Web.InternalServices
 
         [HttpGet]
         public HttpResponseMessage GetTreePathForPage(string itemId, int sortOrder = 0, int portalId = -1,
-            bool includeDisabled = false, bool includeAllTypes = false, 
+            bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = true, bool includeHostPages = false, string roles = "")
         {
             var response = new
@@ -115,7 +115,7 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-        public HttpResponseMessage SortPages(string treeAsJson, int sortOrder = 0, string searchText = "", 
+        public HttpResponseMessage SortPages(string treeAsJson, int sortOrder = 0, string searchText = "",
             int portalId = -1, bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = true, bool includeHostPages = false, string roles = "")
         {
@@ -130,7 +130,7 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-        public HttpResponseMessage SortPagesInPortalGroup(string treeAsJson, int sortOrder = 0, 
+        public HttpResponseMessage SortPagesInPortalGroup(string treeAsJson, int sortOrder = 0,
             string searchText = "", bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = true, bool includeHostPages = false, string roles = "")
         {
@@ -145,8 +145,8 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-		public HttpResponseMessage GetPages(int sortOrder = 0, int portalId = -1, 
-            bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = true, 
+        public HttpResponseMessage GetPages(int sortOrder = 0, int portalId = -1,
+            bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = true,
             bool includeHostPages = false, string roles = "", bool disabledNotSelectable = false)
         {
             var response = new
@@ -159,7 +159,7 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-		public HttpResponseMessage GetPagesInPortalGroup(int sortOrder = 0)
+        public HttpResponseMessage GetPagesInPortalGroup(int sortOrder = 0)
         {
             var response = new
             {
@@ -171,7 +171,7 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-        public HttpResponseMessage SearchPages(string searchText, int sortOrder = 0, int portalId = -1, 
+        public HttpResponseMessage SearchPages(string searchText, int sortOrder = 0, int portalId = -1,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = true,
             bool includeHostPages = false, string roles = "")
         {
@@ -186,7 +186,7 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-        public HttpResponseMessage GetPageDescendantsInPortalGroup(string parentId = null, int sortOrder = 0, 
+        public HttpResponseMessage GetPageDescendantsInPortalGroup(string parentId = null, int sortOrder = 0,
             string searchText = "", bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = true, bool includeHostPages = false, string roles = "")
         {
@@ -199,7 +199,7 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-        public HttpResponseMessage GetTreePathForPageInPortalGroup(string itemId, int sortOrder = 0, 
+        public HttpResponseMessage GetTreePathForPageInPortalGroup(string itemId, int sortOrder = 0,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = true,
             bool includeHostPages = false, string roles = "")
         {
@@ -213,7 +213,7 @@ namespace DotNetNuke.Web.InternalServices
         }
 
         [HttpGet]
-        public HttpResponseMessage SearchPagesInPortalGroup(string searchText, int sortOrder = 0, 
+        public HttpResponseMessage SearchPagesInPortalGroup(string searchText, int sortOrder = 0,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = true,
             bool includeHostPages = false, string roles = "")
         {
@@ -336,7 +336,7 @@ namespace DotNetNuke.Web.InternalServices
 
         #region Pages List
 
-        private NTree<ItemDto> GetPagesInternal(int portalId, int sortOrder, bool includeDisabled = false, 
+        private NTree<ItemDto> GetPagesInternal(int portalId, int sortOrder, bool includeDisabled = false,
             bool includeAllTypes = false, bool includeActive = false, bool includeHostPages = false,
             string roles = "", bool disabledNotSelectable = false)
         {
@@ -344,7 +344,7 @@ namespace DotNetNuke.Web.InternalServices
             {
                 portalId = GetActivePortalId();
             }
-			var tabs = GetPortalPages(portalId, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
+            var tabs = GetPortalPages(portalId, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
             var sortedTree = new NTree<ItemDto> { Data = new ItemDto { Key = RootKey } };
             if (tabs == null)
             {
@@ -365,7 +365,7 @@ namespace DotNetNuke.Web.InternalServices
             return treeNode;
         }
 
-        private IEnumerable<ItemDto> GetPageDescendantsInPortalGroupInternal(string parentId, int sortOrder, 
+        private IEnumerable<ItemDto> GetPageDescendantsInPortalGroupInternal(string parentId, int sortOrder,
             string searchText, bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = true, bool includeHostPages = false, string roles = "")
         {
@@ -398,7 +398,7 @@ namespace DotNetNuke.Web.InternalServices
             return GetPageDescendantsInternal(portalId, parentIdAsInt, sortOrder, searchText, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
         }
 
-        private IEnumerable<ItemDto> GetPageDescendantsInternal(int portalId, string parentId, int sortOrder, 
+        private IEnumerable<ItemDto> GetPageDescendantsInternal(int portalId, string parentId, int sortOrder,
             string searchText, bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = true, bool includeHostPages = false, string roles = "", bool disabledNotSelectable = false)
         {
@@ -407,7 +407,7 @@ namespace DotNetNuke.Web.InternalServices
             return GetPageDescendantsInternal(portalId, id, sortOrder, searchText, includeDisabled , includeAllTypes, includeActive, includeHostPages, roles, disabledNotSelectable);
         }
 
-        private IEnumerable<ItemDto> GetPageDescendantsInternal(int portalId, int parentId, int sortOrder, 
+        private IEnumerable<ItemDto> GetPageDescendantsInternal(int portalId, int parentId, int sortOrder,
             string searchText, bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = true, bool includeHostPages = false, string roles = "", bool disabledNotSelectable = false)
         {
@@ -435,14 +435,14 @@ namespace DotNetNuke.Web.InternalServices
             if (portalId > -1)
             {
                 tabs = TabController.GetPortalTabs(portalId, (includeActive) ? Null.NullInteger : PortalSettings.ActiveTab.TabID, false, null, true, false, includeAllTypes, true, false)
-                                 .Where(tab => searchFunc(tab) 
-                                            && tab.ParentId == parentId 
-                                            && (includeDisabled || !tab.DisableLink) 
+                                .Where(tab => searchFunc(tab)
+                                            && tab.ParentId == parentId
+                                            && (includeDisabled || !tab.DisableLink)
                                             && (includeAllTypes || tab.TabType == TabType.Normal)
                                             && !tab.IsSystem
-                                       )
-                                 .OrderBy(tab => tab.TabOrder)
-                                 .ToList();
+                                        )
+                                .OrderBy(tab => tab.TabOrder)
+                                .ToList();
 
                 if (PortalSettings.UserInfo.IsSuperUser && includeHostPages)
                 {
@@ -481,7 +481,7 @@ namespace DotNetNuke.Web.InternalServices
             return ApplySort(pages, sortOrder);
         }
 
-        private NTree<ItemDto> SearchPagesInternal(int portalId, string searchText, int sortOrder, 
+        private NTree<ItemDto> SearchPagesInternal(int portalId, string searchText, int sortOrder,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = true,
             bool includeHostPages = false, string roles = "", bool disabledNotSelectable = false)
         {
@@ -515,8 +515,8 @@ namespace DotNetNuke.Web.InternalServices
 
                 tabs = TabController.Instance.GetTabsByPortal(portalId).Where(tab =>
                                         (includeActive || tab.Value.TabID != PortalSettings.ActiveTab.TabID)
-                                        && (includeDisabled || !tab.Value.DisableLink) 
-                                        && (includeAllTypes || tab.Value.TabType == TabType.Normal) 
+                                        && (includeDisabled || !tab.Value.DisableLink)
+                                        && (includeAllTypes || tab.Value.TabType == TabType.Normal)
                                         && searchFunc(tab.Value)
                                         && !tab.Value.IsSystem)
                     .OrderBy(tab => tab.Value.TabOrder)
@@ -560,7 +560,7 @@ namespace DotNetNuke.Web.InternalServices
             return tree;
         }
 
-		private List<TabInfo> GetPortalPages(int portalId, bool includeDisabled = false, 
+        private List<TabInfo> GetPortalPages(int portalId, bool includeDisabled = false,
             bool includeAllTypes = false, bool includeActive = false, bool includeHostPages = false,
             string roles = "")
         {
@@ -579,8 +579,8 @@ namespace DotNetNuke.Web.InternalServices
 
             if (portalId > -1)
             {
-      		tabs = TabController.GetPortalTabs(portalId, (includeActive) ? Null.NullInteger : PortalSettings.ActiveTab.TabID, false, null, true, false, includeAllTypes, true, false)
-					.Where(t => (!t.DisableLink || includeDisabled) && !t.IsSystem)
+            tabs = TabController.GetPortalTabs(portalId, (includeActive) ? Null.NullInteger : PortalSettings.ActiveTab.TabID, false, null, true, false, includeAllTypes, true, false)
+                    .Where(t => (!t.DisableLink || includeDisabled) && !t.IsSystem)
                     .ToList();
 
                 if (PortalSettings.UserInfo.IsSuperUser && includeHostPages)
@@ -617,7 +617,7 @@ namespace DotNetNuke.Web.InternalServices
             return GetChildrenOf(tabs, id);
         }
 
-        private NTree<ItemDto> SortPagesInternal(int portalId, string treeAsJson, int sortOrder, 
+        private NTree<ItemDto> SortPagesInternal(int portalId, string treeAsJson, int sortOrder,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = false,
             bool includeHostPages = false, string roles = "")
         {
@@ -625,11 +625,11 @@ namespace DotNetNuke.Web.InternalServices
             return SortPagesInternal(portalId, tree, sortOrder, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
         }
 
-        private NTree<ItemDto> SortPagesInternal(int portalId, NTree<ItemIdDto> openedNodesTree, int sortOrder, 
+        private NTree<ItemDto> SortPagesInternal(int portalId, NTree<ItemIdDto> openedNodesTree, int sortOrder,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = false,
             bool includeHostPages = false, string roles = "")
         {
-			var pages = GetPortalPages(portalId, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
+            var pages = GetPortalPages(portalId, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
             var sortedTree = new NTree<ItemDto> { Data = new ItemDto { Key = RootKey } };
             if (pages == null)
             {
@@ -639,7 +639,7 @@ namespace DotNetNuke.Web.InternalServices
             return sortedTree;
         }
 
-        private NTree<ItemDto> SearchPagesInPortalGroupInternal(string searchText, int sortOrder, 
+        private NTree<ItemDto> SearchPagesInPortalGroupInternal(string searchText, int sortOrder,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = false,
             bool includeHostPages = false, string roles = "")
         {
@@ -658,7 +658,7 @@ namespace DotNetNuke.Web.InternalServices
             return treeNode;
         }
 
-        private NTree<ItemDto> SearchPagesInPortalGroupInternal(string treeAsJson, string searchText, 
+        private NTree<ItemDto> SearchPagesInPortalGroupInternal(string treeAsJson, string searchText,
             int sortOrder, bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = false, bool includeHostPages = false, string roles = "")
         {
@@ -694,15 +694,15 @@ namespace DotNetNuke.Web.InternalServices
             return treeNode;
         }
 
-        private NTree<ItemDto> SortPagesInPortalGroupInternal(string treeAsJson, int sortOrder, 
+        private NTree<ItemDto> SortPagesInPortalGroupInternal(string treeAsJson, int sortOrder,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = false,
             bool includeHostPages = false, string roles = "")
         {
             var tree = DotNetNuke.Common.Utilities.Json.Deserialize<NTree<ItemIdDto>>(treeAsJson);
-			return SortPagesInPortalGroupInternal(tree, sortOrder, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
+            return SortPagesInPortalGroupInternal(tree, sortOrder, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
         }
 
-        private NTree<ItemDto> SortPagesInPortalGroupInternal(NTree<ItemIdDto> openedNode, int sortOrder, 
+        private NTree<ItemDto> SortPagesInPortalGroupInternal(NTree<ItemIdDto> openedNode, int sortOrder,
             bool includeDisabled = false, bool includeAllTypes = false, bool includeActive = false,
             bool includeHostPages = false, string roles = "")
         {
@@ -735,7 +735,7 @@ namespace DotNetNuke.Web.InternalServices
             return treeNode;
         }
 
-		private static void SortPagesRecursevely(IEnumerable<TabInfo> tabs, NTree<ItemDto> treeNode, NTree<ItemIdDto> openedNode, int sortOrder)
+        private static void SortPagesRecursevely(IEnumerable<TabInfo> tabs, NTree<ItemDto> treeNode, NTree<ItemIdDto> openedNode, int sortOrder)
         {
             if (openedNode == null)
             {
@@ -757,7 +757,7 @@ namespace DotNetNuke.Web.InternalServices
             }
         }
 
-        private NTree<ItemDto> GetTreePathForPageInternal(int portalId, string itemId, int sortOrder, 
+        private NTree<ItemDto> GetTreePathForPageInternal(int portalId, string itemId, int sortOrder,
             bool includePortalTree = false, bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = false, bool includeHostPages = false, string roles = "")
         {
@@ -769,7 +769,7 @@ namespace DotNetNuke.Web.InternalServices
             return GetTreePathForPageInternal(portalId, itemIdAsInt, sortOrder, includePortalTree, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
         }
 
-        private NTree<ItemDto> GetTreePathForPageInternal(string itemId, int sortOrder, 
+        private NTree<ItemDto> GetTreePathForPageInternal(string itemId, int sortOrder,
             bool includePortalTree = false, bool includeDisabled = false, bool includeAllTypes = false,
             bool includeActive = false, bool includeHostPages = false, string roles = "")
         {
@@ -792,8 +792,8 @@ namespace DotNetNuke.Web.InternalServices
             return GetTreePathForPageInternal(portalId, itemIdAsInt, sortOrder, includePortalTree, includeDisabled, includeAllTypes, includeActive, includeHostPages, roles);
         }
 
-        private NTree<ItemDto> GetTreePathForPageInternal(int portalId, int selectedItemId, 
-            int sortOrder, bool includePortalTree = false, bool includeDisabled = false, 
+        private NTree<ItemDto> GetTreePathForPageInternal(int portalId, int selectedItemId,
+            int sortOrder, bool includePortalTree = false, bool includeDisabled = false,
             bool includeAllTypes = false, bool includeActive = false, bool includeHostPages = false,
             string roles = "", bool disabledNotSelectable = false)
         {
@@ -1032,7 +1032,7 @@ namespace DotNetNuke.Web.InternalServices
 
             if (parentId < 1) return new List<ItemDto> { new ItemDto
                 {
-                    Key = parentFolder.FolderID.ToString(CultureInfo.InvariantCulture), 
+                    Key = parentFolder.FolderID.ToString(CultureInfo.InvariantCulture),
                     Value = portalId == -1 ? DynamicSharedConstants.HostRootFolder : DynamicSharedConstants.RootFolder,
                     HasChildren = HasChildren(parentFolder, permission),
                     Selectable = true
@@ -1372,16 +1372,16 @@ namespace DotNetNuke.Web.InternalServices
 
             var terms = new ArrayList();
             var vocabularies = from v in vocabRep.GetVocabularies()
-                               where (v.ScopeType.ScopeType == "Application"
-                                      || (v.ScopeType.ScopeType == "Portal" && v.ScopeId == portalId))
-                                     && (!v.IsSystem || includeSystem)
-                                     && (v.Name != "Tags" || includeTags)
-                               select v;
+                                where (v.ScopeType.ScopeType == "Application"
+                                    || (v.ScopeType.ScopeType == "Portal" && v.ScopeId == portalId))
+                                    && (!v.IsSystem || includeSystem)
+                                    && (v.Name != "Tags" || includeTags)
+                                select v;
 
             foreach (var v in vocabularies)
             {
                 terms.AddRange(new[] {from t in termRep.GetTermsByVocabulary(v.VocabularyId)
-                                      where string.IsNullOrEmpty(q) || t.Name.IndexOf(q, StringComparison.InvariantCultureIgnoreCase) > -1
+                                    where string.IsNullOrEmpty(q) || t.Name.IndexOf(q, StringComparison.InvariantCultureIgnoreCase) > -1
                                         select new {text = t.Name, value = t.TermId}});
             }
 
@@ -1413,10 +1413,10 @@ namespace DotNetNuke.Web.InternalServices
         {
             var groups = PortalGroupController.Instance.GetPortalGroups().ToArray();
             var mygroup = (from @group in groups
-                           select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
-                               into portals
-                               where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
-                               select portals.ToArray()).FirstOrDefault();
+                            select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
+                                into portals
+                                where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
+                                select portals.ToArray()).FirstOrDefault();
             return mygroup;
         }
 

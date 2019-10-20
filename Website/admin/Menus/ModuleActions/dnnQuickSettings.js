@@ -7,10 +7,10 @@
     * @param {Object} options Options needed to create a new quick settings.
     * @param {int} options.moduleId Module identifier associated to the quick setting.
     * @param {function} options.onSave A callback function that will executed when save button is clicked. This function MUST
-    *                           returns a promise (see https://api.jquery.com/category/deferred-object/) in order the quick module 
+    *                           returns a promise (see https://api.jquery.com/category/deferred-object/) in order the quick module
     *                           object is allowed to close menu once the save callback action has finished.
     * @param {function} options.onCancel A callback function that will executed when cancel button is clicked. This function MUST
-    *                           returns a promise (see https://api.jquery.com/category/deferred-object/) in order the quick module 
+    *                           returns a promise (see https://api.jquery.com/category/deferred-object/) in order the quick module
     *                           object is allowed to close menu once the cancel callback action has finished.
     * @return {Object} Returnsa quick setting object.
     */
@@ -142,4 +142,3 @@
     }());
 
 })(jQuery);
-

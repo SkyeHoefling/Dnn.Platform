@@ -12,7 +12,7 @@ export default class PersonaBarPageIcon extends Component {
             case hasUnpublishedChanges === true:
                 return ( <div dangerouslySetInnerHTML={{ __html: SvgIcons.TreeDraftIcon }} /> );
             case hasUnpublishedChanges === false:
-                 return ( <div /> );
+                return ( <div /> );
             default:
                 return ( <div /> );
         }

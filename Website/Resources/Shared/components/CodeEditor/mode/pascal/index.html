@@ -30,19 +30,19 @@
 (* Example Pascal code *)
 
 while a <> b do writeln('Waiting');
- 
-if a > b then 
+
+if a > b then
   writeln('Condition met')
-else 
+else
   writeln('Condition not met');
- 
-for i := 1 to 10 do 
+
+for i := 1 to 10 do
   writeln('Iteration: ', i:1);
- 
+
 repeat
   a := a + 1
 until a = 10;
- 
+
 case i of
   0: write('zero');
   1: write('one');
@@ -51,10 +51,10 @@ end;
 </textarea></div>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         mode: "text/x-pascal"
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-pascal</code>.</p>

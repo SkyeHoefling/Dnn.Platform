@@ -15,9 +15,9 @@
 
   CodeMirror.defineMode("htmlembedded", function(config, parserConfig) {
     return CodeMirror.multiplexingMode(CodeMirror.getMode(config, "htmlmixed"), {
-      open: parserConfig.open || parserConfig.scriptStartRegex || "<%",
-      close: parserConfig.close || parserConfig.scriptEndRegex || "%>",
-      mode: CodeMirror.getMode(config, parserConfig.scriptingModeSpec)
+    open: parserConfig.open || parserConfig.scriptStartRegex || "<%",
+    close: parserConfig.close || parserConfig.scriptEndRegex || "%>",
+    mode: CodeMirror.getMode(config, parserConfig.scriptingModeSpec)
     });
   }, "htmlmixed");
 

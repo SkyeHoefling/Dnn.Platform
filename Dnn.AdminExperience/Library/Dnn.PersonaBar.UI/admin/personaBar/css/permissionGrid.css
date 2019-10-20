@@ -82,9 +82,9 @@ table.dnnASPGrid {
 
 div.dnnPermissionsGrid {
     -webkit-user-select: none;
-     -moz-user-select: -moz-none;
-      -ms-user-select: none;
-          user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+        user-select: none;
 }
 div.dnnPermissionsGrid .roles-container {
     min-height: 41px;

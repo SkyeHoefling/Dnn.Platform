@@ -46,7 +46,7 @@
 
 .RadTabStripLeft_Default .rtsLevel .rtsNextArrow,
 .RadTabStripRight_Default .rtsLevel .rtsNextArrow { background-position: -18px -20px; }
-.RadTabStripLeft_Default .rtsLevel .rtsPrevArrow, 
+.RadTabStripLeft_Default .rtsLevel .rtsPrevArrow,
 .RadTabStripRight_Default .rtsLevel .rtsPrevArrow { background-position: 0 -20px; }
 .RadTabStripLeft_Default .rtsLevel .rtsNextArrow:hover,
 .RadTabStripRight_Default .rtsLevel .rtsNextArrow:hover  { background-position: -54px -20px; }

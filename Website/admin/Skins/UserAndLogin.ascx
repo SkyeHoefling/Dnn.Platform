@@ -5,7 +5,7 @@
             {
                 if (CanRegister)
                 {
-        %> 
+        %>
                 <li class="userRegister"><asp:HyperLink ID="registerLink" runat="server"><% =LocalizeString("Register") %></asp:HyperLink>
         <%      } %>
         <%      if (!PortalSettings.HideLoginControl)
@@ -31,7 +31,7 @@
                     <asp:HyperLink ID="viewProfileImageLink" runat="server"><span class="userProfileImg"><asp:Image ID="profilePicture" runat="server"/></span></asp:HyperLink>
                     <asp:Label ID="messages" runat="server" Visible="false" CssClass="userMessages" />
                 </li>
-        <%       
+        <%
             }
         %>
     </ul>

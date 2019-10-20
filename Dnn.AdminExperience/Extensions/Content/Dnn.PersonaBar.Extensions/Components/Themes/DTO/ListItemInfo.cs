@@ -17,7 +17,7 @@ namespace Dnn.PersonaBar.Themes.Components.DTO
 
         public ListItemInfo()
         {
-            
+
         }
 
         public ListItemInfo(string text, string value)

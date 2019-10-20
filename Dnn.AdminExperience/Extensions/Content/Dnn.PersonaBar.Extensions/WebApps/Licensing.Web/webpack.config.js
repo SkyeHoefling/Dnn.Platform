@@ -4,7 +4,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const path = require("path");
 const languages = {
     "en": null
-    // TODO: create locallizaton files per language 
+    // TODO: create locallizaton files per language
     // "de": require("./localizations/de.json"),
     // "es": require("./localizations/es.json"),
     // "fr": require("./localizations/fr.json"),
@@ -37,16 +37,16 @@ module.exports = {
     },
     module: {
         rules: [
-            { 
-                test: /\.(js|jsx)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 enforce: "pre",
                 use: [
                     "eslint-loader"
-                ] 
+                ]
             },
-            { 
-                test: /\.less$/, 
+            {
+                test: /\.less$/,
                 use: [{
                     loader: "style-loader"  // creates style nodes from JS strings
                 }, {
@@ -56,9 +56,9 @@ module.exports = {
                     loader: "less-loader"   // compiles Less to CSS
                 }]
             },
-            { 
-                test: /\.(js|jsx)$/, 
-                exclude: /node_modules/, 
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 use: {
                     loader: "babel-loader",
                     options: {
@@ -66,11 +66,11 @@ module.exports = {
                     }
                 }
             },
-            { 
-                test: /\.(ttf|woff)$/, 
+            {
+                test: /\.(ttf|woff)$/,
                 use: {
                     loader: "url-loader?limit=8192"
-                } 
+                }
             }
         ]
     },

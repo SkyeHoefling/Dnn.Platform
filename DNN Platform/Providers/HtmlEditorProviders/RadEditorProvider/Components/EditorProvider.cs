@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2017
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -400,13 +400,13 @@ namespace DotNetNuke.Providers.RadEditorProvider
                 ReadPaths.Add(RootImageDirectory);
                 WritePaths.Add(RootImageDirectory);
             }
-			else if (folderPath.ToUpperInvariant() == "[USERFOLDER]")
-			{
-				var userFolderPath = FolderManager.Instance.GetUserFolder(UserController.Instance.GetCurrentUserInfo()).FolderPath;
-				var path = RemoveEndSlash(RootImageDirectory) + AddSlash(userFolderPath);
-				WritePaths.Add(path);
-				ReadPaths.Add(path);
-			}
+            else if (folderPath.ToUpperInvariant() == "[USERFOLDER]")
+            {
+                var userFolderPath = FolderManager.Instance.GetUserFolder(UserController.Instance.GetCurrentUserInfo()).FolderPath;
+                var path = RemoveEndSlash(RootImageDirectory) + AddSlash(userFolderPath);
+                WritePaths.Add(path);
+                ReadPaths.Add(path);
+            }
             else if (folderPath.Length > 0)
             {
                 string path = RemoveEndSlash(RootImageDirectory) + AddSlash(folderPath);
@@ -471,20 +471,20 @@ namespace DotNetNuke.Providers.RadEditorProvider
             string linkUrl = string.Empty;
             if (! objTab.DisableLink)
             {
-	            switch (_linksType.ToUpperInvariant())
-	            {
-					case "USETABNAME":
-						var nameLinkFormat = "http://{0}/Default.aspx?TabName={1}";
-						linkUrl = string.Format(nameLinkFormat, PortalSettings.PortalAlias.HTTPAlias, HttpUtility.UrlEncode(objTab.TabName));
-						break;
-					case "USETABID":
-						var idLinkFormat = "http://{0}/Default.aspx?TabId={1}";
-						linkUrl = string.Format(idLinkFormat, PortalSettings.PortalAlias.HTTPAlias, objTab.TabID);
-						break;
-					default:
-						linkUrl = objTab.FullUrl;
-						break;
-	            }
+                switch (_linksType.ToUpperInvariant())
+                {
+                    case "USETABNAME":
+                        var nameLinkFormat = "http://{0}/Default.aspx?TabName={1}";
+                        linkUrl = string.Format(nameLinkFormat, PortalSettings.PortalAlias.HTTPAlias, HttpUtility.UrlEncode(objTab.TabName));
+                        break;
+                    case "USETABID":
+                        var idLinkFormat = "http://{0}/Default.aspx?TabId={1}";
+                        linkUrl = string.Format(idLinkFormat, PortalSettings.PortalAlias.HTTPAlias, objTab.TabID);
+                        break;
+                    default:
+                        linkUrl = objTab.FullUrl;
+                        break;
+                }
                 if (_linksUseRelativeUrls && (linkUrl.StartsWith("http://") || linkUrl.StartsWith("https://")))
                 {
                     int linkIndex = linkUrl.IndexOf("/", 8);
@@ -554,7 +554,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
         public override void Initialize()
         {
             _editor.ToolsFile = ToolsFile;
-            _editor.EnableViewState = false;   
+            _editor.EnableViewState = false;
 
             _editor.ExternalDialogsPath = moduleFolderPath + "Dialogs/";
             _editor.OnClientCommandExecuting = "OnClientCommandExecuting";
@@ -608,7 +608,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                                         }
                                     else
                                     {
-                                        _editor.NewLineMode = EditorNewLineModes.P; 
+                                        _editor.NewLineMode = EditorNewLineModes.P;
                                     }
                                     break;
                                 }
@@ -936,26 +936,26 @@ namespace DotNetNuke.Providers.RadEditorProvider
             {
             }
             PortalPath = PortalPath.Replace(PortalSettings.HomeDirectory, "").Replace("//", "/");
-			var parentModule = ControlUtilities.FindParentControl<PortalModuleBase>(HtmlEditorControl);
-			int moduleId = Convert.ToInt32(((parentModule == null) ? Null.NullInteger : parentModule.ModuleId));
+            var parentModule = ControlUtilities.FindParentControl<PortalModuleBase>(HtmlEditorControl);
+            int moduleId = Convert.ToInt32(((parentModule == null) ? Null.NullInteger : parentModule.ModuleId));
             string strSaveTemplateDialogPath = _panel.Page.ResolveUrl(moduleFolderPath + "Dialogs/SaveTemplate.aspx?Path=" + PortalPath + "&TabId=" + PortalSettings.ActiveTab.TabID + "&ModuleId=" + moduleId);
 
-			AJAX.AddScriptManager(_panel.Page);
-        	ClientResourceManager.EnableAsyncPostBackHandler();
+            AJAX.AddScriptManager(_panel.Page);
+            ClientResourceManager.EnableAsyncPostBackHandler();
             ClientResourceManager.RegisterScript(_panel.Page, moduleFolderPath + "js/ClientScripts.js");
             ClientResourceManager.RegisterScript(_panel.Page, moduleFolderPath + "js/RegisterDialogs.js");
 
-			_editor.ContentAreaCssFile = "~/DesktopModules/Admin/RadEditorProvider/Css/EditorContentAreaOverride.css?cdv=" + Host.CrmVersion;
+            _editor.ContentAreaCssFile = "~/DesktopModules/Admin/RadEditorProvider/Css/EditorContentAreaOverride.css?cdv=" + Host.CrmVersion;
 
             if (_editor.ToolbarMode == EditorToolbarMode.Default && string.Equals(_editor.Skin, "Default", StringComparison.OrdinalIgnoreCase))
             {
-				var editorOverrideCSSPath = _panel.Page.ResolveUrl("~/DesktopModules/Admin/RadEditorProvider/Css/EditorOverride.css?cdv=" + Host.CrmVersion);
+                var editorOverrideCSSPath = _panel.Page.ResolveUrl("~/DesktopModules/Admin/RadEditorProvider/Css/EditorOverride.css?cdv=" + Host.CrmVersion);
                 var setEditorOverrideCSSPath = "<script type=\"text/javascript\">var __editorOverrideCSSPath = \"" + editorOverrideCSSPath + "\";</script>";
                 _panel.Page.ClientScript.RegisterClientScriptBlock(GetType(), "EditorOverrideCSSPath", setEditorOverrideCSSPath);
 
-				ClientResourceManager.RegisterScript(_panel.Page, moduleFolderPath + "js/overrideCSS.js");
+                ClientResourceManager.RegisterScript(_panel.Page, moduleFolderPath + "js/overrideCSS.js");
                 //_editor.Skin = "Black";
-	            _editor.PreventDefaultStylesheet = true;
+                _editor.PreventDefaultStylesheet = true;
             }
             else
             {
@@ -969,31 +969,31 @@ namespace DotNetNuke.Providers.RadEditorProvider
             }
 
             //add save template dialog var
-        	var saveTemplateDialogJs = 
-				"<script type=\"text/javascript\">var __textEditorSaveTemplateDialog = \"" + strSaveTemplateDialogPath + "\";</script>";
-			_panel.Page.ClientScript.RegisterClientScriptBlock(GetType(), "SaveTemplateDialog", saveTemplateDialogJs);
+            var saveTemplateDialogJs =
+                "<script type=\"text/javascript\">var __textEditorSaveTemplateDialog = \"" + strSaveTemplateDialogPath + "\";</script>";
+            _panel.Page.ClientScript.RegisterClientScriptBlock(GetType(), "SaveTemplateDialog", saveTemplateDialogJs);
 
             //add css classes for save template tool
             /*
             _panel.Controls.Add(
                 new LiteralControl("<style type=\"text/css\">.reTool_text .SaveTemplate, .reTool .SaveTemplate { background-image: url('" + _panel.Page.ResolveUrl(moduleFolderPath + "images/save.png") +
-                                   "') !important; }</style>"));
+                                    "') !important; }</style>"));
             _panel.Controls.Add(
                 new LiteralControl("<style type=\"text/css\">.reTool .TemplateOptions { background-image: url('" + _panel.Page.ResolveUrl(moduleFolderPath + "images/templates.png") +
-                                   "') !important; }</style>"));
+                                    "') !important; }</style>"));
             _panel.Controls.Add(
                 new LiteralControl("<style type=\"text/css\">.reTool_text .TemplateManager, .reTool .TemplateManager { background-image: url('" +
-                                   _panel.Page.ResolveUrl(moduleFolderPath + "images/templates.png") + "') !important; background-position: left top !important; }</style>"));
+                                    _panel.Page.ResolveUrl(moduleFolderPath + "images/templates.png") + "') !important; background-position: left top !important; }</style>"));
             _panel.Controls.Add(
                 new LiteralControl("<style type=\"text/css\">.reTool .InsertOptions { background-image: url('" + _panel.Page.ResolveUrl(moduleFolderPath + "images/Attachment.png") +
-                                   "') !important; }</style>"));
-             */
+                                    "') !important; }</style>"));
+            */
 
             _editor.OnClientSubmit = "OnDnnEditorClientSubmit";
 
             //add editor control to panel
             _panel.Controls.Add(_editor);
-			_panel.Controls.Add(new RenderTemplateUrl());
+            _panel.Controls.Add(new RenderTemplateUrl());
         }
 
         protected void Panel_Load(object sender, EventArgs e)
@@ -1094,7 +1094,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
             _editor.DialogHandlerUrl = _panel.Page.ResolveUrl(moduleFolderPath + "DialogHandler.aspx?tabid=" + PortalSettings.ActiveTab.TabID);
             //_editor.SpellCheckSettings.AjaxUrl = moduleFolderPath.Replace("~", "") & "SpellCheckHandler.ashx?tabid=" & PortalSettings.ActiveTab.TabID.ToString()
             _editor.SpellCheckSettings.AjaxUrl = _panel.Page.ResolveUrl(moduleFolderPath + "SpellCheckHandler.ashx?tabid=" + PortalSettings.ActiveTab.TabID);
-	        _editor.DialogOpener.AdditionalQueryString = "&linkstype=" + _linksType + "&nuru=" + HttpContext.Current.Request.QueryString["nuru"];
+            _editor.DialogOpener.AdditionalQueryString = "&linkstype=" + _linksType + "&nuru=" + HttpContext.Current.Request.QueryString["nuru"];
         }
 
         private bool IsLocaleAvailable(string Locale)
@@ -1186,13 +1186,13 @@ namespace DotNetNuke.Providers.RadEditorProvider
 
         #endregion
 
-		private readonly DnnEditor _editor = new DnnEditor();
+        private readonly DnnEditor _editor = new DnnEditor();
         private readonly Panel _panel = new Panel();
         private bool _ShowPortalLinks = true;
 
         //must override properties
         private const string ConfigFileName = moduleFolderPath + "/ConfigFile/ConfigFile.xml";
-            
+
         //other provider specific properties
 
         private bool _languageSet;

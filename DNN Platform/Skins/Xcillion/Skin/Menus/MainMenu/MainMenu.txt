@@ -1,7 +1,7 @@
 <div id="dnnMenu">
-	<ul class="nav navbar-nav topLevel">
-		[*>NODE-TOP]
-	</ul>
+    <ul class="nav navbar-nav topLevel">
+        [*>NODE-TOP]
+    </ul>
 </div>
     [>NODE-TOP]
         <li class="menuItem [?NODE]dropdown [/?][?SELECTED]active[/?]">
@@ -17,7 +17,7 @@
         [/?]
         </li>
     [/>]
-	[>NODE]
+    [>NODE]
         <li class="[?NODE]dropdown [/?][?SELECTED]active[/?]">
         [?ENABLED]
             <a href="[=URL]" [?TARGET]target="[=TARGET]"[/?]><span>[=TEXT]</span> [?NODE]<span class="caret"></span>[/?]</a>

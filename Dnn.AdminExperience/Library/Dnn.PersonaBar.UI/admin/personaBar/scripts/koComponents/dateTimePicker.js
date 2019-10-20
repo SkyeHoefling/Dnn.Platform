@@ -19,15 +19,15 @@ define(['knockout', 'moment',
             this.resx = params.resx;
             this.date = params.date;
             this.minDate = params.minDate;
-            
+
             this.datePart = ko.computed({
                 read: function() {
                     return !self.date() ? "" : moment(self.date()).format("MM/DD/YYYY");
                 },
                 write: function (value) {
                     if (self.datePart() !== value) {
-                        self.date(composeDate(value, self.hour(), self.amPm()));    
-                    }                    
+                        self.date(composeDate(value, self.hour(), self.amPm()));
+                    }
                 }
             });
 
@@ -35,8 +35,8 @@ define(['knockout', 'moment',
                 read: function() {
                     return !self.date() ? "12:00" : moment(self.date()).format("hh:mm");
                 },
-                write: function (value) {                    
-                    self.date(composeDate(self.datePart(), value, self.amPm()));                    
+                write: function (value) {
+                    self.date(composeDate(self.datePart(), value, self.amPm()));
                 }
             });
 
@@ -45,7 +45,7 @@ define(['knockout', 'moment',
                     return !self.date() ? "AM" : moment(self.date()).format("A");
                 },
                 write: function (value) {
-                    self.date(composeDate(self.datePart(), self.hour(), value));                    
+                    self.date(composeDate(self.datePart(), self.hour(), value));
                 }
             });
         },

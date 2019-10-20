@@ -24,7 +24,7 @@ function hasClass(element, className) {
 }
 
 function validateDate(date, minDate, maxDate) {
-    return ((!minDate || date >= minDate) && 
+    return ((!minDate || date >= minDate) &&
             (!maxDate || date <= maxDate));
 }
 
@@ -255,7 +255,7 @@ class DatePicker extends Component {
         return date;
     }
 
-    showCalendar() {       
+    showCalendar() {
         this.setState({ isCalendarVisible: true });
     }
 
@@ -312,7 +312,7 @@ class DatePicker extends Component {
     }
 
     getPositionCss() {
-        switch (this.props.calendarPosition) {            
+        switch (this.props.calendarPosition) {
             case "top":
                 return "show-above-input";
             case "bottom":
@@ -324,7 +324,7 @@ class DatePicker extends Component {
     updateTimezone(timezone) {
         this.setState({timezone});
     }
-   
+
     render() {
         this.date = this.state.Date.FirstDate;
         this.secondDate = this.state.Date.SecondDate;
@@ -358,12 +358,12 @@ class DatePicker extends Component {
             icon = this.props.icon;
         }
 
-        const style = this.props.isDateRange && this.props.hasTimePicker ? {width: 380} : {}; 
+        const style = this.props.isDateRange && this.props.hasTimePicker ? {width: 380} : {};
         const buttonStyle = this.props.isDateRange ? {} : {margin: "10px auto", float: "none"};
         const inputClassName = "calendar-text" + ( this.props.hasTimePicker ? " with-time-picker" : "");
 
         const showClearDates = !!this.props.isDateRange && this.props.showClearDates;
-        const clearButtonStyle = (this.state.Date.FirstDate || this.state.Date.SecondDate) ? clearButtonStyleVisible : clearButtonStyleInvisible;            
+        const clearButtonStyle = (this.state.Date.FirstDate || this.state.Date.SecondDate) ? clearButtonStyleVisible : clearButtonStyleInvisible;
 
         /* eslint-disable react/no-danger */
         return <div className="dnn-day-picker" ref={this.dayPickerRef}>
@@ -394,15 +394,15 @@ class DatePicker extends Component {
                         disabledDays={ this.firstDisableDates.bind(this) }
                     />
                     <div className="dnn-time-picker-box">
-                        {this.props.hasTimePicker && 
-                            <TimePicker 
-                                updateTime={this.updateFirstTime.bind(this)} 
+                        {this.props.hasTimePicker &&
+                            <TimePicker
+                                updateTime={this.updateFirstTime.bind(this)}
                                 time={this.formatDate(this.date, "LT") }
                                 className={this.props.hasTimezonePicker ? "half" : "full"} />
                         }
-                        {this.props.hasTimezonePicker && 
-                            <TimezonePicker 
-                                onUpdate={this.updateTimezone.bind(this)} 
+                        {this.props.hasTimezonePicker &&
+                            <TimezonePicker
+                                onUpdate={this.updateTimezone.bind(this)}
                                 value={this.state.timezone} />
                         }
                     </div>
@@ -419,7 +419,7 @@ class DatePicker extends Component {
                     {this.props.hasTimePicker && <TimePicker updateTime={this.updateSecondTime.bind(this) } time={this.formatDate(this.secondDate, "LT") }/>}
                 </div>}
                 {showButton && <button style={buttonStyle} role="primary" onClick={this.apply.bind(this) }>{this.props.applyButtonText || "Apply"}</button>}
-                {showClearDates && <button role="secondary" style={clearButtonStyle} onClick={this.onClearDatesPressed.bind(this)}>Clear</button> }                
+                {showClearDates && <button role="secondary" style={clearButtonStyle} onClick={this.onClearDatesPressed.bind(this)}>Clear</button> }
             </div>
         </div>;
     }
@@ -438,7 +438,7 @@ DatePicker.propTypes = {
     //if isDateRange is true the secondDate is Required
     secondDate: PropTypes.instanceOf(Date),
 
-    //min and max dates to reduce dates user can select. 
+    //min and max dates to reduce dates user can select.
     minDate: PropTypes.instanceOf(Date),
     maxDate: PropTypes.instanceOf(Date),
 
@@ -448,10 +448,10 @@ DatePicker.propTypes = {
     // timezone value & update callback
     timezone: PropTypes.string,
 
-    // if set to true, it shows time picker 
+    // if set to true, it shows time picker
     hasTimePicker: PropTypes.bool,
 
-    // if set to true, it shows time zone picker 
+    // if set to true, it shows time zone picker
     hasTimezonePicker: PropTypes.bool,
 
     //if set to true it shows static text instead of input fields

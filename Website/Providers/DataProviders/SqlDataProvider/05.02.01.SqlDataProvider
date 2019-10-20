@@ -11,8 +11,8 @@
 /* Set FriendlyName to TypeFullName in Schedule Table - fix 05.02.00 bug */
 /******************************************************/
 
-ALTER TABLE {databaseOwner}{objectQualifier}Schedule 
-	ALTER COLUMN FriendlyName nvarchar(200) NULL
+ALTER TABLE {databaseOwner}{objectQualifier}Schedule
+    ALTER COLUMN FriendlyName nvarchar(200) NULL
 GO
 
 UPDATE {databaseOwner}{objectQualifier}Schedule SET FriendlyName = 'Purge Users Online' WHERE TypeFullName = 'DotNetNuke.Entities.Users.PurgeUsersOnline, DOTNETNUKE'
@@ -72,7 +72,7 @@ SET TypeFullName = @TypeFullName
 ,Enabled = @Enabled
 ,ObjectDependencies = @ObjectDependencies
 ,Servers = @Servers,
-[LastModifiedByUserID] = @LastModifiedByUserID,	
+[LastModifiedByUserID] = @LastModifiedByUserID,
 [LastModifiedOnDate] = getdate()
 WHERE ScheduleID = @ScheduleID
 
@@ -157,19 +157,19 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
   DROP PROCEDURE {databaseOwner}{objectQualifier}GetListEntries
 GO
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}GetListEntries  
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetListEntries
 
-	@ListName nvarchar(50),
-	@ParentKey nvarchar(150),
-	@PortalID int
+    @ListName nvarchar(50),
+    @ParentKey nvarchar(150),
+    @PortalID int
 
 AS
 SELECT *
-	FROM {databaseOwner}{objectQualifier}vw_Lists
-	WHERE (ListName = @ListName OR @ListName='')
-		AND (ParentKey = @ParentKey OR @ParentKey = '')
-		AND (PortalID = @PortalID OR @PortalID IS NULL or SystemList=1)
-	ORDER BY [Level], ListName, SortOrder, Text
+    FROM {databaseOwner}{objectQualifier}vw_Lists
+    WHERE (ListName = @ListName OR @ListName='')
+        AND (ParentKey = @ParentKey OR @ParentKey = '')
+        AND (PortalID = @PortalID OR @PortalID IS NULL or SystemList=1)
+    ORDER BY [Level], ListName, SortOrder, Text
 GO
 
 /* Fix Packages Unique Index to include PackageType */
@@ -184,7 +184,7 @@ GO
 /* This is a temporary procedure that will be deleted */
 /* after application upgrade completes                */
 /******************************************************/
-CREATE PROCEDURE {databaseOwner}{objectQualifier}UpgradeDefaultLanguages  
+CREATE PROCEDURE {databaseOwner}{objectQualifier}UpgradeDefaultLanguages
 
 AS
 DECLARE @PortalID int
@@ -201,17 +201,17 @@ OPEN Languages_Cursor
 FETCH NEXT FROM Languages_Cursor
 into @PortalID, @DefaultLanguage
 WHILE @@FETCH_STATUS = 0
-   BEGIN
+    BEGIN
 set @LanguageID=(select languageid from {databaseOwner}{objectQualifier}Languages where CultureCode=@DefaultLanguage)
 
-if  not exists(select * from {databaseOwner}{objectQualifier}PortalLanguages where PortalID=@PortalID) 
+if  not exists(select * from {databaseOwner}{objectQualifier}PortalLanguages where PortalID=@PortalID)
 
 exec {databaseOwner}[{objectQualifier}AddPortalLanguage] @PortalId,@LanguageId,-1
 
-       FETCH NEXT FROM Languages_Cursor
-       into @PortalID, @DefaultLanguage
+        FETCH NEXT FROM Languages_Cursor
+        into @PortalID, @DefaultLanguage
 
-   END
+    END
 CLOSE Languages_Cursor
 DEALLOCATE Languages_Cursor
 GO

@@ -3,7 +3,7 @@ import { log as ActionTypes }  from "../constants/actionTypes";
 export default function logList(state = {
     logList: [],
     portalList: [],
-    logTypeList: [],    
+    logTypeList: [],
     selectedRowIds: [],
     excludedRowIds: [],
     totalCount: 0
@@ -11,8 +11,8 @@ export default function logList(state = {
     switch (action.type) {
         case ActionTypes.RETRIEVED_LOG_LIST:
             return { ...state,
-                logList: action.data.logList, 
-                selectedRowIds: action.data.selectedRowIds,               
+                logList: action.data.logList,
+                selectedRowIds: action.data.selectedRowIds,
                 excludedRowIds: action.data.excludedRowIds,
                 totalCount: action.data.totalCount
             };

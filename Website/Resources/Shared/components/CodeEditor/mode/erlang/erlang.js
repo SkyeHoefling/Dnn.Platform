@@ -103,183 +103,183 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
   function tokenizer(stream,state) {
     // in multi-line string
     if (state.in_string) {
-      state.in_string = (!doubleQuote(stream));
-      return rval(state,stream,"string");
+    state.in_string = (!doubleQuote(stream));
+    return rval(state,stream,"string");
     }
 
     // in multi-line atom
     if (state.in_atom) {
-      state.in_atom = (!singleQuote(stream));
-      return rval(state,stream,"atom");
+    state.in_atom = (!singleQuote(stream));
+    return rval(state,stream,"atom");
     }
 
     // whitespace
     if (stream.eatSpace()) {
-      return rval(state,stream,"whitespace");
+    return rval(state,stream,"whitespace");
     }
 
     // attributes and type specs
     if (!peekToken(state) &&
         stream.match(/-\s*[a-zß-öø-ÿ][\wØ-ÞÀ-Öß-öø-ÿ]*/)) {
-      if (is_member(stream.current(),typeWords)) {
+    if (is_member(stream.current(),typeWords)) {
         return rval(state,stream,"type");
-      }else{
+    }else{
         return rval(state,stream,"attribute");
-      }
+    }
     }
 
     var ch = stream.next();
 
     // comment
     if (ch == '%') {
-      stream.skipToEnd();
-      return rval(state,stream,"comment");
+    stream.skipToEnd();
+    return rval(state,stream,"comment");
     }
 
     // colon
     if (ch == ":") {
-      return rval(state,stream,"colon");
+    return rval(state,stream,"colon");
     }
 
     // macro
     if (ch == '?') {
-      stream.eatSpace();
-      stream.eatWhile(anumRE);
-      return rval(state,stream,"macro");
+    stream.eatSpace();
+    stream.eatWhile(anumRE);
+    return rval(state,stream,"macro");
     }
 
     // record
     if (ch == "#") {
-      stream.eatSpace();
-      stream.eatWhile(anumRE);
-      return rval(state,stream,"record");
+    stream.eatSpace();
+    stream.eatWhile(anumRE);
+    return rval(state,stream,"record");
     }
 
     // dollar escape
     if (ch == "$") {
-      if (stream.next() == "\\" && !stream.match(escapesRE)) {
+    if (stream.next() == "\\" && !stream.match(escapesRE)) {
         return rval(state,stream,"error");
-      }
-      return rval(state,stream,"number");
+    }
+    return rval(state,stream,"number");
     }
 
     // dot
     if (ch == ".") {
-      return rval(state,stream,"dot");
+    return rval(state,stream,"dot");
     }
 
     // quoted atom
     if (ch == '\'') {
-      if (!(state.in_atom = (!singleQuote(stream)))) {
+    if (!(state.in_atom = (!singleQuote(stream)))) {
         if (stream.match(/\s*\/\s*[0-9]/,false)) {
-          stream.match(/\s*\/\s*[0-9]/,true);
-          return rval(state,stream,"fun");      // 'f'/0 style fun
+        stream.match(/\s*\/\s*[0-9]/,true);
+        return rval(state,stream,"fun");      // 'f'/0 style fun
         }
         if (stream.match(/\s*\(/,false) || stream.match(/\s*:/,false)) {
-          return rval(state,stream,"function");
+        return rval(state,stream,"function");
         }
-      }
-      return rval(state,stream,"atom");
+    }
+    return rval(state,stream,"atom");
     }
 
     // string
     if (ch == '"') {
-      state.in_string = (!doubleQuote(stream));
-      return rval(state,stream,"string");
+    state.in_string = (!doubleQuote(stream));
+    return rval(state,stream,"string");
     }
 
     // variable
     if (/[A-Z_Ø-ÞÀ-Ö]/.test(ch)) {
-      stream.eatWhile(anumRE);
-      return rval(state,stream,"variable");
+    stream.eatWhile(anumRE);
+    return rval(state,stream,"variable");
     }
 
     // atom/keyword/BIF/function
     if (/[a-z_ß-öø-ÿ]/.test(ch)) {
-      stream.eatWhile(anumRE);
+    stream.eatWhile(anumRE);
 
-      if (stream.match(/\s*\/\s*[0-9]/,false)) {
+    if (stream.match(/\s*\/\s*[0-9]/,false)) {
         stream.match(/\s*\/\s*[0-9]/,true);
         return rval(state,stream,"fun");      // f/0 style fun
-      }
+    }
 
-      var w = stream.current();
+    var w = stream.current();
 
-      if (is_member(w,keywordWords)) {
+    if (is_member(w,keywordWords)) {
         return rval(state,stream,"keyword");
-      }else if (is_member(w,operatorAtomWords)) {
+    }else if (is_member(w,operatorAtomWords)) {
         return rval(state,stream,"operator");
-      }else if (stream.match(/\s*\(/,false)) {
+    }else if (stream.match(/\s*\(/,false)) {
         // 'put' and 'erlang:put' are bifs, 'foo:put' is not
         if (is_member(w,bifWords) &&
             ((peekToken(state).token != ":") ||
-             (peekToken(state,2).token == "erlang"))) {
-          return rval(state,stream,"builtin");
+            (peekToken(state,2).token == "erlang"))) {
+        return rval(state,stream,"builtin");
         }else if (is_member(w,guardWords)) {
-          return rval(state,stream,"guard");
+        return rval(state,stream,"guard");
         }else{
-          return rval(state,stream,"function");
+        return rval(state,stream,"function");
         }
-      }else if (lookahead(stream) == ":") {
+    }else if (lookahead(stream) == ":") {
         if (w == "erlang") {
-          return rval(state,stream,"builtin");
+        return rval(state,stream,"builtin");
         } else {
-          return rval(state,stream,"function");
+        return rval(state,stream,"function");
         }
-      }else if (is_member(w,["true","false"])) {
+    }else if (is_member(w,["true","false"])) {
         return rval(state,stream,"boolean");
-      }else{
+    }else{
         return rval(state,stream,"atom");
-      }
+    }
     }
 
     // number
     var digitRE      = /[0-9]/;
     var radixRE      = /[0-9a-zA-Z]/;         // 36#zZ style int
     if (digitRE.test(ch)) {
-      stream.eatWhile(digitRE);
-      if (stream.eat('#')) {                // 36#aZ  style integer
+    stream.eatWhile(digitRE);
+    if (stream.eat('#')) {                // 36#aZ  style integer
         if (!stream.eatWhile(radixRE)) {
-          stream.backUp(1);                 //"36#" - syntax error
+        stream.backUp(1);                 //"36#" - syntax error
         }
-      } else if (stream.eat('.')) {       // float
+    } else if (stream.eat('.')) {       // float
         if (!stream.eatWhile(digitRE)) {
-          stream.backUp(1);        // "3." - probably end of function
+        stream.backUp(1);        // "3." - probably end of function
         } else {
-          if (stream.eat(/[eE]/)) {        // float with exponent
+        if (stream.eat(/[eE]/)) {        // float with exponent
             if (stream.eat(/[-+]/)) {
-              if (!stream.eatWhile(digitRE)) {
+            if (!stream.eatWhile(digitRE)) {
                 stream.backUp(2);            // "2e-" - syntax error
-              }
-            } else {
-              if (!stream.eatWhile(digitRE)) {
-                stream.backUp(1);            // "2e" - syntax error
-              }
             }
-          }
+            } else {
+            if (!stream.eatWhile(digitRE)) {
+                stream.backUp(1);            // "2e" - syntax error
+            }
+            }
         }
-      }
-      return rval(state,stream,"number");   // normal integer
+        }
+    }
+    return rval(state,stream,"number");   // normal integer
     }
 
     // open parens
     if (nongreedy(stream,openParenRE,openParenWords)) {
-      return rval(state,stream,"open_paren");
+    return rval(state,stream,"open_paren");
     }
 
     // close parens
     if (nongreedy(stream,closeParenRE,closeParenWords)) {
-      return rval(state,stream,"close_paren");
+    return rval(state,stream,"close_paren");
     }
 
     // separators
     if (greedy(stream,separatorRE,separatorWords)) {
-      return rval(state,stream,"separator");
+    return rval(state,stream,"separator");
     }
 
     // operators
     if (greedy(stream,operatorSymbolRE,operatorSymbolWords)) {
-      return rval(state,stream,"operator");
+    return rval(state,stream,"operator");
     }
 
     return rval(state,stream,null);
@@ -289,31 +289,31 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
 // utilities
   function nongreedy(stream,re,words) {
     if (stream.current().length == 1 && re.test(stream.current())) {
-      stream.backUp(1);
-      while (re.test(stream.peek())) {
+    stream.backUp(1);
+    while (re.test(stream.peek())) {
         stream.next();
         if (is_member(stream.current(),words)) {
-          return true;
+        return true;
         }
-      }
-      stream.backUp(stream.current().length-1);
+    }
+    stream.backUp(stream.current().length-1);
     }
     return false;
   }
 
   function greedy(stream,re,words) {
     if (stream.current().length == 1 && re.test(stream.current())) {
-      while (re.test(stream.peek())) {
+    while (re.test(stream.peek())) {
         stream.next();
-      }
-      while (0 < stream.current().length) {
+    }
+    while (0 < stream.current().length) {
         if (is_member(stream.current(),words)) {
-          return true;
+        return true;
         }else{
-          stream.backUp(1);
+        stream.backUp(1);
         }
-      }
-      stream.next();
+    }
+    stream.next();
     }
     return false;
   }
@@ -328,12 +328,12 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
 
   function quote(stream,quoteChar,escapeChar) {
     while (!stream.eol()) {
-      var ch = stream.next();
-      if (ch == quoteChar) {
+    var ch = stream.next();
+    if (ch == quoteChar) {
         return true;
-      }else if (ch == escapeChar) {
+    }else if (ch == escapeChar) {
         stream.next();
-      }
+    }
     }
     return false;
   }
@@ -355,29 +355,29 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     // map erlang token type to CodeMirror style class
     //     erlang             -> CodeMirror tag
     switch (type) {
-      case "atom":        return "atom";
-      case "attribute":   return "attribute";
-      case "boolean":     return "atom";
-      case "builtin":     return "builtin";
-      case "close_paren": return null;
-      case "colon":       return null;
-      case "comment":     return "comment";
-      case "dot":         return null;
-      case "error":       return "error";
-      case "fun":         return "meta";
-      case "function":    return "tag";
-      case "guard":       return "property";
-      case "keyword":     return "keyword";
-      case "macro":       return "variable-2";
-      case "number":      return "number";
-      case "open_paren":  return null;
-      case "operator":    return "operator";
-      case "record":      return "bracket";
-      case "separator":   return null;
-      case "string":      return "string";
-      case "type":        return "def";
-      case "variable":    return "variable";
-      default:            return null;
+    case "atom":        return "atom";
+    case "attribute":   return "attribute";
+    case "boolean":     return "atom";
+    case "builtin":     return "builtin";
+    case "close_paren": return null;
+    case "colon":       return null;
+    case "comment":     return "comment";
+    case "dot":         return null;
+    case "error":       return "error";
+    case "fun":         return "meta";
+    case "function":    return "tag";
+    case "guard":       return "property";
+    case "keyword":     return "keyword";
+    case "macro":       return "variable-2";
+    case "number":      return "number";
+    case "open_paren":  return null;
+    case "operator":    return "operator";
+    case "record":      return "bracket";
+    case "separator":   return null;
+    case "string":      return "string";
+    case "type":        return "def";
+    case "variable":    return "variable";
+    default:            return null;
     }
   }
 
@@ -390,9 +390,9 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
 
   function realToken(type,stream) {
     return aToken(stream.current(),
-                 stream.column(),
-                 stream.indentation(),
-                 type);
+                stream.column(),
+                stream.indentation(),
+                type);
   }
 
   function fakeToken(type) {
@@ -404,17 +404,17 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     var dep = (depth ? depth : 1);
 
     if (len < dep) {
-      return false;
+    return false;
     }else{
-      return state.tokenStack[len-dep];
+    return state.tokenStack[len-dep];
     }
   }
 
   function pushToken(state,token) {
 
     if (!(token.type == "comment" || token.type == "whitespace")) {
-      state.tokenStack = maybe_drop_pre(state.tokenStack,token);
-      state.tokenStack = maybe_drop_post(state.tokenStack);
+    state.tokenStack = maybe_drop_pre(state.tokenStack,token);
+    state.tokenStack = maybe_drop_post(state.tokenStack);
     }
   }
 
@@ -422,12 +422,12 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     var last = s.length-1;
 
     if (0 < last && s[last].type === "record" && token.type === "dot") {
-      s.pop();
+    s.pop();
     }else if (0 < last && s[last].type === "group") {
-      s.pop();
-      s.push(token);
+    s.pop();
+    s.push(token);
     }else{
-      s.push(token);
+    s.push(token);
     }
     return s;
   }
@@ -436,26 +436,26 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     var last = s.length-1;
 
     if (s[last].type === "dot") {
-      return [];
+    return [];
     }
     if (s[last].type === "fun" && s[last-1].token === "fun") {
-      return s.slice(0,last-1);
+    return s.slice(0,last-1);
     }
     switch (s[s.length-1].token) {
-      case "}":    return d(s,{g:["{"]});
-      case "]":    return d(s,{i:["["]});
-      case ")":    return d(s,{i:["("]});
-      case ">>":   return d(s,{i:["<<"]});
-      case "end":  return d(s,{i:["begin","case","fun","if","receive","try"]});
-      case ",":    return d(s,{e:["begin","try","when","->",
-                                  ",","(","[","{","<<"]});
-      case "->":   return d(s,{r:["when"],
-                               m:["try","if","case","receive"]});
-      case ";":    return d(s,{E:["case","fun","if","receive","try","when"]});
-      case "catch":return d(s,{e:["try"]});
-      case "of":   return d(s,{e:["case"]});
-      case "after":return d(s,{e:["receive","try"]});
-      default:     return s;
+    case "}":    return d(s,{g:["{"]});
+    case "]":    return d(s,{i:["["]});
+    case ")":    return d(s,{i:["("]});
+    case ">>":   return d(s,{i:["<<"]});
+    case "end":  return d(s,{i:["begin","case","fun","if","receive","try"]});
+    case ",":    return d(s,{e:["begin","try","when","->",
+                                ",","(","[","{","<<"]});
+    case "->":   return d(s,{r:["when"],
+                                m:["try","if","case","receive"]});
+    case ";":    return d(s,{E:["case","fun","if","receive","try","when"]});
+    case "catch":return d(s,{e:["try"]});
+    case "of":   return d(s,{e:["case"]});
+    case "after":return d(s,{e:["receive","try"]});
+    default:     return s;
     }
   }
 
@@ -477,21 +477,21 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     //  in which case it will return an empty stack.
 
     for (var type in tt) {
-      var len = stack.length-1;
-      var tokens = tt[type];
-      for (var i = len-1; -1 < i ; i--) {
+    var len = stack.length-1;
+    var tokens = tt[type];
+    for (var i = len-1; -1 < i ; i--) {
         if (is_member(stack[i].token,tokens)) {
-          var ss = stack.slice(0,i);
-          switch (type) {
-              case "m": return ss.concat(stack[i]).concat(stack[len]);
-              case "r": return ss.concat(stack[len]);
-              case "i": return ss;
-              case "g": return ss.concat(fakeToken("group"));
-              case "E": return ss.concat(stack[i]);
-              case "e": return ss.concat(stack[i]);
-          }
+        var ss = stack.slice(0,i);
+        switch (type) {
+            case "m": return ss.concat(stack[i]).concat(stack[len]);
+            case "r": return ss.concat(stack[len]);
+            case "i": return ss;
+            case "g": return ss.concat(fakeToken("group"));
+            case "E": return ss.concat(stack[i]);
+            case "e": return ss.concat(stack[i]);
         }
-      }
+        }
+    }
     }
     return (type == "E" ? [] : stack);
   }
@@ -507,38 +507,38 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     var prevT = peekToken(state,2);
 
     if (state.in_string || state.in_atom) {
-      return CodeMirror.Pass;
+    return CodeMirror.Pass;
     }else if (!prevT) {
-      return 0;
+    return 0;
     }else if (currT.token == "when") {
-      return currT.column+unit;
+    return currT.column+unit;
     }else if (wordAfter === "when" && prevT.type === "function") {
-      return prevT.indent+unit;
+    return prevT.indent+unit;
     }else if (wordAfter === "(" && currT.token === "fun") {
-      return  currT.column+3;
+    return  currT.column+3;
     }else if (wordAfter === "catch" && (t = getToken(state,["try"]))) {
-      return t.column;
+    return t.column;
     }else if (is_member(wordAfter,["end","after","of"])) {
-      t = getToken(state,["begin","case","fun","if","receive","try"]);
-      return t ? t.column : CodeMirror.Pass;
+    t = getToken(state,["begin","case","fun","if","receive","try"]);
+    return t ? t.column : CodeMirror.Pass;
     }else if (is_member(wordAfter,closeParenWords)) {
-      t = getToken(state,openParenWords);
-      return t ? t.column : CodeMirror.Pass;
+    t = getToken(state,openParenWords);
+    return t ? t.column : CodeMirror.Pass;
     }else if (is_member(currT.token,[",","|","||"]) ||
-              is_member(wordAfter,[",","|","||"])) {
-      t = postcommaToken(state);
-      return t ? t.column+t.token.length : unit;
+            is_member(wordAfter,[",","|","||"])) {
+    t = postcommaToken(state);
+    return t ? t.column+t.token.length : unit;
     }else if (currT.token == "->") {
-      if (is_member(prevT.token, ["receive","case","if","try"])) {
+    if (is_member(prevT.token, ["receive","case","if","try"])) {
         return prevT.column+unit+unit;
-      }else{
-        return prevT.column+unit;
-      }
-    }else if (is_member(currT.token,openParenWords)) {
-      return currT.column+currT.token.length;
     }else{
-      t = defaultToken(state);
-      return truthy(t) ? t.column+unit : 0;
+        return prevT.column+unit;
+    }
+    }else if (is_member(currT.token,openParenWords)) {
+    return currT.column+currT.token.length;
+    }else{
+    t = defaultToken(state);
+    return truthy(t) ? t.column+unit : 0;
     }
   }
 
@@ -561,11 +561,11 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
     var oper = getTokenIndex(objs,"type",["operator"]);
 
     if (truthy(stop) && truthy(oper) && stop < oper) {
-      return objs[stop+1];
+    return objs[stop+1];
     } else if (truthy(stop)) {
-      return objs[stop];
+    return objs[stop];
     } else {
-      return false;
+    return false;
     }
   }
 
@@ -579,9 +579,9 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
   function getTokenIndex(objs,propname,propvals) {
 
     for (var i = objs.length-1; -1 < i ; i--) {
-      if (is_member(objs[i][propname],propvals)) {
+    if (is_member(objs[i][propname],propvals)) {
         return i;
-      }
+    }
     }
     return false;
   }
@@ -595,21 +595,21 @@ CodeMirror.defineMode("erlang", function(cmCfg) {
 
   return {
     startState:
-      function() {
+    function() {
         return {tokenStack: [],
                 in_string:  false,
                 in_atom:    false};
-      },
+    },
 
     token:
-      function(stream, state) {
+    function(stream, state) {
         return tokenizer(stream, state);
-      },
+    },
 
     indent:
-      function(state, textAfter) {
+    function(state, textAfter) {
         return indenter(state,textAfter);
-      },
+    },
 
     lineComment: "%"
   };

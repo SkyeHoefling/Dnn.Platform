@@ -58,7 +58,7 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
             }
             if (rolesFilter.Count() > 0)
             {
-                IList<RoleInfo> foundRoles = _rolesController.GetRolesByNames(PortalSettings, -1, rolesFilter);            
+                IList<RoleInfo> foundRoles = _rolesController.GetRolesByNames(PortalSettings, -1, rolesFilter);
                 HashSet<string> foundRolesNames = new HashSet<string>(foundRoles.Select(role => role.RoleName));
                 HashSet<string> roleFiltersSet = new HashSet<string>(rolesFilter);
                 roleFiltersSet.ExceptWith(foundRolesNames);
@@ -73,7 +73,7 @@ namespace Dnn.PersonaBar.Users.Components.Prompt.Commands
         }
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
-        {            
+        {
             UserId = GetFlagValue(FlagId, "User Id", -1, true, true, true);
             Roles = GetFlagValue(FlagRoles, "Roles", string.Empty, true);
             StartDate = GetFlagValue<DateTime?>(FlagStart, "Start Date", null);

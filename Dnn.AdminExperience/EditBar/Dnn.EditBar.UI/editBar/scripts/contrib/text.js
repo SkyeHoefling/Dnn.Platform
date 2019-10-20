@@ -72,13 +72,13 @@
             },
 
             /**
-             * Parses a resource name into its component parts. Resource names
-             * look like: module/name.ext!strip, where the !strip part is
-             * optional.
-             * @param {String} name the resource name
-             * @returns {Object} with properties "moduleName", "ext" and "strip"
-             * where strip is a boolean.
-             */
+            * Parses a resource name into its component parts. Resource names
+            * look like: module/name.ext!strip, where the !strip part is
+            * optional.
+            * @param {String} name the resource name
+            * @returns {Object} with properties "moduleName", "ext" and "strip"
+            * where strip is a boolean.
+            */
             parseName: function (name) {
                 var strip = false, index = name.indexOf("."),
                     modName = name.substring(0, index),
@@ -102,13 +102,13 @@
             xdRegExp: /^((\w+)\:)?\/\/([^\/\\]+)/,
 
             /**
-             * Is an URL on another domain. Only works for browser use, returns
-             * false in non-browser environments. Only used to know if an
-             * optimized .js version of a text resource should be loaded
-             * instead.
-             * @param {String} url
-             * @returns Boolean
-             */
+            * Is an URL on another domain. Only works for browser use, returns
+            * false in non-browser environments. Only used to know if an
+            * optimized .js version of a text resource should be loaded
+            * instead.
+            * @param {String} url
+            * @returns Boolean
+            */
             useXhr: function (url, protocol, hostname, port) {
                 var match = text.xdRegExp.exec(url),
                     uProtocol, uHostName, uPort;
@@ -123,8 +123,8 @@
                 uHostName = uHostName[0];
 
                 return (!uProtocol || uProtocol === protocol) &&
-                       (!uHostName || uHostName === hostname) &&
-                       ((!uPort && !uHostName) || uPort === port);
+                        (!uHostName || uHostName === hostname) &&
+                        ((!uPort && !uHostName) || uPort === port);
             },
 
             finishLoad: function (name, strip, content, onLoad, config) {
@@ -154,7 +154,7 @@
                     nonStripName = parsed.moduleName + '.' + parsed.ext,
                     url = req.toUrl(nonStripName),
                     useXhr = (config && config.text && config.text.useXhr) ||
-                             text.useXhr;
+                            text.useXhr;
 
                 //Load the text. Use XHR if possible and in a browser.
                 if (!hasLocation || useXhr(url, defaultProtocol, defaultHostName, defaultPort)) {
@@ -177,9 +177,9 @@
                 if (buildMap.hasOwnProperty(moduleName)) {
                     var content = text.jsEscape(buildMap[moduleName]);
                     write.asModule(pluginName + "!" + moduleName,
-                                   "define(function () { return '" +
-                                       content +
-                                   "';});\n");
+                                    "define(function () { return '" +
+                                        content +
+                                    "';});\n");
                 }
             },
 
@@ -189,7 +189,7 @@
                     //Use a '.js' file name so that it indicates it is a
                     //script that can be loaded across domains.
                     fileName = req.toUrl(parsed.moduleName + '.' +
-                                         parsed.ext) + '.js';
+                                        parsed.ext) + '.js';
 
                 //Leverage own load() method to load plugin value, but only
                 //write out values that do not have the strip argument,
@@ -224,8 +224,8 @@
                 xhr.send(null);
             };
         } else if (typeof process !== "undefined" &&
-                 process.versions &&
-                 !!process.versions.node) {
+                process.versions &&
+                !!process.versions.node) {
             //Using special require.nodeRequire, something added by r.js.
             fs = require.nodeRequire('fs');
 

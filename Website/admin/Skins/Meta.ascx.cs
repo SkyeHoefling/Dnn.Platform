@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -52,19 +52,19 @@ namespace DotNetNuke.UI.Skins.Controls
 
         /// <summary>
         /// Gets or sets the <c>http-equiv</c> attribute of the <c>meta</c> element.
-        /// If specified, this is the name of the HTTP header that the 
+        /// If specified, this is the name of the HTTP header that the
         /// <c>meta</c>
         /// The attribute is not rendered if it is not set.
         /// Either this or the <see cref="Name" /> must be set.
         /// </summary>
-        public string HttpEquiv 
+        public string HttpEquiv
         {
-            get { return this.Http.Equiv; } 
-            set { this.Http.Equiv = value; } 
+            get { return this.Http.Equiv; }
+            set { this.Http.Equiv = value; }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to insert this <c>meta</c> 
+        /// Gets or sets a value indicating whether to insert this <c>meta</c>
         /// element at the beginning of the <c>head</c> element, rather than the
         /// end.
         /// </summary>
@@ -105,10 +105,10 @@ namespace DotNetNuke.UI.Skins.Controls
         /// the <see cref="HttpEquiv" /> property via <c>Http-Equiv</c> syntax
         /// in Web Forms markup.
         /// </summary>
-        public class HttpPlaceholder 
+        public class HttpPlaceholder
         {
             /// <summary>
-            /// Gets or sets the <see cref="Meta.HttpEquiv"/> of the parent 
+            /// Gets or sets the <see cref="Meta.HttpEquiv"/> of the parent
             /// <c>meta</c> element
             /// </summary>
             public string Equiv { get; set; }

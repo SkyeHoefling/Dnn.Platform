@@ -15,17 +15,17 @@
   if (PortalSettings.DataConsentActive && User.UserID == UserInfo.UserID)
   {
     switch (PortalSettings.DataConsentUserDeleteAction)
-      {
+    {
         case PortalSettings.UserDeleteAction.Manual:
-          confirmText = ClientAPI.GetSafeJSString(Localization.GetString("ManualDelete.Confirm", "~/DesktopModules/Admin/Security/App_LocalResources/DataConsent.ascx.resx"));
-          break;
+        confirmText = ClientAPI.GetSafeJSString(Localization.GetString("ManualDelete.Confirm", "~/DesktopModules/Admin/Security/App_LocalResources/DataConsent.ascx.resx"));
+        break;
         case PortalSettings.UserDeleteAction.DelayedHardDelete:
-          confirmText = ClientAPI.GetSafeJSString(Localization.GetString("DelayedHardDelete.Confirm", "~/DesktopModules/Admin/Security/App_LocalResources/DataConsent.ascx.resx"));
-          break;
+        confirmText = ClientAPI.GetSafeJSString(Localization.GetString("DelayedHardDelete.Confirm", "~/DesktopModules/Admin/Security/App_LocalResources/DataConsent.ascx.resx"));
+        break;
         case PortalSettings.UserDeleteAction.HardDelete:
-          confirmText = ClientAPI.GetSafeJSString(Localization.GetString("HardDelete.Confirm", "~/DesktopModules/Admin/Security/App_LocalResources/DataConsent.ascx.resx"));
-          break;
-      }
+        confirmText = ClientAPI.GetSafeJSString(Localization.GetString("HardDelete.Confirm", "~/DesktopModules/Admin/Security/App_LocalResources/DataConsent.ascx.resx"));
+        break;
+    }
   }
 %>
 
@@ -54,11 +54,11 @@
                 $('#accountSettingsFieldSet').prepend(messageNode);
                 messageNode.fadeOut(3000, 'easeInExpo', function () { messageNode.remove(); });
             };
-            
+
             function toggleVanityUrl(show) {
                 var $vanityUrlLabel =$('#<%= VanityUrl.ClientID %>');
                 var $vanityUrlPanel = $('#<%= VanityUrlPanel.ClientID %>');
-                
+
                 if (show) {
                     $vanityUrlPanel.show();
                     $vanityUrlLabel.hide();
@@ -77,7 +77,7 @@
                 var $vanityUrlLabel =$('#<%= VanityUrl.ClientID %>');
                 var httpAlias = $('#<%= VanityUrlAlias.ClientID %>').html();
                 var vanityUrl = $vanityUrl.val();
-                
+
                 //Call Service Framework
                 $.ajax({
                     type: 'POST',
@@ -105,7 +105,7 @@
                     });
                 });
             });
-            
+
             var dnn = dnn || {};
             dnn.subscriptionsSettings = <%=UserSubscriptions.GetSettingsAsJson()%>;
             dnn.subscriptionsController = new Subscription(ko, dnn.subscriptionsSettings,'dnnUserSubscriptions');
@@ -134,14 +134,14 @@
     </ul>
     <div id="dnnUserDetails" class="dnnUserDetails dnnClear">
         <div class="udContent dnnClear">
-			<h2 id="dnnPanel-AccountSettings" class="dnnFormSectionHead"><a href="" class="dnnLabelExpanded"><%=LocalizeString("AccountSettings")%></a></h2>
+            <h2 id="dnnPanel-AccountSettings" class="dnnFormSectionHead"><a href="" class="dnnLabelExpanded"><%=LocalizeString("AccountSettings")%></a></h2>
             <fieldset id="accountSettingsFieldSet">
                 <dnn:DnnFormEditor id="userForm" runat="Server" FormMode="Short">
                     <Items>
                         <dnn:DnnFormLiteralItem ID="userNameReadOnly" runat="server" DataField="Username" />
                         <dnn:DnnFormTextBoxItem ID="displayName" runat="server" DataField="DisplayName" Required="true" />
                         <dnn:DnnFormTextBoxItem ID="email" runat="server" DataField="Email" Required="true" />
-                   </Items>
+                    </Items>
                 </dnn:DnnFormEditor>
                 <asp:Panel class="dnnFormItem" ID="VanityUrlRow" runat="server" Visible="False" ViewStateMode="Disabled">
                     <dnn:Label ID="VanityUrlLabel" runat="server" />
@@ -156,13 +156,13 @@
                     </div>
                 </asp:Panel>
             </fieldset>
-			<h2 id="H1" class="dnnFormSectionHead"><a href=""><%=LocalizeString("PasswordSettings")%></a></h2>
+            <h2 id="H1" class="dnnFormSectionHead"><a href=""><%=LocalizeString("PasswordSettings")%></a></h2>
             <fieldset>
                 <div class="dnnPasswordDetails dnnClear">
-    	            <dnn:Password id="ctlPassword" runat="server"></dnn:Password>
+                    <dnn:Password id="ctlPassword" runat="server"></dnn:Password>
                 </div>
             </fieldset>
-			<h2 id="H2" class="dnnFormSectionHead"><a href=""><%=LocalizeString("AccountInfo")%></a></h2>
+            <h2 id="H2" class="dnnFormSectionHead"><a href=""><%=LocalizeString("AccountInfo")%></a></h2>
             <fieldset>
                 <div class="dnnMembership">
                     <dnn:membership id="ctlMembership" runat="Server" />
@@ -175,12 +175,12 @@
         </ul>
     </div>
     <asp:Panel id="dnnProfileDetails" runat="server" class="dnnProfileDetails dnnClear">
-    	<dnn:Profile id="ctlProfile" runat="server"></dnn:Profile>
+        <dnn:Profile id="ctlProfile" runat="server"></dnn:Profile>
     </asp:Panel>
     <div id="dnnUserSubscriptions" class="dnnUserSubscriptions">
         <dnn:UserSubscriptions id="UserSubscriptions" runat="server" LocalResourceFile="~/DesktopModules/CoreMessaging/App_LocalResources/View.ascx.resx"></dnn:UserSubscriptions>
     </div>
     <div id="dnnServicesDetails" runat="server" visible="false" class="dnnServicesDetails dnnClear">
-    	<dnn:MemberServices id="ctlServices" runat="server"></dnn:MemberServices>
+        <dnn:MemberServices id="ctlServices" runat="server"></dnn:MemberServices>
     </div>
 </div>

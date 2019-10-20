@@ -8,32 +8,32 @@ import {
 } from "../../../actions";
 
 class PageUrls extends Component {
-        
+
     onSaveUrl() {
         this.props.onSaveUrl(this.props.editedUrl, this.props.primaryAliasId);
     }
-    
+
     render() {
         const {pageHasParent, addingNewUrl, editingUrl, onOpenEditForm, onDeleteUrl,
-            editedUrl, onCloseEditUrl, onOpenNewForm, onCloseNewUrl, newFormOpened, siteAliases, primaryAliasId, 
+            editedUrl, onCloseEditUrl, onOpenNewForm, onCloseNewUrl, newFormOpened, siteAliases, primaryAliasId,
             pageUrls, onChange, onAddNewUrl} = this.props;
-        
+
         return (
-            <div>                
-                <Table pageUrls={pageUrls} 
+            <div>
+                <Table pageUrls={pageUrls}
                     onOpenEditForm={onOpenEditForm}
                     pageHasParent={pageHasParent}
                     onChange={onChange}
-                    onSave={this.onSaveUrl.bind(this)}  
+                    onSave={this.onSaveUrl.bind(this)}
                     onDelete={onDeleteUrl}
                     onCancel={onCloseEditUrl}
                     editingUrl={editingUrl}
                     editedUrl={editedUrl}
-                    siteAliases={siteAliases} primaryAliasId={primaryAliasId} 
+                    siteAliases={siteAliases} primaryAliasId={primaryAliasId}
                     addingNewUrl={addingNewUrl}
                     onOpenNewForm={onOpenNewForm}
                     onCloseNewUrl={onCloseNewUrl}
-                    newFormOpened={newFormOpened} 
+                    newFormOpened={newFormOpened}
                     onAddNewUrl={onAddNewUrl}/>
             </div>
         );

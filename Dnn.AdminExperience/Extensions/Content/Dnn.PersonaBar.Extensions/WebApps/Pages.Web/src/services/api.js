@@ -12,8 +12,8 @@ function serializeQueryStringParameters(obj) {
 }
 
 function getErrorMessageFromXHRError(error) {
-    if (error && 
-        error.responseJSON && 
+    if (error &&
+        error.responseJSON &&
         error.responseJSON.Message) {
         return {
             message: error.responseJSON.Message
@@ -32,7 +32,7 @@ class Api {
     }
 
     getServiceFramework() {
-        const sf = utils.getServiceFramework(); 
+        const sf = utils.getServiceFramework();
         sf.moduleRoot = this.moduleRoot;
         sf.controller = this.controller;
         return sf;

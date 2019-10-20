@@ -5,9 +5,9 @@
     <div class="content">
         <fieldset class="group-wizard-step-1 wizardGroup" id="step1">
             <h2 class="WizardStepTitle">
-               <strong><%= LocalizeString("CreateGroup.Text")%></strong>
+                <strong><%= LocalizeString("CreateGroup.Text")%></strong>
             </h2>
-            <div class="wizardStepBody">               
+            <div class="wizardStepBody">
                 <div class="dnnFormItem">
                     <div class="dnnLabel">
                         <label>
@@ -26,7 +26,7 @@
                             <span><%=LocalizeString("Description.Text")%></span>
                         </label>
                     </div>
-                    <asp:TextBox ID="txtDescription" Columns="20" Rows="2" TextMode="MultiLine" runat="server" />               
+                    <asp:TextBox ID="txtDescription" Columns="20" Rows="2" TextMode="MultiLine" runat="server" />
                 </div>
                 <!--close dnnFormItem-->
                 <div class="dnnFormItem">
@@ -43,7 +43,7 @@
                             </p>
                         <br />
                         <asp:FileUpload ID="inpFile" runat="server" />
-                  
+
                     </div>
                 </div>
                 <!--close dnnFormItem-->
@@ -58,7 +58,7 @@
                         <tr>
                             <td>
                                 <asp:RadioButton ID="rdAccessTypePublic" GroupName="AccessType" runat="server" Checked="true" />
-                                <label><%=LocalizeString("Public.Text")%></label> 
+                                <label><%=LocalizeString("Public.Text")%></label>
                                 <span><%=LocalizeString("Public.Help")%></span>
                             </td>
                         </tr>
@@ -70,7 +70,7 @@
                         <tr>
                             <td>
                                 <asp:RadioButton ID="rdAccessTypePrivate" GroupName="AccessType" runat="server" />
-                                <label><%=LocalizeString("Private.Text")%></label> 
+                                <label><%=LocalizeString("Private.Text")%></label>
                                 <span><%=LocalizeString("Private.Help")%></span>
                             </td>
                         </tr>
@@ -85,7 +85,7 @@
             </div>
             <!--close wizardStepBody-->
         </fieldset>
-      
+
     </div>
     <!--close content-->
 </div>

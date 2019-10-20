@@ -9,7 +9,7 @@ import { ExtensionActions } from "actions";
 const modalStyles = {
     overlay: {
         zIndex: "99999",
-        backgroundColor: "rgba(0, 0, 0, 0)"        
+        backgroundColor: "rgba(0, 0, 0, 0)"
     },
     content: {
         top: "250px",

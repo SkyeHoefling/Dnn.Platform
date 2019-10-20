@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2017
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -110,7 +110,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
         {
             base.OnInit(e);
 
-			ClientResourceManager.EnableAsyncPostBackHandler();
+            ClientResourceManager.EnableAsyncPostBackHandler();
 
             this.treeTools.NodeClick += this.treeTools_NodeClick;
             this.cmdUpdate.Click += this.OnUpdateClick;
@@ -298,7 +298,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                 File.Copy(orgToolsPath, newToolsPath, true);
             }
 
-            // reload tree    
+            // reload tree
             this.LoadConfiguration();
 
             // select new config
@@ -970,7 +970,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                                             ctl.BindData(true);
                                             ctl.SetLanguage(objConfig.Value);
                                         }
-                                        catch 
+                                        catch
                                         {
                                         }
                                     }
@@ -1105,14 +1105,14 @@ namespace DotNetNuke.Providers.RadEditorProvider
                 else
                 {
                     var pnlRow = new Panel { CssClass = "dnnFormItem" }; // a row starts here and ends at the right before next, where it is added to the fieldset)
-	                var editControlId = "ctl_rc_" + key;
-					pnlRow.Controls.Add(this.BuildLabel(key, editControlId));
+                    var editControlId = "ctl_rc_" + key;
+                    pnlRow.Controls.Add(this.BuildLabel(key, editControlId));
 
                     switch (key.ToLower())
                     {
                         case "stripformattingoptions":
                             {
-								var ctl = new CheckBoxList { ID = editControlId, RepeatColumns = 2, CssClass = "dnnCBItem" };
+                                var ctl = new CheckBoxList { ID = editControlId, RepeatColumns = 2, CssClass = "dnnCBItem" };
 
                                 foreach (string objEnum in Enum.GetNames(typeof(Telerik.Web.UI.EditorStripFormattingOptions)))
                                 {
@@ -1128,7 +1128,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
 
                         case "toolbarmode":
                             {
-								var ctl = new RadioButtonList { ID = editControlId, RepeatColumns = 2, CssClass = "dnnFormRadioButtons" };
+                                var ctl = new RadioButtonList { ID = editControlId, RepeatColumns = 2, CssClass = "dnnFormRadioButtons" };
 
                                 foreach (string objEnum in Enum.GetNames(typeof(Telerik.Web.UI.EditorToolbarMode)))
                                 {
@@ -1141,7 +1141,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
 
                         case "editmodes":
                             {
-								var ctl = new CheckBoxList { ID = editControlId, RepeatColumns = 1, CssClass = "dnnCBItem" };
+                                var ctl = new CheckBoxList { ID = editControlId, RepeatColumns = 1, CssClass = "dnnCBItem" };
 
                                 foreach (string objEnum in Enum.GetNames(typeof(Telerik.Web.UI.EditModes)))
                                 {
@@ -1157,7 +1157,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                         case "contentfilters":
                             {
                                 var ctl = new CheckBoxList();
-								ctl.ID = editControlId;
+                                ctl.ID = editControlId;
                                 ctl.RepeatColumns = 2;
                                 ctl.CssClass = "dnnCBItem";
 
@@ -1179,7 +1179,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                         case "silverlightpath":
                         case "templatepath":
                             {
-								var ctl = new DnnComboBox { ID = editControlId };
+                                var ctl = new DnnComboBox { ID = editControlId };
                                 // ctl.Width = Unit.Pixel(253)
                                 ctl.Items.Clear();
 
@@ -1206,7 +1206,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
 
                         case "skin":
                             {
-								var ctl = new DnnComboBox { ID = editControlId };
+                                var ctl = new DnnComboBox { ID = editControlId };
                                 ctl.AddItem("Default", "Default");
                                 ctl.AddItem("Black", "Black");
                                 ctl.AddItem("Sunset", "Sunset");
@@ -1220,7 +1220,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
 
                         case "linkstype":
                             {
-								var ctl = new DnnComboBox { ID = editControlId };
+                                var ctl = new DnnComboBox { ID = editControlId };
                                 ctl.AddItem(this.LocalizeString("LinksType_Normal"), "Normal");
                                 ctl.AddItem(this.LocalizeString("LinksType_UseTabName"), "UseTabName");
                                 ctl.AddItem(this.LocalizeString("LinksType_UseTabId"), "UseTabId");
@@ -1236,7 +1236,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                         case "linksuserelativeurls":
                         case "newlinebr":
                             {
-								var ctl = new CheckBox { ID = editControlId, CssClass = "dnnCBItem" };
+                                var ctl = new CheckBox { ID = editControlId, CssClass = "dnnCBItem" };
 
                                 pnlRow.Controls.Add(ctl);
                                 break;
@@ -1246,7 +1246,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                         case "width":
                         case "toolswidth":
                             {
-								var ctl = new TextBox { Text = @"5", CssClass = "SpinnerStepOne", ID = editControlId };
+                                var ctl = new TextBox { Text = @"5", CssClass = "SpinnerStepOne", ID = editControlId };
                                 pnlRow.Controls.Add(ctl);
                                 break;
                             }
@@ -1258,14 +1258,14 @@ namespace DotNetNuke.Providers.RadEditorProvider
                         case "maxdocumentsize":
                         case "maxmediasize":
                             {
-								var ctl = new TextBox { Text = @"1024", CssClass = "SpinnerStep1024", ID = editControlId };
+                                var ctl = new TextBox { Text = @"1024", CssClass = "SpinnerStep1024", ID = editControlId };
                                 pnlRow.Controls.Add(ctl);
                                 break;
                             }
 
                         case "contentareamode":
                             {
-								var ctl = new DnnComboBox { ID = editControlId };
+                                var ctl = new DnnComboBox { ID = editControlId };
 
                                 foreach (string name in Enum.GetNames(typeof(EditorContentAreaMode)))
                                 {
@@ -1282,19 +1282,19 @@ namespace DotNetNuke.Providers.RadEditorProvider
                         case "language":
                             {
                                 var ctl = new DnnLanguageComboBox
-                                              {
-												  ID = editControlId,
-                                                  LanguagesListType = LanguagesListType.All,
-                                                  IncludeNoneSpecified = true,
-                                                  CssClass = "languageComboBox"
-                                              };
+                                            {
+                                                ID = editControlId,
+                                                LanguagesListType = LanguagesListType.All,
+                                                IncludeNoneSpecified = true,
+                                                CssClass = "languageComboBox"
+                                            };
                                 pnlRow.Controls.Add(ctl);
                                 break;
                             }
 
                         default:
                             {
-								var ctl = new TextBox { ID = editControlId, Text = value };
+                                var ctl = new TextBox { ID = editControlId, Text = value };
                                 pnlRow.Controls.Add(ctl);
                                 break;
                             }
@@ -1313,12 +1313,12 @@ namespace DotNetNuke.Providers.RadEditorProvider
         /// This method will build a dnn property label (Same as used in the user profile edit area) that can be added to a control.
         /// </summary>
         /// <param name="resourceKey"></param>
-		/// <param name="associatedControlId"></param>
+        /// <param name="associatedControlId"></param>
         /// <returns></returns>
         /// <remarks></remarks>
-		private PropertyLabelControl BuildLabel(string resourceKey, string associatedControlId)
+        private PropertyLabelControl BuildLabel(string resourceKey, string associatedControlId)
         {
-			var propLabel = new PropertyLabelControl { ID = resourceKey + "_Label", ShowHelp = true, ResourceKey = resourceKey, AssociatedControlId = associatedControlId };
+            var propLabel = new PropertyLabelControl { ID = resourceKey + "_Label", ShowHelp = true, ResourceKey = resourceKey, AssociatedControlId = associatedControlId };
 
             return propLabel;
         }
@@ -1337,7 +1337,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                 this.treePages.FindNodeByValue(configpath).ExpandParentNodes();
                 this.treePages.FindNodeByValue(configpath).Selected = true;
             }
-            catch 
+            catch
             {
             }
 
@@ -1349,7 +1349,7 @@ namespace DotNetNuke.Providers.RadEditorProvider
                 this.cmdUpdate.Enabled = (!(configpath.ToLower().EndsWith("configfile.xml.original.xml")));
                 this.cmdCreate.Enabled = true;
                 this.cmdDelete.Enabled = (!(configpath.ToLower().EndsWith("configfile.xml.original.xml"))
-                                     && ! (configpath.ToLower().EndsWith("configfile.xml")));
+                                    && ! (configpath.ToLower().EndsWith("configfile.xml")));
 
                 if (File.Exists(toolspath))
                 {

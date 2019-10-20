@@ -9,11 +9,11 @@ storiesOf("DatePicker", module).add("with content", () => (
   <div className="scheduler-date-row">
     <Label label="Start Date" />
     <DatePicker
-      date={startDate}
-      updateDate={date => action("changed " + date.toString())}
-      isDateRange={false}
-      hasTimePicker={true}
-      showClearDateButton={false}
+    date={startDate}
+    updateDate={date => action("changed " + date.toString())}
+    isDateRange={false}
+    hasTimePicker={true}
+    showClearDateButton={false}
     />
   </div>
 ));

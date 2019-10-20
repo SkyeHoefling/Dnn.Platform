@@ -179,7 +179,7 @@ namespace Dnn.PersonaBar.SiteSettings.Components
                 progress.TimeEstimated = (total - stepNo) * 100;
 
                 SaveProgressToFile(progress);
-                
+
                 if (locale.Code == defaultLocale || string.IsNullOrEmpty(locale.Code))
                 {
                     TabController.Instance.LocalizeTab(currentTab, locale, true);
@@ -234,8 +234,8 @@ namespace Dnn.PersonaBar.SiteSettings.Components
             return (
                 from kvp in TabController.Instance.GetTabsByPortal(portalId)
                 where !kvp.Value.TabPath.StartsWith("//Admin")
-                      && !kvp.Value.IsDeleted
-                      && !kvp.Value.IsSystem
+                    && !kvp.Value.IsDeleted
+                    && !kvp.Value.IsSystem
                 select kvp.Value
                 ).ToList();
         }

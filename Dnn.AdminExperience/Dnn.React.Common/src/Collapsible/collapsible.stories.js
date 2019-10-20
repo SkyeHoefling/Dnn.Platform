@@ -15,34 +15,34 @@ class MyCollapsible extends Component {
 
   render (){
     return (
-      <div>
+    <div>
         <Collapsible isOpened={this.state.opened} autoScroll={true} scrollDelay={10}>
-          <div>
+        <div>
             <p className="add-term-title">Add Term</p>
             <InputGroup>
-              <SingleLineInputWithError
+            <SingleLineInputWithError
                 inputId={"create-term-name"}
                 withLabel={true}
                 label="Required Term *"
                 value="Term Value"
                 onChange={action("changed")}
                 errorMessage="Error"
-              />
+            />
             </InputGroup>
             <InputGroup>
-              <MultiLineInputWithError
+            <MultiLineInputWithError
                 inputId={"create-term-description"}
                 withLabel={true}
                 label="Description"
                 value="Long descritpion here"
                 onChange={action("changed")}
-              />
+            />
             </InputGroup>
-          </div>
+        </div>
         </Collapsible>
         <Button onClick={() => this.setState({opened: true})}>Open</Button>
         <Button onClick={() => this.setState({opened: false})}>Close</Button>
-      </div>
+    </div>
     );
   }
 }

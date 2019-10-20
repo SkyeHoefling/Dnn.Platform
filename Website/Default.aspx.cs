@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -63,17 +63,17 @@ namespace DotNetNuke.Framework
     /// -----------------------------------------------------------------------------
     /// Project	 : DotNetNuke
     /// Class	 : CDefault
-    /// 
+    ///
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <remarks>
     /// </remarks>
     /// -----------------------------------------------------------------------------
     public partial class DefaultPage : CDefault, IClientAPICallbackEventHandler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DefaultPage));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DefaultPage));
 
         private static readonly Regex HeaderTextRegex = new Regex("<meta([^>])+name=('|\")robots('|\")",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
@@ -119,8 +119,8 @@ namespace DotNetNuke.Framework
                             {
                                 var attributeValues = attributeValue.Split(',');
                                 for (var attributeCounter = 0;
-                                     attributeCounter <= attributeValues.Length - 1;
-                                     attributeCounter++)
+                                    attributeCounter <= attributeValues.Length - 1;
+                                    attributeCounter++)
                                 {
                                     attr.Append(string.Concat(" ", attributeName, "=\"", attributeValues[attributeCounter], "\""));
                                 }
@@ -144,7 +144,7 @@ namespace DotNetNuke.Framework
                 return ((PortalSettings)HttpContext.Current.Items["PortalSettings"]).ActiveTab.SkinPath;
             }
         }
-        
+
         #endregion
 
         #region IClientAPICallbackEventHandler Members
@@ -178,14 +178,14 @@ namespace DotNetNuke.Framework
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <remarks>
         /// - Obtain PortalSettings from Current Context
         /// - redirect to a specific tab based on name
         /// - if first time loading this page then reload to avoid caching
         /// - set page title and stylesheet
-        /// - check to see if we should show the Assembly Version in Page Title 
+        /// - check to see if we should show the Assembly Version in Page Title
         /// - set the background image if there is one selected
         /// - set META tags, copyright, keywords and description
         /// </remarks>
@@ -257,14 +257,14 @@ namespace DotNetNuke.Framework
             if (Host.DisplayCopyright)
             {
                 Comment += string.Concat(Environment.NewLine,
-                                         "<!--*********************************************-->",
-                                         Environment.NewLine,
-                                         "<!-- DNN Platform - http://www.dnnsoftware.com   -->",
-                                         Environment.NewLine,
-                                         "<!-- Copyright (c) 2002-2018, by DNN Corporation -->",
-                                         Environment.NewLine,
-                                         "<!--*********************************************-->",
-                                         Environment.NewLine);
+                                        "<!--*********************************************-->",
+                                        Environment.NewLine,
+                                        "<!-- DNN Platform - http://www.dnnsoftware.com   -->",
+                                        Environment.NewLine,
+                                        "<!-- Copyright (c) 2002-2018, by DNN Corporation -->",
+                                        Environment.NewLine,
+                                        "<!--*********************************************-->",
+                                        Environment.NewLine);
             }
 
             //Only insert the header control if a comment is needed
@@ -280,7 +280,7 @@ namespace DotNetNuke.Framework
             {
                 metaPanel.Controls.Add(new LiteralControl(PortalSettings.PageHeadText));
             }
-            
+
             //set page title
             if (UrlUtils.InPopUp())
             {
@@ -311,7 +311,7 @@ namespace DotNetNuke.Framework
                             break;
                     }
                     var title = Localization.LocalizeControlTitle(control);
-                    
+
                     strTitle.Append(string.Concat(" > ", PortalSettings.ActiveTab.LocalizedTabName));
                     strTitle.Append(string.Concat(" > ", title));
                 }
@@ -413,16 +413,16 @@ namespace DotNetNuke.Framework
             //META Robots - hide it inside popups and if PageHeadText of current tab already contains a robots meta tag
             if (!UrlUtils.InPopUp() &&
                 !(HeaderTextRegex.IsMatch(PortalSettings.ActiveTab.PageHeadText) ||
-                  HeaderTextRegex.IsMatch(PortalSettings.PageHeadText)))
+                HeaderTextRegex.IsMatch(PortalSettings.PageHeadText)))
             {
                 MetaRobots.Visible = true;
                 var allowIndex = true;
                 if ((PortalSettings.ActiveTab.TabSettings.ContainsKey("AllowIndex") &&
-                     bool.TryParse(PortalSettings.ActiveTab.TabSettings["AllowIndex"].ToString(), out allowIndex) &&
-                     !allowIndex)
+                    bool.TryParse(PortalSettings.ActiveTab.TabSettings["AllowIndex"].ToString(), out allowIndex) &&
+                    !allowIndex)
                     ||
                     (Request.QueryString["ctl"] != null &&
-                     (Request.QueryString["ctl"] == "Login" || Request.QueryString["ctl"] == "Register")))
+                    (Request.QueryString["ctl"] == "Login" || Request.QueryString["ctl"] == "Register")))
                 {
                     MetaRobots.Content = "NOINDEX, NOFOLLOW";
                 }
@@ -436,16 +436,16 @@ namespace DotNetNuke.Framework
             if (NonProductionVersion() && Host.DisplayBetaNotice && !UrlUtils.InPopUp())
             {
                 string versionString = string.Format(" ({0} Version: {1})", DotNetNukeContext.Current.Application.Status,
-                                                     DotNetNukeContext.Current.Application.Version);
+                                                    DotNetNukeContext.Current.Application.Version);
                 Title += versionString;
             }
 
-			//register the custom stylesheet of current page
-			if (PortalSettings.ActiveTab.TabSettings.ContainsKey("CustomStylesheet") && !string.IsNullOrEmpty(PortalSettings.ActiveTab.TabSettings["CustomStylesheet"].ToString()))
-			{
-				var customStylesheet = Path.Combine(PortalSettings.HomeDirectory, PortalSettings.ActiveTab.TabSettings["CustomStylesheet"].ToString());
-				ClientResourceManager.RegisterStyleSheet(this, customStylesheet);
-			}
+            //register the custom stylesheet of current page
+            if (PortalSettings.ActiveTab.TabSettings.ContainsKey("CustomStylesheet") && !string.IsNullOrEmpty(PortalSettings.ActiveTab.TabSettings["CustomStylesheet"].ToString()))
+            {
+                var customStylesheet = Path.Combine(PortalSettings.HomeDirectory, PortalSettings.ActiveTab.TabSettings["CustomStylesheet"].ToString());
+                ClientResourceManager.RegisterStyleSheet(this, customStylesheet);
+            }
 
             // Cookie Consent
             if (PortalSettings.ShowCookieConsent)
@@ -506,7 +506,7 @@ namespace DotNetNuke.Framework
         }
 
         //I realize the parsing of this is rather primitive.  A better solution would be to use json serialization
-        //unfortunately, I don't have the time to write it.  When we officially adopt MS AJAX, we will get this type of 
+        //unfortunately, I don't have the time to write it.  When we officially adopt MS AJAX, we will get this type of
         //functionality and this should be changed to utilize it for its plumbing.
         private Dictionary<string, string> ParsePageCallBackArgs(string strArg)
         {
@@ -608,8 +608,8 @@ namespace DotNetNuke.Framework
                 JavaScript.RequestRegistration(CommonJs.jQueryUI);
 
                 var popupFilePath = HttpContext.Current.IsDebuggingEnabled
-                                   ? "~/js/Debug/dnn.modalpopup.js"
-                                   : "~/js/dnn.modalpopup.js";
+                                    ? "~/js/Debug/dnn.modalpopup.js"
+                                    : "~/js/dnn.modalpopup.js";
 
                 ClientResourceManager.RegisterScript(this, popupFilePath, FileOrder.Js.DnnModalPopup);
             }
@@ -633,7 +633,7 @@ namespace DotNetNuke.Framework
                     var heading = Localization.GetString("PageDisabled.Header");
                     var message = Localization.GetString("PageDisabled.Text");
                     UI.Skins.Skin.AddPageMessage(ctlSkin, heading, message,
-                                                 ModuleMessage.ModuleMessageType.YellowWarning);
+                                                ModuleMessage.ModuleMessageType.YellowWarning);
                 }
                 else
                 {
@@ -663,7 +663,7 @@ namespace DotNetNuke.Framework
                 }
                 else //other modes just depend on the default alias
                 {
-                    if (string.Compare(PortalSettings.PortalAlias.HTTPAlias, PortalSettings.DefaultPortalAlias, StringComparison.InvariantCulture ) != 0) 
+                    if (string.Compare(PortalSettings.PortalAlias.HTTPAlias, PortalSettings.DefaultPortalAlias, StringComparison.InvariantCulture ) != 0)
                         primaryHttpAlias = PortalSettings.DefaultPortalAlias;
                 }
                 if (primaryHttpAlias != null && string.IsNullOrEmpty(CanonicalLinkUrl))//a primary http alias was identified
@@ -707,7 +707,7 @@ namespace DotNetNuke.Framework
             //add Favicon
             ManageFavicon();
 
-            //ClientCallback Logic 
+            //ClientCallback Logic
             ClientAPI.HandleClientAPICallbackEvent(this);
 
             //add viewstateuserkey to protect against CSRF attacks
@@ -716,16 +716,16 @@ namespace DotNetNuke.Framework
                 ViewStateUserKey = User.Identity.Name;
             }
 
-			//set the async postback timeout.
-	        if (AJAX.IsEnabled())
-	        {
-		        AJAX.GetScriptManager(this).AsyncPostBackTimeout = Host.AsyncTimeout;
-	        }
+            //set the async postback timeout.
+            if (AJAX.IsEnabled())
+            {
+                AJAX.GetScriptManager(this).AsyncPostBackTimeout = Host.AsyncTimeout;
+            }
         }
-        
+
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Initialize the Scrolltop html control which controls the open / closed nature of each module 
+        /// Initialize the Scrolltop html control which controls the open / closed nature of each module
         /// </summary>
         /// <param name="e"></param>
         /// <remarks>
@@ -756,11 +756,11 @@ namespace DotNetNuke.Framework
                 MetaGenerator.Visible = (!String.IsNullOrEmpty(Generator));
                 MetaAuthor.Content = PortalSettings.PortalName;
                 /*
-                 * Never show to be html5 compatible and stay backward compatible
-                 * 
-                 * MetaCopyright.Content = Copyright;
-                 * MetaCopyright.Visible = (!String.IsNullOrEmpty(Copyright));
-                 */
+                * Never show to be html5 compatible and stay backward compatible
+                *
+                * MetaCopyright.Content = Copyright;
+                * MetaCopyright.Visible = (!String.IsNullOrEmpty(Copyright));
+                */
                 MetaKeywords.Content = KeyWords;
                 MetaKeywords.Visible = (!String.IsNullOrEmpty(KeyWords));
                 MetaDescription.Content = Description;
@@ -772,37 +772,37 @@ namespace DotNetNuke.Framework
                 Page.Response.AddHeader("X-UA-Compatible", PortalSettings.AddCompatibleHttpHeader);
             }
 
-	        if (!string.IsNullOrEmpty(CanonicalLinkUrl))
-	        {
-				//Add Canonical <link> using the primary alias
-				var canonicalLink = new HtmlLink();
-				canonicalLink.Href = CanonicalLinkUrl;
-				canonicalLink.Attributes.Add("rel", "canonical");
+            if (!string.IsNullOrEmpty(CanonicalLinkUrl))
+            {
+                //Add Canonical <link> using the primary alias
+                var canonicalLink = new HtmlLink();
+                canonicalLink.Href = CanonicalLinkUrl;
+                canonicalLink.Attributes.Add("rel", "canonical");
 
-				// Add the HtmlLink to the Head section of the page.
-				Page.Header.Controls.Add(canonicalLink);
-	        }
+                // Add the HtmlLink to the Head section of the page.
+                Page.Header.Controls.Add(canonicalLink);
+            }
         }
 
-		protected override void Render(HtmlTextWriter writer)
-		{
-			if (PortalSettings.UserMode == PortalSettings.Mode.Edit)
-			{
-			    var editClass = "dnnEditState";
+        protected override void Render(HtmlTextWriter writer)
+        {
+            if (PortalSettings.UserMode == PortalSettings.Mode.Edit)
+            {
+                var editClass = "dnnEditState";
 
-				var bodyClass = Body.Attributes["class"];
-				if (!string.IsNullOrEmpty(bodyClass))
-				{
+                var bodyClass = Body.Attributes["class"];
+                if (!string.IsNullOrEmpty(bodyClass))
+                {
                     Body.Attributes["class"] = string.Format("{0} {1}", bodyClass, editClass);
-				}
-				else
-				{
+                }
+                else
+                {
                     Body.Attributes["class"] = editClass;
-				}
-			}
+                }
+            }
 
-			base.Render(writer);
-		}
+            base.Render(writer);
+        }
 
         #endregion
 

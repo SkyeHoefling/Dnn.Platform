@@ -1,21 +1,21 @@
 #region Copyright
-// 
-// DotNetNuke® - http://www.dotnetnuke.com
+//
+// DotNetNukeï¿½ - http://www.dotnetnuke.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -54,11 +54,11 @@ namespace DotNetNuke.Services.Installer.Packages
     /// -----------------------------------------------------------------------------
     public class PackageController : ServiceLocator<IPackageController, PackageController>, IPackageController
     {
-		#region Private Members
+        #region Private Members
 
         private static readonly DataProvider provider = DataProvider.Instance();
 
-		#endregion
+        #endregion
 
         protected override Func<IPackageController> GetFactory()
         {
@@ -69,12 +69,12 @@ namespace DotNetNuke.Services.Installer.Packages
 
         private static void AddLog(PackageInfo package, EventLogController.EventLogType logType)
         {
-            EventLogController.Instance.AddLog(package, 
-                        PortalController.Instance.GetCurrentPortalSettings(), 
-                        UserController.Instance.GetCurrentUserInfo().UserID, 
+            EventLogController.Instance.AddLog(package,
+                        PortalController.Instance.GetCurrentPortalSettings(),
+                        UserController.Instance.GetCurrentUserInfo().UserID,
                         "",
                         logType);
-            
+
         }
 
         private static void AddPackageInternal(PackageInfo package)
@@ -97,11 +97,11 @@ namespace DotNetNuke.Services.Installer.Packages
                                                 package.FolderName,
                                                 package.IconFile);
 
-	        foreach (var dependency in package.Dependencies)
-	        {
-	            dependency.PackageId = package.PackageID;
-		        SavePackageDependency(dependency);
-	        }
+            foreach (var dependency in package.Dependencies)
+            {
+                dependency.PackageId = package.PackageID;
+                SavePackageDependency(dependency);
+            }
 
             AddLog(package, EventLogController.EventLogType.PACKAGE_CREATED);
 
@@ -115,7 +115,7 @@ namespace DotNetNuke.Services.Installer.Packages
 
         private static void ClearDependenciesCache()
         {
-            DataCache.RemoveCache(DataCache.PackageDependenciesCacheKey);            
+            DataCache.RemoveCache(DataCache.PackageDependenciesCacheKey);
         }
 
         private static void DeletePackageInternal(PackageInfo package)
@@ -128,13 +128,13 @@ namespace DotNetNuke.Services.Installer.Packages
                 ClearCache(PortalSettings.Current.PortalId);
             }
             ClearCache(Null.NullInteger);
-            
+
         }
 
         private static IEnumerable<PackageDependencyInfo> GetPackageDependencies()
         {
-            return CBO.GetCachedObject<List<PackageDependencyInfo>>(new CacheItemArgs(DataCache.PackageDependenciesCacheKey, 
-                                                                            DataCache.PackagesCacheTimeout, 
+            return CBO.GetCachedObject<List<PackageDependencyInfo>>(new CacheItemArgs(DataCache.PackageDependenciesCacheKey,
+                                                                            DataCache.PackagesCacheTimeout,
                                                                             DataCache.PackagesCachePriority),
                                                 c => CBO.FillCollection<PackageDependencyInfo>(provider.GetPackageDependencies()));
         }
@@ -142,41 +142,41 @@ namespace DotNetNuke.Services.Installer.Packages
         private static void UpdatePackageInternal(PackageInfo package)
         {
             provider.UpdatePackage(package.PackageID,
-                                   package.PortalID,
-                                   package.FriendlyName,
-                                   package.Description,
-                                   package.PackageType,
-                                   package.Version.ToString(3),
-                                   package.License,
-                                   package.Manifest,
-                                   package.Owner,
-                                   package.Organization,
-                                   package.Url,
-                                   package.Email,
-                                   package.ReleaseNotes,
-                                   package.IsSystemPackage,
-                                   UserController.Instance.GetCurrentUserInfo().UserID,
-                                   package.FolderName,
-                                   package.IconFile);
+                                    package.PortalID,
+                                    package.FriendlyName,
+                                    package.Description,
+                                    package.PackageType,
+                                    package.Version.ToString(3),
+                                    package.License,
+                                    package.Manifest,
+                                    package.Owner,
+                                    package.Organization,
+                                    package.Url,
+                                    package.Email,
+                                    package.ReleaseNotes,
+                                    package.IsSystemPackage,
+                                    UserController.Instance.GetCurrentUserInfo().UserID,
+                                    package.FolderName,
+                                    package.IconFile);
 
-	        foreach (var dependency in package.Dependencies)
-	        {
+            foreach (var dependency in package.Dependencies)
+            {
                 dependency.PackageId = package.PackageID;
                 SavePackageDependency(dependency);
-	        }
+            }
 
             AddLog(package, EventLogController.EventLogType.PACKAGE_UPDATED);
 
             ClearCache(package.PortalID);
         }
 
-	    private static void SavePackageDependency(PackageDependencyInfo dependency)
-	    {
-	        dependency.PackageDependencyId = provider.SavePackageDependency(dependency.PackageDependencyId, dependency.PackageId, dependency.PackageName,
-					       dependency.Version.ToString());
-            
+        private static void SavePackageDependency(PackageDependencyInfo dependency)
+        {
+            dependency.PackageDependencyId = provider.SavePackageDependency(dependency.PackageDependencyId, dependency.PackageId, dependency.PackageName,
+                            dependency.Version.ToString());
+
             ClearDependenciesCache();
-	    }
+        }
 
         #endregion
 
@@ -252,7 +252,7 @@ namespace DotNetNuke.Services.Installer.Packages
         /// <summary>
         /// Save or update the package
         /// </summary>
-        /// <param name="package"></param> 
+        /// <param name="package"></param>
         public void SaveExtensionPackage(PackageInfo package)
         {
             if (package.PackageID == Null.NullInteger)
@@ -272,8 +272,8 @@ namespace DotNetNuke.Services.Installer.Packages
 
         public IList<PackageType> GetExtensionPackageTypes()
         {
-            return CBO.GetCachedObject<List<PackageType>>(new CacheItemArgs(DataCache.PackageTypesCacheKey, 
-                                                                            DataCache.PackageTypesCacheTimeout, 
+            return CBO.GetCachedObject<List<PackageType>>(new CacheItemArgs(DataCache.PackageTypesCacheKey,
+                                                                            DataCache.PackageTypesCacheTimeout,
                                                                             DataCache.PackageTypesCachePriority),
                                                             c => CBO.FillCollection<PackageType>(provider.GetPackageTypes()));
         }
@@ -301,7 +301,7 @@ namespace DotNetNuke.Services.Installer.Packages
 
                     //Check if there is an alternative package
                     var packages = Instance.GetExtensionPackages(package.PortalID,
-                                                                 p => p.Name.Equals(dep.PackageName, StringComparison.OrdinalIgnoreCase)
+                                                                p => p.Name.Equals(dep.PackageName, StringComparison.OrdinalIgnoreCase)
                                                                         && p.Version >= dep.Version
                                                                         && p.PackageID != package.PackageID);
                     if (packages.Count == 0)
@@ -618,8 +618,8 @@ namespace DotNetNuke.Services.Installer.Packages
         {
             Instance.SaveExtensionPackage(package);
         }
-		
-		#endregion
+
+        #endregion
 
     }
 }

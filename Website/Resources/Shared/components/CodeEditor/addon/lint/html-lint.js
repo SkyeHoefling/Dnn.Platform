@@ -32,14 +32,14 @@
     if (!window.HTMLHint) return found;
     var messages = HTMLHint.verify(text, options && options.rules || defaultRules);
     for (var i = 0; i < messages.length; i++) {
-      var message = messages[i];
-      var startLine = message.line - 1, endLine = message.line - 1, startCol = message.col - 1, endCol = message.col;
-      found.push({
+    var message = messages[i];
+    var startLine = message.line - 1, endLine = message.line - 1, startCol = message.col - 1, endCol = message.col;
+    found.push({
         from: CodeMirror.Pos(startLine, startCol),
         to: CodeMirror.Pos(endLine, endCol),
         message: message.message,
         severity : message.type
-      });
+    });
     }
     return found;
   });

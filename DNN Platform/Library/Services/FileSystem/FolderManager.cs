@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -184,7 +184,7 @@ namespace DotNetNuke.Services.FileSystem
 
                 throw new FolderProviderException(
                     Localization.Localization.GetExceptionMessage("DeleteFolderUnderlyingSystemError",
-                                                                  "The underlying system threw an exception. The folder has not been deleted."),
+                                                                "The underlying system threw an exception. The folder has not been deleted."),
                     ex);
             }
 
@@ -270,33 +270,33 @@ namespace DotNetNuke.Services.FileSystem
 
             return RegexUtils.GetCachedRegex(pattern, RegexOptions.IgnoreCase);
         }
-        
+
         private static bool IsStandardFolderProviderType(FolderMappingInfo folderMappingInfo)
         {
             var compatibleTypes = new[] { "StandardFolderProvider", "SecureFolderProvider", "DatabaseFolderProvider" };
             return compatibleTypes.Contains(folderMappingInfo.FolderProviderType);
         }
 
-		private int FindFolderMappingId(MergedTreeItem item, int portalId)
-		{
-			if (item.ExistsInFolderMapping)
-			{
-				return item.FolderMappingID;
-			}
+        private int FindFolderMappingId(MergedTreeItem item, int portalId)
+        {
+            if (item.ExistsInFolderMapping)
+            {
+                return item.FolderMappingID;
+            }
 
-			if (item.FolderPath.IndexOf('/') != item.FolderPath.LastIndexOf('/'))
-			{
-				var parentPath = item.FolderPath.Substring(0, item.FolderPath.TrimEnd('/').LastIndexOf('/') + 1);
-				var folder = GetFolder(portalId, parentPath);
-				if (folder != null)
-				{
-					return folder.FolderMappingID;
-				}
-			}
+            if (item.FolderPath.IndexOf('/') != item.FolderPath.LastIndexOf('/'))
+            {
+                var parentPath = item.FolderPath.Substring(0, item.FolderPath.TrimEnd('/').LastIndexOf('/') + 1);
+                var folder = GetFolder(portalId, parentPath);
+                if (folder != null)
+                {
+                    return folder.FolderMappingID;
+                }
+            }
 
-			return FolderMappingController.Instance.GetDefaultFolderMapping(portalId).FolderMappingID;
-		}
-        
+            return FolderMappingController.Instance.GetDefaultFolderMapping(portalId).FolderMappingID;
+        }
+
         private bool DeleteFolderRecursive(IFolderInfo folder, ICollection<IFolderInfo> notDeletedSubfolders, bool isRecursiveDeletionFolder, bool unmap)
         {
             Requires.NotNull("folder", folder);
@@ -324,11 +324,11 @@ namespace DotNetNuke.Services.FileSystem
                     }
                     else
                     {
-                        FileDeletionController.Instance.DeleteFile(file);                        
+                        FileDeletionController.Instance.DeleteFile(file);
                     }
                     OnFileDeleted(file, GetCurrentUserId(), true);
-                }    
-                
+                }
+
                 if (allSubFoldersHasBeenDeleted)
                 {
                     if (unmap)
@@ -337,7 +337,7 @@ namespace DotNetNuke.Services.FileSystem
                     }
                     else
                     {
-                        DeleteFolderInternal(folder, !isRecursiveDeletionFolder);                        
+                        DeleteFolderInternal(folder, !isRecursiveDeletionFolder);
                     }
                     return true;
                 }
@@ -459,7 +459,7 @@ namespace DotNetNuke.Services.FileSystem
             Requires.PropertyNotNull("folderPath", folderPath);
             Requires.NotNull("folderMapping", folderMapping);
 
-	        folderPath = folderPath.Trim();
+            folderPath = folderPath.Trim();
 
             if (FolderExists(folderMapping.PortalID, folderPath))
             {
@@ -544,8 +544,8 @@ namespace DotNetNuke.Services.FileSystem
         /// <exception cref="System.ArgumentNullException">Thrown when folder is null.</exception>
         /// <exception cref="DotNetNuke.Services.FileSystem.FolderProviderException">Thrown when the underlying system throw an exception.</exception>
         public virtual void DeleteFolder(IFolderInfo folder)
-        {                
-            DeleteFolderInternal(folder, false);         
+        {
+            DeleteFolderInternal(folder, false);
         }
 
         public virtual void UnlinkFolder(IFolderInfo folder)
@@ -575,7 +575,7 @@ namespace DotNetNuke.Services.FileSystem
             DeleteFolderRecursive(folder, notDeletedSubfolders, true, GetOnlyUnmap(folder));
         }
 
-       /// <summary>
+        /// <summary>
         /// Checks the existence of the specified folder in the specified portal.
         /// </summary>
         /// <param name="portalId">The portal where to check the existence of the folder.</param>
@@ -828,23 +828,23 @@ namespace DotNetNuke.Services.FileSystem
             Requires.NotNull("destinationFolder", destinationFolder);
 
             var newFolderPath = PathUtils.Instance.FormatFolderPath(destinationFolder.FolderPath + folder.FolderName + "/");
-            
+
             if (folder.FolderPath == destinationFolder.FolderPath) return folder;
 
             if(FolderExists(folder.PortalID, newFolderPath))
             {
                 throw new InvalidOperationException(string.Format(
-                    Localization.Localization.GetExceptionMessage("CannotMoveFolderAlreadyExists", 
+                    Localization.Localization.GetExceptionMessage("CannotMoveFolderAlreadyExists",
                     "The folder with name '{0}' cannot be moved. A folder with that name already exists under the folder '{1}'.", folder.FolderName, destinationFolder.FolderName)));
             }
-            
+
             var folderMapping = FolderMappingController.Instance.GetFolderMapping(folder.PortalID, folder.FolderMappingID);
             var destinationFolderMapping = FolderMappingController.Instance.GetFolderMapping(destinationFolder.PortalID, destinationFolder.FolderMappingID);
 
             if(!CanMoveBetweenFolderMappings(folderMapping, destinationFolderMapping))
             {
                 throw new InvalidOperationException(string.Format(
-                    Localization.Localization.GetExceptionMessage("CannotMoveFolderBetweenFolderType", 
+                    Localization.Localization.GetExceptionMessage("CannotMoveFolderBetweenFolderType",
                     "The folder with name '{0}' cannot be moved. Move Folder operation between this two folder types is not allowed", folder.FolderName)));
             }
 
@@ -1036,7 +1036,7 @@ namespace DotNetNuke.Services.FileSystem
 
             return 0;
         }
-        
+
         /// <summary>
         /// Updates metadata of the specified folder.
         /// </summary>
@@ -1047,7 +1047,7 @@ namespace DotNetNuke.Services.FileSystem
             var updatedFolder = UpdateFolderInternal(folder, true);
 
             AddLogEntry(updatedFolder, EventLogController.EventLogType.FOLDER_UPDATED);
-            
+
             SaveFolderPermissions(updatedFolder);
 
             return updatedFolder;
@@ -1068,8 +1068,8 @@ namespace DotNetNuke.Services.FileSystem
 
             var folderPermission =
                 (from FolderPermissionInfo p in folder.FolderPermissions
-                 where p.PermissionKey == "READ" && p.FolderID == folder.FolderID && p.RoleID == roleId && p.UserID == Null.NullInteger
-                 select p).SingleOrDefault();
+                where p.PermissionKey == "READ" && p.FolderID == folder.FolderID && p.RoleID == roleId && p.UserID == Null.NullInteger
+                select p).SingleOrDefault();
 
             if (folderPermission != null)
             {
@@ -1126,19 +1126,19 @@ namespace DotNetNuke.Services.FileSystem
                 if (SyncFoldersData[threadId].FolderPath == relativePath && SyncFoldersData[threadId].PortalId == portalId)
                 {
                     return SyncFoldersData[threadId].Permissions;
-                }                
+                }
                 permissions = FolderPermissionController.GetFolderPermissionsCollectionByFolder(portalId, relativePath);
                 SyncFoldersData[threadId] = new SyncFolderData {PortalId = portalId, FolderPath = relativePath, Permissions = permissions};
                 return permissions;
             }
             permissions = FolderPermissionController.GetFolderPermissionsCollectionByFolder(portalId, relativePath);
             SyncFoldersData.Add(threadId, new SyncFolderData{ PortalId = portalId, FolderPath = relativePath, Permissions = permissions});
-            
+
             return permissions;
         }
 
         /// <summary>
-        /// Sets specific folder permissions for the given role to the given folder.        
+        /// Sets specific folder permissions for the given role to the given folder.
         /// </summary>
         /// <param name="folder">The folder to set permission to</param>
         /// <param name="permissionId">The id of the permission to assign</param>
@@ -1180,7 +1180,7 @@ namespace DotNetNuke.Services.FileSystem
         /// Sets folder permissions for administrator role to the given folder.
         /// </summary>
         /// <param name="folder">The folder to set permission to</param>
-        /// <param name="administratorRoleId">The administrator role id to assign the permission to</param>  
+        /// <param name="administratorRoleId">The administrator role id to assign the permission to</param>
         public virtual void SetFolderPermissions(IFolderInfo folder, int administratorRoleId)
         {
             Requires.NotNull("folder", folder);
@@ -1223,8 +1223,8 @@ namespace DotNetNuke.Services.FileSystem
                 foreach (var fileId in fileIds)
                 {
                     DataCache.RemoveCache("GetFileById" + fileId);
-                }    
-            }            
+                }
+            }
         }
 
 
@@ -1315,10 +1315,10 @@ namespace DotNetNuke.Services.FileSystem
             if (isRecursive)
             {
                 var folderMappingsRequiringNetworkConnectivity = from fm in FolderMappingController.Instance.GetFolderMappings(portalId)
-                                                                 where
-                                                                      fm.IsEditable &&
-                                                                      FolderProvider.Instance(fm.FolderProviderType).RequiresNetworkConnectivity
-                                                                 select fm;
+                                                                where
+                                                                    fm.IsEditable &&
+                                                                    FolderProvider.Instance(fm.FolderProviderType).RequiresNetworkConnectivity
+                                                                select fm;
 
                 return folderMappingsRequiringNetworkConnectivity.Any();
             }
@@ -1727,8 +1727,8 @@ namespace DotNetNuke.Services.FileSystem
 
             // Update ExistsInFolderMapping if the Parent Does Not ExistsInFolderMapping
             var margedTreeItems = mergedTree.Values;
-            foreach (var mergedItem in margedTreeItems.Where(m => m.ExistsInFolderMapping 
-                                       && margedTreeItems.Any(mt2 => !mt2.ExistsInFolderMapping && m.FolderPath.StartsWith(mt2.FolderPath))))
+            foreach (var mergedItem in margedTreeItems.Where(m => m.ExistsInFolderMapping
+                                        && margedTreeItems.Any(mt2 => !mt2.ExistsInFolderMapping && m.FolderPath.StartsWith(mt2.FolderPath))))
             {
                 mergedItem.ExistsInFolderMapping = false;
             }
@@ -1851,7 +1851,7 @@ namespace DotNetNuke.Services.FileSystem
 
         /// <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
         internal virtual void MoveFolderWithinProvider(IFolderInfo folder, IFolderInfo destinationFolder)
-        {            
+        {
             var newFolderPath = destinationFolder.FolderPath + folder.FolderName + "/";
             RenameFolderInFileSystem(folder, newFolderPath);
 
@@ -1876,7 +1876,7 @@ namespace DotNetNuke.Services.FileSystem
             foreach (var folderInfo in folderInfos)
             {
                 var folderPath = newFolderPath + folderInfo.FolderPath.Substring(tmpFolderPath.Length);
-                
+
                 var parentFolder = GetParentFolder(folder.PortalID, folderPath);
                 folderInfo.ParentID = parentFolder.FolderID;
                 folderInfo.FolderPath = folderPath;
@@ -1905,7 +1905,7 @@ namespace DotNetNuke.Services.FileSystem
                 foldersToDelete.Add(sourceFolder.FolderPath, sourceFolder);
             }
         }
-        
+
         /// <summary>This member is reserved for internal use and is not intended to be used directly from your code.</summary>
         internal virtual void ProcessMergedTreeItemInAddMode(MergedTreeItem item, int portalId)
         {
@@ -1957,7 +1957,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             else
             {
-                SyncFoldersData.Add(threadId, new SyncFolderData{ PortalId = portalId, FolderPath = relativePath, Permissions = permissions});                
+                SyncFoldersData.Add(threadId, new SyncFolderData{ PortalId = portalId, FolderPath = relativePath, Permissions = permissions});
             }
         }
 
@@ -1966,7 +1966,7 @@ namespace DotNetNuke.Services.FileSystem
             var threadId = Thread.CurrentThread.ManagedThreadId;
             if (SyncFoldersData.ContainsKey(threadId))
             {
-                SyncFoldersData.Remove(threadId);                
+                SyncFoldersData.Remove(threadId);
             }
         }
 
@@ -2135,7 +2135,7 @@ namespace DotNetNuke.Services.FileSystem
             var originalFolderPath = folder.FolderPath;
 
             var folderInfos = GetFolders(folder.PortalID).Where(f => f.FolderPath != string.Empty && f.FolderPath.StartsWith(originalFolderPath)).ToArray();
-            
+
             foreach (var folderInfo in folderInfos)
             {
                 var folderMapping = FolderMappingController.Instance.GetFolderMapping(folder.PortalID, folderInfo.FolderMappingID);
@@ -2191,7 +2191,7 @@ namespace DotNetNuke.Services.FileSystem
             return IsStandardFolderProviderType(sourceFolderMapping) && IsStandardFolderProviderType(destinationFolderMapping);
         }
         #endregion
-        
+
         #region Internal Classes
 
         /// <summary>

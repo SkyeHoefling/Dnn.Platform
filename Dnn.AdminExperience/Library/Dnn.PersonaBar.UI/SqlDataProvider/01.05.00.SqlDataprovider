@@ -24,7 +24,7 @@ BEGIN
     IF EXISTS(SELECT MenuId FROM {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions] WHERE MenuId = @MenuId)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions]
-            SET 
+            SET
                 RoleNames = @RoleNames
             WHERE MenuId = @MenuId
 

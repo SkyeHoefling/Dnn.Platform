@@ -26,8 +26,8 @@ function($, ko) {
         update: function (element, valueAccessor) {
             var value = ko.unwrap(valueAccessor());
             if ($(element).val() != value) {
-                $(element).dnnImportTags(!value ? '' : value);    
-            }            
+                $(element).dnnImportTags(!value ? '' : value);
+            }
         }
     };
 });

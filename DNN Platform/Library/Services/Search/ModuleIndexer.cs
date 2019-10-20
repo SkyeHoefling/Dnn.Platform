@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -59,37 +59,37 @@ namespace DotNetNuke.Services.Search
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleIndexer));
         private static readonly int ModuleSearchTypeId = SearchHelper.Instance.GetSearchTypeByName("module").SearchTypeId;
 
-		private readonly IDictionary<int, IEnumerable<ModuleIndexInfo>> _searchModules;
+        private readonly IDictionary<int, IEnumerable<ModuleIndexInfo>> _searchModules;
 
         #endregion
 
-		#region Constructors
+        #region Constructors
 
-	    public ModuleIndexer() : this(false)
-	    {
-	    }
+        public ModuleIndexer() : this(false)
+        {
+        }
 
-		public ModuleIndexer(bool needSearchModules)
-		{
-			_searchModules = new Dictionary<int, IEnumerable<ModuleIndexInfo>>();
+        public ModuleIndexer(bool needSearchModules)
+        {
+            _searchModules = new Dictionary<int, IEnumerable<ModuleIndexInfo>>();
 
-			if (needSearchModules)
-			{
-				var portals = PortalController.Instance.GetPortals();
-				foreach (var portal in portals.Cast<PortalInfo>())
-				{
-					_searchModules.Add(portal.PortalID, GetModulesForIndex(portal.PortalID));
-				}
+            if (needSearchModules)
+            {
+                var portals = PortalController.Instance.GetPortals();
+                foreach (var portal in portals.Cast<PortalInfo>())
+                {
+                    _searchModules.Add(portal.PortalID, GetModulesForIndex(portal.PortalID));
+                }
 
-				_searchModules.Add(Null.NullInteger, GetModulesForIndex(Null.NullInteger));
-			}
-		}
+                _searchModules.Add(Null.NullInteger, GetModulesForIndex(Null.NullInteger));
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
 
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         /// Returns the number of indexed SearchDocuments for the portal.
         /// </summary>
@@ -104,7 +104,7 @@ namespace DotNetNuke.Services.Search
             var totalIndexed = 0;
             startDateLocal = GetLocalTimeOfLastIndexedItem(portalId, schedule.ScheduleID, startDateLocal);
             var searchDocuments = new List<SearchDocument>();
-			var searchModuleCollection = _searchModules.ContainsKey(portalId)
+            var searchModuleCollection = _searchModules.ContainsKey(portalId)
                 ? _searchModules[portalId].Where(m => m.SupportSearch).Select(m => m.ModuleInfo)
                 : GetSearchModules(portalId);
 
@@ -196,8 +196,8 @@ namespace DotNetNuke.Services.Search
         public List<SearchDocument> GetModuleMetaData(int portalId, DateTime startDate)
         {
             var searchDocuments = new List<SearchDocument>();
-			var searchModuleCollection = _searchModules.ContainsKey(portalId) ? 
-											_searchModules[portalId].Select(m => m.ModuleInfo) : GetSearchModules(portalId, true);
+            var searchModuleCollection = _searchModules.ContainsKey(portalId) ?
+                                            _searchModules[portalId].Select(m => m.ModuleInfo) : GetSearchModules(portalId, true);
             foreach (ModuleInfo module in searchModuleCollection)
             {
                 try
@@ -239,7 +239,7 @@ namespace DotNetNuke.Services.Search
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// Converts a SearchItemInfo into a SearchDocument.
-        /// 
+        ///
         /// SearchItemInfo object was used in the old version of search.
         /// </summary>
         /// <param name="searchItem"></param>
@@ -290,12 +290,12 @@ namespace DotNetNuke.Services.Search
             return GetSearchModules(portalId, false);
         }
 
-		protected IEnumerable<ModuleInfo> GetSearchModules(int portalId, bool allModules)
-		{
-			return from mii in GetModulesForIndex(portalId)
-				where allModules || mii.SupportSearch
-				select mii.ModuleInfo;
-		}
+        protected IEnumerable<ModuleInfo> GetSearchModules(int portalId, bool allModules)
+        {
+            return from mii in GetModulesForIndex(portalId)
+                where allModules || mii.SupportSearch
+                select mii.ModuleInfo;
+        }
 
 
         #endregion
@@ -305,8 +305,8 @@ namespace DotNetNuke.Services.Search
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// LEGACY: Deprecated in DNN 7.1. Use 'IndexSearchDocuments' instead.
-        /// Used for Legacy Search (ISearchable) 
-        /// 
+        /// Used for Legacy Search (ISearchable)
+        ///
         /// GetSearchIndexItems gets the SearchInfo Items for the Portal
         /// </summary>
         /// <remarks>
@@ -346,8 +346,8 @@ namespace DotNetNuke.Services.Search
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// LEGACY: Deprecated in DNN 7.1. Use 'GetSearchModules' instead.
-        /// Used for Legacy Search (ISearchable) 
-        /// 
+        /// Used for Legacy Search (ISearchable)
+        ///
         /// GetModuleList gets a collection of SearchContentModuleInfo Items for the Portal
         /// </summary>
         /// <remarks>
@@ -362,7 +362,7 @@ namespace DotNetNuke.Services.Search
             var arrModules = ModuleController.Instance.GetSearchModules(portalId);
             var businessControllers = new Hashtable();
             var htModules = new Hashtable();
-            
+
             foreach (var module in arrModules.Cast<ModuleInfo>().Where(module => !htModules.ContainsKey(module.ModuleID)))
             {
                 try
@@ -375,17 +375,17 @@ namespace DotNetNuke.Services.Search
                         if (controller == null)
                         {
                             //Add to hashtable
-                            controller = Reflection.CreateObject(module.DesktopModule.BusinessControllerClass, module.DesktopModule.BusinessControllerClass);                              
+                            controller = Reflection.CreateObject(module.DesktopModule.BusinessControllerClass, module.DesktopModule.BusinessControllerClass);
                             businessControllers.Add(module.DesktopModule.BusinessControllerClass, controller);
-                        }                            
+                        }
                         //Double-Check that module supports ISearchable
 
-                        //Check if module inherits from ModuleSearchBase                        
+                        //Check if module inherits from ModuleSearchBase
                         if (controller is ISearchable && !(controller is ModuleSearchBase))
                         {
                             var contentInfo = new SearchContentModuleInfo {ModControllerType = (ISearchable) controller, ModInfo = module};
                             results.Add(contentInfo);
-                        }                           
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -429,7 +429,7 @@ namespace DotNetNuke.Services.Search
         {
             var businessControllers = new Hashtable();
             var searchModuleIds = new HashSet<int>();
-			var searchModules = new List<ModuleIndexInfo>();
+            var searchModules = new List<ModuleIndexInfo>();
             //Only get modules that are set to be Indexed.
             var modules = ModuleController.Instance.GetSearchModules(portalId).Cast<ModuleInfo>().Where(m => m.TabModuleSettings["AllowIndex"] == null || bool.Parse(m.TabModuleSettings["AllowIndex"].ToString()));
 
@@ -441,7 +441,7 @@ namespace DotNetNuke.Services.Search
                     //Only index modules on tabs that are set to be Indexed.
                     if (tab.TabSettings["AllowIndex"] == null || (tab.TabSettings["AllowIndex"] != null && bool.Parse(tab.TabSettings["AllowIndex"].ToString())))
                     {
-                        //Check if the business controller is in the Hashtable                        
+                        //Check if the business controller is in the Hashtable
                         var controller = businessControllers[module.DesktopModule.BusinessControllerClass];
                         if (!String.IsNullOrEmpty(module.DesktopModule.BusinessControllerClass))
                         {

@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -44,7 +44,7 @@ namespace DotNetNuke.Web.UI.WebControls
         private object _value;
         private string _requiredMessageSuffix = ".Required";
         private string _validationMessageSuffix = ".RegExError";
-        
+
         protected DnnFormItemBase()
         {
             FormMode = DnnFormMode.Inherit;
@@ -76,9 +76,9 @@ namespace DotNetNuke.Web.UI.WebControls
             {
                 Type type = DataSource.GetType();
                 IList<PropertyInfo> props = new List<PropertyInfo>(type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static));
-                return !String.IsNullOrEmpty(DataMember) 
-                           ? props.SingleOrDefault(p => p.Name == DataMember) 
-                           : props.SingleOrDefault(p => p.Name == DataField);
+                return !String.IsNullOrEmpty(DataMember)
+                            ? props.SingleOrDefault(p => p.Name == DataMember)
+                            : props.SingleOrDefault(p => p.Name == DataField);
             }
         }
 
@@ -161,7 +161,7 @@ namespace DotNetNuke.Web.UI.WebControls
             {
                 var requiredValidator = new RequiredFieldValidator
                                             {
-                                                ID = ID + "_Required", 
+                                                ID = ID + "_Required",
                                                 ErrorMessage = ResourceKey + RequiredMessageSuffix
                                             };
                 Validators.Add(requiredValidator);
@@ -170,11 +170,11 @@ namespace DotNetNuke.Web.UI.WebControls
             if (!String.IsNullOrEmpty(ValidationExpression))
             {
                 var regexValidator = new RegularExpressionValidator
-                                         {
-                                             ID = ID + "_RegEx", 
-                                             ErrorMessage = ResourceKey + ValidationMessageSuffix, 
-                                             ValidationExpression = ValidationExpression
-                                         };
+                                        {
+                                            ID = ID + "_RegEx",
+                                            ErrorMessage = ResourceKey + ValidationMessageSuffix,
+                                            ValidationExpression = ValidationExpression
+                                        };
                 if (!String.IsNullOrEmpty(value))
                 {
                     regexValidator.IsValid = Regex.IsMatch(value, ValidationExpression);
@@ -190,7 +190,7 @@ namespace DotNetNuke.Web.UI.WebControls
                     validator.ControlToValidate = controlId;
                     validator.Display = ValidatorDisplay.Dynamic;
                     validator.ErrorMessage = LocalizeString(validator.ErrorMessage);
-                    validator.CssClass = "dnnFormMessage dnnFormError";                   
+                    validator.CssClass = "dnnFormMessage dnnFormError";
                     Controls.Add(validator);
                 }
             }
@@ -222,10 +222,10 @@ namespace DotNetNuke.Web.UI.WebControls
             }
 
             //Add Label
-            var label = new DnnFormLabel 
+            var label = new DnnFormLabel
                                 {
-                                    LocalResourceFile = LocalResourceFile, 
-                                    ResourceKey = ResourceKey + ".Text", 
+                                    LocalResourceFile = LocalResourceFile,
+                                    ResourceKey = ResourceKey + ".Text",
                                     ToolTipKey = ResourceKey + ".Help",
                                     ViewStateMode = ViewStateMode.Disabled
                                 };
@@ -283,7 +283,7 @@ namespace DotNetNuke.Web.UI.WebControls
                             // ReSharper disable PossibleNullReferenceException
                             value = Property.GetValue(DataSource, null);
                             // ReSharper restore PossibleNullReferenceException
-                        } 
+                        }
                     }
                     else
                     {
@@ -401,7 +401,7 @@ namespace DotNetNuke.Web.UI.WebControls
                         }
                     }
                 }
-            }           
+            }
         }
 
         protected void UpdateDataSource(object oldValue, object newValue, string dataField)

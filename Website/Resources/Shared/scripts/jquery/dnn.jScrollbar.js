@@ -30,7 +30,7 @@
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend({}, Scrollbar.defaults(), this.options);
 
@@ -264,4 +264,3 @@
     };
 
 }).apply(dnn, [jQuery, window, document]);
-

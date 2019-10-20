@@ -306,7 +306,7 @@ class ApplicationService {
     getPortals(callback) {
         const sf = this.getServiceFramework("SiteSettings");
         sf.get("GetPortals", {}, callback);
-    }   
+    }
 
     getListInfo(listName, portalId, callback) {
         const sf = this.getServiceFramework("SiteSettings");

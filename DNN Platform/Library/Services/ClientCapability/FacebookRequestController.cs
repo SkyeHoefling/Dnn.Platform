@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -30,9 +30,9 @@ using DotNetNuke.Common.Utilities;
 namespace DotNetNuke.Services.ClientCapability
 {
     /// <summary>
-    /// Make modules that are aware of Facebook’s signed_request – a parameter that is POSTed to the web page being loaded in the iFrame, 
+    /// Make modules that are aware of Facebook’s signed_request – a parameter that is POSTed to the web page being loaded in the iFrame,
     /// giving it variables such as if the Page has been Liked, and the age range of the user.
-    /// 
+    ///
     /// </summary>
     public class FacebookRequestController
     {
@@ -46,7 +46,7 @@ namespace DotNetNuke.Services.ClientCapability
         const string SignedRequestParameter = "signed_request";
         public bool IsValid { get; set; }
 
-		public static FacebookRequest GetFacebookDetailsFromRequest(HttpRequest Request)
+        public static FacebookRequest GetFacebookDetailsFromRequest(HttpRequest Request)
         {
             if (Request == null) return null;
             if (Request.RequestType != "POST") return null;
@@ -58,30 +58,30 @@ namespace DotNetNuke.Services.ClientCapability
         {
             if (string.IsNullOrEmpty(rawSignedRequest)) return null;
 
-			try
-			{
-				var facebookRequest = new FacebookRequest();
-				facebookRequest.RawSignedRequest = rawSignedRequest;
-				facebookRequest.IsValid = false;
+            try
+            {
+                var facebookRequest = new FacebookRequest();
+                facebookRequest.RawSignedRequest = rawSignedRequest;
+                facebookRequest.IsValid = false;
 
-				string[] signedRequestSplit = rawSignedRequest.Split('.');
-				string expectedSignature = signedRequestSplit[0];
-				string payload = signedRequestSplit[1];
+                string[] signedRequestSplit = rawSignedRequest.Split('.');
+                string expectedSignature = signedRequestSplit[0];
+                string payload = signedRequestSplit[1];
 
-				var decodedJson = ReplaceSpecialCharactersInSignedRequest(payload);
-				var base64JsonArray = Convert.FromBase64String(decodedJson.PadRight(decodedJson.Length + (4 - decodedJson.Length%4)%4, '='));
+                var decodedJson = ReplaceSpecialCharactersInSignedRequest(payload);
+                var base64JsonArray = Convert.FromBase64String(decodedJson.PadRight(decodedJson.Length + (4 - decodedJson.Length%4)%4, '='));
 
-				var encoding = new UTF8Encoding();
-				FaceBookData faceBookData = encoding.GetString(base64JsonArray).FromJson<FaceBookData>();
-				
+                var encoding = new UTF8Encoding();
+                FaceBookData faceBookData = encoding.GetString(base64JsonArray).FromJson<FaceBookData>();
+
                 if (faceBookData.algorithm == "HMAC-SHA256")
                 {
                     facebookRequest.IsValid = true;
                     facebookRequest.Algorithm = faceBookData.algorithm;
                     facebookRequest.ProfileId = faceBookData.profile_id;
                     facebookRequest.AppData = faceBookData.app_data;
-					facebookRequest.OauthToken = !string.IsNullOrEmpty(faceBookData.oauth_token) ? faceBookData.oauth_token : "";
-					facebookRequest.Expires = ConvertToTimestamp(faceBookData.expires);
+                    facebookRequest.OauthToken = !string.IsNullOrEmpty(faceBookData.oauth_token) ? faceBookData.oauth_token : "";
+                    facebookRequest.Expires = ConvertToTimestamp(faceBookData.expires);
                     facebookRequest.IssuedAt = ConvertToTimestamp(faceBookData.issued_at);
                     facebookRequest.UserID = !string.IsNullOrEmpty(faceBookData.user_id) ? faceBookData.user_id : "";
 
@@ -93,14 +93,14 @@ namespace DotNetNuke.Services.ClientCapability
                     facebookRequest.UserCountry = faceBookData.user.country;
                     facebookRequest.UserMinAge = faceBookData.user.age.min;
                     facebookRequest.UserMaxAge = faceBookData.user.age.max;
-				}
+                }
 
-				return facebookRequest;
-			}
-			catch(Exception)
-			{
-				return null;
-			}
+                return facebookRequest;
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
 
         public static bool IsValidSignature(string rawSignedRequest, string secretKey)
@@ -117,7 +117,7 @@ namespace DotNetNuke.Services.ClientCapability
                     var encoding = new UTF8Encoding();
                     var hmac = SignWithHmac(encoding.GetBytes(payload), encoding.GetBytes(secretKey));
                     var hmacBase64 = Base64UrlDecode(Convert.ToBase64String(hmac));
-                    if (hmacBase64 == expectedSignature) 
+                    if (hmacBase64 == expectedSignature)
                         return true;
                 }
             }
@@ -194,6 +194,6 @@ namespace DotNetNuke.Services.ClientCapability
         public long expires { get; set; }
         public string app_data { get; set; }
         public Page page { get; set; }
-        public long profile_id { get; set; }        
+        public long profile_id { get; set; }
     }
 }

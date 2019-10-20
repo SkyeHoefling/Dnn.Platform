@@ -12,7 +12,7 @@ namespace DotNetNuke.Modules.Journal.Components {
                 PropertySource["journalauthor"] = journalItem.JournalAuthor;
                 PropertySource["journalprofile"] = new ProfilePicPropertyAccess(journalItem.JournalAuthor.Id);
             }
-             
+
         }
         public string ReplaceJournalItemTokens(string source) {
             return ReplaceTokens(source);

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -41,7 +41,7 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class LanguageInstaller : FileInstaller
     {
-		#region Private Members
+        #region Private Members
 
         private readonly LanguagePackType LanguagePackType;
         private LanguagePackInfo InstalledLanguagePack;
@@ -49,14 +49,14 @@ namespace DotNetNuke.Services.Installer.Installers
         private LanguagePackInfo LanguagePack;
         private Locale TempLanguage;
 
-		#endregion
+        #endregion
 
         public LanguageInstaller(LanguagePackType type)
         {
             LanguagePackType = type;
         }
-		
-		#region Protected Properties
+
+        #region Protected Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -96,10 +96,10 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             get { return "resx, xml, tdf,template"; }
         }
-		
-		#endregion
 
-		#region Private Methods
+        #endregion
+
+        #region Private Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -111,7 +111,7 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             try
             {
-				//Attempt to get the LanguagePack
+                //Attempt to get the LanguagePack
                 LanguagePackInfo tempLanguagePack = LanguagePackController.GetLanguagePackByPackage(Package.PackageID);
 
                 //Attempt to get the Locale
@@ -135,10 +135,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 Log.AddFailure(ex);
             }
         }
-		
-		#endregion
 
-		#region Protected Methods
+        #endregion
+
+        #region Protected Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -169,14 +169,14 @@ namespace DotNetNuke.Services.Installer.Installers
                     LanguagePack.DependentPackageID = package.PackageID;
                 }
             }
-			
+
             //Call base class
             base.ReadCustomManifest(nav);
         }
-		
-		#endregion
 
-		#region Public Methods
+        #endregion
+
+        #region Public Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -188,7 +188,7 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             if (LanguagePackType == LanguagePackType.Core || LanguagePack.DependentPackageID > 0)
             {
-               base.Commit();             
+                base.Commit();
             }
             else
             {
@@ -253,26 +253,26 @@ namespace DotNetNuke.Services.Installer.Installers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// The Rollback method undoes the installation of the component in the event 
+        /// The Rollback method undoes the installation of the component in the event
         /// that one of the other components fails
         /// </summary>
         /// -----------------------------------------------------------------------------
         public override void Rollback()
         {
-			//If Temp Language exists then we need to update the DataStore with this 
+            //If Temp Language exists then we need to update the DataStore with this
             if (TempLanguage == null)
             {
-				//No Temp Language - Delete newly added Language
+                //No Temp Language - Delete newly added Language
                 DeleteLanguage();
             }
             else
             {
-				//Temp Language - Rollback to Temp
+                //Temp Language - Rollback to Temp
                 Localization.Localization.SaveLanguage(TempLanguage);
             }
-            
-			//Call base class to prcoess files
-			base.Rollback();
+
+            //Call base class to prcoess files
+            base.Rollback();
         }
 
         /// -----------------------------------------------------------------------------
@@ -288,6 +288,6 @@ namespace DotNetNuke.Services.Installer.Installers
             base.UnInstall();
         }
 
-		#endregion
+        #endregion
     }
 }

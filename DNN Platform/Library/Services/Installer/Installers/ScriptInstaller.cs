@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -42,16 +42,16 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class ScriptInstaller : FileInstaller
     {
-		#region Private Members
+        #region Private Members
 
         private readonly SortedList<Version, InstallFile> _installScripts = new SortedList<Version, InstallFile>();
         private readonly SortedList<Version, InstallFile> _unInstallScripts = new SortedList<Version, InstallFile>();
         private InstallFile _installScript;
         private InstallFile _upgradeScript;
 
-		#endregion
+        #endregion
 
-		#region Protected Properties
+        #region Protected Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -144,10 +144,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 return _upgradeScript;
             }
         }
-		
-		#endregion
 
-		#region Public Properties
+        #endregion
+
+        #region Public Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -162,10 +162,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 return "*dataprovider, sql";
             }
         }
-		
-		#endregion
 
-		#region Private Methods
+        #endregion
+
+        #region Private Methods
 
         private bool ExecuteSql(InstallFile scriptFile)
         {
@@ -203,14 +203,14 @@ namespace DotNetNuke.Services.Installer.Installers
         {
             return ProviderConfiguration.DefaultProvider.Equals(fileExtension, StringComparison.InvariantCultureIgnoreCase) || fileExtension.Equals("sql", StringComparison.InvariantCultureIgnoreCase);
         }
-		
-		#endregion
 
-		#region Protected Methods
+        #endregion
+
+        #region Protected Methods
 
         private bool InstallScriptFile(InstallFile scriptFile)
         {
-			//Call base InstallFile method to copy file
+            //Call base InstallFile method to copy file
             bool bSuccess = InstallFile(scriptFile);
 
             //Process the file if it is an Install Script
@@ -252,7 +252,7 @@ namespace DotNetNuke.Services.Installer.Installers
             {
                 if (file.Name.StartsWith("install.", StringComparison.InvariantCultureIgnoreCase))
                 {
-					//This is the initial script when installing
+                    //This is the initial script when installing
                     _installScript = file;
                 }
                 else if (file.Name.StartsWith("upgrade.", StringComparison.InvariantCultureIgnoreCase))
@@ -261,42 +261,42 @@ namespace DotNetNuke.Services.Installer.Installers
                 }
                 else if (type.Equals("install", StringComparison.InvariantCultureIgnoreCase))
                 {
-					//These are the Install/Upgrade scripts
+                    //These are the Install/Upgrade scripts
                     InstallScripts[file.Version] = file;
                 }
                 else
                 {
-					//These are the Uninstall scripts
+                    //These are the Uninstall scripts
                     UnInstallScripts[file.Version] = file;
                 }
             }
-			
+
             //Call base method to set up for file processing
             base.ProcessFile(file, nav);
         }
 
         protected override void UnInstallFile(InstallFile scriptFile)
         {
-			//Process the file if it is an UnInstall Script
+            //Process the file if it is an UnInstall Script
             var extension = Path.GetExtension(scriptFile.Name.ToLowerInvariant());
             if (extension != null && (UnInstallScripts.ContainsValue(scriptFile) ))
             {
                 string fileExtension = extension.Substring(1);
                 if (scriptFile.Name.StartsWith("uninstall.", StringComparison.InvariantCultureIgnoreCase) && IsValidScript(fileExtension))
                 {
-					//Install Script
+                    //Install Script
                     Log.AddInfo(Util.SQL_Executing + scriptFile.Name);
                     ExecuteSql(scriptFile);
                 }
             }
-			
+
             //Call base method to delete file
             base.UnInstallFile(scriptFile);
         }
 
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -331,7 +331,7 @@ namespace DotNetNuke.Services.Installer.Installers
                         installedVersion = InstallScript.Version;
                     }
                 }
-				
+
                 //Then process remain Install/Upgrade Scripts
                 if (bSuccess)
                 {
@@ -347,14 +347,14 @@ namespace DotNetNuke.Services.Installer.Installers
                         }
                     }
                 }
-				
+
                 //Next process UpgradeScript - this script always runs if present
                 if (UpgradeScript != null)
                 {
                     bSuccess = InstallScriptFile(UpgradeScript);
                     installedVersion = UpgradeScript.Version;
                 }
-				
+
                 //Then process uninstallScripts - these need to be copied but not executed
                 if (bSuccess)
                 {
@@ -378,7 +378,7 @@ namespace DotNetNuke.Services.Installer.Installers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// The Rollback method undoes the installation of the script component in the event 
+        /// The Rollback method undoes the installation of the script component in the event
         /// that one of the other components fails
         /// </summary>
         /// -----------------------------------------------------------------------------
@@ -401,7 +401,7 @@ namespace DotNetNuke.Services.Installer.Installers
 
             Log.AddInfo(Util.SQL_EndUnInstall);
         }
-		
-		#endregion
+
+        #endregion
     }
 }

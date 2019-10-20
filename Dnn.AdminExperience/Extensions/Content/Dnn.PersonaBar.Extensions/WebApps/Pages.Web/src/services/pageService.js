@@ -17,7 +17,7 @@ const PageService = function () {
     };
 
     const savePage = function (page) {
-        const api = getOverridablePagesApi();            
+        const api = getOverridablePagesApi();
         let request = { ...page,  url: "" };
         return api.post("SavePageDetails", toBackEndPage(request));
     };

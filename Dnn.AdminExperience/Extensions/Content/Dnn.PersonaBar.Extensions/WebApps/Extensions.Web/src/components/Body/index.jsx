@@ -50,7 +50,7 @@ class Body extends Component {
         props.dispatch(PaginationActions.loadTab(index)); //index acts as scopeTypeId
         this.setState({});
     }
-    
+
     selectPanel(panel, event) {
         if (event) {
             event.preventDefault();
@@ -85,17 +85,17 @@ class Body extends Component {
         return (
             <GridCell className="extension-body">
                 <PersonaBarPageHeader title={Localization.get("ExtensionsLabel")}>
-                    {this.isHost && 
+                    {this.isHost &&
                         <Button type="primary" size="large" onClick={this.selectPanel.bind(this, 3)}>
                             <TextOverflowWrapper text={Localization.get("ExtensionInstall.Action") } maxWidth={120}/>
                         </Button>
                     }
-                    {this.isHost && 
+                    {this.isHost &&
                         <Button type="secondary" size="large" onClick={this.createExtension.bind(this)}>
                             <TextOverflowWrapper text={Localization.get("CreateExtension.Action") } maxWidth={120}/>
                         </Button>
                     }
-                    {this.isHost && 
+                    {this.isHost &&
                         <Button type="secondary" size="large" onClick={this.selectPanel.bind(this, 1)}>
                             <TextOverflowWrapper text={Localization.get("CreateModule.Action") } maxWidth={120}/>
                         </Button>

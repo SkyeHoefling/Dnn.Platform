@@ -9,7 +9,7 @@ class ProviderEditor extends Component {
     }
 
     /* eslint-disable react/no-danger */
-    render() {        
+    render() {
         return <div className={styles.providerSettingEditor}>
             <iframe className="edit-provider" seamless src={this.props.settingUrl} />
         </div>;

@@ -77,7 +77,7 @@ class CreateUserBox extends Component {
             }));
         }
     }
-    
+
     clearForm(callback) {
         let {UserDetails} = this.state;
         UserDetails = Object.assign({}, newUserRegistrationDetails);
@@ -228,14 +228,14 @@ class CreateUserBox extends Component {
                     {!state.UserDetails.randomPassword && <GridSystem>
 
 
-                            <Password 
-                                error={state.errors} 
-                                onChangePassword={this.onChangePassword.bind(this)} 
-                                style={inputStyle} 
+                            <Password
+                                error={state.errors}
+                                onChangePassword={this.onChangePassword.bind(this)}
+                                style={inputStyle}
                                 inputStyle={!requiresQuestionAndAnswer ? { marginBottom: 15 } : { marginBottom: 0 }}
                                 UserDetails={this.state.UserDetails}
                             />
-                           
+
                             <SingleLineInputWithError label={Localization.get("Confirm") }
                                 error={state.errors.confirmPassword || state.errors.passwordsMatch}
                                 onChange={this.onChange.bind(this,"confirmPassword") }

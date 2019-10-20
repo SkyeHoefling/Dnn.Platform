@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -41,7 +41,7 @@ namespace DotNetNuke.Entities.Modules.Actions
     ///-----------------------------------------------------------------------------
     public class ModuleActionCollection : CollectionBase
     {
-		///-----------------------------------------------------------------------------
+        ///-----------------------------------------------------------------------------
         /// <summary>
         /// Initializes a new, empty instance of the <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" /> class.
         /// </summary>
@@ -71,7 +71,7 @@ namespace DotNetNuke.Entities.Modules.Actions
         /// Initializes a new instance of the <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" />
         ///  class containing the specified array of <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> objects.
         /// </summary>
-        /// <param name="value">An array of <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> objects 
+        /// <param name="value">An array of <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> objects
         /// with which to initialize the collection. </param>
         /// <remarks>This overloaded constructor copies the <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" />s
         ///  from the indicated array.</remarks>
@@ -83,14 +83,14 @@ namespace DotNetNuke.Entities.Modules.Actions
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-		/// Gets or sets the <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" /> at the 
+        /// Gets or sets the <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" /> at the
         /// specified index in the collection.
         /// <para>
-		/// In VB.Net, this property is the indexer for the <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" /> class.
+        /// In VB.Net, this property is the indexer for the <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" /> class.
         /// </para>
         /// </summary>
         /// <param name="index">The index of the collection to access.</param>
-		/// <value>A <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> at each valid index.</value>
+        /// <value>A <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> at each valid index.</value>
         /// <remarks>This method is an indexer that can be used to access the collection.</remarks>
         ///-----------------------------------------------------------------------------
         public ModuleAction this[int index]
@@ -107,10 +107,10 @@ namespace DotNetNuke.Entities.Modules.Actions
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-		/// Add an element of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to the end of the collection.
+        /// Add an element of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to the end of the collection.
         /// </summary>
-		/// <param name="value">An object of type <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to add to the collection.</param>
-		/// <returns>The index of the newly added <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /></returns>
+        /// <param name="value">An object of type <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to add to the collection.</param>
+        /// <returns>The index of the newly added <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /></returns>
         ///-----------------------------------------------------------------------------
         public int Add(ModuleAction value)
         {
@@ -123,7 +123,7 @@ namespace DotNetNuke.Entities.Modules.Actions
         /// </summary>
         /// <param name="ID">This is the identifier to use for this action.</param>
         /// <param name="Title">This is the title that will be displayed for this action</param>
-        /// <param name="CmdName">The command name passed to the client when this action is 
+        /// <param name="CmdName">The command name passed to the client when this action is
         /// clicked.</param>
         /// <returns>The index of the newly added <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /></returns>
         /// <remarks>This method creates a new <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> with the specified
@@ -136,24 +136,24 @@ namespace DotNetNuke.Entities.Modules.Actions
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-		/// Add an element of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to the end of the collection.
+        /// Add an element of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to the end of the collection.
         /// </summary>
         /// <param name="ID">This is the identifier to use for this action.</param>
         /// <param name="Title">This is the title that will be displayed for this action</param>
-        /// <param name="CmdName">The command name passed to the client when this action is 
+        /// <param name="CmdName">The command name passed to the client when this action is
         /// clicked.</param>
-        /// <param name="CmdArg">The command argument passed to the client when this action is 
+        /// <param name="CmdArg">The command argument passed to the client when this action is
         /// clicked.</param>
         /// <param name="Icon">The URL of the Icon to place next to this action</param>
-        /// <param name="Url">The destination URL to redirect the client browser when this 
+        /// <param name="Url">The destination URL to redirect the client browser when this
         /// action is clicked.</param>
         /// <param name="UseActionEvent">Determines whether client will receive an event
         /// notification</param>
         /// <param name="Secure">The security access level required for access to this action</param>
         /// <param name="Visible">Whether this action will be displayed</param>
         /// <param name="NewWindow">Whether open in new window.</param>
-		/// <returns>The index of the newly added <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /></returns>
-		/// <remarks>This method creates a new <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> with the specified
+        /// <returns>The index of the newly added <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /></returns>
+        /// <remarks>This method creates a new <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> with the specified
         /// values, adds it to the collection and returns the index of the newly created ModuleAction.</remarks>
         ///-----------------------------------------------------------------------------
         public ModuleAction Add(int ID, string Title, string CmdName, string CmdArg, string Icon, string Url, bool UseActionEvent, SecurityAccessLevel Secure, bool Visible, bool NewWindow)
@@ -167,22 +167,22 @@ namespace DotNetNuke.Entities.Modules.Actions
         /// </summary>
         /// <param name="ID">This is the identifier to use for this action.</param>
         /// <param name="Title">This is the title that will be displayed for this action</param>
-        /// <param name="CmdName">The command name passed to the client when this action is 
+        /// <param name="CmdName">The command name passed to the client when this action is
         /// clicked.</param>
-        /// <param name="CmdArg">The command argument passed to the client when this action is 
+        /// <param name="CmdArg">The command argument passed to the client when this action is
         /// clicked.</param>
         /// <param name="Icon">The URL of the Icon to place next to this action</param>
-        /// <param name="Url">The destination URL to redirect the client browser when this 
+        /// <param name="Url">The destination URL to redirect the client browser when this
         /// action is clicked.</param>
-        /// <param name="ClientScript">Client side script to be run when the this action is 
+        /// <param name="ClientScript">Client side script to be run when the this action is
         /// clicked.</param>
         /// <param name="UseActionEvent">Determines whether client will receive an event
         /// notification</param>
         /// <param name="Secure">The security access level required for access to this action</param>
         /// <param name="Visible">Whether this action will be displayed</param>
         /// <param name="NewWindow">Whether open in new window.</param>
-		/// <returns>The index of the newly added <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /></returns>
-		/// <remarks>This method creates a new <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> with the specified
+        /// <returns>The index of the newly added <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /></returns>
+        /// <remarks>This method creates a new <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> with the specified
         /// values, adds it to the collection and returns the index of the newly created ModuleAction.</remarks>
         ///
         /// -----------------------------------------------------------------------------
@@ -216,7 +216,7 @@ namespace DotNetNuke.Entities.Modules.Actions
         /// Adds the contents of another <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" />
         ///  to the end of the collection.
         /// </summary>
-        /// <param name="value">A <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" /> containing 
+        /// <param name="value">A <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" /> containing
         /// the objects to add to the collection. </param>
         ///-----------------------------------------------------------------------------
         public void AddRange(ModuleActionCollection value)
@@ -235,7 +235,7 @@ namespace DotNetNuke.Entities.Modules.Actions
         /// <returns><b>true</b> if the collection contains the specified object; otherwise, <b>false</b>.</returns>
         /// <example>
         /// <code>
-        /// ' Tests for the presence of a ModuleAction in the 
+        /// ' Tests for the presence of a ModuleAction in the
         /// ' collection, and retrieves its index if it is found.
         /// Dim testModuleAction = New ModuleAction(5, "Edit Action", "Edit")
         /// Dim itemIndex As Integer = -1
@@ -247,7 +247,7 @@ namespace DotNetNuke.Entities.Modules.Actions
         ///-----------------------------------------------------------------------------
         public bool Contains(ModuleAction value)
         {
-			//If value is not of type ModuleAction, this will return false.
+            //If value is not of type ModuleAction, this will return false.
             return List.Contains(value);
         }
 
@@ -325,7 +325,7 @@ namespace DotNetNuke.Entities.Modules.Actions
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-        /// Gets the index in the collection of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" />, 
+        /// Gets the index in the collection of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleActionCollection" />,
         /// if it exists in the collection.
         /// </summary>
         /// <param name="value">The <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to locate in the collection.</param>
@@ -348,14 +348,14 @@ namespace DotNetNuke.Entities.Modules.Actions
 
         ///-----------------------------------------------------------------------------
         /// <summary>
-        /// Add an element of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to the 
+        /// Add an element of the specified <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to the
         /// collection at the designated index.
         /// </summary>
         /// <param name="index">An <see cref="T:system.int32">Integer</see> to indicate the location to add the object to the collection.</param>
         /// <param name="value">An object of type <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to add to the collection.</param>
         /// <example>
         /// <code>
-        /// ' Inserts a ModuleAction at index 0 of the collection. 
+        /// ' Inserts a ModuleAction at index 0 of the collection.
         /// collection.Insert(0, New ModuleAction(5, "Edit Action", "Edit"))
         /// </code>
         /// </example>
@@ -365,14 +365,14 @@ namespace DotNetNuke.Entities.Modules.Actions
             List.Insert(index, value);
         }
 
-        ///----------------------------------------------------------------------------- 
+        ///-----------------------------------------------------------------------------
         /// <summary>
         /// Remove the specified object of type <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> from the collection.
         /// </summary>
         /// <param name="value">An object of type <see cref="T:DotNetNuke.Entities.Modules.Actions.ModuleAction" /> to remove from the collection.</param>
         /// <example>
         /// <code>
-        /// ' Removes the specified ModuleAction from the collection. 
+        /// ' Removes the specified ModuleAction from the collection.
         /// Dim testModuleAction = New ModuleAction(5, "Edit Action", "Edit")
         /// collection.Remove(testModuleAction)
         /// </code>

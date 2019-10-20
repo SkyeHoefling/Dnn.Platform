@@ -8,7 +8,7 @@
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.GenerateSolutionFiles" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.ProcessSolutionFiles" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.IncrementBuild" />
-   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.GetVersion" />
+    <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.GetVersion" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.RemoveTestProjects" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.CIBuildDeploy" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.DotNetNukeDeploy" />
@@ -97,14 +97,14 @@
   </Target>
   <Target Name="VersionCheck">
     <Message Text="SolutionInfo: $(VersionSolutionInfoPath)\SolutionInfo.cs" />
-      <GetVersion SolutionFile="$(VersionSolutionInfoPath)\SolutionInfo.cs" >
+    <GetVersion SolutionFile="$(VersionSolutionInfoPath)\SolutionInfo.cs" >
         <Output TaskParameter="BuildVersion" PropertyName="BuildVersion"></Output>
         <Output TaskParameter="FormattedBuildVersion" PropertyName="FormattedBuildVersion"></Output>
         <Output TaskParameter="Revision" PropertyName="Revision"></Output>
-      </GetVersion>
-      <PropertyGroup>
+    </GetVersion>
+    <PropertyGroup>
         <CEArtifactName>$(ArtifactFolder)\DNN_Platform_$(BUILD_NUMBER)</CEArtifactName>
-      </PropertyGroup>
+    </PropertyGroup>
     <Message Text="Zip Version : $(BuildVersion)" />
   </Target>
 </Project>

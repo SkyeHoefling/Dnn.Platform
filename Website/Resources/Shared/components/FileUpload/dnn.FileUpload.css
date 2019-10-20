@@ -44,7 +44,7 @@
 }
 
 .fu-container .fu-dialog-content-header ul.dnnButtonGroup > li:last-child > a {
-    border-radius: 0 3px 3px 0;    
+    border-radius: 0 3px 3px 0;
 }
 
 .fu-container .fu-dialog-content-header ul.dnnButtonGroup > li > a.upload-file {
@@ -74,7 +74,7 @@
 .fu-container .fu-dialog-content-header ul.dnnButtonGroup > li > a {
     padding: 7px 16px 6px 44px;
     background-repeat: no-repeat;
-    background-position: 12px 7px;    
+    background-position: 12px 7px;
 }
 
 .fu-container .dnnDropDownList .selected-item {
@@ -103,7 +103,7 @@
     margin: 0 6px 0 0;
 }
 
-.fu-container .fu-dialog-content-header > .dnnRight > span {    
+.fu-container .fu-dialog-content-header > .dnnRight > span {
     line-height: 36px;
     float: left;
     width: 200px;
@@ -145,12 +145,12 @@
     font-size: 11px;
     text-align: center;
     width: 100%;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .fu-container .fu-dialog-content-fileupload-local .fu-dialog-drag-and-drop-area-message span.dnnInputFileWrapper {
@@ -299,8 +299,8 @@ a.fu-fileupload-thumbnail:active {
     opacity: 0.9;
 
     -webkit-transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
-       -moz-transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
-         -o-transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        -moz-transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        -o-transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
             transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
@@ -382,8 +382,8 @@ a.fu-fileupload-thumbnail-inactive:hover {
     line-height: 12px;
 
     -webkit-transition: color 0.3s ease-in-out;
-       -moz-transition: color 0.3s ease-in-out;
-         -o-transition: color 0.3s ease-in-out;
+        -moz-transition: color 0.3s ease-in-out;
+        -o-transition: color 0.3s ease-in-out;
             transition: color 0.3s ease-in-out;
 }
 

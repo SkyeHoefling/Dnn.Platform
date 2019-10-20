@@ -22,15 +22,15 @@ CodeMirror.registerGlobalHelper("fold", "comment", function(mode) {
   for (var at = start.ch, pass = 0;;) {
     var found = at <= 0 ? -1 : lineText.lastIndexOf(startToken, at - 1);
     if (found == -1) {
-      if (pass == 1) return;
-      pass = 1;
-      at = lineText.length;
-      continue;
+    if (pass == 1) return;
+    pass = 1;
+    at = lineText.length;
+    continue;
     }
     if (pass == 1 && found < start.ch) return;
     if (/comment/.test(cm.getTokenTypeAt(CodeMirror.Pos(line, found + 1)))) {
-      startCh = found + startToken.length;
-      break;
+    startCh = found + startToken.length;
+    break;
     }
     at = found - 1;
   }
@@ -39,19 +39,19 @@ CodeMirror.registerGlobalHelper("fold", "comment", function(mode) {
   outer: for (var i = line; i <= lastLine; ++i) {
     var text = cm.getLine(i), pos = i == line ? startCh : 0;
     for (;;) {
-      var nextOpen = text.indexOf(startToken, pos), nextClose = text.indexOf(endToken, pos);
-      if (nextOpen < 0) nextOpen = text.length;
-      if (nextClose < 0) nextClose = text.length;
-      pos = Math.min(nextOpen, nextClose);
-      if (pos == text.length) break;
-      if (pos == nextOpen) ++depth;
-      else if (!--depth) { end = i; endCh = pos; break outer; }
-      ++pos;
+    var nextOpen = text.indexOf(startToken, pos), nextClose = text.indexOf(endToken, pos);
+    if (nextOpen < 0) nextOpen = text.length;
+    if (nextClose < 0) nextClose = text.length;
+    pos = Math.min(nextOpen, nextClose);
+    if (pos == text.length) break;
+    if (pos == nextOpen) ++depth;
+    else if (!--depth) { end = i; endCh = pos; break outer; }
+    ++pos;
     }
   }
   if (end == null || line == end && endCh == startCh) return;
   return {from: CodeMirror.Pos(line, startCh),
-          to: CodeMirror.Pos(end, endCh)};
+        to: CodeMirror.Pos(end, endCh)};
 });
 
 });

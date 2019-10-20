@@ -91,7 +91,7 @@ http://ethanschoonover.com/solarized/img/solarized-palette.png
 
 /*visualize tab character*/
 /*.cm-s-dnn-sql .cm-tab:before {
-  content: "➤";   
+  content: "➤";
   color: #586e75;
 }*/
 
@@ -161,4 +161,3 @@ view-port
 .cm-s-dnn-sql.cm-s-light .CodeMirror-activeline-background {
   background: rgba(0, 0, 0, 0.05);
 }
-

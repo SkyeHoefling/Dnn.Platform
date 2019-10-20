@@ -6,7 +6,7 @@ const themeActions = {
         return (dispatch) => new Promise(function (callback) {
             dispatch({
                 type: ActionTypes.RETRIEVING_THEMES
-            });    
+            });
 
             ThemeService.getThemes().then(response => {
                 dispatch({
@@ -26,7 +26,7 @@ const themeActions = {
                     data: {error}
                 });
                 callback({success: false});
-            });     
+            });
         });
     },
 
@@ -34,7 +34,7 @@ const themeActions = {
         return (dispatch) => {
             dispatch({
                 type: ActionTypes.RETRIEVING_THEME_FILES
-            });    
+            });
 
             ThemeService.getThemeFiles(themeName, level).then(response => {
                 dispatch({
@@ -43,13 +43,13 @@ const themeActions = {
                         layouts: response.layouts,
                         containers: response.containers
                     }
-                });  
+                });
             }).catch((error) => {
                 dispatch({
                     type: ActionTypes.ERROR_RETRIEVING_THEME_FILES,
                     data: {error}
                 });
-            });     
+            });
         };
     }
 };

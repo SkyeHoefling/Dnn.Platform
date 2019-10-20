@@ -247,17 +247,17 @@
 
     // Handle one line Comments
     if (stream.match(';')) {
-      stream.skipToEnd();
-      return 'comment';
+    stream.skipToEnd();
+    return 'comment';
     }
 
     // Handle Number Literals
     if (stream.match(/^[0-9\.+-]/, false)) {
-      if (stream.match(/^[+-]?0x[0-9a-fA-F]+/))
+    if (stream.match(/^[+-]?0x[0-9a-fA-F]+/))
         return 'number';
-      if (stream.match(/^[+-]?\d*\.\d+([EeDd][+-]?\d+)?/))
+    if (stream.match(/^[+-]?\d*\.\d+([EeDd][+-]?\d+)?/))
         return 'number';
-      if (stream.match(/^[+-]?\d+([EeDd][+-]?\d+)?/))
+    if (stream.match(/^[+-]?\d+([EeDd][+-]?\d+)?/))
         return 'number';
     }
 
@@ -271,7 +271,7 @@
     if (stream.match(identifiers)) { return 'variable'; }
 
     if (stream.match(singleOperators) || stream.match(boolOperators)) {
-      return 'operator'; }
+    return 'operator'; }
 
     // Handle non-detected items
     stream.next();
@@ -280,9 +280,9 @@
 
   CodeMirror.defineMode('idl', function() {
     return {
-      token: function(stream) {
+    token: function(stream) {
         return tokenBase(stream);
-      }
+    }
     };
   });
 

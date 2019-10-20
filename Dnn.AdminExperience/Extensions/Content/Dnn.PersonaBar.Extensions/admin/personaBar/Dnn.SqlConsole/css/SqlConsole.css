@@ -67,8 +67,8 @@
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    padding: 12px;  
-    width: 100%;  
+    padding: 12px;
+    width: 100%;
 }
 
 .sqlconsolePanel .form-item span.caption.inline + div {
@@ -95,7 +95,7 @@
     margin: 0;
     width: auto !important;
     display: inline-block;
-	position: relative;
+    position: relative;
     vertical-align: middle;
 }
 
@@ -126,7 +126,7 @@
     direction: ltr;
     cursor: pointer;
     height: 100%;
-	font-size: 200px;
+    font-size: 200px;
 }
 
 .sqlconsolePanel {
@@ -335,9 +335,9 @@
 .sqlconsolePanel .tables-container table thead th.table-sortable {
     padding-right: 20px;
     cursor: pointer;
-    -webkit-user-select: none;  
-    -moz-user-select: none;    
-    -ms-user-select: none;      
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
 }
 .sqlconsolePanel .tables-container table thead th.table-sortable span.sort {

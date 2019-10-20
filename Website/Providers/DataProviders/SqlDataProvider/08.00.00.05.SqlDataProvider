@@ -12,18 +12,18 @@ BEGIN
 SELECT
   S.*
   , (SELECT max(S1.NextStart)
-   FROM {databaseOwner}{objectQualifier}ScheduleHistory S1
-   WHERE S1.ScheduleID = S.ScheduleID) as NextStart
+    FROM {databaseOwner}{objectQualifier}ScheduleHistory S1
+    WHERE S1.ScheduleID = S.ScheduleID) as NextStart
  FROM {databaseOwner}{objectQualifier}Schedule S
  WHERE
-	(
-		@Server IS NULL OR 
-		S.Servers LIKE '%,' + @Server + ',%' OR
-		S.Servers LIKE @Server + ',%' OR
-		S.Servers LIKE '%,' + @Server OR
-		S.Servers = @Server OR
-		S.Servers IS NULL)
-	ORDER BY FriendlyName ASC
+    (
+        @Server IS NULL OR
+        S.Servers LIKE '%,' + @Server + ',%' OR
+        S.Servers LIKE @Server + ',%' OR
+        S.Servers LIKE '%,' + @Server OR
+        S.Servers = @Server OR
+        S.Servers IS NULL)
+    ORDER BY FriendlyName ASC
 END
 GO
 
@@ -31,18 +31,18 @@ GO
 /*******************************/
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetTabPaths]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabPaths]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabPaths]
 GO
 
-CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabPaths] 
-	@PortalID		INT,
-	@CultureCode	NVARCHAR(10)
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabPaths]
+    @PortalID		INT,
+    @CultureCode	NVARCHAR(10)
 AS
-	SELECT
-		TabID, 
-		PortalID, 
-		TabPath
-	FROM {databaseOwner}{objectQualifier}vw_Tabs
-	WHERE (PortalID = @PortalID AND (CultureCode = @CultureCode OR CultureCode Is NULL OR ISNULL(@CultureCode, '') = ''))
-		OR @PortalID Is NULL
+    SELECT
+        TabID,
+        PortalID,
+        TabPath
+    FROM {databaseOwner}{objectQualifier}vw_Tabs
+    WHERE (PortalID = @PortalID AND (CultureCode = @CultureCode OR CultureCode Is NULL OR ISNULL(@CultureCode, '') = ''))
+        OR @PortalID Is NULL
 GO

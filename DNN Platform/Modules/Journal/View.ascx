@@ -51,10 +51,10 @@
         <div class="fileUploadArea">
             <div class="jpa" id="tbar-attach-Area">
                 <div class="journal_onlineFileShare">
-                    <span id="tbar-photoText"><%= LocalizeString("SelectPhoto.Text") %></span> 
+                    <span id="tbar-photoText"><%= LocalizeString("SelectPhoto.Text") %></span>
                     <span id="tbar-fileText"><%= LocalizeString("SelectFile.Text") %></span>
                     <div>
-                        <a href="javascript:void(0)" id="photoFromSite" class="dnnSecondaryAction"><%= LocalizeString("BrowseFromSite.Text") %></a> 
+                        <a href="javascript:void(0)" id="photoFromSite" class="dnnSecondaryAction"><%= LocalizeString("BrowseFromSite.Text") %></a>
                     </div>
                 </div>
                 <div class="journal_localFileShare">
@@ -70,12 +70,12 @@
                             <div class="upload_file_name" style="margin-top:5px; margin-bottom:-5px;"></div>
                             <div class="progress-bar green">
                                 <div style="width:0px;">
-                                    <span></span> 
+                                    <span></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                
+
                 <div class="filePreviewArea"></div>
             </div>
         </div>
@@ -120,8 +120,8 @@
     var pagesize = <%= PageSize.ToString()%>;
     var profilePage ='<%= ProfilePage%>';
     var maxlength = <%= MaxMessageLength.ToString()%>;
-    
-    var baseUrl = '<%= BaseUrl %>'; 
+
+    var baseUrl = '<%= BaseUrl %>';
     var resxLike ='<%= LocalizeSafeJsString("{resx:like}")%>';
     var resxUnLike ='<%= LocalizeSafeJsString("{resx:unlike}")%>';
 
@@ -139,19 +139,19 @@
 
     var commentOpts = {};
     commentOpts.servicesFramework = $.ServicesFramework(<%=ModuleId %>);
-    
+
     pluginInit();
-    
+
     function setupJournal() {
         var sf = journalOptions.servicesFramework;
         var journalServiceBase = sf.getServiceRoot('Journal');
-        
+
         $('.juser').click(function() {
             var uid =  $(this).attr('id').replace('user-', '');
             window.location.href = profilePage.replace('xxx',uid);
         });
         var maxUploadSize = <%=MaxUploadSize %>;
-        
+
         $('.fileUploadArea').dnnUserFileUpload({
             maxFileSize: maxUploadSize,
             serverErrorMessage: '<%= LocalizeSafeJsString("ServerError.Text") %>',
@@ -172,7 +172,7 @@
         jopts.maxLength = maxlength;
         jopts.servicesFramework = sf;
         $('body').journalTools(jopts);
-        
+
         $('#userFileManager').userFileManager({
             title: '<%= LocalizeSafeJsString("Title.Text") %>',
             cancelText: '<%= LocalizeSafeJsString("Cancel.Text") %>',
@@ -193,7 +193,7 @@
                 }
             }
         });
-       
+
         var opts = {};
         opts.textareaSelector = '#journalContent';
         opts.clearPreviewSelector = '#linkClose';

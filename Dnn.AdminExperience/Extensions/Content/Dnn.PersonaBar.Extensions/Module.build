@@ -1,7 +1,7 @@
 ﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
+
   <PropertyGroup>
-	<BuildScriptsPath>$(MSBuildProjectDirectory)\..\..\..\Build\BuildScripts</BuildScriptsPath>
+    <BuildScriptsPath>$(MSBuildProjectDirectory)\..\..\..\Build\BuildScripts</BuildScriptsPath>
 </PropertyGroup>
 
   <Import Project="$(BuildScriptsPath)\Package.targets" />
@@ -16,7 +16,7 @@
     <DNNFileName>Dnn.PersonaBar.Extensions</DNNFileName>
     <PackageName>Dnn.PersonaBar.Extensions</PackageName>
     <ModuleFolderName>$(WebsitePath)\DesktopModules\admin\Dnn.PersonaBar\Modules\</ModuleFolderName>
-	<YarnWorkingDirectory>..\..\..\package.json</YarnWorkingDirectory>
+    <YarnWorkingDirectory>..\..\..\package.json</YarnWorkingDirectory>
   </PropertyGroup>
-  
+
 </Project>

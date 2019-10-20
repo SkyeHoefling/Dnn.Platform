@@ -31,21 +31,21 @@ class Tooltip extends Component {
 
     constructor() {
         super();
-    }    
+    }
 
     render() {
         const {messages, rendered, type, className, style} = this.props;
         const containerClass = "dnn-ui-common-tooltip " + type + " " + (className ? className : "");
         const message = getTooltipText(messages);
-        
+
 
         if (!message || rendered === false) {
             return <noscript />;
         }
         return (
             <div className={containerClass} style={style}>
-                <AccessibleTooltip 
-                    label={props => {  
+                <AccessibleTooltip
+                    label={props => {
                         const {customIcon, type, onClick} = this.props;
                         const TooltipIcon = !customIcon ? getIconComponent(type) : CustomIcon;
                         return (
@@ -56,7 +56,7 @@ class Tooltip extends Component {
                     }}
                     overlay={props => {
                         const {tooltipPlace, maxWidth} = this.props;
-                        
+
                         const classNames = [];
                         classNames.push("tooltip-overlay");
                         if (props.isHidden) {

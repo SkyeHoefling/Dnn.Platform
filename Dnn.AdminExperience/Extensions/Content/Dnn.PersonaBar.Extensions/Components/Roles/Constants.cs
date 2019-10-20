@@ -1,5 +1,5 @@
 ﻿namespace Dnn.PersonaBar.Roles.Components
-{ 
+{
     public static class Constants
     {
         public const string MenuName = "Dnn.Roles";

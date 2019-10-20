@@ -27,7 +27,7 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Applications')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   RAISERROR('The table ''aspnet_Applications'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
@@ -35,31 +35,31 @@ END
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Users')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   RAISERROR('The table ''aspnet_Users'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Applications_CreateApplication')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Applications_CreateApplication')
+                AND (type = 'P')))
 BEGIN
   RAISERROR('The stored procedure ''aspnet_Applications_CreateApplication'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Users_CreateUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Users_CreateUser')
+                AND (type = 'P')))
 BEGIN
   RAISERROR('The stored procedure ''aspnet_Users_CreateUser'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
 
 IF (NOT EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Users_DeleteUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Users_DeleteUser')
+                AND (type = 'P')))
 BEGIN
   RAISERROR('The stored procedure ''aspnet_Users_DeleteUser'' cannot be found. Please use aspnet_regsql.exe for installing ASP.NET application services.', 18, 1)
 END
@@ -69,7 +69,7 @@ END
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'aspnet_Membership')
-                  AND (type = 'U')))
+                AND (type = 'U')))
 BEGIN
   PRINT 'Creating the aspnet_Membership table...'
   CREATE TABLE dbo.aspnet_Membership (
@@ -131,9 +131,9 @@ END
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_CreateUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_CreateUser')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_CreateUser
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_CreateUser
@@ -188,11 +188,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     EXEC dbo.aspnet_Applications_CreateApplication @ApplicationName, @ApplicationId OUTPUT
 
@@ -234,8 +234,8 @@ BEGIN
     END
 
     IF ( EXISTS ( SELECT UserId
-                  FROM   dbo.aspnet_Membership
-                  WHERE  @NewUserId = UserId ) )
+                FROM   dbo.aspnet_Membership
+                WHERE  @NewUserId = UserId ) )
     BEGIN
         SET @ErrorCode = 6
         GOTO Cleanup
@@ -268,43 +268,43 @@ BEGIN
 
     INSERT INTO dbo.aspnet_Membership
                 ( ApplicationId,
-                  UserId,
-                  Password,
-                  PasswordSalt,
-                  Email,
-                  LoweredEmail,
-                  PasswordQuestion,
-                  PasswordAnswer,
-                  PasswordFormat,
-                  IsApproved,
-                  IsLockedOut,
-                  CreateDate,
-                  LastLoginDate,
-                  LastPasswordChangedDate,
-                  LastLockoutDate,
-                  FailedPasswordAttemptCount,
-                  FailedPasswordAttemptWindowStart,
-                  FailedPasswordAnswerAttemptCount,
-                  FailedPasswordAnswerAttemptWindowStart )
-         VALUES ( @ApplicationId,
-                  @UserId,
-                  @Password,
-                  @PasswordSalt,
-                  @Email,
-                  LOWER(@Email),
-                  @PasswordQuestion,
-                  @PasswordAnswer,
-                  @PasswordFormat,
-                  @IsApproved,
-                  @IsLockedOut,
-                  @CreateDate,
-                  @CreateDate,
-                  @CreateDate,
-                  @LastLockoutDate,
-                  @FailedPasswordAttemptCount,
-                  @FailedPasswordAttemptWindowStart,
-                  @FailedPasswordAnswerAttemptCount,
-                  @FailedPasswordAnswerAttemptWindowStart )
+                UserId,
+                Password,
+                PasswordSalt,
+                Email,
+                LoweredEmail,
+                PasswordQuestion,
+                PasswordAnswer,
+                PasswordFormat,
+                IsApproved,
+                IsLockedOut,
+                CreateDate,
+                LastLoginDate,
+                LastPasswordChangedDate,
+                LastLockoutDate,
+                FailedPasswordAttemptCount,
+                FailedPasswordAttemptWindowStart,
+                FailedPasswordAnswerAttemptCount,
+                FailedPasswordAnswerAttemptWindowStart )
+        VALUES ( @ApplicationId,
+                @UserId,
+                @Password,
+                @PasswordSalt,
+                @Email,
+                LOWER(@Email),
+                @PasswordQuestion,
+                @PasswordAnswer,
+                @PasswordFormat,
+                @IsApproved,
+                @IsLockedOut,
+                @CreateDate,
+                @CreateDate,
+                @CreateDate,
+                @LastLockoutDate,
+                @FailedPasswordAttemptCount,
+                @FailedPasswordAttemptWindowStart,
+                @FailedPasswordAnswerAttemptCount,
+                @FailedPasswordAnswerAttemptWindowStart )
 
     IF( @@ERROR <> 0 )
     BEGIN
@@ -314,8 +314,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	    SET @TranStarted = 0
-	    COMMIT TRANSACTION
+        SET @TranStarted = 0
+        COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -325,7 +325,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -337,9 +337,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_GetUserByName')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_GetUserByName')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_GetUserByName
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_GetUserByName
@@ -371,7 +371,7 @@ BEGIN
                 m.CreateDate, m.LastLoginDate, u.LastActivityDate, m.LastPasswordChangedDate,
                 u.UserId, m.IsLockedOut, m.LastLockoutDate
         FROM    dbo.aspnet_Applications a, dbo.aspnet_Users u, dbo.aspnet_Membership m
-        WHERE  @UserId = u.UserId AND u.UserId = m.UserId 
+        WHERE  @UserId = u.UserId AND u.UserId = m.UserId
     END
     ELSE
     BEGIN
@@ -395,9 +395,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_GetUserByUserId')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_GetUserByUserId')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_GetUserByUserId
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_GetUserByUserId
@@ -425,7 +425,7 @@ BEGIN
     WHERE   @UserId = u.UserId AND u.UserId = m.UserId
 
     IF ( @@ROWCOUNT = 0 ) -- User ID not found
-       RETURN -1
+        RETURN -1
 
     RETURN 0
 END
@@ -435,9 +435,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_GetUserByEmail')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_GetUserByEmail')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_GetUserByEmail
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_GetUserByEmail
@@ -470,9 +470,9 @@ GO
 /*************************************************************/
 
 IF ( EXISTS( SELECT name
-             FROM sys.objects
-             WHERE ( name = N'aspnet_Membership_GetPasswordWithFormat' )
-                   AND ( type = 'P' ) ) )
+            FROM sys.objects
+            WHERE ( name = N'aspnet_Membership_GetPasswordWithFormat' )
+                    AND ( type = 'P' ) ) )
 DROP PROCEDURE dbo.aspnet_Membership_GetPasswordWithFormat
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_GetPasswordWithFormat
@@ -497,7 +497,7 @@ BEGIN
 
     SELECT  @UserId = u.UserId, @IsLockedOut = m.IsLockedOut, @Password=Password, @PasswordFormat=PasswordFormat,
             @PasswordSalt=PasswordSalt, @FailedPasswordAttemptCount=FailedPasswordAttemptCount,
-		    @FailedPasswordAnswerAttemptCount=FailedPasswordAnswerAttemptCount, @IsApproved=IsApproved,
+            @FailedPasswordAnswerAttemptCount=FailedPasswordAnswerAttemptCount, @IsApproved=IsApproved,
             @LastActivityDate = LastActivityDate, @LastLoginDate = LastLoginDate
     FROM    dbo.aspnet_Applications a, dbo.aspnet_Users u, dbo.aspnet_Membership m
     WHERE   LOWER(@ApplicationName) = a.LoweredApplicationName AND
@@ -512,7 +512,7 @@ BEGIN
         RETURN 99
 
     SELECT   @Password, @PasswordFormat, @PasswordSalt, @FailedPasswordAttemptCount,
-             @FailedPasswordAnswerAttemptCount, @IsApproved, @LastLoginDate, @LastActivityDate
+            @FailedPasswordAnswerAttemptCount, @IsApproved, @LastLoginDate, @LastActivityDate
 
     IF (@UpdateLastLoginActivityDate = 1 AND @IsApproved = 1)
     BEGIN
@@ -533,9 +533,9 @@ GO
 /*************************************************************/
 
 IF ( EXISTS( SELECT name
-             FROM sys.objects
-             WHERE ( name = N'aspnet_Membership_UpdateUserInfo' )
-                   AND ( type = 'P' ) ) )
+            FROM sys.objects
+            WHERE ( name = N'aspnet_Membership_UpdateUserInfo' )
+                    AND ( type = 'P' ) ) )
 DROP PROCEDURE dbo.aspnet_Membership_UpdateUserInfo
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_UpdateUserInfo
@@ -567,11 +567,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     SELECT  @UserId = u.UserId,
             @IsApproved = m.IsApproved,
@@ -671,8 +671,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -682,7 +682,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -694,9 +694,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_GetPassword')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_GetPassword')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_GetPassword
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_GetPassword
@@ -727,11 +727,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     SELECT  @UserId = u.UserId,
             @Password = m.Password,
@@ -812,8 +812,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     IF( @ErrorCode = 0 )
@@ -826,7 +826,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -838,9 +838,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_SetPassword')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_SetPassword')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_SetPassword
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_SetPassword
@@ -876,9 +876,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_ResetPassword')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_ResetPassword')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_ResetPassword
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_ResetPassword
@@ -911,11 +911,11 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-    	SET @TranStarted = 0
+        SET @TranStarted = 0
 
     SELECT  @UserId = u.UserId
     FROM    dbo.aspnet_Users u, dbo.aspnet_Applications a, dbo.aspnet_Membership m
@@ -931,11 +931,11 @@ BEGIN
     END
 
     SELECT @IsLockedOut = IsLockedOut,
-           @LastLockoutDate = LastLockoutDate,
-           @FailedPasswordAttemptCount = FailedPasswordAttemptCount,
-           @FailedPasswordAttemptWindowStart = FailedPasswordAttemptWindowStart,
-           @FailedPasswordAnswerAttemptCount = FailedPasswordAnswerAttemptCount,
-           @FailedPasswordAnswerAttemptWindowStart = FailedPasswordAnswerAttemptWindowStart
+            @LastLockoutDate = LastLockoutDate,
+            @FailedPasswordAttemptCount = FailedPasswordAttemptCount,
+            @FailedPasswordAttemptWindowStart = FailedPasswordAttemptWindowStart,
+            @FailedPasswordAnswerAttemptCount = FailedPasswordAnswerAttemptCount,
+            @FailedPasswordAnswerAttemptWindowStart = FailedPasswordAnswerAttemptWindowStart
     FROM dbo.aspnet_Membership WITH ( UPDLOCK )
     WHERE @UserId = UserId
 
@@ -947,11 +947,11 @@ BEGIN
 
     UPDATE dbo.aspnet_Membership
     SET    Password = @NewPassword,
-           LastPasswordChangedDate = @CurrentTimeUtc,
-           PasswordFormat = @PasswordFormat,
-           PasswordSalt = @PasswordSalt
+            LastPasswordChangedDate = @CurrentTimeUtc,
+            PasswordFormat = @PasswordFormat,
+            PasswordSalt = @PasswordSalt
     WHERE  @UserId = UserId AND
-           ( ( @PasswordAnswer IS NULL ) OR ( LOWER( PasswordAnswer ) = LOWER( @PasswordAnswer ) ) )
+            ( ( @PasswordAnswer IS NULL ) OR ( LOWER( PasswordAnswer ) = LOWER( @PasswordAnswer ) ) )
 
     IF ( @@ROWCOUNT = 0 )
         BEGIN
@@ -1004,8 +1004,8 @@ BEGIN
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -1015,7 +1015,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN @ErrorCode
@@ -1027,9 +1027,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_UnlockUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_UnlockUser')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_UnlockUser
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_UnlockUser
@@ -1066,9 +1066,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_UpdateUser')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_UpdateUser')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_UpdateUser
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_UpdateUser
@@ -1111,38 +1111,38 @@ BEGIN
 
     IF( @@TRANCOUNT = 0 )
     BEGIN
-	    BEGIN TRANSACTION
-	    SET @TranStarted = 1
+        BEGIN TRANSACTION
+        SET @TranStarted = 1
     END
     ELSE
-	SET @TranStarted = 0
+    SET @TranStarted = 0
 
     UPDATE dbo.aspnet_Users WITH (ROWLOCK)
     SET
-         LastActivityDate = @LastActivityDate
+        LastActivityDate = @LastActivityDate
     WHERE
-       @UserId = UserId
+        @UserId = UserId
 
     IF( @@ERROR <> 0 )
         GOTO Cleanup
 
     UPDATE dbo.aspnet_Membership WITH (ROWLOCK)
     SET
-         Email            = @Email,
-         LoweredEmail     = LOWER(@Email),
-         Comment          = @Comment,
-         IsApproved       = @IsApproved,
-         LastLoginDate    = @LastLoginDate
+        Email            = @Email,
+        LoweredEmail     = LOWER(@Email),
+        Comment          = @Comment,
+        IsApproved       = @IsApproved,
+        LastLoginDate    = @LastLoginDate
     WHERE
-       @UserId = UserId
+        @UserId = UserId
 
     IF( @@ERROR <> 0 )
         GOTO Cleanup
 
     IF( @TranStarted = 1 )
     BEGIN
-	SET @TranStarted = 0
-	COMMIT TRANSACTION
+    SET @TranStarted = 0
+    COMMIT TRANSACTION
     END
 
     RETURN 0
@@ -1152,7 +1152,7 @@ Cleanup:
     IF( @TranStarted = 1 )
     BEGIN
         SET @TranStarted = 0
-    	ROLLBACK TRANSACTION
+        ROLLBACK TRANSACTION
     END
 
     RETURN -1
@@ -1163,9 +1163,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_ChangePasswordQuestionAndAnswer')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_ChangePasswordQuestionAndAnswer')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_ChangePasswordQuestionAndAnswer
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_ChangePasswordQuestionAndAnswer
@@ -1198,9 +1198,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_GetAllUsers')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_GetAllUsers')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_GetAllUsers
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_GetAllUsers
@@ -1248,7 +1248,7 @@ BEGIN
             m.LastLockoutDate
     FROM   dbo.aspnet_Membership m, dbo.aspnet_Users u, #PageIndexForUsers p
     WHERE  u.UserId = p.UserId AND u.UserId = m.UserId AND
-           p.IndexId >= @PageLowerBound AND p.IndexId <= @PageUpperBound
+            p.IndexId >= @PageLowerBound AND p.IndexId <= @PageUpperBound
     ORDER BY u.UserName
     RETURN @TotalRecords
 END
@@ -1257,9 +1257,9 @@ GO
 /*************************************************************/
 
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_GetNumberOfUsersOnline')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_GetNumberOfUsersOnline')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_GetNumberOfUsersOnline
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_GetNumberOfUsersOnline
@@ -1288,9 +1288,9 @@ GO
 /*************************************************************/
 /*************************************************************/
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_FindUsersByName')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_FindUsersByName')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_FindUsersByName
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_FindUsersByName
@@ -1337,7 +1337,7 @@ BEGIN
             m.LastLockoutDate
     FROM   dbo.aspnet_Membership m, dbo.aspnet_Users u, #PageIndexForUsers p
     WHERE  u.UserId = p.UserId AND u.UserId = m.UserId AND
-           p.IndexId >= @PageLowerBound AND p.IndexId <= @PageUpperBound
+            p.IndexId >= @PageLowerBound AND p.IndexId <= @PageUpperBound
     ORDER BY u.UserName
 
     SELECT  @TotalRecords = COUNT(*)
@@ -1348,9 +1348,9 @@ GO
 /*************************************************************/
 /*************************************************************/
 IF (EXISTS (SELECT name
-              FROM sys.objects
-             WHERE (name = N'aspnet_Membership_FindUsersByEmail')
-               AND (type = 'P')))
+            FROM sys.objects
+            WHERE (name = N'aspnet_Membership_FindUsersByEmail')
+                AND (type = 'P')))
 DROP PROCEDURE dbo.aspnet_Membership_FindUsersByEmail
 GO
 CREATE PROCEDURE dbo.aspnet_Membership_FindUsersByEmail
@@ -1403,7 +1403,7 @@ BEGIN
             m.LastLockoutDate
     FROM   dbo.aspnet_Membership m, dbo.aspnet_Users u, #PageIndexForUsers p
     WHERE  u.UserId = p.UserId AND u.UserId = m.UserId AND
-           p.IndexId >= @PageLowerBound AND p.IndexId <= @PageUpperBound
+            p.IndexId >= @PageLowerBound AND p.IndexId <= @PageUpperBound
     ORDER BY m.LoweredEmail
 
     SELECT  @TotalRecords = COUNT(*)
@@ -1418,7 +1418,7 @@ GO
 IF (NOT EXISTS (SELECT name
                 FROM sys.objects
                 WHERE (name = N'vw_aspnet_MembershipUsers')
-                  AND (type = 'V')))
+                AND (type = 'V')))
 BEGIN
   PRINT 'Creating the vw_aspnet_MembershipUsers view...'
   EXEC('
@@ -1447,7 +1447,7 @@ BEGIN
             users.[IsAnonymous],
             users.[LastActivityDate]
   FROM [dbo].[aspnet_Membership] members INNER JOIN [dbo].[aspnet_Users] users
-      ON members.[UserId] = users.[UserId]
+    ON members.[UserId] = users.[UserId]
   ')
 END
 GO
@@ -1474,21 +1474,21 @@ GO
 --
 
 IF ( NOT EXISTS ( SELECT name
-                  FROM sys.database_principals
-                  WHERE [type] = 'R'
-                  AND name = N'aspnet_Membership_FullAccess'  ) )
+                FROM sys.database_principals
+                WHERE [type] = 'R'
+                AND name = N'aspnet_Membership_FullAccess'  ) )
 CREATE ROLE aspnet_Membership_FullAccess
 
 IF ( NOT EXISTS ( SELECT name
-                  FROM sys.database_principals
-                  WHERE [type] = 'R'
-                  AND name = N'aspnet_Membership_BasicAccess'  ) )
+                FROM sys.database_principals
+                WHERE [type] = 'R'
+                AND name = N'aspnet_Membership_BasicAccess'  ) )
 CREATE ROLE aspnet_Membership_BasicAccess
 
 IF ( NOT EXISTS ( SELECT name
-                  FROM sys.database_principals
-                  WHERE [type] = 'R'
-                  AND name = N'aspnet_Membership_ReportingAccess'  ) )
+                FROM sys.database_principals
+                WHERE [type] = 'R'
+                AND name = N'aspnet_Membership_ReportingAccess'  ) )
 CREATE ROLE aspnet_Membership_ReportingAccess
 GO
 

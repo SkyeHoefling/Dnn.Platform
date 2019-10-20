@@ -6,7 +6,7 @@
             A temporary UI placeholder to avoid the sliding effect when PersonaBar loads
         -->
     </div>
-	<iframe id="personaBar-iframe" allowTransparency="true" frameBorder="0" scrolling="false"></iframe>
+    <iframe id="personaBar-iframe" allowTransparency="true" frameBorder="0" scrolling="false"></iframe>
     <script type="text/javascript">
         (function($) {
             // Add a class to parent body immediately to indicate PB will be visible

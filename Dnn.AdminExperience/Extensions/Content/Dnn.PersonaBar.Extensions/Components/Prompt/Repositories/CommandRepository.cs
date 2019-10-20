@@ -36,10 +36,10 @@ namespace Dnn.PersonaBar.Prompt.Components.Repositories
             var typeLocator = new TypeLocator();
             var allCommandTypes = typeLocator.GetAllMatchingTypes(
                 t => t != null &&
-                     t.IsClass &&
-                     !t.IsAbstract &&
-                     t.IsVisible &&
-                     typeof(IConsoleCommand).IsAssignableFrom(t));
+                    t.IsClass &&
+                    !t.IsAbstract &&
+                    t.IsVisible &&
+                    typeof(IConsoleCommand).IsAssignableFrom(t));
             foreach (var cmd in allCommandTypes)
             {
                 var attr = cmd.GetCustomAttributes(typeof(ConsoleCommandAttribute), false).FirstOrDefault() ?? new ConsoleCommandAttribute(CreateCommandFromClass(cmd.Name), Constants.GeneralCategory, $"Prompt_{cmd.Name}_Description");
@@ -90,7 +90,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Repositories
                         Required = attribute.Required,
                         DefaultValue = attribute.DefaultValue,
                         Description =
-                               LocalizeString(attribute.Description, consoleCommand.LocalResourceFile)
+                                LocalizeString(attribute.Description, consoleCommand.LocalResourceFile)
                     }).ToList();
                     commandHelp.Options = options;
                 }

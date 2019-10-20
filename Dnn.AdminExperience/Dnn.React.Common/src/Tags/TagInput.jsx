@@ -19,12 +19,12 @@ export default class TagInput extends Component {
     handleClick(e) {
         if (!this.props.container || this.props.container.contains(e.target)) {
             return;
-        }   
+        }
 
         if (this.props.newTagText) {
             this.props.addTag(this.props.newTagText);
         }
-        
+
         this.close();
     }
 
@@ -44,7 +44,7 @@ export default class TagInput extends Component {
     }
 
     onChange(event) {
-        this.props.onAddingNewTagChange(event.target.value);        
+        this.props.onAddingNewTagChange(event.target.value);
     }
 
     close() {

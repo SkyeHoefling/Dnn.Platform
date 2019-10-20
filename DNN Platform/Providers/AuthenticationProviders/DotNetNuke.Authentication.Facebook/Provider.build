@@ -13,11 +13,11 @@
   </Target>
   <Target Name="GetFiles">
     <ItemGroup>
-      <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
-      <Images Include="Images\*.*" />
-      <Views Include="*.ascx" />
-      <ResourceFiles Include="App_LocalResources\*.resx" />
-      <Resources Include="@(ResourceFiles);@(Images);@(Views);@(Controls);@(TextFiles)" />
+    <TextFiles Include="*.txt" Exclude="license.txt;releasenotes.txt" />
+    <Images Include="Images\*.*" />
+    <Views Include="*.ascx" />
+    <ResourceFiles Include="App_LocalResources\*.resx" />
+    <Resources Include="@(ResourceFiles);@(Images);@(Views);@(Controls);@(TextFiles)" />
     </ItemGroup>
   </Target>
   <Target Name="CopyBin">

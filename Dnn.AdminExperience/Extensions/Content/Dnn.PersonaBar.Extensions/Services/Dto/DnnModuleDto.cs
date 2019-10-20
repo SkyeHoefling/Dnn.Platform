@@ -38,7 +38,7 @@ namespace Dnn.PersonaBar.Pages.Services.Dto
         public bool CanAdminModule { get; set; }
 
         public bool TranslatedVisible => !ErrorVisible && CultureCode != null
-                                         && DefaultLanguageGuid != Null.NullGuid && ModuleId != DefaultModuleId;
+                                        && DefaultLanguageGuid != Null.NullGuid && ModuleId != DefaultModuleId;
 
         public bool LocalizedVisible => !ErrorVisible && CultureCode != null && DefaultLanguageGuid != Null.NullGuid;
 

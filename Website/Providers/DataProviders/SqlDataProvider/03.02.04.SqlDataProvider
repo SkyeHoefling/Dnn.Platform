@@ -38,32 +38,32 @@ FROM   {databaseOwner}{objectQualifier}Portals
 WHILE @PortalID is not null
 BEGIN
 
-	/* get the Administrator Role ID */
-	SELECT @AdminRoleID = AdministratorRoleID
-		FROM {databaseOwner}{objectQualifier}Portals
-		WHERE PortalID = @PortalID	
+    /* get the Administrator Role ID */
+    SELECT @AdminRoleID = AdministratorRoleID
+        FROM {databaseOwner}{objectQualifier}Portals
+        WHERE PortalID = @PortalID
 
-	/* remove any records which already exist to avoid a duplicate key error on the insert */
-	DELETE
-		FROM   {databaseOwner}{objectQualifier}FolderPermission
-		WHERE  (PermissionID = @ReadPermissionID AND RoleID = @AdminRoleID)
-			OR  (PermissionID = @WritePermissionID AND RoleID = @AdminRoleID)
+    /* remove any records which already exist to avoid a duplicate key error on the insert */
+    DELETE
+        FROM   {databaseOwner}{objectQualifier}FolderPermission
+        WHERE  (PermissionID = @ReadPermissionID AND RoleID = @AdminRoleID)
+            OR  (PermissionID = @WritePermissionID AND RoleID = @AdminRoleID)
 
-	/* give Administrators READ access to unsecure folders */
-	INSERT INTO {databaseOwner}{objectQualifier}FolderPermission
-		SELECT FolderID, @ReadPermissionID, @AdminRoleID, 1
-		FROM {databaseOwner}{objectQualifier}Folders
-		WHERE PortalID = @PortalID
+    /* give Administrators READ access to unsecure folders */
+    INSERT INTO {databaseOwner}{objectQualifier}FolderPermission
+        SELECT FolderID, @ReadPermissionID, @AdminRoleID, 1
+        FROM {databaseOwner}{objectQualifier}Folders
+        WHERE PortalID = @PortalID
 
-	/* give Administrators WRITE access to unsecure folders */
-	INSERT INTO {databaseOwner}{objectQualifier}FolderPermission
-		SELECT FolderID, @WritePermissionID, @AdminRoleID, 1
-		FROM {databaseOwner}{objectQualifier}Folders
-		WHERE PortalID = @PortalID
+    /* give Administrators WRITE access to unsecure folders */
+    INSERT INTO {databaseOwner}{objectQualifier}FolderPermission
+        SELECT FolderID, @WritePermissionID, @AdminRoleID, 1
+        FROM {databaseOwner}{objectQualifier}Folders
+        WHERE PortalID = @PortalID
 
-	SELECT @PortalID = min(PortalID)
-		FROM   {databaseOwner}{objectQualifier}Portals
-		WHERE  PortalID > @PortalID
+    SELECT @PortalID = min(PortalID)
+        FROM   {databaseOwner}{objectQualifier}Portals
+        WHERE  PortalID > @PortalID
 END
 
 GO
@@ -72,17 +72,16 @@ GO
 /************************************/
 
 DECLARE @FolderID int
-SET @FolderID = (SELECT FolderID 
-					FROM {objectQualifier}Folders 
-					WHERE PortalID IS NULL AND FolderPath = '')
+SET @FolderID = (SELECT FolderID
+                    FROM {objectQualifier}Folders
+                    WHERE PortalID IS NULL AND FolderPath = '')
 If @FolderID IS NULL
-	BEGIN
-		INSERT INTO {objectQualifier}Folders 
-			( PortalID, FolderPath, StorageLocation, IsProtected, IsCached )
-			VALUES	( NULL, '', 0, 1, 0)
-	END
+    BEGIN
+        INSERT INTO {objectQualifier}Folders
+            ( PortalID, FolderPath, StorageLocation, IsProtected, IsCached )
+            VALUES	( NULL, '', 0, 1, 0)
+    END
 
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-

@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -227,7 +227,7 @@ namespace DotNetNuke.Tests.Web.Api
         public void GetRouteNameHashesNameInCorrectFormat(string moduleFolderName, string routeName, int count, string expected)
         {
             //Arrange
-            
+
 
             //Act
             var result = new PortalAliasRouteManager().GetRouteName(moduleFolderName, routeName, count);
@@ -259,7 +259,7 @@ namespace DotNetNuke.Tests.Web.Api
         public void GetRouteNameThrowsOnEmptyModuleFolderName(string moduleFolderName)
         {
             //Arrange
-            
+
 
             //Act
             new PortalAliasRouteManager().GetRouteName(moduleFolderName, "", 0);
@@ -272,7 +272,7 @@ namespace DotNetNuke.Tests.Web.Api
         public void GetRouteNameThrowsOnCountLessThan0()
         {
             //Arrange
-            
+
 
             //Act
             new PortalAliasRouteManager().GetRouteName("foo", "", -1);
@@ -284,7 +284,7 @@ namespace DotNetNuke.Tests.Web.Api
         public void GetAllRouteValuesWorksWithNullRouteValues   ()
         {
             //Arrange
-            
+
 
             //Act
             new PortalAliasRouteManager().GetAllRouteValues(new PortalAliasInfo {HTTPAlias = ""}, null);
@@ -297,11 +297,11 @@ namespace DotNetNuke.Tests.Web.Api
         public void GetAllRouteValuesPreservesPassedInRouteValues()
         {
             //Arrange
-            
+
 
             //Act
             var result = new PortalAliasRouteManager().GetAllRouteValues(new PortalAliasInfo {HTTPAlias = ""},
-                                                               new {value1 = 1, value2 = 2});
+                                                                new {value1 = 1, value2 = 2});
 
             //Assert
             var expected = new Dictionary<string, object> {{"value1", 1}, {"value2", 2}};
@@ -312,12 +312,12 @@ namespace DotNetNuke.Tests.Web.Api
         public void GetAllRouteValuesExtractsChildPortalParams()
         {
             //Arrange
-            
+
 
             //Act
             var result =
                 new PortalAliasRouteManager().GetAllRouteValues(new PortalAliasInfo {HTTPAlias = "ce.lvh.me/child"},
-                                                                   null);
+                                                                    null);
 
             //Assert
             var expected = new Dictionary<string, object> { { "prefix0", "child" } };
@@ -333,7 +333,7 @@ namespace DotNetNuke.Tests.Web.Api
             //Act
             var result =
                 new PortalAliasRouteManager().GetAllRouteValues(new PortalAliasInfo { HTTPAlias = "ce.lvh.me/child0/child1/child2/child3" },
-                                                                   new {value1 = 1, value2 = 2});
+                                                                    new {value1 = 1, value2 = 2});
 
             //Assert
             var expected = new Dictionary<string, object> { { "prefix0", "child0" }, { "prefix1", "child1" }, { "prefix2", "child2" }, { "prefix3", "child3" }, { "value1", 1}, {"value2", 2} };

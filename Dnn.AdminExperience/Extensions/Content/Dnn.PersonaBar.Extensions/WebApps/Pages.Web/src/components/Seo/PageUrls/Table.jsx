@@ -16,7 +16,7 @@ class Table extends Component {
         const { siteAliases, primaryAliasId, onSave, onCancel, onDelete, onChange, editedUrl,
             pageHasParent, editingUrl, onOpenEditForm } = this.props;
         return pageUrls.map(url => {
-            return <UrlRow 
+            return <UrlRow
                 key={url.id}
                 url={url}
                 editedUrl={editedUrl}

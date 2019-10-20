@@ -8,7 +8,7 @@
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.GenerateSolutionFiles" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.ProcessSolutionFiles" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.IncrementBuild" />
-   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.GetVersion" />
+    <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.GetVersion" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.RemoveTestProjects" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.CIBuildDeploy" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.DotNetNukeDeploy" />
@@ -16,7 +16,7 @@
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.DeleteIISSite" />
   <UsingTask AssemblyFile="$(DotNetNukeMSBuildTasksLib)" TaskName="DotNetNuke.MSBuild.Tasks.CodePlexUpdate" />
   <PropertyGroup>
-  
+
     <!--RootFolder was replaced by TeamCity variable checkoutDirectory-->
 
     <!--Versioning-->
@@ -118,7 +118,7 @@
   </ItemGroup>
   <!--PE Elite only projects, remove from PE Source-->
   <ItemGroup>
-    <PEProjects Include="DotNetNuke.Professional"/>    
+    <PEProjects Include="DotNetNuke.Professional"/>
     <PEProjects Include="DotNetNuke.Professional.FolderProviders"/>
     <PEProjects Include="DotNetNuke.Professional.DocumentLibrary"/>
     <PEProjects Include="DotNetNuke.Professional.FileIntegrity"/>
@@ -135,10 +135,10 @@
     <PEProjects Include="DotNetNuke.Professional.SecurityCenter"/>
     <PEProjects Include="DotNetNuke.Professional.UserSwitcher"/>
     <PEProjects Include="DotNetNuke.Professional.WebServerManager"/>
-	<PEProjects Include="DotNetNuke.Professional.DigitalAssets"/>
-	<PEProjects Include="DotNetNuke.Professional.UrlManagement"/>
-	<PEProjects Include="Provider.AspNetClientCapabilityProvider"/>
-	<PEProjects Include="DotNetNuke.Professional.Authentication.ActiveDirectory"/>
+    <PEProjects Include="DotNetNuke.Professional.DigitalAssets"/>
+    <PEProjects Include="DotNetNuke.Professional.UrlManagement"/>
+    <PEProjects Include="Provider.AspNetClientCapabilityProvider"/>
+    <PEProjects Include="DotNetNuke.Professional.Authentication.ActiveDirectory"/>
     <PEProjects Include="Provider.BigSitemapProvider"/>
     <PEProjects Include="Professional"/>
   </ItemGroup>
@@ -186,22 +186,22 @@
   </ItemGroup>
   <!--Content Source Projects-->
   <ItemGroup>
-	<ContentProjects Include="DotNetNuke.Professional"/>
-	<ContentProjects Include="Mechanics"/>
-	<ContentProjects Include="DNN.Evoq.Library"/>
+    <ContentProjects Include="DotNetNuke.Professional"/>
+    <ContentProjects Include="Mechanics"/>
+    <ContentProjects Include="DNN.Evoq.Library"/>
     <ContentProjects Include="Evoq.StructuredContent.HtmlPro"/>
     <ContentProjects Include="Evoq.StructuredContent.Library"/>
     <ContentProjects Include="Evoq.FormBuilder.Library"/>
     <ContentProjects Include="Evoq.FormBuilder.Visualizer"/>
     <ContentProjects Include="Evoq.StructuredContent.Visualizer"/>
-	<ContentProjects Include="NuGetPackages"/>
-	<ContentProjects Include="Mechanics.Tests"/>
-	<ContentProjects Include="DNN.Evoq.Library.Tests"/>
-	<ContentProjects Include="jQuery"/>
-	<ContentProjects Include="jQueryMigrate"/>
-	<ContentProjects Include="jQueryUI"/>
-	<ContentProjects Include="Knockout"/>
-	<ContentProjects Include="KnockoutMapping"/>
+    <ContentProjects Include="NuGetPackages"/>
+    <ContentProjects Include="Mechanics.Tests"/>
+    <ContentProjects Include="DNN.Evoq.Library.Tests"/>
+    <ContentProjects Include="jQuery"/>
+    <ContentProjects Include="jQueryMigrate"/>
+    <ContentProjects Include="jQueryUI"/>
+    <ContentProjects Include="Knockout"/>
+    <ContentProjects Include="KnockoutMapping"/>
   </ItemGroup>
   <!--PE Elite only test projects, remove from PE Source and CE Source-->
   <ItemGroup>
@@ -220,15 +220,15 @@
   </Target>
   <Target Name="VersionCheck">
     <Message Text="SolutionInfo: $(VersionSolutionInfoPath)\SolutionInfo.cs" />
-      <GetVersion SolutionFile="$(VersionSolutionInfoPath)\SolutionInfo.cs" >
+    <GetVersion SolutionFile="$(VersionSolutionInfoPath)\SolutionInfo.cs" >
         <Output TaskParameter="BuildVersion" PropertyName="BuildVersion">
         </Output>
         <Output TaskParameter="FormattedBuildVersion" PropertyName="FormattedBuildVersion">
         </Output>
         <Output TaskParameter="Revision" PropertyName="Revision">
         </Output>
-      </GetVersion>
-      <PropertyGroup>
+    </GetVersion>
+    <PropertyGroup>
         <DocsPackageDirectory>$(PackagesFolder)\Docs\$(FormattedBuildVersion)\$(Revision)</DocsPackageDirectory>
         <CEPackageDirectory>$(PackagesFolder)\CE\$(FormattedBuildVersion)\$(Revision)</CEPackageDirectory>
         <CEPackageName>$(CEPackageDirectory)\DNN_Platform_$(BuildVersion)</CEPackageName>
@@ -239,7 +239,7 @@
         <EEPackageDirectory>$(PackagesFolder)\Evoq_Content\$(FormattedBuildVersion)\$(Revision)</EEPackageDirectory>
         <EEPackageName>$(EEPackageDirectory)\Evoq_Content_$(BuildVersion)</EEPackageName>
         <EEArtifactName>$(ArtifactFolder)\Evoq_Content_$(BuildVersion)</EEArtifactName>
-      </PropertyGroup>
+    </PropertyGroup>
     <Message Text="Zip Version : $(BuildVersion)" />
   </Target>
 </Project>

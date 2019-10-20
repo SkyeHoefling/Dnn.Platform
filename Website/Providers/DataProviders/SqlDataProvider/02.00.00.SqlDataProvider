@@ -58,130 +58,130 @@ GO
 /* rename all PK, FK, DF, IX objects */
 if '{objectQualifier}' <> ''
 begin
-  EXECUTE sp_rename N'PK_BannerType', N'PK_{objectQualifier}BannerType', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Banner', N'PK_{objectQualifier}Banner', 'OBJECT' 
-  EXECUTE sp_rename N'PK_VendorCategory', N'PK_{objectQualifier}VendorCategory', 'OBJECT' 
-  EXECUTE sp_rename N'PK_ClickLog', N'PK_{objectQualifier}ClickLog', 'OBJECT' 
-  EXECUTE sp_rename N'PK_CodeCountry', N'PK_{objectQualifier}CodeCountry', 'OBJECT' 
-  EXECUTE sp_rename N'PK_CodeCurrency', N'PK_{objectQualifier}CodeCurrency', 'OBJECT' 
-  EXECUTE sp_rename N'PK_CodeFrequency', N'PK_{objectQualifier}CodeFrequency', 'OBJECT' 
-  EXECUTE sp_rename N'PK_CodeProcessor', N'PK_{objectQualifier}CodeProcessor', 'OBJECT' 
-  EXECUTE sp_rename N'PK_CodeRegion', N'PK_{objectQualifier}CodeRegion', 'OBJECT' 
-  EXECUTE sp_rename N'PK_CodeSiteLogReport', N'PK_{objectQualifier}CodeSiteLogReport', 'OBJECT' 
-  EXECUTE sp_rename N'PK_File', N'PK_{objectQualifier}File', 'OBJECT' 
-  EXECUTE sp_rename N'PK_PortalModuleDefinitions', N'PK_{objectQualifier}PortalModuleDefinitions', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Referrer', N'PK_{objectQualifier}Referrer', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Search', N'PK_{objectQualifier}Search', 'OBJECT' 
-  EXECUTE sp_rename N'PK_SiteLog', N'PK_{objectQualifier}SiteLog', 'OBJECT' 
-  EXECUTE sp_rename N'PK_UserDefinedData', N'PK_{objectQualifier}UserDefinedData', 'OBJECT' 
-  EXECUTE sp_rename N'PK_UserDefinedTable', N'PK_{objectQualifier}UserDefinedTable', 'OBJECT' 
-  EXECUTE sp_rename N'PK_UserDefinedRows', N'PK_{objectQualifier}UserDefinedRows', 'OBJECT' 
-  EXECUTE sp_rename N'PK_UserPortals', N'PK_{objectQualifier}UserPortals', 'OBJECT' 
-  EXECUTE sp_rename N'PK_UserRoles', N'PK_{objectQualifier}UserRoles', 'OBJECT' 
-  EXECUTE sp_rename N'PK_VendorClassification', N'PK_{objectQualifier}VendorClassification', 'OBJECT' 
-  EXECUTE sp_rename N'PK_VendorFeedback', N'PK_{objectQualifier}VendorFeedback', 'OBJECT' 
-  EXECUTE sp_rename N'PK_VendorLog', N'PK_{objectQualifier}VendorLog', 'OBJECT' 
-  EXECUTE sp_rename N'PK_VendorSearch', N'PK_{objectQualifier}VendorSearch', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Vendor', N'PK_{objectQualifier}Vendor', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Announcements_Clicks', N'DF_{objectQualifier}Announcements_Clicks', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Announcements', N'PK_{objectQualifier}Announcements', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Banners_Views', N'DF_{objectQualifier}Banners_Views', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Banners_ClickThroughs', N'DF_{objectQualifier}Banners_ClickThroughs', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Contacts', N'PK_{objectQualifier}Contacts', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Discussion', N'PK_{objectQualifier}Discussion', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Documents_Clicks', N'DF_{objectQualifier}Documents_Clicks', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Documents', N'PK_{objectQualifier}Documents', 'OBJECT' 
-  EXECUTE sp_rename N'IX_HostSettings', N'IX_{objectQualifier}HostSettings', 'OBJECT' 
-  EXECUTE sp_rename N'PK_HtmlText', N'PK_{objectQualifier}HtmlText', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Links_NewWindow', N'DF_{objectQualifier}Links_NewWindow', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Links_Clicks', N'DF_{objectQualifier}Links_Clicks', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Links', N'PK_{objectQualifier}Links', 'OBJECT' 
-  EXECUTE sp_rename N'DF_ModuleDefinitions_Secure', N'DF_{objectQualifier}ModuleDefinitions_Secure', 'OBJECT' 
-  EXECUTE sp_rename N'DF_ModuleDefinitions_IsPremium', N'DF_{objectQualifier}ModuleDefinitions_IsPremium', 'OBJECT' 
-  EXECUTE sp_rename N'PK_ModuleDefinitions', N'PK_{objectQualifier}ModuleDefinitions', 'OBJECT'  
-  EXECUTE sp_rename N'IX_ModuleDefinitions', N'IX_{objectQualifier}ModuleDefinitions', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Events', N'PK_{objectQualifier}Events', 'OBJECT' 
-  EXECUTE sp_rename N'{objectQualifier}ModuleSettings.IX_ModuleSettings', N'IX_{objectQualifier}ModuleSettings', 'INDEX' 
-  EXECUTE sp_rename N'DF_Modules_AllTabs', N'DF_{objectQualifier}Modules_AllTabs', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Modules_ShowTitle', N'DF_{objectQualifier}Modules_ShowTitle', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Modules_Personalize', N'DF_{objectQualifier}Modules_Personalize', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Modules', N'PK_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'DF_PortalModuleDefinitions_HostFee', N'DF_{objectQualifier}PortalModuleDefinitions_HostFee', 'OBJECT' 
-  EXECUTE sp_rename N'IX_PortalModuleDefinitions', N'IX_{objectQualifier}PortalModuleDefinitions', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Portals_UserRegistration', N'DF_{objectQualifier}Portals_UserRegistration', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Portals_BannerAdvertising', N'DF_{objectQualifier}Portals_BannerAdvertising', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Portals_HostFee', N'DF_{objectQualifier}Portals_HostFee', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Portals_HostSpace', N'DF_{objectQualifier}Portals_HostSpace', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Portals_GUId', N'DF_{objectQualifier}Portals_GUId', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Portals', N'PK_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Roles_ServiceFee', N'DF_{objectQualifier}Roles_ServiceFee', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Roles_IsPublic', N'DF_{objectQualifier}Roles_IsPublic', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Roles_AutoAssignment', N'DF_{objectQualifier}Roles_AutoAssignment', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Roles', N'PK_{objectQualifier}Roles', 'OBJECT'  
-  EXECUTE sp_rename N'DF_Tabs_TabOrder', N'DF_{objectQualifier}Tabs_TabOrder', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Tabs_IsVisible', N'DF_{objectQualifier}Tabs_IsVisible', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Tabs_Level', N'DF_{objectQualifier}Tabs_Level', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Tabs', N'PK_{objectQualifier}Tabs', 'OBJECT' 
-  EXECUTE sp_rename N'IX_Tabs', N'IX_{objectQualifier}Tabs', 'OBJECT' 
-  EXECUTE sp_rename N'DF_UserDefinedFields_FieldOrder', N'DF_{objectQualifier}UserDefinedFields_FieldOrder', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Users_IsSuperUser', N'DF_{objectQualifier}Users_IsSuperUser', 'OBJECT' 
-  EXECUTE sp_rename N'PK_Users', N'PK_{objectQualifier}Users', 'OBJECT' 
-  EXECUTE sp_rename N'IX_Users', N'IX_{objectQualifier}Users', 'OBJECT'  
-  EXECUTE sp_rename N'IX_VendorClassification', N'IX_{objectQualifier}VendorClassification', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Vendors_ClickThroughs', N'DF_{objectQualifier}Vendors_ClickThroughs', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Vendors_Views', N'DF_{objectQualifier}Vendors_Views', 'OBJECT' 
-  EXECUTE sp_rename N'DF_Vendors_Authorized', N'DF_{objectQualifier}Vendors_Authorized', 'OBJECT' 
-  EXECUTE sp_rename N'IX_Vendors', N'IX_{objectQualifier}Vendors', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Announcements_Modules', N'FK_{objectQualifier}Announcements_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Banner_Vendor', N'FK_{objectQualifier}Banner_{objectQualifier}Vendor', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Banners_BannerType', N'FK_{objectQualifier}Banners_{objectQualifier}BannerType', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Classification_Classification', N'FK_{objectQualifier}Classification_{objectQualifier}Classification', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Contacts_Modules', N'FK_{objectQualifier}Contacts_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Discussion_Modules', N'FK_{objectQualifier}Discussion_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Documents_Modules', N'FK_{objectQualifier}Documents_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_HtmlText_Modules', N'FK_{objectQualifier}HtmlText_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Links_Modules', N'FK_{objectQualifier}Links_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Events_Modules', N'FK_{objectQualifier}Events_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_ModuleSettings_Modules', N'FK_{objectQualifier}ModuleSettings_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Modules_ModuleDefinitions', N'FK_{objectQualifier}Modules_{objectQualifier}ModuleDefinitions', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Modules_Tabs', N'FK_{objectQualifier}Modules_{objectQualifier}Tabs', 'OBJECT' 
-  EXECUTE sp_rename N'FK_PortalModuleDefinitions_ModuleDefinitions', N'FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}ModuleDefinitions', 'OBJECT' 
-  EXECUTE sp_rename N'FK_PortalModuleDefinitions_Portals', N'FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Roles_CodeFrequency', N'FK_{objectQualifier}Roles_{objectQualifier}CodeFrequency', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Roles_Portals', N'FK_{objectQualifier}Roles_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'FK_SiteLog_Portals', N'FK_{objectQualifier}SiteLog_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Tabs_Portals', N'FK_{objectQualifier}Tabs_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Tabs_Tabs', N'FK_{objectQualifier}Tabs_{objectQualifier}Tabs', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserDefinedData_UserDefinedFields', N'FK_{objectQualifier}UserDefinedData_{objectQualifier}UserDefinedFields', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserDefinedData_UserDefinedRows', N'FK_{objectQualifier}UserDefinedData_{objectQualifier}UserDefinedRows', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserDefinedFields_Modules', N'FK_{objectQualifier}UserDefinedFields_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserDefinedRows_Modules', N'FK_{objectQualifier}UserDefinedRows_{objectQualifier}Modules', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserPortals_Portals', N'FK_{objectQualifier}UserPortals_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserPortals_Users', N'FK_{objectQualifier}UserPortals_{objectQualifier}Users', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserRoles_Roles', N'FK_{objectQualifier}UserRoles_{objectQualifier}Roles', 'OBJECT' 
-  EXECUTE sp_rename N'FK_UserRoles_Users', N'FK_{objectQualifier}UserRoles_{objectQualifier}Users', 'OBJECT' 
-  EXECUTE sp_rename N'FK_VendorClassification_Classification', N'FK_{objectQualifier}VendorClassification_{objectQualifier}Classification', 'OBJECT' 
-  EXECUTE sp_rename N'FK_VendorClassification_Vendors', N'FK_{objectQualifier}VendorClassification_{objectQualifier}Vendors', 'OBJECT' 
-  EXECUTE sp_rename N'FK_VendorFeedback_Vendors', N'FK_{objectQualifier}VendorFeedback_{objectQualifier}Vendors', 'OBJECT' 
-  EXECUTE sp_rename N'FK_VendorLog_Portals', N'FK_{objectQualifier}VendorLog_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'FK_VendorSearch_Portals', N'FK_{objectQualifier}VendorSearch_{objectQualifier}Portals', 'OBJECT' 
-  EXECUTE sp_rename N'FK_Vendor_Portals', N'FK_{objectQualifier}Vendor_{objectQualifier}Portals', 'OBJECT' 
+  EXECUTE sp_rename N'PK_BannerType', N'PK_{objectQualifier}BannerType', 'OBJECT'
+  EXECUTE sp_rename N'PK_Banner', N'PK_{objectQualifier}Banner', 'OBJECT'
+  EXECUTE sp_rename N'PK_VendorCategory', N'PK_{objectQualifier}VendorCategory', 'OBJECT'
+  EXECUTE sp_rename N'PK_ClickLog', N'PK_{objectQualifier}ClickLog', 'OBJECT'
+  EXECUTE sp_rename N'PK_CodeCountry', N'PK_{objectQualifier}CodeCountry', 'OBJECT'
+  EXECUTE sp_rename N'PK_CodeCurrency', N'PK_{objectQualifier}CodeCurrency', 'OBJECT'
+  EXECUTE sp_rename N'PK_CodeFrequency', N'PK_{objectQualifier}CodeFrequency', 'OBJECT'
+  EXECUTE sp_rename N'PK_CodeProcessor', N'PK_{objectQualifier}CodeProcessor', 'OBJECT'
+  EXECUTE sp_rename N'PK_CodeRegion', N'PK_{objectQualifier}CodeRegion', 'OBJECT'
+  EXECUTE sp_rename N'PK_CodeSiteLogReport', N'PK_{objectQualifier}CodeSiteLogReport', 'OBJECT'
+  EXECUTE sp_rename N'PK_File', N'PK_{objectQualifier}File', 'OBJECT'
+  EXECUTE sp_rename N'PK_PortalModuleDefinitions', N'PK_{objectQualifier}PortalModuleDefinitions', 'OBJECT'
+  EXECUTE sp_rename N'PK_Referrer', N'PK_{objectQualifier}Referrer', 'OBJECT'
+  EXECUTE sp_rename N'PK_Search', N'PK_{objectQualifier}Search', 'OBJECT'
+  EXECUTE sp_rename N'PK_SiteLog', N'PK_{objectQualifier}SiteLog', 'OBJECT'
+  EXECUTE sp_rename N'PK_UserDefinedData', N'PK_{objectQualifier}UserDefinedData', 'OBJECT'
+  EXECUTE sp_rename N'PK_UserDefinedTable', N'PK_{objectQualifier}UserDefinedTable', 'OBJECT'
+  EXECUTE sp_rename N'PK_UserDefinedRows', N'PK_{objectQualifier}UserDefinedRows', 'OBJECT'
+  EXECUTE sp_rename N'PK_UserPortals', N'PK_{objectQualifier}UserPortals', 'OBJECT'
+  EXECUTE sp_rename N'PK_UserRoles', N'PK_{objectQualifier}UserRoles', 'OBJECT'
+  EXECUTE sp_rename N'PK_VendorClassification', N'PK_{objectQualifier}VendorClassification', 'OBJECT'
+  EXECUTE sp_rename N'PK_VendorFeedback', N'PK_{objectQualifier}VendorFeedback', 'OBJECT'
+  EXECUTE sp_rename N'PK_VendorLog', N'PK_{objectQualifier}VendorLog', 'OBJECT'
+  EXECUTE sp_rename N'PK_VendorSearch', N'PK_{objectQualifier}VendorSearch', 'OBJECT'
+  EXECUTE sp_rename N'PK_Vendor', N'PK_{objectQualifier}Vendor', 'OBJECT'
+  EXECUTE sp_rename N'DF_Announcements_Clicks', N'DF_{objectQualifier}Announcements_Clicks', 'OBJECT'
+  EXECUTE sp_rename N'PK_Announcements', N'PK_{objectQualifier}Announcements', 'OBJECT'
+  EXECUTE sp_rename N'DF_Banners_Views', N'DF_{objectQualifier}Banners_Views', 'OBJECT'
+  EXECUTE sp_rename N'DF_Banners_ClickThroughs', N'DF_{objectQualifier}Banners_ClickThroughs', 'OBJECT'
+  EXECUTE sp_rename N'PK_Contacts', N'PK_{objectQualifier}Contacts', 'OBJECT'
+  EXECUTE sp_rename N'PK_Discussion', N'PK_{objectQualifier}Discussion', 'OBJECT'
+  EXECUTE sp_rename N'DF_Documents_Clicks', N'DF_{objectQualifier}Documents_Clicks', 'OBJECT'
+  EXECUTE sp_rename N'PK_Documents', N'PK_{objectQualifier}Documents', 'OBJECT'
+  EXECUTE sp_rename N'IX_HostSettings', N'IX_{objectQualifier}HostSettings', 'OBJECT'
+  EXECUTE sp_rename N'PK_HtmlText', N'PK_{objectQualifier}HtmlText', 'OBJECT'
+  EXECUTE sp_rename N'DF_Links_NewWindow', N'DF_{objectQualifier}Links_NewWindow', 'OBJECT'
+  EXECUTE sp_rename N'DF_Links_Clicks', N'DF_{objectQualifier}Links_Clicks', 'OBJECT'
+  EXECUTE sp_rename N'PK_Links', N'PK_{objectQualifier}Links', 'OBJECT'
+  EXECUTE sp_rename N'DF_ModuleDefinitions_Secure', N'DF_{objectQualifier}ModuleDefinitions_Secure', 'OBJECT'
+  EXECUTE sp_rename N'DF_ModuleDefinitions_IsPremium', N'DF_{objectQualifier}ModuleDefinitions_IsPremium', 'OBJECT'
+  EXECUTE sp_rename N'PK_ModuleDefinitions', N'PK_{objectQualifier}ModuleDefinitions', 'OBJECT'
+  EXECUTE sp_rename N'IX_ModuleDefinitions', N'IX_{objectQualifier}ModuleDefinitions', 'OBJECT'
+  EXECUTE sp_rename N'PK_Events', N'PK_{objectQualifier}Events', 'OBJECT'
+  EXECUTE sp_rename N'{objectQualifier}ModuleSettings.IX_ModuleSettings', N'IX_{objectQualifier}ModuleSettings', 'INDEX'
+  EXECUTE sp_rename N'DF_Modules_AllTabs', N'DF_{objectQualifier}Modules_AllTabs', 'OBJECT'
+  EXECUTE sp_rename N'DF_Modules_ShowTitle', N'DF_{objectQualifier}Modules_ShowTitle', 'OBJECT'
+  EXECUTE sp_rename N'DF_Modules_Personalize', N'DF_{objectQualifier}Modules_Personalize', 'OBJECT'
+  EXECUTE sp_rename N'PK_Modules', N'PK_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'DF_PortalModuleDefinitions_HostFee', N'DF_{objectQualifier}PortalModuleDefinitions_HostFee', 'OBJECT'
+  EXECUTE sp_rename N'IX_PortalModuleDefinitions', N'IX_{objectQualifier}PortalModuleDefinitions', 'OBJECT'
+  EXECUTE sp_rename N'DF_Portals_UserRegistration', N'DF_{objectQualifier}Portals_UserRegistration', 'OBJECT'
+  EXECUTE sp_rename N'DF_Portals_BannerAdvertising', N'DF_{objectQualifier}Portals_BannerAdvertising', 'OBJECT'
+  EXECUTE sp_rename N'DF_Portals_HostFee', N'DF_{objectQualifier}Portals_HostFee', 'OBJECT'
+  EXECUTE sp_rename N'DF_Portals_HostSpace', N'DF_{objectQualifier}Portals_HostSpace', 'OBJECT'
+  EXECUTE sp_rename N'DF_Portals_GUId', N'DF_{objectQualifier}Portals_GUId', 'OBJECT'
+  EXECUTE sp_rename N'PK_Portals', N'PK_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'DF_Roles_ServiceFee', N'DF_{objectQualifier}Roles_ServiceFee', 'OBJECT'
+  EXECUTE sp_rename N'DF_Roles_IsPublic', N'DF_{objectQualifier}Roles_IsPublic', 'OBJECT'
+  EXECUTE sp_rename N'DF_Roles_AutoAssignment', N'DF_{objectQualifier}Roles_AutoAssignment', 'OBJECT'
+  EXECUTE sp_rename N'PK_Roles', N'PK_{objectQualifier}Roles', 'OBJECT'
+  EXECUTE sp_rename N'DF_Tabs_TabOrder', N'DF_{objectQualifier}Tabs_TabOrder', 'OBJECT'
+  EXECUTE sp_rename N'DF_Tabs_IsVisible', N'DF_{objectQualifier}Tabs_IsVisible', 'OBJECT'
+  EXECUTE sp_rename N'DF_Tabs_Level', N'DF_{objectQualifier}Tabs_Level', 'OBJECT'
+  EXECUTE sp_rename N'PK_Tabs', N'PK_{objectQualifier}Tabs', 'OBJECT'
+  EXECUTE sp_rename N'IX_Tabs', N'IX_{objectQualifier}Tabs', 'OBJECT'
+  EXECUTE sp_rename N'DF_UserDefinedFields_FieldOrder', N'DF_{objectQualifier}UserDefinedFields_FieldOrder', 'OBJECT'
+  EXECUTE sp_rename N'DF_Users_IsSuperUser', N'DF_{objectQualifier}Users_IsSuperUser', 'OBJECT'
+  EXECUTE sp_rename N'PK_Users', N'PK_{objectQualifier}Users', 'OBJECT'
+  EXECUTE sp_rename N'IX_Users', N'IX_{objectQualifier}Users', 'OBJECT'
+  EXECUTE sp_rename N'IX_VendorClassification', N'IX_{objectQualifier}VendorClassification', 'OBJECT'
+  EXECUTE sp_rename N'DF_Vendors_ClickThroughs', N'DF_{objectQualifier}Vendors_ClickThroughs', 'OBJECT'
+  EXECUTE sp_rename N'DF_Vendors_Views', N'DF_{objectQualifier}Vendors_Views', 'OBJECT'
+  EXECUTE sp_rename N'DF_Vendors_Authorized', N'DF_{objectQualifier}Vendors_Authorized', 'OBJECT'
+  EXECUTE sp_rename N'IX_Vendors', N'IX_{objectQualifier}Vendors', 'OBJECT'
+  EXECUTE sp_rename N'FK_Announcements_Modules', N'FK_{objectQualifier}Announcements_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_Banner_Vendor', N'FK_{objectQualifier}Banner_{objectQualifier}Vendor', 'OBJECT'
+  EXECUTE sp_rename N'FK_Banners_BannerType', N'FK_{objectQualifier}Banners_{objectQualifier}BannerType', 'OBJECT'
+  EXECUTE sp_rename N'FK_Classification_Classification', N'FK_{objectQualifier}Classification_{objectQualifier}Classification', 'OBJECT'
+  EXECUTE sp_rename N'FK_Contacts_Modules', N'FK_{objectQualifier}Contacts_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_Discussion_Modules', N'FK_{objectQualifier}Discussion_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_Documents_Modules', N'FK_{objectQualifier}Documents_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_HtmlText_Modules', N'FK_{objectQualifier}HtmlText_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_Links_Modules', N'FK_{objectQualifier}Links_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_Events_Modules', N'FK_{objectQualifier}Events_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_ModuleSettings_Modules', N'FK_{objectQualifier}ModuleSettings_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_Modules_ModuleDefinitions', N'FK_{objectQualifier}Modules_{objectQualifier}ModuleDefinitions', 'OBJECT'
+  EXECUTE sp_rename N'FK_Modules_Tabs', N'FK_{objectQualifier}Modules_{objectQualifier}Tabs', 'OBJECT'
+  EXECUTE sp_rename N'FK_PortalModuleDefinitions_ModuleDefinitions', N'FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}ModuleDefinitions', 'OBJECT'
+  EXECUTE sp_rename N'FK_PortalModuleDefinitions_Portals', N'FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'FK_Roles_CodeFrequency', N'FK_{objectQualifier}Roles_{objectQualifier}CodeFrequency', 'OBJECT'
+  EXECUTE sp_rename N'FK_Roles_Portals', N'FK_{objectQualifier}Roles_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'FK_SiteLog_Portals', N'FK_{objectQualifier}SiteLog_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'FK_Tabs_Portals', N'FK_{objectQualifier}Tabs_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'FK_Tabs_Tabs', N'FK_{objectQualifier}Tabs_{objectQualifier}Tabs', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserDefinedData_UserDefinedFields', N'FK_{objectQualifier}UserDefinedData_{objectQualifier}UserDefinedFields', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserDefinedData_UserDefinedRows', N'FK_{objectQualifier}UserDefinedData_{objectQualifier}UserDefinedRows', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserDefinedFields_Modules', N'FK_{objectQualifier}UserDefinedFields_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserDefinedRows_Modules', N'FK_{objectQualifier}UserDefinedRows_{objectQualifier}Modules', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserPortals_Portals', N'FK_{objectQualifier}UserPortals_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserPortals_Users', N'FK_{objectQualifier}UserPortals_{objectQualifier}Users', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserRoles_Roles', N'FK_{objectQualifier}UserRoles_{objectQualifier}Roles', 'OBJECT'
+  EXECUTE sp_rename N'FK_UserRoles_Users', N'FK_{objectQualifier}UserRoles_{objectQualifier}Users', 'OBJECT'
+  EXECUTE sp_rename N'FK_VendorClassification_Classification', N'FK_{objectQualifier}VendorClassification_{objectQualifier}Classification', 'OBJECT'
+  EXECUTE sp_rename N'FK_VendorClassification_Vendors', N'FK_{objectQualifier}VendorClassification_{objectQualifier}Vendors', 'OBJECT'
+  EXECUTE sp_rename N'FK_VendorFeedback_Vendors', N'FK_{objectQualifier}VendorFeedback_{objectQualifier}Vendors', 'OBJECT'
+  EXECUTE sp_rename N'FK_VendorLog_Portals', N'FK_{objectQualifier}VendorLog_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'FK_VendorSearch_Portals', N'FK_{objectQualifier}VendorSearch_{objectQualifier}Portals', 'OBJECT'
+  EXECUTE sp_rename N'FK_Vendor_Portals', N'FK_{objectQualifier}Vendor_{objectQualifier}Portals', 'OBJECT'
 end
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UserPortals
-	DROP CONSTRAINT FK_{objectQualifier}UserPortals_{objectQualifier}Users
+    DROP CONSTRAINT FK_{objectQualifier}UserPortals_{objectQualifier}Users
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UserPortals WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}UserPortals_{objectQualifier}Users FOREIGN KEY
-	(
-	UserId
-	) REFERENCES {databaseOwner}{objectQualifier}Users
-	(
-	UserId
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_{objectQualifier}UserPortals_{objectQualifier}Users FOREIGN KEY
+    (
+    UserId
+    ) REFERENCES {databaseOwner}{objectQualifier}Users
+    (
+    UserId
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
@@ -405,14 +405,14 @@ create procedure {databaseOwner}{objectQualifier}AddFile
 
 as
 
-insert into {objectQualifier}Files ( 
+insert into {objectQualifier}Files (
   PortalId,
   FileName,
   Extension,
   Size,
   WIdth,
   Height,
-  ContentType 
+  ContentType
 )
 values (
   @PortalId,
@@ -421,7 +421,7 @@ values (
   @Size,
   @WIdth,
   @Height,
-  @ContentType 
+  @ContentType
 )
 
 select SCOPE_IDENTITY()
@@ -442,11 +442,11 @@ as
 
 update {objectQualifier}Files
 set    FileName = @FileName,
-       Extension = @Extension,
-       Size = @Size,
-       WIdth = @WIdth,
-       Height = @Height,
-       ContentType = @ContentType
+        Extension = @Extension,
+        Size = @Size,
+        WIdth = @WIdth,
+        Height = @Height,
+        ContentType = @ContentType
 where  FileId = @FileId
 GO
 
@@ -499,7 +499,7 @@ create procedure {databaseOwner}{objectQualifier}GetMessageByParentId
 as
 
 select DisplayOrder
-from   {objectQualifier}Discussion 
+from   {objectQualifier}Discussion
 where  ItemId = @ParentId
 
 GO
@@ -522,7 +522,7 @@ insert into {objectQualifier}Discussion (
   Title,
   Body,
   DisplayOrder,
-  CreatedDate, 
+  CreatedDate,
   CreatedByUser,
   ModuleId
 )
@@ -543,7 +543,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}AddModule
-    
+
 @TabId                         int,
 @ModuleDefId                   int,
 @ModuleOrder                   int,
@@ -564,7 +564,7 @@ create procedure {databaseOwner}{objectQualifier}AddModule
 
 as
 
-insert {objectQualifier}Modules ( 
+insert {objectQualifier}Modules (
   TabId,
   ModuleDefId,
   ModuleOrder,
@@ -626,7 +626,7 @@ create procedure {databaseOwner}{objectQualifier}AddModuleEvent
 
 as
 
-insert into {objectQualifier}ModuleEvents ( 
+insert into {objectQualifier}ModuleEvents (
   ModuleID,
   Description,
   DateTime,
@@ -817,10 +817,10 @@ create procedure {databaseOwner}{objectQualifier}AddSiteLog
 @AffiliateId                   int                   = null
 
 as
- 
+
 declare @SiteLogHistory int
 
-insert into {objectQualifier}SiteLog ( 
+insert into {objectQualifier}SiteLog (
   DateTime,
   PortalId,
   UserId,
@@ -917,23 +917,23 @@ select SCOPE_IDENTITY()
 GO
 create procedure {databaseOwner}{objectQualifier}AddPortalUser
 
-@PortalId   int, 
-@UserId     int, 
+@PortalId   int,
+@UserId     int,
 @Authorized bit
 
 as
 
-insert into {objectQualifier}UserPortals ( 
-  UserId, 
-  PortalId, 
-  Authorized, 
-  CreatedDate 
-) 
-values ( 
+insert into {objectQualifier}UserPortals (
+  UserId,
+  PortalId,
+  Authorized,
+  CreatedDate
+)
+values (
   @UserId,
-  @PortalId, 
-  @Authorized, 
-  getdate() 
+  @PortalId,
+  @Authorized,
+  getdate()
 )
 
 select SCOPE_IDENTITY()
@@ -964,10 +964,10 @@ as
 insert into {objectQualifier}Users (
   FirstName,
   LastName,
-  Unit, 
-  Street, 
+  Unit,
+  Street,
   City,
-  Region, 
+  Region,
   PostalCode,
   Country,
   Telephone,
@@ -1006,7 +1006,7 @@ create procedure {databaseOwner}{objectQualifier}AddUserDefinedField
 
 as
 
-insert into {objectQualifier}UserDefinedFields ( 
+insert into {objectQualifier}UserDefinedFields (
   ModuleId,
   FieldTitle,
   Visible,
@@ -1032,7 +1032,7 @@ create procedure {databaseOwner}{objectQualifier}AddUserDefinedRow
 
 as
 
-insert into {objectQualifier}UserDefinedRows ( 
+insert into {objectQualifier}UserDefinedRows (
   ModuleId
 )
 values (
@@ -1066,7 +1066,7 @@ inner join {objectQualifier}UserPortals on {objectQualifier}UserPortals.UserId =
 where  {objectQualifier}UserRoles.UserId = @UserId
 and    {objectQualifier}UserRoles.RoleId = @RoleId
 and    PortalId = @PortalId
- 
+
 if @UserRoleId is not null
 begin
   update {objectQualifier}UserRoles
@@ -1161,7 +1161,7 @@ values (
   0,
   0,
   @UserName,
-  getdate(), 
+  getdate(),
   @LogoFile,
   @KeyWords,
   @Authorized
@@ -1181,7 +1181,7 @@ create procedure {databaseOwner}{objectQualifier}AddVendorClassification
 
 as
 
-insert into {objectQualifier}VendorClassification ( 
+insert into {objectQualifier}VendorClassification (
   VendorId,
   ClassificationId
 )
@@ -1286,7 +1286,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteFile
 
 as
 
-delete 
+delete
 from {objectQualifier}Files
 where  FileName = @FileName
 and    ((PortalId = @PortalId) or (@PortalId is null and PortalId is null))
@@ -1302,7 +1302,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteFiles
 
 as
 
-delete 
+delete
 from   {objectQualifier}Files
 where  ((PortalId = @PortalId) or (@PortalId is null and PortalId is null))
 
@@ -1353,7 +1353,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteModule
 as
 
 delete
-from {objectQualifier}Modules 
+from {objectQualifier}Modules
 where  ModuleId = @ModuleId
 
 
@@ -1416,7 +1416,7 @@ create procedure {databaseOwner}{objectQualifier}DeleteRole
 
 as
 
-delete 
+delete
 from {objectQualifier}Roles
 where  RoleId = @RoleId
 
@@ -1496,12 +1496,12 @@ where  UserId = @UserId
 GO
 create procedure {databaseOwner}{objectQualifier}DeleteUserDefinedData
 
-@UserDefinedRowId    int, 
+@UserDefinedRowId    int,
 @UserDefinedFieldId  int
 
 as
 
-delete 
+delete
 from {objectQualifier}UserDefinedData
 where  UserDefinedFieldId = @UserDefinedFieldId
 or     UserDefinedRowId = @UserDefinedRowId
@@ -1513,11 +1513,11 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}DeleteUserDefinedField
 
-@UserDefinedFieldId    int 
+@UserDefinedFieldId    int
 
 as
 
-delete 
+delete
 from {objectQualifier}UserDefinedFields
 where  UserDefinedFieldId = @UserDefinedFieldId
 
@@ -1529,11 +1529,11 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}DeleteUserDefinedRow
 
-@UserDefinedRowId    int 
+@UserDefinedRowId    int
 
 as
 
-delete 
+delete
 from {objectQualifier}UserDefinedRows
 where  UserDefinedRowId = @UserDefinedRowId
 
@@ -1625,17 +1625,17 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}UpdateBannerViews
 
-@BannerId  int, 
-@Views     int, 
-@StartDate datetime, 
+@BannerId  int,
+@Views     int,
+@StartDate datetime,
 @EndDate   datetime
 
 as
 
 update {objectQualifier}Banners
 set    Views = @Views,
-       StartDate = @StartDate,
-       EndDate = @EndDate
+        StartDate = @StartDate,
+        EndDate = @EndDate
 where  BannerId = @BannerId
 GO
 drop procedure dbo.FindVendors
@@ -1653,14 +1653,14 @@ create procedure {databaseOwner}{objectQualifier}GetAnnouncements
 as
 
 select ItemId,
-       CreatedByUser,
-       CreatedDate,
-       Title,
-       URL,
-       Syndicate,
-       ExpireDate,
-       Description,
-       ViewOrder
+        CreatedByUser,
+        CreatedDate,
+        Title,
+        URL,
+        Syndicate,
+        ExpireDate,
+        Description,
+        ViewOrder
 from {objectQualifier}Announcements
 where  ModuleId = @ModuleId
 and    (ExpireDate > GetDate() or ExpireDate is null)
@@ -1680,7 +1680,7 @@ create procedure {databaseOwner}{objectQualifier}GetAuthRoles
 as
 
 select {objectQualifier}Tabs.AuthorizedRoles,
-       {objectQualifier}Modules.AuthorizedEditRoles
+        {objectQualifier}Modules.AuthorizedEditRoles
 from {objectQualifier}Modules
 inner join {objectQualifier}Tabs ON {objectQualifier}Modules.TabId = {objectQualifier}Tabs.TabId
 where  {objectQualifier}Modules.ModuleId = @ModuleId
@@ -1719,15 +1719,15 @@ create procedure {databaseOwner}{objectQualifier}GetBanners
 as
 
 select BannerId,
-       BannerName,
-       BannerTypeName,
-       URL,
-       Impressions,
-       CPM,
-       Views,
-       ClickThroughs,
-       StartDate,
-       EndDate
+        BannerName,
+        BannerTypeName,
+        URL,
+        Impressions,
+        CPM,
+        Views,
+        ClickThroughs,
+        StartDate,
+        EndDate
 from {objectQualifier}Banners
 inner join {objectQualifier}BannerTypes on {objectQualifier}Banners.BannerTypeId = {objectQualifier}BannerTypes.BannerTypeId
 where  VendorId = @VendorId
@@ -1744,7 +1744,7 @@ create procedure {databaseOwner}{objectQualifier}GetBannerTypes
 as
 
 select BannerTypeId,
-       BannerTypeName
+        BannerTypeName
 from {objectQualifier}BannerTypes
 
 
@@ -1754,7 +1754,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}GetBillingFrequencyCode
-    
+
 @Code char(1)
 
 as
@@ -1770,7 +1770,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}GetBillingFrequencyCodes
-    
+
 as
 
 select *
@@ -1790,7 +1790,7 @@ create procedure {databaseOwner}{objectQualifier}GetClicks
 as
 
 select DateTime,
-       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
 from {objectQualifier}ClickLog
 left outer join {objectQualifier}Users on {objectQualifier}ClickLog.UserId = {objectQualifier}Users.UserId
 where  TableName = @TableName
@@ -1810,13 +1810,13 @@ create procedure {databaseOwner}{objectQualifier}GetContacts
 as
 
 select ItemId,
-       CreatedDate,
-       CreatedByUser,
-       Name,
-       Role,
-       Email,
-       Contact1,
-       Contact2
+        CreatedDate,
+        CreatedByUser,
+        Name,
+        Role,
+        Email,
+        Contact1,
+        Contact2
 from {objectQualifier}Contacts
 where  ModuleId = @ModuleId
 order by Name
@@ -1827,7 +1827,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}GetCountryCodes
-    
+
 as
 
 select *
@@ -1845,7 +1845,7 @@ create procedure {databaseOwner}{objectQualifier}GetCurrencies
 as
 
 select Code,
-       Description
+        Description
 from {objectQualifier}CodeCurrency
 
 
@@ -1862,13 +1862,13 @@ create procedure {databaseOwner}{objectQualifier}GetDocuments
 as
 
 select ItemId,
-       Title,
-       URL,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Documents.CreatedDate,
-       Category,
-       Size,
-       Syndicate
+        Title,
+        URL,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Documents.CreatedDate,
+        Category,
+        Size,
+        Syndicate
 from {objectQualifier}Documents
 left outer join {objectQualifier}Users on {objectQualifier}Documents.CreatedByUser = {objectQualifier}Users.UserId
 left outer join {objectQualifier}Files on {objectQualifier}Documents.URL = {objectQualifier}Files.FileName and {objectQualifier}Files.PortalId = @PortalId
@@ -1888,10 +1888,10 @@ create procedure {databaseOwner}{objectQualifier}GetFAQs
 as
 
 select ItemId,
-       CreatedDate,
-       CreatedByUser,
-       Question,
-       Answer
+        CreatedDate,
+        CreatedByUser,
+        Question,
+        Answer
 from {objectQualifier}FAQs
 where  ModuleId = @ModuleId
 
@@ -1908,13 +1908,13 @@ create procedure {databaseOwner}{objectQualifier}GetFiles
 as
 
 select FileId,
-       PortalId,
-       FileName,
-       Extension,
-       Size,
-       WIdth,
-       Height,
-       ContentType
+        PortalId,
+        FileName,
+        Extension,
+        Size,
+        WIdth,
+        Height,
+        ContentType
 from {objectQualifier}Files
 where  ((PortalId = @PortalId) or (@PortalId is null and PortalId is null))
 order by FileName
@@ -1945,7 +1945,7 @@ create procedure {databaseOwner}{objectQualifier}GetHostSettings
 as
 
 select SettingName,
-       SettingValue
+        SettingValue
 from {objectQualifier}HostSettings
 
 
@@ -1977,13 +1977,13 @@ create procedure {databaseOwner}{objectQualifier}GetLinks
 as
 
 select ItemId,
-       CreatedByUser,
-       CreatedDate,
-       Title,
-       Url,
-       ViewOrder,
-       Description,
-       NewWindow
+        CreatedByUser,
+        CreatedDate,
+        Title,
+        Url,
+        ViewOrder,
+        Description,
+        NewWindow
 from {objectQualifier}Links
 where  ModuleId = @ModuleId
 order by ViewOrder, Title
@@ -2012,9 +2012,9 @@ create procedure {databaseOwner}{objectQualifier}GetHostModuleDefinitions
 as
 
 select ModuleDefId,
-       FriendlyName,
-       Description,
-       'IsPremium' = case when IsPremium = 1 then 'Y' else 'N' end
+        FriendlyName,
+        Description,
+        'IsPremium' = case when IsPremium = 1 then 'Y' else 'N' end
 from {objectQualifier}ModuleDefinitions
 where  AdminOrder is null
 and    DesktopSrc is not null
@@ -2026,7 +2026,7 @@ create procedure {databaseOwner}{objectQualifier}GetAdminModuleDefinitions
 as
 
 select *
-from   {objectQualifier}ModuleDefinitions 
+from   {objectQualifier}ModuleDefinitions
 where  AdminOrder is not null
 and    AdminOrder > 0
 order by AdminOrder
@@ -2042,8 +2042,8 @@ create procedure {databaseOwner}{objectQualifier}GetModuleDefinitions
 as
 
 select distinct({objectQualifier}ModuleDefinitions.ModuleDefId) as ModuleDefId,
-       {objectQualifier}ModuleDefinitions.FriendlyName,
-       {objectQualifier}ModuleDefinitions.Description
+        {objectQualifier}ModuleDefinitions.FriendlyName,
+        {objectQualifier}ModuleDefinitions.Description
 from {objectQualifier}ModuleDefinitions
 left outer join {objectQualifier}PortalModuleDefinitions on {objectQualifier}ModuleDefinitions.ModuleDefId = {objectQualifier}PortalModuleDefinitions.ModuleDefId
 where  AdminOrder is null
@@ -2063,15 +2063,15 @@ create procedure {databaseOwner}{objectQualifier}GetModuleEvents
 as
 
 select ItemId,
-       Description,
-       DateTime,
-       Title,
-       ExpireDate,
-       CreatedByUser,
-       CreatedDate,
-       IconFile,
-       AltText,
-       'MaxWIdth' = (select max(WIdth) from {objectQualifier}ModuleEvents left outer join {objectQualifier}Files on {objectQualifier}ModuleEvents.IconFile = {objectQualifier}Files.FileName where ModuleId = @ModuleId and (ExpireDate > getdate() or ExpireDate is null))
+        Description,
+        DateTime,
+        Title,
+        ExpireDate,
+        CreatedByUser,
+        CreatedDate,
+        IconFile,
+        AltText,
+        'MaxWIdth' = (select max(WIdth) from {objectQualifier}ModuleEvents left outer join {objectQualifier}Files on {objectQualifier}ModuleEvents.IconFile = {objectQualifier}Files.FileName where ModuleId = @ModuleId and (ExpireDate > getdate() or ExpireDate is null))
 from {objectQualifier}ModuleEvents
 where  ModuleId = @ModuleId
 and    (ExpireDate > getdate() or ExpireDate is null)
@@ -2087,16 +2087,16 @@ create procedure {databaseOwner}{objectQualifier}GetModuleEventsByDate
 as
 
 select ItemId,
-       Description,
-       DateTime,
-       Title,
-       ExpireDate,
-       CreatedByUser,
-       CreatedDate,
-       Every,
-       Period,
-       IconFile,
-       AltText
+        Description,
+        DateTime,
+        Title,
+        ExpireDate,
+        CreatedByUser,
+        CreatedDate,
+        Every,
+        Period,
+        IconFile,
+        AltText
 from {objectQualifier}ModuleEvents
 where  ModuleId = @ModuleId
 and    ( (Period is null and (DateTime >= @StartDate and DateTime <= @EndDate)) or Period is not null )
@@ -2114,7 +2114,7 @@ create procedure {databaseOwner}{objectQualifier}GetModuleSettings
 as
 
 select SettingName,
-       SettingValue
+        SettingValue
 from {objectQualifier}ModuleSettings
 where  ModuleId = @ModuleId
 
@@ -2141,7 +2141,7 @@ create procedure {databaseOwner}{objectQualifier}UpdatePortalAlias
 
 as
 
-update {objectQualifier}Portals 
+update {objectQualifier}Portals
 set    PortalAlias = @PortalAlias
 where  PortalAlias = '_default'
 
@@ -2155,7 +2155,7 @@ create procedure {databaseOwner}{objectQualifier}GetPortalByTab
 
 @TabId int,
 @PortalAlias nvarchar(200)
- 
+
 as
 
 select PortalAlias
@@ -2192,10 +2192,10 @@ create procedure {databaseOwner}{objectQualifier}GetPortalModuleDefinitions
 as
 
 select distinct({objectQualifier}ModuleDefinitions.ModuleDefId),
-       'Subscribed' = case when (PortalId = @PortalId and PortalModuleDefinitionId is not null) then 1 else 0 end,
-       {objectQualifier}ModuleDefinitions.FriendlyName,
-       {objectQualifier}ModuleDefinitions.Description,
-       {objectQualifier}PortalModuleDefinitions.HostFee
+        'Subscribed' = case when (PortalId = @PortalId and PortalModuleDefinitionId is not null) then 1 else 0 end,
+        {objectQualifier}ModuleDefinitions.FriendlyName,
+        {objectQualifier}ModuleDefinitions.Description,
+        {objectQualifier}PortalModuleDefinitions.HostFee
 from {objectQualifier}ModuleDefinitions
 left outer join {objectQualifier}PortalModuleDefinitions on {objectQualifier}ModuleDefinitions.ModuleDefId = {objectQualifier}PortalModuleDefinitions.ModuleDefId
 where  {objectQualifier}ModuleDefinitions.IsPremium = 1
@@ -2214,16 +2214,16 @@ create procedure {databaseOwner}{objectQualifier}GetPortalRoles
 as
 
 select {objectQualifier}Roles.RoleId,
-       {objectQualifier}Roles.RoleName,
-       {objectQualifier}Roles.Description,
-       'ServiceFee' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.ServiceFee else null end,
-       'BillingPeriod' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.BillingPeriod else null end,
-       'BillingFrequency' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then C1.Description else '' end,
-       'TrialFee' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialFee else null end,
-       'TrialPeriod' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialPeriod else null end,
-       'TrialFrequency' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then C2.Description else '' end,
-       'IsPublic' = case when {objectQualifier}Roles.IsPublic = 1 then 'True' else 'False' end,
-       'AutoAssignment' = case when {objectQualifier}Roles.AutoAssignment = 1 then 'True' else 'False' end
+        {objectQualifier}Roles.RoleName,
+        {objectQualifier}Roles.Description,
+        'ServiceFee' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.ServiceFee else null end,
+        'BillingPeriod' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.BillingPeriod else null end,
+        'BillingFrequency' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then C1.Description else '' end,
+        'TrialFee' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialFee else null end,
+        'TrialPeriod' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialPeriod else null end,
+        'TrialFrequency' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then C2.Description else '' end,
+        'IsPublic' = case when {objectQualifier}Roles.IsPublic = 1 then 'True' else 'False' end,
+        'AutoAssignment' = case when {objectQualifier}Roles.AutoAssignment = 1 then 'True' else 'False' end
 from {objectQualifier}Roles
 left outer join {objectQualifier}CodeFrequency C1 on {objectQualifier}Roles.BillingFrequency = C1.Code
 left outer join {objectQualifier}CodeFrequency C2 on {objectQualifier}Roles.TrialFrequency = C2.Code
@@ -2242,7 +2242,7 @@ create procedure {databaseOwner}{objectQualifier}GetPortals
 as
 
 select {objectQualifier}Portals.*,
-       'Users' = ( select count(*) from {objectQualifier}UserPortals where {objectQualifier}UserPortals.PortalId = {objectQualifier}Portals.PortalId )
+        'Users' = ( select count(*) from {objectQualifier}UserPortals where {objectQualifier}UserPortals.PortalId = {objectQualifier}Portals.PortalId )
 from {objectQualifier}Portals
 order by PortalName
 
@@ -2274,7 +2274,7 @@ select {objectQualifier}Tabs.TabId
 from {objectQualifier}Tabs
 inner join {objectQualifier}Portals on {objectQualifier}Tabs.PortalId = {objectQualifier}Portals.PortalId
 where {objectQualifier}Portals.PortalId = @PortalId
-and {objectQualifier}Tabs.TabOrder = 1  
+and {objectQualifier}Tabs.TabOrder = 1
 
 GO
 
@@ -2288,10 +2288,10 @@ create procedure {databaseOwner}{objectQualifier}GetPortalSettings
 as
 
 select {objectQualifier}Portals.*,
-       'Email' = ( select Email from {objectQualifier}Users where {objectQualifier}Users.UserId = {objectQualifier}Portals.AdministratorId ),
-       'AdminTabId' = ( select TabId from {objectQualifier}Tabs where PortalId = {objectQualifier}Portals.PortalId and TabName = 'Admin' ),
-       'SuperUserId' = ( select UserId from {objectQualifier}Users where IsSuperUser = 1 ),
-       'SuperTabId' = ( select TabId from {objectQualifier}Tabs where PortalId is null and ParentId is null )
+        'Email' = ( select Email from {objectQualifier}Users where {objectQualifier}Users.UserId = {objectQualifier}Portals.AdministratorId ),
+        'AdminTabId' = ( select TabId from {objectQualifier}Tabs where PortalId = {objectQualifier}Portals.PortalId and TabName = 'Admin' ),
+        'SuperUserId' = ( select UserId from {objectQualifier}Users where IsSuperUser = 1 ),
+        'SuperTabId' = ( select TabId from {objectQualifier}Tabs where PortalId is null and ParentId is null )
 from   {objectQualifier}Portals
 where  PortalId = @PortalId
 
@@ -2303,8 +2303,8 @@ create procedure {databaseOwner}{objectQualifier}GetPortalTab
 as
 
 select {objectQualifier}Tabs.*,
-       'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName ),
-       'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
+        'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName ),
+        'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
 from   {objectQualifier}Tabs
 where  TabId = @TabId
 
@@ -2333,7 +2333,7 @@ create procedure {databaseOwner}{objectQualifier}GetProcessorCodes
 as
 
 select Processor,
-       URL
+        URL
 from {objectQualifier}CodeProcessor
 order by Processor
 
@@ -2344,7 +2344,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}GetRegionCodes
-    
+
 @Country char(2)
 
 as
@@ -2361,7 +2361,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}GetRoleMembership
-    
+
 @PortalId int,
 @RoleId   int = null,
 @UserId   int = null
@@ -2371,12 +2371,12 @@ as
 if @RoleId is null
 begin
   select {objectQualifier}UserRoles.UserRoleId,
-         {objectQualifier}UserRoles.UserId,
-         'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-         {objectQualifier}Users.Email,
-         {objectQualifier}UserRoles.RoleId,
-         {objectQualifier}Roles.RoleName,
-         {objectQualifier}UserRoles.ExpiryDate
+        {objectQualifier}UserRoles.UserId,
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Users.Email,
+        {objectQualifier}UserRoles.RoleId,
+        {objectQualifier}Roles.RoleName,
+        {objectQualifier}UserRoles.ExpiryDate
   from {objectQualifier}UserRoles
   inner join {objectQualifier}Users On {objectQualifier}Users.UserId = {objectQualifier}UserRoles.UserId
   inner join {objectQualifier}Roles On {objectQualifier}Roles.RoleId = {objectQualifier}UserRoles.RoleId
@@ -2388,12 +2388,12 @@ end
 else
 begin
   select {objectQualifier}UserRoles.UserRoleId,
-         {objectQualifier}UserRoles.UserId,
-         'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-         {objectQualifier}Users.Email,
-         {objectQualifier}UserRoles.RoleId,
-         {objectQualifier}Roles.RoleName,
-         {objectQualifier}UserRoles.ExpiryDate
+        {objectQualifier}UserRoles.UserId,
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Users.Email,
+        {objectQualifier}UserRoles.RoleId,
+        {objectQualifier}Roles.RoleName,
+        {objectQualifier}UserRoles.ExpiryDate
   from {objectQualifier}UserRoles
   inner join {objectQualifier}Users On {objectQualifier}Users.UserId = {objectQualifier}UserRoles.UserId
   inner join {objectQualifier}Roles On {objectQualifier}Roles.RoleId = {objectQualifier}UserRoles.RoleId
@@ -2410,14 +2410,14 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}GetRolesByUser
-    
+
 @UserId        int,
 @PortalId      int
 
 as
 
 select {objectQualifier}Roles.RoleName,
-       {objectQualifier}Roles.RoleId
+        {objectQualifier}Roles.RoleId
 from {objectQualifier}UserRoles
 inner join {objectQualifier}Users on {objectQualifier}UserRoles.UserId = {objectQualifier}Users.UserId
 inner join {objectQualifier}Roles on {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId
@@ -2438,11 +2438,11 @@ create procedure {databaseOwner}{objectQualifier}GetSearchModule
 as
 
 select SearchId,
-       TableName,
-       TitleField,
-       DescriptionField,
-       CreatedDateField,
-       CreatedByUserField
+        TableName,
+        TitleField,
+        DescriptionField,
+        CreatedDateField,
+        CreatedByUserField
 from {objectQualifier}Search
 where  ModuleId = @ModuleId
 order by TableName
@@ -2454,23 +2454,23 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}GetServices
-    
+
 @PortalId  int,
 @UserId    int = null
 
 as
 
 select RoleId,
-       {objectQualifier}Roles.RoleName,
-       {objectQualifier}Roles.Description,
-       'ServiceFee' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.ServiceFee else null end,
-       'BillingPeriod' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.BillingPeriod else null end,
-       'BillingFrequency' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then C1.Description else '' end,
-       'TrialFee' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialFee else null end,
-       'TrialPeriod' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialPeriod else null end,
-       'TrialFrequency' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then C2.Description else '' end,
-       'ExpiryDate' = ( select ExpiryDate from {objectQualifier}UserRoles where {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId and {objectQualifier}UserRoles.UserId = @UserId ),
-       'Subscribed' = ( select UserRoleId from {objectQualifier}UserRoles where {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId and {objectQualifier}UserRoles.UserId = @UserId )
+        {objectQualifier}Roles.RoleName,
+        {objectQualifier}Roles.Description,
+        'ServiceFee' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.ServiceFee else null end,
+        'BillingPeriod' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then {objectQualifier}Roles.BillingPeriod else null end,
+        'BillingFrequency' = case when convert(int,{objectQualifier}Roles.ServiceFee) <> 0 then C1.Description else '' end,
+        'TrialFee' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialFee else null end,
+        'TrialPeriod' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then {objectQualifier}Roles.TrialPeriod else null end,
+        'TrialFrequency' = case when {objectQualifier}Roles.TrialFrequency <> 'N' then C2.Description else '' end,
+        'ExpiryDate' = ( select ExpiryDate from {objectQualifier}UserRoles where {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId and {objectQualifier}UserRoles.UserId = @UserId ),
+        'Subscribed' = ( select UserRoleId from {objectQualifier}UserRoles where {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId and {objectQualifier}UserRoles.UserId = @UserId )
 from {objectQualifier}Roles
 inner join {objectQualifier}CodeFrequency C1 on {objectQualifier}Roles.BillingFrequency = C1.Code
 left outer join {objectQualifier}CodeFrequency C2 on {objectQualifier}Roles.TrialFrequency = C2.Code
@@ -2491,14 +2491,14 @@ create procedure {databaseOwner}{objectQualifier}GetAnnouncement
 as
 
 select Title,
-       URL,
-       Syndicate,
-       ExpireDate,
-       Description,
-       Clicks,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Announcements.CreatedDate,
-       ViewOrder
+        URL,
+        Syndicate,
+        ExpireDate,
+        Description,
+        Clicks,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Announcements.CreatedDate,
+        ViewOrder
 from {objectQualifier}Announcements
 left outer join {objectQualifier}Users on {objectQualifier}Announcements.CreatedByUser = {objectQualifier}Users.UserId
 where  ItemId = @ItemId
@@ -2518,19 +2518,19 @@ create procedure {databaseOwner}{objectQualifier}GetBanner
 as
 
 select BannerId,
-       VendorId,
-       ImageFile,
-       BannerName,
-       URL,
-       Impressions,
-       CPM,
-       Views,
-       ClickThroughs,
-       StartDate,
-       EndDate,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Banners.CreatedDate,
-       BannerTypeId       
+        VendorId,
+        ImageFile,
+        BannerName,
+        URL,
+        Impressions,
+        CPM,
+        Views,
+        ClickThroughs,
+        StartDate,
+        EndDate,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Banners.CreatedDate,
+        BannerTypeId
 from {objectQualifier}Banners
 left outer join {objectQualifier}Users on {objectQualifier}Banners.CreatedByUser = {objectQualifier}Users.UserId
 where  BannerId = @BannerId
@@ -2550,12 +2550,12 @@ create procedure {databaseOwner}{objectQualifier}GetContact
 as
 
 select Name,
-       Role,
-       {objectQualifier}Contacts.Email,
-       Contact1,
-       Contact2,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Contacts.CreatedDate
+        Role,
+        {objectQualifier}Contacts.Email,
+        Contact1,
+        Contact2,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Contacts.CreatedDate
 from {objectQualifier}Contacts
 left outer join {objectQualifier}Users on {objectQualifier}Contacts.CreatedByUser = {objectQualifier}Users.UserId
 where  ItemId = @ItemId
@@ -2592,12 +2592,12 @@ create procedure {databaseOwner}{objectQualifier}GetDocument
 as
 
 select Title,
-       URL,
-       Category,
-       Syndicate,
-       Clicks,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Documents.CreatedDate
+        URL,
+        Category,
+        Syndicate,
+        Clicks,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Documents.CreatedDate
 from {objectQualifier}Documents
 left outer join {objectQualifier}Users on {objectQualifier}Documents.CreatedByUser = {objectQualifier}Users.UserId
 where  ItemId = @ItemId
@@ -2617,11 +2617,11 @@ create procedure {databaseOwner}{objectQualifier}GetFAQ
 as
 
 select ItemId,
-       ModuleId,
-       Question,
-       Answer,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}FAQs.CreatedDate
+        ModuleId,
+        Question,
+        Answer,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}FAQs.CreatedDate
 from {objectQualifier}FAQs
 left outer join {objectQualifier}Users on {objectQualifier}FAQs.CreatedByUser = {objectQualifier}Users.UserId
 where  ItemId = @ItemId
@@ -2641,12 +2641,12 @@ create procedure {databaseOwner}{objectQualifier}GetFile
 as
 
 select FileId,
-       FileName,
-       Extension,
-       Size,
-       WIdth,
-       Height,
-       ContentType
+        FileName,
+        Extension,
+        Size,
+        WIdth,
+        Height,
+        ContentType
 from {objectQualifier}Files
 where  FileName = @FileName
 and    ((PortalId = @PortalId) or (@PortalId is null and PortalId is null))
@@ -2664,14 +2664,14 @@ create procedure {databaseOwner}{objectQualifier}GetLink
 as
 
 select Title,
-       Url,
-       MobileUrl,
-       ViewOrder,
-       Description,
-       NewWindow,
-       Clicks,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Links.CreatedDate
+        Url,
+        MobileUrl,
+        ViewOrder,
+        Description,
+        NewWindow,
+        Clicks,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Links.CreatedDate
 from {objectQualifier}Links
 left outer join {objectQualifier}Users on {objectQualifier}Links.CreatedByUser = {objectQualifier}Users.UserId
 where  ItemId = @ItemId
@@ -2691,11 +2691,11 @@ create procedure {databaseOwner}{objectQualifier}GetMessage
 as
 
 select ItemId,
-       Title,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Discussion.CreatedDate,
-       Body,
-       DisplayOrder
+        Title,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Discussion.CreatedDate,
+        Body,
+        DisplayOrder
 from {objectQualifier}Discussion
 left outer join {objectQualifier}Users on {objectQualifier}Discussion.CreatedByUser = {objectQualifier}Users.UserId
 where  ItemId = @ItemId
@@ -2714,14 +2714,14 @@ create procedure {databaseOwner}{objectQualifier}GetModuleDefinition
 as
 
 select FriendlyName,
-       DesktopSrc,
-       MobileSrc,
-       AdminOrder,
-       EditSrc,
-       Secure,
-       Description,
-       EditModuleIcon,
-       IsPremium
+        DesktopSrc,
+        MobileSrc,
+        AdminOrder,
+        EditSrc,
+        Secure,
+        Description,
+        EditModuleIcon,
+        IsPremium
 from {objectQualifier}ModuleDefinitions
 where  ModuleDefId = @ModuleDefId
 
@@ -2755,16 +2755,16 @@ create procedure {databaseOwner}{objectQualifier}GetModuleEvent
 as
 
 select ItemId,
-       Description,
-       DateTime,
-       Title,
-       ExpireDate,
-       'CreatedByUser' = FirstName + ' ' + LastName,
-       {objectQualifier}ModuleEvents.CreatedDate,
-       Every,
-       Period,
-       IconFile,
-       AltText
+        Description,
+        DateTime,
+        Title,
+        ExpireDate,
+        'CreatedByUser' = FirstName + ' ' + LastName,
+        {objectQualifier}ModuleEvents.CreatedDate,
+        Every,
+        Period,
+        IconFile,
+        AltText
 from {objectQualifier}ModuleEvents
 left outer join {objectQualifier}Users on {objectQualifier}ModuleEvents.CreatedByUser = {objectQualifier}Users.UserId
 where  ItemId = @ItemId
@@ -2783,10 +2783,10 @@ create procedure {databaseOwner}{objectQualifier}GetPortal
 as
 
 select {objectQualifier}Portals.*,
-       'Email' = ( select Email from {objectQualifier}Users where {objectQualifier}Users.UserId = {objectQualifier}Portals.AdministratorId ),
-       'AdminTabId' = ( select TabId from {objectQualifier}Tabs where PortalId = {objectQualifier}Portals.PortalId and TabName = 'Admin' ),
-       'SuperUserId' = ( select UserId from {objectQualifier}Users where IsSuperUser = 1 ),
-       'SuperTabId' = ( select TabId from {objectQualifier}Tabs where PortalId is null and ParentId is null )
+        'Email' = ( select Email from {objectQualifier}Users where {objectQualifier}Users.UserId = {objectQualifier}Portals.AdministratorId ),
+        'AdminTabId' = ( select TabId from {objectQualifier}Tabs where PortalId = {objectQualifier}Portals.PortalId and TabName = 'Admin' ),
+        'SuperUserId' = ( select UserId from {objectQualifier}Users where IsSuperUser = 1 ),
+        'SuperTabId' = ( select TabId from {objectQualifier}Tabs where PortalId is null and ParentId is null )
 from {objectQualifier}Portals
 where  PortalId = @PortalId
 
@@ -2820,17 +2820,17 @@ create procedure {databaseOwner}{objectQualifier}GetRole
 as
 
 select RoleId,
-       PortalId,
-       RoleName,
-       Description,
-       ServiceFee,
-       BillingPeriod,
-       BillingFrequency,
-       TrialFee,
-       TrialPeriod,
-       TrialFrequency,
-       IsPublic,
-       AutoAssignment
+        PortalId,
+        RoleName,
+        Description,
+        ServiceFee,
+        BillingPeriod,
+        BillingFrequency,
+        TrialFee,
+        TrialPeriod,
+        TrialFrequency,
+        IsPublic,
+        AutoAssignment
 from {objectQualifier}Roles
 where  RoleId = @RoleId
 
@@ -2848,10 +2848,10 @@ create procedure {databaseOwner}{objectQualifier}GetSearch
 as
 
 select TableName,
-       TitleField,
-       DescriptionField,
-       CreatedDateField,
-       CreatedByUserField
+        TitleField,
+        DescriptionField,
+        CreatedDateField,
+        CreatedByUserField
 from {objectQualifier}Search
 where  SearchId = @SearchId
 and    ModuleId = @ModuleId
@@ -2871,23 +2871,23 @@ create procedure {databaseOwner}{objectQualifier}GetUser
 as
 
 select {objectQualifier}Users.UserId,
-       {objectQualifier}Users.Username,
-       {objectQualifier}Users.Password,
-       {objectQualifier}Users.Email,
-       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Users.FirstName,
-       {objectQualifier}Users.LastName,
-       {objectQualifier}Users.Unit,
-       {objectQualifier}Users.Street,
-       {objectQualifier}Users.City,
-       {objectQualifier}Users.Region,
-       {objectQualifier}Users.PostalCode,
-       {objectQualifier}Users.Country,
-       {objectQualifier}Users.Telephone,
-       {objectQualifier}Users.IsSuperUser,
-       {objectQualifier}UserPortals.Authorized,
-       {objectQualifier}UserPortals.CreatedDate,
-       {objectQualifier}UserPortals.LastLoginDate
+        {objectQualifier}Users.Username,
+        {objectQualifier}Users.Password,
+        {objectQualifier}Users.Email,
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Users.FirstName,
+        {objectQualifier}Users.LastName,
+        {objectQualifier}Users.Unit,
+        {objectQualifier}Users.Street,
+        {objectQualifier}Users.City,
+        {objectQualifier}Users.Region,
+        {objectQualifier}Users.PostalCode,
+        {objectQualifier}Users.Country,
+        {objectQualifier}Users.Telephone,
+        {objectQualifier}Users.IsSuperUser,
+        {objectQualifier}UserPortals.Authorized,
+        {objectQualifier}UserPortals.CreatedDate,
+        {objectQualifier}UserPortals.LastLoginDate
 from {objectQualifier}Users
 left outer join {objectQualifier}UserPortals on {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId
 where  {objectQualifier}Users.UserId = @UserId
@@ -2905,25 +2905,25 @@ create procedure {databaseOwner}{objectQualifier}GetUserByUsername
 @Username nvarchar(100)
 
 as
- 
+
 select {objectQualifier}Users.UserId,
-       {objectQualifier}Users.Username,
-       {objectQualifier}Users.Password,
-       {objectQualifier}Users.Email,
-       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Users.FirstName,
-       {objectQualifier}Users.LastName,
-       {objectQualifier}Users.Unit,
-       {objectQualifier}Users.Street,
-       {objectQualifier}Users.City,
-       {objectQualifier}Users.Region,
-       {objectQualifier}Users.PostalCode,
-       {objectQualifier}Users.Country,
-       {objectQualifier}Users.Telephone,
-       {objectQualifier}Users.IsSuperUser,
-       {objectQualifier}UserPortals.Authorized,
-       {objectQualifier}UserPortals.CreatedDate,
-       {objectQualifier}UserPortals.LastLoginDate
+        {objectQualifier}Users.Username,
+        {objectQualifier}Users.Password,
+        {objectQualifier}Users.Email,
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Users.FirstName,
+        {objectQualifier}Users.LastName,
+        {objectQualifier}Users.Unit,
+        {objectQualifier}Users.Street,
+        {objectQualifier}Users.City,
+        {objectQualifier}Users.Region,
+        {objectQualifier}Users.PostalCode,
+        {objectQualifier}Users.Country,
+        {objectQualifier}Users.Telephone,
+        {objectQualifier}Users.IsSuperUser,
+        {objectQualifier}UserPortals.Authorized,
+        {objectQualifier}UserPortals.CreatedDate,
+        {objectQualifier}UserPortals.LastLoginDate
 from {objectQualifier}Users
 left outer join {objectQualifier}UserPortals on {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId
 where  username = @Username
@@ -2942,9 +2942,9 @@ create procedure {databaseOwner}{objectQualifier}GetUserDefinedField
 as
 
 select ModuleId,
-       FieldTitle,
-       Visible,
-       FieldOrder
+        FieldTitle,
+        Visible,
+        FieldOrder
 from {objectQualifier}UserDefinedFields
 where  UserDefinedFieldId = @UserDefinedFieldId
 
@@ -2962,7 +2962,7 @@ create procedure {databaseOwner}{objectQualifier}GetUserDefinedRow
 as
 
 select {objectQualifier}UserDefinedFields.FieldTitle,
-       {objectQualifier}UserDefinedData.FieldValue
+        {objectQualifier}UserDefinedData.FieldValue
 from {objectQualifier}UserDefinedData
 inner join {objectQualifier}UserDefinedFields on {objectQualifier}UserDefinedData.UserDefinedFieldId = {objectQualifier}UserDefinedFields.UserDefinedFieldId
 where  {objectQualifier}UserDefinedData.UserDefinedRowId = @UserDefinedRowId
@@ -2975,7 +2975,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}IsUserInRole
-    
+
 @UserId        int,
 @RoleId        int,
 @PortalId      int
@@ -2983,7 +2983,7 @@ create procedure {databaseOwner}{objectQualifier}IsUserInRole
 as
 
 select {objectQualifier}UserRoles.UserId,
-       {objectQualifier}UserRoles.RoleId
+        {objectQualifier}UserRoles.RoleId
 from {objectQualifier}UserRoles
 inner join {objectQualifier}Roles on {objectQualifier}UserRoles.RoleId = {objectQualifier}Roles.RoleId
 where  {objectQualifier}UserRoles.UserId = @UserId
@@ -3003,26 +3003,26 @@ create procedure {databaseOwner}{objectQualifier}GetVendor
 
 as
 
-select {objectQualifier}Vendors.VendorName, 
-       {objectQualifier}Vendors.Unit, 
-       {objectQualifier}Vendors.Street, 
-       {objectQualifier}Vendors.City, 
-       {objectQualifier}Vendors.Region, 
-       {objectQualifier}Vendors.Country, 
-       {objectQualifier}Vendors.PostalCode, 
-       {objectQualifier}Vendors.Telephone,
-       {objectQualifier}Vendors.Fax,
-       {objectQualifier}Vendors.Email,
-       {objectQualifier}Vendors.Website,
-       {objectQualifier}Vendors.FirstName,
-       {objectQualifier}Vendors.LastName,
-       {objectQualifier}Vendors.ClickThroughs,
-       {objectQualifier}Vendors.Views,
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Vendors.CreatedDate,
-       {objectQualifier}Vendors.LogoFile,
-       {objectQualifier}Vendors.KeyWords,
-       {objectQualifier}Vendors.Authorized
+select {objectQualifier}Vendors.VendorName,
+        {objectQualifier}Vendors.Unit,
+        {objectQualifier}Vendors.Street,
+        {objectQualifier}Vendors.City,
+        {objectQualifier}Vendors.Region,
+        {objectQualifier}Vendors.Country,
+        {objectQualifier}Vendors.PostalCode,
+        {objectQualifier}Vendors.Telephone,
+        {objectQualifier}Vendors.Fax,
+        {objectQualifier}Vendors.Email,
+        {objectQualifier}Vendors.Website,
+        {objectQualifier}Vendors.FirstName,
+        {objectQualifier}Vendors.LastName,
+        {objectQualifier}Vendors.ClickThroughs,
+        {objectQualifier}Vendors.Views,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Vendors.CreatedDate,
+        {objectQualifier}Vendors.LogoFile,
+        {objectQualifier}Vendors.KeyWords,
+        {objectQualifier}Vendors.Authorized
 from {objectQualifier}Vendors
 left outer join {objectQualifier}Users on {objectQualifier}Vendors.CreatedByUser = {objectQualifier}Users.UserId
 where  VendorId = @VendorId
@@ -3068,18 +3068,18 @@ create procedure {databaseOwner}{objectQualifier}GetSiteLog2
 as
 
 select {objectQualifier}SiteLog.DateTime,
- 'Name' = 
+ 'Name' =
  case
 when {objectQualifier}SiteLog.UserId is null then null
 else {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
 end,
- 'Referrer' = 
- case 
- when {objectQualifier}SiteLog.Referrer like '%' + @PortalAlias + '%' then null 
+ 'Referrer' =
+ case
+ when {objectQualifier}SiteLog.Referrer like '%' + @PortalAlias + '%' then null
  else {objectQualifier}SiteLog.Referrer
  end,
- 'UserAgent' = 
- case 
+ 'UserAgent' =
+ case
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
@@ -3097,8 +3097,8 @@ end,
  {objectQualifier}SiteLog.UserHostAddress,
  {objectQualifier}Tabs.TabName
 from {objectQualifier}SiteLog
-left outer join {objectQualifier}Users on {objectQualifier}SiteLog.UserId = {objectQualifier}Users.UserId 
-left outer join {objectQualifier}Tabs on {objectQualifier}SiteLog.TabId = {objectQualifier}Tabs.TabId 
+left outer join {objectQualifier}Users on {objectQualifier}SiteLog.UserId = {objectQualifier}Users.UserId
+left outer join {objectQualifier}Tabs on {objectQualifier}SiteLog.TabId = {objectQualifier}Tabs.TabId
 where {objectQualifier}SiteLog.PortalId = @PortalId
 and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
 order by {objectQualifier}SiteLog.DateTime desc
@@ -3158,8 +3158,8 @@ create procedure {databaseOwner}{objectQualifier}GetSiteLog5
 
 as
 
-select'UserAgent' = 
- case 
+select'UserAgent' =
+ case
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
@@ -3179,7 +3179,7 @@ select'UserAgent' =
 from {objectQualifier}SiteLog
 where PortalId = @PortalId
 and {objectQualifier}SiteLog.DateTime between @StartDate and @EndDate
-group by case 
+group by case
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
  when {objectQualifier}SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
@@ -3407,7 +3407,7 @@ as
 if @PortalId is null
 begin
   select TabId,
-         TabOrder
+        TabOrder
   from {objectQualifier}Tabs
   where  TabName = @TabName
   and    PortalId is null
@@ -3415,7 +3415,7 @@ end
 else
 begin
   select TabId,
-         TabOrder
+        TabOrder
   from {objectQualifier}Tabs
   where  TabName = @TabName
   and    PortalId = @PortalId
@@ -3429,13 +3429,13 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetTabs
 
-@PortalId   int 
+@PortalId   int
 
 as
 
 select {objectQualifier}Tabs.*,
-       'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName ),
-       'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
+        'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName ),
+        'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
 from {objectQualifier}Tabs
 where  PortalId = @PortalId
 order by TabOrder, TabName
@@ -3444,22 +3444,22 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetPortalTabModules
 
-@PortalId int, 
+@PortalId int,
 @TabId int
 
 as
 
-select {objectQualifier}Modules.*, 
-       FriendlyName,
-       DesktopSrc,
-       MobileSrc,
-       AdminOrder,
-       EditSrc,
-       Secure,
-       Description,
-       AdminTabIcon,
-       EditModuleIcon,
-       IsPremium
+select {objectQualifier}Modules.*,
+        FriendlyName,
+        DesktopSrc,
+        MobileSrc,
+        AdminOrder,
+        EditSrc,
+        Secure,
+        Description,
+        AdminTabIcon,
+        EditModuleIcon,
+        IsPremium
 from {objectQualifier}Modules
 inner join {objectQualifier}ModuleDefinitions on {objectQualifier}Modules.ModuleDefId = {objectQualifier}ModuleDefinitions.ModuleDefId
 inner join {objectQualifier}Tabs on {objectQualifier}Modules.TabId = {objectQualifier}Tabs.TabId
@@ -3490,19 +3490,19 @@ create procedure {databaseOwner}{objectQualifier}GetTabsByParentId
 as
 
 select TabId,
-       TabOrder,
-       PortalId,
-       TabName,
-       MobileTabName,
-       AuthorizedRoles,
-       ShowMobile,
-       LeftPaneWIdth,
-       RightPaneWIdth,
-       IsVisible,
-       Level,
-       IconFile,
-       AdministratorRoles,
-       'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName )
+        TabOrder,
+        PortalId,
+        TabName,
+        MobileTabName,
+        AuthorizedRoles,
+        ShowMobile,
+        LeftPaneWIdth,
+        RightPaneWIdth,
+        IsVisible,
+        Level,
+        IconFile,
+        AdministratorRoles,
+        'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName )
 from {objectQualifier}Tabs
 where  ParentId = @ParentId
 order by TabOrder
@@ -3520,12 +3520,12 @@ create procedure {databaseOwner}{objectQualifier}GetThreadMessages
 as
 
 select ItemId,
-       DisplayOrder,
-       'Indent' = ((LEN( DisplayOrder ) / 19 ) - 1 ) * 5,
-       Title,  
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Discussion.CreatedDate,
-       Body
+        DisplayOrder,
+        'Indent' = ((LEN( DisplayOrder ) / 19 ) - 1 ) * 5,
+        Title,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Discussion.CreatedDate,
+        Body
 from {objectQualifier}Discussion
 inner join {objectQualifier}Users on {objectQualifier}Discussion.CreatedByUser = {objectQualifier}Users.UserId
 where  LEFT(DisplayOrder, 19) = @Parent
@@ -3545,12 +3545,12 @@ create procedure {databaseOwner}{objectQualifier}GetTopLevelMessages
 as
 
 select ItemId,
-       DisplayOrder,
-       'Parent' = LEFT(DisplayOrder, 19),    
-       'ChildCount' = (SELECT COUNT(*) -1  from {objectQualifier}Discussion Disc2 WHERE LEFT(Disc2.DisplayOrder,LEN(RTRIM({objectQualifier}Discussion.DisplayOrder))) = {objectQualifier}Discussion.DisplayOrder),
-       Title,  
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Discussion.CreatedDate
+        DisplayOrder,
+        'Parent' = LEFT(DisplayOrder, 19),
+        'ChildCount' = (SELECT COUNT(*) -1  from {objectQualifier}Discussion Disc2 WHERE LEFT(Disc2.DisplayOrder,LEN(RTRIM({objectQualifier}Discussion.DisplayOrder))) = {objectQualifier}Discussion.DisplayOrder),
+        Title,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Discussion.CreatedDate
 from {objectQualifier}Discussion
 inner join {objectQualifier}Users on {objectQualifier}Discussion.CreatedByUser = {objectQualifier}Users.UserId
 where  ModuleId = @ModuleId
@@ -3570,9 +3570,9 @@ create procedure {databaseOwner}{objectQualifier}GetUserDefinedFields
 as
 
 select UserDefinedFieldId,
-       FieldTitle,
-       Visible,
-       FieldType
+        FieldTitle,
+        Visible,
+        FieldType
 from {objectQualifier}UserDefinedFields
 where  ModuleId = @ModuleId
 order by FieldOrder
@@ -3585,16 +3585,16 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetUserDefinedRows
 
-@ModuleId    int 
+@ModuleId    int
 
 as
 
 select {objectQualifier}UserDefinedRows.UserDefinedRowId,
-       {objectQualifier}UserDefinedFields.FieldTitle,
-       {objectQualifier}UserDefinedData.FieldValue
+        {objectQualifier}UserDefinedFields.FieldTitle,
+        {objectQualifier}UserDefinedData.FieldValue
 from {objectQualifier}UserDefinedRows
 left outer join {objectQualifier}UserDefinedData on {objectQualifier}UserDefinedRows.UserDefinedRowId = {objectQualifier}UserDefinedData.UserDefinedRowId
-inner join {objectQualifier}UserDefinedFields on {objectQualifier}UserDefinedData.UserDefinedFieldId = {objectQualifier}UserDefinedFields.UserDefinedFieldId 
+inner join {objectQualifier}UserDefinedFields on {objectQualifier}UserDefinedData.UserDefinedFieldId = {objectQualifier}UserDefinedFields.UserDefinedFieldId
 where  {objectQualifier}UserDefinedRows.ModuleId = @ModuleId
 
 
@@ -3610,17 +3610,17 @@ create procedure {databaseOwner}{objectQualifier}GetUsers
 as
 
 select {objectQualifier}Users.*,
-       {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName as FullName,
-       {objectQualifier}UserPortals.Authorized,
-       {objectQualifier}UserPortals.CreatedDate,
-       {objectQualifier}UserPortals.LastLoginDate
-from {objectQualifier}Users 
-left join {objectQualifier}UserPortals on {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId 
+        {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName as FullName,
+        {objectQualifier}UserPortals.Authorized,
+        {objectQualifier}UserPortals.CreatedDate,
+        {objectQualifier}UserPortals.LastLoginDate
+from {objectQualifier}Users
+left join {objectQualifier}UserPortals on {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId
 where ( {objectQualifier}UserPortals.PortalId = @PortalId or @PortalId is null )
 and   ( ( @Filter = '-' and ( {objectQualifier}UserPortals.Authorized = 0 or {objectQualifier}UserPortals.LastLoginDate is null ) )
 or      ( @Filter <> '-' and {objectQualifier}Users.FirstName like @Filter + '%' )
 or      @PortalId is null )
-order by {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName   
+order by {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
 
 GO
 drop procedure dbo.GetVendorClassifications
@@ -3636,15 +3636,15 @@ as
 if @VendorId is null
 begin
   select ClassificationId,
-         ClassificationName,
-         'IsAssociated' = 0
+        ClassificationName,
+        'IsAssociated' = 0
   from {objectQualifier}Classification
 end
 else
 begin
   select ClassificationId,
-         ClassificationName,
-         'IsAssociated' = case when exists ( select 1 from {objectQualifier}VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = {objectQualifier}Classification.ClassificationId ) then 1 else 0 end
+        ClassificationName,
+        'IsAssociated' = case when exists ( select 1 from {objectQualifier}VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = {objectQualifier}Classification.ClassificationId ) then 1 else 0 end
   from {objectQualifier}Classification
 end
 
@@ -3674,8 +3674,8 @@ create procedure {databaseOwner}{objectQualifier}GetVendors
 as
 
 select {objectQualifier}Vendors.*,
-       'Banners' = ( select count(*) from {objectQualifier}Banners where {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId )
-from   {objectQualifier}Vendors 
+        'Banners' = ( select count(*) from {objectQualifier}Banners where {objectQualifier}Banners.VendorId = {objectQualifier}Vendors.VendorId )
+from   {objectQualifier}Vendors
 where  ( @Filter = '-' and Authorized = 0 AND ((PortalId = @PortalId) or (@PortalId is null and PortalId is null)) )
 or     ( @Filter <> '-' and VendorName like @Filter + '%' and ((PortalId = @PortalId) or (@PortalId is null and PortalId is null)) )
 order by VendorName
@@ -3700,13 +3700,13 @@ as
 
 update {objectQualifier}Announcements
 set    CreatedByUser = @UserName,
-       CreatedDate   = GetDate(),
-       Title         = @Title,
-       URL           = @URL,
-       Syndicate     = @Syndicate,
-       ExpireDate    = @ExpireDate,
-       Description   = @Description,
-       ViewOrder     = @ViewOrder
+        CreatedDate   = GetDate(),
+        Title         = @Title,
+        URL           = @URL,
+        Syndicate     = @Syndicate,
+        ExpireDate    = @ExpireDate,
+        Description   = @Description,
+        ViewOrder     = @ViewOrder
 where  ItemId = @ItemId
 
 
@@ -3733,16 +3733,16 @@ as
 
 update {objectQualifier}Banners
 set    ImageFile     = @ImageFile,
-       BannerName    = @BannerName,
-       URL           = @URL,
-       Impressions   = @Impressions,
-       CPM           = @CPM,
-       StartDate     = @StartDate,
-       EndDate       = @EndDate,
-       CreatedByUser = @UserName,
-       CreatedDate   = getdate(),
-       BannerTypeId  = @BannerTypeId
-where  BannerId = @BannerId 
+        BannerName    = @BannerName,
+        URL           = @URL,
+        Impressions   = @Impressions,
+        CPM           = @CPM,
+        StartDate     = @StartDate,
+        EndDate       = @EndDate,
+        CreatedByUser = @UserName,
+        CreatedDate   = getdate(),
+        BannerTypeId  = @BannerTypeId
+where  BannerId = @BannerId
 
 
 GO
@@ -3799,12 +3799,12 @@ as
 
 update {objectQualifier}Contacts
 set    CreatedByUser = @UserName,
-       CreatedDate   = GetDate(),
-       Name          = @Name,
-       Role          = @Role,
-       Email         = @Email,
-       Contact1      = @Contact1,
-       Contact2      = @Contact2
+        CreatedDate   = GetDate(),
+        Name          = @Name,
+        Role          = @Role,
+        Email         = @Email,
+        Contact1      = @Contact1,
+        Contact2      = @Contact2
 where  ItemId = @ItemId
 
 
@@ -3826,11 +3826,11 @@ as
 
 update {objectQualifier}Documents
 set    Title             = @Title,
-       URL               = @URL,
-       CreatedByUser     = @UserName,
-       CreatedDate       = getdate(),
-       Category          = @Category,
-       Syndicate         = @Syndicate
+        URL               = @URL,
+        CreatedByUser     = @UserName,
+        CreatedDate       = getdate(),
+        Category          = @Category,
+        Syndicate         = @Syndicate
 where  ItemId = @ItemId
 
 
@@ -3850,9 +3850,9 @@ as
 
 update {objectQualifier}FAQs
 set    Question = @Question,
-       Answer = @Answer,
-       CreatedByUser = @UserName,
-       CreatedDate = getdate()
+        Answer = @Answer,
+        CreatedByUser = @UserName,
+        CreatedDate = getdate()
 where  ItemId = @ItemId
 
 
@@ -3867,7 +3867,7 @@ as
 insert into {objectQualifier}HostSettings (
   SettingName,
   SettingValue
-) 
+)
 values (
   @SettingName,
   @SettingValue
@@ -3904,7 +3904,7 @@ insert into {objectQualifier}HtmlText (
   DesktopHtml,
   MobileSummary,
   MobileDetails
-) 
+)
 values (
   @ModuleId,
   @DesktopHtml,
@@ -3928,8 +3928,8 @@ as
 
 update {objectQualifier}HtmlText
 set    DesktopHtml   = @DesktopHtml,
-       MobileSummary = @MobileSummary,
-       MobileDetails = @MobileDetails
+        MobileSummary = @MobileSummary,
+        MobileDetails = @MobileDetails
 where  ModuleId = @ModuleId
 
 GO
@@ -3938,7 +3938,7 @@ GO
 
 
 create procedure {databaseOwner}{objectQualifier}UpdateLink
-  
+
 @ItemId      int,
 @UserName    nvarchar(100),
 @Title       nvarchar(100),
@@ -3952,13 +3952,13 @@ as
 
 update {objectQualifier}Links
 set    CreatedByUser = @UserName,
-       CreatedDate   = GetDate(),
-       Title         = @Title,
-       Url           = @Url,
-       MobileUrl     = @MobileUrl,
-       ViewOrder     = @ViewOrder,
-       Description   = @Description,
-       NewWindow     = @NewWindow
+        CreatedDate   = GetDate(),
+        Title         = @Title,
+        Url           = @Url,
+        MobileUrl     = @MobileUrl,
+        ViewOrder     = @ViewOrder,
+        Description   = @Description,
+        NewWindow     = @NewWindow
 where  ItemId = @ItemId
 
 
@@ -3978,9 +3978,9 @@ as
 
 update {objectQualifier}Discussion
 set    Title             = @Title,
-       Body              = @Body,
-       CreatedByUser     = @UserName,
-       CreatedDate       = getdate()
+        Body              = @Body,
+        CreatedByUser     = @UserName,
+        CreatedDate       = getdate()
 where  ItemId = @ItemId
 
 
@@ -4003,7 +4003,7 @@ create procedure {databaseOwner}{objectQualifier}UpdateModule
 @AuthorizedEditRoles nvarchar(256),
 @ShowMobile          bit,
 @TabId               int,
-@AllTabs             bit, 
+@AllTabs             bit,
 @ShowTitle           bit,
 @Personalize         int,
 @Container           nvarchar(1000)
@@ -4012,20 +4012,20 @@ as
 
 update {objectQualifier}Modules
 set    ModuleOrder = @ModuleOrder,
-       ModuleTitle = @ModuleTitle,
-       CacheTime   = @CacheTime,
-       ShowMobile  = @ShowMobile,
-       AuthorizedViewRoles = @AuthorizedViewRoles,
-       AuthorizedEditRoles = @AuthorizedEditRoles,
-       Alignment = @Alignment,
-       Color = @Color,
-       Border = @Border,
-       IconFile = @IconFile,
-       TabId = @TabId,
-       AllTabs = @AllTabs,
-       ShowTitle = @ShowTitle,
-       Personalize = @Personalize,
-       Container = @Container
+        ModuleTitle = @ModuleTitle,
+        CacheTime   = @CacheTime,
+        ShowMobile  = @ShowMobile,
+        AuthorizedViewRoles = @AuthorizedViewRoles,
+        AuthorizedEditRoles = @AuthorizedEditRoles,
+        Alignment = @Alignment,
+        Color = @Color,
+        Border = @Border,
+        IconFile = @IconFile,
+        TabId = @TabId,
+        AllTabs = @AllTabs,
+        ShowTitle = @ShowTitle,
+        Personalize = @Personalize,
+        Container = @Container
 where  ModuleId = @ModuleId
 GO
 drop procedure dbo.UpdateModuleDefinition
@@ -4049,14 +4049,14 @@ as
 
 update {objectQualifier}ModuleDefinitions
 set    FriendlyName   = @FriendlyName,
-       DesktopSrc     = @DesktopSrc,
-       MobileSrc      = @MobileSrc,
-       AdminOrder     = @AdminOrder,
-       EditSrc        = @EditSrc,
-       Secure         = @Secure,
-       Description    = @Description,
-       EditModuleIcon = @EditModuleIcon,
-       IsPremium      = @IsPremium
+        DesktopSrc     = @DesktopSrc,
+        MobileSrc      = @MobileSrc,
+        AdminOrder     = @AdminOrder,
+        EditSrc        = @EditSrc,
+        Secure         = @Secure,
+        Description    = @Description,
+        EditModuleIcon = @EditModuleIcon,
+        IsPremium      = @IsPremium
 where  ModuleDefId = @ModuleDefId
 GO
 
@@ -4094,15 +4094,15 @@ as
 
 update {objectQualifier}ModuleEvents
 set    Description = @Description,
-       DateTime = @DateTime,
-       Title = @Title,
-       ExpireDate = @ExpireDate,
-       CreatedByUser = @UserName,
-       CreatedDate = getdate(),
-       Every = @Every,
-       Period = @Period,
-       IconFile = @IconFile,
-       AltText = @AltText
+        DateTime = @DateTime,
+        Title = @Title,
+        ExpireDate = @ExpireDate,
+        CreatedByUser = @UserName,
+        CreatedDate = getdate(),
+        Every = @Every,
+        Period = @Period,
+        IconFile = @IconFile,
+        AltText = @AltText
 where  ItemId = @ItemId
 
 
@@ -4121,7 +4121,7 @@ as
 
 update {objectQualifier}Modules
 set    ModuleOrder = @ModuleOrder,
-       PaneName = @PaneName
+        PaneName = @PaneName
 where  ModuleId = @ModuleId
 
 
@@ -4134,8 +4134,8 @@ create procedure {databaseOwner}{objectQualifier}GetModuleSetting
 as
 
 select SettingValue
-from   {objectQualifier}ModuleSettings 
-where  ModuleId = @ModuleId 
+from   {objectQualifier}ModuleSettings
+where  ModuleId = @ModuleId
 and    SettingName = @SettingName
 
 GO
@@ -4148,15 +4148,15 @@ create procedure {databaseOwner}{objectQualifier}AddModuleSetting
 
 as
 
-insert into {objectQualifier}ModuleSettings ( 
-  ModuleId, 
-  SettingName, 
-  SettingValue 
-) 
-values ( 
-  @ModuleId, 
-  @SettingName, 
-  @SettingValue 
+insert into {objectQualifier}ModuleSettings (
+  ModuleId,
+  SettingName,
+  SettingValue
+)
+values (
+  @ModuleId,
+  @SettingName,
+  @SettingValue
 )
 
 GO
@@ -4212,23 +4212,23 @@ as
 
 update {objectQualifier}Portals
 set    PortalName = @PortalName,
-       PortalAlias = isnull(@PortalAlias,PortalAlias),
-       LogoFile = @LogoFile,
-       FooterText = @FooterText,
-       ExpiryDate = @ExpiryDate,
-       UserRegistration = @UserRegistration,
-       BannerAdvertising = @BannerAdvertising,
-       Currency = @Currency,
-       AdministratorId = @AdministratorId,
-       HostFee = @HostFee,
-       HostSpace = @HostSpace,
-       PaymentProcessor = @PaymentProcessor,
-       ProcessorUserId = @ProcessorUserId,
-       ProcessorPassword = @ProcessorPassword,
-       Description = @Description,
-       KeyWords = @KeyWords,
-       BackgroundFile = @BackgroundFile,
-       SiteLogHistory = @SiteLogHistory
+        PortalAlias = isnull(@PortalAlias,PortalAlias),
+        LogoFile = @LogoFile,
+        FooterText = @FooterText,
+        ExpiryDate = @ExpiryDate,
+        UserRegistration = @UserRegistration,
+        BannerAdvertising = @BannerAdvertising,
+        Currency = @Currency,
+        AdministratorId = @AdministratorId,
+        HostFee = @HostFee,
+        HostSpace = @HostSpace,
+        PaymentProcessor = @PaymentProcessor,
+        ProcessorUserId = @ProcessorUserId,
+        ProcessorPassword = @ProcessorPassword,
+        Description = @Description,
+        KeyWords = @KeyWords,
+        BackgroundFile = @BackgroundFile,
+        SiteLogHistory = @SiteLogHistory
 where  PortalId = @PortalId
 
 
@@ -4254,7 +4254,7 @@ create procedure {databaseOwner}{objectQualifier}AddPortalModuleDefinition
 
 as
 
-insert into {objectQualifier}PortalModuleDefinitions ( 
+insert into {objectQualifier}PortalModuleDefinitions (
   PortalId,
   ModuleDefId,
   HostFee
@@ -4332,15 +4332,15 @@ as
 
 update {objectQualifier}Roles
 set    RoleName = @RoleName,
-       Description = @Description,
-       ServiceFee = @ServiceFee,
-       BillingPeriod = @BillingPeriod,
-       BillingFrequency = @BillingFrequency,
-       TrialFee = @TrialFee,
-       TrialPeriod = @TrialPeriod,
-       TrialFrequency = @TrialFrequency,
-       IsPublic = @IsPublic,
-       AutoAssignment = @AutoAssignment
+        Description = @Description,
+        ServiceFee = @ServiceFee,
+        BillingPeriod = @BillingPeriod,
+        BillingFrequency = @BillingFrequency,
+        TrialFee = @TrialFee,
+        TrialPeriod = @TrialPeriod,
+        TrialFrequency = @TrialFrequency,
+        IsPublic = @IsPublic,
+        AutoAssignment = @AutoAssignment
 where  RoleId = @RoleId
 
 GO
@@ -4360,9 +4360,9 @@ as
 
 update {objectQualifier}Search
 set    TitleField = @TitleField,
-       DescriptionField = @DescriptionField,
-       CreatedDateField = @CreatedDateField,
-       CreatedByUserField = @CreatedByUserField
+        DescriptionField = @DescriptionField,
+        CreatedDateField = @CreatedDateField,
+        CreatedByUserField = @CreatedByUserField
 where  SearchId = @SearchId
 
 
@@ -4394,16 +4394,16 @@ as
 
 update {objectQualifier}Tabs
 set    TabName = @TabName,
-       ShowMobile = @ShowMobile,
-       MobileTabName = @MobileTabName,
-       AuthorizedRoles = @AuthorizedRoles,
-       LeftPaneWIdth = @LeftPaneWIdth,
-       RightPaneWIdth = @RightPaneWIdth,
-       IsVisible = @IsVisible,
-       DisableLink = @DisableLink,
-       ParentId = @ParentId,
-       IconFile = @IconFile,
-       AdministratorRoles = @AdministratorRoles
+        ShowMobile = @ShowMobile,
+        MobileTabName = @MobileTabName,
+        AuthorizedRoles = @AuthorizedRoles,
+        LeftPaneWIdth = @LeftPaneWIdth,
+        RightPaneWIdth = @RightPaneWIdth,
+        IsVisible = @IsVisible,
+        DisableLink = @DisableLink,
+        ParentId = @ParentId,
+        IconFile = @IconFile,
+        AdministratorRoles = @AdministratorRoles
 where  TabId = @TabId
 
 
@@ -4423,16 +4423,16 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetTabModuleOrder
 
-@TabId    int, 
+@TabId    int,
 @PaneName nvarchar(50)
 
 as
 
-select ModuleOrder 
-from   {objectQualifier}Modules 
-where  TabId = @TabId 
+select ModuleOrder
+from   {objectQualifier}Modules
+where  TabId = @TabId
 and    PaneName = @PaneName
-and   ((ModuleOrder <> 0 and AllTabs = 1) OR (AllTabs = 0)) 
+and   ((ModuleOrder <> 0 and AllTabs = 1) OR (AllTabs = 0))
 order by ModuleOrder
 GO
 drop procedure dbo.UpdateTabModuleOrder
@@ -4448,7 +4448,7 @@ create procedure {databaseOwner}{objectQualifier}UpdateTabModuleOrder
 
 as
 
-update {objectQualifier}Modules 
+update {objectQualifier}Modules
 set    ModuleOrder = @NewModuleOrder
 where  TabId = @TabId
 and    PaneName = @PaneName
@@ -4471,8 +4471,8 @@ as
 
 update {objectQualifier}Tabs
 set    TabOrder = @TabOrder,
-       Level = @Level,
-       ParentId = @ParentId
+        Level = @Level,
+        ParentId = @ParentId
 where  TabId = @TabId
 
 
@@ -4480,29 +4480,29 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}UpdatePortalUser
 
-@PortalId      int, 
-@UserId        int, 
-@Authorized    bit, 
+@PortalId      int,
+@UserId        int,
+@Authorized    bit,
 @LastLoginDate datetime
 
 as
 
-update {objectQualifier}UserPortals 
+update {objectQualifier}UserPortals
 set    Authorized = @Authorized,
-       LastLoginDate = @LastLoginDate 
+        LastLoginDate = @LastLoginDate
 where  PortalId = @PortalId
 and    UserId = @UserId
 GO
 
-create procedure {databaseOwner}{objectQualifier}GetPortalUser 
+create procedure {databaseOwner}{objectQualifier}GetPortalUser
 
-@PortalId int, 
+@PortalId int,
 @UserId int
 
 as
 
 select *
-from   {objectQualifier}UserPortals 
+from   {objectQualifier}UserPortals
 where  PortalId = @PortalId
 and    UserId = @UserId
 GO
@@ -4531,17 +4531,17 @@ as
 
 update {objectQualifier}Users
 set    FirstName = @FirstName,
-       LastName	 = @LastName,
-       Unit	 = @Unit,
-       Street	 = @Street,
-       City	 = @City,
-       Region	 = @Region,
-       PostalCode = @PostalCode,
-       Country	 = @Country,
-       Telephone = @Telephone,
-       Email	 = @Email,
-       Username	 = @Username,
-       Password	 = isnull(@Password,Password)
+        LastName	 = @LastName,
+        Unit	 = @Unit,
+        Street	 = @Street,
+        City	 = @City,
+        Region	 = @Region,
+        PostalCode = @PostalCode,
+        Country	 = @Country,
+        Telephone = @Telephone,
+        Email	 = @Email,
+        Username	 = @Username,
+        Password	 = isnull(@Password,Password)
 where  UserId = @UserId
 
 
@@ -4555,7 +4555,7 @@ create procedure {databaseOwner}{objectQualifier}AddUserDefinedData
 
 as
 
-insert into {objectQualifier}UserDefinedData ( 
+insert into {objectQualifier}UserDefinedData (
   UserDefinedFieldId,
   UserDefinedRowId,
   FieldValue
@@ -4577,9 +4577,9 @@ create procedure {databaseOwner}{objectQualifier}GetUserDefinedData
 
 as
 
-select * 
-from   {objectQualifier}UserDefinedData 
-where  UserDefinedFieldId = @UserDefinedFieldId 
+select *
+from   {objectQualifier}UserDefinedData
+where  UserDefinedFieldId = @UserDefinedFieldId
 and    UserDefinedRowId = @UserDefinedRowId
 
 GO
@@ -4617,8 +4617,8 @@ as
 
 update {objectQualifier}UserDefinedFields
 set    FieldTitle = @FieldTitle,
-       Visible = @Visible,
-       FieldType = @FieldType
+        Visible = @Visible,
+        FieldType = @FieldType
 where  UserDefinedFieldId = @UserDefinedFieldId
 
 
@@ -4675,23 +4675,23 @@ as
 
 update {objectQualifier}Vendors
 set    VendorName    = @VendorName,
-       Unit          = @Unit,
-       Street        = @Street,
-       City          = @City,
-       Region        = @Region,
-       Country       = @Country,
-       PostalCode    = @PostalCode,
-       Telephone     = @Telephone,
-       Fax           = @Fax,
-       Email         = @Email,
-       Website       = @Website,
-       FirstName     = @FirstName,
-       LastName      = @LastName,
-       CreatedByUser = @UserName,
-       CreatedDate   = getdate(),
-       LogoFile      = @LogoFile,
-       KeyWords      = @KeyWords,
-       Authorized    = @Authorized
+        Unit          = @Unit,
+        Street        = @Street,
+        City          = @City,
+        Region        = @Region,
+        Country       = @Country,
+        PostalCode    = @PostalCode,
+        Telephone     = @Telephone,
+        Fax           = @Fax,
+        Email         = @Email,
+        Website       = @Website,
+        FirstName     = @FirstName,
+        LastName      = @LastName,
+        CreatedByUser = @UserName,
+        CreatedDate   = getdate(),
+        LogoFile      = @LogoFile,
+        KeyWords      = @KeyWords,
+        Authorized    = @Authorized
 where  VendorId = @VendorId
 
 
@@ -4711,8 +4711,8 @@ create procedure {databaseOwner}{objectQualifier}UserLogin
 
 as
 
-select UserId 
-from   {objectQualifier}Users 
+select UserId
+from   {objectQualifier}Users
 where  Username = @Username
 and    Password = @Password
 GO
@@ -4721,14 +4721,14 @@ create procedure {databaseOwner}{objectQualifier}GetTables
 
 as
 
-/* Be carefull when changing this procedure as the GetSearchTables() function 
-   in SearchDB.cs is only looking at the first column (to support databases that cannot return 
-   a TableName column name (like MySQL))
+/* Be carefull when changing this procedure as the GetSearchTables() function
+    in SearchDB.cs is only looking at the first column (to support databases that cannot return
+    a TableName column name (like MySQL))
 */
 
 select 'TableName' = [name]
-from   sysobjects 
-where  xtype = 'U' 
+from   sysobjects
+where  xtype = 'U'
 
 GO
 
@@ -4749,10 +4749,10 @@ DROP COLUMN ShowMobile
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Tabs ADD
-	Title nvarchar(200) NULL,
-	Description nvarchar(500) NULL,
-	KeyWords nvarchar(500) NULL,
-	IsDeleted bit NOT NULL CONSTRAINT DF_{objectQualifier}Tabs_IsDeleted DEFAULT 0
+    Title nvarchar(200) NULL,
+    Description nvarchar(500) NULL,
+    KeyWords nvarchar(500) NULL,
+    IsDeleted bit NOT NULL CONSTRAINT DF_{objectQualifier}Tabs_IsDeleted DEFAULT 0
 GO
 
 drop procedure {databaseOwner}{objectQualifier}AddTab
@@ -4817,7 +4817,7 @@ create procedure {databaseOwner}{objectQualifier}GetTabsByParentId
 as
 
 select {objectQualifier}Tabs.*,
-       'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName )
+        'AdminTabIcon' = ( select AdminTabIcon from {objectQualifier}ModuleDefinitions where {objectQualifier}ModuleDefinitions.FriendlyName = {objectQualifier}Tabs.TabName )
 from {objectQualifier}Tabs
 where  ParentId = @ParentId
 order by TabOrder
@@ -4845,71 +4845,71 @@ as
 
 update {objectQualifier}Tabs
 set    TabName            = @TabName,
-       AuthorizedRoles    = @AuthorizedRoles,
-       IsVisible          = @IsVisible,
-       DisableLink        = @DisableLink,
-       ParentId           = @ParentId,
-       IconFile           = @IconFile,
-       AdministratorRoles = @AdministratorRoles,
-       Title              = @Title,
-       Description        = @Description,
-       KeyWords           = @KeyWords,
-       IsDeleted          = @IsDeleted
+        AuthorizedRoles    = @AuthorizedRoles,
+        IsVisible          = @IsVisible,
+        DisableLink        = @DisableLink,
+        ParentId           = @ParentId,
+        IconFile           = @IconFile,
+        AdministratorRoles = @AdministratorRoles,
+        Title              = @Title,
+        Description        = @Description,
+        KeyWords           = @KeyWords,
+        IsDeleted          = @IsDeleted
 where  TabId = @TabId
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}Skins (
-	[SkinID] [int] IDENTITY (1, 1) NOT NULL ,
-	[PortalID] [int] NULL ,
-	[TabID] [int] NULL ,
+    [SkinID] [int] IDENTITY (1, 1) NOT NULL ,
+    [PortalID] [int] NULL ,
+    [TabID] [int] NULL ,
         [ModuleID] [int] NULL ,
         [IsAdmin] [bit] NOT NULL ,
         [SkinRoot] [nvarchar] (50) NOT NULL ,
-	[SkinType] [nvarchar] (1) NOT NULL ,
-	[SkinName] [nvarchar] (50) NOT NULL ,
-	[SkinSrc] [nvarchar] (50) NOT NULL
+    [SkinType] [nvarchar] (1) NOT NULL ,
+    [SkinName] [nvarchar] (50) NOT NULL ,
+    [SkinSrc] [nvarchar] (50) NOT NULL
 ) ON [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Skins ADD CONSTRAINT
-	PK_{objectQualifier}Skins PRIMARY KEY CLUSTERED 
-	(
-	SkinID
-	) ON [PRIMARY]
+    PK_{objectQualifier}Skins PRIMARY KEY CLUSTERED
+    (
+    SkinID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Skins WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}Skins_{objectQualifier}Portals FOREIGN KEY
-	(
-	PortalID
-	) REFERENCES {databaseOwner}{objectQualifier}Portals
-	(
-	PortalID
-	) NOT FOR REPLICATION
+    FK_{objectQualifier}Skins_{objectQualifier}Portals FOREIGN KEY
+    (
+    PortalID
+    ) REFERENCES {databaseOwner}{objectQualifier}Portals
+    (
+    PortalID
+    ) NOT FOR REPLICATION
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Skins WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}Skins_{objectQualifier}Tabs FOREIGN KEY
-	(
-	TabID
-	) REFERENCES {databaseOwner}{objectQualifier}Tabs
-	(
-	TabID
-	) NOT FOR REPLICATION
+    FK_{objectQualifier}Skins_{objectQualifier}Tabs FOREIGN KEY
+    (
+    TabID
+    ) REFERENCES {databaseOwner}{objectQualifier}Tabs
+    (
+    TabID
+    ) NOT FOR REPLICATION
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Skins WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}Skins_{objectQualifier}Modules FOREIGN KEY
-	(
-	ModuleID
-	) REFERENCES {databaseOwner}{objectQualifier}Modules
-	(
-	ModuleID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_{objectQualifier}Skins_{objectQualifier}Modules FOREIGN KEY
+    (
+    ModuleID
+    ) REFERENCES {databaseOwner}{objectQualifier}Modules
+    (
+    ModuleID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
@@ -4924,7 +4924,7 @@ create procedure {databaseOwner}{objectQualifier}GetSkin
 @IsAdmin                bit
 
 as
-	
+
 select *
 from	{objectQualifier}Skins
 where   SkinRoot = @SkinRoot
@@ -4949,8 +4949,8 @@ from   {objectQualifier}Skins
 where   SkinRoot = @SkinRoot
 and     IsAdmin = @IsAdmin
 and    ((PortalID is null and @PortalID is null) or (PortalID = @PortalID))
-and    ((TabID is null and @TabID is null) or (TabID = @TabID)) 
-and    ((ModuleID is null and @ModuleID is null) or (ModuleID = @ModuleID)) 
+and    ((TabID is null and @TabID is null) or (TabID = @TabID))
+and    ((ModuleID is null and @ModuleID is null) or (ModuleID = @ModuleID))
 GO
 
 create procedure {databaseOwner}{objectQualifier}AddSkin
@@ -4994,41 +4994,41 @@ GO
 /* split module definitions */
 
 CREATE TABLE {databaseOwner}{objectQualifier}ModuleControls (
-	[ModuleControlID] [int] IDENTITY (1, 1) NOT NULL ,
-	[ModuleDefID] [int] NULL ,
-	[ControlKey] [nvarchar] (20) NULL ,
-	[ControlTitle] [nvarchar] (50) NULL ,
-	[ControlSrc] [nvarchar] (256) NULL ,
-	[IconFile] [nvarchar] (100) NULL ,
-	[ControlType] [int] NOT NULL ,
-	[ViewOrder] [int] NULL 
+    [ModuleControlID] [int] IDENTITY (1, 1) NOT NULL ,
+    [ModuleDefID] [int] NULL ,
+    [ControlKey] [nvarchar] (20) NULL ,
+    [ControlTitle] [nvarchar] (50) NULL ,
+    [ControlSrc] [nvarchar] (256) NULL ,
+    [IconFile] [nvarchar] (100) NULL ,
+    [ControlType] [int] NOT NULL ,
+    [ViewOrder] [int] NULL
 ) ON [PRIMARY]
 
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}ModuleControls WITH NOCHECK ADD 
-	CONSTRAINT [PK_{objectQualifier}ModuleControls] PRIMARY KEY  CLUSTERED 
-	(
-		[ModuleControlID]
-	)  ON [PRIMARY] 
+ALTER TABLE {databaseOwner}{objectQualifier}ModuleControls WITH NOCHECK ADD
+    CONSTRAINT [PK_{objectQualifier}ModuleControls] PRIMARY KEY  CLUSTERED
+    (
+        [ModuleControlID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}ModuleControls WITH NOCHECK ADD 
-	CONSTRAINT [IX_{objectQualifier}ModuleControls] UNIQUE  NONCLUSTERED 
-	(
-		[ModuleDefID],
-		[ControlKey],
-		[ControlSrc]
-	)  ON [PRIMARY] 
+ALTER TABLE {databaseOwner}{objectQualifier}ModuleControls WITH NOCHECK ADD
+    CONSTRAINT [IX_{objectQualifier}ModuleControls] UNIQUE  NONCLUSTERED
+    (
+        [ModuleDefID],
+        [ControlKey],
+        [ControlSrc]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}ModuleControls ADD 
-	CONSTRAINT [FK_{objectQualifier}ModuleControls_{objectQualifier}ModuleDefinitions] FOREIGN KEY 
-	(
-		[ModuleDefID]
-	) REFERENCES {databaseOwner}[{objectQualifier}ModuleDefinitions] (
-		[ModuleDefID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE {databaseOwner}{objectQualifier}ModuleControls ADD
+    CONSTRAINT [FK_{objectQualifier}ModuleControls_{objectQualifier}ModuleDefinitions] FOREIGN KEY
+    (
+        [ModuleDefID]
+    ) REFERENCES {databaseOwner}[{objectQualifier}ModuleDefinitions] (
+        [ModuleDefID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
 declare @ModuleDefId int
@@ -5047,32 +5047,32 @@ from   {objectQualifier}ModuleDefinitions
 while @ModuleDefId is not null
 begin
   select @FriendlyName = FriendlyName,
-         @DesktopSrc = DesktopSrc,
-         @EditSrc = EditSrc,
-         @EditModuleIcon = EditModuleIcon,
-         @Secure = Secure
+        @DesktopSrc = DesktopSrc,
+        @EditSrc = EditSrc,
+        @EditModuleIcon = EditModuleIcon,
+        @Secure = Secure
   from {objectQualifier}ModuleDefinitions
   where ModuleDefId = @ModuleDefId
 
   if @DesktopSrc is not null and @DesktopSrc <> ''
   begin
     insert into {objectQualifier}ModuleControls (
-      ControlKey,
-      ControlTitle,
-      ModuleDefID,
-      ControlSrc,
-      IconFile,
-      ControlType,
-      ViewOrder
+    ControlKey,
+    ControlTitle,
+    ModuleDefID,
+    ControlSrc,
+    IconFile,
+    ControlType,
+    ViewOrder
     )
     values (
-      null,
-      null,
-      @ModuleDefId,
-      @DesktopSrc,
-      null,
-      0,
-      null
+    null,
+    null,
+    @ModuleDefId,
+    @DesktopSrc,
+    null,
+    0,
+    null
     )
   end
 
@@ -5080,43 +5080,43 @@ begin
   begin
     if @DesktopSrc is not null and @DesktopSrc <> ''
     begin
-      select @EditModuleDefId = @ModuleDefId,
-             @ControlKey = 'Edit',
-             @ControlTitle = 'Edit ' + @FriendlyName
+    select @EditModuleDefId = @ModuleDefId,
+            @ControlKey = 'Edit',
+            @ControlTitle = 'Edit ' + @FriendlyName
     end
     else
     begin
-      select @EditModuleDefId = null,
-             @ControlKey = @FriendlyName,
-             @ControlTitle = @FriendlyName
+    select @EditModuleDefId = null,
+            @ControlKey = @FriendlyName,
+            @ControlTitle = @FriendlyName
     end
 
     if @Secure = 0
     begin
-      select @ControlType = -1
+    select @ControlType = -1
     end
     else
     begin
-      select @ControlType = 1
+    select @ControlType = 1
     end
 
     insert into {objectQualifier}ModuleControls (
-      ControlKey,
-      ControlTitle,
-      ModuleDefId,
-      ControlSrc,
-      IconFile,
-      ControlType,
-      ViewOrder
+    ControlKey,
+    ControlTitle,
+    ModuleDefId,
+    ControlSrc,
+    IconFile,
+    ControlType,
+    ViewOrder
     )
     values (
-      @ControlKey,
-      @ControlTitle,
-      @EditModuleDefId,
-      @EditSrc,
-      @EditModuleIcon,
-      @ControlType,
-      null
+    @ControlKey,
+    @ControlTitle,
+    @EditModuleDefId,
+    @EditSrc,
+    @EditModuleIcon,
+    @ControlType,
+    null
     )
 
   end
@@ -5127,8 +5127,8 @@ begin
 end
 GO
 
-delete 
-from   {objectQualifier}ModuleDefinitions 
+delete
+from   {objectQualifier}ModuleDefinitions
 where  DesktopSrc is null or DesktopSrc = ''
 GO
 
@@ -5138,40 +5138,40 @@ where  FriendlyName = 'Module Definitions'
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}DesktopModules (
-	[DesktopModuleID] [int] IDENTITY (1, 1) NOT NULL ,
-	[FriendlyName] [nvarchar] (128) NOT NULL ,
-	[Description] [nvarchar] (2000) NULL ,
-	[Version] [nvarchar] (8) NULL ,
-	[IsPremium] [bit] NOT NULL ,
-	[IsAdmin] [bit] NOT NULL
+    [DesktopModuleID] [int] IDENTITY (1, 1) NOT NULL ,
+    [FriendlyName] [nvarchar] (128) NOT NULL ,
+    [Description] [nvarchar] (2000) NULL ,
+    [Version] [nvarchar] (8) NULL ,
+    [IsPremium] [bit] NOT NULL ,
+    [IsAdmin] [bit] NOT NULL
 ) ON [PRIMARY]
 
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules WITH NOCHECK ADD 
-	CONSTRAINT [PK_{objectQualifier}DesktopModules] PRIMARY KEY  CLUSTERED 
-	(
-		[DesktopModuleID]
-	)  ON [PRIMARY] 
+ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules WITH NOCHECK ADD
+    CONSTRAINT [PK_{objectQualifier}DesktopModules] PRIMARY KEY  CLUSTERED
+    (
+        [DesktopModuleID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules WITH NOCHECK ADD 
-	CONSTRAINT [IX_{objectQualifier}DesktopModules] UNIQUE  NONCLUSTERED 
-	(
-		[FriendlyName]
-	)  ON [PRIMARY] 
+ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules WITH NOCHECK ADD
+    CONSTRAINT [IX_{objectQualifier}DesktopModules] UNIQUE  NONCLUSTERED
+    (
+        [FriendlyName]
+    )  ON [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}PortalModuleDefinitions
-	DROP CONSTRAINT FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}ModuleDefinitions
+    DROP CONSTRAINT FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}ModuleDefinitions
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}PortalModuleDefinitions ADD
-	DesktopModuleID int NOT NULL CONSTRAINT DF_{objectQualifier}PortalModuleDefinitions_DesktopModuleID DEFAULT 0
+    DesktopModuleID int NOT NULL CONSTRAINT DF_{objectQualifier}PortalModuleDefinitions_DesktopModuleID DEFAULT 0
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModuleDefinitions ADD
-	DesktopModuleID int NOT NULL CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DesktopModuleID DEFAULT 0
+    DesktopModuleID int NOT NULL CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DesktopModuleID DEFAULT 0
 GO
 
 declare @ModuleDefId int
@@ -5186,9 +5186,9 @@ from   {objectQualifier}ModuleDefinitions
 while @ModuleDefId is not null
 begin
   select @FriendlyName = FriendlyName,
-         @Description = Description,
-         @IsPremium = IsPremium,
-         @IsAdmin = case when AdminOrder is null then 0 else 1 end
+        @Description = Description,
+        @IsPremium = IsPremium,
+        @IsAdmin = case when AdminOrder is null then 0 else 1 end
   from   {objectQualifier}ModuleDefinitions
   where  ModuleDefId = @ModuleDefId
 
@@ -5240,42 +5240,42 @@ where  ModuleTitle = 'Manage Users'
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModuleDefinitions
-	DROP CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DesktopModuleID
+    DROP CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DesktopModuleID
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModuleDefinitions
-	DROP CONSTRAINT DF_{objectQualifier}ModuleDefinitions_Secure
+    DROP CONSTRAINT DF_{objectQualifier}ModuleDefinitions_Secure
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModuleDefinitions
-	DROP CONSTRAINT DF_{objectQualifier}ModuleDefinitions_IsPremium
+    DROP CONSTRAINT DF_{objectQualifier}ModuleDefinitions_IsPremium
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModuleDefinitions
-	DROP COLUMN DesktopSrc, MobileSrc, EditSrc, Secure, EditModuleIcon, AdminTabIcon, AdminOrder, Description, IsPremium
+    DROP COLUMN DesktopSrc, MobileSrc, EditSrc, Secure, EditModuleIcon, AdminTabIcon, AdminOrder, Description, IsPremium
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModuleDefinitions ADD CONSTRAINT
-	FK_{objectQualifier}ModuleDefinitions_{objectQualifier}DesktopModules FOREIGN KEY
-	(
-	DesktopModuleID
-	) REFERENCES {databaseOwner}{objectQualifier}DesktopModules
-	(
-	DesktopModuleID
-	) ON DELETE CASCADE NOT FOR REPLICATION
+    FK_{objectQualifier}ModuleDefinitions_{objectQualifier}DesktopModules FOREIGN KEY
+    (
+    DesktopModuleID
+    ) REFERENCES {databaseOwner}{objectQualifier}DesktopModules
+    (
+    DesktopModuleID
+    ) ON DELETE CASCADE NOT FOR REPLICATION
 
 GO
 
 create index [IX_{objectQualifier}ModuleDefinitions_1] on {databaseOwner}{objectQualifier}ModuleDefinitions (
-	[DesktopModuleID]) on [PRIMARY]  
+    [DesktopModuleID]) on [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}PortalModuleDefinitions
-	DROP CONSTRAINT DF_{objectQualifier}PortalModuleDefinitions_DesktopModuleID
+    DROP CONSTRAINT DF_{objectQualifier}PortalModuleDefinitions_DesktopModuleID
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}PortalModuleDefinitions
-	DROP CONSTRAINT IX_{objectQualifier}PortalModuleDefinitions
+    DROP CONSTRAINT IX_{objectQualifier}PortalModuleDefinitions
 GO
 
 DROP INDEX {databaseOwner}{objectQualifier}PortalModuleDefinitions.IX_PortalModuleDefinitions_1
@@ -5285,22 +5285,22 @@ DROP INDEX {databaseOwner}{objectQualifier}PortalModuleDefinitions.IX_PortalModu
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}PortalModuleDefinitions
-	DROP COLUMN ModuleDefId
+    DROP COLUMN ModuleDefId
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}PortalModuleDefinitions ADD CONSTRAINT
-	FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}DesktopModules FOREIGN KEY
-	(
-	DesktopModuleID
-	) REFERENCES {databaseOwner}{objectQualifier}DesktopModules
-	(
-	DesktopModuleID
-	) ON DELETE CASCADE NOT FOR REPLICATION
+    FK_{objectQualifier}PortalModuleDefinitions_{objectQualifier}DesktopModules FOREIGN KEY
+    (
+    DesktopModuleID
+    ) REFERENCES {databaseOwner}{objectQualifier}DesktopModules
+    (
+    DesktopModuleID
+    ) ON DELETE CASCADE NOT FOR REPLICATION
 
 GO
 
 create index [IX_{objectQualifier}PortalModuleDefinitions_1] on {databaseOwner}{objectQualifier}PortalModuleDefinitions (
-	[DesktopModuleID]) on [PRIMARY]  
+    [DesktopModuleID]) on [PRIMARY]
 GO
 
 drop procedure {databaseOwner}{objectQualifier}GetModuleDefinition
@@ -5328,10 +5328,10 @@ create procedure {databaseOwner}{objectQualifier}GetPremiumDesktopModules
 as
 
 select distinct({objectQualifier}DesktopModules.DesktopModuleId) as DesktopModuleId,
-       PortalModuleDefinitionId,
-       {objectQualifier}DesktopModules.FriendlyName,
-       {objectQualifier}DesktopModules.Description,
-       'HostFee' = case when HostFee is null then 0 else HostFee end
+        PortalModuleDefinitionId,
+        {objectQualifier}DesktopModules.FriendlyName,
+        {objectQualifier}DesktopModules.Description,
+        'HostFee' = case when HostFee is null then 0 else HostFee end
 from {objectQualifier}DesktopModules
 left outer join {objectQualifier}PortalModuleDefinitions on {objectQualifier}DesktopModules.DesktopModuleId = {objectQualifier}PortalModuleDefinitions.DesktopModuleId
 where  {objectQualifier}DesktopModules.IsPremium = 1
@@ -5349,12 +5349,12 @@ create procedure {databaseOwner}{objectQualifier}GetPortalDesktopModules
 as
 
 select distinct({objectQualifier}DesktopModules.DesktopModuleId) as DesktopModuleId,
-       {objectQualifier}DesktopModules.FriendlyName,
-       {objectQualifier}DesktopModules.Description
+        {objectQualifier}DesktopModules.FriendlyName,
+        {objectQualifier}DesktopModules.Description
 from {objectQualifier}DesktopModules
 left outer join {objectQualifier}PortalModuleDefinitions on {objectQualifier}DesktopModules.DesktopModuleId = {objectQualifier}PortalModuleDefinitions.DesktopModuleId
 where  IsAdmin = 0
-and    ( IsPremium = 0 or (PortalId = @PortalId and PortalModuleDefinitionId is not null)) 
+and    ( IsPremium = 0 or (PortalId = @PortalId and PortalModuleDefinitionId is not null))
 order  by FriendlyName
 
 GO
@@ -5395,7 +5395,7 @@ drop procedure dbo.AddModuleDefinition
 GO
 
 create procedure {databaseOwner}{objectQualifier}AddDesktopModule
-    
+
 @FriendlyName   nvarchar(128),
 @Description    nvarchar(2000),
 @Version        nvarchar(8),
@@ -5427,7 +5427,7 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}UpdateDesktopModule
 
-@DesktopModuleId int,    
+@DesktopModuleId int,
 @FriendlyName    nvarchar(128),
 @Description     nvarchar(2000),
 @Version         nvarchar(8),
@@ -5437,9 +5437,9 @@ as
 
 update {objectQualifier}DesktopModules
 set    FriendlyName    = @FriendlyName,
-       Description     = @Description,
-       Version         = @Version,
-       IsPremium       = @IsPremium
+        Description     = @Description,
+        Version         = @Version,
+        IsPremium       = @IsPremium
 where  DesktopModuleId = @DesktopModuleId
 
 GO
@@ -5484,7 +5484,7 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetModuleDefinitionByName
 
-@DesktopModuleId int,    
+@DesktopModuleId int,
 @FriendlyName    nvarchar(128)
 
 as
@@ -5498,7 +5498,7 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}AddModuleDefinition
 
-@DesktopModuleId int,    
+@DesktopModuleId int,
 @FriendlyName    nvarchar(128)
 
 as
@@ -5527,7 +5527,7 @@ create procedure {databaseOwner}{objectQualifier}AddPortalModuleDefinition
 
 as
 
-insert into {objectQualifier}PortalModuleDefinitions ( 
+insert into {objectQualifier}PortalModuleDefinitions (
   PortalId,
   DesktopModuleId,
   HostFee
@@ -5628,10 +5628,10 @@ create procedure {databaseOwner}{objectQualifier}GetModuleControlsByKey
 as
 
 select {objectQualifier}ModuleDefinitions.*,
-       ControlTitle,
-       ControlSrc,
-       IconFile,
-       ControlType
+        ControlTitle,
+        ControlSrc,
+        IconFile,
+        ControlType
 from   {objectQualifier}ModuleControls
 left outer join {objectQualifier}ModuleDefinitions on {objectQualifier}ModuleControls.ModuleDefId = {objectQualifier}ModuleDefinitions.ModuleDefId
 where  ((ControlKey is null and @ControlKey is null) or (ControlKey = @ControlKey))
@@ -5647,14 +5647,14 @@ create  procedure {databaseOwner}{objectQualifier}GetModuleControlByKeyAndSrc
 @ControlSrc nvarchar(256)
 
 as
-SELECT     ModuleControlID, 
-	       ModuleDefID, 
-           ControlKey, 
-           ControlTitle, 
-           ControlSrc, 
-           IconFile, 
-           ControlType, 
-           ViewOrder
+SELECT     ModuleControlID,
+            ModuleDefID,
+            ControlKey,
+            ControlTitle,
+            ControlSrc,
+            IconFile,
+            ControlType,
+            ViewOrder
 from       {objectQualifier}ModuleControls
 where ((ModuleDefId is null and @ModuleDefId is null) or (ModuleDefID = @ModuleDefID))
 and ((ControlKey is null and @ControlKey is null) or (ControlKey = @ControlKey))
@@ -5663,7 +5663,7 @@ and ((ControlSrc is null and @ControlSrc is null) or (ControlSrc = @ControlSrc))
 GO
 
 create procedure {databaseOwner}{objectQualifier}AddModuleControl
-    
+
 @ModuleDefID                   int,
 @ControlKey                    nvarchar(20),
 @ControlTitle                  nvarchar(50),
@@ -5712,12 +5712,12 @@ as
 
 update {objectQualifier}ModuleControls
 set    ModuleDefId       = @ModuleDefId,
-       ControlKey        = @ControlKey,
-       ControlTitle      = @ControlTitle,
-       ControlSrc        = @ControlSrc,
-       IconFile          = @IconFile,
-       ControlType       = @ControlType,
-       ViewOrder         = ViewOrder
+        ControlKey        = @ControlKey,
+        ControlTitle      = @ControlTitle,
+        ControlSrc        = @ControlSrc,
+        IconFile          = @IconFile,
+        ControlType       = @ControlType,
+        ViewOrder         = ViewOrder
 where  ModuleControlId = @ModuleControlId
 
 GO
@@ -5737,8 +5737,8 @@ GO
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -5789,8 +5789,8 @@ select @ModuleDefID = @@IDENTITY
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -5809,8 +5809,8 @@ GO
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -5861,8 +5861,8 @@ select @ModuleDefID = @@IDENTITY
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -5899,8 +5899,8 @@ where  FriendlyName = 'Module Definitions'
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -5930,7 +5930,7 @@ create procedure {databaseOwner}{objectQualifier}GetTab
 as
 
 select {objectQualifier}Tabs.*,
-       'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
+        'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
 from   {objectQualifier}Tabs
 where  TabId = @TabId
 
@@ -5946,7 +5946,7 @@ create procedure {databaseOwner}{objectQualifier}GetTabs
 as
 
 select {objectQualifier}Tabs.*,
-       'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
+        'HasChildren' = case when exists (select 1 from {objectQualifier}Tabs T2 where T2.ParentId = {objectQualifier}Tabs.TabId) then 'true' else 'false' end
 from   {objectQualifier}Tabs
 where  PortalId = @PortalId
 order by TabOrder, TabName
@@ -5958,17 +5958,17 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetPortalTabModules
 
-@PortalId int, 
+@PortalId int,
 @TabId int
 
 as
 
 select {objectQualifier}Modules.*,
-       AuthorizedRoles, 
-       FriendlyName,
-       ControlSrc,
-       ControlType,
-       ControlTitle
+        AuthorizedRoles,
+        FriendlyName,
+        ControlSrc,
+        ControlType,
+        ControlTitle
 from {objectQualifier}Modules
 inner join {objectQualifier}Tabs on {objectQualifier}Modules.TabId = {objectQualifier}Tabs.TabId
 inner join {objectQualifier}ModuleDefinitions on {objectQualifier}Modules.ModuleDefId = {objectQualifier}ModuleDefinitions.ModuleDefId
@@ -6004,7 +6004,7 @@ create procedure {databaseOwner}{objectQualifier}GetModule
 as
 
 select {objectQualifier}Modules.*,
-       AuthorizedRoles
+        AuthorizedRoles
 from {objectQualifier}Modules
 inner join {objectQualifier}Tabs on {objectQualifier}Modules.TabId = {objectQualifier}Tabs.TabId
 where  ModuleId = @ModuleId
@@ -6020,8 +6020,8 @@ where  FriendlyName = 'Links'
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6046,8 +6046,8 @@ where  FriendlyName = 'User Defined Table'
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6071,8 +6071,8 @@ GO
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6102,8 +6102,8 @@ GO
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6128,8 +6128,8 @@ where  FriendlyName = 'Events'
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6148,8 +6148,8 @@ GO
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6200,8 +6200,8 @@ SET @ModuleDefID = @@IDENTITY
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6229,7 +6229,7 @@ where TabName = 'Admin'
 while @TabId is not null
 begin
   select @PortalId = PortalId,
-         @Roles = AuthorizedRoles
+        @Roles = AuthorizedRoles
   from   {objectQualifier}Tabs
   where  TabId = @TabId
 
@@ -6272,7 +6272,7 @@ begin
 
   select @NewTabId = @@IDENTITY
 
-  insert into {objectQualifier}Modules ( 
+  insert into {objectQualifier}Modules (
     TabId,
     ModuleDefId,
     ModuleOrder,
@@ -6353,8 +6353,8 @@ SET @ModuleDefID = @@IDENTITY
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6373,8 +6373,8 @@ declare @TabOrder int
 declare @ParentId int
 declare @TabID int
 
-select @TabOrder = max(TabOrder) + 2 
-from   {objectQualifier}Tabs 
+select @TabOrder = max(TabOrder) + 2
+from   {objectQualifier}Tabs
 where  PortalID is null
 
 select @ParentId = TabId
@@ -6394,7 +6394,7 @@ insert into {objectQualifier}Tabs (
   DisableLink,
   IsDeleted
 )
-values ( 
+values (
   @TabOrder,
   null,
   'Exception Viewer',
@@ -6486,8 +6486,8 @@ SET @ModuleDefID = @@IDENTITY
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -6565,14 +6565,14 @@ ALTER TABLE {databaseOwner}{objectQualifier}Modules
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Modules ADD
-	IsDeleted bit NOT NULL CONSTRAINT DF_{objectQualifier}Modules_IsDeleted DEFAULT 0
+    IsDeleted bit NOT NULL CONSTRAINT DF_{objectQualifier}Modules_IsDeleted DEFAULT 0
 GO
 
 drop procedure {databaseOwner}{objectQualifier}AddModule
 GO
 
 create procedure {databaseOwner}{objectQualifier}AddModule
-    
+
 @TabId                         int,
 @ModuleDefId                   int,
 @ModuleOrder                   int,
@@ -6591,7 +6591,7 @@ create procedure {databaseOwner}{objectQualifier}AddModule
 
 as
 
-insert {objectQualifier}Modules ( 
+insert {objectQualifier}Modules (
   TabId,
   ModuleDefId,
   ModuleOrder,
@@ -6648,7 +6648,7 @@ create procedure {databaseOwner}{objectQualifier}UpdateModule
 @AuthorizedViewRoles nvarchar(256),
 @AuthorizedEditRoles nvarchar(256),
 @TabId               int,
-@AllTabs             bit, 
+@AllTabs             bit,
 @ShowTitle           bit,
 @Personalize         int,
 @IsDeleted           bit
@@ -6657,26 +6657,26 @@ as
 
 update {objectQualifier}Modules
 set    ModuleOrder = @ModuleOrder,
-       ModuleTitle = @ModuleTitle,
-       CacheTime   = @CacheTime,
-       AuthorizedViewRoles = @AuthorizedViewRoles,
-       AuthorizedEditRoles = @AuthorizedEditRoles,
-       Alignment = @Alignment,
-       Color = @Color,
-       Border = @Border,
-       IconFile = @IconFile,
-       TabId = @TabId,
-       AllTabs = @AllTabs,
-       ShowTitle = @ShowTitle,
-       Personalize = @Personalize,
-       IsDeleted = @IsDeleted
+        ModuleTitle = @ModuleTitle,
+        CacheTime   = @CacheTime,
+        AuthorizedViewRoles = @AuthorizedViewRoles,
+        AuthorizedEditRoles = @AuthorizedEditRoles,
+        Alignment = @Alignment,
+        Color = @Color,
+        Border = @Border,
+        IconFile = @IconFile,
+        TabId = @TabId,
+        AllTabs = @AllTabs,
+        ShowTitle = @ShowTitle,
+        Personalize = @Personalize,
+        IsDeleted = @IsDeleted
 where  ModuleId = @ModuleId
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Portals ADD
-	HomeTabId int NULL,
-	LoginTabId int NULL,
-	UserTabId int NULL
+    HomeTabId int NULL,
+    LoginTabId int NULL,
+    UserTabId int NULL
 GO
 
 drop procedure {databaseOwner}{objectQualifier}AddPortalInfo
@@ -6763,26 +6763,26 @@ as
 
 update {objectQualifier}Portals
 set    PortalName = @PortalName,
-       PortalAlias = isnull(@PortalAlias,PortalAlias),
-       LogoFile = @LogoFile,
-       FooterText = @FooterText,
-       ExpiryDate = @ExpiryDate,
-       UserRegistration = @UserRegistration,
-       BannerAdvertising = @BannerAdvertising,
-       Currency = @Currency,
-       AdministratorId = @AdministratorId,
-       HostFee = @HostFee,
-       HostSpace = @HostSpace,
-       PaymentProcessor = @PaymentProcessor,
-       ProcessorUserId = @ProcessorUserId,
-       ProcessorPassword = @ProcessorPassword,
-       Description = @Description,
-       KeyWords = @KeyWords,
-       BackgroundFile = @BackgroundFile,
-       SiteLogHistory = @SiteLogHistory,
-       HomeTabId = @HomeTabId,
-       LoginTabId = @LoginTabId,
-       UserTabId = @UserTabId
+        PortalAlias = isnull(@PortalAlias,PortalAlias),
+        LogoFile = @LogoFile,
+        FooterText = @FooterText,
+        ExpiryDate = @ExpiryDate,
+        UserRegistration = @UserRegistration,
+        BannerAdvertising = @BannerAdvertising,
+        Currency = @Currency,
+        AdministratorId = @AdministratorId,
+        HostFee = @HostFee,
+        HostSpace = @HostSpace,
+        PaymentProcessor = @PaymentProcessor,
+        ProcessorUserId = @ProcessorUserId,
+        ProcessorPassword = @ProcessorPassword,
+        Description = @Description,
+        KeyWords = @KeyWords,
+        BackgroundFile = @BackgroundFile,
+        SiteLogHistory = @SiteLogHistory,
+        HomeTabId = @HomeTabId,
+        LoginTabId = @LoginTabId,
+        UserTabId = @UserTabId
 where  PortalId = @PortalId
 
 GO
@@ -6800,34 +6800,34 @@ create procedure {databaseOwner}{objectQualifier}UpdatePortalSetup
 as
 
 update {objectQualifier}Portals
-set    AdministratorId = @AdministratorId, 
-       AdministratorRoleId = @AdministratorRoleId, 
-       RegisteredRoleId = @RegisteredRoleId,
-       HomeTabId = @HomeTabId,
-       LoginTabId = @LoginTabId,
-       UserTabId = @UserTabId
+set    AdministratorId = @AdministratorId,
+        AdministratorRoleId = @AdministratorRoleId,
+        RegisteredRoleId = @RegisteredRoleId,
+        HomeTabId = @HomeTabId,
+        LoginTabId = @LoginTabId,
+        UserTabId = @UserTabId
 where  PortalId = @PortalId
 
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}Affiliates
-	(
-	AffiliateId int NOT NULL IDENTITY (1, 1),
-	VendorId int NULL,
-	StartDate datetime NULL,
-	EndDate datetime NULL,
+    (
+    AffiliateId int NOT NULL IDENTITY (1, 1),
+    VendorId int NULL,
+    StartDate datetime NULL,
+    EndDate datetime NULL,
         CPC float NOT NULL,
         Clicks int NOT NULL,
         CPA float NOT NULL,
         Acquisitions int NOT NULL
-	)  ON [PRIMARY]
+    )  ON [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Affiliates ADD CONSTRAINT
-	PK_{objectQualifier}Affiliates PRIMARY KEY CLUSTERED 
-	(
-	AffiliateId
-	) ON [PRIMARY]
+    PK_{objectQualifier}Affiliates PRIMARY KEY CLUSTERED
+    (
+    AffiliateId
+    ) ON [PRIMARY]
 
 GO
 
@@ -6883,14 +6883,14 @@ create procedure {databaseOwner}{objectQualifier}GetAffiliates
 as
 
 select AffiliateId,
-       StartDate,
-       EndDate,
-       CPC,
-       Clicks,
-       'CPCTotal' = Clicks * CPC,
-       CPA,
-       Acquisitions,
-       'CPATotal' = Acquisitions * CPA
+        StartDate,
+        EndDate,
+        CPC,
+        Clicks,
+        'CPCTotal' = Clicks * CPC,
+        CPA,
+        Acquisitions,
+        'CPATotal' = Acquisitions * CPA
 from   {objectQualifier}Affiliates
 where  VendorId = @VendorId
 order  by StartDate desc
@@ -6905,13 +6905,13 @@ create procedure {databaseOwner}{objectQualifier}GetAffiliate
 as
 
 select AffiliateId,
-       VendorId,
-       StartDate,
-       EndDate,
-       CPC,
-       Clicks,
-       CPA,
-       Acquisitions
+        VendorId,
+        StartDate,
+        EndDate,
+        CPC,
+        Clicks,
+        CPA,
+        Acquisitions
 from   {objectQualifier}Affiliates
 where  AffiliateId = @AffiliateId
 and    VendorId = @VendorId
@@ -6930,10 +6930,10 @@ as
 
 update {objectQualifier}Affiliates
 set    StartDate   = @StartDate,
-       EndDate     = @EndDate,
-       CPC         = @CPC,
-       CPA         = @CPA
-where  AffiliateId = @AffiliateId 
+        EndDate     = @EndDate,
+        CPC         = @CPC,
+        CPA         = @CPA
+where  AffiliateId = @AffiliateId
 
 GO
 
@@ -6947,15 +6947,15 @@ as
 
 update {objectQualifier}Affiliates
 set    Clicks = Clicks + @Clicks,
-       Acquisitions = Acquisitions + @Acquisitions
-where  VendorId = @AffiliateId 
-and    ( StartDate < getdate() or StartDate is null ) 
+        Acquisitions = Acquisitions + @Acquisitions
+where  VendorId = @AffiliateId
+and    ( StartDate < getdate() or StartDate is null )
 and    ( EndDate > getdate() or EndDate is null )
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Users ADD
-	AffiliateId int NULL
+    AffiliateId int NULL
 GO
 
 drop procedure {databaseOwner}{objectQualifier}AddUser
@@ -6982,10 +6982,10 @@ as
 insert into {objectQualifier}Users (
   FirstName,
   LastName,
-  Unit, 
-  Street, 
+  Unit,
+  Street,
   City,
-  Region, 
+  Region,
   PostalCode,
   Country,
   Telephone,
@@ -7053,8 +7053,8 @@ where  FriendlyName = 'Vendors'
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -7072,8 +7072,8 @@ values (
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -7091,8 +7091,8 @@ values (
 insert into {objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -7179,8 +7179,8 @@ values ( '[VISIBILITY]', null, null, 'Admin/Containers/Visibility.ascx', null, -
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetUserRole
-    @PortalId int, 
-    @UserId int, 
+    @PortalId int,
+    @UserId int,
     @RoleId int
 AS
 SELECT UserRoleId
@@ -7191,12 +7191,12 @@ AND    {objectQualifier}UserRoles.RoleId = @RoleId
 AND    PortalId = @PortalId
 GO
 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateUserRole 
-    @UserRoleId int, 
+CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateUserRole
+    @UserRoleId int,
     @ExpiryDate datetime
 AS
 
-UPDATE {objectQualifier}UserRoles 
+UPDATE {objectQualifier}UserRoles
 SET ExpiryDate = @ExpiryDate
 WHERE UserRoleId = @UserRoleId
 GO
@@ -7207,7 +7207,7 @@ where  FriendlyName = 'Contacts'
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UserPortals ADD
-	UserPortalId int NOT NULL IDENTITY (1, 1)
+    UserPortalId int NOT NULL IDENTITY (1, 1)
 GO
 
 drop procedure {databaseOwner}{objectQualifier}GetUserDefinedFields
@@ -7220,10 +7220,10 @@ create procedure {databaseOwner}{objectQualifier}GetUserDefinedFields
 as
 
 select UserDefinedFieldId,
-       FieldTitle,
-       Visible,
-       FieldOrder,
-       FieldType
+        FieldTitle,
+        Visible,
+        FieldOrder,
+        FieldType
 from {objectQualifier}UserDefinedFields
 where  ModuleId = @ModuleId
 order by FieldOrder
@@ -7250,18 +7250,18 @@ go
 
 create procedure {databaseOwner}{objectQualifier}GetPortalTabModules
 
-@PortalId int, 
+@PortalId int,
 @TabId int
 
 as
 
 select {objectQualifier}Modules.*,
-       {objectQualifier}Tabs.AuthorizedRoles, 
-       {objectQualifier}ModuleDefinitions.FriendlyName,
-       {objectQualifier}ModuleControls.ControlSrc,
-       {objectQualifier}ModuleControls.ControlType,
-       {objectQualifier}ModuleControls.ControlTitle,
-       {objectQualifier}DesktopModules.IsAdmin
+        {objectQualifier}Tabs.AuthorizedRoles,
+        {objectQualifier}ModuleDefinitions.FriendlyName,
+        {objectQualifier}ModuleControls.ControlSrc,
+        {objectQualifier}ModuleControls.ControlType,
+        {objectQualifier}ModuleControls.ControlTitle,
+        {objectQualifier}DesktopModules.IsAdmin
 from {objectQualifier}Modules
 inner join {objectQualifier}Tabs on {objectQualifier}Modules.TabId = {objectQualifier}Tabs.TabId
 inner join {objectQualifier}ModuleDefinitions on {objectQualifier}Modules.ModuleDefId = {objectQualifier}ModuleDefinitions.ModuleDefId
@@ -7276,7 +7276,3 @@ GO
 /************************************************************/
 /*****              Upgrade Script DAL                  *****/
 /************************************************************/
-
-
-
-

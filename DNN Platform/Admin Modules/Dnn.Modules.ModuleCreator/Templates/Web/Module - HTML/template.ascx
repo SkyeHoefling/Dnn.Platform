@@ -1,6 +1,6 @@
 <!--
     *NOTE: Please manage your content in the  associated _CONTROL_.html file in this folder
---> 
+-->
 
 <%@ Control Language="C#" ClassName="_OWNER_._MODULE_._CONTROL_" Inherits="DotNetNuke.Entities.Modules.PortalModuleBase" %>
 
@@ -11,10 +11,10 @@
 
     #region Copyright
 
-    // 
+    //
     // Copyright (c) _YEAR_
     // by _OWNER_
-    // 
+    //
 
     #endregion
 

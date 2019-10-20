@@ -11,14 +11,14 @@ class MyRadioButtons extends Component{
 
   render(){
     return (
-      <RadioButtons
+    <RadioButtons
         options={[
-          { value: "1", label: "Value 1" },
-          { value: "2", label: "Value 2" }
+        { value: "1", label: "Value 1" },
+        { value: "2", label: "Value 2" }
         ]}
         onChange={(value) => this.setState({value:value})}
         value={this.state.value}
-      />
+    />
     );
   }
 }

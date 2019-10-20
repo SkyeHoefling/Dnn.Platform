@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -202,7 +202,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
         [Test]
         public void MessagingController_Constructor_Throws_On_Null_DataService()
         {
-            //Arrange            
+            //Arrange
 
             //Act, Assert
             Assert.Throws<ArgumentNullException>(() => new MessagingController(null));
@@ -470,7 +470,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
         [ExpectedException(typeof(ArgumentException))]
         public void MessagingController_CreateMessage_Throws_On_Large_To()
         {
-            //Arrange            
+            //Arrange
             var message = new Message { Subject = "subject", Body = "body" };
             var roles = new List<RoleInfo>();
             var users = new List<UserInfo>();
@@ -489,7 +489,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
         [ExpectedException(typeof(ArgumentException))]
         public void MessagingController_CreateMessage_Throws_On_Null_Sender()
         {
-            //Arrange            
+            //Arrange
             var message = new Message { Subject = "subject", Body = "body" };
             var user = new UserInfo { DisplayName = "user1", UserID = Constants.USER_TenId };
             var role = new RoleInfo { RoleName = "role1" };
@@ -502,7 +502,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
         [ExpectedException(typeof(ArgumentException))]
         public void MessagingController_CreateMessage_Throws_On_Negative_SenderID()
         {
-            //Arrange            
+            //Arrange
             var message = new Message { Subject = "subject", Body = "body" };
             var user = new UserInfo { DisplayName = "user1", UserID = Constants.USER_TenId };
             var role = new RoleInfo { RoleName = "role1" };
@@ -516,10 +516,10 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
         [ExpectedException(typeof(ArgumentException))]
         public void MessagingController_CreateMessage_Throws_On_SendingToRole_ByNonAdmin()
         {
-            //Arrange            
+            //Arrange
             var message = new Message { Subject = "subject", Body = "body" };
             var user = new UserInfo { DisplayName = Constants.USER_ElevenName, UserID = Constants.USER_ElevenId };
-			var role = new RoleInfo { RoleName = Constants.RoleName_FirstSocialGroup, RoleID = Constants.RoleID_FirstSocialGroup };
+            var role = new RoleInfo { RoleName = Constants.RoleName_FirstSocialGroup, RoleID = Constants.RoleID_FirstSocialGroup };
 
             var mockDataService = new Mock<IDataService>();
             var messagingController = new MessagingController(mockDataService.Object);
@@ -582,11 +582,11 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
 
             //Assert
             _mockDataService.Verify(ds => ds.SaveMessage(It.Is<Message>(v => v.PortalID == Constants.PORTAL_Zero && v.Subject == "subject"
-                                                                             && v.Body == "body"
-                                                                             && v.To == "role1,user1"
-                                                                             && v.SenderUserID == _adminUserInfo.UserID)
-                                                               , It.IsAny<int>()
-                                                               , It.IsAny<int>()));
+                                                                            && v.Body == "body"
+                                                                            && v.To == "role1,user1"
+                                                                            && v.SenderUserID == _adminUserInfo.UserID)
+                                                                , It.IsAny<int>()
+                                                                , It.IsAny<int>()));
         }
 
         [Test]
@@ -651,7 +651,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
             //Act
             _mockMessagingController.Object.SendMessage(message, new List<RoleInfo> { role }, new List<UserInfo> { user }, null, _adminUserInfo);
 
-            //SaveMessageRecipient is called twice, one for sent message and second for receive                        
+            //SaveMessageRecipient is called twice, one for sent message and second for receive
         }
 
         [Test]
@@ -1083,7 +1083,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Messaging
             //Arrange
             var sender = new UserInfo { DisplayName = "user11" };
 
-            //Act            
+            //Act
             _internalMessagingController.ReplyMessage(Constants.Messaging_MessageId_1, "body", null, sender);
         }
 

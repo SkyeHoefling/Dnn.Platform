@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -46,12 +46,12 @@ using DotNetNuke.Services.UserRequest;
 namespace DotNetNuke.Modules.Admin.Security
 {
 
-   
+
     public partial class PasswordReset : UserModuleBase
     {
         #region Private Members
 
-	    private const int RedirectTimeout = 3000;
+        private const int RedirectTimeout = 3000;
         private string _ipAddress;
 
         private string ResetToken
@@ -67,7 +67,7 @@ namespace DotNetNuke.Modules.Admin.Security
         }
 
         #endregion
-    
+
         #region Event Handlers
 
         protected override void OnLoad(EventArgs e)
@@ -76,30 +76,30 @@ namespace DotNetNuke.Modules.Admin.Security
             _ipAddress = UserRequestIPAddressController.Instance.GetUserRequestIPAddress(new HttpRequestWrapper(Request));
 
             JavaScript.RequestRegistration(CommonJs.DnnPlugins);
-			ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/scripts/dnn.jquery.extensions.js");
-			ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/scripts/dnn.jquery.tooltip.js");
-			ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/scripts/dnn.PasswordStrength.js");
-			ClientResourceManager.RegisterScript(Page, "~/DesktopModules/Admin/Security/Scripts/dnn.PasswordComparer.js");
+            ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/scripts/dnn.jquery.extensions.js");
+            ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/scripts/dnn.jquery.tooltip.js");
+            ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/scripts/dnn.PasswordStrength.js");
+            ClientResourceManager.RegisterScript(Page, "~/DesktopModules/Admin/Security/Scripts/dnn.PasswordComparer.js");
 
-			ClientResourceManager.RegisterStyleSheet(Page, "~/Resources/Shared/stylesheets/dnn.PasswordStrength.css", FileOrder.Css.ResourceCss);
+            ClientResourceManager.RegisterStyleSheet(Page, "~/Resources/Shared/stylesheets/dnn.PasswordStrength.css", FileOrder.Css.ResourceCss);
 
             if (PortalSettings.LoginTabId != -1 && PortalSettings.ActiveTab.TabID != PortalSettings.LoginTabId)
             {
                 Response.Redirect(Globals.NavigateURL(PortalSettings.LoginTabId) + Request.Url.Query);
             }
             cmdChangePassword.Click +=cmdChangePassword_Click;
-            
+
             hlCancel.NavigateUrl = Globals.NavigateURL();
 
             if (Request.QueryString["resetToken"] != null)
             {
                 ResetToken = Request.QueryString["resetToken"];
                 txtUsername.Enabled = false;
-                
+
             }
 
-	        var useEmailAsUserName = PortalController.GetPortalSettingAsBoolean("Registration_UseEmailAsUserName", PortalId, false);
-			if (useEmailAsUserName)
+            var useEmailAsUserName = PortalController.GetPortalSettingAsBoolean("Registration_UseEmailAsUserName", PortalId, false);
+            if (useEmailAsUserName)
             {
                 valUsername.Text = Localization.GetString("Email.Required", LocalResourceFile);
             }
@@ -113,9 +113,9 @@ namespace DotNetNuke.Modules.Admin.Security
                 lblInfo.Text = Localization.GetString("ForcedResetInfo", LocalResourceFile);
             }
 
-			txtUsername.Attributes.Add("data-default",useEmailAsUserName ? LocalizeString("Email") : LocalizeString("Username"));
-			txtPassword.Attributes.Add("data-default", LocalizeString("Password"));
-			txtConfirmPassword.Attributes.Add("data-default", LocalizeString("Confirm"));
+            txtUsername.Attributes.Add("data-default",useEmailAsUserName ? LocalizeString("Email") : LocalizeString("Username"));
+            txtPassword.Attributes.Add("data-default", LocalizeString("Password"));
+            txtConfirmPassword.Attributes.Add("data-default", LocalizeString("Confirm"));
             txtAnswer.Attributes.Add("data-default", LocalizeString("Answer"));
 
             if (!Page.IsPostBack)
@@ -150,42 +150,42 @@ namespace DotNetNuke.Modules.Admin.Security
             if (!string.IsNullOrEmpty(lblHelp.Text) || !string.IsNullOrEmpty(lblInfo.Text))
                 resetMessages.Visible = true;
 
-			var options = new DnnPaswordStrengthOptions();
-			var optionsAsJsonString = Json.Serialize(options);
-			var script = string.Format("dnn.initializePasswordStrength('.{0}', {1});{2}",
-				"password-strength", optionsAsJsonString, Environment.NewLine);
+            var options = new DnnPaswordStrengthOptions();
+            var optionsAsJsonString = Json.Serialize(options);
+            var script = string.Format("dnn.initializePasswordStrength('.{0}', {1});{2}",
+                "password-strength", optionsAsJsonString, Environment.NewLine);
 
-			if (ScriptManager.GetCurrent(Page) != null)
-			{
-				// respect MS AJAX
-				ScriptManager.RegisterStartupScript(Page, GetType(), "PasswordStrength", script, true);
-			}
-			else
-			{
-				Page.ClientScript.RegisterStartupScript(GetType(), "PasswordStrength", script, true);
-			}
+            if (ScriptManager.GetCurrent(Page) != null)
+            {
+                // respect MS AJAX
+                ScriptManager.RegisterStartupScript(Page, GetType(), "PasswordStrength", script, true);
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "PasswordStrength", script, true);
+            }
 
-			var confirmPasswordOptions = new DnnConfirmPasswordOptions()
-			{
-				FirstElementSelector = ".password-strength",
-				SecondElementSelector = ".password-confirm",
-				ContainerSelector = ".dnnPasswordReset",
-				UnmatchedCssClass = "unmatched",
-				MatchedCssClass = "matched"
-			};
+            var confirmPasswordOptions = new DnnConfirmPasswordOptions()
+            {
+                FirstElementSelector = ".password-strength",
+                SecondElementSelector = ".password-confirm",
+                ContainerSelector = ".dnnPasswordReset",
+                UnmatchedCssClass = "unmatched",
+                MatchedCssClass = "matched"
+            };
 
-			optionsAsJsonString = Json.Serialize(confirmPasswordOptions);
-			script = string.Format("dnn.initializePasswordComparer({0});{1}", optionsAsJsonString, Environment.NewLine);
+            optionsAsJsonString = Json.Serialize(confirmPasswordOptions);
+            script = string.Format("dnn.initializePasswordComparer({0});{1}", optionsAsJsonString, Environment.NewLine);
 
-			if (ScriptManager.GetCurrent(Page) != null)
-			{
-				// respect MS AJAX
-				ScriptManager.RegisterStartupScript(Page, GetType(), "ConfirmPassword", script, true);
-			}
-			else
-			{
-				Page.ClientScript.RegisterStartupScript(GetType(), "ConfirmPassword", script, true);
-			}
+            if (ScriptManager.GetCurrent(Page) != null)
+            {
+                // respect MS AJAX
+                ScriptManager.RegisterStartupScript(Page, GetType(), "ConfirmPassword", script, true);
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "ConfirmPassword", script, true);
+            }
         }
 
         private void cmdChangePassword_Click(object sender, EventArgs e)
@@ -214,7 +214,7 @@ namespace DotNetNuke.Modules.Admin.Security
                 var failed = Localization.GetString("PasswordResetFailed");
                 LogFailure(failed);
                 lblHelp.Text = failed;
-                return;    
+                return;
             }
 
             //Check New Password is not same as username or banned
@@ -229,7 +229,7 @@ namespace DotNetNuke.Modules.Admin.Security
                     var failed = Localization.GetString("PasswordResetFailed");
                     LogFailure(failed);
                     lblHelp.Text = failed;
-                    return;  
+                    return;
                 }
             }
 
@@ -273,8 +273,8 @@ namespace DotNetNuke.Modules.Admin.Security
                     var loginStatus = UserLoginStatus.LOGIN_FAILURE;
                     UserController.UserLogin(PortalSettings.PortalId, username, txtPassword.Text, "", "", "", ref loginStatus, false);
                     RedirectAfterLogin();
-                }            
-            }           
+                }
+            }
         }
 
         protected void RedirectAfterLogin()
@@ -311,7 +311,7 @@ namespace DotNetNuke.Modules.Admin.Security
                     }
                     else
                     {
-                        //redirect to current page 
+                        //redirect to current page
                         redirectURL = Globals.NavigateURL();
                     }
                 }
@@ -321,8 +321,8 @@ namespace DotNetNuke.Modules.Admin.Security
                 redirectURL = Globals.NavigateURL(Convert.ToInt32(setting));
             }
 
-			AddModuleMessage("ChangeSuccessful", ModuleMessage.ModuleMessageType.GreenSuccess, true);
-	        resetMessages.Visible = divPassword.Visible = false;
+            AddModuleMessage("ChangeSuccessful", ModuleMessage.ModuleMessageType.GreenSuccess, true);
+            resetMessages.Visible = divPassword.Visible = false;
             lblHelp.Text = lblInfo.Text = string.Empty;
 
             //redirect page after 5 seconds
@@ -367,7 +367,7 @@ namespace DotNetNuke.Modules.Admin.Security
                 log.LogProperties.Add(new LogDetailInfo("Cause", message));
             }
             log.AddProperty("IP", _ipAddress);
-            
+
             LogController.Instance.AddLog(log);
         }
 

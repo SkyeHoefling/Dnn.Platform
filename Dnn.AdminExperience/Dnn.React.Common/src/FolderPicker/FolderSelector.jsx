@@ -56,7 +56,7 @@ export default class FolderSelector extends Component {
         e.preventDefault();
         this.setState({ searchFolderText: "" });
         this.props.searchFolder();
-    }   
+    }
 
     onFoldersClick() {
         const {showFolderPicker} = this.state;
@@ -74,7 +74,7 @@ export default class FolderSelector extends Component {
         const selectedFolderText = selectedFolder ? selectedFolder.value : "<" + noFolderSelectedValue + ">";
         const searchIcon = this.getSearchIcon();
 
-        return ( 
+        return (
             <div className="dnn-folder-selector" ref={node => this.node = node}>
                 <div className="selected-item" onClick={this.onFoldersClick.bind(this) }>
                     {selectedFolderText}
@@ -82,13 +82,13 @@ export default class FolderSelector extends Component {
                 <div className={"folder-selector-container" + (this.state.showFolderPicker ? " show" : "") } >
                     <div className="inner-box">
                         <div className="search">
-                            <input 
-                                type="text" 
-                                value={this.state.searchFolderText} 
-                                onChange={this.onChangeSearchFolderText.bind(this) } 
+                            <input
+                                type="text"
+                                value={this.state.searchFolderText}
+                                onChange={this.onChangeSearchFolderText.bind(this) }
                                 placeholder={searchFolderPlaceHolder}
                                 aria-label="Search" />
-                            {this.state.searchFolderText && 
+                            {this.state.searchFolderText &&
                                 <div onClick={this.clearSearch.bind(this)} className="clear-button">×</div>
                             }
                             {searchIcon}

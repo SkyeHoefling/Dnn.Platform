@@ -54,7 +54,7 @@ export default class FolderPicker extends Component {
         e.preventDefault();
         this.setState({ searchFolderText: "" });
         this.props.searchFolder();
-    }   
+    }
 
     onFoldersClick() {
         const {showFolderPicker} = this.state;

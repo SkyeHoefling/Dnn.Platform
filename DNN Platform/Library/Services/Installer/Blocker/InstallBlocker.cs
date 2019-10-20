@@ -30,8 +30,8 @@ namespace DotNetNuke.Services.Installer.Blocker
         #region Public Methods
 
         public void RegisterInstallBegining()
-        {          
-            if(!fileCreated)  
+        {
+            if(!fileCreated)
                 File.Create(Globals.ApplicationMapPath + installBlockerFile);
             fileCreated = true;
         }

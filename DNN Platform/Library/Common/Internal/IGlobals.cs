@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -25,7 +25,7 @@ using DotNetNuke.Entities.Tabs;
 
 namespace DotNetNuke.Common.Internal
 {
-    
+
     public interface IGlobals
     {
         /// <summary>
@@ -40,7 +40,7 @@ namespace DotNetNuke.Common.Internal
         string HostMapPath { get; }
 
         /// <summary>
-        /// Returns the folder path under the root for the portal 
+        /// Returns the folder path under the root for the portal
         /// </summary>
         /// <param name="fileNamePath">The folder the absolute path</param>
         /// <param name="portalId">Portal Id.</param>
@@ -68,7 +68,7 @@ namespace DotNetNuke.Common.Internal
         /// <param name="portalGuid">The Portal GUID</param>
         /// <returns></returns>
         string LinkClick(string Link, int TabID, int ModuleID, bool TrackClicks, bool ForceDownload, int PortalId,
-                         bool EnableUrlLanguage, string portalGuid);
+                        bool EnableUrlLanguage, string portalGuid);
 
         /// <summary>
         /// Generates the correctly formatted url
@@ -101,7 +101,7 @@ namespace DotNetNuke.Common.Internal
         /// <param name="blnAddHTTP">if set to <c>true</c> calls <see cref="AddHTTP"/> on the result.</param>
         /// <returns>domain name</returns>
         string GetPortalDomainName(string strPortalAlias, HttpRequest Request, bool blnAddHTTP);
-        
+
         /// <summary>
         /// Gets the name of the domain.
         /// </summary>
@@ -308,7 +308,7 @@ namespace DotNetNuke.Common.Internal
         /// Generates the correctly formatted friendly URL
         /// </summary>
         /// <remarks>
-        /// This overload includes an optional page to include in the URL, and the portal 
+        /// This overload includes an optional page to include in the URL, and the portal
         /// settings for the site
         /// </remarks>
         /// <param name="tab">The current tab</param>
@@ -322,7 +322,7 @@ namespace DotNetNuke.Common.Internal
         /// Generates the correctly formatted friendly url
         /// </summary>
         /// <remarks>
-        /// This overload includes an optional page to include in the url, and the portal 
+        /// This overload includes an optional page to include in the url, and the portal
         /// alias for the site
         /// </remarks>
         /// <param name="tab">The current tab</param>

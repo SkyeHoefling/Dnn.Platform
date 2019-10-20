@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 //Based on the work of:
@@ -84,7 +84,7 @@ namespace DotNetNuke.Services.Authentication.OAuth
         private readonly Random random = new Random();
 
         private const string UnreservedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
-        
+
         //DNN-6265 - Support OAuth V2 optional parameter resource, which is required by Microsoft Azure Active
         //Directory implementation of OAuth V2
         private const string OAuthResourceKey = "resource";
@@ -93,7 +93,7 @@ namespace DotNetNuke.Services.Authentication.OAuth
 
         protected OAuthClientBase(int portalId, AuthMode mode, string service)
         {
-            //Set default Expiry to 14 days 
+            //Set default Expiry to 14 days
             //oAuth v1 tokens do not expire
             //oAuth v2 tokens have an expiry
             AuthTokenExpiry = new TimeSpan(14, 0, 0, 0);
@@ -112,7 +112,7 @@ namespace DotNetNuke.Services.Authentication.OAuth
 
         protected const string OAuthTokenKey = "oauth_token";
 
-        protected virtual string UserGuidKey 
+        protected virtual string UserGuidKey
         {
             get { return String.Empty; }
         }
@@ -142,14 +142,14 @@ namespace DotNetNuke.Services.Authentication.OAuth
         protected string OAuthHeaderCode { get; set; }
 
         //oAuth 2
-        protected string AuthTokenName { get; set; }        
+        protected string AuthTokenName { get; set; }
         protected string Scope { get; set; }
-		protected string AccessToken { get; set; }
+        protected string AccessToken { get; set; }
         protected string VerificationCode
         {
             get { return HttpContext.Current.Request.Params[OAuthCodeKey]; }
         }
-        
+
         //DNN-6265 Support "Optional" Resource Parameter required by Azure AD Oauth V2 Solution
         protected string APIResource { get; set; }
 
@@ -338,15 +338,15 @@ namespace DotNetNuke.Services.Authentication.OAuth
 
 
             var headerParameters = new List<QueryParameter>
-                                       {
-                                           new QueryParameter(OAuthConsumerKeyKey, APIKey),
-                                           new QueryParameter(OAuthNonceKey, nonce),
-                                           new QueryParameter(OAuthSignatureKey, sig),
-                                           new QueryParameter(OAuthSignatureMethodKey, HMACSHA1SignatureType),
-                                           new QueryParameter(OAuthTimestampKey, timeStamp),
-                                           new QueryParameter(OAuthTokenKey, AuthToken),
-                                           new QueryParameter(OAuthVersionKey, OAuthVersion)
-                                       };
+                                        {
+                                            new QueryParameter(OAuthConsumerKeyKey, APIKey),
+                                            new QueryParameter(OAuthNonceKey, nonce),
+                                            new QueryParameter(OAuthSignatureKey, sig),
+                                            new QueryParameter(OAuthSignatureMethodKey, HMACSHA1SignatureType),
+                                            new QueryParameter(OAuthTimestampKey, timeStamp),
+                                            new QueryParameter(OAuthTokenKey, AuthToken),
+                                            new QueryParameter(OAuthVersionKey, OAuthVersion)
+                                        };
             if (uri == TokenEndpoint)
             {
                 headerParameters.Add(new QueryParameter(OAuthVerifierKey, OAuthVerifier));
@@ -370,14 +370,14 @@ namespace DotNetNuke.Services.Authentication.OAuth
                 request.ContentType = "application/x-www-form-urlencoded";
                 //request.ContentType = "text/xml";
                 request.ContentLength = byteArray.Length;
-				
-				if (!String.IsNullOrEmpty(OAuthHeaderCode))
-				{ 
-					byte[] API64 = Encoding.UTF8.GetBytes(APIKey + ":" + APISecret); 
-					string Api64Encoded = System.Convert.ToBase64String(API64); 
-					//Authentication providers needing an "Authorization: Basic/bearer base64(clientID:clientSecret)" header. OAuthHeaderCode might be: Basic/Bearer/empty.
-					request.Headers.Add("Authorization: " + OAuthHeaderCode + " " + Api64Encoded); 
-				}
+
+                if (!String.IsNullOrEmpty(OAuthHeaderCode))
+                {
+                    byte[] API64 = Encoding.UTF8.GetBytes(APIKey + ":" + APISecret);
+                    string Api64Encoded = System.Convert.ToBase64String(API64);
+                    //Authentication providers needing an "Authorization: Basic/bearer base64(clientID:clientSecret)" header. OAuthHeaderCode might be: Basic/Bearer/empty.
+                    request.Headers.Add("Authorization: " + OAuthHeaderCode + " " + Api64Encoded);
+                }
 
                 if (!String.IsNullOrEmpty(parameters))
                 {
@@ -538,15 +538,15 @@ namespace DotNetNuke.Services.Authentication.OAuth
                                             out requestParameters);
 
             var headerParameters = new List<QueryParameter>
-                                       {
-                                           new QueryParameter(OAuthCallbackKey, CallbackUri.OriginalString),
-                                           new QueryParameter(OAuthConsumerKeyKey, APIKey),
-                                           new QueryParameter(OAuthNonceKey, nonce),
-                                           new QueryParameter(OAuthSignatureKey, sig),
-                                           new QueryParameter(OAuthSignatureMethodKey, HMACSHA1SignatureType),
-                                           new QueryParameter(OAuthTimestampKey, timeStamp),
-                                           new QueryParameter(OAuthVersionKey, OAuthVersion)
-                                       };
+                                        {
+                                            new QueryParameter(OAuthCallbackKey, CallbackUri.OriginalString),
+                                            new QueryParameter(OAuthConsumerKeyKey, APIKey),
+                                            new QueryParameter(OAuthNonceKey, nonce),
+                                            new QueryParameter(OAuthSignatureKey, sig),
+                                            new QueryParameter(OAuthSignatureMethodKey, HMACSHA1SignatureType),
+                                            new QueryParameter(OAuthTimestampKey, timeStamp),
+                                            new QueryParameter(OAuthVersionKey, OAuthVersion)
+                                        };
 
             string ret = ExecuteWebRequest(RequestTokenMethod, new Uri(outUrl), String.Empty, headerParameters.ToAuthorizationString());
 
@@ -639,7 +639,7 @@ namespace DotNetNuke.Services.Authentication.OAuth
                 objUserInfo = MembershipProvider.Instance().GetUserByUserName(settings.PortalId, userName);
                 if (objUserInfo != null)
                 {
-                    //user already exists... lets check for a token next... 
+                    //user already exists... lets check for a token next...
                     var dnnAuthToken = MembershipProvider.Instance().GetUserByAuthToken(settings.PortalId, token, Service);
                     if (dnnAuthToken == null)
                     {
@@ -757,12 +757,12 @@ namespace DotNetNuke.Services.Authentication.OAuth
             string signatureBase = GenerateSignatureBase(url, token, callbackurl, oauthVerifier, httpMethod, timeStamp, nonce, out normalizedUrl, out requestParameters);
 
             var hmacsha1 = new HMACSHA1
-                               {
-                                   Key = Encoding.ASCII.GetBytes(string.Format("{0}&{1}", UrlEncode(APISecret),
-                                                                             string.IsNullOrEmpty(tokenSecret)
-                                                                                 ? ""
-                                                                                 : UrlEncode(tokenSecret)))
-                               };
+                                {
+                                    Key = Encoding.ASCII.GetBytes(string.Format("{0}&{1}", UrlEncode(APISecret),
+                                                                            string.IsNullOrEmpty(tokenSecret)
+                                                                                ? ""
+                                                                                : UrlEncode(tokenSecret)))
+                                };
 
             return GenerateSignatureUsingHash(signatureBase, hmacsha1);
         }

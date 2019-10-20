@@ -6,7 +6,7 @@
     padding: 0;
 }
 .dnnModuleSettings .dnnFormItem input[type="text"], .dnnModuleSettings .dnnFormItem .dnnFormInput, .dnnModuleSettings .dnnFormItem textarea, .dnnExport .dnnFormItem input[type="text"], .dnnExport .dnnFormItem .dnnFormInput, .dnnExport .dnnFormItem textarea {
-    
+
 }
 .dnnModuleSettings .urlControlLinkType .dnnFormLabel {
     width: 100px;
@@ -84,7 +84,7 @@ p.dnnFormRequired span {
     margin: 6px 0 15px 0;
 }
 .dnnFormItem > textarea{
-    margin-top:5px;   
+    margin-top:5px;
 }
 
 span.labelCacheInherited{
@@ -93,7 +93,7 @@ span.labelCacheInherited{
     border-color: rgba(255, 0, 0, 0.2);
     padding: 8px;
     float: left;
-    width: 100px !important;  
+    width: 100px !important;
 }
 .tabVisibilityRow span.dnnFormLabel {
     width: 20%;
@@ -118,7 +118,7 @@ span.labelCacheInherited{
 }
 
 .dnnContainerPreview .dnnSecondaryAction{
-    float: left;    
+    float: left;
 }
 
 .dnnCacheSettings .dnnLabel{

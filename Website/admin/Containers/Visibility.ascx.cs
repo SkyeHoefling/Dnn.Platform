@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -39,10 +39,10 @@ namespace DotNetNuke.UI.Containers
     /// -----------------------------------------------------------------------------
     /// Project	 : DotNetNuke
     /// Class	 : Containers.Visibility
-    /// 
+    ///
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// Handles the events for collapsing and expanding modules, 
+    /// Handles the events for collapsing and expanding modules,
     /// Showing or hiding admin controls when preview is checked
     /// if personalization of the module container and title is allowed for that module.
     /// </summary>
@@ -64,7 +64,7 @@ namespace DotNetNuke.UI.Containers
                 {
                     return ModulePath + minIcon;
                 }
-                
+
                 return Globals.ApplicationPath + "/images/min.gif"; //is ~/ the same as ApplicationPath in all cases?
             }
         }
@@ -77,7 +77,7 @@ namespace DotNetNuke.UI.Containers
                 {
                     return ModulePath + MaxIcon;
                 }
-                
+
                 return Globals.ApplicationPath + "/images/max.gif"; //is ~/ the same as ApplicationPath in all cases?
             }
         }
@@ -105,10 +105,10 @@ namespace DotNetNuke.UI.Containers
                 return ModuleControl.ModuleContext.Configuration.ContainerPath.Substring(0, ModuleControl.ModuleContext.Configuration.ContainerPath.LastIndexOf("/") + 1);
             }
         }
-		
-		#endregion
 
-		#region "Public Members"
+        #endregion
+
+        #region "Public Members"
 
 
         public int AnimationFrames
@@ -134,9 +134,9 @@ namespace DotNetNuke.UI.Containers
                     case VisibilityState.Maximized:
                     case VisibilityState.Minimized:
                         return DNNClientAPI.MinMaxContentVisibile(cmdVisibility,
-                                                                  ModuleControl.ModuleContext.ModuleId,
-                                                                  ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.Minimized,
-                                                                  DNNClientAPI.MinMaxPersistanceType.Cookie);
+                                                                ModuleControl.ModuleContext.ModuleId,
+                                                                ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.Minimized,
+                                                                DNNClientAPI.MinMaxPersistanceType.Cookie);
                     default:
                         return true;
                 }
@@ -144,10 +144,10 @@ namespace DotNetNuke.UI.Containers
             set
             {
                 DNNClientAPI.MinMaxContentVisibile(cmdVisibility,
-                                                   ModuleControl.ModuleContext.ModuleId,
-                                                   ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.Minimized,
-                                                   DNNClientAPI.MinMaxPersistanceType.Cookie,
-                                                   value);
+                                                    ModuleControl.ModuleContext.ModuleId,
+                                                    ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.Minimized,
+                                                    DNNClientAPI.MinMaxPersistanceType.Cookie,
+                                                    value);
             }
         }
 
@@ -176,14 +176,14 @@ namespace DotNetNuke.UI.Containers
             {
                 if (!Page.IsPostBack)
                 {
-					//public attributes
+                    //public attributes
                     if (!String.IsNullOrEmpty(BorderWidth))
                     {
                         cmdVisibility.BorderWidth = Unit.Parse(BorderWidth);
                     }
                     if (ModuleControl.ModuleContext.Configuration != null)
                     {
-						//check if Personalization is allowed
+                        //check if Personalization is allowed
                         if (ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.None)
                         {
                             cmdVisibility.Enabled = false;
@@ -191,7 +191,7 @@ namespace DotNetNuke.UI.Containers
                         }
                         if (ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.Minimized)
                         {
-							//if visibility is set to minimized, then the client needs to set the cookie for maximized only and delete the cookie for minimized,
+                            //if visibility is set to minimized, then the client needs to set the cookie for maximized only and delete the cookie for minimized,
                             //instead of the opposite.  We need to notify the client of this
                             ClientAPI.RegisterClientVariable(Page, "__dnn_" + ModuleControl.ModuleContext.ModuleId + ":defminimized", "true", true);
                         }
@@ -201,7 +201,7 @@ namespace DotNetNuke.UI.Containers
                             {
                                 if (ModuleContent != null)
                                 {
-									//EnableMinMax now done in prerender
+                                    //EnableMinMax now done in prerender
                                 }
                                 else
                                 {
@@ -248,13 +248,13 @@ namespace DotNetNuke.UI.Containers
                     case VisibilityState.Maximized:
                     case VisibilityState.Minimized:
                         DNNClientAPI.EnableMinMax(cmdVisibility,
-                                                  ModuleContent,
-                                                  ModuleControl.ModuleContext.ModuleId,
-                                                  ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.Minimized,
-                                                  MinIconLoc,
-                                                  MaxIconLoc,
-                                                  DNNClientAPI.MinMaxPersistanceType.Cookie,
-                                                  AnimationFrames);
+                                                ModuleContent,
+                                                ModuleControl.ModuleContext.ModuleId,
+                                                ModuleControl.ModuleContext.Configuration.Visibility == VisibilityState.Minimized,
+                                                MinIconLoc,
+                                                MaxIconLoc,
+                                                DNNClientAPI.MinMaxPersistanceType.Cookie,
+                                                AnimationFrames);
                         break;
                 }
             }
@@ -281,7 +281,7 @@ namespace DotNetNuke.UI.Containers
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

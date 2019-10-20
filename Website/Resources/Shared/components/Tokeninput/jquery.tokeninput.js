@@ -291,14 +291,14 @@
 
         // Keep a reference to the original input box
         var hidden_input = $(input)
-                           .hide()
-                           .val("")
-                           .focus(function () {
-                               input_box.focus();
-                           })
-                           .blur(function () {
-                               input_box.blur();
-                           });
+                            .hide()
+                            .val("")
+                            .focus(function () {
+                                input_box.focus();
+                            })
+                            .blur(function () {
+                                input_box.blur();
+                            });
 
         // Keep a reference to the selected token and dropdown item
         var selected_token = null;
@@ -451,8 +451,8 @@
         function insert_token(item) {
             var this_token = settings.tokenFormatter(item);
             this_token = $(this_token)
-          .addClass(settings.classes.token)
-          .insertBefore(input_token);
+        .addClass(settings.classes.token)
+        .insertBefore(input_token);
 
             // The 'delete token' button
             $("<span>" + settings.deleteText + "</span>")

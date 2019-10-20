@@ -4,7 +4,7 @@ import { Label, InputGroup, SingleLineInputWithError } from "@dnnsoftware/dnn-re
 import GlobalIcon from "./GlobalIcon";
 
 export default class EditBlock extends Component {
-    
+
     render() {
         const {props} = this;
 
@@ -13,11 +13,11 @@ export default class EditBlock extends Component {
                 tooltipMessage={props.tooltip}
                 label={props.label} style={{width: "auto"}} />
             {props.isGlobal && <GlobalIcon /> }
-            <SingleLineInputWithError 
-                value={props.value} 
-                type={props.type} 
+            <SingleLineInputWithError
+                value={props.value}
+                type={props.type}
                 onChange={props.onChange}
-                error={!!props.error} 
+                error={!!props.error}
                 errorMessage={props.error} />
         </InputGroup>;
     }

@@ -35,11 +35,11 @@
 
   function State(options) {
     if (typeof options == "object") {
-      this.minChars = options.minChars;
-      this.style = options.style;
-      this.showToken = options.showToken;
-      this.delay = options.delay;
-      this.wordsOnly = options.wordsOnly;
+    this.minChars = options.minChars;
+    this.style = options.style;
+    this.showToken = options.showToken;
+    this.delay = options.delay;
+    this.wordsOnly = options.wordsOnly;
     }
     if (this.style == null) this.style = DEFAULT_TOKEN_STYLE;
     if (this.minChars == null) this.minChars = DEFAULT_MIN_CHARS;
@@ -50,16 +50,16 @@
 
   CodeMirror.defineOption("highlightSelectionMatches", false, function(cm, val, old) {
     if (old && old != CodeMirror.Init) {
-      var over = cm.state.matchHighlighter.overlay;
-      if (over) cm.removeOverlay(over);
-      clearTimeout(cm.state.matchHighlighter.timeout);
-      cm.state.matchHighlighter = null;
-      cm.off("cursorActivity", cursorActivity);
+    var over = cm.state.matchHighlighter.overlay;
+    if (over) cm.removeOverlay(over);
+    clearTimeout(cm.state.matchHighlighter.timeout);
+    cm.state.matchHighlighter = null;
+    cm.off("cursorActivity", cursorActivity);
     }
     if (val) {
-      cm.state.matchHighlighter = new State(val);
-      highlightMatches(cm);
-      cm.on("cursorActivity", cursorActivity);
+    cm.state.matchHighlighter = new State(val);
+    highlightMatches(cm);
+    cm.on("cursorActivity", cursorActivity);
     }
   });
 
@@ -71,25 +71,25 @@
 
   function highlightMatches(cm) {
     cm.operation(function() {
-      var state = cm.state.matchHighlighter;
-      if (state.overlay) {
+    var state = cm.state.matchHighlighter;
+    if (state.overlay) {
         cm.removeOverlay(state.overlay);
         state.overlay = null;
-      }
-      if (!cm.somethingSelected() && state.showToken) {
+    }
+    if (!cm.somethingSelected() && state.showToken) {
         var re = state.showToken === true ? /[\w$]/ : state.showToken;
         var cur = cm.getCursor(), line = cm.getLine(cur.line), start = cur.ch, end = start;
         while (start && re.test(line.charAt(start - 1))) --start;
         while (end < line.length && re.test(line.charAt(end))) ++end;
         if (start < end)
-          cm.addOverlay(state.overlay = makeOverlay(line.slice(start, end), re, state.style));
+        cm.addOverlay(state.overlay = makeOverlay(line.slice(start, end), re, state.style));
         return;
-      }
-      var from = cm.getCursor("from"), to = cm.getCursor("to");
-      if (from.line != to.line) return;
-      if (state.wordsOnly && !isWord(cm, from, to)) return;
-      var selection = cm.getRange(from, to).replace(/^\s+|\s+$/g, "");
-      if (selection.length >= state.minChars)
+    }
+    var from = cm.getCursor("from"), to = cm.getCursor("to");
+    if (from.line != to.line) return;
+    if (state.wordsOnly && !isWord(cm, from, to)) return;
+    var selection = cm.getRange(from, to).replace(/^\s+|\s+$/g, "");
+    if (selection.length >= state.minChars)
         cm.addOverlay(state.overlay = makeOverlay(selection, false, state.style));
     });
   }
@@ -113,16 +113,16 @@
 
   function boundariesAround(stream, re) {
     return (!stream.start || !re.test(stream.string.charAt(stream.start - 1))) &&
-      (stream.pos == stream.string.length || !re.test(stream.string.charAt(stream.pos)));
+    (stream.pos == stream.string.length || !re.test(stream.string.charAt(stream.pos)));
   }
 
   function makeOverlay(query, hasBoundary, style) {
     return {token: function(stream) {
-      if (stream.match(query) &&
-          (!hasBoundary || boundariesAround(stream, hasBoundary)))
+    if (stream.match(query) &&
+        (!hasBoundary || boundariesAround(stream, hasBoundary)))
         return style;
-      stream.next();
-      stream.skipTo(query.charAt(0)) || stream.skipToEnd();
+    stream.next();
+    stream.skipTo(query.charAt(0)) || stream.skipToEnd();
     }};
   }
 });

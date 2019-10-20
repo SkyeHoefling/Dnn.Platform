@@ -4,15 +4,15 @@ import { action } from "@storybook/addon-actions";
 import TextOverflowWrapper from "./index";
 
 storiesOf("TextOverflowWrapper", module).add("with content", () => (
-    <div style={{ paddingTop: 100, paddingLeft: 100 }}>        
+    <div style={{ paddingTop: 100, paddingLeft: 100 }}>
         <TextOverflowWrapper text="Default Content & tooltip" />
     </div>
 ));
 
-storiesOf("TextOverflowWrapper", module).add("with tooltip", () => (            
-    <div style={{ paddingTop: 100, paddingLeft: 100 }}>                
+storiesOf("TextOverflowWrapper", module).add("with tooltip", () => (
+    <div style={{ paddingTop: 100, paddingLeft: 100 }}>
         <TextOverflowWrapper
-            text="Tooltip test"            
+            text="Tooltip test"
             doNotUseTitleAttribute={true}
             maxWidth={50}
             type="info"
@@ -29,7 +29,7 @@ storiesOf("TextOverflowWrapper", module).add("with hyperlink", () => (
             text="hyperlink test"
             href="http://www.google.com"
             isAnchor={true}
-            type="info"            
+            type="info"
         />
     </div>
 ));

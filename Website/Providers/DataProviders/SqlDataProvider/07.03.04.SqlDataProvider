@@ -10,7 +10,7 @@
 
 -- ensure, last modified is not Null (should not exist)
 UPDATE {databaseOwner}[{objectQualifier}PortalSettings]
- SET   LastModifiedOnDate = '2000-01-01' 
+ SET   LastModifiedOnDate = '2000-01-01'
  WHERE LastModifiedOnDate is Null
 GO
 
@@ -24,21 +24,21 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortalSetting]
     @CultureCode nVarChar(50)	-- not Null
 AS
 BEGIN
-	SELECT TOP (1)
-		SettingName,
-		CASE WHEN Lower(SettingValue) Like 'fileid=%'
-		 THEN {databaseOwner}[{objectQualifier}FilePath](SettingValue)
-		 ELSE SettingValue 
-		END   AS SettingValue,
-		CreatedByUserID,
-		CreatedOnDate,
-		LastModifiedByUserID,
-		LastModifiedOnDate,
-		CultureCode
-	 FROM  {databaseOwner}[{objectQualifier}PortalSettings]
-	 WHERE PortalID    = @PortalID
-	   AND SettingName = @SettingName
-	 ORDER BY LastModifiedOnDate DESC
+    SELECT TOP (1)
+        SettingName,
+        CASE WHEN Lower(SettingValue) Like 'fileid=%'
+        THEN {databaseOwner}[{objectQualifier}FilePath](SettingValue)
+        ELSE SettingValue
+        END   AS SettingValue,
+        CreatedByUserID,
+        CreatedOnDate,
+        LastModifiedByUserID,
+        LastModifiedOnDate,
+        CultureCode
+    FROM  {databaseOwner}[{objectQualifier}PortalSettings]
+    WHERE PortalID    = @PortalID
+        AND SettingName = @SettingName
+    ORDER BY LastModifiedOnDate DESC
 END
 GO
 
@@ -51,23 +51,23 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortalSettings]
     @CultureCode nVarChar(20)    -- not Null!
 AS
 BEGIN
-	SELECT
-		SettingName,
-		CASE WHEN Lower(SettingValue) Like 'fileid=%'
-		 THEN {databaseOwner}[{objectQualifier}FilePath](SettingValue)
-		 ELSE SettingValue 
-		END   AS SettingValue,
-		CreatedByUserID,
-		CreatedOnDate,
-		LastModifiedByUserID,
-		LastModifiedOnDate,
-		CultureCode
-	 FROM  {databaseOwner}[{objectQualifier}PortalSettings] P
-	 JOIN  (SELECT PortalID, SettingName SN, Max(LastModifiedOnDate) MD
-	        FROM {databaseOwner}[{objectQualifier}PortalSettings] 
-			WHERE PortalID = @PortalId
-			GROUP BY PortalID, SettingName) S 
-	   ON P.PortalID = S.PortalID AND P.SettingName = S.SN AND P.LastModifiedOnDate = S.MD;
+    SELECT
+        SettingName,
+        CASE WHEN Lower(SettingValue) Like 'fileid=%'
+        THEN {databaseOwner}[{objectQualifier}FilePath](SettingValue)
+        ELSE SettingValue
+        END   AS SettingValue,
+        CreatedByUserID,
+        CreatedOnDate,
+        LastModifiedByUserID,
+        LastModifiedOnDate,
+        CultureCode
+    FROM  {databaseOwner}[{objectQualifier}PortalSettings] P
+    JOIN  (SELECT PortalID, SettingName SN, Max(LastModifiedOnDate) MD
+            FROM {databaseOwner}[{objectQualifier}PortalSettings]
+            WHERE PortalID = @PortalId
+            GROUP BY PortalID, SettingName) S
+        ON P.PortalID = S.PortalID AND P.SettingName = S.SN AND P.LastModifiedOnDate = S.MD;
 END
 GO
 

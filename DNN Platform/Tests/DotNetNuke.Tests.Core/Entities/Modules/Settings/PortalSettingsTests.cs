@@ -245,16 +245,16 @@ namespace DotNetNuke.Tests.Core.Entities.Modules.Settings
             //Arrange
             var moduleInfo = GetModuleInfo;
             var portalSettings = new Dictionary<string, string>
-                                 {
-                                     { SettingNamePrefix + "StringProperty", stringValue },
-                                     { SettingNamePrefix + "IntegerProperty", integerValue.ToString() },
-                                     { SettingNamePrefix + "DoubleProperty", doubleValue.ToString(CultureInfo.InvariantCulture) },
-                                     { SettingNamePrefix + "BooleanProperty", booleanValue.ToString() },
-                                     { SettingNamePrefix + "DateTimeProperty", datetimeValue.ToString("o", CultureInfo.InvariantCulture) },
-                                     { SettingNamePrefix + "TimeSpanProperty", timeSpanValue.ToString("c", CultureInfo.InvariantCulture) },
-                                     { SettingNamePrefix + "EnumProperty", enumValue.ToString() },
-                                     { SettingNamePrefix + "ComplexProperty", $"{complexValue.X} | {complexValue.Y}" },
-                                 };
+                                {
+                                    { SettingNamePrefix + "StringProperty", stringValue },
+                                    { SettingNamePrefix + "IntegerProperty", integerValue.ToString() },
+                                    { SettingNamePrefix + "DoubleProperty", doubleValue.ToString(CultureInfo.InvariantCulture) },
+                                    { SettingNamePrefix + "BooleanProperty", booleanValue.ToString() },
+                                    { SettingNamePrefix + "DateTimeProperty", datetimeValue.ToString("o", CultureInfo.InvariantCulture) },
+                                    { SettingNamePrefix + "TimeSpanProperty", timeSpanValue.ToString("c", CultureInfo.InvariantCulture) },
+                                    { SettingNamePrefix + "EnumProperty", enumValue.ToString() },
+                                    { SettingNamePrefix + "ComplexProperty", $"{complexValue.X} | {complexValue.Y}" },
+                                };
 
             MockPortalSettings(moduleInfo, portalSettings);
 

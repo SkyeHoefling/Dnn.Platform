@@ -23,7 +23,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
     ///</summary>
     public partial class Settings : FolderMappingSettingsControlBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Settings));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Settings));
 
         #region Overrided Methods
 
@@ -41,7 +41,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 
             if (folderMappingSettings.ContainsKey(Constants.AccountKey))
             {
-                tbAccountKey.Text = folderProvider.GetEncryptedSetting(folderMappingSettings, Constants.AccountKey);                
+                tbAccountKey.Text = folderProvider.GetEncryptedSetting(folderMappingSettings, Constants.AccountKey);
             }
 
             if (tbAccountName.Text.Length > 0 && tbAccountKey.Text.Length > 0)
@@ -115,12 +115,12 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 
                 throw new Exception();
             }
-            
+
             folderMapping.FolderMappingSettings[Constants.AccountName] = accountName;
             folderMapping.FolderMappingSettings[Constants.AccountKey] = accountKey;
             folderMapping.FolderMappingSettings[Constants.Container] = container;
             folderMapping.FolderMappingSettings[Constants.UseHttps] = useHttps;
-			folderMapping.FolderMappingSettings[Constants.DirectLink] = chkDirectLink.Checked;
+            folderMapping.FolderMappingSettings[Constants.DirectLink] = chkDirectLink.Checked;
             folderMapping.FolderMappingSettings[Constants.CustomDomain] = customDomain;
             folderMapping.FolderMappingSettings[Constants.SyncBatchSize] = synchBatchSize;
 
@@ -139,7 +139,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
             return folderMappings
                 .Where(fm => fm.FolderMappingID != folderMapping.FolderMappingID && fm.FolderProviderType == folderMapping.FolderProviderType)
                 .Any(fm => fm.FolderMappingSettings[Constants.AccountName].ToString().Equals(accountName, StringComparison.InvariantCulture) &&
-                           fm.FolderMappingSettings[Constants.Container].ToString().Equals(container, StringComparison.InvariantCultureIgnoreCase));
+                            fm.FolderMappingSettings[Constants.Container].ToString().Equals(container, StringComparison.InvariantCultureIgnoreCase));
         }
 
         private string GetUseHttps()
@@ -185,7 +185,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 
                 return false;
             }
-            
+
             var csa = new CloudStorageAccount(sc, useHttps);
             var blobClient = csa.CreateCloudBlobClient();
             var container = blobClient.GetContainerReference(containerName);
@@ -245,12 +245,12 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 
         private string GetAccountKey()
         {
-            return FolderProvider.Instance(Constants.FolderProviderType).EncryptValue(tbAccountKey.Text);            
+            return FolderProvider.Instance(Constants.FolderProviderType).EncryptValue(tbAccountKey.Text);
         }
 
         private string GetAccountName()
         {
-            return FolderProvider.Instance(Constants.FolderProviderType).EncryptValue(tbAccountName.Text);            
+            return FolderProvider.Instance(Constants.FolderProviderType).EncryptValue(tbAccountName.Text);
         }
 
         private string GetCustomDomain()
@@ -270,7 +270,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
             var useHttps = chkUseHttps.Checked;
 
             StorageCredentials sc;
-            
+
             try
             {
                 sc = new StorageCredentials(accountName, accountKey);
@@ -281,7 +281,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 
                 valContainerName.ErrorMessage = Localization.GetString("AuthenticationFailure.ErrorMessage", LocalResourceFile);
                 valContainerName.IsValid = false;
-                
+
                 return;
             }
 
@@ -298,7 +298,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
             catch (StorageException ex)
             {
                 if(ex.RequestInformation.ExtendedErrorInformation != null)
-                { 
+                {
                     switch (ex.RequestInformation.ExtendedErrorInformation.ErrorCode)
                     {
                         case "AuthenticationFailure":

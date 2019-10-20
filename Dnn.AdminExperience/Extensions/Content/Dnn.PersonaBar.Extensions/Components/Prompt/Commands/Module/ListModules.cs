@@ -43,7 +43,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Module
 
         public override void Init(string[] args, DotNetNuke.Entities.Portals.PortalSettings portalSettings, DotNetNuke.Entities.Users.UserInfo userInfo, int activeTabId)
         {
-            
+
             PageId = GetFlagValue(FlagPageId, "Page Id", -1);
             ModuleName = GetFlagValue(FlagModuleName, "Module Name", string.Empty);
             ModuleTitle = GetFlagValue(FlagModuleTitle, "Module Title", string.Empty);

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -37,24 +37,24 @@ using DotNetNuke.Instrumentation;
 
 namespace DotNetNuke.Services.Exceptions
 {
-	/// <summary>
-	/// Base Portal Exception.
-	/// </summary>
+    /// <summary>
+    /// Base Portal Exception.
+    /// </summary>
     public class BasePortalException : Exception
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (BasePortalException));
-	    private string m_InnerExceptionString;
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (BasePortalException));
+        private string m_InnerExceptionString;
         private string m_Message;
-	    private string m_Source;
+        private string m_Source;
         private string m_StackTrace;
 
-	    //default constructor
-		public BasePortalException()
+        //default constructor
+        public BasePortalException()
         {
         }
 
         //constructor with exception message
-		public BasePortalException(string message) : base(message)
+        public BasePortalException(string message) : base(message)
         {
             InitializePrivateVariables();
         }
@@ -91,41 +91,41 @@ namespace DotNetNuke.Services.Exceptions
             m_Source = info.GetString("m_Source");
         }
 
-	    public string AssemblyVersion { get; private set; }
+        public string AssemblyVersion { get; private set; }
 
-	    public int PortalID { get; private set; }
+        public int PortalID { get; private set; }
 
-	    public string PortalName { get; private set; }
+        public string PortalName { get; private set; }
 
-	    public int UserID { get; private set; }
+        public int UserID { get; private set; }
 
-	    public string UserName { get; private set; }
+        public string UserName { get; private set; }
 
-	    public int ActiveTabID { get; private set; }
+        public int ActiveTabID { get; private set; }
 
-	    public string ActiveTabName { get; private set; }
+        public string ActiveTabName { get; private set; }
 
-	    public string RawURL { get; private set; }
+        public string RawURL { get; private set; }
 
-	    public string AbsoluteURL { get; private set; }
+        public string AbsoluteURL { get; private set; }
 
-	    public string AbsoluteURLReferrer { get; private set; }
+        public string AbsoluteURLReferrer { get; private set; }
 
-	    public string UserAgent { get; private set; }
+        public string UserAgent { get; private set; }
 
-	    public string DefaultDataProvider { get; private set; }
+        public string DefaultDataProvider { get; private set; }
 
-	    public string ExceptionGUID { get; private set; }
+        public string ExceptionGUID { get; private set; }
 
-	    public string FileName { get; private set; }
+        public string FileName { get; private set; }
 
-	    public int FileLineNumber { get; private set; }
+        public int FileLineNumber { get; private set; }
 
-	    public int FileColumnNumber { get; private set; }
+        public int FileColumnNumber { get; private set; }
 
-	    public string Method { get; private set; }
+        public string Method { get; private set; }
 
-	    [XmlIgnore]
+        [XmlIgnore]
         public new MethodBase TargetSite
         {
             get
@@ -136,7 +136,7 @@ namespace DotNetNuke.Services.Exceptions
 
         private void InitializePrivateVariables()
         {
-			//Try and get the Portal settings from context
+            //Try and get the Portal settings from context
             //If an error occurs getting the context then set the variables to -1
             try
             {
@@ -200,7 +200,7 @@ namespace DotNetNuke.Services.Exceptions
                     ProviderConfiguration objProviderConfiguration = ProviderConfiguration.GetProviderConfiguration("data");
                     string strTypeName = ((Provider)objProviderConfiguration.Providers[objProviderConfiguration.DefaultProvider]).Type;
                     DefaultDataProvider = strTypeName;
-                    
+
                 }
                 catch (Exception exc)
                 {

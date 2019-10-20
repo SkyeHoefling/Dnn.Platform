@@ -4,7 +4,7 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
 <div class="dnnForm dnnEditFolderMapping dnnClear" id="dnnEditFolderMapping">
-	<div class="dnnFormMessage dnnFormInfo"><asp:Label ID="DescriptionLabel" runat="server" resourcekey="Description"></asp:Label></div>
+    <div class="dnnFormMessage dnnFormInfo"><asp:Label ID="DescriptionLabel" runat="server" resourcekey="Description"></asp:Label></div>
     <asp:PlaceHolder id="SyncWarningPlaceHolder" runat="server">
         <div class="dnnFormMessage dnnFormInfo"><asp:Label ID="SyncLabel" runat="server" Visible="true" ResourceKey="SyncWarning" /></div>
     </asp:PlaceHolder>
@@ -20,7 +20,7 @@
                         <asp:RequiredFieldValidator ID="NameValidator" runat="server" ControlToValidate="NameTextbox" Display="Dynamic" CssClass="dnnFormMessage dnnFormError" resourcekey="NameValidator.ErrorMessage" ValidationGroup="vgEditFolderMapping"></asp:RequiredFieldValidator>
                     </div>
                     <div class="dnnFormItem">
-                        <dnn:label id="FolderProviderLabel" runat="server" controlname="cboFolderProviders" />                        
+                        <dnn:label id="FolderProviderLabel" runat="server" controlname="cboFolderProviders" />
                         <dnn:DnnComboBox ID="FolderProvidersComboBox" runat="server" AutoPostBack="true" CausesValidation="false" OnSelectedIndexChanged="cboFolderProviders_SelectedIndexChanged" />
                         <asp:RequiredFieldValidator ID="FolderProviderValidator" runat="server" ControlToValidate="FolderProvidersComboBox" InitialValue="" Display="Dynamic" CssClass="dnnFormMessage dnnFormError" resourcekey="FolderProviderValidator.ErrorMessage" EnableClientScript="false" ValidationGroup="vgEditFolderMapping"></asp:RequiredFieldValidator>
                     </div>
@@ -34,7 +34,7 @@
     </div>
     <ul class="dnnActions dnnClear">
         <li>
-            <asp:LinkButton ID="UpdateButton" runat="server" CssClass="dnnPrimaryAction" ResourceKey="cmdUpdate" IconKey="Add" ValidationGroup="vgEditFolderMapping" />        
+            <asp:LinkButton ID="UpdateButton" runat="server" CssClass="dnnPrimaryAction" ResourceKey="cmdUpdate" IconKey="Add" ValidationGroup="vgEditFolderMapping" />
         </li>
         <li><asp:HyperLink ID="CancelHyperLink" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCancel" /></li>
     </ul>

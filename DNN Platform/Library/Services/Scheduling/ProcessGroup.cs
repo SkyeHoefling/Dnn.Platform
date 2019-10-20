@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -33,7 +33,7 @@ namespace DotNetNuke.Services.Scheduling
 {
     public class ProcessGroup
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ProcessGroup));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ProcessGroup));
         //''''''''''''''''''''''''''''''''''''''''''''''''''
         //This class represents a process group for
         //our threads to run in.
@@ -84,8 +84,8 @@ namespace DotNetNuke.Services.Scheduling
                 ticksElapsed = Environment.TickCount - ticksElapsed;
                 Process = GetSchedulerClient(objScheduleHistoryItem.TypeFullName, objScheduleHistoryItem);
                 Process.ScheduleHistoryItem = objScheduleHistoryItem;
-                
-				//Set up the handlers for the CoreScheduler
+
+                //Set up the handlers for the CoreScheduler
                 Process.ProcessStarted += Scheduler.CoreScheduler.WorkStarted;
                 Process.ProcessProgressing += Scheduler.CoreScheduler.WorkProgressing;
                 Process.ProcessCompleted += Scheduler.CoreScheduler.WorkCompleted;
@@ -93,7 +93,7 @@ namespace DotNetNuke.Services.Scheduling
                 //This kicks off the DoWork method of the class
                 //type specified in the configuration.
 
-				Process.Started();
+                Process.Started();
                 try
                 {
                     Process.ScheduleHistoryItem.Succeeded = false;
@@ -119,15 +119,15 @@ namespace DotNetNuke.Services.Scheduling
                 {
                     Process.Completed();
                 }
-                
-				//If all processes in this ProcessGroup have
+
+                //If all processes in this ProcessGroup have
                 //completed, set the ticksElapsed and raise
                 //the Completed event.
                 //I don't think this is necessary with the
                 //other events.  I'll leave it for now and
                 //will probably take it out later.
 
-				if (processesCompleted == numberOfProcesses)
+                if (processesCompleted == numberOfProcesses)
                 {
                     if (processesCompleted == numberOfProcesses)
                     {
@@ -154,7 +154,7 @@ namespace DotNetNuke.Services.Scheduling
                 }
                 else
                 {
-                    //when the schedule has invalid config and can't initialize the Process, 
+                    //when the schedule has invalid config and can't initialize the Process,
                     //we need also trigger work errored event so that the schedule can remove from inprogress and inqueue list to prevent endless loop.
                     Scheduler.CoreScheduler.WorkStarted(objScheduleHistoryItem);
                     objScheduleHistoryItem.Succeeded = false;
@@ -178,13 +178,13 @@ namespace DotNetNuke.Services.Scheduling
             var param = new ScheduleHistoryItem[1];
             param[0] = objScheduleHistoryItem;
             var types = new Type[1];
-            
-			//Get the constructor for the Class
+
+            //Get the constructor for the Class
             types[0] = typeof (ScheduleHistoryItem);
             ConstructorInfo objConstructor;
             objConstructor = t.GetConstructor(types);
-            
-			//Return an instance of the class as an object
+
+            //Return an instance of the class as an object
             return (SchedulerClient) objConstructor.Invoke(param);
         }
 
@@ -196,7 +196,7 @@ namespace DotNetNuke.Services.Scheduling
             Run((ScheduleHistoryItem) objScheduleHistoryItem);
         }
 
-        //Add a queue request to Threadpool with a 
+        //Add a queue request to Threadpool with a
         //callback to RunPooledThread which calls Run()
         public void AddQueueUserWorkItem(ScheduleItem s)
         {

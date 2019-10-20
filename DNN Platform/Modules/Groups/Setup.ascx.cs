@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -77,21 +77,21 @@ namespace DotNetNuke.Modules.Groups
             ModuleController.Instance.UpdateTabModuleSetting(TabModuleId, Constants.GroupLoadView, GroupMode.List.ToString());
             ModuleController.Instance.UpdateTabModuleSetting(TabModuleId, Constants.GroupViewPage, tab.TabID.ToString(CultureInfo.InvariantCulture));
 
-			//Default Social Groups
-	        var defaultGroup = RoleController.GetRoleGroupByName(PortalId, Constants.DefaultGroupName);
-	        var groupId = -2;
-			if (defaultGroup != null)
-			{
-				groupId = defaultGroup.RoleGroupID;
-			}
-			else
-			{
-				var groupInfo = new RoleGroupInfo();
+            //Default Social Groups
+            var defaultGroup = RoleController.GetRoleGroupByName(PortalId, Constants.DefaultGroupName);
+            var groupId = -2;
+            if (defaultGroup != null)
+            {
+                groupId = defaultGroup.RoleGroupID;
+            }
+            else
+            {
+                var groupInfo = new RoleGroupInfo();
                 groupInfo.PortalID = PortalId;
                 groupInfo.RoleGroupName = Constants.DefaultGroupName;
                 groupInfo.Description = Constants.DefaultGroupName;
-				groupId = RoleController.AddRoleGroup(groupInfo);
-			}
+                groupId = RoleController.AddRoleGroup(groupInfo);
+            }
             ModuleController.Instance.UpdateTabModuleSetting(TabModuleId, Constants.DefaultRoleGroupSetting, groupId.ToString());
 
             Response.Redirect(Request.RawUrl);
@@ -168,7 +168,7 @@ namespace DotNetNuke.Modules.Groups
 
         private int AddModule(TabInfo tab, int portalId, string moduleName, string pane)
         {
-			var module = ModuleController.Instance.GetTabModules(tab.TabID).Values.SingleOrDefault(m => m.DesktopModule.ModuleName == moduleName);
+            var module = ModuleController.Instance.GetTabModules(tab.TabID).Values.SingleOrDefault(m => m.DesktopModule.ModuleName == moduleName);
             int id = -1;
             if (module == null)
             {
@@ -273,19 +273,19 @@ namespace DotNetNuke.Modules.Groups
                         }
 
                         ModulePermissionInfo objModulePermission = AddModulePermission(objModule,
-                                                                                       objSystemModulePermission,
-                                                                                       objTabPermission.RoleID,
-                                                                                       objTabPermission.UserID,
-                                                                                       objTabPermission.AllowAccess);
+                                                                                        objSystemModulePermission,
+                                                                                        objTabPermission.RoleID,
+                                                                                        objTabPermission.UserID,
+                                                                                        objTabPermission.AllowAccess);
 
                         // ensure that every EDIT permission which allows access also provides VIEW permission
                         if (objModulePermission.PermissionKey == "EDIT" & objModulePermission.AllowAccess)
                         {
                             ModulePermissionInfo objModuleViewperm = AddModulePermission(objModule,
-                                                                                         (PermissionInfo) arrSystemModuleViewPermissions[0],
-                                                                                         objModulePermission.RoleID,
-                                                                                         objModulePermission.UserID,
-                                                                                         true);
+                                                                                        (PermissionInfo) arrSystemModuleViewPermissions[0],
+                                                                                        objModulePermission.RoleID,
+                                                                                        objModulePermission.UserID,
+                                                                                        true);
                         }
                     }
                 }

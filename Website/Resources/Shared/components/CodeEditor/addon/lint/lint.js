@@ -19,9 +19,9 @@
     document.body.appendChild(tt);
 
     function position(e) {
-      if (!tt.parentNode) return CodeMirror.off(document, "mousemove", position);
-      tt.style.top = Math.max(0, e.clientY - tt.offsetHeight - 5) + "px";
-      tt.style.left = (e.clientX + 5) + "px";
+    if (!tt.parentNode) return CodeMirror.off(document, "mousemove", position);
+    tt.style.top = Math.max(0, e.clientY - tt.offsetHeight - 5) + "px";
+    tt.style.left = (e.clientX + 5) + "px";
     }
     CodeMirror.on(document, "mousemove", position);
     position(e);
@@ -41,16 +41,16 @@
   function showTooltipFor(e, content, node) {
     var tooltip = showTooltip(e, content);
     function hide() {
-      CodeMirror.off(node, "mouseout", hide);
-      if (tooltip) { hideTooltip(tooltip); tooltip = null; }
+    CodeMirror.off(node, "mouseout", hide);
+    if (tooltip) { hideTooltip(tooltip); tooltip = null; }
     }
     var poll = setInterval(function() {
-      if (tooltip) for (var n = node;; n = n.parentNode) {
+    if (tooltip) for (var n = node;; n = n.parentNode) {
         if (n && n.nodeType == 11) n = n.host;
         if (n == document.body) return;
         if (!n) { hide(); break; }
-      }
-      if (!tooltip) return clearInterval(poll);
+    }
+    if (!tooltip) return clearInterval(poll);
     }, 400);
     CodeMirror.on(node, "mouseout", hide);
   }
@@ -73,7 +73,7 @@
     var state = cm.state.lint;
     if (state.hasGutter) cm.clearGutter(GUTTER_ID);
     for (var i = 0; i < state.marked.length; ++i)
-      state.marked[i].clear();
+    state.marked[i].clear();
     state.marked.length = 0;
   }
 
@@ -81,12 +81,12 @@
     var marker = document.createElement("div"), inner = marker;
     marker.className = "CodeMirror-lint-marker-" + severity;
     if (multiple) {
-      inner = marker.appendChild(document.createElement("div"));
-      inner.className = "CodeMirror-lint-marker-multiple";
+    inner = marker.appendChild(document.createElement("div"));
+    inner.className = "CodeMirror-lint-marker-multiple";
     }
 
     if (tooltips != false) CodeMirror.on(inner, "mouseover", function(e) {
-      showTooltipFor(e, labels, inner);
+    showTooltipFor(e, labels, inner);
     });
 
     return marker;
@@ -100,8 +100,8 @@
   function groupByLine(annotations) {
     var lines = [];
     for (var i = 0; i < annotations.length; ++i) {
-      var ann = annotations[i], line = ann.from.line;
-      (lines[line] || (lines[line] = [])).push(ann);
+    var ann = annotations[i], line = ann.from.line;
+    (lines[line] || (lines[line] = [])).push(ann);
     }
     return lines;
   }
@@ -121,9 +121,9 @@
     var getAnnotations = options.getAnnotations || cm.getHelper(CodeMirror.Pos(0, 0), "lint");
     if (!getAnnotations) return;
     if (options.async || getAnnotations.async)
-      getAnnotations(cm.getValue(), updateLinting, passOptions, cm);
+    getAnnotations(cm.getValue(), updateLinting, passOptions, cm);
     else
-      updateLinting(cm, getAnnotations(cm.getValue(), passOptions, cm));
+    updateLinting(cm, getAnnotations(cm.getValue(), passOptions, cm));
   }
 
   function updateLinting(cm, annotationsNotSorted) {
@@ -133,13 +133,13 @@
     var annotations = groupByLine(annotationsNotSorted);
 
     for (var line = 0; line < annotations.length; ++line) {
-      var anns = annotations[line];
-      if (!anns) continue;
+    var anns = annotations[line];
+    if (!anns) continue;
 
-      var maxSeverity = null;
-      var tipLabel = state.hasGutter && document.createDocumentFragment();
+    var maxSeverity = null;
+    var tipLabel = state.hasGutter && document.createDocumentFragment();
 
-      for (var i = 0; i < anns.length; ++i) {
+    for (var i = 0; i < anns.length; ++i) {
         var ann = anns[i];
         var severity = ann.severity;
         if (!severity) severity = "error";
@@ -149,14 +149,14 @@
         if (state.hasGutter) tipLabel.appendChild(annotationTooltip(ann));
 
         if (ann.to) state.marked.push(cm.markText(ann.from, ann.to, {
-          className: "CodeMirror-lint-mark-" + severity,
-          __annotation: ann
+        className: "CodeMirror-lint-mark-" + severity,
+        __annotation: ann
         }));
-      }
+    }
 
-      if (state.hasGutter)
+    if (state.hasGutter)
         cm.setGutterMarker(line, GUTTER_ID, makeMarker(tipLabel, maxSeverity, anns.length > 1,
-                                                       state.options.tooltips));
+                                                        state.options.tooltips));
     }
     if (options.onUpdateLinting) options.onUpdateLinting(annotationsNotSorted, annotations, cm);
   }
@@ -179,31 +179,31 @@
     var box = target.getBoundingClientRect(), x = (box.left + box.right) / 2, y = (box.top + box.bottom) / 2;
     var spans = cm.findMarksAt(cm.coordsChar({left: x, top: y}, "client"));
     for (var i = 0; i < spans.length; ++i) {
-      var ann = spans[i].__annotation;
-      if (ann) return popupSpanTooltip(ann, e);
+    var ann = spans[i].__annotation;
+    if (ann) return popupSpanTooltip(ann, e);
     }
   }
 
   CodeMirror.defineOption("lint", false, function(cm, val, old) {
     if (old && old != CodeMirror.Init) {
-      clearMarks(cm);
-      if (cm.state.lint.options.lintOnChange !== false)
+    clearMarks(cm);
+    if (cm.state.lint.options.lintOnChange !== false)
         cm.off("change", onChange);
-      CodeMirror.off(cm.getWrapperElement(), "mouseover", cm.state.lint.onMouseOver);
-      clearTimeout(cm.state.lint.timeout);
-      delete cm.state.lint;
+    CodeMirror.off(cm.getWrapperElement(), "mouseover", cm.state.lint.onMouseOver);
+    clearTimeout(cm.state.lint.timeout);
+    delete cm.state.lint;
     }
 
     if (val) {
-      var gutters = cm.getOption("gutters"), hasLintGutter = false;
-      for (var i = 0; i < gutters.length; ++i) if (gutters[i] == GUTTER_ID) hasLintGutter = true;
-      var state = cm.state.lint = new LintState(cm, parseOptions(cm, val), hasLintGutter);
-      if (state.options.lintOnChange !== false)
+    var gutters = cm.getOption("gutters"), hasLintGutter = false;
+    for (var i = 0; i < gutters.length; ++i) if (gutters[i] == GUTTER_ID) hasLintGutter = true;
+    var state = cm.state.lint = new LintState(cm, parseOptions(cm, val), hasLintGutter);
+    if (state.options.lintOnChange !== false)
         cm.on("change", onChange);
-      if (state.options.tooltips != false)
+    if (state.options.tooltips != false)
         CodeMirror.on(cm.getWrapperElement(), "mouseover", state.onMouseOver);
 
-      startLinting(cm);
+    startLinting(cm);
     }
   });
 

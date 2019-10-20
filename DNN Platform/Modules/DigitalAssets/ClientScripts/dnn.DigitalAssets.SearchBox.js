@@ -8,19 +8,19 @@ dnnModule.DigitalAssetsSearchBox = function ($, $scope, servicesFramework) {
     function search() {
         var newPattern = $("#dnnModuleDigitalAssetsSearchBox>input.searchInput", $scope).val();
         newPattern = $.trim(newPattern);
-        
+
         if (onSearchFunction) {
             onSearchFunction(newPattern);
         }
     }
 
     function clearSearch() {
-        $("#dnnModuleDigitalAssetsSearchBox>input.searchInput", $scope).val(''); 
+        $("#dnnModuleDigitalAssetsSearchBox>input.searchInput", $scope).val('');
     }
-    
+
     function doSearch(currentFolderId, pattern, startIndex, numItems, sortExpression, before, done, fail, always) {
         var contentServiceUrl = servicesFramework.getServiceRoot('DigitalAssets') + 'ContentService/';
-        
+
         before();
         $.ajax({
             url: contentServiceUrl + "SearchFolderContent",
@@ -52,17 +52,17 @@ dnnModule.DigitalAssetsSearchBox = function ($, $scope, servicesFramework) {
             return false;
         });
     }
-    
+
     function onSearch(onSearchFunc) {
         onSearchFunction = onSearchFunc;
     }
-    
+
     function highlightItemName(pattern, itemName) {
         if (!pattern || pattern == "" || pattern.indexOf("?") != -1) {
             return itemName;
         }
 
-        if (pattern.lastIndexOf("*") == pattern.length - 1) {   // example*            
+        if (pattern.lastIndexOf("*") == pattern.length - 1) {   // example*
             pattern = pattern.substring(0, pattern.length - 1);
 
             if (pattern.lastIndexOf("*") == 0) { // *example* --> Highlight al occurrences
@@ -82,7 +82,7 @@ dnnModule.DigitalAssetsSearchBox = function ($, $scope, servicesFramework) {
             }
         }
 
-        if (pattern.indexOf("*") == -1) {   // highlight the beginning                    
+        if (pattern.indexOf("*") == -1) {   // highlight the beginning
             itemName = "<font class='dnnModuleDigitalAssetsHighlight'>" + itemName.substring(0, pattern.length) + "</font>" +
                 itemName.substring(pattern.length);
         }

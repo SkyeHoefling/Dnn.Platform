@@ -19,9 +19,9 @@ CodeMirror.defineMode("dylan", function(_config) {
 
     // Words that introduce simple named definitions like "define library"
     namedDefinition: ["module", "library", "macro",
-                      "C-struct", "C-union",
-                      "C-function", "C-callable-wrapper"
-                     ],
+                    "C-struct", "C-union",
+                    "C-function", "C-callable-wrapper"
+                    ],
 
     // Words that introduce type definitions like "define class".
     // These are also parameterized like "define method" and are
@@ -31,8 +31,8 @@ CodeMirror.defineMode("dylan", function(_config) {
     // Words that introduce trickier definitions like "define method".
     // These require special definitions to be added to startExpressions
     otherParameterizedDefinition: ["method", "function",
-                                   "C-variable", "C-address"
-                                  ],
+                                    "C-variable", "C-address"
+                                ],
 
     // Words that introduce module constant definitions.
     // These must also be simple definitions and are
@@ -49,31 +49,31 @@ CodeMirror.defineMode("dylan", function(_config) {
     otherSimpleDefinition: ["generic", "domain",
                             "C-pointer-type",
                             "table"
-                           ],
+                            ],
 
     // Words that begin statements with implicit bodies.
     statement: ["if", "block", "begin", "method", "case",
                 "for", "select", "when", "unless", "until",
                 "while", "iterate", "profiling", "dynamic-bind"
-               ],
+                ],
 
     // Patterns that act as separators in compound statements.
     // This may include any general pattern that must be indented
     // specially.
     separator: ["finally", "exception", "cleanup", "else",
                 "elseif", "afterwards"
-               ],
+                ],
 
     // Keywords that do not require special indentation handling,
     // but which should be highlighted
     other: ["above", "below", "by", "from", "handler", "in",
             "instance", "let", "local", "otherwise", "slot",
             "subclass", "then", "to", "keyed-by", "virtual"
-           ],
+            ],
 
     // Condition signaling function calls
     signalingCalls: ["signal", "error", "cerror",
-                     "break", "check-type", "abort"
+                    "break", "check-type", "abort"
                     ]
   };
 
@@ -120,7 +120,7 @@ CodeMirror.defineMode("dylan", function(_config) {
   // Compile all patterns to regular expressions
   for (var patternName in patterns)
     if (patterns.hasOwnProperty(patternName))
-      patterns[patternName] = new RegExp("^" + patterns[patternName]);
+    patterns[patternName] = new RegExp("^" + patterns[patternName]);
 
   // Names beginning "with-" and "without-" are commonly
   // used as statement macro
@@ -143,8 +143,8 @@ CodeMirror.defineMode("dylan", function(_config) {
     "signalingCalls"
   ].forEach(function(type) {
     words[type].forEach(function(word) {
-      wordLookup[word] = type;
-      styleLookup[word] = styles[type];
+    wordLookup[word] = type;
+    styleLookup[word] = styles[type];
     });
   });
 
@@ -158,84 +158,84 @@ CodeMirror.defineMode("dylan", function(_config) {
     // String
     var ch = stream.peek();
     if (ch == "'" || ch == '"') {
-      stream.next();
-      return chain(stream, state, tokenString(ch, "string"));
+    stream.next();
+    return chain(stream, state, tokenString(ch, "string"));
     }
     // Comment
     else if (ch == "/") {
-      stream.next();
-      if (stream.eat("*")) {
+    stream.next();
+    if (stream.eat("*")) {
         return chain(stream, state, tokenComment);
-      } else if (stream.eat("/")) {
+    } else if (stream.eat("/")) {
         stream.skipToEnd();
         return "comment";
-      } else {
+    } else {
         stream.skipTo(" ");
         return "operator";
-      }
+    }
     }
     // Decimal
     else if (/\d/.test(ch)) {
-      stream.match(/^\d*(?:\.\d*)?(?:e[+\-]?\d+)?/);
-      return "number";
+    stream.match(/^\d*(?:\.\d*)?(?:e[+\-]?\d+)?/);
+    return "number";
     }
     // Hash
     else if (ch == "#") {
-      stream.next();
-      // Symbol with string syntax
-      ch = stream.peek();
-      if (ch == '"') {
+    stream.next();
+    // Symbol with string syntax
+    ch = stream.peek();
+    if (ch == '"') {
         stream.next();
         return chain(stream, state, tokenString('"', "string-2"));
-      }
-      // Binary number
-      else if (ch == "b") {
+    }
+    // Binary number
+    else if (ch == "b") {
         stream.next();
         stream.eatWhile(/[01]/);
         return "number";
-      }
-      // Hex number
-      else if (ch == "x") {
+    }
+    // Hex number
+    else if (ch == "x") {
         stream.next();
         stream.eatWhile(/[\da-f]/i);
         return "number";
-      }
-      // Octal number
-      else if (ch == "o") {
+    }
+    // Octal number
+    else if (ch == "o") {
         stream.next();
         stream.eatWhile(/[0-7]/);
         return "number";
-      }
-      // Hash symbol
-      else {
+    }
+    // Hash symbol
+    else {
         stream.eatWhile(/[-a-zA-Z]/);
         return "keyword";
-      }
+    }
     } else if (stream.match("end")) {
-      return "keyword";
+    return "keyword";
     }
     for (var name in patterns) {
-      if (patterns.hasOwnProperty(name)) {
+    if (patterns.hasOwnProperty(name)) {
         var pattern = patterns[name];
         if ((pattern instanceof Array && pattern.some(function(p) {
-          return stream.match(p);
+        return stream.match(p);
         })) || stream.match(pattern))
-          return patternStyles[name];
-      }
+        return patternStyles[name];
+    }
     }
     if (stream.match("define")) {
-      return "def";
+    return "def";
     } else {
-      stream.eatWhile(/[\w\-]/);
-      // Keyword
-      if (wordLookup[stream.current()]) {
+    stream.eatWhile(/[\w\-]/);
+    // Keyword
+    if (wordLookup[stream.current()]) {
         return styleLookup[stream.current()];
-      } else if (stream.current().match(symbol)) {
+    } else if (stream.current().match(symbol)) {
         return "variable";
-      } else {
+    } else {
         stream.next();
         return "variable-2";
-      }
+    }
     }
   }
 
@@ -243,43 +243,43 @@ CodeMirror.defineMode("dylan", function(_config) {
     var maybeEnd = false,
     ch;
     while ((ch = stream.next())) {
-      if (ch == "/" && maybeEnd) {
+    if (ch == "/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return "comment";
   }
 
   function tokenString(quote, style) {
     return function(stream, state) {
-      var next, end = false;
-      while ((next = stream.next()) != null) {
+    var next, end = false;
+    while ((next = stream.next()) != null) {
         if (next == quote) {
-          end = true;
-          break;
+        end = true;
+        break;
         }
-      }
-      if (end)
+    }
+    if (end)
         state.tokenize = tokenBase;
-      return style;
+    return style;
     };
   }
 
   // Interface
   return {
     startState: function() {
-      return {
+    return {
         tokenize: tokenBase,
         currentIndent: 0
-      };
+    };
     },
     token: function(stream, state) {
-      if (stream.eatSpace())
+    if (stream.eatSpace())
         return null;
-      var style = state.tokenize(stream, state);
-      return style;
+    var style = state.tokenize(stream, state);
+    return style;
     },
     blockCommentStart: "/*",
     blockCommentEnd: "*/"

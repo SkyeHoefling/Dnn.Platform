@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -46,13 +46,13 @@ namespace DotNetNuke.Entities.Content.Workflow
         private const string ContentWorkflowNotificationType = "ContentWorkflowNotification";
 
         private ContentWorkflowController()
-        {            
+        {
             contentController = new ContentController();
         }
 
         #region Public Methods
         #region Obsolete Methods
-        
+
         #region Engine
 
         [Obsolete("Deprecated in Platform 7.4.0. Use instead IWorkflowEngine. Scheduled removal in v10.0.0.")]
@@ -230,11 +230,11 @@ namespace DotNetNuke.Entities.Content.Workflow
         public void AddWorkflowStatePermission(ContentWorkflowStatePermission permission, int lastModifiedByUserID)
         {
             DataProvider.Instance().AddContentWorkflowStatePermission(permission.StateID,
-                                                                       permission.PermissionID,
-                                                                       permission.RoleID,
-                                                                       permission.AllowAccess,
-                                                                       permission.UserID,
-                                                                       lastModifiedByUserID);
+                                                                        permission.PermissionID,
+                                                                        permission.RoleID,
+                                                                        permission.AllowAccess,
+                                                                        permission.UserID,
+                                                                        lastModifiedByUserID);
         }
 
         [Obsolete("Deprecated in Platform 7.4.0. Use instead IWorkflowStateManager. Scheduled removal in v10.0.0.")]
@@ -365,74 +365,74 @@ namespace DotNetNuke.Entities.Content.Workflow
                 StartAfterEditing = true,
                 DispositionEnabled = false,
                 States = new List<ContentWorkflowState>
-                                               {
-                                                   new ContentWorkflowState
-                                                       {
-                                                           StateName =
-                                                               Localization.GetString("DefaultWorkflowState1.StateName"),
-                                                           Order = 1,
-                                                           IsActive = true,
-                                                           SendEmail = false,
-                                                           SendMessage = true,
-                                                           IsDisposalState = false,
-                                                           OnCompleteMessageSubject =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState1.OnCompleteMessageSubject"),
-                                                           OnCompleteMessageBody =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState1.OnCompleteMessageBody"),
-                                                           OnDiscardMessageSubject =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState1.OnDiscardMessageSubject"),
-                                                           OnDiscardMessageBody =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState1.OnDiscardMessageBody")
-                                                       },
-                                                   new ContentWorkflowState
-                                                       {
-                                                           StateName =
-                                                               Localization.GetString("DefaultWorkflowState2.StateName"),
-                                                           Order = 2,
-                                                           IsActive = true,
-                                                           SendEmail = false,
-                                                           SendMessage = true,
-                                                           IsDisposalState = false,
-                                                           OnCompleteMessageSubject =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState2.OnCompleteMessageSubject"),
-                                                           OnCompleteMessageBody =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState2.OnCompleteMessageBody"),
-                                                           OnDiscardMessageSubject =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState2.OnDiscardMessageSubject"),
-                                                           OnDiscardMessageBody =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState2.OnDiscardMessageBody")
-                                                       },
-                                                   new ContentWorkflowState
-                                                       {
-                                                           StateName =
-                                                               Localization.GetString("DefaultWorkflowState3.StateName"),
-                                                           Order = 3,
-                                                           IsActive = true,
-                                                           SendEmail = false,
-                                                           SendMessage = true,
-                                                           IsDisposalState = false,
-                                                           OnCompleteMessageSubject =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState3.OnCompleteMessageSubject"),
-                                                           OnCompleteMessageBody =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState3.OnCompleteMessageBody"),
-                                                           OnDiscardMessageSubject =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState3.OnDiscardMessageSubject"),
-                                                           OnDiscardMessageBody =
-                                                               Localization.GetString(
-                                                                   "DefaultWorkflowState3.OnDiscardMessageBody")
-                                                       }
-                                               }
+                                                {
+                                                    new ContentWorkflowState
+                                                        {
+                                                            StateName =
+                                                                Localization.GetString("DefaultWorkflowState1.StateName"),
+                                                            Order = 1,
+                                                            IsActive = true,
+                                                            SendEmail = false,
+                                                            SendMessage = true,
+                                                            IsDisposalState = false,
+                                                            OnCompleteMessageSubject =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState1.OnCompleteMessageSubject"),
+                                                            OnCompleteMessageBody =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState1.OnCompleteMessageBody"),
+                                                            OnDiscardMessageSubject =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState1.OnDiscardMessageSubject"),
+                                                            OnDiscardMessageBody =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState1.OnDiscardMessageBody")
+                                                        },
+                                                    new ContentWorkflowState
+                                                        {
+                                                            StateName =
+                                                                Localization.GetString("DefaultWorkflowState2.StateName"),
+                                                            Order = 2,
+                                                            IsActive = true,
+                                                            SendEmail = false,
+                                                            SendMessage = true,
+                                                            IsDisposalState = false,
+                                                            OnCompleteMessageSubject =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState2.OnCompleteMessageSubject"),
+                                                            OnCompleteMessageBody =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState2.OnCompleteMessageBody"),
+                                                            OnDiscardMessageSubject =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState2.OnDiscardMessageSubject"),
+                                                            OnDiscardMessageBody =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState2.OnDiscardMessageBody")
+                                                        },
+                                                    new ContentWorkflowState
+                                                        {
+                                                            StateName =
+                                                                Localization.GetString("DefaultWorkflowState3.StateName"),
+                                                            Order = 3,
+                                                            IsActive = true,
+                                                            SendEmail = false,
+                                                            SendMessage = true,
+                                                            IsDisposalState = false,
+                                                            OnCompleteMessageSubject =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState3.OnCompleteMessageSubject"),
+                                                            OnCompleteMessageBody =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState3.OnCompleteMessageBody"),
+                                                            OnDiscardMessageSubject =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState3.OnDiscardMessageSubject"),
+                                                            OnDiscardMessageBody =
+                                                                Localization.GetString(
+                                                                    "DefaultWorkflowState3.OnDiscardMessageBody")
+                                                        }
+                                                }
             };
 
             AddWorkflow(worflow);
@@ -509,7 +509,7 @@ namespace DotNetNuke.Entities.Content.Workflow
 
         [Obsolete("Deprecated in Platform 7.4.0. Scheduled removal in v10.0.0.")]
         public void SendWorkflowNotification(bool sendEmail, bool sendMessage, PortalSettings settings, IEnumerable<RoleInfo> roles, IEnumerable<UserInfo> users, string subject, string body,
-                                             string comment, int userID)
+                                            string comment, int userID)
         {
             var replacedSubject = ReplaceNotificationTokens(subject, null, null, null, settings.PortalId, userID);
             var replacedBody = ReplaceNotificationTokens(body, null, null, null, settings.PortalId, userID);
@@ -523,7 +523,7 @@ namespace DotNetNuke.Entities.Content.Workflow
         {
             var workflow = GetWorkflow(item);
 
-            var logComment = ReplaceNotificationTokens(GetWorkflowActionComment(ContentWorkflowLogType.CommentProvided), workflow, item, workflow.States.FirstOrDefault(s => s.StateID == item.StateID), workflow.PortalID, userID, userComment);            
+            var logComment = ReplaceNotificationTokens(GetWorkflowActionComment(ContentWorkflowLogType.CommentProvided), workflow, item, workflow.States.FirstOrDefault(s => s.StateID == item.StateID), workflow.PortalID, userID, userComment);
             AddWorkflowLog(workflow.WorkflowID, item, GetWorkflowActionText(ContentWorkflowLogType.CommentProvided), logComment, userID);
         }
 
@@ -546,7 +546,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             var roles = GetRolesFromPermissions(settings, permissions);
             var replacedSubject = ReplaceNotificationTokens(subject, workflow, item, GetWorkflowStateByID(destinationStateID), settings.PortalId, actionUserID);
             var replacedBody = ReplaceNotificationTokens(body, workflow, item, GetWorkflowStateByID(destinationStateID), settings.PortalId, actionUserID);
-            
+
             SendNotification(state.SendEmail, state.SendMessage, settings, roles, users, replacedSubject, replacedBody, comment, actionUserID, source, parameters);
         }
 
@@ -560,7 +560,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             }
 
             var notification = new Notification
-            {                
+            {
                 NotificationTypeID = NotificationsController.Instance.GetNotificationType(ContentWorkflowNotificationType).NotificationTypeId,
                 Subject = subject,
                 Body = fullbody,
@@ -585,7 +585,7 @@ namespace DotNetNuke.Entities.Content.Workflow
         {
             return body + "<br><br>" + comment;
         }
-        
+
         private void SendEmailNotifications(PortalSettings settings, IEnumerable<RoleInfo> roles, IEnumerable<UserInfo> users, string subject, string body, string comment)
         {
             var fullbody = GetFullBody(body, comment);
@@ -597,7 +597,7 @@ namespace DotNetNuke.Entities.Content.Workflow
             }
 
             foreach (var userMail in emailUsers.Select(u => u.Email).Distinct())
-            {                
+            {
                 Mail.SendEmail(settings.Email, userMail, subject, fullbody);
             }
         }
@@ -605,7 +605,7 @@ namespace DotNetNuke.Entities.Content.Workflow
         private IEnumerable<RoleInfo> GetRolesFromPermissions(PortalSettings settings, IEnumerable<ContentWorkflowStatePermission> permissions)
         {
             var roles = new List<RoleInfo>();
-            
+
             foreach (var permission in permissions)
             {
                 if (permission.AllowAccess && permission.RoleID > Null.NullInteger)

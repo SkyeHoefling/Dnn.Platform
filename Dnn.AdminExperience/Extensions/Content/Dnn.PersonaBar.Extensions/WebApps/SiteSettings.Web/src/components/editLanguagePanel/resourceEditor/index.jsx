@@ -47,9 +47,9 @@ class ResourceEditor extends Component {
             height = 100;
         }
 
-        return (<MultiLineInput 
-            className={props.className} 
-            value={state.content} 
+        return (<MultiLineInput
+            className={props.className}
+            value={state.content}
             enabled={props.enabled}
             style={{height: height + "px"}}
             onChange={this.onChange.bind(this)} />);
@@ -58,9 +58,9 @@ class ResourceEditor extends Component {
     renderSingle() {
         const { props, state } = this;
 
-        return (<SingleLineInput 
-            className={props.className} 
-            value={state.content} 
+        return (<SingleLineInput
+            className={props.className}
+            value={state.content}
             enabled={props.enabled}
             onChange={this.onChange.bind(this)} />);
     }
@@ -92,7 +92,7 @@ class ResourceEditor extends Component {
     onFullEditorCancel() {
         this.onExitFullMode();
     }
-    
+
     /* eslint-disable react/no-danger */
     render() {
         const { props, state } = this;
@@ -101,21 +101,21 @@ class ResourceEditor extends Component {
 
         return (<div className="dnn-language-resource-editor">
             {renderMulti ? this.renderMulti() : this.renderSingle()}
-            {props.enabled && 
-            <div 
-                className="edit-svg" 
+            {props.enabled &&
+            <div
+                className="edit-svg"
                 dangerouslySetInnerHTML={{ __html: SvgIcons.EditIcon }}
                 onClick={this.onEnterFullMode.bind(this)}>
             </div>
             }
-            {props.enabled && 
-            <Modal 
+            {props.enabled &&
+            <Modal
                 isOpen={state.inFullMode}
                 onRequestClose={this.onExitFullMode.bind(this)}
                 shouldCloseOnOverlayClick={false}
                 modalHeight={390}>
-                <FullEditor 
-                    value={props.value} 
+                <FullEditor
+                    value={props.value}
                     onChange={this.onFullEditorChange.bind(this)}
                     onCancel={this.onFullEditorCancel.bind(this)}
                 />

@@ -46,7 +46,7 @@ class AuditCheckPanelBody extends Component {
         const successText = result.SuccessText;
         const failureText = result.FailureText;
         const reason = result.Reason;
-        
+
         switch (severity) {
             case 0:
                 return (

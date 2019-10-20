@@ -12,57 +12,57 @@
 /********************************************/
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.DBLoggingProvider'
+    WHERE Name = 'DotNetNuke.DBLoggingProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.SchedulingProvider'
-	
-DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.CorePermissionProvider'
+    WHERE Name = 'DotNetNuke.SchedulingProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.SearchIndexProvider'
+    WHERE Name = 'DotNetNuke.CorePermissionProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.SearchProvider'
+    WHERE Name = 'DotNetNuke.SearchIndexProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.SearchProvider'
+    WHERE Name = 'DotNetNuke.SearchProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.CoreSitemapProvider'
+    WHERE Name = 'DotNetNuke.SearchProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.FileBasedCachingProvider'
+    WHERE Name = 'DotNetNuke.CoreSitemapProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.ModuleCaching.FileProvider'
+    WHERE Name = 'DotNetNuke.FileBasedCachingProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.ModuleCaching.MemoryProvider'
+    WHERE Name = 'DotNetNuke.ModuleCaching.FileProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.AspNetMembershipProvider'
+    WHERE Name = 'DotNetNuke.ModuleCaching.MemoryProvider'
 
 DELETE FROM {databaseOwner}{objectQualifier}Packages
-	WHERE Name = 'DotNetNuke.DNNProfileProvider'
+    WHERE Name = 'DotNetNuke.AspNetMembershipProvider'
+
+DELETE FROM {databaseOwner}{objectQualifier}Packages
+    WHERE Name = 'DotNetNuke.DNNProfileProvider'
 
 /*
  * Add new IsShareable and IsShareableViewOnly columns to Modules Table
  */
 
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}Modules' AND COLUMN_NAME='IsShareable')
-	BEGIN
-		ALTER TABLE {databaseOwner}{objectQualifier}Modules
-			ADD IsShareable bit NOT NULL CONSTRAINT DF_{objectQualifier}Modules_IsShareable DEFAULT 1
-	END
+    BEGIN
+        ALTER TABLE {databaseOwner}{objectQualifier}Modules
+            ADD IsShareable bit NOT NULL CONSTRAINT DF_{objectQualifier}Modules_IsShareable DEFAULT 1
+    END
 GO
 
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}Modules' AND COLUMN_NAME='IsShareableViewOnly')
-	BEGIN
-		ALTER TABLE {databaseOwner}{objectQualifier}Modules
-			ADD IsShareableViewOnly bit NOT NULL CONSTRAINT DF_{objectQualifier}Modules_IsShareableViewOnly DEFAULT 1
-	END
+    BEGIN
+        ALTER TABLE {databaseOwner}{objectQualifier}Modules
+            ADD IsShareableViewOnly bit NOT NULL CONSTRAINT DF_{objectQualifier}Modules_IsShareableViewOnly DEFAULT 1
+    END
 GO
 
 /*
@@ -92,67 +92,67 @@ GO
 CREATE VIEW {databaseOwner}{objectQualifier}vw_TabModules
 AS
     SELECT
-		M.PortalID AS [OwnerPortalID],
+        M.PortalID AS [OwnerPortalID],
         T.PortalID,
-        TM.TabID, 
-        TM.TabModuleID, 
-        M.ModuleID, 
-        M.ModuleDefID, 
-        TM.ModuleOrder, 
-        TM.PaneName, 
-        TM.ModuleTitle, 
-        TM.CacheTime, 
-        TM.CacheMethod, 
-        TM.Alignment, 
-        TM.Color, 
-        TM.Border, 
-        CASE WHEN LEFT(LOWER(TM.IconFile), 6) = 'fileid' THEN (SELECT Folder + FileName FROM {databaseOwner}{objectQualifier}Files WHERE 'fileid=' + CONVERT(varchar, {databaseOwner}{objectQualifier}Files.FileID) = TM.IconFile) ELSE TM.IconFile END AS IconFile, 
-        M.AllTabs, 
-        TM.Visibility, 
-        TM.IsDeleted, 
-        TM.Header, 
-        TM.Footer, 
-        M.StartDate, 
-        M.EndDate, 
-        TM.ContainerSrc, 
-        TM.DisplayTitle, 
-        TM.DisplayPrint, 
-        TM.DisplaySyndicate, 
-        TM.IsWebSlice, 
-        TM.WebSliceTitle, 
-        TM.WebSliceExpiryDate, 
-        TM.WebSliceTTL, 
+        TM.TabID,
+        TM.TabModuleID,
+        M.ModuleID,
+        M.ModuleDefID,
+        TM.ModuleOrder,
+        TM.PaneName,
+        TM.ModuleTitle,
+        TM.CacheTime,
+        TM.CacheMethod,
+        TM.Alignment,
+        TM.Color,
+        TM.Border,
+        CASE WHEN LEFT(LOWER(TM.IconFile), 6) = 'fileid' THEN (SELECT Folder + FileName FROM {databaseOwner}{objectQualifier}Files WHERE 'fileid=' + CONVERT(varchar, {databaseOwner}{objectQualifier}Files.FileID) = TM.IconFile) ELSE TM.IconFile END AS IconFile,
+        M.AllTabs,
+        TM.Visibility,
+        TM.IsDeleted,
+        TM.Header,
+        TM.Footer,
+        M.StartDate,
+        M.EndDate,
+        TM.ContainerSrc,
+        TM.DisplayTitle,
+        TM.DisplayPrint,
+        TM.DisplaySyndicate,
+        TM.IsWebSlice,
+        TM.WebSliceTitle,
+        TM.WebSliceExpiryDate,
+        TM.WebSliceTTL,
         M.InheritViewPermissions,
-		M.IsShareable,
-		M.IsShareableViewOnly, 
-        MD.DesktopModuleID, 
-        MD.DefaultCacheTime, 
-        MC.ModuleControlID, 
-        DM.BusinessControllerClass, 
-        DM.IsAdmin, 
+        M.IsShareable,
+        M.IsShareableViewOnly,
+        MD.DesktopModuleID,
+        MD.DefaultCacheTime,
+        MC.ModuleControlID,
+        DM.BusinessControllerClass,
+        DM.IsAdmin,
         DM.SupportedFeatures,
         CI.ContentItemID,
         CI.Content,
         CI.ContentTypeID,
         CI.ContentKey,
         CI.Indexed,
-        TM.CreatedByUserID, 
-        TM.CreatedOnDate, 
-        TM.LastModifiedByUserID, 
+        TM.CreatedByUserID,
+        TM.CreatedOnDate,
+        TM.LastModifiedByUserID,
         TM.LastModifiedOnDate,
         M.LastContentModifiedOnDate,
-        TM.UniqueId, 
-        TM.VersionGuid, 
-        TM.DefaultLanguageGuid, 
+        TM.UniqueId,
+        TM.VersionGuid,
+        TM.DefaultLanguageGuid,
         TM.LocalizedVersionGuid,
         TM.CultureCode
-    FROM {databaseOwner}{objectQualifier}ModuleDefinitions AS MD 
-        INNER JOIN {databaseOwner}{objectQualifier}Modules AS M ON MD.ModuleDefID = M.ModuleDefID 
-        INNER JOIN {databaseOwner}{objectQualifier}ModuleControls AS MC ON MD.ModuleDefID = MC.ModuleDefID 
-        INNER JOIN {databaseOwner}{objectQualifier}DesktopModules AS DM ON MD.DesktopModuleID = DM.DesktopModuleID 
+    FROM {databaseOwner}{objectQualifier}ModuleDefinitions AS MD
+        INNER JOIN {databaseOwner}{objectQualifier}Modules AS M ON MD.ModuleDefID = M.ModuleDefID
+        INNER JOIN {databaseOwner}{objectQualifier}ModuleControls AS MC ON MD.ModuleDefID = MC.ModuleDefID
+        INNER JOIN {databaseOwner}{objectQualifier}DesktopModules AS DM ON MD.DesktopModuleID = DM.DesktopModuleID
         LEFT OUTER JOIN {databaseOwner}{objectQualifier}ContentItems AS CI ON M.ContentItemID = CI.ContentItemID
         LEFT OUTER JOIN {databaseOwner}{objectQualifier}TabModules AS TM ON M.ModuleID = TM.ModuleID
-		LEFT OUTER JOIN {databaseOwner}{objectQualifier}Tabs AS T ON TM.TabID = T.TabID
+        LEFT OUTER JOIN {databaseOwner}{objectQualifier}Tabs AS T ON TM.TabID = T.TabID
     WHERE (MC.ControlKey IS NULL)
 GO
 
@@ -163,68 +163,68 @@ GO
 
 CREATE VIEW {databaseOwner}{objectQualifier}vw_Modules
 AS
-    SELECT     
-		M.PortalID AS [OwnerPortalID],
-        T.PortalID, 
-        TM.TabID, 
-        TM.TabModuleID, 
-        M.ModuleID, 
-        M.ModuleDefID, 
-        TM.ModuleOrder, 
-        TM.PaneName, 
-        TM.ModuleTitle, 
-        TM.CacheTime, 
-        TM.CacheMethod, 
-        TM.Alignment, 
-        TM.Color, 
-        TM.Border, 
-        CASE WHEN LEFT(LOWER(TM.IconFile), 6) = 'fileid' THEN (SELECT Folder + FileName FROM {databaseOwner}{objectQualifier}Files WHERE 'fileid=' + CONVERT(varchar, {databaseOwner}{objectQualifier}Files.FileID) = TM.IconFile) ELSE TM.IconFile END AS IconFile, 
-        M.AllTabs, 
-        TM.Visibility, 
-        TM.IsDeleted, 
-        TM.Header, 
-        TM.Footer, 
-        M.StartDate, 
-        M.EndDate, 
-        TM.ContainerSrc, 
-        TM.DisplayTitle, 
-        TM.DisplayPrint, 
-        TM.DisplaySyndicate, 
-        TM.IsWebSlice, 
-        TM.WebSliceTitle, 
-        TM.WebSliceExpiryDate, 
-        TM.WebSliceTTL, 
-        M.InheritViewPermissions, 
-		M.IsShareable,
-		M.IsShareableViewOnly, 
-        MD.DesktopModuleID, 
-        MD.DefaultCacheTime, 
-        MC.ModuleControlID, 
-        DM.BusinessControllerClass, 
-        DM.IsAdmin, 
+    SELECT
+        M.PortalID AS [OwnerPortalID],
+        T.PortalID,
+        TM.TabID,
+        TM.TabModuleID,
+        M.ModuleID,
+        M.ModuleDefID,
+        TM.ModuleOrder,
+        TM.PaneName,
+        TM.ModuleTitle,
+        TM.CacheTime,
+        TM.CacheMethod,
+        TM.Alignment,
+        TM.Color,
+        TM.Border,
+        CASE WHEN LEFT(LOWER(TM.IconFile), 6) = 'fileid' THEN (SELECT Folder + FileName FROM {databaseOwner}{objectQualifier}Files WHERE 'fileid=' + CONVERT(varchar, {databaseOwner}{objectQualifier}Files.FileID) = TM.IconFile) ELSE TM.IconFile END AS IconFile,
+        M.AllTabs,
+        TM.Visibility,
+        TM.IsDeleted,
+        TM.Header,
+        TM.Footer,
+        M.StartDate,
+        M.EndDate,
+        TM.ContainerSrc,
+        TM.DisplayTitle,
+        TM.DisplayPrint,
+        TM.DisplaySyndicate,
+        TM.IsWebSlice,
+        TM.WebSliceTitle,
+        TM.WebSliceExpiryDate,
+        TM.WebSliceTTL,
+        M.InheritViewPermissions,
+        M.IsShareable,
+        M.IsShareableViewOnly,
+        MD.DesktopModuleID,
+        MD.DefaultCacheTime,
+        MC.ModuleControlID,
+        DM.BusinessControllerClass,
+        DM.IsAdmin,
         DM.SupportedFeatures,
         CI.ContentItemID,
         CI.Content,
         CI.ContentTypeID,
         CI.ContentKey,
         CI.Indexed,
-        M.CreatedByUserID, 
-        M.CreatedOnDate, 
-        M.LastModifiedByUserID, 
+        M.CreatedByUserID,
+        M.CreatedOnDate,
+        M.LastModifiedByUserID,
         M.LastModifiedOnDate,
         M.LastContentModifiedOnDate,
-        TM.UniqueId, 
-        TM.VersionGuid, 
-        TM.DefaultLanguageGuid, 
+        TM.UniqueId,
+        TM.VersionGuid,
+        TM.DefaultLanguageGuid,
         TM.LocalizedVersionGuid,
         TM.CultureCode
-    FROM {databaseOwner}{objectQualifier}ModuleDefinitions AS MD 
-        INNER JOIN {databaseOwner}{objectQualifier}Modules AS M ON MD.ModuleDefID = M.ModuleDefID 
-        INNER JOIN {databaseOwner}{objectQualifier}ModuleControls AS MC ON MD.ModuleDefID = MC.ModuleDefID 
-        INNER JOIN {databaseOwner}{objectQualifier}DesktopModules AS DM ON MD.DesktopModuleID = DM.DesktopModuleID 
+    FROM {databaseOwner}{objectQualifier}ModuleDefinitions AS MD
+        INNER JOIN {databaseOwner}{objectQualifier}Modules AS M ON MD.ModuleDefID = M.ModuleDefID
+        INNER JOIN {databaseOwner}{objectQualifier}ModuleControls AS MC ON MD.ModuleDefID = MC.ModuleDefID
+        INNER JOIN {databaseOwner}{objectQualifier}DesktopModules AS DM ON MD.DesktopModuleID = DM.DesktopModuleID
         LEFT OUTER JOIN {databaseOwner}{objectQualifier}ContentItems AS CI ON M.ContentItemID = CI.ContentItemID
         LEFT OUTER JOIN {databaseOwner}{objectQualifier}TabModules AS TM ON M.ModuleID = TM.ModuleID
-		LEFT OUTER JOIN {databaseOwner}{objectQualifier}Tabs AS T ON TM.TabID = T.TabID
+        LEFT OUTER JOIN {databaseOwner}{objectQualifier}Tabs AS T ON TM.TabID = T.TabID
     WHERE (MC.ControlKey IS NULL)
 
 GO
@@ -233,223 +233,223 @@ GO
 
 IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'{objectQualifier}DesktopModules' AND COLUMN_NAME = 'Shareable')
 BEGIN
-	ALTER TABLE {databaseOwner}[{objectQualifier}DesktopModules] ADD Shareable INT
-		CONSTRAINT DF_{objectQualifier}DesktopModules_Shareable DEFAULT 0 NOT NULL
+    ALTER TABLE {databaseOwner}[{objectQualifier}DesktopModules] ADD Shareable INT
+        CONSTRAINT DF_{objectQualifier}DesktopModules_Shareable DEFAULT 0 NOT NULL
 END
 GO
 
 /* AddDesktopModule */
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}AddDesktopModule]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}AddDesktopModule]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}AddDesktopModule]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddDesktopModule]
-	@PackageID		int,
-	@ModuleName		nvarchar(128),
-	@FolderName		nvarchar(128),
-	@FriendlyName		nvarchar(128),
-	@Description		nvarchar(2000),
-	@Version		nvarchar(8),
-	@IsPremium		bit,
-	@IsAdmin		bit,
-	@BusinessController	nvarchar(200),
-	@SupportedFeatures	int,
-	@Shareable		int,
-	@CompatibleVersions	nvarchar(500),
-	@Dependencies		nvarchar(400),
-	@Permissions		nvarchar(400),
-	@ContentItemId		int,
-	@CreatedByUserID	int
+    @PackageID		int,
+    @ModuleName		nvarchar(128),
+    @FolderName		nvarchar(128),
+    @FriendlyName		nvarchar(128),
+    @Description		nvarchar(2000),
+    @Version		nvarchar(8),
+    @IsPremium		bit,
+    @IsAdmin		bit,
+    @BusinessController	nvarchar(200),
+    @SupportedFeatures	int,
+    @Shareable		int,
+    @CompatibleVersions	nvarchar(500),
+    @Dependencies		nvarchar(400),
+    @Permissions		nvarchar(400),
+    @ContentItemId		int,
+    @CreatedByUserID	int
 
 AS
-	INSERT INTO {databaseOwner}{objectQualifier}DesktopModules (
-		PackageID,
-		ModuleName,
-		FolderName,
-		FriendlyName,
-		Description,
-		Version,
-		IsPremium,
-		IsAdmin,
-		BusinessControllerClass,
-		SupportedFeatures,
-		Shareable,
-		CompatibleVersions,
-		Dependencies,
-		Permissions,
-		CreatedByUserID,
-		CreatedOnDate,
-		LastModifiedByUserID,
-		LastModifiedOnDate,
-		ContentItemId
-	)
-	VALUES (
-		@PackageID,
-		@ModuleName,
-		@FolderName,
-		@FriendlyName,
-		@Description,
-		@Version,
-		@IsPremium,
-		@IsAdmin,
-		@BusinessController,
-		@SupportedFeatures,
-		@Shareable,
-		@CompatibleVersions,
-		@Dependencies,
-		@Permissions,
-		@CreatedByUserID,
-		getdate(),
-		@CreatedByUserID,
-		getdate(),
-		@ContentItemId
-	)
+    INSERT INTO {databaseOwner}{objectQualifier}DesktopModules (
+        PackageID,
+        ModuleName,
+        FolderName,
+        FriendlyName,
+        Description,
+        Version,
+        IsPremium,
+        IsAdmin,
+        BusinessControllerClass,
+        SupportedFeatures,
+        Shareable,
+        CompatibleVersions,
+        Dependencies,
+        Permissions,
+        CreatedByUserID,
+        CreatedOnDate,
+        LastModifiedByUserID,
+        LastModifiedOnDate,
+        ContentItemId
+    )
+    VALUES (
+        @PackageID,
+        @ModuleName,
+        @FolderName,
+        @FriendlyName,
+        @Description,
+        @Version,
+        @IsPremium,
+        @IsAdmin,
+        @BusinessController,
+        @SupportedFeatures,
+        @Shareable,
+        @CompatibleVersions,
+        @Dependencies,
+        @Permissions,
+        @CreatedByUserID,
+        getdate(),
+        @CreatedByUserID,
+        getdate(),
+        @ContentItemId
+    )
 
-	SELECT SCOPE_IDENTITY()
+    SELECT SCOPE_IDENTITY()
 GO
 
 /* UpdateDesktopModule */
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}UpdateDesktopModule]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateDesktopModule]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateDesktopModule]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateDesktopModule]
-	@DesktopModuleId		int,    
-	@PackageID			int,
-	@ModuleName			nvarchar(128),
-	@FolderName			nvarchar(128),
-	@FriendlyName			nvarchar(128),
-	@Description			nvarchar(2000),
-	@Version			nvarchar(8),
-	@IsPremium			bit,
-	@IsAdmin			bit,
-	@BusinessController		nvarchar(200),
-	@SupportedFeatures		int,
-	@Shareable			int,
-	@CompatibleVersions		nvarchar(500),
-	@Dependencies			nvarchar(400),
-	@Permissions			nvarchar(400),
-	@ContentItemId			int,
-	@LastModifiedByUserID		int
+    @DesktopModuleId		int,
+    @PackageID			int,
+    @ModuleName			nvarchar(128),
+    @FolderName			nvarchar(128),
+    @FriendlyName			nvarchar(128),
+    @Description			nvarchar(2000),
+    @Version			nvarchar(8),
+    @IsPremium			bit,
+    @IsAdmin			bit,
+    @BusinessController		nvarchar(200),
+    @SupportedFeatures		int,
+    @Shareable			int,
+    @CompatibleVersions		nvarchar(500),
+    @Dependencies			nvarchar(400),
+    @Permissions			nvarchar(400),
+    @ContentItemId			int,
+    @LastModifiedByUserID		int
 
 AS
-		UPDATE {databaseOwner}{objectQualifier}DesktopModules
-		SET    	
-			PackageID = @PackageID,
-			ModuleName = @ModuleName,
-			FolderName = @FolderName,
-			FriendlyName = @FriendlyName,
-			Description = @Description,
-			Version = @Version,
-			IsPremium = @IsPremium,
-			IsAdmin = @IsAdmin,
-			BusinessControllerClass = @BusinessController,
-			SupportedFeatures = @SupportedFeatures,
-			Shareable = @Shareable,
-			CompatibleVersions = @CompatibleVersions,
-			Dependencies = @Dependencies,
-			Permissions = @Permissions,
-			ContentItemId = @ContentItemId,
-			LastModifiedByUserID = @LastModifiedByUserID,
-			LastModifiedOnDate = getdate()
-	WHERE  DesktopModuleId = @DesktopModuleId
+        UPDATE {databaseOwner}{objectQualifier}DesktopModules
+        SET
+            PackageID = @PackageID,
+            ModuleName = @ModuleName,
+            FolderName = @FolderName,
+            FriendlyName = @FriendlyName,
+            Description = @Description,
+            Version = @Version,
+            IsPremium = @IsPremium,
+            IsAdmin = @IsAdmin,
+            BusinessControllerClass = @BusinessController,
+            SupportedFeatures = @SupportedFeatures,
+            Shareable = @Shareable,
+            CompatibleVersions = @CompatibleVersions,
+            Dependencies = @Dependencies,
+            Permissions = @Permissions,
+            ContentItemId = @ContentItemId,
+            LastModifiedByUserID = @LastModifiedByUserID,
+            LastModifiedOnDate = getdate()
+    WHERE  DesktopModuleId = @DesktopModuleId
 
 GO
 
 IF EXISTS (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_DesktopModules]') and OBJECTPROPERTY(id, N'IsView') = 1)
-	DROP VIEW {databaseOwner}[{objectQualifier}vw_DesktopModules]
+    DROP VIEW {databaseOwner}[{objectQualifier}vw_DesktopModules]
 GO
 
 CREATE VIEW {databaseOwner}[{objectQualifier}vw_DesktopModules]
 AS
-	SELECT
-		DM.DesktopModuleID,
-		DM.FriendlyName,
-		DM.Description,
-		DM.Version,
-		DM.IsPremium,
-		DM.IsAdmin,
-		DM.BusinessControllerClass,
-		DM.FolderName,
-		DM.ModuleName,
-		DM.SupportedFeatures,
-		DM.CompatibleVersions,
-		DM.Dependencies,
-		DM.Permissions,
-		DM.PackageID,
-		DM.CreatedByUserID,
-		DM.CreatedOnDate,
-		DM.LastModifiedByUserID,
-		DM.LastModifiedOnDate,
-		CI.ContentItemID,
-		CI.[Content],
-		CI.ContentTypeID,
-		CI.TabID,
-		CI.ModuleID,
-		CI.ContentKey,
-		CI.Indexed,
-		DM.Shareable
-	FROM {databaseOwner}[{objectQualifier}DesktopModules] AS DM
-		LEFT OUTER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI ON DM.ContentItemId = CI.ContentItemID
+    SELECT
+        DM.DesktopModuleID,
+        DM.FriendlyName,
+        DM.Description,
+        DM.Version,
+        DM.IsPremium,
+        DM.IsAdmin,
+        DM.BusinessControllerClass,
+        DM.FolderName,
+        DM.ModuleName,
+        DM.SupportedFeatures,
+        DM.CompatibleVersions,
+        DM.Dependencies,
+        DM.Permissions,
+        DM.PackageID,
+        DM.CreatedByUserID,
+        DM.CreatedOnDate,
+        DM.LastModifiedByUserID,
+        DM.LastModifiedOnDate,
+        CI.ContentItemID,
+        CI.[Content],
+        CI.ContentTypeID,
+        CI.TabID,
+        CI.ModuleID,
+        CI.ContentKey,
+        CI.Indexed,
+        DM.Shareable
+    FROM {databaseOwner}[{objectQualifier}DesktopModules] AS DM
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI ON DM.ContentItemId = CI.ContentItemID
 GO
 
 /* Update AddModule */
 /********************/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}AddModule]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}AddModule]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}AddModule]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddModule]
-	@ContentItemID				int,
-	@PortalID					int,
-	@ModuleDefId				int,
-	@AllTabs					bit,
-	@StartDate					datetime,
-	@EndDate					datetime,
-	@InheritViewPermissions     bit,
-	@IsShareable				bit,
-	@IsShareableViewOnly		bit,
-	@IsDeleted					bit,
-	@CreatedByUserID  			int
-	
-AS
-	INSERT INTO {databaseOwner}{objectQualifier}Modules (
-		ContentItemID, 
-		PortalId,
-		ModuleDefId,
-		AllTabs,
-		StartDate,
-		EndDate,
-		InheritViewPermissions,
-		IsShareable,
-		IsShareableViewOnly,
-		IsDeleted,
-		CreatedByUserID,
-		CreatedOnDate,
-		LastModifiedByUserID,
-		LastModifiedOnDate
-	)
-	VALUES (
-		@ContentItemID,
-		@PortalID,
-		@ModuleDefId,
-		@AllTabs,
-		@StartDate,
-		@EndDate,
-		@InheritViewPermissions,
-		@IsShareable,
-		@IsShareableViewOnly,
-		@IsDeleted,
-		@CreatedByUserID,
-		getdate(),
-		@CreatedByUserID,
-		getdate()
-	)
+    @ContentItemID				int,
+    @PortalID					int,
+    @ModuleDefId				int,
+    @AllTabs					bit,
+    @StartDate					datetime,
+    @EndDate					datetime,
+    @InheritViewPermissions     bit,
+    @IsShareable				bit,
+    @IsShareableViewOnly		bit,
+    @IsDeleted					bit,
+    @CreatedByUserID  			int
 
-	SELECT SCOPE_IDENTITY()
+AS
+    INSERT INTO {databaseOwner}{objectQualifier}Modules (
+        ContentItemID,
+        PortalId,
+        ModuleDefId,
+        AllTabs,
+        StartDate,
+        EndDate,
+        InheritViewPermissions,
+        IsShareable,
+        IsShareableViewOnly,
+        IsDeleted,
+        CreatedByUserID,
+        CreatedOnDate,
+        LastModifiedByUserID,
+        LastModifiedOnDate
+    )
+    VALUES (
+        @ContentItemID,
+        @PortalID,
+        @ModuleDefId,
+        @AllTabs,
+        @StartDate,
+        @EndDate,
+        @InheritViewPermissions,
+        @IsShareable,
+        @IsShareableViewOnly,
+        @IsDeleted,
+        @CreatedByUserID,
+        getdate(),
+        @CreatedByUserID,
+        getdate()
+    )
+
+    SELECT SCOPE_IDENTITY()
 
 GO
 
@@ -457,37 +457,37 @@ GO
 /***********************/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}UpdateModule]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateModule]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateModule]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateModule]
-	@ModuleId					int,
+    @ModuleId					int,
     @ModuleDefId                int,
-	@ContentItemID				int,
-	@AllTabs					bit, 
-	@StartDate					datetime,
-	@EndDate					datetime,
-	@InheritViewPermissions		bit,
-	@IsShareable				bit,
-	@IsShareableViewOnly		bit,
-	@IsDeleted					bit,
-	@LastModifiedByUserID  		int
-	
+    @ContentItemID				int,
+    @AllTabs					bit,
+    @StartDate					datetime,
+    @EndDate					datetime,
+    @InheritViewPermissions		bit,
+    @IsShareable				bit,
+    @IsShareableViewOnly		bit,
+    @IsDeleted					bit,
+    @LastModifiedByUserID  		int
+
 AS
-	UPDATE	{databaseOwner}{objectQualifier}Modules
-		SET		
-			ModuleDefId = @ModuleDefId,
+    UPDATE	{databaseOwner}{objectQualifier}Modules
+        SET
+            ModuleDefId = @ModuleDefId,
             ContentItemID = @ContentItemID,
-			AllTabs = @AllTabs,
-			StartDate = @StartDate,
-			EndDate = @EndDate,
-			InheritViewPermissions = @InheritViewPermissions,
-			IsShareable = @IsShareable,
-			IsShareableViewOnly = @IsShareableViewOnly,
-			IsDeleted = @IsDeleted,
-			LastModifiedByUserID = @LastModifiedByUserID,
-			LastModifiedOnDate = getdate()
-	WHERE  ModuleId = @ModuleId	
+            AllTabs = @AllTabs,
+            StartDate = @StartDate,
+            EndDate = @EndDate,
+            InheritViewPermissions = @InheritViewPermissions,
+            IsShareable = @IsShareable,
+            IsShareableViewOnly = @IsShareableViewOnly,
+            IsDeleted = @IsDeleted,
+            LastModifiedByUserID = @LastModifiedByUserID,
+            LastModifiedOnDate = getdate()
+    WHERE  ModuleId = @ModuleId
 
 GO
 
@@ -496,67 +496,67 @@ GO
 
 
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}ModulePermission' AND COLUMN_NAME='PortalID')
-	BEGIN
-		ALTER TABLE {databaseOwner}{objectQualifier}ModulePermission
-			ADD PortalID int NULL
-	END
-GO	
+    BEGIN
+        ALTER TABLE {databaseOwner}{objectQualifier}ModulePermission
+            ADD PortalID int NULL
+    END
+GO
 
 UPDATE MP
-	SET MP.PortalID = M.PortalID
+    SET MP.PortalID = M.PortalID
 FROM {databaseOwner}{objectQualifier}ModulePermission AS MP
-	INNER JOIN {databaseOwner}{objectQualifier}Modules AS M ON M.ModuleID = MP.ModuleID
+    INNER JOIN {databaseOwner}{objectQualifier}Modules AS M ON M.ModuleID = MP.ModuleID
 GO
 
-DELETE FROM {databaseOwner}{objectQualifier}ModulePermission 
-	WHERE EXISTS (SELECT ModuleId FROM {databaseOwner}{objectQualifier}Modules WHERE (PortalID IS NULL) 
-					AND ({databaseOwner}{objectQualifier}ModulePermission.ModuleID = {databaseOwner}{objectQualifier}Modules.ModuleID))
-GO
-
-ALTER TABLE {databaseOwner}{objectQualifier}ModulePermission
-	DROP CONSTRAINT IX_{objectQualifier}ModulePermission
+DELETE FROM {databaseOwner}{objectQualifier}ModulePermission
+    WHERE EXISTS (SELECT ModuleId FROM {databaseOwner}{objectQualifier}Modules WHERE (PortalID IS NULL)
+                    AND ({databaseOwner}{objectQualifier}ModulePermission.ModuleID = {databaseOwner}{objectQualifier}Modules.ModuleID))
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModulePermission
-	ALTER COLUMN PortalID int NOT NULL 
+    DROP CONSTRAINT IX_{objectQualifier}ModulePermission
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}ModulePermission
+    ALTER COLUMN PortalID int NOT NULL
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}ModulePermission ADD CONSTRAINT
-	IX_{objectQualifier}ModulePermission UNIQUE NONCLUSTERED ( PortalID, ModuleID, PermissionID, RoleID, UserID )
+    IX_{objectQualifier}ModulePermission UNIQUE NONCLUSTERED ( PortalID, ModuleID, PermissionID, RoleID, UserID )
 GO
 
 /* Update ModulePermissions View */
 /*********************************/
 
 IF EXISTS (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}vw_ModulePermissions]') and OBJECTPROPERTY(id, N'IsView') = 1)
-	DROP VIEW {databaseOwner}[{objectQualifier}vw_ModulePermissions]
+    DROP VIEW {databaseOwner}[{objectQualifier}vw_ModulePermissions]
 GO
 
 CREATE VIEW {databaseOwner}[{objectQualifier}vw_ModulePermissions]
 AS
-	SELECT     
-		MP.ModulePermissionID, 
-		MP.ModuleID,
-		MP.PortalID, 
-		P.PermissionID, 
-		MP.RoleID, 
-        CASE MP.RoleID WHEN - 1 THEN 'All Users' WHEN - 2 THEN 'Superuser' WHEN - 3 THEN 'Unauthenticated Users' ELSE R.RoleName END AS RoleName, 
-		MP.AllowAccess, 
-		MP.UserID, 
-		U.Username, 
-		U.DisplayName, 
-		P.PermissionCode, 
-		P.ModuleDefID, 
-		P.PermissionKey, 
-		P.PermissionName, 
-		MP.CreatedByUserID, 
-        MP.CreatedOnDate, 
-		MP.LastModifiedByUserID, 
-		MP.LastModifiedOnDate
-	FROM {databaseOwner}{objectQualifier}ModulePermission AS MP 
-		LEFT OUTER JOIN {databaseOwner}{objectQualifier}Permission AS P ON MP.PermissionID = P.PermissionID 
-		LEFT OUTER JOIN {databaseOwner}{objectQualifier}Roles AS R ON MP.RoleID = R.RoleID 
-		LEFT OUTER JOIN {databaseOwner}{objectQualifier}Users AS U ON MP.UserID = U.UserID
+    SELECT
+        MP.ModulePermissionID,
+        MP.ModuleID,
+        MP.PortalID,
+        P.PermissionID,
+        MP.RoleID,
+        CASE MP.RoleID WHEN - 1 THEN 'All Users' WHEN - 2 THEN 'Superuser' WHEN - 3 THEN 'Unauthenticated Users' ELSE R.RoleName END AS RoleName,
+        MP.AllowAccess,
+        MP.UserID,
+        U.Username,
+        U.DisplayName,
+        P.PermissionCode,
+        P.ModuleDefID,
+        P.PermissionKey,
+        P.PermissionName,
+        MP.CreatedByUserID,
+        MP.CreatedOnDate,
+        MP.LastModifiedByUserID,
+        MP.LastModifiedOnDate
+    FROM {databaseOwner}{objectQualifier}ModulePermission AS MP
+        LEFT OUTER JOIN {databaseOwner}{objectQualifier}Permission AS P ON MP.PermissionID = P.PermissionID
+        LEFT OUTER JOIN {databaseOwner}{objectQualifier}Roles AS R ON MP.RoleID = R.RoleID
+        LEFT OUTER JOIN {databaseOwner}{objectQualifier}Users AS U ON MP.UserID = U.UserID
 
 GO
 
@@ -564,80 +564,80 @@ GO
 /******************************/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}AddModulePermission]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}AddModulePermission]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}AddModulePermission]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}AddModulePermission]
-	@ModuleID 			int,
-	@PortalID			int,
-	@PermissionID 		int,
-	@RoleID 			int,
-	@AllowAccess 		bit,
-	@UserID 			int,
-	@CreatedByUserID	int
+    @ModuleID 			int,
+    @PortalID			int,
+    @PermissionID 		int,
+    @RoleID 			int,
+    @AllowAccess 		bit,
+    @UserID 			int,
+    @CreatedByUserID	int
 AS
-	INSERT INTO {databaseOwner}{objectQualifier}ModulePermission (
-		[ModuleID],
-		[PortalID],
-		[PermissionID],
-		[RoleID],
-		[AllowAccess],
-		[UserID],
-		[CreatedByUserID],
-		[CreatedOnDate],
-		[LastModifiedByUserID],
-		[LastModifiedOnDate]
-	) VALUES (
-		@ModuleID,
-		@PortalID,
-		@PermissionID,
-		@RoleID,
-		@AllowAccess,
-		@UserID,
-		@CreatedByUserID,
-		getdate(),
-		@CreatedByUserID,
-		getdate()
-	)
+    INSERT INTO {databaseOwner}{objectQualifier}ModulePermission (
+        [ModuleID],
+        [PortalID],
+        [PermissionID],
+        [RoleID],
+        [AllowAccess],
+        [UserID],
+        [CreatedByUserID],
+        [CreatedOnDate],
+        [LastModifiedByUserID],
+        [LastModifiedOnDate]
+    ) VALUES (
+        @ModuleID,
+        @PortalID,
+        @PermissionID,
+        @RoleID,
+        @AllowAccess,
+        @UserID,
+        @CreatedByUserID,
+        getdate(),
+        @CreatedByUserID,
+        getdate()
+    )
 
-	SELECT SCOPE_IDENTITY()
+    SELECT SCOPE_IDENTITY()
 GO
 
 /* Update DeleteModulePermissionsByModuleID */
 /********************************************/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DeleteModulePermissionsByModuleID]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}DeleteModulePermissionsByModuleID]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}DeleteModulePermissionsByModuleID]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}DeleteModulePermissionsByModuleID]
-	@ModuleID int,
-	@PortalID int
+    @ModuleID int,
+    @PortalID int
 AS
-	DELETE FROM {databaseOwner}{objectQualifier}ModulePermission
-		WHERE ModuleID = @ModuleID
-			AND PortalID = @PortalID
+    DELETE FROM {databaseOwner}{objectQualifier}ModulePermission
+        WHERE ModuleID = @ModuleID
+            AND PortalID = @PortalID
 GO
 
 /* Update GetModulePermissionsByTabID */
 /**************************************/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetModulePermissionsByTabID]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModulePermissionsByTabID]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModulePermissionsByTabID]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetModulePermissionsByTabID]
-	
-	@TabID int
+
+    @TabID int
 
 AS
 SELECT MP.*
-	FROM {databaseOwner}{objectQualifier}TabModules AS TM
-		INNER JOIN {databaseOwner}{objectQualifier}Tabs AS T ON TM.TabID = T.TabID 
-		INNER JOIN {databaseOwner}{objectQualifier}vw_ModulePermissions AS MP ON TM.ModuleID = MP.ModuleID 
-		INNER JOIN {databaseOwner}{objectQualifier}Portals AS P ON T.PortalID = P.PortalID 
-			AND MP.PortalID = P.PortalID
-	WHERE T.TabID = @TabID
+    FROM {databaseOwner}{objectQualifier}TabModules AS TM
+        INNER JOIN {databaseOwner}{objectQualifier}Tabs AS T ON TM.TabID = T.TabID
+        INNER JOIN {databaseOwner}{objectQualifier}vw_ModulePermissions AS MP ON TM.ModuleID = MP.ModuleID
+        INNER JOIN {databaseOwner}{objectQualifier}Portals AS P ON T.PortalID = P.PortalID
+            AND MP.PortalID = P.PortalID
+    WHERE T.TabID = @TabID
 
 GO
 
@@ -645,65 +645,65 @@ GO
 /*********************************/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}UpdateModulePermission]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateModulePermission]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}UpdateModulePermission]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateModulePermission]
-	@ModulePermissionID		int, 
-	@ModuleID				int, 
-	@PortalID				int,
-	@PermissionID			int, 
-	@RoleID					int,
-	@AllowAccess			bit,
-	@LastModifiedByUserID	int
+    @ModulePermissionID		int,
+    @ModuleID				int,
+    @PortalID				int,
+    @PermissionID			int,
+    @RoleID					int,
+    @AllowAccess			bit,
+    @LastModifiedByUserID	int
 AS
-	UPDATE {databaseOwner}{objectQualifier}ModulePermission SET
-		[ModuleID] = @ModuleID,
-		[PortalID] = @PortalID,
-		[PermissionID] = @PermissionID,
-		[RoleID] = @RoleID,
-		[AllowAccess] = @AllowAccess,
-		[UserID] = @LastModifiedByUserID,
-		[LastModifiedByUserID] = @LastModifiedByUserID,
-		[LastModifiedOnDate] = getdate()
-	WHERE
-		[ModulePermissionID] = @ModulePermissionID
+    UPDATE {databaseOwner}{objectQualifier}ModulePermission SET
+        [ModuleID] = @ModuleID,
+        [PortalID] = @PortalID,
+        [PermissionID] = @PermissionID,
+        [RoleID] = @RoleID,
+        [AllowAccess] = @AllowAccess,
+        [UserID] = @LastModifiedByUserID,
+        [LastModifiedByUserID] = @LastModifiedByUserID,
+        [LastModifiedOnDate] = getdate()
+    WHERE
+        [ModulePermissionID] = @ModulePermissionID
 GO
 
 /* Add new ModulePermissions Module Control */
 /********************************************/
 
 IF NOT EXISTS (SELECT * FROM {databaseOwner}{objectQualifier}ModuleControls WHERE ControlSrc = 'Admin/Modules/ModulePermissions.ascx')
-	BEGIN
-		INSERT INTO {databaseOwner}{objectQualifier}ModuleControls
-			([ModuleDefID]
-			,[ControlKey]
-			,[ControlTitle]
-			,[ControlSrc]
-			,[IconFile]
-			,[ControlType]
-			,[ViewOrder]
-			,[SupportsPartialRendering]
-			,[CreatedByUserID]
-			,[CreatedOnDate]
-			,[LastModifiedByUserID]
-			,[LastModifiedOnDate]
-			,[SupportsPopUps])
-		VALUES
-			(NULL
-			,'ModulePermissions'
-			,'ModulePermissions'
-			,'Admin/Modules/ModulePermissions.ascx'
-			,'~/Icons/Sigma/Moduledefinitions_32X32_Standard.png'
-			,4
-			,0
-			,1
-			,-1
-			,getDate()
-			,-1
-			,getDate()
-			,1)
-	END
+    BEGIN
+        INSERT INTO {databaseOwner}{objectQualifier}ModuleControls
+            ([ModuleDefID]
+            ,[ControlKey]
+            ,[ControlTitle]
+            ,[ControlSrc]
+            ,[IconFile]
+            ,[ControlType]
+            ,[ViewOrder]
+            ,[SupportsPartialRendering]
+            ,[CreatedByUserID]
+            ,[CreatedOnDate]
+            ,[LastModifiedByUserID]
+            ,[LastModifiedOnDate]
+            ,[SupportsPopUps])
+        VALUES
+            (NULL
+            ,'ModulePermissions'
+            ,'ModulePermissions'
+            ,'Admin/Modules/ModulePermissions.ascx'
+            ,'~/Icons/Sigma/Moduledefinitions_32X32_Standard.png'
+            ,4
+            ,0
+            ,1
+            ,-1
+            ,getDate()
+            ,-1
+            ,getDate()
+            ,1)
+    END
 GO
 
 
@@ -711,11 +711,11 @@ GO
 /* Update Roles table to add IsSystemRole field */
 /*************************************************/
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME= N'{objectQualifier}Roles' AND COLUMN_NAME='IsSystemRole')
-	BEGIN
-		ALTER TABLE {databaseOwner}[{objectQualifier}Roles]
-			ADD IsSystemRole bit NOT NULL CONSTRAINT DF_{objectQualifier}Roles_IsSystemRole DEFAULT 0
-	END
-GO	
+    BEGIN
+        ALTER TABLE {databaseOwner}[{objectQualifier}Roles]
+            ADD IsSystemRole bit NOT NULL CONSTRAINT DF_{objectQualifier}Roles_IsSystemRole DEFAULT 0
+    END
+GO
 
 
 
@@ -724,73 +724,73 @@ GO
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}AddRole]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
   DROP PROCEDURE {databaseOwner}{objectQualifier}AddRole
 GO
-CREATE PROCEDURE {databaseOwner}{objectQualifier}AddRole 
-	@PortalID         int,
-	@RoleGroupId      int,
-	@RoleName         nvarchar(50),
-	@Description      nvarchar(1000),
-	@ServiceFee       money,
-	@BillingPeriod    int,
-	@BillingFrequency char(1),
-	@TrialFee         money,
-	@TrialPeriod      int,
-	@TrialFrequency   char(1),
-	@IsPublic         bit,
-	@AutoAssignment   bit,
-	@RSVPCode         nvarchar(50),
-	@IconFile         nvarchar(100),
-	@CreatedByUserID  int,
-	@Status			  int,
-	@SecurityMode   int,
-	@IsSystemRole bit
+CREATE PROCEDURE {databaseOwner}{objectQualifier}AddRole
+    @PortalID         int,
+    @RoleGroupId      int,
+    @RoleName         nvarchar(50),
+    @Description      nvarchar(1000),
+    @ServiceFee       money,
+    @BillingPeriod    int,
+    @BillingFrequency char(1),
+    @TrialFee         money,
+    @TrialPeriod      int,
+    @TrialFrequency   char(1),
+    @IsPublic         bit,
+    @AutoAssignment   bit,
+    @RSVPCode         nvarchar(50),
+    @IconFile         nvarchar(100),
+    @CreatedByUserID  int,
+    @Status			  int,
+    @SecurityMode   int,
+    @IsSystemRole bit
 AS
-	INSERT INTO {databaseOwner}{objectQualifier}Roles (
-	  PortalId,
-	  RoleGroupId,
-	  RoleName,
-	  Description,
-	  ServiceFee,
-	  BillingPeriod,
-	  BillingFrequency,
-	  TrialFee,
-	  TrialPeriod,
-	  TrialFrequency,
-	  IsPublic,
-	  AutoAssignment,
-	  RSVPCode,
-	  IconFile,
-	  CreatedByUserID,
-	  CreatedOnDate,
-	  LastModifiedByUserID,
-	  LastModifiedOnDate,
-	  Status,
-	  SecurityMode,
-	  IsSystemRole
-	)
-	VALUES (
-	  @PortalID,
-	  @RoleGroupId,
-	  @RoleName,
-	  @Description,
-	  @ServiceFee,
-	  @BillingPeriod,
-	  @BillingFrequency,
-	  @TrialFee,
-	  @TrialPeriod,
-	  @TrialFrequency,
-	  @IsPublic,
-	  @AutoAssignment,
-	  @RSVPCode,
-	  @IconFile,
-	  @CreatedByUserID,
-	  getdate(),
-	  @CreatedByUserID,
-	  getdate(),
-	  @Status,
-	  @SecurityMode,
-	  @IsSystemRole
-	)
-	SELECT SCOPE_IDENTITY()
+    INSERT INTO {databaseOwner}{objectQualifier}Roles (
+    PortalId,
+    RoleGroupId,
+    RoleName,
+    Description,
+    ServiceFee,
+    BillingPeriod,
+    BillingFrequency,
+    TrialFee,
+    TrialPeriod,
+    TrialFrequency,
+    IsPublic,
+    AutoAssignment,
+    RSVPCode,
+    IconFile,
+    CreatedByUserID,
+    CreatedOnDate,
+    LastModifiedByUserID,
+    LastModifiedOnDate,
+    Status,
+    SecurityMode,
+    IsSystemRole
+    )
+    VALUES (
+    @PortalID,
+    @RoleGroupId,
+    @RoleName,
+    @Description,
+    @ServiceFee,
+    @BillingPeriod,
+    @BillingFrequency,
+    @TrialFee,
+    @TrialPeriod,
+    @TrialFrequency,
+    @IsPublic,
+    @AutoAssignment,
+    @RSVPCode,
+    @IconFile,
+    @CreatedByUserID,
+    getdate(),
+    @CreatedByUserID,
+    getdate(),
+    @Status,
+    @SecurityMode,
+    @IsSystemRole
+    )
+    SELECT SCOPE_IDENTITY()
 GO
 /* Update Roles UpdateRole SP to add IsSystemRole field */
 /*************************************************/
@@ -798,45 +798,45 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
   DROP PROCEDURE {databaseOwner}{objectQualifier}UpdateRole
 GO
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateRole
-	@RoleId					int,
-	@RoleGroupId			int,
-	@RoleName				nvarchar(50),
-	@Description			nvarchar(1000),
-	@ServiceFee				money,
-	@BillingPeriod			int,
-	@BillingFrequency		char(1),
-	@TrialFee				money,
-	@TrialPeriod			int,
-	@TrialFrequency			char(1),
-	@IsPublic				bit,
-	@AutoAssignment			bit,
-	@RSVPCode				nvarchar(50),
-	@IconFile				nvarchar(100),
-	@LastModifiedByUserID	int,
-	@Status					int,
-	@SecurityMode			int,
-	@IsSystemRole			bit
+    @RoleId					int,
+    @RoleGroupId			int,
+    @RoleName				nvarchar(50),
+    @Description			nvarchar(1000),
+    @ServiceFee				money,
+    @BillingPeriod			int,
+    @BillingFrequency		char(1),
+    @TrialFee				money,
+    @TrialPeriod			int,
+    @TrialFrequency			char(1),
+    @IsPublic				bit,
+    @AutoAssignment			bit,
+    @RSVPCode				nvarchar(50),
+    @IconFile				nvarchar(100),
+    @LastModifiedByUserID	int,
+    @Status					int,
+    @SecurityMode			int,
+    @IsSystemRole			bit
 AS
-	UPDATE {databaseOwner}{objectQualifier}Roles
-	SET    RoleGroupId			= @RoleGroupId,
-		   RoleName				= @RoleName,
-		   Description			= @Description,
-		   ServiceFee			= @ServiceFee,
-		   BillingPeriod		= @BillingPeriod,
-		   BillingFrequency		= @BillingFrequency,
-		   TrialFee				= @TrialFee,
-		   TrialPeriod			= @TrialPeriod,
-		   TrialFrequency		= @TrialFrequency,
-		   IsPublic				= @IsPublic,
-		   AutoAssignment		= @AutoAssignment,
-		   RSVPCode				= @RSVPCode,
-		   IconFile				= @IconFile,
-		   LastModifiedByUserID = @LastModifiedByUserID,
-		   LastModifiedOnDate		= getdate(),
-		   Status				= @Status,
-		   SecurityMode			= @SecurityMode,
-		   IsSystemRole			= @IsSystemRole
-	WHERE  RoleId = @RoleId
+    UPDATE {databaseOwner}{objectQualifier}Roles
+    SET    RoleGroupId			= @RoleGroupId,
+            RoleName				= @RoleName,
+            Description			= @Description,
+            ServiceFee			= @ServiceFee,
+            BillingPeriod		= @BillingPeriod,
+            BillingFrequency		= @BillingFrequency,
+            TrialFee				= @TrialFee,
+            TrialPeriod			= @TrialPeriod,
+            TrialFrequency		= @TrialFrequency,
+            IsPublic				= @IsPublic,
+            AutoAssignment		= @AutoAssignment,
+            RSVPCode				= @RSVPCode,
+            IconFile				= @IconFile,
+            LastModifiedByUserID = @LastModifiedByUserID,
+            LastModifiedOnDate		= getdate(),
+            Status				= @Status,
+            SecurityMode			= @SecurityMode,
+            IsSystemRole			= @IsSystemRole
+    WHERE  RoleId = @RoleId
 GO
 
 
@@ -848,36 +848,36 @@ GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPortalRoles
-	@PortalId     int
+    @PortalId     int
 AS
-	SELECT R.RoleId,
-		   R.PortalId,
-		   R.RoleGroupId,
-		   R.RoleName,
-		   R.Description,
-		   R.ServiceFee,
-		   case when convert(int,R.ServiceFee) <> 0 then R.BillingPeriod else null end AS BillingPeriod,
-		   case when convert(int,R.ServiceFee) <> 0 then L1.Text else '' end AS BillingFrequency,
-		   R.TrialFee,
-		   case when R.TrialFrequency <> 'N' then R.TrialPeriod else null end AS TrialPeriod,
-		   case when R.TrialFrequency <> 'N' then L2.Text else '' end AS TrialFrequency,
-		   R.IsPublic,
-		   R.AutoAssignment,
-		   R.RSVPCode,
-		   R.IconFile,
-		   R.Status,
-		   R.SecurityMode,
-		   (SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}UserRoles U WHERE U.RoleID = R.RoleID) AS UserCount,
-		   R.CreatedByUserID,
-		   R.CreatedOnDate,
-		   R.LastModifiedByUserID,
-		   R.LastModifiedOnDate,
-		   R.IsSystemRole
-	FROM {databaseOwner}{objectQualifier}Roles R
-	LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L1 ON R.BillingFrequency = L1.Value AND L1.ListName='Frequency'
-	LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L2 ON R.TrialFrequency = L2.Value AND L2.ListName='Frequency'
-	WHERE  ( R.PortalId = @PortalId OR R.PortalId is null )
-	ORDER BY R.RoleName
+    SELECT R.RoleId,
+            R.PortalId,
+            R.RoleGroupId,
+            R.RoleName,
+            R.Description,
+            R.ServiceFee,
+            case when convert(int,R.ServiceFee) <> 0 then R.BillingPeriod else null end AS BillingPeriod,
+            case when convert(int,R.ServiceFee) <> 0 then L1.Text else '' end AS BillingFrequency,
+            R.TrialFee,
+            case when R.TrialFrequency <> 'N' then R.TrialPeriod else null end AS TrialPeriod,
+            case when R.TrialFrequency <> 'N' then L2.Text else '' end AS TrialFrequency,
+            R.IsPublic,
+            R.AutoAssignment,
+            R.RSVPCode,
+            R.IconFile,
+            R.Status,
+            R.SecurityMode,
+            (SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}UserRoles U WHERE U.RoleID = R.RoleID) AS UserCount,
+            R.CreatedByUserID,
+            R.CreatedOnDate,
+            R.LastModifiedByUserID,
+            R.LastModifiedOnDate,
+            R.IsSystemRole
+    FROM {databaseOwner}{objectQualifier}Roles R
+    LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L1 ON R.BillingFrequency = L1.Value AND L1.ListName='Frequency'
+    LEFT OUTER JOIN {databaseOwner}{objectQualifier}Lists L2 ON R.TrialFrequency = L2.Value AND L2.ListName='Frequency'
+    WHERE  ( R.PortalId = @PortalId OR R.PortalId is null )
+    ORDER BY R.RoleName
 
 
 GO
@@ -886,16 +886,16 @@ GO
 /* Update SystemRoles to set IsSystemRole field to true */
 /*************************************************/
 
-	UPDATE {databaseOwner}{objectQualifier}Roles SET IsSystemRole=1 WHERE RoleName='Administrators'
-	UPDATE {databaseOwner}{objectQualifier}Roles SET IsSystemRole=1 WHERE RoleName='Subscribers'
-	UPDATE {databaseOwner}{objectQualifier}Roles SET IsSystemRole=1 WHERE RoleName='Registered Users'
+    UPDATE {databaseOwner}{objectQualifier}Roles SET IsSystemRole=1 WHERE RoleName='Administrators'
+    UPDATE {databaseOwner}{objectQualifier}Roles SET IsSystemRole=1 WHERE RoleName='Subscribers'
+    UPDATE {databaseOwner}{objectQualifier}Roles SET IsSystemRole=1 WHERE RoleName='Registered Users'
 
 GO
 
 /* Insert New ControlPanel Bar: ControlBar */
 /*************************************************/
 IF NOT EXISTS (SELECT * FROM {databaseOwner}[{objectQualifier}ModuleControls] WHERE [ControlKey] = N'CONTROLPANEL:CONTROLBAR')
-	INSERT INTO {databaseOwner}[{objectQualifier}ModuleControls] ([ModuleDefID], [ControlKey], [ControlTitle], [ControlSrc], [IconFile], [ControlType], [ViewOrder], [HelpUrl], [SupportsPartialRendering], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [SupportsPopUps]) VALUES (NULL, N'CONTROLPANEL:CONTROLBAR', NULL, N'Admin/ControlPanel/ControlBar.ascx', NULL, -3, NULL, NULL, 0, NULL, NULL, -1, NULL, 1)
+    INSERT INTO {databaseOwner}[{objectQualifier}ModuleControls] ([ModuleDefID], [ControlKey], [ControlTitle], [ControlSrc], [IconFile], [ControlType], [ViewOrder], [HelpUrl], [SupportsPartialRendering], [CreatedByUserID], [CreatedOnDate], [LastModifiedByUserID], [LastModifiedOnDate], [SupportsPopUps]) VALUES (NULL, N'CONTROLPANEL:CONTROLBAR', NULL, N'Admin/ControlPanel/ControlBar.ascx', NULL, -3, NULL, NULL, 0, NULL, NULL, -1, NULL, 1)
 GO
 
 
@@ -903,96 +903,96 @@ GO
 /*************************************************/
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetServerConfiguration]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetServerConfiguration]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetServerConfiguration]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPortalByAlias]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortalByAlias]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortalByAlias]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPortalByTab]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortalByTab]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortalByTab]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}VerifyPortal]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}VerifyPortal]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}VerifyPortal]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPortal]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortal]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortal]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPortalCount]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortalCount]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortalCount]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}VerifyPortalTab]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}VerifyPortalTab]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}VerifyPortalTab]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetTabByName]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabByName]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabByName]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetTabCount]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabCount]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabCount]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetTabsByParentId]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabsByParentId]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabsByParentId]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetModuleControlsByKey]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModuleControlsByKey]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModuleControlsByKey]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetModuleControlByKeyAndSrc]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModuleControlByKeyAndSrc]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModuleControlByKeyAndSrc]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetModuleControl]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModuleControl]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetModuleControl]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}UserLogin]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}UserLogin]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}UserLogin]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetAuthRoles]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetAuthRoles]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetAuthRoles]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetUsers]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetUsers]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetUsers]
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetSuperUsers]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetSuperUsers]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetSuperUsers]
 GO
 
 /* Add DefinitionName to ModuleDefinitions */
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}ModuleDefinitions' AND COLUMN_NAME='DefinitionName')
-	BEGIN
-		ALTER TABLE {databaseOwner}[{objectQualifier}ModuleDefinitions]
-			ADD DefinitionName nvarchar(128) NOT NULL CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DefinitionName DEFAULT ''
-	END
+    BEGIN
+        ALTER TABLE {databaseOwner}[{objectQualifier}ModuleDefinitions]
+            ADD DefinitionName nvarchar(128) NOT NULL CONSTRAINT DF_{objectQualifier}ModuleDefinitions_DefinitionName DEFAULT ''
+    END
 GO
 
 IF EXISTS (SELECT * FROM {databaseOwner}[{objectQualifier}ModuleDefinitions] WHERE DefinitionName = '')
-	BEGIN
+    BEGIN
         UPDATE {databaseOwner}[{objectQualifier}ModuleDefinitions] SET DefinitionName = FriendlyName
 
         ALTER TABLE {databaseOwner}[{objectQualifier}ModuleDefinitions]
-	        DROP CONSTRAINT  DF_{objectQualifier}ModuleDefinitions_DefinitionName
+            DROP CONSTRAINT  DF_{objectQualifier}ModuleDefinitions_DefinitionName
 
         ALTER TABLE {databaseOwner}[{objectQualifier}ModuleDefinitions]
-        	DROP CONSTRAINT IX_{objectQualifier}ModuleDefinitions
-        
+            DROP CONSTRAINT IX_{objectQualifier}ModuleDefinitions
+
         CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}ModuleDefinitions ON {databaseOwner}[{objectQualifier}ModuleDefinitions]
-	    (
-	        DefinitionName
-	    )
-	END
+        (
+            DefinitionName
+        )
+    END
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}AddModuleDefinition]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
@@ -1001,33 +1001,33 @@ GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddModuleDefinition
 
-	@DesktopModuleId int,    
-	@FriendlyName    nvarchar(128),
-	@DefinitionName nvarchar(128),
-	@DefaultCacheTime int,
-	@CreatedByUserID  int
+    @DesktopModuleId int,
+    @FriendlyName    nvarchar(128),
+    @DefinitionName nvarchar(128),
+    @DefaultCacheTime int,
+    @CreatedByUserID  int
 
 as
 
 insert into {databaseOwner}{objectQualifier}ModuleDefinitions (
-	DesktopModuleId,
-	FriendlyName,
-	DefinitionName,
-	DefaultCacheTime,
-	CreatedByUserID,
-	CreatedOnDate,
-	LastModifiedByUserID,
-	LastModifiedOnDate
+    DesktopModuleId,
+    FriendlyName,
+    DefinitionName,
+    DefaultCacheTime,
+    CreatedByUserID,
+    CreatedOnDate,
+    LastModifiedByUserID,
+    LastModifiedOnDate
 )
 values (
-	@DesktopModuleId,
-	@FriendlyName,
-	@DefinitionName,
-	@DefaultCacheTime,
-	@CreatedByUserID,
-	getdate(),
-	@CreatedByUserID,
-	getdate()
+    @DesktopModuleId,
+    @FriendlyName,
+    @DefinitionName,
+    @DefaultCacheTime,
+    @CreatedByUserID,
+    getdate(),
+    @CreatedByUserID,
+    getdate()
 )
 
 select SCOPE_IDENTITY()
@@ -1040,48 +1040,48 @@ GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateModuleDefinition
 
-	@ModuleDefId			int,    
-	@FriendlyName			nvarchar(128),
-	@DefinitionName			nvarchar(128),
-	@DefaultCacheTime		int,
-	@LastModifiedByUserID	int
+    @ModuleDefId			int,
+    @FriendlyName			nvarchar(128),
+    @DefinitionName			nvarchar(128),
+    @DefaultCacheTime		int,
+    @LastModifiedByUserID	int
 
 as
 
-update {databaseOwner}{objectQualifier}ModuleDefinitions 
-	SET FriendlyName = @FriendlyName,
-		DefinitionName = @DefinitionName,
-		DefaultCacheTime = @DefaultCacheTime,
-		LastModifiedByUserID = @LastModifiedByUserID,
-		LastModifiedOnDate = getdate()
-	WHERE ModuleDefId = @ModuleDefId
+update {databaseOwner}{objectQualifier}ModuleDefinitions
+    SET FriendlyName = @FriendlyName,
+        DefinitionName = @DefinitionName,
+        DefaultCacheTime = @DefaultCacheTime,
+        LastModifiedByUserID = @LastModifiedByUserID,
+        LastModifiedOnDate = getdate()
+    WHERE ModuleDefId = @ModuleDefId
 
 GO
 
 /* Update AddSkin */
 /******************/
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}AddSkin]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
-	DROP PROCEDURE {databaseOwner}{objectQualifier}AddSkin
+    DROP PROCEDURE {databaseOwner}{objectQualifier}AddSkin
 GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddSkin
-	@SkinPackageID		int,
-    @SkinSrc			nvarchar(200)		
+    @SkinPackageID		int,
+    @SkinSrc			nvarchar(200)
 AS
-	BEGIN
-		IF NOT EXISTS (
-			SELECT 1 FROM {databaseOwner}{objectQualifier}Skins S
-				WHERE S.SkinPackageID = @SkinPackageID AND S.SkinSrc = @SkinSrc
-			)
-			BEGIN
-				INSERT INTO {databaseOwner}{objectQualifier}Skins (SkinPackageID, SkinSrc)
-				VALUES (@SkinPackageID, @SkinSrc)
-			END
-	END
-	
-	SELECT SkinID FROM {databaseOwner}{objectQualifier}Skins S
-		WHERE S.SkinPackageID = @SkinPackageID AND S.SkinSrc = @SkinSrc
+    BEGIN
+        IF NOT EXISTS (
+            SELECT 1 FROM {databaseOwner}{objectQualifier}Skins S
+                WHERE S.SkinPackageID = @SkinPackageID AND S.SkinSrc = @SkinSrc
+            )
+            BEGIN
+                INSERT INTO {databaseOwner}{objectQualifier}Skins (SkinPackageID, SkinSrc)
+                VALUES (@SkinPackageID, @SkinSrc)
+            END
+    END
+
+    SELECT SkinID FROM {databaseOwner}{objectQualifier}Skins S
+        WHERE S.SkinPackageID = @SkinPackageID AND S.SkinSrc = @SkinSrc
 
 GO
 
@@ -1094,11 +1094,11 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}CoreMessaging_MarkMessageAsSent]
-	@MessageId int,
-	@RecipientId int
+    @MessageId int,
+    @RecipientId int
 AS
 BEGIN
-	Update {databaseOwner}{objectQualifier}CoreMessaging_MessageRecipients set EmailSent = 1  where MessageID =@MessageId AND RecipientId=@RecipientId
+    Update {databaseOwner}{objectQualifier}CoreMessaging_MessageRecipients set EmailSent = 1  where MessageID =@MessageId AND RecipientId=@RecipientId
 END
 
 GO
@@ -1280,17 +1280,17 @@ GO
 /* Moved from Upgrade.cs becuase UpdateUser has changed */
 /********************************************************/
 
-UPDATE {databaseOwner}{objectQualifier}Users 
-	SET UpdatePassword = 0 
-	WHERE IsSuperUser = 1
+UPDATE {databaseOwner}{objectQualifier}Users
+    SET UpdatePassword = 0
+    WHERE IsSuperUser = 1
 GO
 
 /* Allow PackageID to be NULL in Assemblies Table */
 /**************************************************/
 
 ALTER TABLE {databaseOwner}{objectQualifier}Assemblies
-	ALTER COLUMN PackageID int NULL
-	
+    ALTER COLUMN PackageID int NULL
+
 GO
 
 /* Add ClearFileContent */
@@ -1302,245 +1302,245 @@ GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}ClearFileContent]
 
-	@FileId      int
+    @FileId      int
 
 AS
 
 UPDATE {databaseOwner}{objectQualifier}Files
-	SET    Content = NULL
-	WHERE  FileId = @FileId
+    SET    Content = NULL
+    WHERE  FileId = @FileId
 
 GO
 
 /* Update Control Panel */
 /************************/
 
-UPDATE {databaseOwner}{objectQualifier}HostSettings 
-	SET SettingValue = 'Admin/ControlPanel/ControlBar.ascx'
-	WHERE SettingName = 'ControlPanel'
-		AND SettingValue = 'Admin/ControlPanel/RibbonBar.ascx'
+UPDATE {databaseOwner}{objectQualifier}HostSettings
+    SET SettingValue = 'Admin/ControlPanel/ControlBar.ascx'
+    WHERE SettingName = 'ControlPanel'
+        AND SettingValue = 'Admin/ControlPanel/RibbonBar.ascx'
 GO
 
 /*Insert Skin Package for Gravity Skin*/
 
 IF NOT EXISTS (SELECT * FROM {databaseOwner}[{objectQualifier}Packages] WHERE [Name] = N'Gravity')
 BEGIN
-	DECLARE @PackageId int
-	
-	INSERT INTO {databaseOwner}{objectQualifier}Packages
-	(
-		PortalID,
-		[Name],
-		FriendlyName,
-		[Description],
-		PackageType,
-		Version,
-		License,
-		Manifest,
-		ReleaseNotes,
-		[Owner],
-		Organization,
-		Url,
-		Email,
-		IsSystemPackage,
-		[CreatedByUserID],
-		[CreatedOnDate],
-		[LastModifiedByUserID],
-		[LastModifiedOnDate],
-		FolderName,
-		IconFile
-	)
-	VALUES (
-		Null,
-		'Gravity',
-		'Gravity',
-		'Gravity Skin',
-		'Skin',
-		'07.00.00',
-		'',
-		'<dotnetnuke type="Package" version="5.0">
+    DECLARE @PackageId int
+
+    INSERT INTO {databaseOwner}{objectQualifier}Packages
+    (
+        PortalID,
+        [Name],
+        FriendlyName,
+        [Description],
+        PackageType,
+        Version,
+        License,
+        Manifest,
+        ReleaseNotes,
+        [Owner],
+        Organization,
+        Url,
+        Email,
+        IsSystemPackage,
+        [CreatedByUserID],
+        [CreatedOnDate],
+        [LastModifiedByUserID],
+        [LastModifiedOnDate],
+        FolderName,
+        IconFile
+    )
+    VALUES (
+        Null,
+        'Gravity',
+        'Gravity',
+        'Gravity Skin',
+        'Skin',
+        '07.00.00',
+        '',
+        '<dotnetnuke type="Package" version="5.0">
   <packages>
     <package name="Gravity" type="Skin" version="07.00.00">
-      <friendlyName>Gravity</friendlyName>
-      <description>Gravity</description>
-      <owner>
+    <friendlyName>Gravity</friendlyName>
+    <description>Gravity</description>
+    <owner>
         <name>DotNetNuke</name>
         <organization>DotNetNuke Corporation</organization>
         <url>www.dotnetnuke.com</url>
         <email>support@dotnetnuke.com</email>
-      </owner>
-      <components>
+    </owner>
+    <components>
         <component type="Skin">
-          <skinFiles>
+        <skinFiles>
             <skinName>Gravity</skinName>
             <basePath>Portals\_default\Skins\Gravity</basePath>
-          </skinFiles>
+        </skinFiles>
         </component>
-      </components>
+    </components>
     </package>
     <package name="Gravity" type="Container" version="07.00.00">
-      <friendlyName>Gravity</friendlyName>
-      <description>Gravity</description>
-      <owner>
+    <friendlyName>Gravity</friendlyName>
+    <description>Gravity</description>
+    <owner>
         <name>DotNetNuke</name>
         <organization>DotNetNuke Corporation</organization>
         <url>www.dotnetnuke.com</url>
         <email>support@dotnetnuke.com</email>
-      </owner>
-      <components>
+    </owner>
+    <components>
         <component type="Container">
-          <containerFiles>
+        <containerFiles>
             <containerName>Gravity</containerName>
             <basePath>Portals\_default\Containers\Gravity</basePath>
-          </containerFiles>
+        </containerFiles>
         </component>
-      </components>
+    </components>
     </package>
   </packages>
 </dotnetnuke>',
-		'',
-		'DotNetNuke',
-		'DotNetNuke Corp',
-		'www.dotnetnuke.com',
-		'support@dotnetnuke.com',
-		1,
-		-1,
-		getdate(),
-		-1,
-		getdate(),
-		Null,
-		Null
-	)
-	Set @PackageId = SCOPE_IDENTITY()
+        '',
+        'DotNetNuke',
+        'DotNetNuke Corp',
+        'www.dotnetnuke.com',
+        'support@dotnetnuke.com',
+        1,
+        -1,
+        getdate(),
+        -1,
+        getdate(),
+        Null,
+        Null
+    )
+    Set @PackageId = SCOPE_IDENTITY()
 
-	INSERT INTO {databaseOwner}{objectQualifier}SkinPackages (
-	  PackageID,
-	  PortalID,
-	  SkinName,
-	  SkinType,
-	[CreatedByUserID],
-	[CreatedOnDate],
-	[LastModifiedByUserID],
-	[LastModifiedOnDate]
-	)
-	VALUES (
-	  @PackageID,
-	  Null,
-	  'Gravity',
-	  'Skin',
-	  -1,
-	  getdate(),
-	  -1,
-	  getdate()
-	)
+    INSERT INTO {databaseOwner}{objectQualifier}SkinPackages (
+    PackageID,
+    PortalID,
+    SkinName,
+    SkinType,
+    [CreatedByUserID],
+    [CreatedOnDate],
+    [LastModifiedByUserID],
+    [LastModifiedOnDate]
+    )
+    VALUES (
+    @PackageID,
+    Null,
+    'Gravity',
+    'Skin',
+    -1,
+    getdate(),
+    -1,
+    getdate()
+    )
 
-		INSERT INTO {databaseOwner}{objectQualifier}Packages
-	(
-		PortalID,
-		[Name],
-		FriendlyName,
-		[Description],
-		PackageType,
-		Version,
-		License,
-		Manifest,
-		ReleaseNotes,
-		[Owner],
-		Organization,
-		Url,
-		Email,
-		IsSystemPackage,
-		[CreatedByUserID],
-		[CreatedOnDate],
-		[LastModifiedByUserID],
-		[LastModifiedOnDate],
-		FolderName,
-		IconFile
-	)
-	VALUES (
-		Null,
-		'Gravity',
-		'Gravity',
-		'Gravity Container',
-		'Container',
-		'07.00.00',
-		'',
-		'<dotnetnuke type="Package" version="5.0">
+        INSERT INTO {databaseOwner}{objectQualifier}Packages
+    (
+        PortalID,
+        [Name],
+        FriendlyName,
+        [Description],
+        PackageType,
+        Version,
+        License,
+        Manifest,
+        ReleaseNotes,
+        [Owner],
+        Organization,
+        Url,
+        Email,
+        IsSystemPackage,
+        [CreatedByUserID],
+        [CreatedOnDate],
+        [LastModifiedByUserID],
+        [LastModifiedOnDate],
+        FolderName,
+        IconFile
+    )
+    VALUES (
+        Null,
+        'Gravity',
+        'Gravity',
+        'Gravity Container',
+        'Container',
+        '07.00.00',
+        '',
+        '<dotnetnuke type="Package" version="5.0">
   <packages>
     <package name="Gravity" type="Skin" version="07.00.00">
-      <friendlyName>Gravity</friendlyName>
-      <description>Gravity demo</description>
-      <owner>
+    <friendlyName>Gravity</friendlyName>
+    <description>Gravity demo</description>
+    <owner>
         <name>DotNetNuke</name>
         <organization>DotNetNuke Corporation</organization>
         <url>www.dotnetnuke.com</url>
         <email>support@dotnetnuke.com</email>
-      </owner>
-      <components>
+    </owner>
+    <components>
         <component type="Skin">
-          <skinFiles>
+        <skinFiles>
             <skinName>Gravity</skinName>
             <basePath>Portals\_default\Skins\Gravity</basePath>
-          </skinFiles>
+        </skinFiles>
         </component>
-      </components>
+    </components>
     </package>
     <package name="Gravity" type="Container" version="07.00.00">
-      <friendlyName>Gravity</friendlyName>
-      <description>Gravity</description>
-      <owner>
+    <friendlyName>Gravity</friendlyName>
+    <description>Gravity</description>
+    <owner>
         <name>DotNetNuke</name>
         <organization>DotNetNuke Corporation</organization>
         <url>www.dotnetnuke.com</url>
         <email>support@dotnetnuke.com</email>
-      </owner>
-      <components>
+    </owner>
+    <components>
         <component type="Container">
-          <containerFiles>
+        <containerFiles>
             <containerName>Gravity</containerName>
             <basePath>Portals\_default\Containers\Gravity</basePath>
-          </containerFiles>
+        </containerFiles>
         </component>
-      </components>
+    </components>
     </package>
   </packages>
 </dotnetnuke>',
-		'',
-		'DotNetNuke',
-		'DotNetNuke Corp',
-		'www.dotnetnuke.com',
-		'support@dotnetnuke.com',
-		1,
-		-1,
-		getdate(),
-		-1,
-		getdate(),
-		Null,
-		Null
-	)
+        '',
+        'DotNetNuke',
+        'DotNetNuke Corp',
+        'www.dotnetnuke.com',
+        'support@dotnetnuke.com',
+        1,
+        -1,
+        getdate(),
+        -1,
+        getdate(),
+        Null,
+        Null
+    )
 
-		Set @PackageId = SCOPE_IDENTITY()
+        Set @PackageId = SCOPE_IDENTITY()
 
-	INSERT INTO {databaseOwner}{objectQualifier}SkinPackages (
-	  PackageID,
-	  PortalID,
-	  SkinName,
-	  SkinType,
-	[CreatedByUserID],
-	[CreatedOnDate],
-	[LastModifiedByUserID],
-	[LastModifiedOnDate]
-	)
-	VALUES (
-	  @PackageID,
-	  Null,
-	  'Gravity',
-	  'Container',
-	  -1,
-	  getdate(),
-	  -1,
-	  getdate()
-	)
+    INSERT INTO {databaseOwner}{objectQualifier}SkinPackages (
+    PackageID,
+    PortalID,
+    SkinName,
+    SkinType,
+    [CreatedByUserID],
+    [CreatedOnDate],
+    [LastModifiedByUserID],
+    [LastModifiedOnDate]
+    )
+    VALUES (
+    @PackageID,
+    Null,
+    'Gravity',
+    'Container',
+    -1,
+    getdate(),
+    -1,
+    getdate()
+    )
 END
 
 GO

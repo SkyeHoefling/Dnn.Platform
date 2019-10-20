@@ -13,17 +13,17 @@
     <h2>Quick Installation</h2>
     <p>In order to make your experience with DotNetNuke as productive as possible, we have optimized the number of installation steps required for web developers.</p>
     <p>
-    As long as you selected the default options for creating a web project in Visual Studio 2005 
-    ( selected "File System" as the Location: for your website ) and want to use the default SQL Server 2005 Express database included with the application, 
-    you simpy need to <b>press Ctrl-F5</b> (ie. hold the Ctrl key down while clicking on the F5 function key) in order to complete your installation. 
-    The application may take a few minutes to build and you may find it useful to monitor the build progress output 
+    As long as you selected the default options for creating a web project in Visual Studio 2005
+    ( selected "File System" as the Location: for your website ) and want to use the default SQL Server 2005 Express database included with the application,
+    you simpy need to <b>press Ctrl-F5</b> (ie. hold the Ctrl key down while clicking on the F5 function key) in order to complete your installation.
+    The application may take a few minutes to build and you may find it useful to monitor the build progress output
     ( select View / Output or CTRL-ALT-O within Visual Studio 2005 ). When your web browser loads the initial Installation screen, <b>you must choose the Auto Installation option</b> to successfully complete the process.
     </p>
     <hr />
     <h2>Advanced Installation</h2>
-    <p>For those developers are not satisfied with the default options used in the Quick Installation option above 
-       or perhaps want a little more control over the installation process, 
-       we have included Advanced Installation instrustions to cover the most common customizations.
+    <p>For those developers are not satisfied with the default options used in the Quick Installation option above
+        or perhaps want a little more control over the installation process,
+        we have included Advanced Installation instrustions to cover the most common customizations.
     </p>
     <ul>
         <li><a href="#Step1">Create/Configure</a> a SQL Server Database</li>
@@ -59,14 +59,14 @@
         more readable - the
         actual string must be on one line.)</em></p>
     <p><em></em>The examples shown above are for the default SQL Server 2005 Express database file
-        "Database.mdf".&nbsp; If you used 
+        "Database.mdf".&nbsp; If you used
         a different filename for the database file, you need to change the <i>AttachDBFilename=|DataDirectory|Database.mdf;</i> section.</p>
     <p>To use a SQL Server 2000 or 2005 database replace the whole connection string by
         something similar to</p>
     <p>Server=(local);Database=DatabaseName;uid=LoginName;pwd=LoginPassword;</p>
     <a name="Step3" /><h3>3. Configure the Web Server</h3>
     <p>For the most part, you should not need to configure your web server.&nbsp; It does
-        not matter whether you selected the File System (default) or HTTP (IIS) as the Location: for your web server. 
+        not matter whether you selected the File System (default) or HTTP (IIS) as the Location: for your web server.
         In either case the default configurations should work.&nbsp;
         In fact the File System web server has no configuration options.&nbsp; However,
         if you would like further information on configuring IIS please see <a href="WebServerConfig.html">Configuring Internet Information Server (IIS)</a>.</p>

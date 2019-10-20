@@ -31,10 +31,10 @@ class DnnTabs extends Component {
             return <Tab key={this.uniqueId + "-" + index}>{tabHeader}</Tab>;
         });
     }
-    
+
     getTabPanels() {
         const {props} = this;
-        let children = [];        
+        let children = [];
         if (Object.prototype.toString.call(props.children) === "[object Array]") {
             for (let i = 0; i < (props.children.length); i++) {
                 children.push(<TabPanel key={this.uniqueId + "panel-" + i}>{props.children[i]}</TabPanel>);

@@ -6,24 +6,24 @@
 <div class="dnnForm dnnManageSecurityRoles">
     <asp:Panel ID="pnlRoles" runat="server" Visible="True">
         <h2 class="dnnFormSectionHead"><asp:Label ID="lblTitle" runat="server" /></h2>
-             <div class="dnnFormItem">
+            <div class="dnnFormItem">
         <table cellspacing="0" cellpadding="0" border="0" class="dnnSecurityRoles dnnClear">
             <tr>
-                <td valign="top" width="250">                  
+                <td valign="top" width="250">
                     <div class="dnnFormItem" style="z-index: 10;">
-                    <dnn:Label ID="plRoles" runat="server" />  
-                    <dnn:Label ID="plUsers" runat="server" /> 
-                    </div>               
+                    <dnn:Label ID="plRoles" runat="server" />
+                    <dnn:Label ID="plUsers" runat="server" />
+                    </div>
                 </td>
                 <td width="30"></td>
                 <td valign="top" width="100">
                     <dnn:Label ID="plEffectiveDate" runat="server"/>
-                 </td>
+                </td>
                 <td width="30"></td>
                 <td valign="top" width="100">
                     <dnn:Label ID="plExpiryDate" runat="server" />
                 </td>
-                
+
                 <asp:Placeholder runat="server" ID="placeIsOwnerHeader" Visible="false">
                     <td width="30"></td>
                     <td valign="top" width="150"><dnn:Label ID="lblIsOwner" runat="server" /></td>
@@ -61,7 +61,7 @@
         <asp:CompareValidator ID="valEffectiveDate" CssClass="dnnFormError" runat="server" resourcekey="valEffectiveDate" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="effectiveDatePicker" ValidationGroup="SecurityRole" />
         <asp:CompareValidator ID="valExpiryDate" CssClass="dnnFormError" runat="server" resourcekey="valExpiryDate" Display="Dynamic" Type="Date" Operator="DataTypeCheck" ControlToValidate="expiryDatePicker" ValidationGroup="SecurityRole" />
         <asp:CompareValidator ID="valDates" CssClass="dnnFormError" runat="server" resourcekey="valDates" Display="Dynamic" Type="Date" Operator="GreaterThan" ControlToValidate="expiryDatePicker" ControlToCompare="effectiveDatePicker" ValidationGroup="SecurityRole" />
-         </div>
+        </div>
     </asp:Panel>
     <asp:Panel ID="pnlUserRoles" runat="server" CssClass="WorkPanel" Visible="True">
         <asp:DataGrid ID="grdUserRoles" runat="server" Width="100%" GridLines="None" DataKeyField="UserRoleID" EnableViewState="false" AutoGenerateColumns="false" CellSpacing="0" CellPadding="0" CssClass="dnnGrid">
@@ -82,19 +82,19 @@
                 </asp:TemplateColumn>
                 <asp:TemplateColumn HeaderText="UserName">
                     <ItemTemplate>
-                         <a href='<%# DotNetNuke.Common.Globals.LinkClick("userid=" + Eval("UserID").ToString(), TabId, ModuleId) %>' class=""> <%# Eval("FullName").ToString()%> </a>
+                        <a href='<%# DotNetNuke.Common.Globals.LinkClick("userid=" + Eval("UserID").ToString(), TabId, ModuleId) %>' class=""> <%# Eval("FullName").ToString()%> </a>
                     </ItemTemplate>
                 </asp:TemplateColumn>
                 <asp:BoundColumn DataField="RoleName" HeaderText="SecurityRole" />
                 <asp:TemplateColumn HeaderText="EffectiveDate">
                     <ItemTemplate>
-                         <%#FormatDate(Convert.ToDateTime(Eval("EffectiveDate"))) %>
+                        <%#FormatDate(Convert.ToDateTime(Eval("EffectiveDate"))) %>
                     </ItemTemplate>
                 </asp:TemplateColumn>
                 <asp:TemplateColumn HeaderText="ExpiryDate">
                     <ItemTemplate>
-                         <%#FormatDate(Convert.ToDateTime(Eval("ExpiryDate"))) %>
-                         </ItemTemplate>
+                        <%#FormatDate(Convert.ToDateTime(Eval("ExpiryDate"))) %>
+                        </ItemTemplate>
                 </asp:TemplateColumn>
                 <asp:TemplateColumn HeaderText="IsOwner">
                     <ItemTemplate>
@@ -104,7 +104,7 @@
             </Columns>
         </asp:DataGrid>
         <dnn:pagingcontrol id="ctlPagingControl" runat="server"></dnn:pagingcontrol>
-        
+
     </asp:Panel>
     <ul id="actionsRow" runat="server" class="dnnActions dnnClear">
         <li><asp:HyperLink id="cmdCancel" runat="server" CssClass="dnnPrimaryAction" resourcekey="Close" /></li>

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -49,7 +49,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:CollectionEditorControl runat=server></{0}:CollectionEditorControl>")]
     public class CollectionEditorControl : PropertyEditorControl
     {
-		#region Protected Members
+        #region Protected Members
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -65,9 +65,9 @@ namespace DotNetNuke.UI.WebControls
             }
         }
 
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -125,7 +125,7 @@ namespace DotNetNuke.UI.WebControls
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Gets and sets the value of the Field that is bound to the EditControl's 
+        /// Gets and sets the value of the Field that is bound to the EditControl's
         /// Expression DynamicContentValidator
         /// </summary>
         /// <value>A string representing the Name of the Field</value>
@@ -159,10 +159,10 @@ namespace DotNetNuke.UI.WebControls
         /// -----------------------------------------------------------------------------
         [Browsable(true), Category("Data"), DefaultValue(""), Description("Enter the name of the field that determines the visibility.")]
         public string VisibilityDataField { get; set; }
-		
-		#endregion
 
-		#region Private Methods
+        #endregion
+
+        #region Private Methods
 
         private Hashtable GetFieldNames()
         {
@@ -179,10 +179,10 @@ namespace DotNetNuke.UI.WebControls
 
             return fields;
         }
-		
-		#endregion
 
-		#region Protected Methods
+        #endregion
+
+        #region Protected Methods
 
         protected override void AddEditorRow(Table table, object obj)
         {
@@ -208,8 +208,8 @@ namespace DotNetNuke.UI.WebControls
         {
             PropertyInfo objProperty;
             string _Category = Null.NullString;
-			
-			//Get Category Field
+
+            //Get Category Field
             if (!String.IsNullOrEmpty(CategoryDataField))
             {
                 objProperty = obj.GetType().GetProperty(CategoryDataField);
@@ -233,7 +233,7 @@ namespace DotNetNuke.UI.WebControls
 
             foreach (object obj in arrObjects)
             {
-				//Get Category Field
+                //Get Category Field
                 if (!String.IsNullOrEmpty(CategoryDataField))
                 {
                     objProperty = obj.GetType().GetProperty(CategoryDataField);
@@ -273,7 +273,7 @@ namespace DotNetNuke.UI.WebControls
             }
             if (!isVisible && EditMode == PropertyEditorMode.Edit)
             {
-				//Check if property is required - as this will need to override visibility
+                //Check if property is required - as this will need to override visibility
                 objProperty = obj.GetType().GetProperty(RequiredDataField);
                 if (!(objProperty == null || (objProperty.GetValue(obj, null) == null)))
                 {
@@ -282,7 +282,7 @@ namespace DotNetNuke.UI.WebControls
             }
             return isVisible;
         }
-		
-		#endregion
+
+        #endregion
     }
 }

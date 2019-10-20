@@ -311,7 +311,7 @@
 
         function buildMenuLabel(root, rootText, rootClass) {
             if (!rootText || rootText.length == 0) {
-                return;                
+                return;
             }
             root.append("<li class=\"" + rootClass + "\"><div>" + rootText + "</div>");
         }

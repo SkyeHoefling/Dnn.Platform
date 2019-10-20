@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -63,8 +63,8 @@ namespace DotNetNuke.Modules.Admin.Users
     /// </remarks>
     public partial class User : UserUserControlBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (User));
-		#region Public Properties
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (User));
+        #region Public Properties
 
         public UserCreateStatus CreateStatus { get; set; }
 
@@ -112,25 +112,25 @@ namespace DotNetNuke.Modules.Admin.Users
             }
         }
 
-		/// <summary>
-		/// User Form's css class.
-		/// </summary>
-    	public string CssClass
-    	{
-    		get
-    		{
-				return pnlAddUser.CssClass;
-    		}
-			set
-			{
-				userForm.CssClass = string.IsNullOrEmpty(userForm.CssClass) ? value : string.Format("{0} {1}", userForm.CssClass, value);
-				pnlAddUser.CssClass = string.IsNullOrEmpty(pnlAddUser.CssClass) ? value : string.Format("{0} {1}", pnlAddUser.CssClass, value); ;
-			}
-    	}
+        /// <summary>
+        /// User Form's css class.
+        /// </summary>
+        public string CssClass
+        {
+            get
+            {
+                return pnlAddUser.CssClass;
+            }
+            set
+            {
+                userForm.CssClass = string.IsNullOrEmpty(userForm.CssClass) ? value : string.Format("{0} {1}", userForm.CssClass, value);
+                pnlAddUser.CssClass = string.IsNullOrEmpty(pnlAddUser.CssClass) ? value : string.Format("{0} {1}", pnlAddUser.CssClass, value); ;
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Private Methods
+        #region Private Methods
 
         /// <summary>
         /// method checks to see if its allowed to change the username
@@ -171,10 +171,10 @@ namespace DotNetNuke.Modules.Admin.Users
 
         private void UpdateDisplayName()
         {
-			//Update DisplayName to conform to Format
-			if (!string.IsNullOrEmpty(PortalSettings.Registration.DisplayNameFormat))
+            //Update DisplayName to conform to Format
+            if (!string.IsNullOrEmpty(PortalSettings.Registration.DisplayNameFormat))
             {
-				User.UpdateDisplayName(PortalSettings.Registration.DisplayNameFormat);
+                User.UpdateDisplayName(PortalSettings.Registration.DisplayNameFormat);
             }
         }
 
@@ -192,8 +192,8 @@ namespace DotNetNuke.Modules.Admin.Users
             {
                 CreateStatus = UserCreateStatus.AddUser;
                 if (!chkRandom.Checked)
-                {					
-					//1. Check Password is Valid
+                {
+                    //1. Check Password is Valid
                     if (CreateStatus == UserCreateStatus.AddUser && !UserController.ValidatePassword(txtPassword.Text))
                     {
                         CreateStatus = UserCreateStatus.InvalidPassword;
@@ -205,16 +205,16 @@ namespace DotNetNuke.Modules.Admin.Users
                 }
                 else
                 {
-					//Generate a random password for the user
+                    //Generate a random password for the user
                     User.Membership.Password = UserController.GeneratePassword();
                 }
-				
+
                 //Check Question/Answer
                 if (CreateStatus == UserCreateStatus.AddUser && MembershipProviderConfig.RequiresQuestionAndAnswer)
                 {
                     if (string.IsNullOrEmpty(txtQuestion.Text))
                     {
-						//Invalid Question
+                        //Invalid Question
                         CreateStatus = UserCreateStatus.InvalidQuestion;
                     }
                     else
@@ -225,7 +225,7 @@ namespace DotNetNuke.Modules.Admin.Users
                     {
                         if (string.IsNullOrEmpty(txtAnswer.Text))
                         {
-							//Invalid Question
+                            //Invalid Question
                             CreateStatus = UserCreateStatus.InvalidAnswer;
                         }
                         else
@@ -242,9 +242,9 @@ namespace DotNetNuke.Modules.Admin.Users
             return _IsValid;
         }
 
-		#endregion
+        #endregion
 
-		#region Public Methods
+        #region Public Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -276,7 +276,7 @@ namespace DotNetNuke.Modules.Admin.Users
             var createStatus = UserController.CreateUser(ref user);
 
             var args = (createStatus == UserCreateStatus.Success)
-                                            ? new UserCreatedEventArgs(User) {Notify = chkNotify.Checked} 
+                                            ? new UserCreatedEventArgs(User) {Notify = chkNotify.Checked}
                                             : new UserCreatedEventArgs(null);
             args.CreateStatus = createStatus;
             OnUserCreated(args);
@@ -361,9 +361,9 @@ namespace DotNetNuke.Modules.Admin.Users
 
             if (CanUpdateUsername() && !disableUsername)
             {
-               
+
                 renameUserName.Visible = true;
-                
+
                 userName.Visible = false;
                 userNameReadOnly.Visible = false;
 
@@ -380,17 +380,17 @@ namespace DotNetNuke.Modules.Admin.Users
                 }
             }
 
-			if (!string.IsNullOrEmpty(PortalSettings.Registration.UserNameValidator))
+            if (!string.IsNullOrEmpty(PortalSettings.Registration.UserNameValidator))
             {
-				userName.ValidationExpression = PortalSettings.Registration.UserNameValidator;
+                userName.ValidationExpression = PortalSettings.Registration.UserNameValidator;
             }
 
-			if (!string.IsNullOrEmpty(PortalSettings.Registration.EmailValidator))
+            if (!string.IsNullOrEmpty(PortalSettings.Registration.EmailValidator))
             {
-				email.ValidationExpression = PortalSettings.Registration.EmailValidator;
+                email.ValidationExpression = PortalSettings.Registration.EmailValidator;
             }
 
-			if (!string.IsNullOrEmpty(PortalSettings.Registration.DisplayNameFormat))
+            if (!string.IsNullOrEmpty(PortalSettings.Registration.DisplayNameFormat))
             {
                 if (AddUser)
                 {
@@ -414,16 +414,16 @@ namespace DotNetNuke.Modules.Admin.Users
             }
 
             userForm.DataSource = User;
-			if (!Page.IsPostBack)
-			{
-				userForm.DataBind();
-			    renameUserName.Value = User.Username;
-			}
+            if (!Page.IsPostBack)
+            {
+                userForm.DataBind();
+                renameUserName.Value = User.Username;
+            }
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -447,56 +447,56 @@ namespace DotNetNuke.Modules.Admin.Users
             ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/scripts/dnn.PasswordStrength.js");
             ClientResourceManager.RegisterScript(Page, "~/DesktopModules/Admin/Security/Scripts/dnn.PasswordComparer.js");
 
-			ClientResourceManager.RegisterStyleSheet(Page, "~/Resources/Shared/stylesheets/dnn.PasswordStrength.css", FileOrder.Css.ResourceCss);
+            ClientResourceManager.RegisterStyleSheet(Page, "~/Resources/Shared/stylesheets/dnn.PasswordStrength.css", FileOrder.Css.ResourceCss);
 
-			JavaScript.RequestRegistration(CommonJs.DnnPlugins);
+            JavaScript.RequestRegistration(CommonJs.DnnPlugins);
 
             base.OnPreRender(e);
 
 
-			if (Host.EnableStrengthMeter)
-			{
-				passwordContainer.CssClass = "password-strength-container";
-				txtPassword.CssClass = "password-strength";
-				txtConfirm.CssClass = string.Format("{0} checkStength", txtConfirm.CssClass);
-				
-				var options = new DnnPaswordStrengthOptions();
-				var optionsAsJsonString = Json.Serialize(options);
-				var passwordScript = string.Format("dnn.initializePasswordStrength('.{0}', {1});{2}",
-					"password-strength", optionsAsJsonString, Environment.NewLine);
+            if (Host.EnableStrengthMeter)
+            {
+                passwordContainer.CssClass = "password-strength-container";
+                txtPassword.CssClass = "password-strength";
+                txtConfirm.CssClass = string.Format("{0} checkStength", txtConfirm.CssClass);
 
-				if (ScriptManager.GetCurrent(Page) != null)
-				{
-					// respect MS AJAX
-					ScriptManager.RegisterStartupScript(Page, GetType(), "PasswordStrength", passwordScript, true);
-				}
-				else
-				{
-					Page.ClientScript.RegisterStartupScript(GetType(), "PasswordStrength", passwordScript, true);
-				}
-			}
+                var options = new DnnPaswordStrengthOptions();
+                var optionsAsJsonString = Json.Serialize(options);
+                var passwordScript = string.Format("dnn.initializePasswordStrength('.{0}', {1});{2}",
+                    "password-strength", optionsAsJsonString, Environment.NewLine);
 
-			var confirmPasswordOptions = new DnnConfirmPasswordOptions()
-			{
-				FirstElementSelector = "#" + passwordContainer.ClientID + " input[type=password]",
-				SecondElementSelector = ".password-confirm",
-				ContainerSelector = ".dnnFormPassword",
-				UnmatchedCssClass = "unmatched",
-				MatchedCssClass = "matched"
-			};
+                if (ScriptManager.GetCurrent(Page) != null)
+                {
+                    // respect MS AJAX
+                    ScriptManager.RegisterStartupScript(Page, GetType(), "PasswordStrength", passwordScript, true);
+                }
+                else
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "PasswordStrength", passwordScript, true);
+                }
+            }
 
-			var confirmOptionsAsJsonString = Json.Serialize(confirmPasswordOptions);
-			var confirmScript = string.Format("dnn.initializePasswordComparer({0});{1}", confirmOptionsAsJsonString, Environment.NewLine);
+            var confirmPasswordOptions = new DnnConfirmPasswordOptions()
+            {
+                FirstElementSelector = "#" + passwordContainer.ClientID + " input[type=password]",
+                SecondElementSelector = ".password-confirm",
+                ContainerSelector = ".dnnFormPassword",
+                UnmatchedCssClass = "unmatched",
+                MatchedCssClass = "matched"
+            };
 
-			if (ScriptManager.GetCurrent(Page) != null)
-			{
-				// respect MS AJAX
-				ScriptManager.RegisterStartupScript(Page, GetType(), "ConfirmPassword", confirmScript, true);
-			}
-			else
-			{
-				Page.ClientScript.RegisterStartupScript(GetType(), "ConfirmPassword", confirmScript, true);
-			}
+            var confirmOptionsAsJsonString = Json.Serialize(confirmPasswordOptions);
+            var confirmScript = string.Format("dnn.initializePasswordComparer({0});{1}", confirmOptionsAsJsonString, Environment.NewLine);
+
+            if (ScriptManager.GetCurrent(Page) != null)
+            {
+                // respect MS AJAX
+                ScriptManager.RegisterStartupScript(Page, GetType(), "ConfirmPassword", confirmScript, true);
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "ConfirmPassword", confirmScript, true);
+            }
         }
 
 
@@ -577,7 +577,7 @@ namespace DotNetNuke.Modules.Admin.Users
             {
                 if (IsValid)
                 {
-                    CreateUser();                    
+                    CreateUser();
                     DataCache.ClearPortalUserCountCache(PortalId);
                 }
             }
@@ -587,12 +587,12 @@ namespace DotNetNuke.Modules.Admin.Users
                 {
                     if (User.UserID == PortalSettings.AdministratorId)
                     {
-						//Clear the Portal Cache
+                        //Clear the Portal Cache
                         DataCache.ClearPortalUserCountCache(UserPortalID);
                     }
                     try
                     {
-						//Update DisplayName to conform to Format
+                        //Update DisplayName to conform to Format
                         UpdateDisplayName();
                         //either update the username or update the user details
 
@@ -632,7 +632,7 @@ namespace DotNetNuke.Modules.Admin.Users
                 }
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

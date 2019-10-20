@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -58,15 +58,15 @@ namespace DotNetNuke.Security.Permissions
         }
 
         #region Public Methods
-		
+
         public int AddPermission(PermissionInfo permission)
         {
             EventLogController.Instance.AddLog(permission, PortalController.Instance.GetCurrentPortalSettings(), UserController.Instance.GetCurrentUserInfo().UserID, "", EventLogController.EventLogType.PERMISSION_CREATED);
             var permissionId =  Convert.ToInt32(provider.AddPermission(permission.PermissionCode,
-                                                       permission.ModuleDefID,
-                                                       permission.PermissionKey,
-                                                       permission.PermissionName,
-                                                       UserController.Instance.GetCurrentUserInfo().UserID));
+                                                        permission.ModuleDefID,
+                                                        permission.PermissionKey,
+                                                        permission.PermissionName,
+                                                        UserController.Instance.GetCurrentUserInfo().UserID));
 
             ClearCache();
             return permissionId;
@@ -75,10 +75,10 @@ namespace DotNetNuke.Security.Permissions
         public void DeletePermission(int permissionID)
         {
             EventLogController.Instance.AddLog("PermissionID",
-                               permissionID.ToString(),
-                               PortalController.Instance.GetCurrentPortalSettings(),
-                               UserController.Instance.GetCurrentUserInfo().UserID,
-                               EventLogController.EventLogType.PERMISSION_DELETED);
+                                permissionID.ToString(),
+                                PortalController.Instance.GetCurrentPortalSettings(),
+                                UserController.Instance.GetCurrentUserInfo().UserID,
+                                EventLogController.EventLogType.PERMISSION_DELETED);
             provider.DeletePermission(permissionID);
             ClearCache();
         }
@@ -91,7 +91,7 @@ namespace DotNetNuke.Security.Permissions
         public ArrayList GetPermissionByCodeAndKey(string permissionCode, string permissionKey)
         {
             return new ArrayList(GetPermissions().Where(p => p.PermissionCode.Equals(permissionCode, StringComparison.InvariantCultureIgnoreCase)
-                                                             && p.PermissionKey.Equals(permissionKey, StringComparison.InvariantCultureIgnoreCase)).ToArray());
+                                                            && p.PermissionKey.Equals(permissionKey, StringComparison.InvariantCultureIgnoreCase)).ToArray());
         }
 
         public ArrayList GetPermissionsByModuleDefID(int moduleDefID)
@@ -110,17 +110,17 @@ namespace DotNetNuke.Security.Permissions
         {
             EventLogController.Instance.AddLog(permission, PortalController.Instance.GetCurrentPortalSettings(), UserController.Instance.GetCurrentUserInfo().UserID, "", EventLogController.EventLogType.PERMISSION_UPDATED);
             provider.UpdatePermission(permission.PermissionID,
-                                      permission.PermissionCode,
-                                      permission.ModuleDefID,
-                                      permission.PermissionKey,
-                                      permission.PermissionName,
-                                      UserController.Instance.GetCurrentUserInfo().UserID);
+                                    permission.PermissionCode,
+                                    permission.ModuleDefID,
+                                    permission.PermissionKey,
+                                    permission.PermissionName,
+                                    UserController.Instance.GetCurrentUserInfo().UserID);
             ClearCache();
         }
-		
-		#endregion
-		
-		#region Shared Methods
+
+        #endregion
+
+        #region Shared Methods
 
         public static string BuildPermissions(IList Permissions, string PermissionKey)
         {
@@ -129,9 +129,9 @@ namespace DotNetNuke.Security.Permissions
             {
                 if (PermissionKey.Equals(permission.PermissionKey, StringComparison.InvariantCultureIgnoreCase))
                 {
-					//Deny permissions are prefixed with a "!"
+                    //Deny permissions are prefixed with a "!"
                     string prefix = !permission.AllowAccess ? "!" : "";
-					
+
                     //encode permission
                     string permissionString;
                     if (Null.IsNull(permission.UserID))
@@ -142,7 +142,7 @@ namespace DotNetNuke.Security.Permissions
                     {
                         permissionString = prefix + "[" + permission.UserID + "];";
                     }
-					
+
                     //build permissions string ensuring that Deny permissions are inserted at the beginning and Grant permissions at the end
                     if (prefix == "!")
                     {
@@ -154,7 +154,7 @@ namespace DotNetNuke.Security.Permissions
                     }
                 }
             }
-			
+
             //get string
             string permissionsString = permissionsBuilder.ToString();
 
@@ -237,8 +237,8 @@ namespace DotNetNuke.Security.Permissions
 
             return result;
         }
-		
-		#endregion
+
+        #endregion
 
         [Obsolete("Deprecated in DNN 7.3.0. Replaced by GetPermissionsByModule(int, int). Scheduled removal in v10.0.0.")]
         public ArrayList GetPermissionsByModuleID(int moduleId)

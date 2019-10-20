@@ -1,7 +1,7 @@
 /// <reference name="MicrosoftAjax.js" />
 /// <reference name="dnn.js" assembly="DotNetNuke.WebUtility" />
 
-//dnn.xmlhttp Namespace 
+//dnn.xmlhttp Namespace
 Type.registerNamespace('dnn.xmlhttp');
 
 dnn.xmlhttp.callbackType = function() { };
@@ -89,7 +89,7 @@ dnn.extend(dnn.xmlhttp, {
         if (this.callBackMethods[ns])
         {
             //var argAry = [];
-            //for (var i = 0; i < args.length; i++) 
+            //for (var i = 0; i < args.length; i++)
             //    argAry[i] = args[i];
             if (args == null)
                 args = {};
@@ -186,7 +186,7 @@ dnn.extend(dnn.xmlhttp, {
     }
 });
 
-//dnn.xmlhttp.XmlHttpRequest Object 
+//dnn.xmlhttp.XmlHttpRequest Object
 dnn.xmlhttp.XmlHttpRequest = function(o)
 {
     this._request = o;
@@ -276,4 +276,3 @@ dnn.xmlhttp.XmlHttpRequest.registerClass('dnn.xmlhttp.XmlHttpRequest');
 
 dnn.xmlhttp.init();
 Sys.Application.add_load(dnn.xmlhttp.onload);
-

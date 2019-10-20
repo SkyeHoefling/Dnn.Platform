@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -64,7 +64,7 @@ namespace DotNetNuke.UI.Modules
     /// </summary>
     public sealed class ModuleHost : Panel
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleHost));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleHost));
 
         private static readonly Regex CdfMatchRegex = new Regex(@"<\!--CDF\((?<type>JAVASCRIPT|CSS|JS-LIBRARY)\|(?<path>.+?)(\|(?<provider>.+?)\|(?<priority>\d+?))?\)-->",
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -111,7 +111,7 @@ namespace DotNetNuke.UI.Modules
         {
             get
             {
-				//Make sure the Control tree has been created
+                //Make sure the Control tree has been created
                 EnsureChildControls();
                 return _control as IModuleControl;
             }
@@ -156,13 +156,13 @@ namespace DotNetNuke.UI.Modules
         {
             if (_moduleConfiguration.IsWebSlice && !Globals.IsAdminControl())
             {
-				//Assign the class - hslice to the Drag-N-Drop Panel
+                //Assign the class - hslice to the Drag-N-Drop Panel
                 CssClass = "hslice";
                 var titleLabel = new Label
-                                     {
-                                         CssClass = "entry-title Hidden",
-                                         Text = !string.IsNullOrEmpty(_moduleConfiguration.WebSliceTitle) ? _moduleConfiguration.WebSliceTitle : _moduleConfiguration.ModuleTitle
-                                     };
+                                    {
+                                        CssClass = "entry-title Hidden",
+                                        Text = !string.IsNullOrEmpty(_moduleConfiguration.WebSliceTitle) ? _moduleConfiguration.WebSliceTitle : _moduleConfiguration.ModuleTitle
+                                    };
                 Controls.Add(titleLabel);
 
                 var websliceContainer = new Panel {CssClass = "entry-content"};
@@ -209,7 +209,7 @@ namespace DotNetNuke.UI.Modules
         /// <returns>A Boolean</returns>
         private bool DisplayContent()
         {
-			//module content visibility options
+            //module content visibility options
             var content = PortalSettings.UserMode != PortalSettings.Mode.Layout;
             if (Page.Request.QueryString["content"] != null)
             {
@@ -249,16 +249,16 @@ namespace DotNetNuke.UI.Modules
             bool viewMode;
 
             if (ModulePermissionController.HasModuleAccess(SecurityAccessLevel.ViewPermissions, Null.NullString,
-                                                              moduleInfo))
+                                                            moduleInfo))
             {
                 viewMode = false;
             }
             else
             {
                 viewMode = !(ModulePermissionController.HasModuleAccess(SecurityAccessLevel.Edit, Null.NullString,
-                                                              moduleInfo)); 
+                                                            moduleInfo));
             }
-            
+
             return viewMode || settings.UserMode == PortalSettings.Mode.View;
         }
 
@@ -275,12 +275,12 @@ namespace DotNetNuke.UI.Modules
                     //if the module supports caching and caching is enabled for the instance and the user does not have Edit rights or is currently in View mode
                     if (SupportsCaching() && IsViewMode(_moduleConfiguration, PortalSettings) && !IsVersionRequest())
                     {
-						//attempt to load the cached content
+                        //attempt to load the cached content
                         _isCached = TryLoadCached();
                     }
                     if (!_isCached)
                     {
-                    	// load the control dynamically
+                        // load the control dynamically
                         _control = _moduleControlPipeline.LoadModuleControl(Page, _moduleConfiguration);
                     }
                 }
@@ -290,11 +290,11 @@ namespace DotNetNuke.UI.Modules
                 }
                 if (Skin != null)
                 {
-				
-                	//check for IMC
+
+                    //check for IMC
                     Skin.Communicator.LoadCommunicator(_control);
                 }
-				
+
                 //add module settings
                 ModuleControl.ModuleContext.Configuration = _moduleConfiguration;
             }
@@ -307,13 +307,13 @@ namespace DotNetNuke.UI.Modules
             catch (Exception exc)
             {
                 Logger.Error(exc);
-				
-				//add module settings
+
+                //add module settings
                 _control = _moduleControlPipeline.CreateModuleControl(_moduleConfiguration);
                 ModuleControl.ModuleContext.Configuration = _moduleConfiguration;
                 if (TabPermissionController.CanAdminPage())
                 {
-					//only display the error to page administrators
+                    //only display the error to page administrators
                     Exceptions.ProcessModuleLoadException(_control, exc);
                 }
                 else
@@ -322,7 +322,7 @@ namespace DotNetNuke.UI.Modules
                     new ExceptionLogController().AddLog(exc);
                 }
             }
-            
+
             //Enable ViewState
             _control.ViewStateMode = ViewStateMode.Enabled;
         }
@@ -332,7 +332,7 @@ namespace DotNetNuke.UI.Modules
         /// </summary>
         private void LoadUpdatePanel()
         {
-			//register AJAX
+            //register AJAX
             AJAX.RegisterScriptManager();
 
             //enable Partial Rendering
@@ -341,13 +341,13 @@ namespace DotNetNuke.UI.Modules
             {
                 scriptManager.EnablePartialRendering = true;
             }
-			
+
             //create update panel
             var updatePanel = new UpdatePanel
-                                  {
-                                      UpdateMode = UpdatePanelUpdateMode.Conditional, 
-                                      ID = _control.ID + "_UP"
-                                  };
+                                {
+                                    UpdateMode = UpdatePanelUpdateMode.Conditional,
+                                    ID = _control.ID + "_UP"
+                                };
 
             //get update panel content template
             var templateContainer = updatePanel.ContentTemplateContainer;
@@ -366,12 +366,12 @@ namespace DotNetNuke.UI.Modules
 
             //inject updateprogress into the panel
             var updateProgress = new UpdateProgress
-                                     {
-                                         AssociatedUpdatePanelID = updatePanel.ID, 
-                                         ID = updatePanel.ID + "_Prog",
+                                    {
+                                        AssociatedUpdatePanelID = updatePanel.ID,
+                                        ID = updatePanel.ID + "_Prog",
 
-                                         ProgressTemplate = new LiteralTemplate(progressTemplate)
-                                     };
+                                        ProgressTemplate = new LiteralTemplate(progressTemplate)
+                                    };
             Controls.Add(updateProgress);
         }
 
@@ -517,8 +517,8 @@ namespace DotNetNuke.UI.Modules
 
             //Load Module Control (or cached control)
             LoadModuleControl();
-			
-			//Optionally Inject AJAX Update Panel
+
+            //Optionally Inject AJAX Update Panel
             if (ModuleControl != null)
             {
                 //if module is dynamically loaded and AJAX is installed and the control supports partial rendering (defined in ModuleControls table )
@@ -562,14 +562,14 @@ namespace DotNetNuke.UI.Modules
         {
             if (_isCached)
             {
-				//Render the cached control to the output stream
+                //Render the cached control to the output stream
                 base.RenderContents(writer);
             }
             else
             {
                 if (SupportsCaching() && IsViewMode(_moduleConfiguration, PortalSettings) && !Globals.IsAdminControl() && !IsVersionRequest())
                 {
-					//Render to cache
+                    //Render to cache
                     var tempWriter = new StringWriter();
 
                     _control.RenderControl(new HtmlTextWriter(tempWriter));
@@ -577,7 +577,7 @@ namespace DotNetNuke.UI.Modules
 
                     if (!string.IsNullOrEmpty(cachedOutput) && (!HttpContext.Current.Request.Browser.Crawler))
                     {
-						//Save content to cache
+                        //Save content to cache
                         var moduleContent = Encoding.UTF8.GetBytes(cachedOutput);
                         var cache = ModuleCachingProvider.Instance(_moduleConfiguration.GetEffectiveCacheMethod());
 
@@ -586,13 +586,13 @@ namespace DotNetNuke.UI.Modules
                         var cacheKey = cache.GenerateCacheKey(_moduleConfiguration.TabModuleID, varyBy);
                         cache.SetModule(_moduleConfiguration.TabModuleID, cacheKey, new TimeSpan(0, 0, _moduleConfiguration.CacheTime), moduleContent);
                     }
-					
+
                     //Render the cached content to Response
                     writer.Write(cachedOutput);
                 }
                 else
                 {
-					//Render the control to Response
+                    //Render the control to Response
                     base.RenderContents(writer);
                 }
             }

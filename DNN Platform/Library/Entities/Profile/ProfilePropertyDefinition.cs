@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -30,13 +30,13 @@ using DotNetNuke.UI.WebControls;
 
 namespace DotNetNuke.Entities.Profile
 {
-	/// -----------------------------------------------------------------------------
+    /// -----------------------------------------------------------------------------
     /// Project:    DotNetNuke
     /// Namespace:  DotNetNuke.Entities.Profile
     /// Class:      ProfilePropertyDefinition
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// The ProfilePropertyDefinition class provides a Business Layer entity for 
+    /// The ProfilePropertyDefinition class provides a Business Layer entity for
     /// property Definitions
     /// </summary>
     /// <remarks>
@@ -52,7 +52,7 @@ namespace DotNetNuke.Entities.Profile
         private string _defaultValue;
         private UserVisibilityMode _defaultVisibility = UserVisibilityMode.AdminOnly;
         private bool _deleted;
-	    private int _length;
+        private int _length;
         private int _moduleDefId = Null.NullInteger;
         private int _portalId;
         private ProfileVisibility _profileVisibility = new ProfileVisibility
@@ -60,7 +60,7 @@ namespace DotNetNuke.Entities.Profile
                                                                 VisibilityMode = UserVisibilityMode.AdminOnly
                                                             };
         private string _propertyCategory;
-	    private string _propertyName;
+        private string _propertyName;
         private string _propertyValue;
         private bool _readOnly;
         private bool _required;
@@ -86,7 +86,7 @@ namespace DotNetNuke.Entities.Profile
             PortalId = portalId;
         }
 
-	    #endregion
+        #endregion
 
         #region Public Properties
 
@@ -182,16 +182,16 @@ namespace DotNetNuke.Entities.Profile
             }
         }
 
-	    /// -----------------------------------------------------------------------------
-	    /// <summary>
-	    /// Gets whether the Definition has been modified since it has been retrieved
-	    /// </summary>
-	    /// -----------------------------------------------------------------------------
-	    [Browsable(false)]
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets whether the Definition has been modified since it has been retrieved
+        /// </summary>
+        /// -----------------------------------------------------------------------------
+        [Browsable(false)]
         [XmlIgnore]
-	    public bool IsDirty { get; private set; }
+        public bool IsDirty { get; private set; }
 
-	    /// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         /// Gets and sets the Length of the Profile Property
         /// </summary>
@@ -276,16 +276,16 @@ namespace DotNetNuke.Entities.Profile
             }
         }
 
-	    /// -----------------------------------------------------------------------------
-	    /// <summary>
-	    /// Gets and sets the Id of the ProfilePropertyDefinition
-	    /// </summary>
-	    /// -----------------------------------------------------------------------------
-	    [Browsable(false)]
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets and sets the Id of the ProfilePropertyDefinition
+        /// </summary>
+        /// -----------------------------------------------------------------------------
+        [Browsable(false)]
         [XmlIgnore]
-	    public int PropertyDefinitionId { get; set; }
+        public int PropertyDefinitionId { get; set; }
 
-	    /// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         /// Gets and sets the Name of the Profile Property
         /// </summary>
@@ -458,7 +458,7 @@ namespace DotNetNuke.Entities.Profile
         [Browsable(false)]
         [XmlIgnore]
         public ProfileVisibility ProfileVisibility
-	    {
+        {
             get
             {
                 return _profileVisibility;
@@ -470,8 +470,8 @@ namespace DotNetNuke.Entities.Profile
                     IsDirty = true;
                 }
                 _profileVisibility = value;
-            }	        
-	    }
+            }
+        }
 
         #endregion
 

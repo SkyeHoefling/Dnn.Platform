@@ -17,57 +17,57 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdatePortalInfo
-	@PortalID           int,
-	@PortalName         nvarchar(128),
-	@LogoFile           nvarchar(50),
-	@FooterText         nvarchar(100),
-	@ExpiryDate         datetime,
-	@UserRegistration   int,
-	@BannerAdvertising  int,
-	@Currency           char(3),
-	@AdministratorId    int,
-	@HostFee            money,
-	@HostSpace          int,
-	@PageQuota          int,
-	@UserQuota          int,
-	@PaymentProcessor   nvarchar(50),
-	@ProcessorUserId    nvarchar(50),
-	@ProcessorPassword  nvarchar(50),
-	@Description        nvarchar(500),
-	@KeyWords           nvarchar(500),
-	@BackgroundFile     nvarchar(50),
-	@SiteLogHistory     int,
-	@SplashTabId          int,
-	@HomeTabId          int,
-	@LoginTabId         int,
-	@UserTabId          int,
-	@DefaultLanguage    nvarchar(10),
-	@TimeZoneOffset	    int,
-	@HomeDirectory		varchar(100),
-	@LastModifiedByUserID	int,
-	@CultureCode   nvarchar(50)
+    @PortalID           int,
+    @PortalName         nvarchar(128),
+    @LogoFile           nvarchar(50),
+    @FooterText         nvarchar(100),
+    @ExpiryDate         datetime,
+    @UserRegistration   int,
+    @BannerAdvertising  int,
+    @Currency           char(3),
+    @AdministratorId    int,
+    @HostFee            money,
+    @HostSpace          int,
+    @PageQuota          int,
+    @UserQuota          int,
+    @PaymentProcessor   nvarchar(50),
+    @ProcessorUserId    nvarchar(50),
+    @ProcessorPassword  nvarchar(50),
+    @Description        nvarchar(500),
+    @KeyWords           nvarchar(500),
+    @BackgroundFile     nvarchar(50),
+    @SiteLogHistory     int,
+    @SplashTabId          int,
+    @HomeTabId          int,
+    @LoginTabId         int,
+    @UserTabId          int,
+    @DefaultLanguage    nvarchar(10),
+    @TimeZoneOffset	    int,
+    @HomeDirectory		varchar(100),
+    @LastModifiedByUserID	int,
+    @CultureCode   nvarchar(50)
 AS
 
 update {databaseOwner}{objectQualifier}Portals
-set    
-       ExpiryDate = @ExpiryDate,
-       UserRegistration = @UserRegistration,
-       BannerAdvertising = @BannerAdvertising,
-       Currency = @Currency,
-       AdministratorId = @AdministratorId,
-       HostFee = @HostFee,
-       HostSpace = @HostSpace,
-       PageQuota = @PageQuota,
-       UserQuota = @UserQuota,
-       PaymentProcessor = @PaymentProcessor,
-       ProcessorUserId = @ProcessorUserId,
-       ProcessorPassword = @ProcessorPassword,
-       SiteLogHistory = @SiteLogHistory,
-       DefaultLanguage = @DefaultLanguage,
-       TimeZoneOffset = @TimeZoneOffset,
-       HomeDirectory = @HomeDirectory,
-	   LastModifiedByUserID = @LastModifiedByUserID,
-	   LastModifiedOnDate = getdate()
+set
+        ExpiryDate = @ExpiryDate,
+        UserRegistration = @UserRegistration,
+        BannerAdvertising = @BannerAdvertising,
+        Currency = @Currency,
+        AdministratorId = @AdministratorId,
+        HostFee = @HostFee,
+        HostSpace = @HostSpace,
+        PageQuota = @PageQuota,
+        UserQuota = @UserQuota,
+        PaymentProcessor = @PaymentProcessor,
+        ProcessorUserId = @ProcessorUserId,
+        ProcessorPassword = @ProcessorPassword,
+        SiteLogHistory = @SiteLogHistory,
+        DefaultLanguage = @DefaultLanguage,
+        TimeZoneOffset = @TimeZoneOffset,
+        HomeDirectory = @HomeDirectory,
+        LastModifiedByUserID = @LastModifiedByUserID,
+        LastModifiedOnDate = getdate()
 where  PortalId = @PortalID
 
 UPDATE {databaseOwner}{objectQualifier}PortalLocalization
@@ -81,9 +81,9 @@ SET
         HomeTabId = @HomeTabId,
         LoginTabId = @LoginTabId,
         UserTabId = @UserTabId,
-		SplashTabId = @SplashTabId,
-		LastModifiedByUserID = @LastModifiedByUserID,
-		LastModifiedOnDate = getdate()
+        SplashTabId = @SplashTabId,
+        LastModifiedByUserID = @LastModifiedByUserID,
+        LastModifiedOnDate = getdate()
 WHERE	PortalId = @PortalID AND CultureCode = @CultureCode
 GO
 
@@ -99,19 +99,19 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPortalDesktopModules
-	@PortalId int,
-	@DesktopModuleId int
+    @PortalId int,
+    @DesktopModuleId int
 
 AS
-	SELECT {objectQualifier}PortalDesktopModules.*,
-		   PortalName,
-		   FriendlyName
-	FROM   {objectQualifier}PortalDesktopModules
-		INNER JOIN {objectQualifier}vw_Portals ON {objectQualifier}PortalDesktopModules.PortalId = {objectQualifier}vw_Portals.PortalId
-		INNER JOIN {objectQualifier}DesktopModules ON {objectQualifier}PortalDesktopModules.DesktopModuleId = {objectQualifier}DesktopModules.DesktopModuleId
-	WHERE  (({objectQualifier}PortalDesktopModules.PortalId = @PortalId) OR @PortalId is null)
-		AND    (({objectQualifier}PortalDesktopModules.DesktopModuleId = @DesktopModuleId) OR @DesktopModuleId is null)
-	ORDER BY {objectQualifier}PortalDesktopModules.PortalId, {objectQualifier}PortalDesktopModules.DesktopModuleId
+    SELECT {objectQualifier}PortalDesktopModules.*,
+            PortalName,
+            FriendlyName
+    FROM   {objectQualifier}PortalDesktopModules
+        INNER JOIN {objectQualifier}vw_Portals ON {objectQualifier}PortalDesktopModules.PortalId = {objectQualifier}vw_Portals.PortalId
+        INNER JOIN {objectQualifier}DesktopModules ON {objectQualifier}PortalDesktopModules.DesktopModuleId = {objectQualifier}DesktopModules.DesktopModuleId
+    WHERE  (({objectQualifier}PortalDesktopModules.PortalId = @PortalId) OR @PortalId is null)
+        AND    (({objectQualifier}PortalDesktopModules.DesktopModuleId = @DesktopModuleId) OR @DesktopModuleId is null)
+    ORDER BY {objectQualifier}PortalDesktopModules.PortalId, {objectQualifier}PortalDesktopModules.DesktopModuleId
 
 GO
 

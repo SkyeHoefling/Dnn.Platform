@@ -3,4 +3,4 @@ UrlFormat,								advanced
 FriendlyAdminHostUrls,					true
 PageExtensionUsageType,					AlwaysUse
 ForceLowerCase,							true
-ReplaceSpaceWith,						
+ReplaceSpaceWith,

@@ -5,7 +5,7 @@ using Dnn.PersonaBar.Prompt.Components.Models;
 namespace Dnn.PersonaBar.Prompt.Components.Repositories
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public interface ICommandRepository
     {

@@ -8,8 +8,8 @@
 <script src="../../lib/codemirror.js"></script>
 <script src="asterisk.js"></script>
 <style>
-      .CodeMirror {border: 1px solid #999;}
-      .cm-s-default span.cm-arrow { color: red; }
+    .CodeMirror {border: 1px solid #999;}
+    .cm-s-default span.cm-arrow { color: red; }
     </style>
 <div id=nav>
   <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
@@ -85,7 +85,7 @@ exten => 1000,1,Goto(default,s,1)
 ; voicemail, etc.
 ;
 exten => 1234,1,Playback(transfer,skip)		; "Please hold while..."
-					; (but skip if channel is not up)
+                    ; (but skip if channel is not up)
 exten => 1234,n,Gosub(${EXTEN},stdexten(${GLOBAL(CONSOLE)}))
 exten => 1234,n,Goto(default,s,1)		; exited Voicemail
 
@@ -142,11 +142,11 @@ exten => 8500,n,Goto(s,6)
 
     </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: "text/x-asterisk",
         matchBrackets: true,
         lineNumber: true
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-asterisk</code>.</p>

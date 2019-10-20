@@ -7,10 +7,10 @@
     <WebsiteBinProvidersPath>$(WebsitePath)\bin\Providers</WebsiteBinProvidersPath>
     <WebsiteInstallPath>$(WebsitePath)\Install\Module</WebsiteInstallPath>
   </PropertyGroup>
-  
+
   <Import Project="$(BuildScriptsPath)\Package.Targets" />
   <Import Project="$(BuildScriptsPath)\Module.Build"/>
-  
+
   <PropertyGroup>
     <Extension>zip</Extension>
     <DNNFileName>Dnn.EditBar.UI</DNNFileName>
@@ -21,13 +21,13 @@
 
   <Target Name="GetFiles">
     <ItemGroup>
-      <EditBar-views Include=".\editBar\*.html" />
-      <EditBar-images Include=".\editBar\images\**\*" />
-      <EditBar-css Include=".\editBar\css\**\*" />
-      <EditBar-resources Include=".\editBar\App_LocalResources\*.resx" />
-      <EditBar-scripts Include=".\editBar\scripts\**\*" />
-      <EditBar-moduleResources Include=".\editBar\Resources\**\**\*.*" />
-      <Resources Include="@(EditBar-views);@(EditBar-images);@(EditBar-css);@(EditBar-scripts);@(EditBar-resources);@(EditBar-moduleResources)" />
+    <EditBar-views Include=".\editBar\*.html" />
+    <EditBar-images Include=".\editBar\images\**\*" />
+    <EditBar-css Include=".\editBar\css\**\*" />
+    <EditBar-resources Include=".\editBar\App_LocalResources\*.resx" />
+    <EditBar-scripts Include=".\editBar\scripts\**\*" />
+    <EditBar-moduleResources Include=".\editBar\Resources\**\**\*.*" />
+    <Resources Include="@(EditBar-views);@(EditBar-images);@(EditBar-css);@(EditBar-scripts);@(EditBar-resources);@(EditBar-moduleResources)" />
     </ItemGroup>
   </Target>
 

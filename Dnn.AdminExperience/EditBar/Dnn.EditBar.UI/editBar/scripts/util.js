@@ -5,8 +5,8 @@ define(['jquery'], function ($) {
             return {
                 loadResx: function(cb) {
                     var self = this;
-                    
-					self.sf.moduleRoot = 'editBar/common';
+
+                    self.sf.moduleRoot = 'editBar/common';
                     self.sf.controller = 'localization';
                     self.sf.getsilence('gettable', { culture: config.culture }, function (d) {
                         self.resx = d;
@@ -123,7 +123,7 @@ define(['jquery'], function ($) {
                         return this.moment(str, 'YYYY-MM-DD').toDate();
                     }
                 },
-                
+
                 serializeCustomDate: function (dateObj) {
                     if (this.moment) {
                         return this.moment(dateObj).format('YYYY-MM-DD');
@@ -144,17 +144,17 @@ define(['jquery'], function ($) {
 
 define('css',{
     load: function (name, require, load, config) {
-		function inject(filename)
-		{
-			var head = document.getElementsByTagName('head')[0];
-			var link = document.createElement('link');
-			link.href = filename;
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			head.appendChild(link);
-		}
+        function inject(filename)
+        {
+            var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = filename;
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            head.appendChild(link);
+        }
 
-		var path = name;
+        var path = name;
         for (var i in config.paths) {
             if (path.indexOf(i) === 0) {
                 path = path.replace(i, config.paths[i]);
@@ -171,7 +171,7 @@ define('css',{
         }
         inject(path);
 
-		load(true);
-	},
-	pluginBuilder: './css-build'
+        load(true);
+    },
+    pluginBuilder: './css-build'
 });;

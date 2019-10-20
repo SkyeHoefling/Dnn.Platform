@@ -1,125 +1,125 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
     <package name="DNN_HTML" type="Module">
-      <friendlyName>HTML</friendlyName>
-      <description>This module renders a block of HTML or Text content. The Html/Text module allows authorized users to edit the content either inline or in a separate administration page. Optional tokens can be used that get replaced dynamically during display. All versions of content are stored in the database including the ability to rollback to an older version.</description>
-      <iconFile>DesktopModules\HTML\Images\html.png</iconFile>
-      <owner>
+    <friendlyName>HTML</friendlyName>
+    <description>This module renders a block of HTML or Text content. The Html/Text module allows authorized users to edit the content either inline or in a separate administration page. Optional tokens can be used that get replaced dynamically during display. All versions of content are stored in the database including the ability to rollback to an older version.</description>
+    <iconFile>DesktopModules\HTML\Images\html.png</iconFile>
+    <owner>
         <name>DNN</name>
         <organization>DNN Corp.</organization>
         <url>http://www.dnnsoftware.com</url>
         <email>support@dnnsoftware.com</email>
-      </owner>
-      <license src="license.txt" />
-      <releaseNotes src="releaseNotes.txt" />
-      <azureCompatible>true</azureCompatible>
-      <dependencies>
+    </owner>
+    <license src="license.txt" />
+    <releaseNotes src="releaseNotes.txt" />
+    <azureCompatible>true</azureCompatible>
+    <dependencies>
         <dependency type="CoreVersion">09.01.00</dependency>
         <dependency type="package" version="09.01.00">DotNetNuke.Web.Deprecated</dependency>
-      </dependencies>
-      <components>
+    </dependencies>
+    <components>
         <component type="Script">
-          <scripts>
+        <scripts>
             <basePath>DesktopModules\HTML</basePath>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>03.00.00.SqlDataProvider</name>
-              <version>03.00.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>03.00.00.SqlDataProvider</name>
+            <version>03.00.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>03.01.00.SqlDataProvider</name>
-              <version>03.01.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>03.01.00.SqlDataProvider</name>
+            <version>03.01.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>04.05.00.SqlDataProvider</name>
-              <version>04.05.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>04.05.00.SqlDataProvider</name>
+            <version>04.05.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>04.06.00.SqlDataProvider</name>
-              <version>04.06.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>04.06.00.SqlDataProvider</name>
+            <version>04.06.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>04.06.01.SqlDataProvider</name>
-              <version>04.06.01</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>04.06.01.SqlDataProvider</name>
+            <version>04.06.01</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>04.07.00.SqlDataProvider</name>
-              <version>04.07.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>04.07.00.SqlDataProvider</name>
+            <version>04.07.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>04.08.01.SqlDataProvider</name>
-              <version>04.08.01</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>04.08.01.SqlDataProvider</name>
+            <version>04.08.01</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>05.01.00.SqlDataProvider</name>
-              <version>05.01.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>05.01.00.SqlDataProvider</name>
+            <version>05.01.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>05.01.02.SqlDataProvider</name>
-              <version>05.01.02</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>05.01.02.SqlDataProvider</name>
+            <version>05.01.02</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>05.01.03.SqlDataProvider</name>
-              <version>05.01.03</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>05.01.03.SqlDataProvider</name>
+            <version>05.01.03</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>05.01.04.SqlDataProvider</name>
-              <version>05.01.04</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>05.01.04.SqlDataProvider</name>
+            <version>05.01.04</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>05.02.00.SqlDataProvider</name>
-              <version>05.02.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>05.02.00.SqlDataProvider</name>
+            <version>05.02.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>05.05.00.SqlDataProvider</name>
-              <version>05.05.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>05.05.00.SqlDataProvider</name>
+            <version>05.05.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>06.01.00.SqlDataProvider</name>
-              <version>06.01.00</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>06.01.00.SqlDataProvider</name>
+            <version>06.01.00</version>
             </script>
             <script type="Install">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>07.02.01.SqlDataProvider</name>
-              <version>07.02.01</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>07.02.01.SqlDataProvider</name>
+            <version>07.02.01</version>
             </script>
             <script type="UnInstall">
-              <path>Providers\DataProviders\SqlDataProvider</path>
-              <name>Uninstall.SqlDataProvider</name>
-              <version>05.01.04</version>
+            <path>Providers\DataProviders\SqlDataProvider</path>
+            <name>Uninstall.SqlDataProvider</name>
+            <version>05.01.04</version>
             </script>
-          </scripts>
+        </scripts>
         </component>
         <component type="Module">
-          <desktopModule>
+        <desktopModule>
             <moduleName>DNN_HTML</moduleName>
             <foldername>HTML</foldername>
             <shareable>Supported</shareable>
             <businessControllerClass>DotNetNuke.Modules.Html.HtmlTextController, DotNetNuke.Modules.Html</businessControllerClass>
             <supportedFeatures>
-              <supportedFeature type="Portable" />
-              <supportedFeature type="Searchable" />
-              <supportedFeature type="Upgradeable" />
+            <supportedFeature type="Portable" />
+            <supportedFeature type="Searchable" />
+            <supportedFeature type="Upgradeable" />
             </supportedFeatures>
             <moduleDefinitions>
-              <moduleDefinition>
+            <moduleDefinition>
                 <friendlyName>Text/HTML</friendlyName>
                 <defaultCacheTime>1200</defaultCacheTime>
                 <moduleControls>
-                  <moduleControl>
+                <moduleControl>
                     <controlKey />
                     <controlSrc>DesktopModules/HTML/HtmlModule.ascx</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
@@ -128,8 +128,8 @@
                     <iconFile />
                     <helpUrl>http://www.dnnsoftware.com/help</helpUrl>
                     <viewOrder>0</viewOrder>
-                  </moduleControl>
-                  <moduleControl>
+                </moduleControl>
+                <moduleControl>
                     <controlKey>Edit</controlKey>
                     <controlSrc>DesktopModules/HTML/EditHTML.ascx</controlSrc>
                     <supportsPartialRendering>True</supportsPartialRendering>
@@ -139,8 +139,8 @@
                     <helpUrl>http://www.dnnsoftware.com/help</helpUrl>
                     <viewOrder>0</viewOrder>
                     <supportsPopUps>True</supportsPopUps>
-                  </moduleControl>
-                  <moduleControl>
+                </moduleControl>
+                <moduleControl>
                     <controlKey>MyWork</controlKey>
                     <controlSrc>DesktopModules/HTML/MyWork.ascx</controlSrc>
                     <supportsPartialRendering>True</supportsPartialRendering>
@@ -150,8 +150,8 @@
                     <helpUrl>http://www.dnnsoftware.com/help</helpUrl>
                     <viewOrder>0</viewOrder>
                     <supportsPopUps>True</supportsPopUps>
-                  </moduleControl>
-                  <moduleControl>
+                </moduleControl>
+                <moduleControl>
                     <controlKey>Settings</controlKey>
                     <controlSrc>DesktopModules/HTML/Settings.ascx</controlSrc>
                     <supportsPartialRendering>True</supportsPartialRendering>
@@ -160,36 +160,36 @@
                     <iconFile />
                     <helpUrl>http://www.dnnsoftware.com/help</helpUrl>
                     <viewOrder>0</viewOrder>
-                  </moduleControl>
+                </moduleControl>
                 </moduleControls>
-              </moduleDefinition>
+            </moduleDefinition>
             </moduleDefinitions>
-          </desktopModule>
-          <eventMessage>
+        </desktopModule>
+        <eventMessage>
             <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
             <processorCommand>UpgradeModule</processorCommand>
             <attributes>
-              <businessControllerClass>DotNetNuke.Modules.Html.HtmlTextController</businessControllerClass>
-              <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
-              <upgradeVersionsList>05.01.02,06.00.00,06.02.00</upgradeVersionsList>
+            <businessControllerClass>DotNetNuke.Modules.Html.HtmlTextController</businessControllerClass>
+            <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+            <upgradeVersionsList>05.01.02,06.00.00,06.02.00</upgradeVersionsList>
             </attributes>
-          </eventMessage>
+        </eventMessage>
         </component>
         <component type="Assembly">
-          <assemblies>
+        <assemblies>
             <assembly>
-              <path>bin</path>
-              <name>DotNetNuke.Modules.Html.dll</name>
+            <path>bin</path>
+            <name>DotNetNuke.Modules.Html.dll</name>
             </assembly>
-          </assemblies>
+        </assemblies>
         </component>
         <component type="ResourceFile">
-          <resourceFiles>
+        <resourceFiles>
             <basePath>DesktopModules/HTML</basePath>
             <resourceFile>
-              <name>Resources.zip</name>
+            <name>Resources.zip</name>
             </resourceFile>
-          </resourceFiles>
+        </resourceFiles>
         </component>
         <component type="Cleanup" version="04.05.00" fileName="04.05.00.txt" />
         <component type="Cleanup" version="04.06.00" fileName="04.06.00.txt" />
@@ -203,7 +203,7 @@
         <component type="Cleanup" version="05.02.00" fileName="05.02.00.txt" />
         <component type="Cleanup" version="05.04.03" fileName="05.04.03.txt" />
         <component type="Cleanup" version="07.03.00" fileName="07.03.00.txt" />
-      </components>
+    </components>
     </package>
   </packages>
 </dotnetnuke>

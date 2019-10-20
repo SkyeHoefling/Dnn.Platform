@@ -9,60 +9,60 @@
 /************************************************************/
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}Personabar_GetUsersByUserIds') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	DROP PROCEDURE {databaseOwner}{objectQualifier}Personabar_GetUsersByUserIds
+    DROP PROCEDURE {databaseOwner}{objectQualifier}Personabar_GetUsersByUserIds
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}Personabar_GetUsersByUserIds (
-	@PortalId INT,
-	@UserIds nvarchar(max) -- comma separated list of UserIds
+    @PortalId INT,
+    @UserIds nvarchar(max) -- comma separated list of UserIds
 ) AS
 BEGIN
-		SELECT DISTINCT U.UserID, U.Username, U.DisplayName, U.Email, U.CreatedOnDate, U.IsDeleted, U.Authorised
-		FROM {databaseOwner}{objectQualifier}vw_Users U WITH (NOLOCK)
-		INNER JOIN (Select RowValue FROM {databaseOwner}{objectQualifier}ConvertListToTable(',',@UserIds)) UserIds
-			ON U.UserID = UserIds.RowValue
-		INNER JOIN {databaseOwner}{objectQualifier}UserPortals UP WITH (NOLOCK)
-			ON U.UserID = UP.UserId
-		WHERE UP.PortalId = @PortalId
+        SELECT DISTINCT U.UserID, U.Username, U.DisplayName, U.Email, U.CreatedOnDate, U.IsDeleted, U.Authorised
+        FROM {databaseOwner}{objectQualifier}vw_Users U WITH (NOLOCK)
+        INNER JOIN (Select RowValue FROM {databaseOwner}{objectQualifier}ConvertListToTable(',',@UserIds)) UserIds
+            ON U.UserID = UserIds.RowValue
+        INNER JOIN {databaseOwner}{objectQualifier}UserPortals UP WITH (NOLOCK)
+            ON U.UserID = UP.UserId
+        WHERE UP.PortalId = @PortalId
 END
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}Personabar_GetUsers') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	DROP PROCEDURE {databaseOwner}{objectQualifier}Personabar_GetUsers
+    DROP PROCEDURE {databaseOwner}{objectQualifier}Personabar_GetUsers
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}Personabar_GetUsers (
-	@PortalId INT,
-	@SortColumn NVARCHAR(32),
-	@SortAscending BIT,
+    @PortalId INT,
+    @SortColumn NVARCHAR(32),
+    @SortAscending BIT,
     @PageIndex int = 0,
     @PageSize int = 10
 ) AS
 BEGIN
-	SELECT COUNT(*) AS TotalRecords
-	FROM {databaseOwner}{objectQualifier}UserPortals UP WITH (NOLOCK)
-	INNER JOIN {databaseOwner}{objectQualifier}Users U WITH (NOLOCK) ON UP.UserId = U.UserID
-	WHERE UP.PortalId = @PortalId
-	AND IsSuperUser = 0
-		
-	;WITH UsersCTE
-	AS
-	(	
-		SELECT U.UserID, U.Username, U.DisplayName, U.Email, U.CreatedOnDate, U.IsDeleted, U.Authorised,
-		ROW_NUMBER() OVER ( ORDER BY CASE WHEN @SortColumn = 'Joined' AND @SortAscending = 1 THEN U.UserID END ASC, 
-									 CASE WHEN @SortColumn = 'Joined' AND @SortAscending = 0 THEN U.UserID END DESC,
-									 CASE WHEN @SortColumn = 'Email' AND @SortAscending = 1 THEN U.Email END ASC, 
-									 CASE WHEN @SortColumn = 'Email' AND @SortAscending = 0 THEN U.Email END DESC,
-									 CASE WHEN @SortColumn = 'DisplayName' AND @SortAscending = 1 THEN U.DisplayName END ASC, 
-									 CASE WHEN @SortColumn = 'DisplayName' AND @SortAscending = 0 THEN U.DisplayName END DESC) AS RowNumber 
-		FROM {databaseOwner}{objectQualifier}vw_Users U WITH (NOLOCK)
-		INNER JOIN {databaseOwner}{objectQualifier}UserPortals UP WITH (NOLOCK)
-			ON U.UserID = UP.UserId
-		WHERE UP.PortalId = @PortalId
-		AND IsSuperUser = 0
-	)
-	SELECT * FROM UsersCTE
-	WHERE	RowNumber BETWEEN (@PageIndex * @PageSize + 1) AND ((@PageIndex + 1) * @PageSize);
+    SELECT COUNT(*) AS TotalRecords
+    FROM {databaseOwner}{objectQualifier}UserPortals UP WITH (NOLOCK)
+    INNER JOIN {databaseOwner}{objectQualifier}Users U WITH (NOLOCK) ON UP.UserId = U.UserID
+    WHERE UP.PortalId = @PortalId
+    AND IsSuperUser = 0
+
+    ;WITH UsersCTE
+    AS
+    (
+        SELECT U.UserID, U.Username, U.DisplayName, U.Email, U.CreatedOnDate, U.IsDeleted, U.Authorised,
+        ROW_NUMBER() OVER ( ORDER BY CASE WHEN @SortColumn = 'Joined' AND @SortAscending = 1 THEN U.UserID END ASC,
+                                    CASE WHEN @SortColumn = 'Joined' AND @SortAscending = 0 THEN U.UserID END DESC,
+                                    CASE WHEN @SortColumn = 'Email' AND @SortAscending = 1 THEN U.Email END ASC,
+                                    CASE WHEN @SortColumn = 'Email' AND @SortAscending = 0 THEN U.Email END DESC,
+                                    CASE WHEN @SortColumn = 'DisplayName' AND @SortAscending = 1 THEN U.DisplayName END ASC,
+                                    CASE WHEN @SortColumn = 'DisplayName' AND @SortAscending = 0 THEN U.DisplayName END DESC) AS RowNumber
+        FROM {databaseOwner}{objectQualifier}vw_Users U WITH (NOLOCK)
+        INNER JOIN {databaseOwner}{objectQualifier}UserPortals UP WITH (NOLOCK)
+            ON U.UserID = UP.UserId
+        WHERE UP.PortalId = @PortalId
+        AND IsSuperUser = 0
+    )
+    SELECT * FROM UsersCTE
+    WHERE	RowNumber BETWEEN (@PageIndex * @PageSize + 1) AND ((@PageIndex + 1) * @PageSize);
 END
 GO
 
@@ -74,10 +74,10 @@ GO
 /* Add SearchAllTables */
 /**********************************/
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SearchAllTables]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}SearchAllTables]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}SearchAllTables]
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SecurityAnalyzer_SearchAllTables]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_SearchAllTables]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_SearchAllTables]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_SearchAllTables]
@@ -99,7 +99,7 @@ BEGIN
 
     BEGIN
         SET @ColumnName = ''
-        SET @TableName = 
+        SET @TableName =
         (
             SELECT MIN(QUOTENAME(TABLE_SCHEMA) + '.' + QUOTENAME(TABLE_NAME))
             FROM     INFORMATION_SCHEMA.TABLES
@@ -108,8 +108,8 @@ BEGIN
                 AND    OBJECTPROPERTY(
                         OBJECT_ID(
                             QUOTENAME(TABLE_SCHEMA) + '.' + QUOTENAME(TABLE_NAME)
-                             ), 'IsMSShipped'
-                               ) = 0
+                            ), 'IsMSShipped'
+                                ) = 0
         )
 
         WHILE (@TableName IS NOT NULL) AND (@ColumnName IS NOT NULL)
@@ -131,12 +131,12 @@ BEGIN
                 INSERT INTO #Results
                 EXEC
                 (
-                    'SELECT ''' + @TableName + '.' + @ColumnName + ''', LEFT(' + @ColumnName + ', 3630) 
+                    'SELECT ''' + @TableName + '.' + @ColumnName + ''', LEFT(' + @ColumnName + ', 3630)
                     FROM ' + @TableName + 'WITH (NOLOCK) ' +
                     ' WHERE ' + @ColumnName + ' LIKE ' + @SearchStr2
                 )
             END
-        END    
+        END
     END
 
     SELECT ColumnName, ColumnValue FROM #Results
@@ -144,7 +144,7 @@ END
 
 GO
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModulesHasHeaderFooter]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModulesHasHeaderFooter]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModulesHasHeaderFooter]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModulesHasHeaderFooter]
@@ -156,7 +156,7 @@ END
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModifiedSettings]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModifiedSettings]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModifiedSettings]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}SecurityAnalyzer_GetModifiedSettings]
@@ -199,10 +199,10 @@ BEGIN
                         SettingValue ,
                         ms.LastModifiedByUserID ,
                         ms.LastModifiedOnDate
-              FROM      {databaseOwner}[{objectQualifier}ModuleSettings] ms
+            FROM      {databaseOwner}[{objectQualifier}ModuleSettings] ms
                         INNER JOIN {databaseOwner}[{objectQualifier}Modules] m ON m.ModuleID = ms.ModuleID
-              UNION
-              ( SELECT  'TabModule Settings' as Type,
+            UNION
+            ( SELECT  'TabModule Settings' as Type,
                         tm.ModuleID ,
                         m.PortalID ,
                         ts.SettingName ,
@@ -212,7 +212,7 @@ BEGIN
                 FROM    {databaseOwner}[{objectQualifier}TabModuleSettings] ts
                         INNER JOIN {databaseOwner}[{objectQualifier}TabModules] tm ON tm.TabModuleID = ts.TabModuleID
                         INNER JOIN {databaseOwner}[{objectQualifier}Modules] m ON m.ModuleID = tm.ModuleID
-              )
+            )
             ) T
             INNER JOIN {databaseOwner}[{objectQualifier}Modules] m ON m.ModuleID = T.ModuleID
     ORDER BY T.LastModifiedOnDate DESC;

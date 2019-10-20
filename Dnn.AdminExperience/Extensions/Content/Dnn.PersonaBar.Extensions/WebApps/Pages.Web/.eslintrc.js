@@ -34,7 +34,7 @@ module.exports = {
         },
         "ecmaVersion": 2018,
         "sourceType": "module"
-    },        
+    },
     "globals": {
         "__": false,
         "Promise": false,
@@ -44,18 +44,18 @@ module.exports = {
         "it" : false,
         "expect" :false
     },
-    "rules": {            
-      "semi": "error",
-      "no-var": "error",
-      "indent": ["warn", 4, {"SwitchCase": 1}],
-      "no-unused-vars": "warn",
-      "no-console": "warn",      
-      "keyword-spacing": "warn", 
-      "eqeqeq": ["warn", "smart"],
-      "space-before-function-paren": ["warn", { "anonymous": "always", "named": "never" }],
-      "space-before-blocks": "warn",
-      "no-multiple-empty-lines":  "warn",
-      "react/jsx-equals-spacing": ["warn", "never"],
-      "id-match": ["error", "^([A-Za-z0-9_])+$", {"properties": true}]
+    "rules": {
+    "semi": "error",
+    "no-var": "error",
+    "indent": ["warn", 4, {"SwitchCase": 1}],
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "keyword-spacing": "warn",
+    "eqeqeq": ["warn", "smart"],
+    "space-before-function-paren": ["warn", { "anonymous": "always", "named": "never" }],
+    "space-before-blocks": "warn",
+    "no-multiple-empty-lines":  "warn",
+    "react/jsx-equals-spacing": ["warn", "never"],
+    "id-match": ["error", "^([A-Za-z0-9_])+$", {"properties": true}]
     }
 };

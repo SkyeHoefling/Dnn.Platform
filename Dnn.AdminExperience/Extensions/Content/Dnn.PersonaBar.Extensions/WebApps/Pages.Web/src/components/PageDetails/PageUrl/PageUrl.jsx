@@ -9,7 +9,7 @@ import styles from "./style.less";
 
 class PageUrl extends Component {
 
-    getDetail(pageType) {        
+    getDetail(pageType) {
         switch (pageType) {
             case "tab":
                 return PageExisting;
@@ -17,9 +17,9 @@ class PageUrl extends Component {
                 return PageExternalUrl;
             case "file":
                 return PageFile;
-            default: 
-                throw "invalid page type";                                                                        
-        }        
+            default:
+                throw "invalid page type";
+        }
     }
 
     render() {

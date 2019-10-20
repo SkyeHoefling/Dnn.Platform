@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -73,15 +73,15 @@ namespace DotNetNuke.Services.Install
             }
             Response.Write("<h2>Execution Complete</h2>");
             Response.Flush();
-            
+
             //Write out Footer
             HtmlUtils.WriteFooter(Response);
         }
 
         private void InstallApplication()
         {
-            //the application uses a two step installation process. The first step is used to update 
-            //the Web.config with any configuration settings - which forces an application restart. 
+            //the application uses a two step installation process. The first step is used to update
+            //the Web.config with any configuration settings - which forces an application restart.
             //The second step finishes the installation process and provisions the site.
 
             string installationDate = Config.GetSetting("InstallationDate");
@@ -158,14 +158,14 @@ namespace DotNetNuke.Services.Install
 
                         var licenseConfig = installConfig.License;
                         bool IsProOrEnterprise = (File.Exists(HttpContext.Current.Server.MapPath("~\\bin\\DotNetNuke.Professional.dll")) ||
-                                                  File.Exists(HttpContext.Current.Server.MapPath("~\\bin\\DotNetNuke.Enterprise.dll")));
+                                                File.Exists(HttpContext.Current.Server.MapPath("~\\bin\\DotNetNuke.Enterprise.dll")));
                         if (IsProOrEnterprise && licenseConfig != null && !String.IsNullOrEmpty(licenseConfig.AccountEmail) &&
                             !String.IsNullOrEmpty(licenseConfig.InvoiceNumber))
                         {
                             Upgrade.Upgrade.ActivateLicense();
                         }
 
-                        //Adding ClientDependency Resources config to web.config                    
+                        //Adding ClientDependency Resources config to web.config
                         if (!ClientResourceManager.IsInstalled())
                         {
                             ClientResourceManager.AddConfiguration();
@@ -210,7 +210,7 @@ namespace DotNetNuke.Services.Install
                 }
             }
         }
-        
+
         private static void RegisterInstallBegining()
         {
             InstallBlocker.Instance.RegisterInstallBegining();
@@ -220,7 +220,7 @@ namespace DotNetNuke.Services.Install
         {
             InstallBlocker.Instance.RegisterInstallEnd();
         }
-        
+
         private void WriteInstallationHeader()
         {
             Response.Write("<h2>Version: " + Globals.FormatVersion(DotNetNukeContext.Current.Application.Version) + "</h2>");
@@ -251,7 +251,7 @@ namespace DotNetNuke.Services.Install
         }
 
         private void UpgradeApplication()
-        { 
+        {
             try
             {
                 if (Upgrade.Upgrade.RemoveInvalidAntiForgeryCookie())
@@ -603,7 +603,7 @@ namespace DotNetNuke.Services.Install
                 }
 
                 //restore Script timeout
-                Server.ScriptTimeout = scriptTimeOut;                
+                Server.ScriptTimeout = scriptTimeOut;
             }
         }
         #endregion

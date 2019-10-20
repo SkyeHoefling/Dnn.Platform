@@ -1,7 +1,7 @@
 import ActionTypes from "../constants/actionTypes/visiblePanelActionTypes";
 
-const visiblePanelActions = {    
-    showPanel(panelId) {        
+const visiblePanelActions = {
+    showPanel(panelId) {
         return (dispatch) => {
             dispatch({
                 type: ActionTypes.SHOW_PANEL,
@@ -15,7 +15,7 @@ const visiblePanelActions = {
                 type: ActionTypes.HIDE_PANEL,
                 data: {}
             });
-        };       
+        };
     }
 };
 export default visiblePanelActions;

@@ -22,15 +22,15 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
     var operator = kw("operator"), atom = {type: "atom", style: "atom"}, attribute = {type:"attribute", style: "attribute"};
   var type = kw("typedef");
     return {
-      "if": A, "while": A, "else": B, "do": B, "try": B,
-      "return": C, "break": C, "continue": C, "new": C, "throw": C,
-      "var": kw("var"), "inline":attribute, "static": attribute, "using":kw("import"),
+    "if": A, "while": A, "else": B, "do": B, "try": B,
+    "return": C, "break": C, "continue": C, "new": C, "throw": C,
+    "var": kw("var"), "inline":attribute, "static": attribute, "using":kw("import"),
     "public": attribute, "private": attribute, "cast": kw("cast"), "import": kw("import"), "macro": kw("macro"),
-      "function": kw("function"), "catch": kw("catch"), "untyped": kw("untyped"), "callback": kw("cb"),
-      "for": kw("for"), "switch": kw("switch"), "case": kw("case"), "default": kw("default"),
-      "in": operator, "never": kw("property_access"), "trace":kw("trace"),
+    "function": kw("function"), "catch": kw("catch"), "untyped": kw("untyped"), "callback": kw("cb"),
+    "for": kw("for"), "switch": kw("switch"), "case": kw("case"), "default": kw("default"),
+    "in": operator, "never": kw("property_access"), "trace":kw("trace"),
     "class": type, "abstract":type, "enum":type, "interface":type, "typedef":type, "extends":type, "implements":type, "dynamic":type,
-      "true": atom, "false": atom, "null": atom
+    "true": atom, "false": atom, "null": atom
     };
   }();
 
@@ -44,9 +44,9 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   function nextUntilUnescaped(stream, end) {
     var escaped = false, next;
     while ((next = stream.next()) != null) {
-      if (next == end && !escaped)
+    if (next == end && !escaped)
         return false;
-      escaped = !escaped && next == "\\";
+    escaped = !escaped && next == "\\";
     }
     return escaped;
   }
@@ -62,82 +62,82 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   function haxeTokenBase(stream, state) {
     var ch = stream.next();
     if (ch == '"' || ch == "'")
-      return chain(stream, state, haxeTokenString(ch));
+    return chain(stream, state, haxeTokenString(ch));
     else if (/[\[\]{}\(\),;\:\.]/.test(ch))
-      return ret(ch);
+    return ret(ch);
     else if (ch == "0" && stream.eat(/x/i)) {
-      stream.eatWhile(/[\da-f]/i);
-      return ret("number", "number");
+    stream.eatWhile(/[\da-f]/i);
+    return ret("number", "number");
     }
     else if (/\d/.test(ch) || ch == "-" && stream.eat(/\d/)) {
-      stream.match(/^\d*(?:\.\d*)?(?:[eE][+\-]?\d+)?/);
-      return ret("number", "number");
+    stream.match(/^\d*(?:\.\d*)?(?:[eE][+\-]?\d+)?/);
+    return ret("number", "number");
     }
     else if (state.reAllowed && (ch == "~" && stream.eat(/\//))) {
-      nextUntilUnescaped(stream, "/");
-      stream.eatWhile(/[gimsu]/);
-      return ret("regexp", "string-2");
+    nextUntilUnescaped(stream, "/");
+    stream.eatWhile(/[gimsu]/);
+    return ret("regexp", "string-2");
     }
     else if (ch == "/") {
-      if (stream.eat("*")) {
+    if (stream.eat("*")) {
         return chain(stream, state, haxeTokenComment);
-      }
-      else if (stream.eat("/")) {
+    }
+    else if (stream.eat("/")) {
         stream.skipToEnd();
         return ret("comment", "comment");
-      }
-      else {
+    }
+    else {
         stream.eatWhile(isOperatorChar);
         return ret("operator", null, stream.current());
-      }
+    }
     }
     else if (ch == "#") {
         stream.skipToEnd();
         return ret("conditional", "meta");
     }
     else if (ch == "@") {
-      stream.eat(/:/);
-      stream.eatWhile(/[\w_]/);
-      return ret ("metadata", "meta");
+    stream.eat(/:/);
+    stream.eatWhile(/[\w_]/);
+    return ret ("metadata", "meta");
     }
     else if (isOperatorChar.test(ch)) {
-      stream.eatWhile(isOperatorChar);
-      return ret("operator", null, stream.current());
+    stream.eatWhile(isOperatorChar);
+    return ret("operator", null, stream.current());
     }
     else {
     var word;
     if(/[A-Z]/.test(ch))
     {
-      stream.eatWhile(/[\w_<>]/);
-      word = stream.current();
-      return ret("type", "variable-3", word);
+    stream.eatWhile(/[\w_<>]/);
+    word = stream.current();
+    return ret("type", "variable-3", word);
     }
     else
     {
         stream.eatWhile(/[\w_]/);
         var word = stream.current(), known = keywords.propertyIsEnumerable(word) && keywords[word];
         return (known && state.kwAllowed) ? ret(known.type, known.style, word) :
-                       ret("variable", "variable", word);
+                        ret("variable", "variable", word);
     }
     }
   }
 
   function haxeTokenString(quote) {
     return function(stream, state) {
-      if (!nextUntilUnescaped(stream, quote))
+    if (!nextUntilUnescaped(stream, quote))
         state.tokenize = haxeTokenBase;
-      return ret("string", "string");
+    return ret("string", "string");
     };
   }
 
   function haxeTokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+    if (ch == "/" && maybeEnd) {
         state.tokenize = haxeTokenBase;
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return ret("comment", "comment");
   }
@@ -157,7 +157,7 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
 
   function inScope(state, varname) {
     for (var v = state.localVars; v; v = v.next)
-      if (v.name == varname) return true;
+    if (v.name == varname) return true;
   }
 
   function parseHaxe(state, style, type, content, stream) {
@@ -167,18 +167,18 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
     cx.state = state; cx.stream = stream; cx.marked = null, cx.cc = cc;
 
     if (!state.lexical.hasOwnProperty("align"))
-      state.lexical.align = true;
+    state.lexical.align = true;
 
     while(true) {
-      var combinator = cc.length ? cc.pop() : statement;
-      if (combinator(type, content)) {
+    var combinator = cc.length ? cc.pop() : statement;
+    if (combinator(type, content)) {
         while(cc.length && cc[cc.length - 1].lex)
-          cc.pop()();
+        cc.pop()();
         if (cx.marked) return cx.marked;
         if (type == "variable" && inScope(state, content)) return "variable-2";
     if (type == "variable" && imported(state, content)) return "variable-3";
         return style;
-      }
+    }
     }
   }
 
@@ -211,10 +211,10 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   function register(varname) {
     var state = cx.state;
     if (state.context) {
-      cx.marked = "def";
-      for (var v = state.localVars; v; v = v.next)
+    cx.marked = "def";
+    for (var v = state.localVars; v; v = v.next)
         if (v.name == varname) return;
-      state.localVars = {name: varname, next: state.localVars};
+    state.localVars = {name: varname, next: state.localVars};
     }
   }
 
@@ -231,8 +231,8 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   }
   function pushlex(type, info) {
     var result = function() {
-      var state = cx.state;
-      state.lexical = new HaxeLexical(state.indented, cx.stream.column(), type, null, state.lexical, info);
+    var state = cx.state;
+    state.lexical = new HaxeLexical(state.indented, cx.stream.column(), type, null, state.lexical, info);
     };
     result.lex = true;
     return result;
@@ -240,18 +240,18 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   function poplex() {
     var state = cx.state;
     if (state.lexical.prev) {
-      if (state.lexical.type == ")")
+    if (state.lexical.type == ")")
         state.indented = state.lexical.indented;
-      state.lexical = state.lexical.prev;
+    state.lexical = state.lexical.prev;
     }
   }
   poplex.lex = true;
 
   function expect(wanted) {
     function f(type) {
-      if (type == wanted) return cont();
-      else if (wanted == ";") return pass();
-      else return cont(f);
+    if (type == wanted) return cont();
+    else if (wanted == ";") return pass();
+    else return cont(f);
     };
     return f;
   }
@@ -266,10 +266,10 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
     if (type == "attribute") return cont(maybeattribute);
     if (type == "function") return cont(functiondef);
     if (type == "for") return cont(pushlex("form"), expect("("), pushlex(")"), forspec1, expect(")"),
-                                      poplex, statement, poplex);
+                                    poplex, statement, poplex);
     if (type == "variable") return cont(pushlex("stat"), maybelabel);
     if (type == "switch") return cont(pushlex("form"), expression, pushlex("}", "switch"), expect("{"),
-                                         block, poplex, poplex);
+                                        block, poplex, poplex);
     if (type == "case") return cont(expression, expect(":"));
     if (type == "default") return cont(expect(":"));
     if (type == "catch") return cont(pushlex("form"), pushcontext, expect("("), funarg, expect(")"),
@@ -341,13 +341,13 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   }
   function commasep(what, end) {
     function proceed(type) {
-      if (type == ",") return cont(what, proceed);
-      if (type == end) return cont();
-      return cont(expect(end));
+    if (type == ",") return cont(what, proceed);
+    if (type == end) return cont();
+    return cont(expect(end));
     }
     return function(type) {
-      if (type == end) return cont();
-      else return pass(what, proceed);
+    if (type == end) return cont();
+    else return pass(what, proceed);
     };
   }
   function block(type) {
@@ -396,7 +396,7 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
   return {
     startState: function(basecolumn) {
     var defaulttypes = ["Int", "Float", "String", "Void", "Std", "Bool", "Dynamic", "Array"];
-      return {
+    return {
         tokenize: haxeTokenBase,
         reAllowed: true,
         kwAllowed: true,
@@ -406,35 +406,35 @@ CodeMirror.defineMode("haxe", function(config, parserConfig) {
     importedtypes: defaulttypes,
         context: parserConfig.localVars && {vars: parserConfig.localVars},
         indented: 0
-      };
+    };
     },
 
     token: function(stream, state) {
-      if (stream.sol()) {
+    if (stream.sol()) {
         if (!state.lexical.hasOwnProperty("align"))
-          state.lexical.align = false;
+        state.lexical.align = false;
         state.indented = stream.indentation();
-      }
-      if (stream.eatSpace()) return null;
-      var style = state.tokenize(stream, state);
-      if (type == "comment") return style;
-      state.reAllowed = !!(type == "operator" || type == "keyword c" || type.match(/^[\[{}\(,;:]$/));
-      state.kwAllowed = type != '.';
-      return parseHaxe(state, style, type, content, stream);
+    }
+    if (stream.eatSpace()) return null;
+    var style = state.tokenize(stream, state);
+    if (type == "comment") return style;
+    state.reAllowed = !!(type == "operator" || type == "keyword c" || type.match(/^[\[{}\(,;:]$/));
+    state.kwAllowed = type != '.';
+    return parseHaxe(state, style, type, content, stream);
     },
 
     indent: function(state, textAfter) {
-      if (state.tokenize != haxeTokenBase) return 0;
-      var firstChar = textAfter && textAfter.charAt(0), lexical = state.lexical;
-      if (lexical.type == "stat" && firstChar == "}") lexical = lexical.prev;
-      var type = lexical.type, closing = firstChar == type;
-      if (type == "vardef") return lexical.indented + 4;
-      else if (type == "form" && firstChar == "{") return lexical.indented;
-      else if (type == "stat" || type == "form") return lexical.indented + indentUnit;
-      else if (lexical.info == "switch" && !closing)
+    if (state.tokenize != haxeTokenBase) return 0;
+    var firstChar = textAfter && textAfter.charAt(0), lexical = state.lexical;
+    if (lexical.type == "stat" && firstChar == "}") lexical = lexical.prev;
+    var type = lexical.type, closing = firstChar == type;
+    if (type == "vardef") return lexical.indented + 4;
+    else if (type == "form" && firstChar == "{") return lexical.indented;
+    else if (type == "stat" || type == "form") return lexical.indented + indentUnit;
+    else if (lexical.info == "switch" && !closing)
         return lexical.indented + (/^(?:case|default)\b/.test(textAfter) ? indentUnit : 2 * indentUnit);
-      else if (lexical.align) return lexical.column + (closing ? 0 : 1);
-      else return lexical.indented + (closing ? 0 : indentUnit);
+    else if (lexical.align) return lexical.column + (closing ? 0 : 1);
+    else return lexical.indented + (closing ? 0 : indentUnit);
     },
 
     electricChars: "{}",
@@ -450,64 +450,64 @@ CodeMirror.defineMode("hxml", function () {
 
   return {
     startState: function () {
-      return {
+    return {
         define: false,
         inString: false
-      };
+    };
     },
     token: function (stream, state) {
-      var ch = stream.peek();
-      var sol = stream.sol();
+    var ch = stream.peek();
+    var sol = stream.sol();
 
-      ///* comments */
-      if (ch == "#") {
+    ///* comments */
+    if (ch == "#") {
         stream.skipToEnd();
         return "comment";
-      }
-      if (sol && ch == "-") {
+    }
+    if (sol && ch == "-") {
         var style = "variable-2";
 
         stream.eat(/-/);
 
         if (stream.peek() == "-") {
-          stream.eat(/-/);
-          style = "keyword a";
+        stream.eat(/-/);
+        style = "keyword a";
         }
 
         if (stream.peek() == "D") {
-          stream.eat(/[D]/);
-          style = "keyword c";
-          state.define = true;
+        stream.eat(/[D]/);
+        style = "keyword c";
+        state.define = true;
         }
 
         stream.eatWhile(/[A-Z]/i);
         return style;
-      }
+    }
 
-      var ch = stream.peek();
+    var ch = stream.peek();
 
-      if (state.inString == false && ch == "'") {
+    if (state.inString == false && ch == "'") {
         state.inString = true;
         ch = stream.next();
-      }
+    }
 
-      if (state.inString == true) {
+    if (state.inString == true) {
         if (stream.skipTo("'")) {
 
         } else {
-          stream.skipToEnd();
+        stream.skipToEnd();
         }
 
         if (stream.peek() == "'") {
-          stream.next();
-          state.inString = false;
+        stream.next();
+        state.inString = false;
         }
 
         return "string";
-      }
+    }
 
-      stream.next();
-      return null;
+    stream.next();
+    return null;
     },
     lineComment: "#"
   };

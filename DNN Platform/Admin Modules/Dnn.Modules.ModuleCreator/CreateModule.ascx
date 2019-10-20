@@ -21,7 +21,7 @@
                 <dnn:Label ID="plLanguage" ControlName="optLanguage" runat="server" />
                 <asp:RadioButtonList ID="optLanguage" CssClass="dnnFormRadioButtons" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" AutoPostBack="True" />
             </div>
-           <div class="dnnFormItem">
+            <div class="dnnFormItem">
                 <dnn:Label ID="plTemplate" ControlName="cboTemplate" runat="server" />
                 <asp:DropDownList ID="cboTemplate" runat="server" AutoPostBack="True" />
             </div>
@@ -38,4 +38,3 @@
         </div>
     </asp:PlaceHolder>
 </div>
-

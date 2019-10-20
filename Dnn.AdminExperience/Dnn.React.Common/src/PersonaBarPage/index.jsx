@@ -9,11 +9,11 @@ const getClassName = function (className, isOpen, fullWidth) {
 const PersonaBarPage = ({className, isOpen, children, fullWidth}) => (
     <div className={getClassName(className, isOpen, fullWidth)}>
         {children}
-    </div> 
+    </div>
 );
 
 PersonaBarPage.propTypes = {
-    isOpen: PropTypes.bool.isRequired, 
+    isOpen: PropTypes.bool.isRequired,
     className: PropTypes.string,
     children: PropTypes.node,
     fullWidth: PropTypes.bool

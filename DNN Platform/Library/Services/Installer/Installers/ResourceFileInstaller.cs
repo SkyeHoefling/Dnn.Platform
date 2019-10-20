@@ -126,7 +126,7 @@ namespace DotNetNuke.Services.Installer.Installers
             try
             {
                 Log.AddInfo(Util.FILES_Expanding);
-                //Create the folder for destination            
+                //Create the folder for destination
                 _Manifest = insFile.Name + ".manifest";
                 if (!Directory.Exists(PhysicalBasePath))
                 {

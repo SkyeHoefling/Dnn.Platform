@@ -13,24 +13,24 @@
 
   CodeMirror.defineOption("foldGutter", false, function(cm, val, old) {
     if (old && old != CodeMirror.Init) {
-      cm.clearGutter(cm.state.foldGutter.options.gutter);
-      cm.state.foldGutter = null;
-      cm.off("gutterClick", onGutterClick);
-      cm.off("change", onChange);
-      cm.off("viewportChange", onViewportChange);
-      cm.off("fold", onFold);
-      cm.off("unfold", onFold);
-      cm.off("swapDoc", updateInViewport);
+    cm.clearGutter(cm.state.foldGutter.options.gutter);
+    cm.state.foldGutter = null;
+    cm.off("gutterClick", onGutterClick);
+    cm.off("change", onChange);
+    cm.off("viewportChange", onViewportChange);
+    cm.off("fold", onFold);
+    cm.off("unfold", onFold);
+    cm.off("swapDoc", updateInViewport);
     }
     if (val) {
-      cm.state.foldGutter = new State(parseOptions(val));
-      updateInViewport(cm);
-      cm.on("gutterClick", onGutterClick);
-      cm.on("change", onChange);
-      cm.on("viewportChange", onViewportChange);
-      cm.on("fold", onFold);
-      cm.on("unfold", onFold);
-      cm.on("swapDoc", updateInViewport);
+    cm.state.foldGutter = new State(parseOptions(val));
+    updateInViewport(cm);
+    cm.on("gutterClick", onGutterClick);
+    cm.on("change", onChange);
+    cm.on("viewportChange", onViewportChange);
+    cm.on("fold", onFold);
+    cm.on("unfold", onFold);
+    cm.on("swapDoc", updateInViewport);
     }
   });
 
@@ -52,16 +52,16 @@
   function isFolded(cm, line) {
     var marks = cm.findMarksAt(Pos(line));
     for (var i = 0; i < marks.length; ++i)
-      if (marks[i].__isFold && marks[i].find().from.line == line) return marks[i];
+    if (marks[i].__isFold && marks[i].find().from.line == line) return marks[i];
   }
 
   function marker(spec) {
     if (typeof spec == "string") {
-      var elt = document.createElement("div");
-      elt.className = spec + " CodeMirror-guttermarker-subtle";
-      return elt;
+    var elt = document.createElement("div");
+    elt.className = spec + " CodeMirror-guttermarker-subtle";
+    return elt;
     } else {
-      return spec.cloneNode(true);
+    return spec.cloneNode(true);
     }
   }
 
@@ -70,17 +70,17 @@
     var minSize = cm.foldOption(opts, "minFoldSize");
     var func = cm.foldOption(opts, "rangeFinder");
     cm.eachLine(from, to, function(line) {
-      var mark = null;
-      if (isFolded(cm, cur)) {
+    var mark = null;
+    if (isFolded(cm, cur)) {
         mark = marker(opts.indicatorFolded);
-      } else {
+    } else {
         var pos = Pos(cur, 0);
         var range = func && func(cm, pos);
         if (range && range.to.line - range.from.line >= minSize)
-          mark = marker(opts.indicatorOpen);
-      }
-      cm.setGutterMarker(line, opts.gutter, mark);
-      ++cur;
+        mark = marker(opts.indicatorOpen);
+    }
+    cm.setGutterMarker(line, opts.gutter, mark);
+    ++cur;
     });
   }
 
@@ -88,7 +88,7 @@
     var vp = cm.getViewport(), state = cm.state.foldGutter;
     if (!state) return;
     cm.operation(function() {
-      updateFoldInfo(cm, vp.from, vp.to);
+    updateFoldInfo(cm, vp.from, vp.to);
     });
     state.from = vp.from; state.to = vp.to;
   }
@@ -118,21 +118,21 @@
     var opts = state.options;
     clearTimeout(state.changeUpdate);
     state.changeUpdate = setTimeout(function() {
-      var vp = cm.getViewport();
-      if (state.from == state.to || vp.from - state.to > 20 || state.from - vp.to > 20) {
+    var vp = cm.getViewport();
+    if (state.from == state.to || vp.from - state.to > 20 || state.from - vp.to > 20) {
         updateInViewport(cm);
-      } else {
+    } else {
         cm.operation(function() {
-          if (vp.from < state.from) {
+        if (vp.from < state.from) {
             updateFoldInfo(cm, vp.from, state.from);
             state.from = vp.from;
-          }
-          if (vp.to > state.to) {
+        }
+        if (vp.to > state.to) {
             updateFoldInfo(cm, state.to, vp.to);
             state.to = vp.to;
-          }
+        }
         });
-      }
+    }
     }, opts.updateViewportTimeSpan || 400);
   }
 
@@ -141,6 +141,6 @@
     if (!state) return;
     var line = from.line;
     if (line >= state.from && line < state.to)
-      updateFoldInfo(cm, line, line + 1);
+    updateFoldInfo(cm, line, line + 1);
   }
 });

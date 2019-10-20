@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -62,7 +62,7 @@ namespace DotNetNuke.Entities.Icons
     /// </remarks>
     public class IconController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (IconController));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (IconController));
         #region Constants
 
         public const string DefaultIconSize = "16X16";
@@ -78,7 +78,7 @@ namespace DotNetNuke.Entities.Icons
         /// <summary>
         /// Gets the Icon URL.
         /// </summary>
-        /// <param name="key">Key to icon, e.g. edit</param>        
+        /// <param name="key">Key to icon, e.g. edit</param>
         /// <returns>Link to the image, e.g. /Icons/Sigma/edit_16x16_standard.png</returns>
         public static string IconURL(string key)
         {
@@ -88,7 +88,7 @@ namespace DotNetNuke.Entities.Icons
         /// <summary>
         /// Gets the Icon URL.
         /// </summary>
-        /// <param name="key">Key to icon, e.g. edit</param>        
+        /// <param name="key">Key to icon, e.g. edit</param>
         /// <param name="size">Size of icon, e.g.16x16 (default) or 32x32</param>
         /// <returns>Link to the image, e.g. /Icons/Sigma/edit_16x16_standard.png</returns>
         public static string IconURL(string key, string size)
@@ -99,16 +99,16 @@ namespace DotNetNuke.Entities.Icons
         /// <summary>
         /// Gets the Icon URL.
         /// </summary>
-        /// <param name="key">Key to icon, e.g. edit</param>        
+        /// <param name="key">Key to icon, e.g. edit</param>
         /// <param name="size">Size of icon, e.g.16x16 (default) or 32x32</param>
         /// <param name="style">Style of icon, e.g. Standard (default)</param>
         /// <returns>Link to the image, e.g. /Icons/Sigma/edit_16x16_standard.png</returns>
         public static string IconURL(string key, string size, string style)
         {
-            if (string.IsNullOrEmpty(key)) 
+            if (string.IsNullOrEmpty(key))
                 return string.Empty;
 
-            if (string.IsNullOrEmpty(size)) 
+            if (string.IsNullOrEmpty(size))
                 size = DefaultIconSize;
 
             if (string.IsNullOrEmpty(style))
@@ -134,10 +134,10 @@ namespace DotNetNuke.Entities.Icons
 
         private static readonly SharedDictionary<string, bool> _iconsStatusOnDisk = new SharedDictionary<string, bool>();
         private static void CheckIconOnDisk(string path)
-        {            
+        {
             using (_iconsStatusOnDisk.GetReadLock())
-            {                
-                if (_iconsStatusOnDisk.ContainsKey(path)) 
+            {
+                if (_iconsStatusOnDisk.ContainsKey(path))
                     return;
             }
 
@@ -147,10 +147,10 @@ namespace DotNetNuke.Entities.Icons
                 {
                     _iconsStatusOnDisk.Add(path, true);
                     string iconPhysicalPath = Path.Combine(Globals.ApplicationMapPath, path.Replace('/', '\\'));
-                    if (!File.Exists(iconPhysicalPath)) 
-						Logger.WarnFormat(string.Format("Icon Not Present on Disk {0}", iconPhysicalPath));
+                    if (!File.Exists(iconPhysicalPath))
+                        Logger.WarnFormat(string.Format("Icon Not Present on Disk {0}", iconPhysicalPath));
                 }
-            }            
+            }
         }
 
         public static string[] GetIconSets()

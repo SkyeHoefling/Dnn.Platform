@@ -93,7 +93,7 @@ namespace Dnn.ExportImport.Components.Services
                 if (CheckCancelled(exportJob)) return;
                 if (roleSettings == null)
                     roleSettings = CBO.FillCollection<ExportRoleSetting>(
-                       DataProvider.Instance().GetAllRoleSettings(exportJob.PortalId, toDate, fromDate));
+                        DataProvider.Instance().GetAllRoleSettings(exportJob.PortalId, toDate, fromDate));
                 Repository.CreateItems(roleSettings);
                 Result.AddSummary("Exported Role Settings", roleSettings.Count.ToString());
                 CheckPoint.Progress = 100;
@@ -156,7 +156,7 @@ namespace Dnn.ExportImport.Components.Services
         public override int GetImportTotal()
         {
             return Repository.GetCount<ExportRoleGroup>() + Repository.GetCount<ExportRole>() +
-                   Repository.GetCount<ExportRoleSetting>();
+                    Repository.GetCount<ExportRoleSetting>();
         }
 
         private void ProcessRoleGroups(ExportImportJob importJob, ImportDto importDto,

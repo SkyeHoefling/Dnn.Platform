@@ -105,7 +105,7 @@ namespace DotNetNuke.Entities.Modules.Settings
             if (mapping == null)
             {
                 mapping = this.CreateMapping();
-                // HARDCODED: 2 hour expiration. 
+                // HARDCODED: 2 hour expiration.
                 // Note that "caching" can also be accomplished with a static dictionary since the Attribute/Property mapping does not change unless the module is updated.
                 CachingProvider.Instance().Insert(cacheKey, mapping, (DNNCacheDependency)null, DateTime.Now.AddHours(2), Cache.NoSlidingExpiration);
             }
@@ -273,9 +273,9 @@ namespace DotNetNuke.Entities.Modules.Settings
             {
                 // TODO: Localize exception
                 throw new InvalidCastException(string.Format(CultureInfo.CurrentUICulture, "Could not cast {0} to property {1} of type {2}",
-                                                             propertyValue,
-                                                             property.Name,
-                                                             property.PropertyType), exception);
+                                                            propertyValue,
+                                                            property.Name,
+                                                            property.PropertyType), exception);
             }
         }
 

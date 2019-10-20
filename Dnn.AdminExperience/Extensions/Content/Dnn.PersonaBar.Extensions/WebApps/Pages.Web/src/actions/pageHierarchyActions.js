@@ -5,7 +5,7 @@ const pageHierarchyActions = {
         return {
             type: ActionTypes.SET_SEARCH_KEYWORD,
             searchKeyword
-        };    
+        };
     },
 
     setItemTemplate(itemTemplate) {

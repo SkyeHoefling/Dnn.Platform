@@ -11,7 +11,7 @@ IF (EXISTS (SELECT name FROM sysobjects WHERE (name = N'{objectQualifier}Dashboa
 GO
 
 IF (EXISTS (SELECT name FROM sysobjects WHERE (name = N'{objectQualifier}Dashboard_GetControls') AND (type = 'P')))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}Dashboard_GetControls]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Dashboard_GetControls]
 GO
 
 IF (EXISTS (SELECT name FROM sysobjects WHERE (name = N'{objectQualifier}Dashboard_GetDashboardControlByPackageId') AND (type = 'P')))
@@ -23,15 +23,15 @@ IF (EXISTS (SELECT name FROM sysobjects WHERE (name = N'{objectQualifier}Dashboa
 GO
 
 IF (EXISTS (SELECT name FROM sysobjects WHERE (name = N'{objectQualifier}Dashboard_GetDbBackups') AND (type = 'P')))
-	DROP PROCEDURE {databaseOwner}{objectQualifier}Dashboard_GetDbBackups
+    DROP PROCEDURE {databaseOwner}{objectQualifier}Dashboard_GetDbBackups
 GO
 
 IF (EXISTS (SELECT name FROM sys.objects WHERE (name = N'{objectQualifier}Dashboard_GetDbFileInfo') AND (type = 'P')))
-	DROP PROCEDURE {databaseOwner}{objectQualifier}Dashboard_GetDbFileInfo
+    DROP PROCEDURE {databaseOwner}{objectQualifier}Dashboard_GetDbFileInfo
 GO
 
 IF (EXISTS (SELECT name FROM sys.objects WHERE (name = N'{objectQualifier}Dashboard_GetDbInfo') AND (type = 'P')))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}Dashboard_GetDbInfo]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}Dashboard_GetDbInfo]
 GO
 
 IF (EXISTS (SELECT name FROM sys.objects WHERE (name = N'{objectQualifier}Dashboard_UpdateControl') AND (type = 'P')))

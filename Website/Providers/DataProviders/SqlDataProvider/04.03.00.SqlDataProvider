@@ -9,7 +9,7 @@
 /************************************************************/
 
 IF EXISTS ( SELECT * FROM sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}AddScheduleItemSetting') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	DROP PROCEDURE {databaseOwner}{objectQualifier}AddScheduleItemSetting
+    DROP PROCEDURE {databaseOwner}{objectQualifier}AddScheduleItemSetting
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddScheduleItemSetting
@@ -21,34 +21,34 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}AddScheduleItemSetting
 as
 
 IF EXISTS ( SELECT * FROM {databaseOwner}{objectQualifier}ScheduleItemSettings WHERE ScheduleID = @ScheduleID AND SettingName = @Name)
-BEGIN 
-	UPDATE	{databaseOwner}{objectQualifier}ScheduleItemSettings
-	SET		SettingValue = @Value
-	WHERE	ScheduleID = @ScheduleID
-	AND		SettingName = @Name
-END 
-ELSE 
-BEGIN 
-	INSERT INTO {databaseOwner}{objectQualifier}ScheduleItemSettings (
-		ScheduleID,
-		SettingName,
-		Settingvalue
-	)
-	VALUES (
-		@ScheduleID,
-		@Name,
-		@Value
-	)
+BEGIN
+    UPDATE	{databaseOwner}{objectQualifier}ScheduleItemSettings
+    SET		SettingValue = @Value
+    WHERE	ScheduleID = @ScheduleID
+    AND		SettingName = @Name
 END
- 
+ELSE
+BEGIN
+    INSERT INTO {databaseOwner}{objectQualifier}ScheduleItemSettings (
+        ScheduleID,
+        SettingName,
+        Settingvalue
+    )
+    VALUES (
+        @ScheduleID,
+        @Name,
+        @Value
+    )
+END
+
 GO
 
 IF EXISTS ( SELECT * FROM sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}GetPortalSpaceUsed') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	DROP PROCEDURE {databaseOwner}{objectQualifier}GetPortalSpaceUsed
+    DROP PROCEDURE {databaseOwner}{objectQualifier}GetPortalSpaceUsed
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPortalSpaceUsed
-	@PortalId int
+    @PortalId int
 AS
 
 SELECT 'SpaceUsed' = SUM(CAST(Size as bigint))

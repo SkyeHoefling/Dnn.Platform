@@ -244,8 +244,8 @@ namespace Dnn.PersonaBar.Security.Components
         {
             try
             {
-                // If the file has been deleted since we took  
-                // the snapshot, ignore it and return the empty string. 
+                // If the file has been deleted since we took
+                // the snapshot, ignore it and return the empty string.
                 if (IsReadable(name))
                 {
                     return File.ReadAllText(name).IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;

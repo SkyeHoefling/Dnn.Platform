@@ -19,7 +19,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper and the name of the form field.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element.
         /// </returns>
@@ -32,7 +32,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper, the name of the form field, and an option label.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -45,7 +45,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper, the name of the form field, and the specified list items.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -58,7 +58,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper, the name of the form field, the specified list items, and the specified HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -71,7 +71,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper, the name of the form field, the specified list items, and the specified HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -84,7 +84,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper, the name of the form field, the specified list items, and an option label.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -97,7 +97,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper, the name of the form field, the specified list items, an option label, and the specified HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -110,7 +110,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a single-selection select element using the specified HTML helper, the name of the form field, the specified list items, an option label, and the specified HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -123,7 +123,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -136,7 +136,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items and HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -149,7 +149,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items and HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -162,7 +162,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items and option label.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -175,7 +175,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items, option label, and HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -188,7 +188,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items, option label, and HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -201,7 +201,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each value in the enumeration that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each value in the enumeration that is represented by the expression.
         /// </returns>
@@ -214,7 +214,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each value in the enumeration that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each value in the enumeration that is represented by the expression.
         /// </returns>
@@ -227,7 +227,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each value in the enumeration that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each value in the enumeration that is represented by the expression.
         /// </returns>
@@ -240,7 +240,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each value in the enumeration that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each value in the enumeration that is represented by the expression.
         /// </returns>
@@ -253,7 +253,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each value in the enumeration that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each value in the enumeration that is represented by the expression.
         /// </returns>
@@ -266,7 +266,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each value in the enumeration that is represented by the specified expression.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each value in the enumeration that is represented by the expression.
         /// </returns>
@@ -281,7 +281,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a multi-select select element using the specified HTML helper and the name of the form field.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element.
         /// </returns>
@@ -294,7 +294,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a multi-select select element using the specified HTML helper, the name of the form field, and the specified list items.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list.
         /// </returns>
@@ -307,7 +307,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a multi-select select element using the specified HTML helper, the name of the form field, and the specified list items.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list..
         /// </returns>
@@ -320,7 +320,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns a multi-select select element using the specified HTML helper, the name of the form field, the specified list items, and the specified HMTL attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element with an option subelement for each item in the list..
         /// </returns>
@@ -333,7 +333,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression and using the specified list items.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -346,7 +346,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items and HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>
@@ -359,7 +359,7 @@ namespace DotNetNuke.Web.Mvc.Helpers
         /// <summary>
         /// Returns an HTML select element for each property in the object that is represented by the specified expression using the specified list items and HTML attributes.
         /// </summary>
-        /// 
+        ///
         /// <returns>
         /// An HTML select element for each property in the object that is represented by the expression.
         /// </returns>

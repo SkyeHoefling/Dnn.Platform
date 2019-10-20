@@ -47,17 +47,17 @@
   <script type="text/javascript">//<![CDATA[
     var a = {$just_a_normal_js_object : "value"};
     var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"), {
-      mode           : "smartymixed",
-      tabSize        : 2,
-      indentUnit     : 2,
-      indentWithTabs : false,
-      lineNumbers    : true,
-      smartyVersion  : 3
+    mode           : "smartymixed",
+    tabSize        : 2,
+    indentUnit     : 2,
+    indentWithTabs : false,
+    lineNumbers    : true,
+    smartyVersion  : 3
     });
     // ]]>
   </script>
   <style>
-    /* CSS content 
+    /* CSS content
     {$no_smarty} */
     .some-class { font-weight: bolder; color: "orange"; }
   </style>
@@ -75,16 +75,16 @@
   {elseif $name == $foo}
     {function name=menu level=0}
     {foreach $data as $entry}
-      {if is_array($entry)}
-      - {$entry@key}
-      {menu data=$entry level=$level+1}
-      {else}
-      {$entry}
-      {* One
-      * Two
-      * Three
-      *}
-      {/if}
+    {if is_array($entry)}
+    - {$entry@key}
+    {menu data=$entry level=$level+1}
+    {else}
+    {$entry}
+    {* One
+    * Two
+    * Three
+    *}
+    {/if}
     {/foreach}
     {/function}
   {/if}
@@ -94,7 +94,7 @@
 </textarea></form>
 
     <script type="text/javascript">
-      var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode           : "smartymixed",
         tabSize        : 2,
         indentUnit     : 2,
@@ -102,7 +102,7 @@
         lineNumbers    : true,
         smartyVersion  : 3,
         matchBrackets  : true,
-      });
+    });
     </script>
 
     <p>The Smarty mixed mode depends on the Smarty and HTML mixed modes. HTML

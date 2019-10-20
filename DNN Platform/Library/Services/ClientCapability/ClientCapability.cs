@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -41,7 +41,7 @@ namespace DotNetNuke.Services.ClientCapability
         {
             _capabilities = new Dictionary<string, string>();
         }
-    
+
         #region Implementation of IClientCapability
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace DotNetNuke.Services.ClientCapability
         /// <summary>
         ///   Is request coming from a tablet device.
         /// </summary>
-        public bool IsTablet { get; set; }        
+        public bool IsTablet { get; set; }
 
         /// <summary>
         ///   Does the requesting device supports touch screen.
@@ -73,9 +73,9 @@ namespace DotNetNuke.Services.ClientCapability
         ///   FacebookRequest property is filled when request is coming though Facebook iFrame (e.g. fan pages).
         /// </summary>
         /// <remarks>
-        ///   FacebookRequest property is populated based on data in "signed_request" headers coming from Facebook.  
+        ///   FacebookRequest property is populated based on data in "signed_request" headers coming from Facebook.
         ///   In order to ensure request is coming from Facebook, FacebookRequest.IsValidSignature method should be called with the secrety key provided by Facebook.
-        /// </remarks>         
+        /// </remarks>
         public FacebookRequest FacebookRequest { get; set; }
 
         /// <summary>
@@ -102,12 +102,12 @@ namespace DotNetNuke.Services.ClientCapability
             get
             {
                 return _capabilities;
-                
+
             }
             set
             {
                 _capabilities = value;
-                
+
             }
         }
 
@@ -131,7 +131,7 @@ namespace DotNetNuke.Services.ClientCapability
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public virtual string this[string name] 
+        public virtual string this[string name]
         {
             get
             {

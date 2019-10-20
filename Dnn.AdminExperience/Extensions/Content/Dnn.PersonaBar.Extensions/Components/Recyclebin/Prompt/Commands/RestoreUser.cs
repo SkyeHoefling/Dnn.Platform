@@ -31,7 +31,7 @@ namespace Dnn.PersonaBar.Recyclebin.Components.Prompt.Commands
 
         public override void Init(string[] args, PortalSettings portalSettings, UserInfo userInfo, int activeTabId)
         {
-            
+
             UserId = GetFlagValue(FlagId, "User Id", -1, true, true, true);
         }
 
@@ -39,7 +39,7 @@ namespace Dnn.PersonaBar.Recyclebin.Components.Prompt.Commands
         {
             UserInfo userInfo;
             _userValidator.ValidateUser(UserId, PortalSettings, User, out userInfo);
-                
+
             if (userInfo == null)
                 return new ConsoleErrorResultModel(string.Format(LocalizeString("UserNotFound"), UserId));
 

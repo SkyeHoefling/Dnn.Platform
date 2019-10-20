@@ -7,11 +7,11 @@
     var outer = CodeMirror.getMode({}, "markdown");
 
     var innerOptions = {
-      open: '$',
-      close: '$',
-      mode: inner,
-      delimStyle: 'delim',
-      innerStyle: 'inner'
+    open: '$',
+    close: '$',
+    mode: inner,
+    delimStyle: 'delim',
+    innerStyle: 'inner'
     };
 
     return CodeMirror.multiplexingMode(outer, innerOptions);
@@ -21,10 +21,10 @@
 
   function MT(name) {
     test.mode(
-      name,
-      mode,
-      Array.prototype.slice.call(arguments, 1),
-      'multiplexing');
+    name,
+    mode,
+    Array.prototype.slice.call(arguments, 1),
+    'multiplexing');
   }
 
   MT(

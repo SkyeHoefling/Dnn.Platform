@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -57,7 +57,7 @@ namespace Dnn.PersonaBar.Users.Components
 
         //NOTE - While making modifications in this method, developer must refer to call tree in Register.ascx.cs.
         //Especially Validate and CreateUser methods. Register class inherits from UserModuleBase, which also contains bunch of logic.
-        //This method can easily be modified to pass passowrd, display name, etc. 
+        //This method can easily be modified to pass passowrd, display name, etc.
         //It is recommended to write unit tests.
         public UserBasicDto Register(RegisterationDetails registerationDetails)
         {
@@ -67,9 +67,9 @@ namespace Dnn.PersonaBar.Users.Components
 
             Requires.NotNullOrEmpty("email", email);
 
-            var disallowRegistration = !registerationDetails.IgnoreRegistrationMode && 
-                                   ((portalSettings.UserRegistration == (int) Globals.PortalRegistrationType.NoRegistration) ||
-                                   (portalSettings.UserRegistration == (int) Globals.PortalRegistrationType.PrivateRegistration));
+            var disallowRegistration = !registerationDetails.IgnoreRegistrationMode &&
+                                    ((portalSettings.UserRegistration == (int) Globals.PortalRegistrationType.NoRegistration) ||
+                                    (portalSettings.UserRegistration == (int) Globals.PortalRegistrationType.PrivateRegistration));
 
             if (disallowRegistration)
             {
@@ -84,15 +84,15 @@ namespace Dnn.PersonaBar.Users.Components
             };
 
             var cleanUsername = PortalSecurity.Instance.InputFilter(username,
-                                                      PortalSecurity.FilterFlag.NoScripting |
-                                                      PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                      PortalSecurity.FilterFlag.NoMarkup);
+                                                    PortalSecurity.FilterFlag.NoScripting |
+                                                    PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                    PortalSecurity.FilterFlag.NoMarkup);
 
             if (!cleanUsername.Equals(username))
             {
                 throw new ArgumentException(Localization.GetExceptionMessage("InvalidUserName", "The username specified is invalid."));
             }
-            
+
             var valid = UserController.Instance.IsValidUserName(username);
 
             if (!valid)
@@ -234,8 +234,8 @@ namespace Dnn.PersonaBar.Users.Components
             if (!string.IsNullOrEmpty(displaynameFormat)) newUser.UpdateDisplayName(displaynameFormat);
 
             //membership is approved only for public registration
-            newUser.Membership.Approved = 
-                (registerationDetails.IgnoreRegistrationMode || 
+            newUser.Membership.Approved =
+                (registerationDetails.IgnoreRegistrationMode ||
                 portalSettings.UserRegistration == (int)Globals.PortalRegistrationType.PublicRegistration) && registerationDetails.Authorize;
             newUser.Membership.PasswordQuestion = registerationDetails.Question;
             newUser.Membership.PasswordAnswer = registerationDetails.Answer;
@@ -262,12 +262,12 @@ namespace Dnn.PersonaBar.Users.Components
             //send notification to portal administrator of new user registration
             //check the receive notification setting first, but if register type is Private, we will always send the notification email.
             //because the user need administrators to do the approve action so that he can continue use the website.
-            if (!registerationDetails.IgnoreRegistrationMode && 
+            if (!registerationDetails.IgnoreRegistrationMode &&
                     (portalSettings.EnableRegisterNotification || portalSettings.UserRegistration == (int) Globals.PortalRegistrationType.PrivateRegistration))
             {
                 Mail.SendMail(newUser, MessageType.UserRegistrationAdmin, portalSettings);
                 SendAdminNotification(newUser, portalSettings);
-            }            
+            }
 
             return UserBasicDto.FromUserInfo(newUser);
         }
@@ -295,7 +295,7 @@ namespace Dnn.PersonaBar.Users.Components
             };
 
             notification.Body = Utilities.FixDoublEntityEncoding(notification.Body);
-            NotificationsController.Instance.SendNotification(notification, portalSettings.PortalId, roles, new List<UserInfo>());            
+            NotificationsController.Instance.SendNotification(notification, portalSettings.PortalId, roles, new List<UserInfo>());
         }
 
         private static string GetNotificationBody(string locale, UserInfo newUser, PortalSettings portalSettings)

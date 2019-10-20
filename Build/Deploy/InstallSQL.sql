@@ -6,8 +6,8 @@
 
 -- Declare variables for database name, username and password
 DECLARE @dbName sysname,
-      @dbUser sysname,
-      @dbPwd nvarchar(max);
+    @dbUser sysname,
+    @dbPwd nvarchar(max);
 
 -- Set variables for database name, username and password
 SET @dbName = 'PlaceholderForDbName';
@@ -27,7 +27,7 @@ END
 -- Create database user and map to login
 -- and add user to the datareader, datawriter, ddladmin and securityadmin roles
 --
-SET @cmd = N'USE ' + quotename(@DBName) + N'; 
+SET @cmd = N'USE ' + quotename(@DBName) + N';
 IF( NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = ''' + replace(@dbUser, '''', '''''') + N'''))
 BEGIN
     print ''-- Creating user'';

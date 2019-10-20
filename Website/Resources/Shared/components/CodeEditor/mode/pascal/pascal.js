@@ -18,8 +18,8 @@ CodeMirror.defineMode("pascal", function() {
     return obj;
   }
   var keywords = words("and array begin case const div do downto else end file for forward integer " +
-                       "boolean char function goto if in label mod nil not of or packed procedure " +
-                       "program record repeat set string then to type until var while with");
+                        "boolean char function goto if in label mod nil not of or packed procedure " +
+                        "program record repeat set string then to type until var while with");
   var atoms = {"null": true};
 
   var isOperatorChar = /[+\-*&%=<>!?|\/]/;
@@ -27,33 +27,33 @@ CodeMirror.defineMode("pascal", function() {
   function tokenBase(stream, state) {
     var ch = stream.next();
     if (ch == "#" && state.startOfLine) {
-      stream.skipToEnd();
-      return "meta";
+    stream.skipToEnd();
+    return "meta";
     }
     if (ch == '"' || ch == "'") {
-      state.tokenize = tokenString(ch);
-      return state.tokenize(stream, state);
+    state.tokenize = tokenString(ch);
+    return state.tokenize(stream, state);
     }
     if (ch == "(" && stream.eat("*")) {
-      state.tokenize = tokenComment;
-      return tokenComment(stream, state);
+    state.tokenize = tokenComment;
+    return tokenComment(stream, state);
     }
     if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
-      return null;
+    return null;
     }
     if (/\d/.test(ch)) {
-      stream.eatWhile(/[\w\.]/);
-      return "number";
+    stream.eatWhile(/[\w\.]/);
+    return "number";
     }
     if (ch == "/") {
-      if (stream.eat("/")) {
+    if (stream.eat("/")) {
         stream.skipToEnd();
         return "comment";
-      }
+    }
     }
     if (isOperatorChar.test(ch)) {
-      stream.eatWhile(isOperatorChar);
-      return "operator";
+    stream.eatWhile(isOperatorChar);
+    return "operator";
     }
     stream.eatWhile(/[\w\$_]/);
     var cur = stream.current();
@@ -64,24 +64,24 @@ CodeMirror.defineMode("pascal", function() {
 
   function tokenString(quote) {
     return function(stream, state) {
-      var escaped = false, next, end = false;
-      while ((next = stream.next()) != null) {
+    var escaped = false, next, end = false;
+    while ((next = stream.next()) != null) {
         if (next == quote && !escaped) {end = true; break;}
         escaped = !escaped && next == "\\";
-      }
-      if (end || !escaped) state.tokenize = null;
-      return "string";
+    }
+    if (end || !escaped) state.tokenize = null;
+    return "string";
     };
   }
 
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == ")" && maybeEnd) {
+    if (ch == ")" && maybeEnd) {
         state.tokenize = null;
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return "comment";
   }
@@ -90,14 +90,14 @@ CodeMirror.defineMode("pascal", function() {
 
   return {
     startState: function() {
-      return {tokenize: null};
+    return {tokenize: null};
     },
 
     token: function(stream, state) {
-      if (stream.eatSpace()) return null;
-      var style = (state.tokenize || tokenBase)(stream, state);
-      if (style == "comment" || style == "meta") return style;
-      return style;
+    if (stream.eatSpace()) return null;
+    var style = (state.tokenize || tokenBase)(stream, state);
+    if (style == "comment" || style == "meta") return style;
+    return style;
     },
 
     electricChars: "{}"

@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -47,7 +47,7 @@ namespace DotNetNuke.Services.Log.EventLog
 {
     public partial class LogController : ServiceLocator<ILogController, LogController>, ILogController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (LogController));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (LogController));
         private const int WriterLockTimeout = 10000; //milliseconds
         private static readonly ReaderWriterLockSlim LockLog = new ReaderWriterLockSlim();
 
@@ -202,7 +202,7 @@ namespace DotNetNuke.Services.Log.EventLog
                             }
                         }
                     }
-                    
+
                     //Get portal name if name isn't set
                     if (logInfo.LogPortalID != Null.NullInteger && String.IsNullOrEmpty(logInfo.LogPortalName))
                     {
@@ -239,21 +239,21 @@ namespace DotNetNuke.Services.Log.EventLog
                         AddLogTypeConfigInfo(logTypeConfigInfo);
                     }
 
-	                if (LoggingProvider.Instance() != null)
-	                {
-		                try
-		                {
-							LoggingProvider.Instance().AddLog(logInfo);
-		                }
-		                catch (Exception)
-		                {
-			                if (Globals.Status != Globals.UpgradeStatus.Upgrade) //this may caught exception during upgrade because old logging provider has problem in it.
-			                {
-				                throw;
-			                }
-		                }
-		                
-	                }
+                    if (LoggingProvider.Instance() != null)
+                    {
+                        try
+                        {
+                            LoggingProvider.Instance().AddLog(logInfo);
+                        }
+                        catch (Exception)
+                        {
+                            if (Globals.Status != Globals.UpgradeStatus.Upgrade) //this may caught exception during upgrade because old logging provider has problem in it.
+                            {
+                                throw;
+                            }
+                        }
+
+                    }
                 }
                 catch (Exception exc)
                 {
@@ -285,13 +285,13 @@ namespace DotNetNuke.Services.Log.EventLog
                     if (typeInfo.Attributes != null)
                     {
                         var objLogTypeInfo = new LogTypeInfo
-                                                 {
-                                                     LogTypeKey = typeInfo.Attributes["LogTypeKey"].Value,
-                                                     LogTypeFriendlyName = typeInfo.Attributes["LogTypeFriendlyName"].Value,
-                                                     LogTypeDescription = typeInfo.Attributes["LogTypeDescription"].Value,
-                                                     LogTypeCSSClass = typeInfo.Attributes["LogTypeCSSClass"].Value,
-                                                     LogTypeOwner = typeInfo.Attributes["LogTypeOwner"].Value
-                                                 };
+                                                {
+                                                    LogTypeKey = typeInfo.Attributes["LogTypeKey"].Value,
+                                                    LogTypeFriendlyName = typeInfo.Attributes["LogTypeFriendlyName"].Value,
+                                                    LogTypeDescription = typeInfo.Attributes["LogTypeDescription"].Value,
+                                                    LogTypeCSSClass = typeInfo.Attributes["LogTypeCSSClass"].Value,
+                                                    LogTypeOwner = typeInfo.Attributes["LogTypeOwner"].Value
+                                                };
                         AddLogType(objLogTypeInfo);
                     }
                 }
@@ -399,17 +399,17 @@ namespace DotNetNuke.Services.Log.EventLog
         public virtual void UpdateLogTypeConfigInfo(LogTypeConfigInfo logTypeConfig)
         {
             LoggingProvider.Instance().UpdateLogTypeConfigInfo(logTypeConfig.ID,
-                                                               logTypeConfig.LoggingIsActive,
-                                                               logTypeConfig.LogTypeKey,
-                                                               logTypeConfig.LogTypePortalID,
-                                                               logTypeConfig.KeepMostRecent,
-                                                               logTypeConfig.LogFileName,
-                                                               logTypeConfig.EmailNotificationIsActive,
-                                                               Convert.ToString(logTypeConfig.NotificationThreshold),
-                                                               Convert.ToString(logTypeConfig.NotificationThresholdTime),
-                                                               Convert.ToString((int)logTypeConfig.NotificationThresholdTimeType),
-                                                               logTypeConfig.MailFromAddress,
-                                                               logTypeConfig.MailToAddress);
+                                                                logTypeConfig.LoggingIsActive,
+                                                                logTypeConfig.LogTypeKey,
+                                                                logTypeConfig.LogTypePortalID,
+                                                                logTypeConfig.KeepMostRecent,
+                                                                logTypeConfig.LogFileName,
+                                                                logTypeConfig.EmailNotificationIsActive,
+                                                                Convert.ToString(logTypeConfig.NotificationThreshold),
+                                                                Convert.ToString(logTypeConfig.NotificationThresholdTime),
+                                                                Convert.ToString((int)logTypeConfig.NotificationThresholdTimeType),
+                                                                logTypeConfig.MailFromAddress,
+                                                                logTypeConfig.MailToAddress);
         }
 
         public virtual void UpdateLogType(LogTypeInfo logType)

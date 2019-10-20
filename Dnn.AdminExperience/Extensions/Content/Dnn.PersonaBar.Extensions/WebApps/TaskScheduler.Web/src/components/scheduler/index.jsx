@@ -164,7 +164,7 @@ class SchedulerPanel extends Component {
                             onUpdate={this.onUpdateSchedulerItem.bind(this)}
                             id={id}
                             openId={this.state.openId}
-                            panelIndex={this.state.historyPanelOpen ? 1 : 0} />                        
+                            panelIndex={this.state.historyPanelOpen ? 1 : 0} />
                     </SchedulerRow>
                 );
             });

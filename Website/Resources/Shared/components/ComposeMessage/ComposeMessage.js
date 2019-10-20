@@ -19,11 +19,11 @@
 
         if (opts.showAttachments) {
             html += "<div class='dnnFormItem'><div class='dnnLabel'<label>" + opts.attachmentsText + "</label></div><div><button type='button' id='fileFromSite' class='dnnTertiaryAction'><span>" + opts.browseText + "</span></button><div class='fileUploadArea'><input id='uploadFileId' type='file' name='files[]' data-text='" + opts.uploadText + "' /></div><div class='messageAttachments'><ul></ul></div></div></div>";
-	        html += "<div class='itemUpload'><div class='fileupload-error dnnFormMessage dnnFormValidationSummary' style='display:none;'></div><div class='progress_bar_wrapper'><div class='progress_context' style='margin:10px 0px; display:none;'><div class='upload_file_name' style='margin:5px 0;'></div><div class='progress-bar green'><div style='width:0px;'><span></span> </div></div></div></div></div>";
+            html += "<div class='itemUpload'><div class='fileupload-error dnnFormMessage dnnFormValidationSummary' style='display:none;'></div><div class='progress_bar_wrapper'><div class='progress_context' style='margin:10px 0px; display:none;'><div class='upload_file_name' style='margin:5px 0;'></div><div class='progress-bar green'><div style='width:0px;'><span></span> </div></div></div></div></div>";
             html += "<div id='userFileManager'></div>";
 
             opts.userFileManagerOptions.openTriggerSelector = '#fileFromSite';
-	        opts.userFileManagerOptions.attachCallback = attachFile;
+            opts.userFileManagerOptions.attachCallback = attachFile;
         }
 
         html += "</fieldset>";
@@ -60,7 +60,7 @@
                 messageNode.remove();
             });
         };
-	    function attachFile(file) {
+        function attachFile(file) {
             if ($.inArray(file.id, attachments) === -1) {
                 attachments.push(file.id);
                 composeMessageDialog.find('.messageAttachments ul').append('<li><a href="#" title="' + file.name + '">' + file.name + '</a><a href="#" class="removeAttachment" title="' + opts.removeText + '"></a></li>');
@@ -94,72 +94,72 @@
 
             composeMessageDialog = $("<div class='composeMessageDialog dnnForm dnnClear'/>").html(html).dialog(opts);
 
-	        if (opts.showAttachments && !$wrap.data('fileManagerInitialized')) {
+            if (opts.showAttachments && !$wrap.data('fileManagerInitialized')) {
                 // we only need to initialize this plugin once, doing so more than once will lead to multiple dialogs.
                 // this is because the #userFileManager element is never destroyed when the compose message dialog is closed.
-	        	composeMessageDialog.find('#userFileManager').userFileManager(opts.userFileManagerOptions);
-		        
+                composeMessageDialog.find('#userFileManager').userFileManager(opts.userFileManagerOptions);
+
                 $wrap.data('fileManagerInitialized', true);
             }
-	        
-	        if ($.fn.dnnUserFileUpload && typeof $.fn.dnnUserFileUpload === "function") {
-				composeMessageDialog.find('.fileUploadArea').dnnUserFileUpload({
-					maxFileSize: opts.maxFileSize,
-					serverErrorMessage: opts.serverErrorText,
-					addImageServiceUrl: opts.servicesFramework.getServiceRoot('CoreMessaging') + 'FileUpload/UploadFile',
-					beforeSend: opts.servicesFramework.setModuleHeaders,
-					callback: attachFile,
-					complete: function() {
-						composeMessageDialog.find('.fileUploadArea input:file').data("wrapper").get(0).childNodes[0].nodeValue = opts.uploadText;
-					}
-				});
-	        }
-	        
-	        composeMessageDialog.find('#to').tokenInput(opts.serviceurlbase + "Search", {
-				// We can set the tokenLimit here
-				theme: "facebook",
-				resultsFormatter: function (item) {
-					if (item.id.startsWith("user-")) {
-						return "<li class='user'><img src='" + item.iconfile + "' title='" + item.name + "' height='25px' width='25px' /><span>" + item.name + "</span></li>";
-					} else if (item.id.startsWith("role-")) {
-						return "<li class='role'><img src='" + item.iconfile + "' title='" + item.name + "' height='25px' width='25px' /><span>" + item.name + "</span></li>";
-					}
-					return "<li>" + item[this.propertyToSearch] + "</li>"; // Default formatter
-				},
-				minChars: 2,
-				preventDuplicates: true,
-				hintText: '',
-				noResultsText: opts.noResultsText,
-				searchingText: opts.searchingText,
-				onAdd: function (item) {
-					if (item.id.startsWith("user-")) {
-						users.push(item.id.substring(5));
-					} else if (item.id.startsWith("role-")) {
-						roles.push(item.id.substring(5));
-					}
-					updateSendButtonStatus();
-				},
-				onDelete: function (item) {
-					var array = item.id.startsWith("user-") ? users : roles,
-						id = item.id.substring(5),
-						index = $.inArray(id, array);
 
-					if (index !== -1) {
-						array.splice(index, 1);
-					}
-					updateSendButtonStatus();
-				},
-				onError: function (xhr, status) {
-					displayMessage(composeMessageDialog, opts.autoSuggestErrorText + status);
-				},
-	            onReady: function() {
-	                composeMessageDialog.find('input[id^=token-input]').attr('aria-label', 'Token Input');
-	            }
-			});
+            if ($.fn.dnnUserFileUpload && typeof $.fn.dnnUserFileUpload === "function") {
+                composeMessageDialog.find('.fileUploadArea').dnnUserFileUpload({
+                    maxFileSize: opts.maxFileSize,
+                    serverErrorMessage: opts.serverErrorText,
+                    addImageServiceUrl: opts.servicesFramework.getServiceRoot('CoreMessaging') + 'FileUpload/UploadFile',
+                    beforeSend: opts.servicesFramework.setModuleHeaders,
+                    callback: attachFile,
+                    complete: function() {
+                        composeMessageDialog.find('.fileUploadArea input:file').data("wrapper").get(0).childNodes[0].nodeValue = opts.uploadText;
+                    }
+                });
+            }
 
-			composeMessageDialog.find('#subject').keyup(function () {
-				updateSendButtonStatus();
-			});
+            composeMessageDialog.find('#to').tokenInput(opts.serviceurlbase + "Search", {
+                // We can set the tokenLimit here
+                theme: "facebook",
+                resultsFormatter: function (item) {
+                    if (item.id.startsWith("user-")) {
+                        return "<li class='user'><img src='" + item.iconfile + "' title='" + item.name + "' height='25px' width='25px' /><span>" + item.name + "</span></li>";
+                    } else if (item.id.startsWith("role-")) {
+                        return "<li class='role'><img src='" + item.iconfile + "' title='" + item.name + "' height='25px' width='25px' /><span>" + item.name + "</span></li>";
+                    }
+                    return "<li>" + item[this.propertyToSearch] + "</li>"; // Default formatter
+                },
+                minChars: 2,
+                preventDuplicates: true,
+                hintText: '',
+                noResultsText: opts.noResultsText,
+                searchingText: opts.searchingText,
+                onAdd: function (item) {
+                    if (item.id.startsWith("user-")) {
+                        users.push(item.id.substring(5));
+                    } else if (item.id.startsWith("role-")) {
+                        roles.push(item.id.substring(5));
+                    }
+                    updateSendButtonStatus();
+                },
+                onDelete: function (item) {
+                    var array = item.id.startsWith("user-") ? users : roles,
+                        id = item.id.substring(5),
+                        index = $.inArray(id, array);
+
+                    if (index !== -1) {
+                        array.splice(index, 1);
+                    }
+                    updateSendButtonStatus();
+                },
+                onError: function (xhr, status) {
+                    displayMessage(composeMessageDialog, opts.autoSuggestErrorText + status);
+                },
+                onReady: function() {
+                    composeMessageDialog.find('input[id^=token-input]').attr('aria-label', 'Token Input');
+                }
+            });
+
+            composeMessageDialog.find('#subject').keyup(function () {
+                updateSendButtonStatus();
+            });
 
             var prePopulatedRecipients = opts.onPrePopulate(this);
 
@@ -169,7 +169,7 @@
                     to.tokenInput("add", value);
                 });
             }
-            
+
             var minWidth = $(window).width() > 650 ? 650 : $(window).width() - 40;
             var maxWidth = $(window).width() - minWidth > 40 ? minWidth : $(window).width() - 40; // 36px is padding around the compose box. So we decrease the max width by 40 to show full message box in smaller window, if required.
 
@@ -215,11 +215,11 @@
                     if (prePopulatedRecipients != null) {
                         composeMessageDialog.find('#subject').focus();
                     }
-	                
-					composeMessageDialog.find('.fileUploadArea input').dnnFileInput();
+
+                    composeMessageDialog.find('.fileUploadArea input').dnnFileInput();
                 },
                 close: function(event, ui) {
-	                composeMessageDialog.destroy();
+                    composeMessageDialog.destroy();
                 },
                 buttons: [
                     {
@@ -233,11 +233,11 @@
                                 fileIds: JSON.stringify(attachments)
                             };
                             $.ajax(
-                                {   
+                                {
                                     url: opts.serviceurlbase + "Create",
-                                    type: "POST", 
+                                    type: "POST",
                                     data: JSON.stringify(params),
-                                    contentType: "application/json", 
+                                    contentType: "application/json",
                                     dataType: "json",
                                     beforeSend: opts.servicesFramework.setModuleHeaders
                                 }).done(function (data) {
@@ -275,7 +275,7 @@
                     }
                 ],
                 close: function () {
-	                composeMessageDialog.remove();
+                    composeMessageDialog.remove();
                     if (autoclose != null) {
                         clearInterval(autoclose);
                     }

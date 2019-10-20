@@ -2,8 +2,8 @@
 name: Feature Request
 about: Suggest an idea for this project
 ---
- <!-- 
-  Please read contribution guideline first: https://github.com/dnnsoftware/Dnn.Platform/blob/development/CONTRIBUTING.md 
+ <!--
+  Please read contribution guideline first: https://github.com/dnnsoftware/Dnn.Platform/blob/development/CONTRIBUTING.md
   Any potential security issues should be sent to security@dnnsoftware.com, rather than posted on GitHub
 -->
 
@@ -34,7 +34,7 @@ Add any other context about the feature that may be helpful with implementation.
 * [ ] 9.0
 
 ## Affected browser
-<!-- 
+<!--
   Check all that apply and add more if necessary.
   If possible, please also specify exact versions and mention the operating system
 -->

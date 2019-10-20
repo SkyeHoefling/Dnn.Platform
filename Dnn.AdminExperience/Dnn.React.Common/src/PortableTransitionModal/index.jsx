@@ -50,7 +50,7 @@ PortableTransitionModal.propTypes = {
     header: PropTypes.string,
     showCancelButton: PropTypes.bool,
     cancelButtonText:PropTypes.string,
-    
+
     showOkButton: PropTypes.bool,
     okButtonText: PropTypes.string,
     className: PropTypes.string,

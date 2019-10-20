@@ -25,7 +25,7 @@ namespace DotNetNuke.Tests.Core.Entities.Modules.Settings
 
             [ModuleSetting(Prefix = SettingNamePrefix)]
             public double DoubleProperty { get; set; }
-            
+
             [ModuleSetting(Prefix = SettingNamePrefix)]
             public bool BooleanProperty { get; set; }
 
@@ -108,7 +108,7 @@ namespace DotNetNuke.Tests.Core.Entities.Modules.Settings
             this.SaveSettings_CallsUpdateModuleSetting_WithRightParameters(stringValue, integerValue, doubleValue, booleanValue, datetimeValue, timeSpanValue, enumValue, complexValue);
         }
 
-        private void SaveSettings_CallsUpdateModuleSetting_WithRightParameters(string stringValue, int integerValue, double doubleValue, 
+        private void SaveSettings_CallsUpdateModuleSetting_WithRightParameters(string stringValue, int integerValue, double doubleValue,
             bool booleanValue, DateTime datetimeValue, TimeSpan timeSpanValue, TestingEnum enumValue, ComplexType complexValue)
         {
             //Arrange
@@ -159,7 +159,7 @@ namespace DotNetNuke.Tests.Core.Entities.Modules.Settings
             //Assert
             MockRepository.VerifyAll();
         }
-        
+
         [Test]
         public void GetSettings_CallsGetCachedObject()
         {
@@ -246,16 +246,16 @@ namespace DotNetNuke.Tests.Core.Entities.Modules.Settings
             //Arrange
             var moduleInfo = GetModuleInfo;
             var moduleSettings = new Hashtable
-                                 {
-                                     { SettingNamePrefix + "StringProperty", stringValue },
-                                     { SettingNamePrefix + "IntegerProperty", integerValue.ToString() },
-                                     { SettingNamePrefix + "DoubleProperty", doubleValue.ToString(CultureInfo.InvariantCulture) },
-                                     { SettingNamePrefix + "BooleanProperty", booleanValue.ToString() },
-                                     { SettingNamePrefix + "DateTimeProperty", datetimeValue.ToString("o", CultureInfo.InvariantCulture) },
-                                     { SettingNamePrefix + "TimeSpanProperty", timeSpanValue.ToString("c", CultureInfo.InvariantCulture) },
-                                     { SettingNamePrefix + "EnumProperty", enumValue.ToString() },
-                                     { SettingNamePrefix + "ComplexProperty", $"{complexValue.X} | {complexValue.Y}" },
-                                 };
+                                {
+                                    { SettingNamePrefix + "StringProperty", stringValue },
+                                    { SettingNamePrefix + "IntegerProperty", integerValue.ToString() },
+                                    { SettingNamePrefix + "DoubleProperty", doubleValue.ToString(CultureInfo.InvariantCulture) },
+                                    { SettingNamePrefix + "BooleanProperty", booleanValue.ToString() },
+                                    { SettingNamePrefix + "DateTimeProperty", datetimeValue.ToString("o", CultureInfo.InvariantCulture) },
+                                    { SettingNamePrefix + "TimeSpanProperty", timeSpanValue.ToString("c", CultureInfo.InvariantCulture) },
+                                    { SettingNamePrefix + "EnumProperty", enumValue.ToString() },
+                                    { SettingNamePrefix + "ComplexProperty", $"{complexValue.X} | {complexValue.Y}" },
+                                };
 
             MockModuleSettings(moduleInfo, moduleSettings);
 

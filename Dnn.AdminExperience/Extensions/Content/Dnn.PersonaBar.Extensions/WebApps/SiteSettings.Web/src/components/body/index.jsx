@@ -38,7 +38,7 @@ export class Body extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        // Only render if is to show the component.Avoid calling backend when not needed. 
+        // Only render if is to show the component.Avoid calling backend when not needed.
         return nextProps.showing;
     }
 

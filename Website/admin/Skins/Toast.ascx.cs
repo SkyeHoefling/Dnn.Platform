@@ -38,8 +38,8 @@ namespace DotNetNuke.UI.Skins.Controls
 
         public bool IsOnline()
         {
-             var userInfo = UserController.Instance.GetCurrentUserInfo();
-             return userInfo.UserID != -1;
+            var userInfo = UserController.Instance.GetCurrentUserInfo();
+            return userInfo.UserID != -1;
         }
 
         public string GetNotificationLink()
@@ -83,7 +83,7 @@ namespace DotNetNuke.UI.Skins.Controls
         //This method is copied from user skin object
         private int FindMessageTab()
         {
-            //On brand new install the new Message Center Module is on the child page of User Profile Page 
+            //On brand new install the new Message Center Module is on the child page of User Profile Page
             //On Upgrade to 6.2.0, the Message Center module is on the User Profile Page
             var profileTab = TabController.Instance.GetTab(PortalSettings.UserTabId, PortalSettings.PortalId, false);
             if (profileTab != null)
@@ -96,24 +96,24 @@ namespace DotNetNuke.UI.Skins.Controls
                         var module = kvp.Value;
                         if (module.DesktopModule.FriendlyName == "Message Center")
                         {
-                            return tab.TabID;                            
+                            return tab.TabID;
                         }
                     }
                 }
             }
 
             //default to User Profile Page
-            return PortalSettings.UserTabId;            
-        }        
+            return PortalSettings.UserTabId;
+        }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-			JavaScript.RequestRegistration(CommonJs.jQueryUI);
+            JavaScript.RequestRegistration(CommonJs.jQueryUI);
 
             ClientResourceManager.RegisterScript(Page, "~/Resources/Shared/components/Toast/jquery.toastmessage.js", DotNetNuke.Web.Client.FileOrder.Js.jQuery);
-			ClientResourceManager.RegisterStyleSheet(Page, "~/Resources/Shared/components/Toast/jquery.toastmessage.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultCss);
+            ClientResourceManager.RegisterStyleSheet(Page, "~/Resources/Shared/components/Toast/jquery.toastmessage.css", DotNetNuke.Web.Client.FileOrder.Css.DefaultCss);
 
             InitializeConfig();
         }
@@ -129,7 +129,7 @@ namespace DotNetNuke.UI.Skins.Controls
                 if (toastConfig == null)
                 {
                     var configFile = Server.MapPath(Path.Combine(TemplateSourceDirectory, "Toast.config"));
-                    
+
                     if (File.Exists(configFile))
                     {
                         var xmlDocument = new XmlDocument { XmlResolver = null };

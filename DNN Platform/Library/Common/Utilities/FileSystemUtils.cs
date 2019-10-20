@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -55,7 +55,7 @@ namespace DotNetNuke.Common.Utilities
 {
     public class FileSystemUtils
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FileSystemUtils));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FileSystemUtils));
         #region Private Methods
 
         private static string CreateFile(IFolderInfo folder, string fileName, string contentType, Stream fileContent, bool unzip, bool overwrite, bool checkPermissions)
@@ -129,8 +129,8 @@ namespace DotNetNuke.Common.Utilities
         /// <summary>
         /// Writes a Stream to the appropriate File Storage
         /// </summary>
-		/// <param name="objResponse">The Id of the File</param>
-		/// <param name="objStream">The Input Stream</param>
+        /// <param name="objResponse">The Id of the File</param>
+        /// <param name="objStream">The Input Stream</param>
         /// <remarks>
         /// </remarks>
         /// -----------------------------------------------------------------------------
@@ -152,10 +152,10 @@ namespace DotNetNuke.Common.Utilities
                 //Read the bytes.
                 while (lngDataToRead > 0)
                 {
-					//Verify that the client is connected.
+                    //Verify that the client is connected.
                     if (objResponse.IsClientConnected)
                     {
-						//Read the data in buffer
+                        //Read the data in buffer
                         intLength = objStream.Read(bytBuffer, 0, 10000);
 
                         //Write the data to the current output stream.
@@ -199,17 +199,17 @@ namespace DotNetNuke.Common.Utilities
             FileStream fs = null;
             try
             {
-				//Open File Stream
+                //Open File Stream
                 fs = File.OpenRead(FixPath(filePath));
-				
-				//Read file into byte array buffer
+
+                //Read file into byte array buffer
                 var buffer = new byte[fs.Length];
 
                 var len = fs.Read(buffer, 0, buffer.Length);
                 if (len != fs.Length)
                 {
                     Logger.ErrorFormat("Reading from " + filePath + " didn't read all data in buffer. " +
-                                      "Requested to read {0} bytes, but was read {1} bytes", fs.Length, len);
+                                    "Requested to read {0} bytes, but was read {1} bytes", fs.Length, len);
                 }
 
                 //Create Zip Entry
@@ -250,7 +250,7 @@ namespace DotNetNuke.Common.Utilities
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Deletes file in areas with a high degree of concurrent file access (i.e. caching, logging) 
+        /// Deletes file in areas with a high degree of concurrent file access (i.e. caching, logging)
         /// This solves file concurrency issues under heavy load.
         /// </summary>
         /// <param name="fileName">String</param>
@@ -301,7 +301,7 @@ namespace DotNetNuke.Common.Utilities
         /// <summary>
         /// Tries to delete a file from the file system
         /// </summary>
-		/// <param name="fileName">The name of the file</param>
+        /// <param name="fileName">The name of the file</param>
         /// -----------------------------------------------------------------------------
         public static void DeleteFile(string fileName)
         {
@@ -382,7 +382,7 @@ namespace DotNetNuke.Common.Utilities
                         }
                         catch(Exception ex)
                         {
-							Logger.Error(ex);
+                            Logger.Error(ex);
                         }
                     }
                     zipEntry = zipStream.GetNextEntry();

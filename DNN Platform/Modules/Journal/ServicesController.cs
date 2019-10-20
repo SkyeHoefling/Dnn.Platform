@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -48,7 +48,7 @@ namespace DotNetNuke.Modules.Journal
     [SupportedModules("Journal")]
     public class ServicesController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ServicesController));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ServicesController));
 
         private const int MentionNotificationLength = 100;
         private const string MentionNotificationSuffix = "...";
@@ -82,12 +82,12 @@ namespace DotNetNuke.Modules.Journal
             }
 
             if (relativePath.Contains("?"))
-	        {
-		        relativePath = relativePath.Substring(0,
-			        relativePath.IndexOf("?", StringComparison.InvariantCultureIgnoreCase));
-	        }
+            {
+                relativePath = relativePath.Substring(0,
+                    relativePath.IndexOf("?", StringComparison.InvariantCultureIgnoreCase));
+            }
 
-            
+
             var extension = relativePath.Substring(relativePath.LastIndexOf(".",
             StringComparison.Ordinal) + 1).ToLowerInvariant();
             return AcceptedFileExtensions.Contains(extension);
@@ -100,7 +100,7 @@ namespace DotNetNuke.Modules.Journal
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[DnnAuthorize(DenyRoles = "Unverified Users")]
+        [DnnAuthorize(DenyRoles = "Unverified Users")]
         public HttpResponseMessage Create(CreateDTO postData)
         {
             try
@@ -325,7 +325,7 @@ namespace DotNetNuke.Modules.Journal
             }
         }
 
-        
+
         public class PreviewDTO
         {
             public string Url { get; set; }
@@ -333,7 +333,7 @@ namespace DotNetNuke.Modules.Journal
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[DnnAuthorize]
+        [DnnAuthorize]
         public HttpResponseMessage PreviewUrl(PreviewDTO postData)
         {
             try
@@ -347,7 +347,7 @@ namespace DotNetNuke.Modules.Journal
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
-        
+
         public class GetListForProfileDTO
         {
             public int ProfileId { get; set; }
@@ -362,7 +362,7 @@ namespace DotNetNuke.Modules.Journal
         {
             try
             {
-                
+
                 var jp = new JournalParser(PortalSettings, ActiveModule.ModuleID, postData.ProfileId, postData.GroupId, UserInfo);
                 return Request.CreateResponse(HttpStatusCode.OK, jp.GetList(postData.RowIndex, postData.MaxRows), "text/html");
             }
@@ -399,7 +399,7 @@ namespace DotNetNuke.Modules.Journal
         {
             public int JournalId { get; set; }
             public string Comment { get; set; }
-            public IList<MentionDTO> Mentions { get; set; } 
+            public IList<MentionDTO> Mentions { get; set; }
         }
 
         [HttpPost]
@@ -482,46 +482,46 @@ namespace DotNetNuke.Modules.Journal
             public string key { get; set; }
         }
 
-		[HttpGet]
-		[DnnAuthorize(DenyRoles = "Unverified Users")]
-		public HttpResponseMessage GetSuggestions(string keyword)
-		{
-			try
-			{
+        [HttpGet]
+        [DnnAuthorize(DenyRoles = "Unverified Users")]
+        public HttpResponseMessage GetSuggestions(string keyword)
+        {
+            try
+            {
                 var findedUsers = new List<SuggestDTO>();
-				var relations = RelationshipController.Instance.GetUserRelationships(UserInfo);
-				foreach (var ur in relations)
-				{
-					var targetUserId = ur.UserId == UserInfo.UserID ? ur.RelatedUserId : ur.UserId;
-					var targetUser = UserController.GetUserById(PortalSettings.PortalId, targetUserId);
-					var relationship = RelationshipController.Instance.GetRelationship(ur.RelationshipId);
-					if (ur.Status == RelationshipStatus.Accepted && targetUser != null
-						&& ((relationship.RelationshipTypeId == (int)DefaultRelationshipTypes.Followers && ur.RelatedUserId == UserInfo.UserID)
-								|| relationship.RelationshipTypeId == (int)DefaultRelationshipTypes.Friends
-							)
-						&& (targetUser.DisplayName.ToLowerInvariant().Contains(keyword.ToLowerInvariant())
+                var relations = RelationshipController.Instance.GetUserRelationships(UserInfo);
+                foreach (var ur in relations)
+                {
+                    var targetUserId = ur.UserId == UserInfo.UserID ? ur.RelatedUserId : ur.UserId;
+                    var targetUser = UserController.GetUserById(PortalSettings.PortalId, targetUserId);
+                    var relationship = RelationshipController.Instance.GetRelationship(ur.RelationshipId);
+                    if (ur.Status == RelationshipStatus.Accepted && targetUser != null
+                        && ((relationship.RelationshipTypeId == (int)DefaultRelationshipTypes.Followers && ur.RelatedUserId == UserInfo.UserID)
+                                || relationship.RelationshipTypeId == (int)DefaultRelationshipTypes.Friends
+                            )
+                        && (targetUser.DisplayName.ToLowerInvariant().Contains(keyword.ToLowerInvariant())
                                 || targetUser.DisplayName.ToLowerInvariant().Contains(keyword.Replace("-", " ").ToLowerInvariant())
-							)
+                            )
                         && findedUsers.All(s => s.userId != targetUser.UserID)
-						)
-					{
-						findedUsers.Add(new SuggestDTO
-							                {
+                        )
+                    {
+                        findedUsers.Add(new SuggestDTO
+                                            {
                                                 displayName = targetUser.DisplayName.Replace(" ", "-"),
-											    userId = targetUser.UserID,
-											    avatar = targetUser.Profile.PhotoURL,
+                                                userId = targetUser.UserID,
+                                                avatar = targetUser.Profile.PhotoURL,
                                                 key = keyword
-							                });
-					}
-				}
+                                            });
+                    }
+                }
 
-				return Request.CreateResponse(HttpStatusCode.OK, findedUsers.Cast<object>().Take(5));
-			}
-			catch (Exception exc)
-			{
-				Logger.Error(exc);
-				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
-			}
+                return Request.CreateResponse(HttpStatusCode.OK, findedUsers.Cast<object>().Take(5));
+            }
+            catch (Exception exc)
+            {
+                Logger.Error(exc);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
+            }
         }
 
         #endregion
@@ -541,12 +541,12 @@ namespace DotNetNuke.Modules.Journal
                 if (user != null)
                 {
                     var relationship = RelationshipController.Instance.GetFollowingRelationship(UserInfo, user) ??
-                                       RelationshipController.Instance.GetFriendRelationship(UserInfo, user);
+                                        RelationshipController.Instance.GetFriendRelationship(UserInfo, user);
                     if (relationship != null && relationship.Status == RelationshipStatus.Accepted)
                     {
                         var userLink = string.Format("<a href=\"{0}\" class=\"userLink\" target=\"_blank\">{1}</a>",
-                                                     Globals.UserProfileURL(user.UserID),
-                                                     MentionIdentityChar + user.DisplayName);
+                                                    Globals.UserProfileURL(user.UserID),
+                                                    MentionIdentityChar + user.DisplayName);
                         content = content.Replace(MentionIdentityChar + mention.DisplayName, userLink);
 
                         mentionedUsers.Add(mention.DisplayName, user);

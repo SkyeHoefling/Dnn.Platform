@@ -48,11 +48,11 @@ and P.CreatedDate IS NOT NULL
 /************************************************************/
 
 ALTER TABLE {databaseOwner}{objectQualifier}Users
-	DROP COLUMN Street, City, Region, PostalCode, Country, Password, Email, Unit, Telephone
+    DROP COLUMN Street, City, Region, PostalCode, Country, Password, Email, Unit, Telephone
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UserPortals
-	DROP COLUMN Authorized, CreatedDate, LastLoginDate
+    DROP COLUMN Authorized, CreatedDate, LastLoginDate
 GO
 
 drop procedure {databaseOwner}{objectQualifier}AddUser
@@ -78,14 +78,14 @@ if @UserID is null
 begin
   insert into {objectQualifier}Users (
     Username,
-    FirstName, 
-    LastName, 
+    FirstName,
+    LastName,
     AffiliateId
   )
   values (
     @Username,
-    @FirstName, 
-    @LastName, 
+    @FirstName,
+    @LastName,
     @AffiliateId
   )
 
@@ -122,12 +122,12 @@ create procedure {databaseOwner}{objectQualifier}GetUser
 as
 
 select {objectQualifier}Users.UserId,
-       {objectQualifier}UserPortals.PortalId,
-       {objectQualifier}Users.Username,
-       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Users.FirstName,
-       {objectQualifier}Users.LastName,
-       {objectQualifier}Users.IsSuperUser
+        {objectQualifier}UserPortals.PortalId,
+        {objectQualifier}Users.Username,
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Users.FirstName,
+        {objectQualifier}Users.LastName,
+        {objectQualifier}Users.IsSuperUser
 from {objectQualifier}Users
 left outer join {databaseOwner}{objectQualifier}UserPortals On {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId
 where  {objectQualifier}Users.UserId = @UserId
@@ -144,14 +144,14 @@ create procedure {databaseOwner}{objectQualifier}GetUserByUsername
 @Username nvarchar(100)
 
 as
- 
+
 select {objectQualifier}Users.UserId,
-       {objectQualifier}UserPortals.PortalID,
-       {objectQualifier}Users.Username,
-       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Users.FirstName,
-       {objectQualifier}Users.LastName,
-       {objectQualifier}Users.IsSuperUser
+        {objectQualifier}UserPortals.PortalID,
+        {objectQualifier}Users.Username,
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Users.FirstName,
+        {objectQualifier}Users.LastName,
+        {objectQualifier}Users.IsSuperUser
 from {objectQualifier}Users
 left outer join {databaseOwner}{objectQualifier}UserPortals On {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId
 where  username = @Username
@@ -172,7 +172,7 @@ as
 
 update {objectQualifier}Users
 set    FirstName = @FirstName,
-       LastName	 = @LastName
+        LastName	 = @LastName
 where  UserId = @UserId
 
 GO
@@ -182,16 +182,16 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetUserRole
 
-@PortalId int, 
-@UserId int, 
+@PortalId int,
+@UserId int,
 @RoleId int
 
 as
 
-select	r.*, 
-        ur.UserRoleID, 
-        ur.UserID, 
-        ur.ExpiryDate, 
+select	r.*,
+        ur.UserRoleID,
+        ur.UserID,
+        ur.ExpiryDate,
         ur.IsTrialUsed
 from	{databaseOwner}{objectQualifier}UserRoles ur
 inner join {databaseOwner}{objectQualifier}UserPortals up on ur.UserId = up.UserId
@@ -210,7 +210,7 @@ create procedure {databaseOwner}{objectQualifier}GetPortals
 as
 
 select P.*,
-       'Users' = ( select count(*) from {databaseOwner}{objectQualifier}UserPortals where {objectQualifier}UserPortals.PortalId = P.PortalId )
+        'Users' = ( select count(*) from {databaseOwner}{objectQualifier}UserPortals where {objectQualifier}UserPortals.PortalId = P.PortalId )
 from {databaseOwner}{objectQualifier}Portals P
 order by P.PortalName
 
@@ -226,10 +226,10 @@ create procedure {databaseOwner}{objectQualifier}GetUsers
 as
 
 select {objectQualifier}Users.*
-from {objectQualifier}Users 
+from {objectQualifier}Users
 left join {databaseOwner}{objectQualifier}UserPortals on {objectQualifier}Users.UserId = {objectQualifier}UserPortals.UserId
 where ( {objectQualifier}UserPortals.PortalId = @PortalId or @PortalId is null )
-order by {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName   
+order by {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName
 
 GO
 
@@ -243,10 +243,10 @@ create procedure {databaseOwner}{objectQualifier}GetPortal
 as
 
 select P.*,
-       'SuperUserId' = ( select UserId from {objectQualifier}Users where IsSuperUser = 1 ),
-       'SuperTabId' = ( select TabId from {objectQualifier}Tabs where PortalId is null and ParentId is null ),
-       'AdministratorRoleName' = ( select RoleName from {databaseOwner}{objectQualifier}Roles where RoleId = P.AdministratorRoleID ),
-       'RegisteredRoleName' = ( select RoleName from {databaseOwner}{objectQualifier}Roles where RoleId = P.RegisteredRoleID )
+        'SuperUserId' = ( select UserId from {objectQualifier}Users where IsSuperUser = 1 ),
+        'SuperTabId' = ( select TabId from {objectQualifier}Tabs where PortalId is null and ParentId is null ),
+        'AdministratorRoleName' = ( select RoleName from {databaseOwner}{objectQualifier}Roles where RoleId = P.AdministratorRoleID ),
+        'RegisteredRoleName' = ( select RoleName from {databaseOwner}{objectQualifier}Roles where RoleId = P.RegisteredRoleID )
 from {objectQualifier}Portals P
 where  PortalId = @PortalId
 
@@ -257,7 +257,7 @@ drop procedure {databaseOwner}{objectQualifier}AddModule
 GO
 
 create procedure {databaseOwner}{objectQualifier}AddModule
-    
+
 @TabId                         int,
 @ModuleDefId                   int,
 @ModuleOrder                   int,
@@ -278,7 +278,7 @@ create procedure {databaseOwner}{objectQualifier}AddModule
 @InheritViewPermissions		   bit
 as
 
-insert into {databaseOwner}{objectQualifier}Modules ( 
+insert into {databaseOwner}{objectQualifier}Modules (
   TabId,
   ModuleDefId,
   ModuleOrder,
@@ -294,7 +294,7 @@ insert into {databaseOwner}{objectQualifier}Modules (
   Personalize,
   IsDeleted,
   Header,
-  Footer, 
+  Footer,
   StartDate,
   EndDate,
   InheritViewPermissions
@@ -315,7 +315,7 @@ values (
   @Personalize,
   0,
   @Header,
-  @Footer, 
+  @Footer,
   @StartDate,
   @EndDate,
   @InheritViewPermissions
@@ -407,7 +407,7 @@ create procedure {databaseOwner}{objectQualifier}UpdateModule
 @IconFile            nvarchar(100),
 @CacheTime           int,
 @TabId               int,
-@AllTabs             bit, 
+@AllTabs             bit,
 @ShowTitle           bit,
 @Personalize         int,
 @IsDeleted           bit,
@@ -421,22 +421,22 @@ as
 
 update {databaseOwner}{objectQualifier}Modules
 set    ModuleOrder = @ModuleOrder,
-       ModuleTitle = @ModuleTitle,
-       CacheTime   = @CacheTime,
-       Alignment = @Alignment,
-       Color = @Color,
-       Border = @Border,
-       IconFile = @IconFile,
-       TabId = @TabId,
-       AllTabs = @AllTabs,
-       ShowTitle = @ShowTitle,
-       Personalize = @Personalize,
-       IsDeleted = @IsDeleted,
-       Header = @Header,
-       Footer = @Footer, 
-       StartDate = @StartDate,
-       EndDate = @EndDate,
-	   InheritViewPermissions = @InheritViewPermissions
+        ModuleTitle = @ModuleTitle,
+        CacheTime   = @CacheTime,
+        Alignment = @Alignment,
+        Color = @Color,
+        Border = @Border,
+        IconFile = @IconFile,
+        TabId = @TabId,
+        AllTabs = @AllTabs,
+        ShowTitle = @ShowTitle,
+        Personalize = @Personalize,
+        IsDeleted = @IsDeleted,
+        Header = @Header,
+        Footer = @Footer,
+        StartDate = @StartDate,
+        EndDate = @EndDate,
+        InheritViewPermissions = @InheritViewPermissions
 where  ModuleId = @ModuleId
 
 GO
@@ -462,15 +462,15 @@ as
 
 update {databaseOwner}{objectQualifier}Tabs
 set    TabName            = @TabName,
-       IsVisible          = @IsVisible,
-       DisableLink        = @DisableLink,
-       ParentId           = @ParentId,
-       IconFile           = @IconFile,
-       Title              = @Title,
-       Description        = @Description,
-       KeyWords           = @KeyWords,
-       IsDeleted          = @IsDeleted,
-       Url                = @Url
+        IsVisible          = @IsVisible,
+        DisableLink        = @DisableLink,
+        ParentId           = @ParentId,
+        IconFile           = @IconFile,
+        Title              = @Title,
+        Description        = @Description,
+        KeyWords           = @KeyWords,
+        IsDeleted          = @IsDeleted,
+        Url                = @Url
 where  TabId = @TabId
 
 GO
@@ -478,13 +478,13 @@ GO
 -- If controls does not exists, insert it again
 if not exists(select * from {databaseOwner}{objectQualifier}modulecontrols where controlkey='Access Denied' and moduleDefID is null)
 begin
-	insert into {databaseOwner}{objectQualifier}ModuleControls(ModuleDefID,ControlKey,ControlTitle,ControlSrc,IconFile,ControlType,ViewOrder,HelpUrl)
-		values(null,'Access Denied','Access Denied','Admin/Security/AccessDenied.ascx',null,-1,null,null)		
+    insert into {databaseOwner}{objectQualifier}ModuleControls(ModuleDefID,ControlKey,ControlTitle,ControlSrc,IconFile,ControlType,ViewOrder,HelpUrl)
+        values(null,'Access Denied','Access Denied','Admin/Security/AccessDenied.ascx',null,-1,null,null)
 end
 -- Remove unused control
 if exists(select * from {databaseOwner}{objectQualifier}modulecontrols where controlkey='Edit Access Denied' and moduleDefID is null)
 begin
-	delete from {databaseOwner}{objectQualifier}ModuleControls where controlkey='Edit Access Denied' and moduleDefID is null
+    delete from {databaseOwner}{objectQualifier}ModuleControls where controlkey='Edit Access Denied' and moduleDefID is null
 end
 
 GO

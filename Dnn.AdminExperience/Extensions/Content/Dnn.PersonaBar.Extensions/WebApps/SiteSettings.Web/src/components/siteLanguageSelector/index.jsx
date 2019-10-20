@@ -56,7 +56,7 @@ class SiteLanguageSelector extends Component {
             });
         }
         if (props.portalId !== undefined && props.portalId !== prevProps.portalId) {
-            this.onSiteChange({ value: props.portalId });         
+            this.onSiteChange({ value: props.portalId });
         }
         if (props.cultureCode !== state.cultureCode) {
             this.onLanguageChange({ value: props.cultureCode });

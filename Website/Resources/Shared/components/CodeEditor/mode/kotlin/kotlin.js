@@ -21,11 +21,11 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
   var multiLineStrings = parserConfig.multiLineStrings;
 
   var keywords = words(
-          "package continue return object while break class data trait interface throw super" +
-          " when type this else This try val var fun for is in if do as true false null get set");
+        "package continue return object while break class data trait interface throw super" +
+        " when type this else This try val var fun for is in if do as true false null get set");
   var softKeywords = words("import" +
-      " where by get set abstract enum open annotation override private public internal" +
-      " protected catch out vararg inline finally final ref");
+    " where by get set abstract enum open annotation override private public internal" +
+    " protected catch out vararg inline finally final ref");
   var blockKeywords = words("catch class do else finally for if where try while enum");
   var atoms = words("null true false this");
 
@@ -34,59 +34,59 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
   function tokenBase(stream, state) {
     var ch = stream.next();
     if (ch == '"' || ch == "'") {
-      return startString(ch, stream, state);
+    return startString(ch, stream, state);
     }
     // Wildcard import w/o trailing semicolon (import smth.*)
     if (ch == "." && stream.eat("*")) {
-      return "word";
+    return "word";
     }
     if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
-      curPunc = ch;
-      return null;
+    curPunc = ch;
+    return null;
     }
     if (/\d/.test(ch)) {
-      if (stream.eat(/eE/)) {
+    if (stream.eat(/eE/)) {
         stream.eat(/\+\-/);
         stream.eatWhile(/\d/);
-      }
-      return "number";
+    }
+    return "number";
     }
     if (ch == "/") {
-      if (stream.eat("*")) {
+    if (stream.eat("*")) {
         state.tokenize.push(tokenComment);
         return tokenComment(stream, state);
-      }
-      if (stream.eat("/")) {
+    }
+    if (stream.eat("/")) {
         stream.skipToEnd();
         return "comment";
-      }
-      if (expectExpression(state.lastToken)) {
+    }
+    if (expectExpression(state.lastToken)) {
         return startString(ch, stream, state);
-      }
+    }
     }
     // Commented
     if (ch == "-" && stream.eat(">")) {
-      curPunc = "->";
-      return null;
+    curPunc = "->";
+    return null;
     }
     if (/[\-+*&%=<>!?|\/~]/.test(ch)) {
-      stream.eatWhile(/[\-+*&%=<>|~]/);
-      return "operator";
+    stream.eatWhile(/[\-+*&%=<>|~]/);
+    return "operator";
     }
     stream.eatWhile(/[\w\$_]/);
 
     var cur = stream.current();
     if (atoms.propertyIsEnumerable(cur)) {
-      return "atom";
+    return "atom";
     }
     if (softKeywords.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "softKeyword";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "softKeyword";
     }
 
     if (keywords.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "keyword";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "keyword";
     }
     return "word";
   }
@@ -96,38 +96,38 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
   function startString(quote, stream, state) {
     var tripleQuoted = false;
     if (quote != "/" && stream.eat(quote)) {
-      if (stream.eat(quote)) tripleQuoted = true;
-      else return "string";
+    if (stream.eat(quote)) tripleQuoted = true;
+    else return "string";
     }
     function t(stream, state) {
-      var escaped = false, next, end = !tripleQuoted;
+    var escaped = false, next, end = !tripleQuoted;
 
-      while ((next = stream.next()) != null) {
+    while ((next = stream.next()) != null) {
         if (next == quote && !escaped) {
-          if (!tripleQuoted) {
+        if (!tripleQuoted) {
             break;
-          }
-          if (stream.match(quote + quote)) {
+        }
+        if (stream.match(quote + quote)) {
             end = true;
             break;
-          }
+        }
         }
 
         if (quote == '"' && next == "$" && !escaped && stream.eat("{")) {
-          state.tokenize.push(tokenBaseUntilBrace());
-          return "string";
+        state.tokenize.push(tokenBaseUntilBrace());
+        return "string";
         }
 
         if (next == "$" && !escaped && !stream.eat(" ")) {
-          state.tokenize.push(tokenBaseUntilSpace());
-          return "string";
+        state.tokenize.push(tokenBaseUntilSpace());
+        return "string";
         }
         escaped = !escaped && next == "\\";
-      }
-      if (multiLineStrings)
+    }
+    if (multiLineStrings)
         state.tokenize.push(t);
-      if (end) state.tokenize.pop();
-      return "string";
+    if (end) state.tokenize.pop();
+    return "string";
     }
 
     state.tokenize.push(t);
@@ -138,16 +138,16 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
     var depth = 1;
 
     function t(stream, state) {
-      if (stream.peek() == "}") {
+    if (stream.peek() == "}") {
         depth--;
         if (depth == 0) {
-          state.tokenize.pop();
-          return state.tokenize[state.tokenize.length - 1](stream, state);
+        state.tokenize.pop();
+        return state.tokenize[state.tokenize.length - 1](stream, state);
         }
-      } else if (stream.peek() == "{") {
+    } else if (stream.peek() == "{") {
         depth++;
-      }
-      return tokenBase(stream, state);
+    }
+    return tokenBase(stream, state);
     }
 
     t.isBase = true;
@@ -156,15 +156,15 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
 
   function tokenBaseUntilSpace() {
     function t(stream, state) {
-      if (stream.eat(/[\w]/)) {
+    if (stream.eat(/[\w]/)) {
         var isWord = stream.eatWhile(/[\w]/);
         if (isWord) {
-          state.tokenize.pop();
-          return "word";
+        state.tokenize.pop();
+        return "word";
         }
-      }
-      state.tokenize.pop();
-      return "string";
+    }
+    state.tokenize.pop();
+    return "string";
     }
 
     t.isBase = true;
@@ -174,11 +174,11 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+    if (ch == "/" && maybeEnd) {
         state.tokenize.pop();
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return "comment";
   }
@@ -203,7 +203,7 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
   function popContext(state) {
     var t = state.context.type;
     if (t == ")" || t == "]" || t == "}")
-      state.indented = state.context.indented;
+    state.indented = state.context.indented;
     return state.context = state.context.prev;
   }
 
@@ -211,64 +211,64 @@ CodeMirror.defineMode("kotlin", function (config, parserConfig) {
 
   return {
     startState: function (basecolumn) {
-      return {
+    return {
         tokenize: [tokenBase],
         context: new Context((basecolumn || 0) - config.indentUnit, 0, "top", false),
         indented: 0,
         startOfLine: true,
         lastToken: null
-      };
+    };
     },
 
     token: function (stream, state) {
-      var ctx = state.context;
-      if (stream.sol()) {
+    var ctx = state.context;
+    if (stream.sol()) {
         if (ctx.align == null) ctx.align = false;
         state.indented = stream.indentation();
         state.startOfLine = true;
         // Automatic semicolon insertion
         if (ctx.type == "statement" && !expectExpression(state.lastToken)) {
-          popContext(state);
-          ctx = state.context;
+        popContext(state);
+        ctx = state.context;
         }
-      }
-      if (stream.eatSpace()) return null;
-      curPunc = null;
-      var style = state.tokenize[state.tokenize.length - 1](stream, state);
-      if (style == "comment") return style;
-      if (ctx.align == null) ctx.align = true;
-      if ((curPunc == ";" || curPunc == ":") && ctx.type == "statement") popContext(state);
-      // Handle indentation for {x -> \n ... }
-      else if (curPunc == "->" && ctx.type == "statement" && ctx.prev.type == "}") {
+    }
+    if (stream.eatSpace()) return null;
+    curPunc = null;
+    var style = state.tokenize[state.tokenize.length - 1](stream, state);
+    if (style == "comment") return style;
+    if (ctx.align == null) ctx.align = true;
+    if ((curPunc == ";" || curPunc == ":") && ctx.type == "statement") popContext(state);
+    // Handle indentation for {x -> \n ... }
+    else if (curPunc == "->" && ctx.type == "statement" && ctx.prev.type == "}") {
         popContext(state);
         state.context.align = false;
-      }
-      else if (curPunc == "{") pushContext(state, stream.column(), "}");
-      else if (curPunc == "[") pushContext(state, stream.column(), "]");
-      else if (curPunc == "(") pushContext(state, stream.column(), ")");
-      else if (curPunc == "}") {
+    }
+    else if (curPunc == "{") pushContext(state, stream.column(), "}");
+    else if (curPunc == "[") pushContext(state, stream.column(), "]");
+    else if (curPunc == "(") pushContext(state, stream.column(), ")");
+    else if (curPunc == "}") {
         while (ctx.type == "statement") ctx = popContext(state);
         if (ctx.type == "}") ctx = popContext(state);
         while (ctx.type == "statement") ctx = popContext(state);
-      }
-      else if (curPunc == ctx.type) popContext(state);
-      else if (ctx.type == "}" || ctx.type == "top" || (ctx.type == "statement" && curPunc == "newstatement"))
+    }
+    else if (curPunc == ctx.type) popContext(state);
+    else if (ctx.type == "}" || ctx.type == "top" || (ctx.type == "statement" && curPunc == "newstatement"))
         pushContext(state, stream.column(), "statement");
-      state.startOfLine = false;
-      state.lastToken = curPunc || style;
-      return style;
+    state.startOfLine = false;
+    state.lastToken = curPunc || style;
+    return style;
     },
 
     indent: function (state, textAfter) {
-      if (!state.tokenize[state.tokenize.length - 1].isBase) return 0;
-      var firstChar = textAfter && textAfter.charAt(0), ctx = state.context;
-      if (ctx.type == "statement" && !expectExpression(state.lastToken)) ctx = ctx.prev;
-      var closing = firstChar == ctx.type;
-      if (ctx.type == "statement") {
+    if (!state.tokenize[state.tokenize.length - 1].isBase) return 0;
+    var firstChar = textAfter && textAfter.charAt(0), ctx = state.context;
+    if (ctx.type == "statement" && !expectExpression(state.lastToken)) ctx = ctx.prev;
+    var closing = firstChar == ctx.type;
+    if (ctx.type == "statement") {
         return ctx.indented + (firstChar == "{" ? 0 : config.indentUnit);
-      }
-      else if (ctx.align) return ctx.column + (closing ? 0 : 1);
-      else return ctx.indented + (closing ? 0 : config.indentUnit);
+    }
+    else if (ctx.align) return ctx.column + (closing ? 0 : 1);
+    else return ctx.indented + (closing ? 0 : config.indentUnit);
     },
 
     closeBrackets: {triples: "'\""},

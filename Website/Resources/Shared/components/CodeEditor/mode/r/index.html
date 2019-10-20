@@ -8,11 +8,11 @@
 <script src="../../lib/codemirror.js"></script>
 <script src="r.js"></script>
 <style>
-      .CodeMirror { border-top: 1px solid silver; border-bottom: 1px solid silver; }
-      .cm-s-default span.cm-semi { color: blue; font-weight: bold; }
-      .cm-s-default span.cm-dollar { color: orange; font-weight: bold; }
-      .cm-s-default span.cm-arrow { color: brown; }
-      .cm-s-default span.cm-arg-is { color: brown; }
+    .CodeMirror { border-top: 1px solid silver; border-bottom: 1px solid silver; }
+    .cm-s-default span.cm-semi { color: blue; font-weight: bold; }
+    .cm-s-default span.cm-dollar { color: orange; font-weight: bold; }
+    .cm-s-default span.cm-arrow { color: brown; }
+    .cm-s-default span.cm-arg-is { color: brown; }
     </style>
 <div id=nav>
   <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
@@ -46,7 +46,7 @@ square <- function(x) {
 }
 cat("The square of 3 is ", square(3), "\n")
 
-                 # default value of the arg is set to 5.
+                # default value of the arg is set to 5.
 cube <- function(x=5) {
   return(x*x*x);
 }
@@ -74,7 +74,7 @@ print("Showing powers of 3 --"); print(powerful(3));
 powerful <- function(x) {list(x2=x*x, x3=x*x*x, x4=x*x*x*x)}
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {});
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-rsrc</code>.</p>

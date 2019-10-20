@@ -115,7 +115,7 @@ namespace Dnn.AzureConnector.Components
 
             var settings = folderMapping != null ? folderMapping.FolderMappingSettings : new Hashtable();
 
-            
+
             configs.Add("AccountName", GetSetting(settings, Constants.AzureAccountName, true));
             configs.Add("AccountKey", GetSetting(settings, Constants.AzureAccountKey, true));
             configs.Add("Container", GetSetting(settings, Constants.AzureContainerName));
@@ -191,7 +191,7 @@ namespace Dnn.AzureConnector.Components
 
                 settings[Constants.AzureAccountName] = folderProvider.EncryptValue(azureAccountName);
                 settings[Constants.AzureAccountKey] = folderProvider.EncryptValue(azureAccountKey);
-                
+
                 if (values.ContainsKey(Constants.AzureContainerName) && !string.IsNullOrEmpty(values[Constants.AzureContainerName]))
                 {
                     settings[Constants.AzureContainerName] = values[Constants.AzureContainerName];
@@ -210,7 +210,7 @@ namespace Dnn.AzureConnector.Components
                     folderMapping.FolderMappingSettings[Constants.UseHttps] = "True";
                 }
                 if (folderMapping.MappingName != DisplayName && !string.IsNullOrEmpty(DisplayName) &&
-                   DisplayName != DefaultDisplayName)
+                    DisplayName != DefaultDisplayName)
                 {
                     folderMapping.MappingName = DisplayName;
                 }
@@ -414,7 +414,7 @@ namespace Dnn.AzureConnector.Components
         private static void DeleteAzureFolderMapping(int portalId)
         {
             var folderMapping = FolderMappingController.Instance.GetFolderMappings(portalId)
-                           .FirstOrDefault(f => f.FolderProviderType == Constants.FolderProviderType);
+                            .FirstOrDefault(f => f.FolderProviderType == Constants.FolderProviderType);
 
             if (folderMapping != null)
             {
@@ -445,10 +445,10 @@ namespace Dnn.AzureConnector.Components
                 var removableFolders =
                     folders.Where(
                         f => f.FolderMappingID == folderMappingId && !folders1.Any(f2 => f2.FolderID != f.FolderID &&
-                                                                                         f2.FolderPath.StartsWith(
-                                                                                             f.FolderPath) &&
-                                                                                         f2.FolderMappingID !=
-                                                                                         folderMappingId));
+                                                                                        f2.FolderPath.StartsWith(
+                                                                                            f.FolderPath) &&
+                                                                                        f2.FolderMappingID !=
+                                                                                        folderMappingId));
 
                 if (removableFolders.Count() > 0)
                 {

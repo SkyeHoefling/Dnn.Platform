@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -53,7 +53,7 @@ namespace DotNetNuke.Entities.Urls
         private const string DisableRedirectPresistCookieName = "disableredirectpresist"; //dnn cookies
 
         private const string DisableMobileRedirectQueryStringName = "nomo";
-                             //google uses the same name nomo=1 means do not redirect to mobile
+                            //google uses the same name nomo=1 means do not redirect to mobile
 
         private const string MobileViewSiteCookieName = "dnn_IsMobile";
         private const string DisableMobileViewCookieName = "dnn_NoMobile";
@@ -107,7 +107,7 @@ namespace DotNetNuke.Entities.Urls
         /// <remarks>Updated  to insert where an ascii replacement or spaces-replaced replacement has been made (562)</remarks>
         private static void BuildFriendlyUrls(TabInfo tab, bool includeStdUrls, PortalSettings portalSettings, FriendlyUrlSettings settings)
         {
-            
+
             //unfriendly Url
             if (includeStdUrls)
             {
@@ -125,7 +125,7 @@ namespace DotNetNuke.Entities.Urls
                 if (tab.TabUrls.Count > 0)
                 {
                     //there are custom redirects for this tab
-                    //cycle through all and collect the list of cultures where a 
+                    //cycle through all and collect the list of cultures where a
                     //custom redirect has been implemented
                     foreach (TabUrlInfo redirect in tab.TabUrls)
                     {
@@ -154,7 +154,7 @@ namespace DotNetNuke.Entities.Urls
                     SetExclusionProperties(tab, settings);
 
                     //friendly Urls are switched on
-                    //std = default.aspx?tabId=xx 
+                    //std = default.aspx?tabId=xx
                     //and page not excluded from redirects
                     bool onlyBaseUrls = tab.UseBaseFriendlyUrls;
                         //use base means only use Base Friendly Urls (searchFriendly)
@@ -187,24 +187,24 @@ namespace DotNetNuke.Entities.Urls
 
                         var improvedFriendlyUrls = new Dictionary<string, string>();
                         //call friendly url provider to get current friendly url (uses all settings)
-                        string baseFriendlyUrl = GetFriendlyUrl(tab, 
-                                                                stdUrl + langQs, 
+                        string baseFriendlyUrl = GetFriendlyUrl(tab,
+                                                                stdUrl + langQs,
                                                                 Globals.glbDefaultPage,
-                                                                portalSettings.PortalAlias.HTTPAlias, 
+                                                                portalSettings.PortalAlias.HTTPAlias,
                                                                 settings);
 
                         if (onlyBaseUrls == false)
                         {
-                            //get the improved friendly Url for this tab                    
+                            //get the improved friendly Url for this tab
                             //improved friendly Url = 'human friendly' url generated by Advanced Friendly Url Provider : note call is made to ignore custom redirects
-                            //this temp switch is to clear out the useBaseFriendlyUrls setting.  The post-process setting means the generated 
+                            //this temp switch is to clear out the useBaseFriendlyUrls setting.  The post-process setting means the generated
                             //friendly url will be a base url, and then replaced later when the page is finished.  Because we want to pretend we're
                             //looking at the finished product, we clear out the value and restore it after the friendly url generation
-                            string improvedFriendlyUrl = GetImprovedFriendlyUrl(tab, 
-                                                                                stdUrl + langQs, 
-                                                                                Globals.glbDefaultPage, 
-                                                                                portalSettings, 
-                                                                                true, 
+                            string improvedFriendlyUrl = GetImprovedFriendlyUrl(tab,
+                                                                                stdUrl + langQs,
+                                                                                Globals.glbDefaultPage,
+                                                                                portalSettings,
+                                                                                true,
                                                                                 settings);
 
                             improvedFriendlyUrls.Add("hfurl:" + cultureCode, improvedFriendlyUrl);
@@ -237,11 +237,11 @@ namespace DotNetNuke.Entities.Urls
                                 settings.ReplaceSpaceWith = "None";
                                 settings.AutoAsciiConvert = false;
                                 //get one without auto ascii convert, and replace spaces off
-                                string impUrl = GetImprovedFriendlyUrl(tab, 
-                                                                        stdUrl + langQs, 
+                                string impUrl = GetImprovedFriendlyUrl(tab,
+                                                                        stdUrl + langQs,
                                                                         Globals.glbDefaultPage,
-                                                                        httpAlias, 
-                                                                        true, 
+                                                                        httpAlias,
+                                                                        true,
                                                                         settings);
                                 improvedFriendlyUrls.Add("aac:rsw:" + cultureCode, impUrl);
                                 settings.AutoAsciiConvert = true;
@@ -254,11 +254,11 @@ namespace DotNetNuke.Entities.Urls
                             {
                                 settings.AutoAsciiConvert = false;
                                 //get one with auto ascii convert off
-                                string impUrl = GetImprovedFriendlyUrl(tab, 
-                                                                        stdUrl + langQs, 
+                                string impUrl = GetImprovedFriendlyUrl(tab,
+                                                                        stdUrl + langQs,
                                                                         Globals.glbDefaultPage,
-                                                                        httpAlias, 
-                                                                        true, 
+                                                                        httpAlias,
+                                                                        true,
                                                                         settings);
                                 improvedFriendlyUrls.Add("aac:" + cultureCode, impUrl);
                                 settings.AutoAsciiConvert = true;
@@ -268,11 +268,11 @@ namespace DotNetNuke.Entities.Urls
                                 string replaceSpaceWith = settings.ReplaceSpaceWith;
                                 settings.ReplaceSpaceWith = "None";
                                 //get one with replace spaces off
-                                string impUrl = GetImprovedFriendlyUrl(tab, 
-                                                                        stdUrl + langQs, 
+                                string impUrl = GetImprovedFriendlyUrl(tab,
+                                                                        stdUrl + langQs,
                                                                         Globals.glbDefaultPage,
-                                                                        httpAlias, 
-                                                                        true, 
+                                                                        httpAlias,
+                                                                        true,
                                                                         settings);
                                 improvedFriendlyUrls.Add("rsw:" + cultureCode, impUrl);
                                 settings.ReplaceSpaceWith = replaceSpaceWith;
@@ -353,7 +353,7 @@ namespace DotNetNuke.Entities.Urls
                         var baseFriendly = new TabUrlInfo
                                                 {
                                                     TabId = tab.TabID,
-                                                    HttpStatus = (settings.RedirectUnfriendly == false || IsExcludedFromFriendlyUrls(tab, settings, true)) 
+                                                    HttpStatus = (settings.RedirectUnfriendly == false || IsExcludedFromFriendlyUrls(tab, settings, true))
                                                                         ? "200"
                                                                         : baseFriendlyHttpStatus,
                                                     CultureCode = cultureCode,
@@ -379,7 +379,7 @@ namespace DotNetNuke.Entities.Urls
                 }
             }
         }
-        
+
         /// <summary>
         /// A reflection based call to the Friendly Url provider to get the 'base' (dnn standard) urls
         /// </summary>
@@ -390,7 +390,7 @@ namespace DotNetNuke.Entities.Urls
         /// <param name="settings"></param>
         /// <returns></returns>
         internal static string GetFriendlyUrl(TabInfo tab, string path, string defaultPage, string httpAlias,
-                                              FriendlyUrlSettings settings)
+                                            FriendlyUrlSettings settings)
         {
             List<string> messages;
             object result = CallFriendlyUrlProviderMethod("BaseFriendlyUrl", out messages, tab, path, defaultPage, httpAlias, settings);
@@ -402,12 +402,12 @@ namespace DotNetNuke.Entities.Urls
         }
 
         internal static string GetImprovedFriendlyUrl(TabInfo tab, string path, string defaultPage, string httpAlias,
-                                                      bool ignoreCustomRedirects)
+                                                    bool ignoreCustomRedirects)
         {
             FriendlyUrlSettings settings = GetCurrentSettings(tab.PortalID);
             List<string> messages;
             return GetImprovedFriendlyUrl(tab, path, defaultPage, httpAlias, ignoreCustomRedirects, settings,
-                                          out messages);
+                                        out messages);
         }
 
         /// <summary>
@@ -421,33 +421,19 @@ namespace DotNetNuke.Entities.Urls
         /// <param name="settings"></param>
         /// <returns></returns>
         internal static string GetImprovedFriendlyUrl(TabInfo tab, string path, string defaultPage, string httpAlias,
-                                                      bool ignoreCustomRedirects, FriendlyUrlSettings settings)
+                                                    bool ignoreCustomRedirects, FriendlyUrlSettings settings)
         {
             List<string> messages;
             return GetImprovedFriendlyUrl(tab, path, defaultPage, httpAlias, ignoreCustomRedirects, settings,
-                                          out messages);
+                                        out messages);
         }
 
         internal static string GetImprovedFriendlyUrl(TabInfo tab, string path, string defaultPage, string httpAlias,
-                                                      bool ignoreCustomRedirects, FriendlyUrlSettings settings,
-                                                      out List<string> messages)
+                                                    bool ignoreCustomRedirects, FriendlyUrlSettings settings,
+                                                    out List<string> messages)
         {
             object result = CallFriendlyUrlProviderMethod("ImprovedFriendlyUrlWithMessages", out messages, tab, path,
-                                                          defaultPage, httpAlias, ignoreCustomRedirects, settings);
-            if (result != null)
-            {
-                return (string) result;
-            }
-            return "";
-        }
-        
-        internal static string GetImprovedFriendlyUrl(TabInfo tab, string path, string defaultPage,
-                                                      PortalSettings portalSettings, bool ignoreCustomRedirects,
-                                                      FriendlyUrlSettings settings)
-        {
-            List<string> messages;
-            object result = CallFriendlyUrlProviderMethod("ImprovedFriendlyUrlWithSettings", out messages, tab, path,
-                                                          defaultPage, portalSettings, ignoreCustomRedirects, settings);
+                                                        defaultPage, httpAlias, ignoreCustomRedirects, settings);
             if (result != null)
             {
                 return (string) result;
@@ -456,12 +442,26 @@ namespace DotNetNuke.Entities.Urls
         }
 
         internal static string GetImprovedFriendlyUrl(TabInfo tab, string path, string defaultPage,
-                                                      PortalSettings portalSettings, bool ignoreCustomRedirects,
-                                                      FriendlyUrlSettings settings, out List<string> messages)
+                                                    PortalSettings portalSettings, bool ignoreCustomRedirects,
+                                                    FriendlyUrlSettings settings)
+        {
+            List<string> messages;
+            object result = CallFriendlyUrlProviderMethod("ImprovedFriendlyUrlWithSettings", out messages, tab, path,
+                                                        defaultPage, portalSettings, ignoreCustomRedirects, settings);
+            if (result != null)
+            {
+                return (string) result;
+            }
+            return "";
+        }
+
+        internal static string GetImprovedFriendlyUrl(TabInfo tab, string path, string defaultPage,
+                                                    PortalSettings portalSettings, bool ignoreCustomRedirects,
+                                                    FriendlyUrlSettings settings, out List<string> messages)
         {
             object result = CallFriendlyUrlProviderMethod("ImprovedFriendlyUrlWithSettingsAndMessages", out messages,
-                                                          tab, path, defaultPage, portalSettings, ignoreCustomRedirects,
-                                                          settings);
+                                                        tab, path, defaultPage, portalSettings, ignoreCustomRedirects,
+                                                        settings);
             if (result != null)
             {
                 return (string) result;
@@ -485,7 +485,7 @@ namespace DotNetNuke.Entities.Urls
             }
             return "";
         }
-        
+
         internal static string ReplaceDiacritics(string tabPath)
         {
             object result = CallTabPathHelperMethod("ReplaceDiacritics", tabPath);
@@ -495,7 +495,7 @@ namespace DotNetNuke.Entities.Urls
             }
             return "";
         }
-        
+
         public static void RebuildCustomUrlDict(string reason, int portalId)
         {
             CallTabDictControllerMethod("InvalidateDictionary", reason, null, portalId);
@@ -508,7 +508,7 @@ namespace DotNetNuke.Entities.Urls
         //    object retval = CallUrlRewriterMethod("ProcessTestRequest", out messages, useFriendlyUrls, httpMethod, requestUri, result, queryString, settings);
         //}
         /// <summary>
-        /// Gets the Reflection MethodInfo object of the FriendlyUrlProvider method, 
+        /// Gets the Reflection MethodInfo object of the FriendlyUrlProvider method,
         /// as LONG as the iFInity.UrlMaster.FriendlyUrlProvider can be found
         /// </summary>
         /// <remarks>This is a heavyweight proc, don't call too much!</remarks>
@@ -524,7 +524,7 @@ namespace DotNetNuke.Entities.Urls
         private static void CallTabDictControllerMethod(string methodName, params object[] parameters)
         {
             CallFriendlyUrlProviderDllMethod(methodName, "iFinity.DNN.Modules.UrlMaster.TabDictController",
-                                             parameters);
+                                            parameters);
         }
 
         private static object CallTabPathHelperMethod(string methodName, params object[] parameters)
@@ -534,14 +534,14 @@ namespace DotNetNuke.Entities.Urls
         }
 
         private static object CallFriendlyUrlProviderDllMethod(string methodName, string typeName,
-                                                               params object[] parameters)
+                                                                params object[] parameters)
         {
             List<string> messages;
             return CallFriendlyUrlProviderDllMethod(methodName, typeName, out messages, parameters);
         }
 
         private static object CallFriendlyUrlProviderDllMethod(string methodName, string typeName,
-                                                               out List<string> messages, params object[] parameters)
+                                                                out List<string> messages, params object[] parameters)
         {
             object result = null;
             messages = null;
@@ -557,7 +557,7 @@ namespace DotNetNuke.Entities.Urls
                     {
                         Type providerType = type;
                         string providerTypeName = providerType.Name;
-                        //570 : check to see if it is an abstract class before trying to instantiate the 
+                        //570 : check to see if it is an abstract class before trying to instantiate the
                         //calling object
                         if (!providerType.IsAbstract)
                         {
@@ -585,7 +585,7 @@ namespace DotNetNuke.Entities.Urls
                             MethodInfo method = providerType.GetMethod(methodName);
                             if (method != null)
                             {
-                                //new collection 
+                                //new collection
                                 int messageParmIdx = -1;
                                 var parmValues = new List<object>(parameters);
                                 ParameterInfo[] methodParms = method.GetParameters();
@@ -637,7 +637,7 @@ namespace DotNetNuke.Entities.Urls
         }
         */
         #endregion
-  
+
         #region Database methods
 
         public static Dictionary<int, TabInfo> GetTabs(int portalId, bool includeStdUrls)
@@ -648,7 +648,7 @@ namespace DotNetNuke.Entities.Urls
         public static Dictionary<int, TabInfo> GetTabs(int portalId, bool includeStdUrls, FriendlyUrlSettings settings)
         {
             PortalSettings portalSettings = null;
-            //716 just ignore portal settings if we don't actually need it 
+            //716 just ignore portal settings if we don't actually need it
             if (includeStdUrls)
             {
                 portalSettings = PortalController.Instance.GetCurrentPortalSettings();
@@ -850,7 +850,7 @@ namespace DotNetNuke.Entities.Urls
             }
             bool convertDiacritics = options.ConvertDiacriticChars;
             Regex regexMatch = options.RegexMatchRegex;
-            string replaceWith = options.PunctuationReplacement;            
+            string replaceWith = options.PunctuationReplacement;
             bool replaceDoubleChars = options.ReplaceDoubleChars;
             Dictionary<string, string> replacementChars = options.ReplaceCharWithChar;
 
@@ -905,7 +905,7 @@ namespace DotNetNuke.Entities.Urls
                     {
                         ch = ""; //not a replacement or allowed char, so doesn't go into Url
                         replacedUnwantedChars = true;
-                        //if we are here, this character isn't going into the output Url                        
+                        //if we are here, this character isn't going into the output Url
                     }
                 }
 
@@ -960,7 +960,7 @@ namespace DotNetNuke.Entities.Urls
                 string start = path.Substring(0, leading.Length);
                 if (String.Compare(start, leading, StringComparison.OrdinalIgnoreCase) != 0)
                 {
-                    //not leading with this 
+                    //not leading with this
                     path = leading + path;
                 }
             }
@@ -1010,7 +1010,7 @@ namespace DotNetNuke.Entities.Urls
                             // Store the result as a cookie.
                             if (viewMobileCookie == null)
                             {
-                                response.Cookies.Add(new HttpCookie(MobileViewSiteCookieName, isMobile.ToString()) 
+                                response.Cookies.Add(new HttpCookie(MobileViewSiteCookieName, isMobile.ToString())
                                     { Path = (!string.IsNullOrEmpty(Globals.ApplicationPath) ? Globals.ApplicationPath : "/") });
                             }
                             else
@@ -1066,11 +1066,11 @@ namespace DotNetNuke.Entities.Urls
             {
                 var friendlyUrlSettings = GetCurrentSettings(settings.PortalId);
                 var tabs = TabController.Instance.GetTabsByPortal(settings.PortalId).AsList();
-				//DNN-6492: if content localize enabled, only check tab names in current culture.
-	            if (settings.ContentLocalizationEnabled)
-	            {
-		            tabs = tabs.Where(t => t.CultureCode == settings.CultureCode).ToList();
-	            }
+                //DNN-6492: if content localize enabled, only check tab names in current culture.
+                if (settings.ContentLocalizationEnabled)
+                {
+                    tabs = tabs.Where(t => t.CultureCode == settings.CultureCode).ToList();
+                }
 
                 foreach (TabInfo tab in tabs)
                 {

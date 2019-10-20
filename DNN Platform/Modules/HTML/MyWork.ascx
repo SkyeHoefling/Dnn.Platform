@@ -5,21 +5,21 @@
 <dnncl:DnnCssInclude ID="customJS" runat="server" FilePath="DesktopModules/HTML/edit.css" AddTag="false" />
 
 <div class="dnnForm dnnMyWork dnnClear">
-	<dnnweb:DnnGrid ID="dgTabs" runat="server" AutoGenerateColumns="False" AllowPaging="false" EnableViewState="true" CssClass="dnnGrid">
-			<Columns>
-				<dnnweb:DnnGridTemplateColumn HeaderText="Page">
-					<ItemTemplate>
-						<%#FormatURL(Container.DataItem)%>
-					</ItemTemplate>
-				</dnnweb:DnnGridTemplateColumn>
-			</Columns>
-			<EmptyDataTemplate>
-				<div class="dnnFormMessage dnnFormWarning">
-					<asp:Label ID="lblNoRecords" resourcekey="lblNoRecords" runat="server" />
-				</div>
-			</EmptyDataTemplate>
-	</dnnweb:DnnGrid>
-	<ul class="dnnActions dnnClear">
-		<li><asp:HyperLink id="hlCancel" runat="server" class="dnnPrimaryAction" resourcekey="cmdCancel" /></li>
-	</ul>
+    <dnnweb:DnnGrid ID="dgTabs" runat="server" AutoGenerateColumns="False" AllowPaging="false" EnableViewState="true" CssClass="dnnGrid">
+            <Columns>
+                <dnnweb:DnnGridTemplateColumn HeaderText="Page">
+                    <ItemTemplate>
+                        <%#FormatURL(Container.DataItem)%>
+                    </ItemTemplate>
+                </dnnweb:DnnGridTemplateColumn>
+            </Columns>
+            <EmptyDataTemplate>
+                <div class="dnnFormMessage dnnFormWarning">
+                    <asp:Label ID="lblNoRecords" resourcekey="lblNoRecords" runat="server" />
+                </div>
+            </EmptyDataTemplate>
+    </dnnweb:DnnGrid>
+    <ul class="dnnActions dnnClear">
+        <li><asp:HyperLink id="hlCancel" runat="server" class="dnnPrimaryAction" resourcekey="cmdCancel" /></li>
+    </ul>
 </div>

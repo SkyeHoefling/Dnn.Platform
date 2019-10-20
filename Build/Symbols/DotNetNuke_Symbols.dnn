@@ -1,26 +1,26 @@
 ﻿<dotnetnuke type="Package" version="5.0">
   <packages>
     <package name="DotNetNuke_Symbols" type="Library" >
-      <friendlyName>DNN @@VER_NAME@@ Symbols</friendlyName>
-      <description>This package contains Debug Symbols and Intellisense files for DNN @@VER_NAME@@ Edition.</description>
-      <owner>
+    <friendlyName>DNN @@VER_NAME@@ Symbols</friendlyName>
+    <description>This package contains Debug Symbols and Intellisense files for DNN @@VER_NAME@@ Edition.</description>
+    <owner>
         <name>DNN Corporation</name>
         <organization>DNN Corporation</organization>
         <url>https://www.dnnsoftware.com</url>
         <email>support@dnnsoftware.com</email>
-      </owner>
-      <license src="license.txt" />
-      <releaseNotes src="releaseNotes.txt" />
-      <components>
+    </owner>
+    <license src="license.txt" />
+    <releaseNotes src="releaseNotes.txt" />
+    <components>
         <component type="ResourceFile">
-          <resourceFiles>
+        <resourceFiles>
             <basePath></basePath>
             <resourceFile>
-              <name>Resources.zip</name>
+            <name>Resources.zip</name>
             </resourceFile>
-          </resourceFiles>
+        </resourceFiles>
         </component>
-      </components>
+    </components>
     </package>
   </packages>
 </dotnetnuke>

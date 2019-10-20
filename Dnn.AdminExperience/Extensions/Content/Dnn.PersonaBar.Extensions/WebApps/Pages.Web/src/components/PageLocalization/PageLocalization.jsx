@@ -201,7 +201,7 @@ class PageLocalization extends Component {
     render() {
         const {Pages} = this.state;
         const isNeutral = Pages ? !Pages.length : true;
-        
+
         const Languages = this.getAllLanguages();
         const containerStyle = { width: (Languages.length - 1) * 250 };
 

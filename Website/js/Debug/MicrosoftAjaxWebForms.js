@@ -545,11 +545,11 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
     }
 
     function Sys$WebForms$PageRequestManager$_getPageLoadedEventArgs(initialLoad) {
-                                                                                                                                        
+
         var updated = [];
         var created = [];
 
-                var oldIDs = this._oldUpdatePanelIDs || [];         var newIDs = this._updatePanelIDs;         var childIDs = this._childUpdatePanelIDs || [];         var refreshedIDs = this._panelsToRefreshIDs || []; 
+                var oldIDs = this._oldUpdatePanelIDs || [];         var newIDs = this._updatePanelIDs;         var childIDs = this._childUpdatePanelIDs || [];         var refreshedIDs = this._panelsToRefreshIDs || [];
                 for (var i = 0; i < refreshedIDs.length; i++) {
             Array.add(updated, document.getElementById(this._uniqueIDToClientID(refreshedIDs[i])));
         }
@@ -564,7 +564,7 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
     }
 
     function Sys$WebForms$PageRequestManager$_getPageLoadingEventArgs() {
-                                                                                                                                        
+
         var updated = [];
         var deleted = [];
 
@@ -607,7 +607,7 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
                         var indexOfPanel = Array.indexOf(this._updatePanelClientIDs, element.id);
                         if (indexOfPanel !== -1) {
                                                         if (this._updatePanelHasChildrenAsTriggers[indexOfPanel]) {
-                                                                
+
                                                                                                                                 return this._createPostBackSettings(true, this._updatePanelIDs[indexOfPanel] + '|' + elementUniqueID, originalElement);
                             }
                             else {
@@ -676,7 +676,7 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
 
         this._form = formElement;
 
-        
+
                 this._form._initialAction = this._form.action;
 
         this._onsubmit = this._form.onsubmit;
@@ -860,7 +860,7 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
         this._processingRequest = true;
 
         var delimitByLengthDelimiter = '|';
-        
+
         if (sender.get_timedOut()) {
             this._endPostBack(this._createPageRequestManagerTimeoutError(), sender);
             return;
@@ -1206,7 +1206,7 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
     }
 
     function Sys$WebForms$PageRequestManager$_scriptsLoadComplete() {
-                        
+
                                                 if (window.__theFormPostData) {
             window.__theFormPostData = "";
         }
@@ -1478,13 +1478,13 @@ Sys.UI._UpdateProgress = function Sys$UI$_UpdateProgress(element) {
     }
     function Sys$UI$_UpdateProgress$_handleBeginRequest(sender, arg) {
         var curElem = arg.get_postBackElement();
-        var showProgress = !this._associatedUpdatePanelId; 
+        var showProgress = !this._associatedUpdatePanelId;
         while (!showProgress && curElem) {
             if (curElem.id && this._associatedUpdatePanelId === curElem.id) {
-                showProgress = true; 
+                showProgress = true;
             }
-            curElem = curElem.parentNode; 
-        } 
+            curElem = curElem.parentNode;
+        }
         if (showProgress) {
             this._timerCookie = window.setTimeout(this._startDelegate, this._displayAfter);
         }
@@ -1505,24 +1505,24 @@ Sys.UI._UpdateProgress = function Sys$UI$_UpdateProgress(element) {
         }
     }
     function Sys$UI$_UpdateProgress$dispose() {
-       if (this._pageRequestManager !== null) {
-           this._pageRequestManager.remove_beginRequest(this._beginRequestHandlerDelegate);
-           this._pageRequestManager.remove_endRequest(this._endRequestHandlerDelegate);
-       }
-       Sys.UI._UpdateProgress.callBaseMethod(this,"dispose");
+        if (this._pageRequestManager !== null) {
+            this._pageRequestManager.remove_beginRequest(this._beginRequestHandlerDelegate);
+            this._pageRequestManager.remove_endRequest(this._endRequestHandlerDelegate);
+        }
+        Sys.UI._UpdateProgress.callBaseMethod(this,"dispose");
     }
     function Sys$UI$_UpdateProgress$initialize() {
         Sys.UI._UpdateProgress.callBaseMethod(this, 'initialize');
-    	this._beginRequestHandlerDelegate = Function.createDelegate(this, this._handleBeginRequest);
-    	this._endRequestHandlerDelegate = Function.createDelegate(this, this._handleEndRequest);
-    	this._startDelegate = Function.createDelegate(this, this._startRequest);
-    	if (Sys.WebForms && Sys.WebForms.PageRequestManager) {
-           this._pageRequestManager = Sys.WebForms.PageRequestManager.getInstance();
-    	}
-    	if (this._pageRequestManager !== null ) {
-               	    this._pageRequestManager.add_beginRequest(this._beginRequestHandlerDelegate);
-    	    this._pageRequestManager.add_endRequest(this._endRequestHandlerDelegate);
-    	}
+        this._beginRequestHandlerDelegate = Function.createDelegate(this, this._handleBeginRequest);
+        this._endRequestHandlerDelegate = Function.createDelegate(this, this._handleEndRequest);
+        this._startDelegate = Function.createDelegate(this, this._startRequest);
+        if (Sys.WebForms && Sys.WebForms.PageRequestManager) {
+            this._pageRequestManager = Sys.WebForms.PageRequestManager.getInstance();
+        }
+        if (this._pageRequestManager !== null ) {
+                        this._pageRequestManager.add_beginRequest(this._beginRequestHandlerDelegate);
+            this._pageRequestManager.add_endRequest(this._endRequestHandlerDelegate);
+        }
     }
 Sys.UI._UpdateProgress.prototype = {
     get_displayAfter: Sys$UI$_UpdateProgress$get_displayAfter,

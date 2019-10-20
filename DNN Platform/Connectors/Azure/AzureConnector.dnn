@@ -4,9 +4,9 @@
             <friendlyName>Dnn Azure Connector</friendlyName>
             <description>The Azure Connector allows you to integrate Azure as your commenting solution with the Publisher module.</description>
             <iconFile>~/DesktopModules/Connectors/Azure/Images/icon-azure-32px.png</iconFile>
-          <dependencies>
+        <dependencies>
             <dependency type="CoreVersion">09.02.00</dependency>
-          </dependencies>
+        </dependencies>
             <owner>
                 <name>DNN</name>
                 <organization>DNN Corporation</organization>

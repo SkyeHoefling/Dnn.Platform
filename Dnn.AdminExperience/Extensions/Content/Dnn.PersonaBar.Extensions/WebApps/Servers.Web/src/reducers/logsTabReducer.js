@@ -23,8 +23,8 @@ export default function webTabReducer(state = {
             return { ...state,
                 logs: {},
                 errorMessage:  action.payload.errorMessage
-            }; 
-        
+            };
+
         case ActionTypes.LOAD_LOG:
             return { ...state,
                 selectedLog: action.payload.log,
@@ -38,8 +38,8 @@ export default function webTabReducer(state = {
         case ActionTypes.ERROR_LOADING_LOG:
             return { ...state,
                 errorMessage:  action.payload.errorMessage
-            }; 
+            };
         default:
-            return state;     
+            return state;
     }
 }

@@ -2,19 +2,19 @@
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -80,7 +80,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
                 else
                 {
                     this.Progressing();
-                   
+
                     var instantMessages = this.HandleInstantMessages(schedulerInstance);
                     var remainingMessages = Host.MessageSchedulerBatchSize - instantMessages;
                     if (remainingMessages > 0)
@@ -135,7 +135,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
             template = template.Replace("[MESSAGEBODY]", messageBody); // moved to top since that we we can replace tokens in there too...
             template = template.Replace("[RECIPIENTUSERID]", recipientUser.UserID.ToString(CultureInfo.InvariantCulture));
             template = template.Replace("[RECIPIENTDISPLAYNAME]", recipientUser.DisplayName);
-            template = template.Replace("[RECIPIENTEMAIL]", recipientUser.Email);    
+            template = template.Replace("[RECIPIENTEMAIL]", recipientUser.Email);
             template = template.Replace("[SITEURL]", GetPortalHomeUrl(portalSettings));
             template = template.Replace("[NOTIFICATIONURL]", GetNotificationUrl(portalSettings, recipientUser.UserID));
             template = template.Replace("[PORTALNAME]", portalSettings.PortalName);
@@ -172,7 +172,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
                 var acceptUrl = GetRelationshipAcceptRequestUrl(portalSettings, authorId, "AcceptFriend");
                 var profileUrl = GetProfileUrl(portalSettings, authorId);
                 var linkContent = GetFriendRequestActionsTemplate(defaultLanguage);
-                emailItemContent = emailItemContent.Replace("[FRIENDREQUESTACTIONS]", string.Format(linkContent, acceptUrl, profileUrl));                
+                emailItemContent = emailItemContent.Replace("[FRIENDREQUESTACTIONS]", string.Format(linkContent, acceptUrl, profileUrl));
             }
 
             if (messageDetails.NotificationTypeID == 3)
@@ -183,13 +183,13 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
                 var acceptUrl = GetRelationshipAcceptRequestUrl(portalSettings, authorId, "FollowBack");
                 var profileUrl = GetProfileUrl(portalSettings, authorId);
                 var linkContent = GetFollowRequestActionsTemplate(defaultLanguage);
-                emailItemContent = emailItemContent.Replace("[FOLLOWREQUESTACTIONS]", string.Format(linkContent, acceptUrl, profileUrl));            
+                emailItemContent = emailItemContent.Replace("[FOLLOWREQUESTACTIONS]", string.Format(linkContent, acceptUrl, profileUrl));
             }
 
             // No social actions for the rest of notifications types
             emailItemContent = emailItemContent.Replace("[FOLLOWREQUESTACTIONS]", string.Empty);
-            emailItemContent = emailItemContent.Replace("[FRIENDREQUESTACTIONS]", string.Empty);    
-            
+            emailItemContent = emailItemContent.Replace("[FRIENDREQUESTACTIONS]", string.Empty);
+
             return emailItemContent;
         }
 
@@ -277,9 +277,9 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
                 "http://{0}/tabid/{1}/userId/{2}/action/{3}/{4}",
                 portalSettings.DefaultPortalAlias,
                 portalSettings.UserTabId,
-                                 userId.ToString(CultureInfo.InvariantCulture),
-                                 action,
-                                 Globals.glbDefaultPage);
+                                userId.ToString(CultureInfo.InvariantCulture),
+                                action,
+                                Globals.glbDefaultPage);
         }
 
         /// <summary>Gets the profile URL.</summary>
@@ -303,8 +303,8 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
         private static string GetDisplayName(PortalSettings portalSettings, int userId)
         {
             return (UserController.GetUserById(portalSettings.PortalId, userId) != null)
-                       ? UserController.GetUserById(portalSettings.PortalId, userId).DisplayName
-                       : portalSettings.PortalName;
+                        ? UserController.GetUserById(portalSettings.PortalId, userId).DisplayName
+                        : portalSettings.PortalName;
         }
 
         /// <summary>Gets the notification URL.</summary>
@@ -366,8 +366,8 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
         {
             var portalAlias = portalSettings.DefaultPortalAlias;
             return portalAlias.IndexOf("/", StringComparison.InvariantCulture) != -1 ?
-                       portalAlias.Substring(0, portalAlias.IndexOf("/", StringComparison.InvariantCulture)) :
-                       portalAlias;
+                        portalAlias.Substring(0, portalAlias.IndexOf("/", StringComparison.InvariantCulture)) :
+                        portalAlias;
         }
 
         /// <summary>Gets the portal home URL.</summary>
@@ -388,7 +388,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
                 "http://{0}/tabid/{1}/ctl/Profile/userId/{2}/pageno/3",
                 portalSettings.DefaultPortalAlias,
                 GetMessageTab(portalSettings),
-                                 userId);
+                                userId);
         }
 
         /// <summary>Gets the message tab.</summary>
@@ -397,7 +397,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
         private static int GetMessageTab(PortalSettings sendingPortal)
         {
             var cacheKey = string.Format("MessageTab:{0}", sendingPortal.PortalId);
-            
+
             var cacheItemArgs = new CacheItemArgs(cacheKey, 30, CacheItemPriority.Default, sendingPortal);
 
             return CBO.GetCachedObject<int>(cacheItemArgs, GetMessageTabCallback);
@@ -438,14 +438,14 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
         {
             var handledMessages = this.HandleFrequencyDigest(DateTime.Now.AddHours(-1), SettingLastHourlyRun, Frequency.Hourly, schedulerInstance, remainingMessages);
             remainingMessages = remainingMessages - handledMessages;
-         
-            handledMessages = this.HandleFrequencyDigest(DateTime.Now.AddDays(-1), SettingLastDailyRun, Frequency.Daily, schedulerInstance, remainingMessages);        
-            remainingMessages = remainingMessages - handledMessages;
-            
-            handledMessages = this.HandleFrequencyDigest(DateTime.Now.AddDays(-7), SettingLastWeeklyRun, Frequency.Weekly, schedulerInstance, remainingMessages);         
-            remainingMessages = remainingMessages - handledMessages;           
 
-            this.HandleFrequencyDigest(DateTime.Now.AddDays(-30), SettingLastMonthlyRun, Frequency.Monthly, schedulerInstance, remainingMessages);                    
+            handledMessages = this.HandleFrequencyDigest(DateTime.Now.AddDays(-1), SettingLastDailyRun, Frequency.Daily, schedulerInstance, remainingMessages);
+            remainingMessages = remainingMessages - handledMessages;
+
+            handledMessages = this.HandleFrequencyDigest(DateTime.Now.AddDays(-7), SettingLastWeeklyRun, Frequency.Weekly, schedulerInstance, remainingMessages);
+            remainingMessages = remainingMessages - handledMessages;
+
+            this.HandleFrequencyDigest(DateTime.Now.AddDays(-30), SettingLastMonthlyRun, Frequency.Monthly, schedulerInstance, remainingMessages);
         }
 
         /// <summary>Handles the frequency digest.</summary>
@@ -463,7 +463,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
                 return handledMessages;
             }
 
-            var lastRunDate = this.GetScheduleItemDateSetting(settingKeyLastRunDate);            
+            var lastRunDate = this.GetScheduleItemDateSetting(settingKeyLastRunDate);
             if (dateToCompare >= lastRunDate)
             {
                 handledMessages = this.HandleDigest(schedulerInstance, frequency, remainingMessages);
@@ -488,7 +488,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
 
             // get subscribers based on frequency, utilize remaining batch size as part of count of users to return (note, if multiple subscriptions have the same frequency they will be combined into 1 email)
             ScheduleHistoryItem.AddLogNote("<br>Messaging Scheduler Starting Digest '" + schedulerInstance + "'.  ");
-            
+
             var messageLeft = true;
 
             while (messageLeft)
@@ -535,7 +535,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
             }
 
             ScheduleHistoryItem.AddLogNote("Sent " + messagesSent + " " + frequency + " digest subscription emails.  ");
-            
+
             return messagesSent;
         }
 
@@ -616,11 +616,11 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
                 SchedulingProvider.Instance().AddScheduleItemSetting(
                     ScheduleHistoryItem.ScheduleID, SettingLastHourlyRun, dateValue.ToString(CultureInfo.InvariantCulture));
                 SchedulingProvider.Instance().AddScheduleItemSetting(
-                   ScheduleHistoryItem.ScheduleID, SettingLastDailyRun, dateValue.ToString(CultureInfo.InvariantCulture));
+                    ScheduleHistoryItem.ScheduleID, SettingLastDailyRun, dateValue.ToString(CultureInfo.InvariantCulture));
                 SchedulingProvider.Instance().AddScheduleItemSetting(
-                   ScheduleHistoryItem.ScheduleID, SettingLastWeeklyRun, dateValue.ToString(CultureInfo.InvariantCulture));
+                    ScheduleHistoryItem.ScheduleID, SettingLastWeeklyRun, dateValue.ToString(CultureInfo.InvariantCulture));
                 SchedulingProvider.Instance().AddScheduleItemSetting(
-                   ScheduleHistoryItem.ScheduleID, SettingLastMonthlyRun, dateValue.ToString(CultureInfo.InvariantCulture));
+                    ScheduleHistoryItem.ScheduleID, SettingLastMonthlyRun, dateValue.ToString(CultureInfo.InvariantCulture));
             }
 
             return dateValue;
@@ -667,7 +667,7 @@ namespace DotNetNuke.Services.Social.Messaging.Scheduler
         /// <param name="messageRecipient">The message recipient.</param>
         private void SendMessage(MessageRecipient messageRecipient)
         {
-            var message = InternalMessagingController.Instance.GetMessage(messageRecipient.MessageID);            
+            var message = InternalMessagingController.Instance.GetMessage(messageRecipient.MessageID);
 
             var toUser = UserController.Instance.GetUser(message.PortalID, messageRecipient.UserID);
             if (!IsUserAbleToReceiveAnEmail(toUser))

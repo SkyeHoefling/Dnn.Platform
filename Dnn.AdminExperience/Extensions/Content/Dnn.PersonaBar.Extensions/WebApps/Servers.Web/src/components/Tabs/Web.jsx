@@ -29,43 +29,43 @@ class Web extends Component {
         return <div className="dnn-servers-info-panel">
             <GridSystem>
                 <div>
-                    <InfoBlock label={Localization.get("ServerInfo_OSVersion")} 
-                        tooltip={Localization.get("ServerInfo_OSVersion.Help")} 
-                        text={props.webServerInfo.osVersion || defaultPlaceHolder} />   
+                    <InfoBlock label={Localization.get("ServerInfo_OSVersion")}
+                        tooltip={Localization.get("ServerInfo_OSVersion.Help")}
+                        text={props.webServerInfo.osVersion || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("ServerInfo_IISVersion")} 
-                        tooltip={Localization.get("ServerInfo_IISVersion.Help")} 
-                        text={props.webServerInfo.iisVersion || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("ServerInfo_IISVersion")}
+                        tooltip={Localization.get("ServerInfo_IISVersion.Help")}
+                        text={props.webServerInfo.iisVersion || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("ServerInfo_Framework")} 
-                        tooltip={Localization.get("ServerInfo_Framework.Help")} 
-                        text={props.webServerInfo.framework || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("ServerInfo_Framework")}
+                        tooltip={Localization.get("ServerInfo_Framework.Help")}
+                        text={props.webServerInfo.framework || defaultPlaceHolder} />
 
                     <div className="tooltipAdjustment">
-                        <InfoBlock label={Localization.get("ServerInfo_Identity")} 
-                            tooltip={Localization.get("ServerInfo_Identity.Help")} 
+                        <InfoBlock label={Localization.get("ServerInfo_Identity")}
+                            tooltip={Localization.get("ServerInfo_Identity.Help")}
                             text={props.webServerInfo.identity || defaultPlaceHolder} />
-                    </div> 
+                    </div>
 
-                    <InfoBlock label={Localization.get("ServerInfo_HostName")} 
-                        tooltip={Localization.get("ServerInfo_HostName.Help")} 
-                        text={props.webServerInfo.hostName || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("ServerInfo_HostName")}
+                        tooltip={Localization.get("ServerInfo_HostName.Help")}
+                        text={props.webServerInfo.hostName || defaultPlaceHolder} />
                 </div>
                 <div>
-                    <InfoBlock label={Localization.get("ServerInfo_PhysicalPath")} 
-                        tooltip={Localization.get("ServerInfo_PhysicalPath.Help")} 
-                        text={props.webServerInfo.physicalPath || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("ServerInfo_PhysicalPath")}
+                        tooltip={Localization.get("ServerInfo_PhysicalPath.Help")}
+                        text={props.webServerInfo.physicalPath || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("ServerInfo_Url")} 
-                        tooltip={Localization.get("ServerInfo_Url.Help")} 
-                        text={props.webServerInfo.url || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("ServerInfo_Url")}
+                        tooltip={Localization.get("ServerInfo_Url.Help")}
+                        text={props.webServerInfo.url || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("ServerInfo_RelativePath")} 
-                        tooltip={Localization.get("ServerInfo_RelativePath.Help")} 
-                        text={props.webServerInfo.relativePath || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("ServerInfo_RelativePath")}
+                        tooltip={Localization.get("ServerInfo_RelativePath.Help")}
+                        text={props.webServerInfo.relativePath || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("ServerInfo_ServerTime")} 
-                        tooltip={Localization.get("ServerInfo_ServerTime.Help")} 
+                    <InfoBlock label={Localization.get("ServerInfo_ServerTime")}
+                        tooltip={Localization.get("ServerInfo_ServerTime.Help")}
                         text={props.webServerInfo.serverTime || defaultPlaceHolder} />
                 </div>
             </GridSystem>
@@ -73,13 +73,13 @@ class Web extends Component {
     }
 }
 
-Web.propTypes = {   
+Web.propTypes = {
     webServerInfo: PropTypes.object.isRequired,
     errorMessage: PropTypes.string,
     onRetrieveWebServerInfo: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {    
+function mapStateToProps(state) {
     return {
         webServerInfo: state.webTab.webServerInfo,
         errorMessage: state.webTab.errorMessage
@@ -89,7 +89,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators ({
-            onRetrieveWebServerInfo: WebTabActions.loadWebServerInfo     
+            onRetrieveWebServerInfo: WebTabActions.loadWebServerInfo
         }, dispatch)
     };
 }

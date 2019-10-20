@@ -163,5 +163,3 @@ PersonaBarTreeInContextMenu.propTypes = {
     pageInContextComponents: PropTypes.array.isRequired,
     onClose: PropTypes.func.isRequired
 };
-
-

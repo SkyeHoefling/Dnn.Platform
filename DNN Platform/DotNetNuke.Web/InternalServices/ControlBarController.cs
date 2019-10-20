@@ -3,19 +3,19 @@
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -170,10 +170,10 @@ namespace DotNetNuke.Web.InternalServices
                 var groups = PortalGroupController.Instance.GetPortalGroups().ToArray();
 
                 var mygroup = (from @group in groups
-                               select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
-                                  into portals
-                               where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
-                               select portals.ToArray()).FirstOrDefault();
+                                select PortalGroupController.Instance.GetPortalsByGroup(@group.PortalGroupId)
+                                into portals
+                                where portals.Any(x => x.PortalID == PortalSettings.Current.PortalId)
+                                select portals.ToArray()).FirstOrDefault();
 
                 if (mygroup != null && mygroup.Any(p => p.PortalID == portalSettings.PortalId))
                 {
@@ -406,7 +406,7 @@ namespace DotNetNuke.Web.InternalServices
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
-                    //Do nothing we are not logging ThreadAbortxceptions caused by redirects      
+                    //Do nothing we are not logging ThreadAbortxceptions caused by redirects
                 }
                 catch (Exception ex)
                 {
@@ -435,11 +435,11 @@ namespace DotNetNuke.Web.InternalServices
                         return Request.CreateResponse(HttpStatusCode.OK, new { Success = true });
                     }
                 }
-                
+
             }
             catch (System.Threading.ThreadAbortException)
             {
-                //Do nothing we are not logging ThreadAbortxceptions caused by redirects      
+                //Do nothing we are not logging ThreadAbortxceptions caused by redirects
             }
             catch (Exception ex)
             {
@@ -569,9 +569,9 @@ namespace DotNetNuke.Web.InternalServices
 
             string imageUrl =
                     (from pkgs in packages
-                     join portMods in portalDesktopModules on pkgs.PackageID equals portMods.Value.PackageID
-                     where portMods.Value.DesktopModuleID == moduleId
-                     select pkgs.IconFile).FirstOrDefault();
+                    join portMods in portalDesktopModules on pkgs.PackageID equals portMods.Value.PackageID
+                    where portMods.Value.DesktopModuleID == moduleId
+                    select pkgs.IconFile).FirstOrDefault();
 
             imageUrl = String.IsNullOrEmpty(imageUrl) ? Globals.ImagePath + DefaultExtensionImage : imageUrl;
             return System.Web.VirtualPathUtility.ToAbsolute(imageUrl);
@@ -585,11 +585,11 @@ namespace DotNetNuke.Web.InternalServices
             var packages = PackageController.Instance.GetExtensionPackages(PortalSettings.Current.PortalId);
 
             string imageUrl = (from pkgs in packages
-                               join portMods in portalDesktopModules on pkgs.PackageID equals portMods.Value.PackageID
-                               join modDefs in moduleDefnitions on portMods.Value.DesktopModuleID equals modDefs.Value.DesktopModuleID
-                               join tabMods in tabModules on modDefs.Value.DesktopModuleID equals tabMods.Value.DesktopModuleID
-                               where tabMods.Value.ModuleID == moduleId
-                               select pkgs.IconFile).FirstOrDefault();
+                                join portMods in portalDesktopModules on pkgs.PackageID equals portMods.Value.PackageID
+                                join modDefs in moduleDefnitions on portMods.Value.DesktopModuleID equals modDefs.Value.DesktopModuleID
+                                join tabMods in tabModules on modDefs.Value.DesktopModuleID equals tabMods.Value.DesktopModuleID
+                                where tabMods.Value.ModuleID == moduleId
+                                select pkgs.IconFile).FirstOrDefault();
 
             imageUrl = String.IsNullOrEmpty(imageUrl) ? Globals.ImagePath + DefaultExtensionImage : imageUrl;
             return System.Web.VirtualPathUtility.ToAbsolute(imageUrl);
@@ -638,7 +638,7 @@ namespace DotNetNuke.Web.InternalServices
                         case ModuleSharing.Unsupported:
                             // Should never happen since the module should not be listed in the first place.
                             throw new ApplicationException(string.Format("Module '{0}' does not support Shareable and should not be listed in Add Existing Module from a different source site",
-                                                                         moduleInfo.DesktopModule.FriendlyName));
+                                                                        moduleInfo.DesktopModule.FriendlyName));
                         case ModuleSharing.Supported:
                             break;
                         case ModuleSharing.Unknown:
@@ -893,8 +893,8 @@ namespace DotNetNuke.Web.InternalServices
             if (_nameDics == null)
             {
                 _nameDics = new Dictionary<string, string> {{"SearchCrawlerAdmin", "SearchCrawler Admin"},
-                                                             {"SearchCrawlerInput", "SearchCrawler Input"},
-                                                             {"SearchCrawlerResults", "SearchCrawler Results"}};
+                                                            {"SearchCrawlerInput", "SearchCrawler Input"},
+                                                            {"SearchCrawlerResults", "SearchCrawler Results"}};
             }
 
             return _nameDics.ContainsKey(moduleName) ? _nameDics[moduleName] : moduleName;

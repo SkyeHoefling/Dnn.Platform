@@ -48,7 +48,7 @@ Type.registerNamespace('dnn.util');dnn.extend(dnn.util, { tableReorderMove: func
     return sRet;
 }, checkallChecked: function (oCtl, iCellIndex) {
     setTimeout(function () {
-        var bChecked = oCtl.checked; var oTD = dnn.dom.getParentByTagName(oCtl, 'td'); var oTR = oTD.parentNode; var oCtr = oTR.parentNode; var iOffset = 0; var oTemp; 
+        var bChecked = oCtl.checked; var oTD = dnn.dom.getParentByTagName(oCtl, 'td'); var oTR = oTD.parentNode; var oCtr = oTR.parentNode; var iOffset = 0; var oTemp;
         for (var i = 0; i < iCellIndex; i++) {
             if (oTR.childNodes[i].tagName == null)
                 iOffset++;

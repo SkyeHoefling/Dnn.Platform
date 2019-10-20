@@ -19,20 +19,20 @@
     var cmWrapper = this.getWrapperElement();
 
     if (options.after instanceof Panel && !options.after.cleared) {
-      wrapper.insertBefore(node, options.before.node.nextSibling);
+    wrapper.insertBefore(node, options.before.node.nextSibling);
     } else if (options.before instanceof Panel && !options.before.cleared) {
-      wrapper.insertBefore(node, options.before.node);
+    wrapper.insertBefore(node, options.before.node);
     } else if (options.replace instanceof Panel && !options.replace.cleared) {
-      wrapper.insertBefore(node, options.replace.node);
-      options.replace.clear();
+    wrapper.insertBefore(node, options.replace.node);
+    options.replace.clear();
     } else if (options.position == "bottom") {
-      wrapper.appendChild(node);
+    wrapper.appendChild(node);
     } else if (options.position == "before-bottom") {
-      wrapper.insertBefore(node, cmWrapper.nextSibling);
+    wrapper.insertBefore(node, cmWrapper.nextSibling);
     } else if (options.position == "after-top") {
-      wrapper.insertBefore(node, cmWrapper);
+    wrapper.insertBefore(node, cmWrapper);
     } else {
-      wrapper.insertBefore(node, wrapper.firstChild);
+    wrapper.insertBefore(node, wrapper.firstChild);
     }
 
     var height = (options && options.height) || node.offsetHeight;
@@ -70,10 +70,10 @@
     var style = window.getComputedStyle ? window.getComputedStyle(wrap) : wrap.currentStyle;
     var height = parseInt(style.height);
     var info = cm.state.panels = {
-      setHeight: wrap.style.height,
-      heightLeft: height,
-      panels: 0,
-      wrapper: document.createElement("div")
+    setHeight: wrap.style.height,
+    heightLeft: height,
+    panels: 0,
+    wrapper: document.createElement("div")
     };
     wrap.parentNode.insertBefore(info.wrapper, wrap);
     var hasFocus = cm.hasFocus();
@@ -82,20 +82,20 @@
 
     cm._setSize = cm.setSize;
     if (height != null) cm.setSize = function(width, newHeight) {
-      if (newHeight == null) return this._setSize(width, newHeight);
-      info.setHeight = newHeight;
-      if (typeof newHeight != "number") {
+    if (newHeight == null) return this._setSize(width, newHeight);
+    info.setHeight = newHeight;
+    if (typeof newHeight != "number") {
         var px = /^(\d+\.?\d*)px$/.exec(newHeight);
         if (px) {
-          newHeight = Number(px[1]);
+        newHeight = Number(px[1]);
         } else {
-          info.wrapper.style.height = newHeight;
-          newHeight = info.wrapper.offsetHeight;
-          info.wrapper.style.height = "";
+        info.wrapper.style.height = newHeight;
+        newHeight = info.wrapper.offsetHeight;
+        info.wrapper.style.height = "";
         }
-      }
-      cm._setSize(width, info.heightLeft += (newHeight - height));
-      height = newHeight;
+    }
+    cm._setSize(width, info.heightLeft += (newHeight - height));
+    height = newHeight;
     };
   }
 

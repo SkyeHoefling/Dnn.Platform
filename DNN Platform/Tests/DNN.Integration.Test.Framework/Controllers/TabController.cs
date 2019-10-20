@@ -92,8 +92,8 @@ namespace DNN.Integration.Test.Framework.Controllers
         {
             var query1 = string.Format(@"
                 SELECT TOP(1) ModuleID FROM {{objectQualifier}}vw_TabModules tm
-                INNER JOIN {{objectQualifier}}DesktopModules dm ON dm.DesktopModuleId = tm.DesktopModuleId 
-                INNER JOIN {{objectQualifier}}ModuleDefinitions md ON md.ModuleDefID = tm.ModuleDefID 
+                INNER JOIN {{objectQualifier}}DesktopModules dm ON dm.DesktopModuleId = tm.DesktopModuleId
+                INNER JOIN {{objectQualifier}}ModuleDefinitions md ON md.ModuleDefID = tm.ModuleDefID
                 WHERE TabId = {0} AND ISNULL(PortalID,0)={1} AND (dm.FriendlyName = '{2}' OR md.FriendlyName = '{2}')
                 ORDER BY tm.ModuleDefID, ModuleID;", tabId, PortalId, moduleFriendlyName);
 
@@ -127,11 +127,11 @@ namespace DNN.Integration.Test.Framework.Controllers
         public static int GetTabModuleId(int tabId, int moduledId)
         {
             return DatabaseHelper.ExecuteScalar<int>(
-               string.Format(@"
+                string.Format(@"
                     SELECT TOP(1) TabModuleID FROM {{objectQualifier}}TabModules
                     WHERE TabID = {0} AND ModuleID = {1};", tabId, moduledId));
         }
-        
+
         /// <summary>
         /// Returns all the tab urls
         /// </summary>

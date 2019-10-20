@@ -22,109 +22,109 @@
     atom = new RegExp("((" + atom.join(")|(") + "))\\b");
 
     function tokenBase (stream, state) {
-      var ch = stream.peek();
+    var ch = stream.peek();
 
-      //Comment
-      if (state.incomment) {
+    //Comment
+    if (state.incomment) {
         if (!stream.skipTo("#}")) {
-          stream.skipToEnd();
+        stream.skipToEnd();
         } else {
-          stream.eatWhile(/\#|}/);
-          state.incomment = false;
+        stream.eatWhile(/\#|}/);
+        state.incomment = false;
         }
         return "comment";
-      //Tag
-      } else if (state.intag) {
+    //Tag
+    } else if (state.intag) {
         //After operator
         if (state.operator) {
-          state.operator = false;
-          if (stream.match(atom)) {
+        state.operator = false;
+        if (stream.match(atom)) {
             return "atom";
-          }
-          if (stream.match(number)) {
+        }
+        if (stream.match(number)) {
             return "number";
-          }
+        }
         }
         //After sign
         if (state.sign) {
-          state.sign = false;
-          if (stream.match(atom)) {
+        state.sign = false;
+        if (stream.match(atom)) {
             return "atom";
-          }
-          if (stream.match(number)) {
+        }
+        if (stream.match(number)) {
             return "number";
-          }
+        }
         }
 
         if (state.instring) {
-          if (ch == state.instring) {
+        if (ch == state.instring) {
             state.instring = false;
-          }
-          stream.next();
-          return "string";
+        }
+        stream.next();
+        return "string";
         } else if (ch == "'" || ch == '"') {
-          state.instring = ch;
-          stream.next();
-          return "string";
+        state.instring = ch;
+        stream.next();
+        return "string";
         } else if (stream.match(state.intag + "}") || stream.eat("-") && stream.match(state.intag + "}")) {
-          state.intag = false;
-          return "tag";
+        state.intag = false;
+        return "tag";
         } else if (stream.match(operator)) {
-          state.operator = true;
-          return "operator";
+        state.operator = true;
+        return "operator";
         } else if (stream.match(sign)) {
-          state.sign = true;
+        state.sign = true;
         } else {
-          if (stream.eat(" ") || stream.sol()) {
+        if (stream.eat(" ") || stream.sol()) {
             if (stream.match(keywords)) {
-              return "keyword";
+            return "keyword";
             }
             if (stream.match(atom)) {
-              return "atom";
+            return "atom";
             }
             if (stream.match(number)) {
-              return "number";
+            return "number";
             }
             if (stream.sol()) {
-              stream.next();
-            }
-          } else {
             stream.next();
-          }
+            }
+        } else {
+            stream.next();
+        }
 
         }
         return "variable";
-      } else if (stream.eat("{")) {
+    } else if (stream.eat("{")) {
         if (ch = stream.eat("#")) {
-          state.incomment = true;
-          if (!stream.skipTo("#}")) {
+        state.incomment = true;
+        if (!stream.skipTo("#}")) {
             stream.skipToEnd();
-          } else {
+        } else {
             stream.eatWhile(/\#|}/);
             state.incomment = false;
-          }
-          return "comment";
+        }
+        return "comment";
         //Open tag
         } else if (ch = stream.eat(/\{|%/)) {
-          //Cache close tag
-          state.intag = ch;
-          if (ch == "{") {
+        //Cache close tag
+        state.intag = ch;
+        if (ch == "{") {
             state.intag = "}";
-          }
-          stream.eat("-");
-          return "tag";
         }
-      }
-      stream.next();
+        stream.eat("-");
+        return "tag";
+        }
+    }
+    stream.next();
     };
 
     return {
-      startState: function () {
+    startState: function () {
         return {};
-      },
-      token: function (stream, state) {
+    },
+    token: function (stream, state) {
         return tokenBase(stream, state);
-      }
+    }
     };
   });
 

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -124,7 +124,7 @@ namespace DotNetNuke.UI.WebControls
                 var category = (CategoryAttribute) categoryAttributes[0];
                 editInfo.Category = category.Category;
             }
-			
+
             //Get EditMode Field
 
             if (!objProperty.CanWrite)
@@ -143,7 +143,7 @@ namespace DotNetNuke.UI.WebControls
                     }
                 }
             }
-			
+
             //Get Editor Field
             editInfo.Editor = "UseSystemType";
             object[] editorAttributes = objProperty.GetCustomAttributes(typeof (EditorAttribute), true);
@@ -163,7 +163,7 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Editor = editor.EditorTypeName;
                 }
             }
-			
+
             //Get Required Field
             editInfo.Required = false;
             object[] requiredAttributes = objProperty.GetCustomAttributes(typeof (RequiredAttribute), true);
@@ -176,7 +176,7 @@ namespace DotNetNuke.UI.WebControls
                     editInfo.Required = true;
                 }
             }
-			
+
             //Get Css Style
             editInfo.ControlStyle = new Style();
             object[] StyleAttributes = objProperty.GetCustomAttributes(typeof (ControlStyleAttribute), true);
@@ -187,7 +187,7 @@ namespace DotNetNuke.UI.WebControls
                 editInfo.ControlStyle.Height = attribute.Height;
                 editInfo.ControlStyle.Width = attribute.Width;
             }
-			
+
             //Get LabelMode Field
             editInfo.LabelMode = LabelMode.Left;
             object[] labelModeAttributes = objProperty.GetCustomAttributes(typeof (LabelModeAttribute), true);
@@ -196,7 +196,7 @@ namespace DotNetNuke.UI.WebControls
                 var mode = (LabelModeAttribute) labelModeAttributes[0];
                 editInfo.LabelMode = mode.Mode;
             }
-			
+
             //Set ResourceKey Field
             editInfo.ResourceKey = string.Format("{0}_{1}", dataSource.GetType().Name, objProperty.Name);
 
@@ -208,12 +208,12 @@ namespace DotNetNuke.UI.WebControls
                 var regExAttribute = (RegularExpressionValidatorAttribute) regExAttributes[0];
                 editInfo.ValidationExpression = regExAttribute.Expression;
             }
-			
+
             //Set Visibility
             editInfo.ProfileVisibility = new ProfileVisibility
-                                             {
-                                                 VisibilityMode = UserVisibilityMode.AllUsers
-                                             };
+                                            {
+                                                VisibilityMode = UserVisibilityMode.AllUsers
+                                            };
 
             return editInfo;
         }

@@ -56,7 +56,7 @@ class LanguageVerifierPanelBody extends Component {
     /* eslint-disable react/no-danger */
     render() {
         return (
-            <div className={styles.languageVerifier}>                
+            <div className={styles.languageVerifier}>
                 <PersonaBarPageBody backToLinkProps={{
                     text: resx.get("BackToLanguages"),
                     onClick: this.props.closeLanguageVerifier.bind(this)

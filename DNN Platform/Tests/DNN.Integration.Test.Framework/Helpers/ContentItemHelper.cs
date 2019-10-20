@@ -18,7 +18,7 @@ namespace DNN.Integration.Test.Framework.Helpers
         {
             var tagsQuery = @"SELECT t.Name Name
                             FROM {objectQualifier}ContentItems_Tags ct
-	                            JOIN {objectQualifier}Taxonomy_Terms t ON ct.TermID = t.TermID
+                                JOIN {objectQualifier}Taxonomy_Terms t ON ct.TermID = t.TermID
                             WHERE ContentItemID = " + contentItemId;
             var tags = DatabaseHelper.ExecuteQuery(tagsQuery);
             return tags[0].Values.OfType<string>().Select(HttpUtility.HtmlDecode).ToArray();
@@ -45,7 +45,7 @@ namespace DNN.Integration.Test.Framework.Helpers
         public static void RemoveContentItem(int contentItemId)
         {
             var query = string.Format(@"DELETE
-                            FROM {{objectQualifier}}ContentItems 
+                            FROM {{objectQualifier}}ContentItems
                             WHERE ContentItemId = '{0}'", contentItemId);
 
             DatabaseHelper.ExecuteQuery(query);

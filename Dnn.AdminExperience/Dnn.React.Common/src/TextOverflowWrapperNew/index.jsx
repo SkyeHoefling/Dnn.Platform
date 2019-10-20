@@ -80,4 +80,3 @@ TextOverflowWrapperNew.propTypes = {
 };
 
 export default TextOverflowWrapperNew;
-

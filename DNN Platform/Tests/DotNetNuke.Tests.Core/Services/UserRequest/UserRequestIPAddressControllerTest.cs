@@ -24,14 +24,14 @@ namespace DotNetNuke.Tests.Core.Services.UserRequest
         private Mock<IHostController> _mockHostController;
         private Mock<HttpContextBase> _mockhttpContext;
         private Mock<HttpRequestBase> _mockRequest;
-        
+
         private UserRequestIPAddressController _userRequestIPAddressController;
 
         [SetUp]
         public void Setup()
         {
             NameValueCollection serverVariables = new NameValueCollection();
-            
+
             // Setup Mock
             _mockhttpContext = HttpContextHelper.RegisterMockHttpContext();
             _mockRequest = Mock.Get(_mockhttpContext.Object.Request);
@@ -48,7 +48,7 @@ namespace DotNetNuke.Tests.Core.Services.UserRequest
         public void TearDown()
         {
             MockComponentProvider.ResetContainer();
-        }        
+        }
 
         [TestCase("111.111.111.111","X-Forwarded-For")]
         [TestCase("111.111.111.111,123.112.11.33", "X-Forwarded-For")]
@@ -57,7 +57,7 @@ namespace DotNetNuke.Tests.Core.Services.UserRequest
         public void UserRequestIPAddress_ShouldReturnIP_IfAnyHeaderIsPresent(string requestIp, string headerName)
         {
             //Arrange
-            var expectedIp = "111.111.111.111";                    
+            var expectedIp = "111.111.111.111";
 
             NameValueCollection headersWithXForwardedHeaders = new NameValueCollection();
             headersWithXForwardedHeaders.Add(headerName, requestIp);
@@ -67,7 +67,7 @@ namespace DotNetNuke.Tests.Core.Services.UserRequest
             //Act
             string userRequestIPAddress = _userRequestIPAddressController.GetUserRequestIPAddress(_mockhttpContext.Object.Request);
 
-            //Assert            
+            //Assert
             Assert.AreEqual(expectedIp, userRequestIPAddress);
         }
 
@@ -86,7 +86,7 @@ namespace DotNetNuke.Tests.Core.Services.UserRequest
             //Act
             var userRequestIPAddress = _userRequestIPAddressController.GetUserRequestIPAddress(_mockhttpContext.Object.Request);
 
-            //Assert            
+            //Assert
             Assert.AreSame(expectedIp, userRequestIPAddress);
             _mockRequest.VerifyGet(r => r.ServerVariables);
             _mockRequest.VerifyGet(r => r.Headers);
@@ -103,7 +103,7 @@ namespace DotNetNuke.Tests.Core.Services.UserRequest
             //Act
             var userRequestIPAddress = _userRequestIPAddressController.GetUserRequestIPAddress(_mockhttpContext.Object.Request);
 
-            //Assert            
+            //Assert
             Assert.AreSame(expectedIp, userRequestIPAddress);
             _mockRequest.VerifyGet(r => r.UserHostAddress);
         }
@@ -114,17 +114,17 @@ namespace DotNetNuke.Tests.Core.Services.UserRequest
         public void UserRequestIPAddress_ShouldReturnEmptyString_IfIPAddressIsNotValid(string requestIp)
         {
             //Arrange
-            var headerName = "X-Forwarded-For";           
+            var headerName = "X-Forwarded-For";
 
             NameValueCollection headersWithXForwardedHeaders = new NameValueCollection();
             headersWithXForwardedHeaders.Add(headerName, requestIp);
             _mockRequest.Setup(x => x.Headers).Returns(headersWithXForwardedHeaders);
             _mockHostController.Setup(hc => hc.GetString(It.IsAny<string>(), It.IsAny<string>())).Returns(headerName);
-            
+
             //Act
             var userRequestIPAddress = _userRequestIPAddressController.GetUserRequestIPAddress(_mockhttpContext.Object.Request);
 
-            //Assert            
+            //Assert
             Assert.AreSame(string.Empty, userRequestIPAddress);
         }
     }

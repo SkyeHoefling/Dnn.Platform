@@ -18,7 +18,7 @@ const toBackEndUrl = function (url, tabId, primaryAliasId) {
     } else {
         siteAliasUsage = portalAliasUsageType.ChildPagesDoNotInherit;
     }
-    
+
     return {
         tabId,
         saveUrl: {
@@ -39,7 +39,7 @@ const PageService = function () {
     function getApi() {
         if (api === null) {
             return new Api("Pages");
-        }        
+        }
         return api;
     }
 
@@ -52,7 +52,7 @@ const PageService = function () {
         const api = getApi();
         return api.post("UpdateCustomUrl", toBackEndUrl(url, tabId, primaryAliasId));
     };
-    
+
     const deleteUrl = function (url, tabId) {
         const api = getApi();
         return api.post("DeleteCustomUrl", {id: url.id, tabId});
@@ -62,7 +62,7 @@ const PageService = function () {
         const api = getApi();
         return api.get("GetCustomUrls", { pageId });
     };
-    
+
     return {
         add: add,
         save: save,

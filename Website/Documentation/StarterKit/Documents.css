@@ -1,10 +1,10 @@
 
 Body, A
 {
-   font-family: Verdana, Arial, Helvetica, Sans Serif;
-   font-size: 10pt;
-   font-weight: normal;
-   color: black;
+    font-family: Verdana, Arial, Helvetica, Sans Serif;
+    font-size: 10pt;
+    font-weight: normal;
+    color: black;
 }
 
 Body
@@ -15,14 +15,14 @@ Body
 
 H1
 {
-	font-size: 2.0em;
-	font-weight: bold;
-	color: #75808A;
-	text-decoration: underline;
+    font-size: 2.0em;
+    font-weight: bold;
+    color: #75808A;
+    text-decoration: underline;
 }
 
 H2  {
-	font-size: 1.6em;
+    font-size: 1.6em;
     font-weight: bold;
     color: #75808A;
 }

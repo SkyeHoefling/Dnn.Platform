@@ -4,20 +4,20 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <asp:Panel ID="ScopeWrapper" runat="server">
-    
+
     <asp:Panel runat="server" ID="FolderContentPanel" CssClass="dnnModuleDigitalAssetsFilePropertiesContent">
         <ul class="dnnAdminTabNav dnnClear" runat="server" ID="Tabs">
             <li id="dnnModuleDigitalAssetsGeneralTab">
                 <asp:HyperLink href="#dnnModuleDigitalAssetsGeneral" runat="server" ID="GeneralTabLink" resourcekey="GeneralTab" />
             </li>
-        </ul>    
+        </ul>
         <asp:Panel runat="server" ID="TabsPanel" class="dnnClear" >
             <div class="dnnClear" id="dnnModuleDigitalAssetsGeneral">
                 <div class="dnnModuleDigitalAssetsPreviewInfo" id="dnnModuleDigitalAssetsFilePreview">
-                    <asp:Panel runat="server" ID="PreviewPanelContainer"></asp:Panel>                    
+                    <asp:Panel runat="server" ID="PreviewPanelContainer"></asp:Panel>
                 </div>
                 <div class="dnnModuleDigitalAssetsGeneralProperties dnnForm" id="dnnModuleDigitalAssetsFileProperties">
-                    <asp:Panel runat="server" ID="FileFieldsContainer"></asp:Panel>                  
+                    <asp:Panel runat="server" ID="FileFieldsContainer"></asp:Panel>
                 </div>
             </div>
         </asp:Panel>
@@ -41,7 +41,7 @@
             parent.$("#iPopUp").dialog('option', 'title', settings.dialogTitle);
             setupDnnTabs(controls, settings);
             setupDnnCheckboxes(controls);
-            
+
             var permissionTabId = controls.permissionTabId;
             var canAdminPerms = (settings.canAdminPermissions === 'true');
             if (!canAdminPerms) {
@@ -56,14 +56,14 @@
                 $('#' + activeTab + ' a').click();
             }
         }
-        
+
         function setupDnnTabs(controls, settings) {
             var options = {};
             var selectedTab = parseInt(settings.selectedTab);
             if (selectedTab != NaN && selectedTab != null) options.selected = selectedTab;
             $('#' + controls.scopeWrapperId).dnnTabs(options).dnnPanels();
         }
-        
+
         function setupDnnCheckboxes(controls) {
             $('#' + controls.scopeWrapperId + ".dnnModuleDigitalAssetsGeneralPropertiesCheckBoxGroup input[type='checkbox']").dnnCheckbox();
         }
@@ -88,7 +88,7 @@
             dialogTitleContainerId: 'ui-dialog-title-iPopUp'
         },
         {
-            selectedTab: '<%=(!IsPostBack ? "0" : "-1")%>',            
+            selectedTab: '<%=(!IsPostBack ? "0" : "-1")%>',
             canAdminPermissions: '<%=Localization.GetSafeJSString(CanManageFolder.ToString().ToLowerInvariant()) %>',
             dialogTitle: '<%=Localization.GetSafeJSString(DialogTitle)%>'
         }

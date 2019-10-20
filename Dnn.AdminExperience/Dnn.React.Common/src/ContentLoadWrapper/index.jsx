@@ -53,7 +53,7 @@ export default class ContentLoadWrapper extends Component {
                 }, 300);
             }
         }
-    }    
+    }
 
     increase() {
         let {percent} = this.state;

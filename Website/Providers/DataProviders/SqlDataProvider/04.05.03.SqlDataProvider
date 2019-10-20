@@ -57,8 +57,8 @@ SET @ModuleDefID = @@IDENTITY
 insert into {databaseOwner}{objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -76,8 +76,8 @@ values (
 insert into {databaseOwner}{objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -116,14 +116,14 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPermissionsByTabID
-	@TabID int
+    @TabID int
 AS
 
 SELECT  PermissionID,
-	PermissionCode,
-	PermissionKey,
-	ModuleDefID,
-	PermissionName
+    PermissionCode,
+    PermissionKey,
+    ModuleDefID,
+    PermissionName
 FROM    {databaseOwner}{objectQualifier}Permission
 WHERE   PermissionCode = 'SYSTEM_TAB'
 ORDER BY PermissionID
@@ -135,14 +135,14 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPermissionsByModuleID
-	@ModuleID int
+    @ModuleID int
 AS
 
 SELECT  PermissionID,
-	PermissionCode,
-	ModuleDefID,
-	PermissionKey,
-	PermissionName
+    PermissionCode,
+    ModuleDefID,
+    PermissionKey,
+    PermissionName
 FROM    {databaseOwner}{objectQualifier}Permission
 WHERE   ModuleDefID = (SELECT ModuleDefID FROM {databaseOwner}{objectQualifier}Modules WHERE ModuleID = @ModuleID)
 OR 	PermissionCode = 'SYSTEM_MODULE_DEFINITION'
@@ -155,14 +155,14 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPermissionsByModuleDefID
-	@ModuleDefID int
+    @ModuleDefID int
 AS
 
 SELECT  PermissionID,
-	PermissionCode,
-	ModuleDefID,
-	PermissionKey,
-	PermissionName
+    PermissionCode,
+    ModuleDefID,
+    PermissionKey,
+    PermissionName
 FROM    {databaseOwner}{objectQualifier}Permission
 WHERE   ModuleDefID = @ModuleDefID
 ORDER BY PermissionID
@@ -174,14 +174,14 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetPermissionsByFolderPath
-	@PortalID int,
-	@FolderPath varchar(300)
+    @PortalID int,
+    @FolderPath varchar(300)
 AS
 
 SELECT  PermissionID,
-	PermissionCode,
-	PermissionKey,
-	PermissionName
+    PermissionCode,
+    PermissionKey,
+    PermissionName
 FROM    {databaseOwner}{objectQualifier}Permission P
 WHERE   PermissionCode = 'SYSTEM_FOLDER'
 ORDER BY PermissionID

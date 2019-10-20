@@ -27,12 +27,12 @@ namespace Dnn.PersonaBar.Extensions.Components.Dto
 
         public PackageManifestDto()
         {
-            
+
         }
 
         public PackageManifestDto(int portalId, PackageInfo package) : base(portalId, package)
         {
-            
+
         }
     }
 }

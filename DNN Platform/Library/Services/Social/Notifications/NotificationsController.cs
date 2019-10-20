@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -41,7 +41,7 @@ namespace DotNetNuke.Services.Social.Notifications
     /// <summary>
     /// Provides the methods to work with Notifications, NotificationTypes, NotificationTypeActions and NotificationActions.
     /// </summary>
-    public class NotificationsController 
+    public class NotificationsController
                         : ServiceLocator<INotificationsController, NotificationsController>
                         , INotificationsController
     {
@@ -54,7 +54,7 @@ namespace DotNetNuke.Services.Social.Notifications
 
         internal const int ConstMaxSubject = 400;
         internal const int ConstMaxTo = 2000;
-	    private const string ToastsCacheKey = "GetToasts_{0}";
+        private const string ToastsCacheKey = "GetToasts_{0}";
 
         #endregion
 
@@ -115,11 +115,11 @@ namespace DotNetNuke.Services.Social.Notifications
             foreach (var action in actions)
             {
                 action.NotificationTypeActionId = _dataService.AddNotificationTypeAction(notificationTypeId,
-                                                                                         action.NameResourceKey,
-                                                                                         action.DescriptionResourceKey,
-                                                                                         action.ConfirmResourceKey,
-                                                                                         action.APICall,
-                                                                                         GetCurrentUserId());
+                                                                                        action.NameResourceKey,
+                                                                                        action.DescriptionResourceKey,
+                                                                                        action.ConfirmResourceKey,
+                                                                                        action.APICall,
+                                                                                        GetCurrentUserId());
                 action.NotificationTypeId = notificationTypeId;
             }
         }
@@ -226,8 +226,8 @@ namespace DotNetNuke.Services.Social.Notifications
             }
 
             var recipients = from user in users
-                             where InternalMessagingController.Instance.GetMessageRecipient(notification.NotificationID, user.UserID) == null
-                             select new MessageRecipient
+                            where InternalMessagingController.Instance.GetMessageRecipient(notification.NotificationID, user.UserID) == null
+                            select new MessageRecipient
                                         {
                                             MessageID = notification.NotificationID,
                                             UserID = user.UserID,
@@ -263,11 +263,11 @@ namespace DotNetNuke.Services.Social.Notifications
             }
 
             notificationType.NotificationTypeId = _dataService.CreateNotificationType(notificationType.Name,
-                                                                                      notificationType.Description,
-                                                                                      (int)notificationType.TimeToLive.TotalMinutes == 0 ? Null.NullInteger : (int)notificationType.TimeToLive.TotalMinutes,
-                                                                                      notificationType.DesktopModuleId,
-                                                                                      GetCurrentUserId(), 
-                                                                                      notificationType.IsTask);
+                                                                                    notificationType.Description,
+                                                                                    (int)notificationType.TimeToLive.TotalMinutes == 0 ? Null.NullInteger : (int)notificationType.TimeToLive.TotalMinutes,
+                                                                                    notificationType.DesktopModuleId,
+                                                                                    GetCurrentUserId(),
+                                                                                    notificationType.IsTask);
         }
 
         public virtual void DeleteNotification(int notificationId)
@@ -388,17 +388,17 @@ namespace DotNetNuke.Services.Social.Notifications
 
         #endregion
 
-		#region Toast APIS
+        #region Toast APIS
 
-		public bool IsToastPending(int notificationId)
-		{
-			return _dataService.IsToastPending(notificationId);
-		}
+        public bool IsToastPending(int notificationId)
+        {
+            return _dataService.IsToastPending(notificationId);
+        }
 
-		public void MarkReadyForToast(Notification notification, UserInfo userInfo)
-		{
-			MarkReadyForToast(notification, userInfo.UserID);
-		}
+        public void MarkReadyForToast(Notification notification, UserInfo userInfo)
+        {
+            MarkReadyForToast(notification, userInfo.UserID);
+        }
 
         public void MarkReadyForToast(Notification notification, int userId)
         {
@@ -406,10 +406,10 @@ namespace DotNetNuke.Services.Social.Notifications
             _dataService.MarkReadyForToast(notification.NotificationID, userId);
         }
 
-		public void MarkToastSent(int notificationId, int userId)
-		{
-			_dataService.MarkToastSent(notificationId, userId);
-		}
+        public void MarkToastSent(int notificationId, int userId)
+        {
+            _dataService.MarkToastSent(notificationId, userId);
+        }
 
         public IList<Notification> GetToasts(UserInfo userInfo)
         {

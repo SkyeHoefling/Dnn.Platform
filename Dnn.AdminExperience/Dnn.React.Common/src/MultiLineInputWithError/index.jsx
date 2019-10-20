@@ -55,7 +55,7 @@ class MultiLineInputWithError extends Component {
     }
 
     getInputRightPadding(counter, error) {
-        
+
         let padding = 0;
         if (counter || counter === 0) {
             padding += 10 + counter.toString().length * 8;

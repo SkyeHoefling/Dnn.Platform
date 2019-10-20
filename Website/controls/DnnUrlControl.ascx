@@ -14,7 +14,7 @@
             <asp:LinkButton ID="cmdSelect" resourcekey="Select" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />
             <asp:LinkButton ID="cmdDelete" resourcekey="Delete" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />
             <asp:LinkButton ID="cmdAdd" resourcekey="Add" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />
-	    </div>
+        </div>
     </asp:Panel>
     <asp:Panel ID="TabRow" runat="server" CssClass="urlControlTab dnnClear" >
         <div class="dnnFormItem">

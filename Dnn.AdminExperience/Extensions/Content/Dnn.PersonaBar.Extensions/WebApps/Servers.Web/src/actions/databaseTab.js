@@ -3,19 +3,19 @@ import databaseTabService from "../services/databaseTabService";
 import localization from "../localization";
 
 const databaseTabActions = {
-    loadDatabaseServerInfo() {       
+    loadDatabaseServerInfo() {
         return (dispatch) => {
             dispatch({
-                type: ActionTypes.LOAD_DATABASE_TAB               
-            });        
-            
+                type: ActionTypes.LOAD_DATABASE_TAB
+            });
+
             databaseTabService.getDataBaseServerInfo().then(response => {
                 dispatch({
                     type: ActionTypes.LOADED_DATABASE_TAB,
                     payload: {
                         databaseServerInfo: response
                     }
-                });  
+                });
             }).catch(() => {
                 dispatch({
                     type: ActionTypes.ERROR_LOADING_DATABASE_TAB,
@@ -23,7 +23,7 @@ const databaseTabActions = {
                         errorMessage: localization.get("errorMessageLoadingDatabaseTab")
                     }
                 });
-            });        
+            });
         };
     }
 };

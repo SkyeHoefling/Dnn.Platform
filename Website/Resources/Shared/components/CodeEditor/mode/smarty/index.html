@@ -37,12 +37,12 @@
 {elseif $name == $foo}
   {function name=menu level=0}
     {foreach $data as $entry}
-      {if is_array($entry)}
+    {if is_array($entry)}
         - {$entry@key}
         {menu data=$entry level=$level+1}
-      {else}
+    {else}
         {$entry}
-      {/if}
+    {/if}
     {/foreach}
   {/function}
 {/if}</textarea></form>
@@ -76,12 +76,12 @@
 {--elseif $name == $foo--}
   {--function name=menu level=0--}
     {--foreach $data as $entry--}
-      {--if is_array($entry)--}
+    {--if is_array($entry)--}
         - {--$entry@key--}
         {--menu data=$entry level=$level+1--}
-      {--else--}
+    {--else--}
         {--$entry--}
-      {--/if--}
+    {--/if--}
     {--/foreach--}
   {--/function--}
 {--/if--}</textarea></form>

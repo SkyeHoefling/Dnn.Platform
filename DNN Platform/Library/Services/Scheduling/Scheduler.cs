@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -35,7 +35,7 @@ namespace DotNetNuke.Services.Scheduling
 {
     internal static class Scheduler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Scheduler));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Scheduler));
         internal static class CoreScheduler
         {
             //This is the heart of the scheduler mechanism.
@@ -52,7 +52,7 @@ namespace DotNetNuke.Services.Scheduling
             private static int _maxThreadCount;
             private static int _activeThreadCount;
 
-            //If KeepRunning gets switched to false, 
+            //If KeepRunning gets switched to false,
             //the scheduler stops running.
             private static bool _forceReloadSchedule;
             private static bool _debug;
@@ -77,7 +77,7 @@ namespace DotNetNuke.Services.Scheduling
             private static readonly ReaderWriterLockSlim StatusLock = new ReaderWriterLockSlim();
             private static ScheduleStatus _status = ScheduleStatus.STOPPED;
 
-            //If KeepRunning gets switched to false, 
+            //If KeepRunning gets switched to false,
             //the scheduler stops running.
             public static bool KeepThreadAlive = true;
             public static bool KeepRunning = true;
@@ -195,7 +195,7 @@ namespace DotNetNuke.Services.Scheduling
                         var item = ScheduleInProgress.FirstOrDefault(si => si.ScheduleID == scheduleItem.ScheduleID);
                         return item;
                     }
-                    
+
                 }
                 catch (ApplicationException ex)
                 {
@@ -270,7 +270,7 @@ namespace DotNetNuke.Services.Scheduling
                     //catches edge-case where schedule runs before webserver registration
                     return null;
                 }
-                    
+
             }
 
             public static ScheduleHistoryItem AddScheduleHistory(ScheduleHistoryItem scheduleHistoryItem)
@@ -321,7 +321,7 @@ namespace DotNetNuke.Services.Scheduling
                 }
             }
 
-	        private delegate void AddToScheduleInProgressDelegate(ScheduleHistoryItem item);
+            private delegate void AddToScheduleInProgressDelegate(ScheduleHistoryItem item);
             public static void FireEvents()
             {
                 //This method uses a thread pool to
@@ -334,65 +334,65 @@ namespace DotNetNuke.Services.Scheduling
                 //Pass in the ScheduleItem to the ProcessGroup
                 //so the ProcessGroup can pass it around for
                 //logging and notifications.
-	            lock (ScheduleQueue)
-	            {
-		            var scheduleList = new List<ScheduleItem>();
-		            using (ScheduleQueue.GetReadLock(LockTimeout))
-		            {
-			            foreach (ScheduleItem scheduleItem in ScheduleQueue)
-			            {
-				            scheduleList.Add(scheduleItem);
-			            }
-		            }
+                lock (ScheduleQueue)
+                {
+                    var scheduleList = new List<ScheduleItem>();
+                    using (ScheduleQueue.GetReadLock(LockTimeout))
+                    {
+                        foreach (ScheduleItem scheduleItem in ScheduleQueue)
+                        {
+                            scheduleList.Add(scheduleItem);
+                        }
+                    }
 
-		            int numToRun = scheduleList.Count;
-		            int numRun = 0;
+                    int numToRun = scheduleList.Count;
+                    int numRun = 0;
 
-		            foreach (ScheduleItem scheduleItem in scheduleList)
-		            {
-			            if (!KeepRunning)
-			            {
-				            return;
-			            }
+                    foreach (ScheduleItem scheduleItem in scheduleList)
+                    {
+                        if (!KeepRunning)
+                        {
+                            return;
+                        }
 
-			            int processGroup = GetProcessGroup();
+                        int processGroup = GetProcessGroup();
 
-			            if (scheduleItem.NextStart <= DateTime.Now &&
-							scheduleItem.Enabled &&
-							!IsInProgress(scheduleItem) &&
-							!HasDependenciesConflict(scheduleItem) &&
-							numRun < numToRun)
-			            {
-				            scheduleItem.ProcessGroup = processGroup;
-			                if (scheduleItem.ScheduleSource == ScheduleSource.NOT_SET)
-			                {
-			                    if (SchedulingProvider.SchedulerMode == SchedulerMode.TIMER_METHOD)
-			                    {
-			                        scheduleItem.ScheduleSource = ScheduleSource.STARTED_FROM_TIMER;
-			                    }
-			                    else if (SchedulingProvider.SchedulerMode == SchedulerMode.REQUEST_METHOD)
-			                    {
-			                        scheduleItem.ScheduleSource = ScheduleSource.STARTED_FROM_BEGIN_REQUEST;
-			                    }
-			                }
+                        if (scheduleItem.NextStart <= DateTime.Now &&
+                            scheduleItem.Enabled &&
+                            !IsInProgress(scheduleItem) &&
+                            !HasDependenciesConflict(scheduleItem) &&
+                            numRun < numToRun)
+                        {
+                            scheduleItem.ProcessGroup = processGroup;
+                            if (scheduleItem.ScheduleSource == ScheduleSource.NOT_SET)
+                            {
+                                if (SchedulingProvider.SchedulerMode == SchedulerMode.TIMER_METHOD)
+                                {
+                                    scheduleItem.ScheduleSource = ScheduleSource.STARTED_FROM_TIMER;
+                                }
+                                else if (SchedulingProvider.SchedulerMode == SchedulerMode.REQUEST_METHOD)
+                                {
+                                    scheduleItem.ScheduleSource = ScheduleSource.STARTED_FROM_BEGIN_REQUEST;
+                                }
+                            }
 
-			                var delegateFunc = new AddToScheduleInProgressDelegate(AddToScheduleInProgress);
+                            var delegateFunc = new AddToScheduleInProgressDelegate(AddToScheduleInProgress);
                             var scheduleHistoryItem = new ScheduleHistoryItem(scheduleItem);
                             scheduleHistoryItem.StartDate = DateTime.Now;
                             delegateFunc.BeginInvoke(scheduleHistoryItem, null, null);
                             Thread.Sleep(1000);
 
-				            _processGroup[processGroup].AddQueueUserWorkItem(scheduleItem);
+                            _processGroup[processGroup].AddQueueUserWorkItem(scheduleItem);
 
-				            LogEventAddedToProcessGroup(scheduleItem);
-				            numRun += 1;
-			            }
-			            else
-			            {
-				            LogWhyTaskNotRun(scheduleItem);
-			            }
-		            }
-	            }
+                            LogEventAddedToProcessGroup(scheduleItem);
+                            numRun += 1;
+                        }
+                        else
+                        {
+                            LogWhyTaskNotRun(scheduleItem);
+                        }
+                    }
+                }
             }
 
             private static void LogWhyTaskNotRun(ScheduleItem scheduleItem)
@@ -591,7 +591,7 @@ namespace DotNetNuke.Services.Scheduling
                         {
                             StatusLock.ExitReadLock();
                         }
-                        
+
                     }
                 }
                 catch (ApplicationException)
@@ -608,12 +608,12 @@ namespace DotNetNuke.Services.Scheduling
             /// <param name="sourceOfHalt">Initiator of Halt</param>
             public static void Halt(string sourceOfHalt)
             {
-				//should do nothing if the scheduler havn't start yet.
-            	var currentStatus = GetScheduleStatus();
-				if(currentStatus == ScheduleStatus.NOT_SET || currentStatus == ScheduleStatus.STOPPED)
-				{
-					return;
-				}
+                //should do nothing if the scheduler havn't start yet.
+                var currentStatus = GetScheduleStatus();
+                if(currentStatus == ScheduleStatus.NOT_SET || currentStatus == ScheduleStatus.STOPPED)
+                {
+                    return;
+                }
                 SetScheduleStatus(ScheduleStatus.SHUTTING_DOWN);
                 var log = new LogInfo {LogTypeKey = "SCHEDULER_SHUTTING_DOWN"};
                 log.AddProperty("Initiator", sourceOfHalt);
@@ -631,7 +631,7 @@ namespace DotNetNuke.Services.Scheduling
                     }
                     Thread.Sleep(1000);
                 }
-                
+
                 _activeThreadCount = 0;
             }
 
@@ -714,7 +714,7 @@ namespace DotNetNuke.Services.Scheduling
                 }
 
                 bool runningInAGroup = !String.IsNullOrEmpty(thisServer.ServerGroup);
-                
+
                 var serverGroupServers = ServerGroupServers(thisServer);
 
 
@@ -800,7 +800,7 @@ namespace DotNetNuke.Services.Scheduling
                     //As long as we have an open thread, continue.
 
                     //Load the queue to determine which schedule
-                    //items need to be run. 
+                    //items need to be run.
                     LoadQueueFromEvent(eventName);
 
                     while (GetScheduleQueueCount() > 0)
@@ -889,7 +889,7 @@ namespace DotNetNuke.Services.Scheduling
                     {
                         try
                         {
-                            if (Common.Globals.ElapsedSinceAppStart.TotalSeconds < SchedulingProvider.DelayAtAppStart) 
+                            if (Common.Globals.ElapsedSinceAppStart.TotalSeconds < SchedulingProvider.DelayAtAppStart)
                             {
                                 if (!KeepThreadAlive)
                                     return;
@@ -907,7 +907,7 @@ namespace DotNetNuke.Services.Scheduling
                                 SetScheduleStatus(ScheduleStatus.RUNNING_REQUEST_SCHEDULE);
                             }
                             //Load the queue to determine which schedule
-                            //items need to be run. 
+                            //items need to be run.
 
                             LoadQueueFromTimer();
 
@@ -916,7 +916,7 @@ namespace DotNetNuke.Services.Scheduling
                             DateTime lastQueueRefresh = DateTime.Now;
                             bool refreshQueueSchedule = false;
 
-                            //We allow for [MaxThreadCount] threads to run 
+                            //We allow for [MaxThreadCount] threads to run
                             //simultaneously.  As long as we have an open thread
                             //and we don't have to refresh the queue, continue
                             //to loop.
@@ -1300,7 +1300,7 @@ namespace DotNetNuke.Services.Scheduling
                     //object property to note the start time.
                     scheduleHistoryItem.StartDate = DateTime.Now;
                     AddScheduleHistory(scheduleHistoryItem);
-                    
+
                     if (scheduleHistoryItem.RetainHistoryNum > 0)
                     {
                         //Write out the log entry for this event

@@ -14,7 +14,7 @@
         </div>
         <div class="dnnFormItem">
             <dnn:Label ID="plFile" runat="server" ControlName="cboFiles" Suffix=":" />
-              <dnn:DnnComboBox runat="server" ID="cboFiles"  AutoPostBack="true"/>
+            <dnn:DnnComboBox runat="server" ID="cboFiles"  AutoPostBack="true"/>
         </div>
  </fieldset>
     <h2 id="dnnPanel-ModuleContent" class="dnnFormSectionHead">

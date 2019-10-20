@@ -16,7 +16,7 @@
         shim: {
             'jquery.hoverintent.min': ['jquery'],
             'jquery.qatooltip': ['jquery.hoverintent.min']
-            
+
         },
         map: {
             '*': {
@@ -65,7 +65,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
     function ($, ko, moment, ut, sf, cf, extension, persistent, eventEmitter, iconLoader, Gateway) {
         var iframe = window.parent.document.getElementById("personaBar-iframe");
         if (!iframe) return;
-        
+
         var onTouch = "ontouchstart" in document.documentElement;
         // Checking touch screen for second level menu - the above onTouch won't work on windows tablet - IE I didnt test but read about it.
         var isTouch = ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
@@ -87,7 +87,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
         var $personaBar = $('#personabar');
         var $showSiteButton = $('#showsite');
         var customModules = [];
-        
+
         window.requirejs.config({
             paths: {
                 'rootPath': utility.getApplicationRootPath()
@@ -97,7 +97,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
         if (config.skin) {
             $personaBar.addClass(config.skin);
         }
-        
+
         var menuViewModel = utility.buildMenuViewModel(config.menuStructure);
         var cachedPersonaBarPageWidth = 860;
 
@@ -118,13 +118,13 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
 
 
             openSocialTasks: function openTaskWindow(){
-                 var taskWindow = $('.socialtasks');
-                 taskWindow.css({visibility:'visible'});
+                var taskWindow = $('.socialtasks');
+                taskWindow.css({visibility:'visible'});
             },
 
             closeSocialTasks: function closeTaskWindow() {
-                 var taskWindow = $('.socialtasks')
-                 taskWindow.css({visibility:'hidden'});
+                var taskWindow = $('.socialtasks')
+                taskWindow.css({visibility:'hidden'});
             },
 
             expandPersonaBarPage: function expandPersonaBar(){
@@ -241,7 +241,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                 $showSiteButton.hide();
                 var $menuItems = $(".btn_panel");
                 var $hoverMenuItems = $(".hovermenu > ul > li");
-                
+
                 $menuItems.removeClass('selected pending');
                 $hoverMenuItems.removeClass('selected pending');
 
@@ -430,10 +430,10 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                 }
             },
             /**
-             * in case path is an array, it is expected to be a sorted list of dependent sources.
-             * 
-             * @param path string|array
-             */
+            * in case path is an array, it is expected to be a sorted list of dependent sources.
+            *
+            * @param path string|array
+            */
             loadBundleScript: function (path) {
 
                 var urls = path;
@@ -456,7 +456,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                         }
                     });
                 }
-                    
+
                 ajax(urls.reverse(), config.buildNumber);
             },
             panelViewData: function (panelId, viewData) {
@@ -589,7 +589,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                 }, 100);
             }
         }
-        
+
         function onShownPersonaBar() {
             (function handleResizeWindow() {
                 var evt = document.createEvent('HTMLEvents');
@@ -824,9 +824,9 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                                 $body.addClass('ie');
                                 iframe.style.backgroundColor = "rgba(0,0,0,0.01)"; // IE10 flashing bug
                             }
-                            
+
                             if (config.visible) {
-                                
+
 
                                 (function setupMenu() {
                                     $(".btn_panel .hovermenu").click(function(e) {
@@ -878,7 +878,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                                         }
 
                                         if (!path) return;
-                                        
+
                                         if (moduleName !== undefined) {
                                             params = {
                                                 moduleName: moduleName,
@@ -1117,7 +1117,7 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                     } else {
                         $iframe.width(personaBarMenuWidth);
                         $personaBar.show();
-          
+
                         $personaBar.css({ left: 0, 'display': 'block' });
                         $parentBody.animate({ marginLeft: personaBarMenuWidth }, 1, 'linear', onShownPersonaBar);
                         $personaBar.animate({ left: 0 }, 1, 'linear', callback);
@@ -1146,9 +1146,9 @@ require(['jquery', 'knockout', 'moment', '../util', '../sf', '../config', './../
                 util.loadPanel(identifier, {});
             }
         });
-        
+
         if (typeof window.parent.dnn === "undefined" || window.parent.dnn === null) {
-             window.parent.dnn = {};
+            window.parent.dnn = {};
         }
         // Register a PersonaBar object in the parent window global scope
         // to allow easy integration between the site and the persona bar

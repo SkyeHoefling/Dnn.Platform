@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -156,10 +156,10 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
         private List<Field> GetFolderPreviewFields(IFolderInfo folder)
         {
             var fields = new List<Field>
-                             {                                 
-                                 GetFolderSizeField(folder), 
-                                 GetTotalFilesField(folder)
-                             };
+                            {
+                                GetFolderSizeField(folder),
+                                GetTotalFilesField(folder)
+                            };
             fields.AddRange(GetAuditFields((FolderInfo)folder, folder.PortalID));
             return fields;
         }
@@ -167,10 +167,10 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
         private List<Field> GetFilePreviewFields(IFileInfo file)
         {
             var fields = new List<Field>
-                             {
-                                 GetFileKindField(file),
-                                 GetFileSizeField(file),
-                             };
+                            {
+                                GetFileKindField(file),
+                                GetFileSizeField(file),
+                            };
             fields.AddRange(GetAuditFields((FileInfo)file, file.PortalId));
             return fields;
         }
@@ -180,32 +180,32 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
             var createdByUser = item.CreatedByUser(portalId);
             var lastModifiedByUser = item.LastModifiedByUser(portalId);
             return new List<Field>
-                {                    
+                {
                     new Field(DefaultMetadataNames.Created)
                     {
-                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.Created + ".DisplayName"), 
-                        Type = typeof(DateTime), 
+                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.Created + ".DisplayName"),
+                        Type = typeof(DateTime),
                         Value = item.CreatedOnDate,
                         StringValue = item.CreatedOnDate.ToString(CultureInfo.CurrentCulture)
                     },
                 new Field(DefaultMetadataNames.CreatedBy)
                     {
-                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.CreatedBy + ".DisplayName"), 
-                        Type = typeof(int), 
+                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.CreatedBy + ".DisplayName"),
+                        Type = typeof(int),
                         Value = item.CreatedByUserID,
                         StringValue = createdByUser != null ? createdByUser.DisplayName : ""
                     },
                 new Field(DefaultMetadataNames.Modified)
                     {
-                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.Modified + ".DisplayName"), 
-                        Type = typeof(DateTime), 
+                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.Modified + ".DisplayName"),
+                        Type = typeof(DateTime),
                         Value = item.LastModifiedOnDate,
                         StringValue = item.LastModifiedOnDate.ToString(CultureInfo.CurrentCulture)
                     },
                 new Field(DefaultMetadataNames.ModifiedBy)
                     {
-                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.ModifiedBy + ".DisplayName"), 
-                        Type = typeof(int), 
+                        DisplayName = LocalizationHelper.GetString("Field" + DefaultMetadataNames.ModifiedBy + ".DisplayName"),
+                        Type = typeof(int),
                         Value = item.LastModifiedByUserID,
                         StringValue = lastModifiedByUser != null ? lastModifiedByUser.DisplayName : ""
                     }
@@ -247,7 +247,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
             var portalId = GetCurrentPortalId(moduleId);
 
             return new List<FolderMappingInfo>
-                {                        
+                {
                     FolderMappingController.Instance.GetFolderMapping(portalId, "Standard"),
                     FolderMappingController.Instance.GetFolderMapping(portalId, "Secure"),
                     FolderMappingController.Instance.GetFolderMapping(portalId, "Database")
@@ -280,7 +280,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
                 }
             }
 
-            return IsHostMenu ? Null.NullInteger : PortalSettings.Current.PortalId;            
+            return IsHostMenu ? Null.NullInteger : PortalSettings.Current.PortalId;
         }
 
         public IEnumerable<FolderMappingViewModel> GetFolderMappings(int moduleId)
@@ -325,7 +325,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
 
             if (!FolderPermissionController.CanBrowseFolder((FolderInfo)folder))
             {
-                //The user cannot access the content               
+                //The user cannot access the content
                 return;
             }
 
@@ -364,7 +364,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
             }
 
             var portalId = this.GetCurrentPortalId(moduleId);
-            return this.GetFolderViewModel(FolderManager.Instance.GetFolder(portalId, ""));            
+            return this.GetFolderViewModel(FolderManager.Instance.GetFolder(portalId, ""));
         }
 
         public FolderViewModel GetGroupFolder(int groupId, PortalSettings portalSettings)
@@ -395,7 +395,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
             {
                 var pc = new PermissionController();
                 var browsePermission = pc.GetPermissionByCodeAndKey("SYSTEM_FOLDER", "BROWSE").Cast<PermissionInfo>().FirstOrDefault();
-                var readPermission = pc.GetPermissionByCodeAndKey("SYSTEM_FOLDER", "READ").Cast<PermissionInfo>().FirstOrDefault(); 
+                var readPermission = pc.GetPermissionByCodeAndKey("SYSTEM_FOLDER", "READ").Cast<PermissionInfo>().FirstOrDefault();
                 var writePermission = pc.GetPermissionByCodeAndKey("SYSTEM_FOLDER", "WRITE").Cast<PermissionInfo>().FirstOrDefault();
 
                 if (!FolderManager.Instance.FolderExists(portalSettings.PortalId, "Groups"))
@@ -419,7 +419,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
                 return groupFolder;
             }
 
-            return FolderManager.Instance.GetFolder(portalSettings.PortalId, groupFolderPath);        
+            return FolderManager.Instance.GetFolder(portalSettings.PortalId, groupFolderPath);
         }
 
         public FolderViewModel GetUserFolder(UserInfo userInfo)
@@ -565,7 +565,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
 
             if (file.FolderId == destinationFolderId)
             {
-                // User must not move files in the same folder                
+                // User must not move files in the same folder
                 throw new DotNetNukeException(LocalizationHelper.GetString("DestinationFolderCannotMatchSourceFolder.Error"));
             }
 
@@ -650,7 +650,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
             };
             return result;
         }
-        
+
         public ZipExtractViewModel UnzipFile(int fileId, bool overwrite)
         {
             var file = FileManager.Instance.GetFile(fileId, true);
@@ -700,7 +700,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
                 IconUrl = GetFileIconUrl(file.Extension)
             };
         }
-        
+
         protected virtual FolderViewModel GetFolderViewModel(IFolderInfo folder)
         {
             var folderName = string.IsNullOrEmpty(folder.FolderName)
@@ -759,7 +759,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
                 UnlinkAllowedStatus = GetUnlinkAllowedStatus(folder)
             };
         }
-        
+
         protected virtual ItemViewModel GetItemViewModel(IFileInfo file)
         {
             var folder = FolderManager.Instance.GetFolder(file.FolderId);
@@ -793,7 +793,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
         }
 
         #endregion
-        
+
         public string UpgradeModule(string version)
         {
             try
@@ -816,14 +816,14 @@ namespace DotNetNuke.Modules.DigitalAssets.Components.Controllers
                             Upgrade.AddModuleToPage(hostPage, mDef.ModuleDefID, "File Management", "~/Icons/Sigma/Files_32X32_Standard.png", true);
 
                             Upgrade.AddAdminPages("File Management",
-                                                 "Manage assets within the portal",
-                                                 "~/Icons/Sigma/Files_16X16_Standard.png",
-                                                 "~/Icons/Sigma/Files_32X32_Standard.png",
-                                                 true,
-                                                 mDef.ModuleDefID,
-                                                 "File Management",
-                                                 "~/Icons/Sigma/Files_16X16_Standard.png",
-                                                 true);
+                                                "Manage assets within the portal",
+                                                "~/Icons/Sigma/Files_16X16_Standard.png",
+                                                "~/Icons/Sigma/Files_32X32_Standard.png",
+                                                true,
+                                                mDef.ModuleDefID,
+                                                "File Management",
+                                                "~/Icons/Sigma/Files_16X16_Standard.png",
+                                                true);
                         }
 
                         //Remove Host File Manager page

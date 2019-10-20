@@ -38,8 +38,8 @@ define(function () {
     }
 
     /**
-     * Sets the page as loaded.
-     */
+    * Sets the page as loaded.
+    */
     function pageLoaded() {
         if (!isPageLoaded) {
             isPageLoaded = true;
@@ -97,10 +97,10 @@ define(function () {
     /** START OF PUBLIC API **/
 
     /**
-     * Registers a callback for DOM ready. If DOM is already ready, the
-     * callback is called immediately.
-     * @param {Function} callback
-     */
+    * Registers a callback for DOM ready. If DOM is already ready, the
+    * callback is called immediately.
+    * @param {Function} callback
+    */
     function domReady(callback) {
         if (isPageLoaded) {
             callback(doc);
@@ -113,8 +113,8 @@ define(function () {
     domReady.version = '2.0.1';
 
     /**
-     * Loader Plugin API method
-     */
+    * Loader Plugin API method
+    */
     domReady.load = function (name, req, onLoad, config) {
         if (config.isBuild) {
             onLoad(null);

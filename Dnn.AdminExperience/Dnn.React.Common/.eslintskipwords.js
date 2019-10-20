@@ -51,7 +51,7 @@ module.exports = [
     "selectable",
     "scrollarea",
     "searchbox",
-	"checkmark",
+    "checkmark",
     "filesystem",
     "npm",
     "console",

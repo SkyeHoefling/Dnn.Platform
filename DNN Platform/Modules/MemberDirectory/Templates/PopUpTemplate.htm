@@ -6,7 +6,7 @@
         <a href="" title="" class="mdMemberTitle" data-bind="attr: { title: DisplayName, href: ProfileUrl }">
             <span data-bind="text: DisplayName"></span>
         </a>
-    </li>  
+    </li>
     <li class="mdTitle"><p><span data-bind="text: Title"></span></p></li>
     <li class="mdPhone"><p><span data-bind="text: Phone"></span></p></li>
     <li class="mdEmail"><a href="#"><span data-bind="text: Email"></span></a></li>
@@ -20,4 +20,3 @@
         <li class="mdUnfollow" data-bind="visible: IsFollowing()"><a href="" title="" class="firstItem" data-bind="click: unFollow"><span data-bind="text: UnFollowText"></span></a></li>
         <li class="mdComposeMessage"><a href="" title="" class="ComposeMessage" data-bind="visible: !$parent.disablePrivateMessage()"><span data-bind="text: SendMessageText"></span></a></li>
 </ul>
-

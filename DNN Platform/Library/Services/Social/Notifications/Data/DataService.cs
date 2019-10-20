@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -146,40 +146,40 @@ namespace DotNetNuke.Services.Social.Notifications.Data
 
         #endregion
 
-		#region Toast
+        #region Toast
 
-		public bool IsToastPending(int notificationId)
-		{
-			return _provider.ExecuteScalar<bool>(GetFullyQualifiedName("IsToastPending"),
-												notificationId);
-		}
+        public bool IsToastPending(int notificationId)
+        {
+            return _provider.ExecuteScalar<bool>(GetFullyQualifiedName("IsToastPending"),
+                                                notificationId);
+        }
 
-		/// <summary>
-		/// Mark a Toast ready for sending
-		/// </summary>
-		/// <param name="notificationId">The notification Id </param>
-		/// <param name="userId">The Recipient User Id </param>
-		public void MarkReadyForToast(int notificationId, int userId)
-		{
-			_provider.ExecuteNonQuery(GetFullyQualifiedName("MarkReadyForToast"), notificationId, userId);
-		}
+        /// <summary>
+        /// Mark a Toast ready for sending
+        /// </summary>
+        /// <param name="notificationId">The notification Id </param>
+        /// <param name="userId">The Recipient User Id </param>
+        public void MarkReadyForToast(int notificationId, int userId)
+        {
+            _provider.ExecuteNonQuery(GetFullyQualifiedName("MarkReadyForToast"), notificationId, userId);
+        }
 
-		/// <summary>
-		/// Mark Toast being already sent
-		/// </summary>
-		/// <param name="notificationId">The notification Id </param>
-		/// <param name="userId">The Recipient User Id </param>
-		public void MarkToastSent(int notificationId, int userId)
-		{
+        /// <summary>
+        /// Mark Toast being already sent
+        /// </summary>
+        /// <param name="notificationId">The notification Id </param>
+        /// <param name="userId">The Recipient User Id </param>
+        public void MarkToastSent(int notificationId, int userId)
+        {
             _provider.ExecuteNonQuery(GetFullyQualifiedName("MarkToastSent"), notificationId, userId);
-		}
+        }
 
-		public IDataReader GetToasts(int userId, int portalId)
-		{
-			return _provider.ExecuteReader(GetFullyQualifiedName("GetToasts"), userId, portalId);
-		}
+        public IDataReader GetToasts(int userId, int portalId)
+        {
+            return _provider.ExecuteReader(GetFullyQualifiedName("GetToasts"), userId, portalId);
+        }
 
-		#endregion
+        #endregion
 
     }
 }

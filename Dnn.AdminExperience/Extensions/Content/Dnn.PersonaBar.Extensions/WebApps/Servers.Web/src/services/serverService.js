@@ -9,7 +9,7 @@ const clearCache = function () {
 
 const serverService = {
     restartApplication,
-    clearCache    
+    clearCache
 };
 
-export default serverService; 
+export default serverService;

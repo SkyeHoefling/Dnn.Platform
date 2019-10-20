@@ -10,65 +10,65 @@ namespace DotNetNuke.Web.DDRMenu.Localisation
     using DotNetNuke.Entities.Portals;
 
     public class Generic : ILocalisation
-	{
-		private bool haveChecked;
-		private object locApi;
-		private MethodInfo locTab;
-		private MethodInfo locNodes;
+    {
+        private bool haveChecked;
+        private object locApi;
+        private MethodInfo locTab;
+        private MethodInfo locNodes;
 
-		public bool HaveApi()
-		{
-			if (!haveChecked)
-			{
-				var modules = DesktopModuleController.GetDesktopModules(PortalSettings.Current.PortalId);
-				foreach (var moduleKeyPair in modules)
-				{
+        public bool HaveApi()
+        {
+            if (!haveChecked)
+            {
+                var modules = DesktopModuleController.GetDesktopModules(PortalSettings.Current.PortalId);
+                foreach (var moduleKeyPair in modules)
+                {
                     if (!String.IsNullOrEmpty(moduleKeyPair.Value.BusinessControllerClass))
-					{
-						try
-						{
+                    {
+                        try
+                        {
                             locApi = Reflection.CreateObject(moduleKeyPair.Value.BusinessControllerClass, moduleKeyPair.Value.BusinessControllerClass);
-							locTab = locApi.GetType().GetMethod("LocaliseTab", new[] {typeof(TabInfo), typeof(int)});
-							if (locTab != null)
-							{
-								if (locTab.IsStatic)
-								{
-									locApi = null;
-								}
-								break;
-							}
+                            locTab = locApi.GetType().GetMethod("LocaliseTab", new[] {typeof(TabInfo), typeof(int)});
+                            if (locTab != null)
+                            {
+                                if (locTab.IsStatic)
+                                {
+                                    locApi = null;
+                                }
+                                break;
+                            }
 
-							locNodes = locApi.GetType().GetMethod("LocaliseNodes", new[] {typeof(DNNNodeCollection)});
-							if (locNodes != null)
-							{
-								if (locNodes.IsStatic)
-								{
-									locApi = null;
-								}
-								break;
-							}
-						}
+                            locNodes = locApi.GetType().GetMethod("LocaliseNodes", new[] {typeof(DNNNodeCollection)});
+                            if (locNodes != null)
+                            {
+                                if (locNodes.IsStatic)
+                                {
+                                    locApi = null;
+                                }
+                                break;
+                            }
+                        }
 // ReSharper disable EmptyGeneralCatchClause
-						catch
-						{
-						}
+                        catch
+                        {
+                        }
 // ReSharper restore EmptyGeneralCatchClause
-					}
-				}
-				haveChecked = true;
-			}
+                    }
+                }
+                haveChecked = true;
+            }
 
-			return (locTab != null) || (locNodes != null);
-		}
+            return (locTab != null) || (locNodes != null);
+        }
 
-		public TabInfo LocaliseTab(TabInfo tab, int portalId)
-		{
-			return (locTab == null) ? null : (TabInfo)locTab.Invoke(locApi, new object[] {tab, portalId});
-		}
+        public TabInfo LocaliseTab(TabInfo tab, int portalId)
+        {
+            return (locTab == null) ? null : (TabInfo)locTab.Invoke(locApi, new object[] {tab, portalId});
+        }
 
-		public DNNNodeCollection LocaliseNodes(DNNNodeCollection nodes)
-		{
-			return (locNodes == null) ? null : (DNNNodeCollection)locNodes.Invoke(locApi, new object[] {nodes});
-		}
-	}
+        public DNNNodeCollection LocaliseNodes(DNNNodeCollection nodes)
+        {
+            return (locNodes == null) ? null : (DNNNodeCollection)locNodes.Invoke(locApi, new object[] {nodes});
+        }
+    }
 }

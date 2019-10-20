@@ -13,13 +13,13 @@ namespace DotNetNuke.Services.GeneratedImage.StartTransform
     /// <summary>
     /// User Profile Picture ImageTransform class
     /// </summary>
-	public class UserProfilePicTransform : ImageTransform
+    public class UserProfilePicTransform : ImageTransform
     {
         #region Properties
         /// <summary>
-		/// Sets the UserID of the profile pic
-		/// </summary>
-		public int UserID { get; set; }
+        /// Sets the UserID of the profile pic
+        /// </summary>
+        public int UserID { get; set; }
 
         /// <summary>
         /// Provides an Unique String for the image transformation
@@ -33,12 +33,12 @@ namespace DotNetNuke.Services.GeneratedImage.StartTransform
         #endregion
 
         public UserProfilePicTransform()
-		{
+        {
             InterpolationMode = InterpolationMode.HighQualityBicubic;
             SmoothingMode = SmoothingMode.HighQuality;
             PixelOffsetMode = PixelOffsetMode.HighQuality;
             CompositingQuality = CompositingQuality.HighQuality;
-		}
+        }
 
         /// <summary>
         /// Processes an input image returning the user profile picture
@@ -46,23 +46,23 @@ namespace DotNetNuke.Services.GeneratedImage.StartTransform
         /// <param name="image">Input image</param>
         /// <returns>Image result after image transformation</returns>
         public override Image ProcessImage(Image image)
-		{
+        {
             IFileInfo photoFile;
 
-		    if (TryGetPhotoFile(out photoFile))
-		    {
-		        if (!IsImageExtension(photoFile.Extension))
-		        {
-		            return GetNoAvatarImage();
-		        }
+            if (TryGetPhotoFile(out photoFile))
+            {
+                if (!IsImageExtension(photoFile.Extension))
+                {
+                    return GetNoAvatarImage();
+                }
 
-		        using (var content = FileManager.Instance.GetFileContent(photoFile))
-		        {
-		            return CopyImage(content);
-		        }
-		    }
-		    return GetNoAvatarImage();
-		}
+                using (var content = FileManager.Instance.GetFileContent(photoFile))
+                {
+                    return CopyImage(content);
+                }
+            }
+            return GetNoAvatarImage();
+        }
 
         /// <summary>
         /// Get the Bitmap of the No Avatar Image
@@ -117,7 +117,7 @@ namespace DotNetNuke.Services.GeneratedImage.StartTransform
 
             return isVisible;
         }
-        
+
         private static bool IsImageExtension(string extension)
         {
             if (!extension.StartsWith("."))

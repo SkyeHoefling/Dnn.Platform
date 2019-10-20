@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -39,11 +39,11 @@ namespace DotNetNuke.Entities.Users.Social
     /// Class:      Relationship
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// The Relationship class describes the relationships that a user or portal owns.  
-    /// A handful of default Portal-Level Relationships will be be present for every portal (e.g. Friends, Followers, Family).  
+    /// The Relationship class describes the relationships that a user or portal owns.
+    /// A handful of default Portal-Level Relationships will be be present for every portal (e.g. Friends, Followers, Family).
     /// Portal-Level Relationship will have a -1 in UserId field.
     /// Any custom User-Level Relationship created by user will also be defined by this class (e.g. My InLaws, Engineering Group).
-    /// User-Relationship will always have an associcated PortalId. User-Level Relationship will always be tied to a specific Portal.    
+    /// User-Relationship will always have an associcated PortalId. User-Level Relationship will always be tied to a specific Portal.
     /// </summary>
     /// -----------------------------------------------------------------------------
     [Serializable]
@@ -100,8 +100,8 @@ namespace DotNetNuke.Entities.Users.Social
         /// Is this a Portal-Level Relationship
         /// </summary>
         [XmlIgnore]
-        public bool IsPortalList 
-        { 
+        public bool IsPortalList
+        {
             get
             {
                 return UserId == Null.NullInteger && PortalId >= 0;
@@ -121,7 +121,7 @@ namespace DotNetNuke.Entities.Users.Social
         }
 
         /// <summary>
-        /// Is this a USer-Level Relationship 
+        /// Is this a USer-Level Relationship
         /// </summary>
         [XmlIgnore]
         public bool IsUserList

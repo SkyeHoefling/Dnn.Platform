@@ -1,10 +1,10 @@
 #region Apache License
 //
-// Licensed to the Apache Software Foundation (ASF) under one or more 
+// Licensed to the Apache Software Foundation (ASF) under one or more
 // contributor license agreements. See the NOTICE file distributed with
-// this work for additional information regarding copyright ownership. 
+// this work for additional information regarding copyright ownership.
 // The ASF licenses this file to you under the Apache License, Version 2.0
-// (the "License"); you may not use this file except in compliance with 
+// (the "License"); you may not use this file except in compliance with
 // the License. You may obtain a copy of the License at
 //
 // http://www.apache.org/licenses/LICENSE-2.0
@@ -25,30 +25,30 @@ using log4net.Core;
 
 namespace log4net.Layout.Pattern
 {
-	/// <summary>
-	/// Converter for logger name
-	/// </summary>
-	/// <remarks>
-	/// <para>
-	/// Outputs the <see cref="LoggingEvent.LoggerName"/> of the event.
-	/// </para>
-	/// </remarks>
-	/// <author>Nicko Cadell</author>
-	internal sealed class LoggerPatternConverter : NamedPatternConverter 
-	{
-		/// <summary>
-		/// Gets the fully qualified name of the logger
-		/// </summary>
-		/// <param name="loggingEvent">the event being logged</param>
-		/// <returns>The fully qualified logger name</returns>
-		/// <remarks>
-		/// <para>
-		/// Returns the <see cref="LoggingEvent.LoggerName"/> of the <paramref name="loggingEvent"/>.
-		/// </para>
-		/// </remarks>
-		override protected string GetFullyQualifiedName(LoggingEvent loggingEvent) 
-		{
-			return loggingEvent.LoggerName;
-		}
-	}
+    /// <summary>
+    /// Converter for logger name
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Outputs the <see cref="LoggingEvent.LoggerName"/> of the event.
+    /// </para>
+    /// </remarks>
+    /// <author>Nicko Cadell</author>
+    internal sealed class LoggerPatternConverter : NamedPatternConverter
+    {
+        /// <summary>
+        /// Gets the fully qualified name of the logger
+        /// </summary>
+        /// <param name="loggingEvent">the event being logged</param>
+        /// <returns>The fully qualified logger name</returns>
+        /// <remarks>
+        /// <para>
+        /// Returns the <see cref="LoggingEvent.LoggerName"/> of the <paramref name="loggingEvent"/>.
+        /// </para>
+        /// </remarks>
+        override protected string GetFullyQualifiedName(LoggingEvent loggingEvent)
+        {
+            return loggingEvent.LoggerName;
+        }
+    }
 }

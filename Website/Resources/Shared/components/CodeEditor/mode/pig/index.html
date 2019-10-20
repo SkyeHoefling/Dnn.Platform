@@ -26,7 +26,7 @@
 <h2>Pig Latin mode</h2>
 <form><textarea id="code" name="code">
 -- Apache Pig (Pig Latin Language) Demo
-/* 
+/*
 This is a multiline comment.
 */
 a = LOAD "\path\to\input" USING PigStorage('\t') AS (x:long, y:chararray, z:bytearray);
@@ -38,11 +38,11 @@ STORE c INTO "\path\to\output";
 </textarea></form>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         indentUnit: 4,
         mode: "text/x-pig"
-      });
+    });
     </script>
 
     <p>

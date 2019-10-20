@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -53,13 +53,13 @@ namespace DotNetNuke.UI.ControlPanels
     /// -----------------------------------------------------------------------------
     public class ControlPanelBase : UserControl
     {
-		#region Private Members
+        #region Private Members
 
         private string _localResourceFile;
-		
-		#endregion
 
-		#region Protected Properties
+        #endregion
+
+        #region Protected Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -137,8 +137,8 @@ namespace DotNetNuke.UI.ControlPanels
 
         public virtual bool IsDockable
         {
-          get { return false; }
-          set { }
+        get { return false; }
+        set { }
         }
 
         protected bool IsModuleAdmin()
@@ -180,9 +180,9 @@ namespace DotNetNuke.UI.ControlPanels
             return _IsPageAdmin;
         }
 
-		#endregion
-		
-		#region Private Methods
+        #endregion
+
+        #region Private Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -211,11 +211,11 @@ namespace DotNetNuke.UI.ControlPanels
             }
             return objModulePermission;
         }
-		
-		#endregion
 
-		#region Protected Methods
-		
+        #endregion
+
+        #region Protected Methods
+
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// Adds an Existing Module to a Pane
@@ -322,7 +322,7 @@ namespace DotNetNuke.UI.ControlPanels
                         objModule.InheritViewPermissions = false;
                         break;
                 }
-				
+
                 //get the default module view permissions
                 ArrayList arrSystemModuleViewPermissions = objPermissionController.GetPermissionByCodeAndKey("SYSTEM_MODULE_DEFINITION", "VIEW");
 
@@ -331,10 +331,10 @@ namespace DotNetNuke.UI.ControlPanels
                 {
                     if (objTabPermission.PermissionKey == "VIEW" && permissionType == ViewPermissionType.View)
                     {
-						//Don't need to explicitly add View permisisons if "Same As Page"
+                        //Don't need to explicitly add View permisisons if "Same As Page"
                         continue;
                     }
-					
+
                     //get the system module permissions for the permissionkey
                     ArrayList arrSystemModulePermissions = objPermissionController.GetPermissionByCodeAndKey("SYSTEM_MODULE_DEFINITION", objTabPermission.PermissionKey);
                     //loop through the system module permissions
@@ -345,26 +345,26 @@ namespace DotNetNuke.UI.ControlPanels
                         objSystemModulePermission = (PermissionInfo) arrSystemModulePermissions[j];
                         if (objSystemModulePermission.PermissionKey == "VIEW" && permissionType == ViewPermissionType.Edit && objTabPermission.PermissionKey != "EDIT")
                         {
-							//Only Page Editors get View permissions if "Page Editors Only"
+                            //Only Page Editors get View permissions if "Page Editors Only"
                             continue;
                         }
                         ModulePermissionInfo objModulePermission = AddModulePermission(objModule,
-                                                                                       objSystemModulePermission,
-                                                                                       objTabPermission.RoleID,
-                                                                                       objTabPermission.UserID,
-                                                                                       objTabPermission.AllowAccess);
+                                                                                        objSystemModulePermission,
+                                                                                        objTabPermission.RoleID,
+                                                                                        objTabPermission.UserID,
+                                                                                        objTabPermission.AllowAccess);
 
                         //ensure that every EDIT permission which allows access also provides VIEW permission
                         if (objModulePermission.PermissionKey == "EDIT" && objModulePermission.AllowAccess)
                         {
                             ModulePermissionInfo objModuleViewperm = AddModulePermission(objModule,
-                                                                                         (PermissionInfo) arrSystemModuleViewPermissions[0],
-                                                                                         objModulePermission.RoleID,
-                                                                                         objModulePermission.UserID,
-                                                                                         true);
+                                                                                        (PermissionInfo) arrSystemModuleViewPermissions[0],
+                                                                                        objModulePermission.RoleID,
+                                                                                        objModulePermission.UserID,
+                                                                                        true);
                         }
                     }
-					
+
                     //Get the custom Module Permissions,  Assume that roles with Edit Tab Permissions
                     //are automatically assigned to the Custom Module Permissions
                     if (objTabPermission.PermissionKey == "EDIT")
@@ -374,7 +374,7 @@ namespace DotNetNuke.UI.ControlPanels
                         //loop through the custom module permissions
                         for (j = 0; j <= arrCustomModulePermissions.Count - 1; j++)
                         {
-							//create the module permission
+                            //create the module permission
                             PermissionInfo objCustomModulePermission;
                             objCustomModulePermission = (PermissionInfo) arrCustomModulePermissions[j];
                             AddModulePermission(objModule, objCustomModulePermission, objTabPermission.RoleID, objTabPermission.UserID, objTabPermission.AllowAccess);
@@ -458,20 +458,20 @@ namespace DotNetNuke.UI.ControlPanels
             Personalization.SetProfile("Usability", "ControlPanelVisible" + PortalSettings.PortalId, isVisible.ToString());
         }
 
-		protected override void OnInit(EventArgs e)
-		{
-			if (this.Page.Items.Contains(typeof(ControlPanelBase)) && this.Page.Items[typeof(ControlPanelBase)] is ControlPanelBase)
-			{
-				this.Parent.Controls.Remove(this);
-			}
-			else
-			{
-				this.Page.Items[typeof(ControlPanelBase)] = this;
-				base.OnInit(e);
-			}
-		}
-		
-		#endregion
+        protected override void OnInit(EventArgs e)
+        {
+            if (this.Page.Items.Contains(typeof(ControlPanelBase)) && this.Page.Items[typeof(ControlPanelBase)] is ControlPanelBase)
+            {
+                this.Parent.Controls.Remove(this);
+            }
+            else
+            {
+                this.Page.Items[typeof(ControlPanelBase)] = this;
+                base.OnInit(e);
+            }
+        }
+
+        #endregion
 
         #region Nested type: ViewPermissionType
 

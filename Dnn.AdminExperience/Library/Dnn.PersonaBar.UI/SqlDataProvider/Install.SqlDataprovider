@@ -12,23 +12,23 @@
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}PersonaBarMenu') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 BEGIN
     CREATE TABLE {databaseOwner}[{objectQualifier}PersonaBarMenu](
-	    [MenuId] INT IDENTITY(1,1) NOT NULL,
+        [MenuId] INT IDENTITY(1,1) NOT NULL,
         [Identifier] NVARCHAR(50) NOT NULL,
-	    [ModuleName] NVARCHAR(50) NOT NULL,
-	    [FolderName] NVARCHAR(50) NULL,
-	    [Controller] NVARCHAR(260) NULL,
-	    [ResourceKey] NVARCHAR(50) NOT NULL,
-	    [Path] NVARCHAR(260) NOT NULL,
-	    [Link] NVARCHAR(260) NULL,
-	    [CssClass] NVARCHAR(50) NULL,
-	    [ParentId] INT NULL,
+        [ModuleName] NVARCHAR(50) NOT NULL,
+        [FolderName] NVARCHAR(50) NULL,
+        [Controller] NVARCHAR(260) NULL,
+        [ResourceKey] NVARCHAR(50) NOT NULL,
+        [Path] NVARCHAR(260) NOT NULL,
+        [Link] NVARCHAR(260) NULL,
+        [CssClass] NVARCHAR(50) NULL,
+        [ParentId] INT NULL,
         [Order] INT NOT NULL DEFAULT(0),
         [AllowHost] BIT NOT NULL DEFAULT(0),
         [Enabled] BIT NOT NULL DEFAULT(0),
-	    [CreatedByUserId] INT NULL,
-	    [CreatedOnDate] DATETIME NULL,
-	    [LastModifiedByUserId] INT NULL,
-	    [LastModifiedOnDate] DATETIME NULL,
+        [CreatedByUserId] INT NULL,
+        [CreatedOnDate] DATETIME NULL,
+        [LastModifiedByUserId] INT NULL,
+        [LastModifiedOnDate] DATETIME NULL,
         CONSTRAINT [PK_{objectQualifier}PersonaBarMenu] PRIMARY KEY CLUSTERED ([MenuId] ASC),
         CONSTRAINT [FK_{objectQualifier}PersonaBarMenu_ParentId] FOREIGN KEY([ParentId]) REFERENCES {databaseOwner}[{objectQualifier}PersonaBarMenu] ([MenuId]),
         CONSTRAINT [IX_{objectQualifier}PersonaBarMenu] UNIQUE NONCLUSTERED ([Identifier] ASC)
@@ -59,7 +59,7 @@ BEGIN
     IF EXISTS(SELECT Identifier FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] WHERE Identifier = @Identifier)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenu]
-            SET 
+            SET
                 ModuleName = @ModuleName,
                 FolderName = @FolderName,
                 Controller = @Controller,
@@ -141,33 +141,33 @@ GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_GetPersonaBarMenu]
 AS
-	SELECT 
-        MenuId, 
-        Identifier, 
-        ModuleName, 
+    SELECT
+        MenuId,
+        Identifier,
+        ModuleName,
         FolderName,
-        Controller, 
-        ResourceKey, 
-        Path, 
-        Link, 
-        CssClass, 
-        ParentId, 
-        [Order], 
-        AllowHost, 
-        Enabled, 
-        CreatedByUserId, 
-        CreatedOnDate, 
-        LastModifiedByUserId, 
-        LastModifiedOnDate 
-        
+        Controller,
+        ResourceKey,
+        Path,
+        Link,
+        CssClass,
+        ParentId,
+        [Order],
+        AllowHost,
+        Enabled,
+        CreatedByUserId,
+        CreatedOnDate,
+        LastModifiedByUserId,
+        LastModifiedOnDate
+
     FROM {databaseOwner}[{objectQualifier}PersonaBarMenu]
 GO
 
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}PersonaBarMenuDefaultPermissions') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 BEGIN
     CREATE TABLE {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions](
-	    [Id] INT IDENTITY(1,1) NOT NULL,
-	    [MenuId] INT NOT NULL,
+        [Id] INT IDENTITY(1,1) NOT NULL,
+        [MenuId] INT NOT NULL,
         [RoleNames] NVARCHAR(260) NOT NULL,
         CONSTRAINT [PK_{objectQualifier}PersonaBarMenuDefaultPermissions] PRIMARY KEY CLUSTERED ([Id] ASC),
         CONSTRAINT [FK_{objectQualifier}PersonaBarMenuDefaultPermissions_MenuId] FOREIGN KEY([MenuId]) REFERENCES {databaseOwner}[{objectQualifier}PersonaBarMenu] ([MenuId])  ON DELETE CASCADE,
@@ -188,7 +188,7 @@ BEGIN
     IF EXISTS(SELECT MenuId FROM {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions] WHERE MenuId = @MenuId)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions]
-            SET 
+            SET
                 RoleNames = @RoleNames
             WHERE MenuId = @MenuId
 
@@ -216,25 +216,25 @@ GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_GetPersonaBarMenuDefaultPermissions]
     @MenuId INT
 AS
-	SELECT RoleNames FROM {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions] WHERE MenuId = @MenuId
+    SELECT RoleNames FROM {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions] WHERE MenuId = @MenuId
 GO
 
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}PersonaBarExtensions') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 BEGIN
     CREATE TABLE {databaseOwner}[{objectQualifier}PersonaBarExtensions](
-	    [ExtensionId] INT IDENTITY(1,1) NOT NULL,
+        [ExtensionId] INT IDENTITY(1,1) NOT NULL,
         [Identifier] NVARCHAR(50) NOT NULL,
-	    [MenuId] INT NOT NULL,
+        [MenuId] INT NOT NULL,
         [FolderName] NVARCHAR(50) NULL,
         [Controller] NVARCHAR(260) NULL,
         [Container] NVARCHAR(50) NOT NULL,
         [Path] NVARCHAR(260) NOT NULL,
         [Order] INT NOT NULL DEFAULT(0),
         [Enabled] BIT NOT NULL DEFAULT(1),
-	    [CreatedByUserId] INT NULL,
-	    [CreatedOnDate] DATETIME NULL,
-	    [LastModifiedByUserId] INT NULL,
-	    [LastModifiedOnDate] DATETIME NULL,
+        [CreatedByUserId] INT NULL,
+        [CreatedOnDate] DATETIME NULL,
+        [LastModifiedByUserId] INT NULL,
+        [LastModifiedOnDate] DATETIME NULL,
         CONSTRAINT [PK_{objectQualifier}PersonaBarExtensions] PRIMARY KEY CLUSTERED ([ExtensionId] ASC),
         CONSTRAINT [FK_{objectQualifier}PersonaBarExtensions_MenuId] FOREIGN KEY([MenuId]) REFERENCES {databaseOwner}[{objectQualifier}PersonaBarMenu] ([MenuId])  ON DELETE CASCADE,
         CONSTRAINT [IX_{objectQualifier}PersonaBarExtensions] UNIQUE NONCLUSTERED ([Identifier] ASC)
@@ -261,7 +261,7 @@ BEGIN
     IF EXISTS(SELECT ExtensionId FROM {databaseOwner}[{objectQualifier}PersonaBarExtensions] WHERE Identifier = @Identifier)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarExtensions]
-            SET 
+            SET
                 MenuId = @MenuId,
                 FolderName = @FolderName,
                 Controller = @Controller,
@@ -307,7 +307,7 @@ GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_DeletePersonaBarExtension]
     @Identifier NVARCHAR(50)
 AS
-	DELETE FROM {databaseOwner}[{objectQualifier}PersonaBarExtensions] WHERE Identifier = @Identifier
+    DELETE FROM {databaseOwner}[{objectQualifier}PersonaBarExtensions] WHERE Identifier = @Identifier
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}PersonaBar_GetPersonaBarExtensions') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
@@ -316,20 +316,20 @@ GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_GetPersonaBarExtensions]
 AS
-	SELECT 
-        ExtensionId, 
-        Identifier, 
-        MenuId, 
+    SELECT
+        ExtensionId,
+        Identifier,
+        MenuId,
         FolderName,
-        Controller, 
-        Container, 
-        Path, 
-        [Order], 
-        Enabled, 
-        CreatedByUserId, 
-        CreatedOnDate, 
-        LastModifiedByUserId, 
-        LastModifiedOnDate 
+        Controller,
+        Container,
+        Path,
+        [Order],
+        Enabled,
+        CreatedByUserId,
+        CreatedOnDate,
+        LastModifiedByUserId,
+        LastModifiedOnDate
     FROM {databaseOwner}[{objectQualifier}PersonaBarExtensions]
 GO
 
@@ -337,15 +337,15 @@ GO
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}PersonaBarPermission') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 BEGIN
     CREATE TABLE {databaseOwner}[{objectQualifier}PersonaBarPermission](
-	    	[PermissionId] [INT] IDENTITY(1,1) NOT NULL,
-	        [MenuId] [INT] NULL,
-	        [PermissionKey] [VARCHAR](50) NOT NULL,
-	        [PermissionName] [VARCHAR](50) NOT NULL,
-	        [ViewOrder] [INT] NOT NULL DEFAULT ((9999)),
-	        [CreatedByUserID] [INT] NULL,
-	        [CreatedOnDate] [DATETIME] NULL,
-	        [LastModifiedByUserID] [INT] NULL,
-	        [LastModifiedOnDate] [DATETIME] NULL,
+            [PermissionId] [INT] IDENTITY(1,1) NOT NULL,
+            [MenuId] [INT] NULL,
+            [PermissionKey] [VARCHAR](50) NOT NULL,
+            [PermissionName] [VARCHAR](50) NOT NULL,
+            [ViewOrder] [INT] NOT NULL DEFAULT ((9999)),
+            [CreatedByUserID] [INT] NULL,
+            [CreatedOnDate] [DATETIME] NULL,
+            [LastModifiedByUserID] [INT] NULL,
+            [LastModifiedOnDate] [DATETIME] NULL,
         CONSTRAINT [PK_{objectQualifier}PersonaBarPermission] PRIMARY KEY CLUSTERED ([PermissionId] ASC),
         CONSTRAINT [FK_{objectQualifier}PersonaBarPermission_MenuId] FOREIGN KEY([MenuId]) REFERENCES {databaseOwner}[{objectQualifier}PersonaBarMenu] ([MenuId]),
         CONSTRAINT [IX_{objectQualifier}PersonaBarPermissionScope] UNIQUE NONCLUSTERED ([MenuId] ASC, [PermissionKey] ASC)
@@ -359,16 +359,16 @@ GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_GetPersonaBarPermissions]
 AS
-	SELECT 
+    SELECT
         [PermissionId],
-	    [MenuId],
-	    [PermissionKey],
-	    [PermissionName],
-	    [ViewOrder],
-	    [CreatedByUserID],
-	    [CreatedOnDate],
-	    [LastModifiedByUserID],
-	    [LastModifiedOnDate]
+        [MenuId],
+        [PermissionKey],
+        [PermissionName],
+        [ViewOrder],
+        [CreatedByUserID],
+        [CreatedOnDate],
+        [LastModifiedByUserID],
+        [LastModifiedOnDate]
     FROM {databaseOwner}[{objectQualifier}PersonaBarPermission] ORDER BY ViewOrder ASC
 GO
 
@@ -377,19 +377,19 @@ IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{o
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}PersonaBar_SavePersonaBarPermission
-	@MenuId		        INT,
-	@PermissionKey		VARCHAR(50),
-	@PermissionName		VARCHAR(50),
-	@CurrentUserId	    INT
+    @MenuId		        INT,
+    @PermissionKey		VARCHAR(50),
+    @PermissionName		VARCHAR(50),
+    @CurrentUserId	    INT
 AS
     IF EXISTS(SELECT PermissionId FROM {databaseOwner}[{objectQualifier}PersonaBarPermission]
                 WHERE ((@MenuId IS NULL AND MenuId IS NULL) OR MenuId = @MenuId) AND PermissionKey = @PermissionKey)
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarPermission]  SET
-	        [MenuId] = @MenuId,
-	        [PermissionName] = @PermissionName,
-	        [LastModifiedByUserID] = @CurrentUserId,
-	        [LastModifiedOnDate] = GETDATE()
+            [MenuId] = @MenuId,
+            [PermissionName] = @PermissionName,
+            [LastModifiedByUserID] = @CurrentUserId,
+            [LastModifiedOnDate] = GETDATE()
         WHERE ((@MenuId IS NULL AND MenuId IS NULL) OR MenuId = @MenuId) AND PermissionKey = @PermissionKey
 
         SELECT PermissionId FROM {databaseOwner}[{objectQualifier}PersonaBarPermission]
@@ -398,21 +398,21 @@ AS
     ELSE
     BEGIN
         INSERT INTO {databaseOwner}[{objectQualifier}PersonaBarPermission] (
-	        [MenuId],
-	        [PermissionKey],
-	        [PermissionName],
-	        [CreatedByUserID],
-	        [CreatedOnDate],
-	        [LastModifiedByUserID],
-	        [LastModifiedOnDate]
+            [MenuId],
+            [PermissionKey],
+            [PermissionName],
+            [CreatedByUserID],
+            [CreatedOnDate],
+            [LastModifiedByUserID],
+            [LastModifiedOnDate]
         ) VALUES (
-	        @MenuId,
-	        @PermissionKey,
-	        @PermissionName,
-	        @CurrentUserId,
-	        GETDATE(),
-	        @CurrentUserId,
-	        GETDATE()
+            @MenuId,
+            @PermissionKey,
+            @PermissionName,
+            @CurrentUserId,
+            GETDATE(),
+            @CurrentUserId,
+            GETDATE()
         )
 
         SELECT SCOPE_IDENTITY()
@@ -426,24 +426,24 @@ GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_DeletePersonaBarPermission]
     @PermissionId           INT
 AS
-    DELETE FROM {databaseOwner}[{objectQualifier}PersonaBarPermission] 
+    DELETE FROM {databaseOwner}[{objectQualifier}PersonaBarPermission]
         WHERE PermissionId = @PermissionId
 GO
 
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}PersonaBarMenuPermission') AND OBJECTPROPERTY(id, N'IsTable') = 1)
 BEGIN
     CREATE TABLE {databaseOwner}[{objectQualifier}PersonaBarMenuPermission](
-	    [MenuPermissionId] [INT] IDENTITY(1,1) NOT NULL,
+        [MenuPermissionId] [INT] IDENTITY(1,1) NOT NULL,
         [PortalId] [INT],
-	    [MenuId] INT NOT NULL,
-	    [PermissionId] [INT] NOT NULL,
-	    [AllowAccess] [BIT] NOT NULL,
-	    [RoleId] [INT] NULL,
-	    [UserId] [INT] NULL,
-	    [CreatedByUserId] [INT] NULL,
-	    [CreatedOnDate] [DATETIME] NULL,
-	    [LastModifiedByUserId] [INT] NULL,
-	    [LastModifiedOnDate] [DATETIME] NULL,
+        [MenuId] INT NOT NULL,
+        [PermissionId] [INT] NOT NULL,
+        [AllowAccess] [BIT] NOT NULL,
+        [RoleId] [INT] NULL,
+        [UserId] [INT] NULL,
+        [CreatedByUserId] [INT] NULL,
+        [CreatedOnDate] [DATETIME] NULL,
+        [LastModifiedByUserId] [INT] NULL,
+        [LastModifiedOnDate] [DATETIME] NULL,
         CONSTRAINT [PK_{objectQualifier}PersonaBarMenuPermission] PRIMARY KEY CLUSTERED ([MenuPermissionId] ASC),
         CONSTRAINT [FK_{objectQualifier}PersonaBarMenuPermission_Permission] FOREIGN KEY([PermissionId]) REFERENCES {databaseOwner}[{objectQualifier}PersonaBarPermission] ([PermissionID]) ON DELETE CASCADE,
         CONSTRAINT [FK_{objectQualifier}PersonaBarMenuPermission_MenuId] FOREIGN KEY([MenuId]) REFERENCES {databaseOwner}[{objectQualifier}PersonaBarMenu] ([MenuId]) ON DELETE CASCADE,
@@ -501,9 +501,9 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_SavePersonaBarMenuP
 AS
 BEGIN
     DECLARE @MenuPermissionId INT
-    SELECT @MenuPermissionId = MenuPermissionId FROM {databaseOwner}[{objectQualifier}PersonaBarMenuPermission] 
+    SELECT @MenuPermissionId = MenuPermissionId FROM {databaseOwner}[{objectQualifier}PersonaBarMenuPermission]
         WHERE      (PortalId = @PortalId OR (PortalId IS NULL AND @PortalId IS NULL))
-            AND    MenuId = @MenuId 
+            AND    MenuId = @MenuId
             AND    PermissionId = @PermissionId
             AND    (RoleId = @RoleId OR (RoleId IS NULL AND @RoleId IS NULL))
             AND    (UserId = @UserId OR (UserId IS NULL AND @UserId IS NULL))
@@ -511,7 +511,7 @@ BEGIN
     IF @MenuPermissionId > 0
     BEGIN
         UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenuPermission]
-            SET 
+            SET
                 AllowAccess = @AllowAccess,
                 LastModifiedByUserId = CASE WHEN @CurrentUserId = -1 THEN NULL ELSE @CurrentUserId END,
                 LastModifiedOnDate = GETDATE()
@@ -555,11 +555,11 @@ IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{o
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_DeletePersonaBarMenuPermissionById]
-	@MenuPermissionId INT
+    @MenuPermissionId INT
 AS
 DELETE FROM {databaseOwner}[{objectQualifier}PersonaBarMenuPermission]
 WHERE
-	[MenuPermissionId] = @MenuPermissionId
+    [MenuPermissionId] = @MenuPermissionId
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}PersonaBar_DeletePersonaBarMenuPermissionsByMenuId') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
@@ -568,11 +568,11 @@ GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_DeletePersonaBarMenuPermissionsByMenuId]
     @PortalId INT,
-	@MenuId INT
+    @MenuId INT
 AS
 DELETE FROM {databaseOwner}[{objectQualifier}PersonaBarMenuPermission]
 WHERE
-	[MenuId] = @MenuId AND (PortalId = @PortalId OR @PortalId IS NULL AND PortalId IS NULL)
+    [MenuId] = @MenuId AND (PortalId = @PortalId OR @PortalId IS NULL AND PortalId IS NULL)
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}PersonaBar_GetPersonaBarMenuPermissionsByPortal') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
@@ -580,27 +580,27 @@ IF EXISTS (SELECT * FROM dbo.sysobjects where id = object_id(N'{databaseOwner}{o
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}PersonaBar_GetPersonaBarMenuPermissionsByPortal]
-	@PortalID INT
+    @PortalID INT
 AS
-	SELECT 
-        MenuPermissionId, 
-        MenuId, 
-        PortalId, 
-        PermissionId, 
-        RoleID, 
-        RoleName, 
-        AllowAccess, 
-        UserId, 
-        Username, 
-        DisplayName, 
-        PermissionKey, 
-        PermissionName, 
+    SELECT
+        MenuPermissionId,
+        MenuId,
+        PortalId,
+        PermissionId,
+        RoleID,
+        RoleName,
+        AllowAccess,
+        UserId,
+        Username,
+        DisplayName,
+        PermissionKey,
+        PermissionName,
         ModuleDefID,
         PermissionCode,
-        CreatedByUserId, 
-        CreatedOnDate, 
-        LastModifiedByUserId, 
-        LastModifiedOnDate 
+        CreatedByUserId,
+        CreatedOnDate,
+        LastModifiedByUserId,
+        LastModifiedOnDate
     FROM {databaseOwner}[{objectQualifier}vw_PersonaBarMenuPermissions]
         WHERE PortalId = @PortalId OR PortalId IS NULL
 GO
@@ -639,7 +639,7 @@ BEGIN
             [LastModifiedByUserId],
             [LastModifiedOnDate]
         )
-        SELECT Item, Item, '', 'nav_' + Item, '', NULL, ROW_NUMBER() OVER (ORDER BY (SELECT 1)) * 5, 1, 1, -1, GETDATE(), -1, GETDATE() 
+        SELECT Item, Item, '', 'nav_' + Item, '', NULL, ROW_NUMBER() OVER (ORDER BY (SELECT 1)) * 5, 1, 1, -1, GETDATE(), -1, GETDATE()
             FROM {databaseOwner}{objectQualifier}SplitStrings_CTE('Content,Manage,Settings,Logout,Edit,SiteAssets,GlobalAssets', ',')
 
     UPDATE {databaseOwner}[{objectQualifier}PersonaBarMenu]
@@ -650,7 +650,7 @@ BEGIN
         SET [Order] = 1000,
             Controller = 'Dnn.PersonaBar.UI.MenuControllers.EditMenuController, Dnn.PersonaBar.UI'
         WHERE Identifier = 'Edit'
-    
+
     DECLARE @ParentId INT
     SELECT @ParentId = MenuId FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] WHERE Identifier = 'Manage'
 
@@ -668,25 +668,25 @@ BEGIN
         WHERE Identifier = 'GlobalAssets'
 
     INSERT INTO {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions]
-        SELECT MenuId, 'Administrators' 
-            FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] 
+        SELECT MenuId, 'Administrators'
+            FROM {databaseOwner}[{objectQualifier}PersonaBarMenu]
             WHERE Identifier IN ('Manage','Settings','Tools','Logout','SiteAssets')
-	
-	INSERT INTO {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions]
-        SELECT MenuId, 'Registered Users' 
-            FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] 
+
+    INSERT INTO {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions]
+        SELECT MenuId, 'Registered Users'
+            FROM {databaseOwner}[{objectQualifier}PersonaBarMenu]
             WHERE Identifier = 'Content'
 
     INSERT INTO {databaseOwner}[{objectQualifier}PersonaBarMenuDefaultPermissions]
-        SELECT MenuId, 'Registered Users' 
-            FROM {databaseOwner}[{objectQualifier}PersonaBarMenu] 
+        SELECT MenuId, 'Registered Users'
+            FROM {databaseOwner}[{objectQualifier}PersonaBarMenu]
             WHERE Identifier = 'Edit'
 END
 GO
 
 IF NOT EXISTS (SELECT * FROM {databaseOwner}[{objectQualifier}PersonaBarPermission] WHERE PermissionKey = 'VIEW' AND MenuId IS NULL)
 BEGIN
-    EXEC {databaseOwner}{objectQualifier}PersonaBar_SavePersonaBarPermission 
+    EXEC {databaseOwner}{objectQualifier}PersonaBar_SavePersonaBarPermission
         @MenuId = NULL,
         @PermissionKey = 'VIEW',
         @PermissionName = 'View Menu',

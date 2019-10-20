@@ -34,10 +34,10 @@
     builtin: set(builtins),
     atoms: set(atoms),
     hooks: {
-      "@": function(stream) {
+    "@": function(stream) {
         stream.eatWhile(/[\w\$_]/);
         return "meta";
-      }
+    }
     }
   });
 

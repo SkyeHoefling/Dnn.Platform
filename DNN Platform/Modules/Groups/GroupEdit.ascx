@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="GroupEdit.ascx.cs" Inherits="DotNetNuke.Modules.Groups.GroupEdit" %>
-<div class="dnnForm  DnnModule-groupsWizard">   
+<div class="dnnForm  DnnModule-groupsWizard">
     <div class="dnnFormItem">
         <div class="dnnLabel">
             <label>

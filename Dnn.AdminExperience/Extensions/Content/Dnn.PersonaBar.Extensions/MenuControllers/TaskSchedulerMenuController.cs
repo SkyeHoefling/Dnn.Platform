@@ -14,7 +14,7 @@ namespace Dnn.PersonaBar.TaskScheduler.MenuControllers
     {
         public void UpdateParameters(MenuItem menuItem)
         {
-            
+
         }
 
         public bool Visible(MenuItem menuItem)

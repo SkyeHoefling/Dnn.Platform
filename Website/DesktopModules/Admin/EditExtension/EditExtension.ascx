@@ -50,11 +50,11 @@
                     <dnn:DnnFormLiteralItem ID="DnnFormTextBoxItem8" runat="server" DataField = "Url" ResourceKey="URL" />
                     <dnn:DnnFormLiteralItem ID="DnnFormTextBoxItem9" runat="server" DataField = "Email" />
                 </Items>
-            </dnn:DnnFormEditor>    
+            </dnn:DnnFormEditor>
         </fieldset>
     </div>
     <ul class="dnnActions dnnClear">
-    	<li><asp:LinkButton id="cmdUpdate" runat="server" CssClass="dnnPrimaryAction" resourcekey="cmdUpdate" /></li>
+        <li><asp:LinkButton id="cmdUpdate" runat="server" CssClass="dnnPrimaryAction" resourcekey="cmdUpdate" /></li>
         <li><asp:LinkButton id="cmdDelete" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdDelete" Causesvalidation="False" /></li>
         <li><asp:LinkButton id="cmdPackage" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdPackage" Causesvalidation="False" /></li>
         <li><asp:LinkButton id="cmdCancel" runat="server" CssClass="dnnSecondaryAction" resourcekey="cmdCancel" Causesvalidation="False" /></li>

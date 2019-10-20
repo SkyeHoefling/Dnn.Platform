@@ -14,11 +14,11 @@ namespace DNN.Integration.Test.Framework.Helpers
         /// <returns>The string value of the setting</returns>
         public static string GetPortalSetting(string settingName, int portalId = 0)
         {
-            var query = string.Format(@"SELECT SettingValue 
-                                        FROM {{objectQualifier}}PortalSettings 
-                                        WHERE SettingName = '{0}' 
+            var query = string.Format(@"SELECT SettingValue
+                                        FROM {{objectQualifier}}PortalSettings
+                                        WHERE SettingName = '{0}'
                                             AND PortalId = {1}", settingName, portalId);
-            
+
             return DatabaseHelper.ExecuteScalar<string>(query);
         }
 
@@ -36,7 +36,7 @@ namespace DNN.Integration.Test.Framework.Helpers
                     ON s.SettingName = v.SettingName
                     WHEN MATCHED THEN UPDATE SET s.SettingValue = v.SettingValue, SettingIsSecure = v.Sec
                     WHEN NOT MATCHED THEN INSERT (PortalId, SettingName, SettingValue, SettingIsSecure)
-				                          VALUES (v.PortalId, v.SettingName, v.SettingValue, v.Sec);",
+                                        VALUES (v.PortalId, v.SettingName, v.SettingValue, v.Sec);",
                         settingName, settingValue, portalId, isSecure ? "1" : "0");
 
             DatabaseHelper.ExecuteNonQuery(query);

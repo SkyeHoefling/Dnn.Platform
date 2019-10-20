@@ -47,9 +47,9 @@ class Modules extends Component {
         return modules.map((module, index) => {
             const isEditingModule = module.id === editingSettingModuleId;
             return (
-                <ModulesRow 
+                <ModulesRow
                     key={index}
-                    module={module} 
+                    module={module}
                     onDelete={this.onDeleteModule.bind(this)}
                     onEditing={this.onEditingModule.bind(this, 'content')}
                     onSetting={this.onEditingModule.bind(this, 'settings')}
@@ -72,7 +72,7 @@ class Modules extends Component {
                         <div className="module-icon" dangerouslySetInnerHTML={{ __html: SvgIcons.ModuleIcon }} />
                         <div className="sectionTitle">{Localization.get("ModulesOnThisPage")}</div>
                     </div>
-                <div className="module-table">    
+                <div className="module-table">
                     <div className="header-row">
                         {showCopySettings &&
                             <GridCell columnSize={10} />
@@ -86,19 +86,19 @@ class Modules extends Component {
                     </div>
                     {moduleRows}
                 </div>
-                <Modal 
-                    isOpen={editingModule && state.editType !== ''} 
-                    header={state.editType === "content" ? Localization.get("EditContent") : Localization.get("ModuleSettings")} 
+                <Modal
+                    isOpen={editingModule && state.editType !== ''}
+                    header={state.editType === "content" ? Localization.get("EditContent") : Localization.get("ModuleSettings")}
                     onRequestClose={onCancelEditingModule}>
-                    {editingModule && 
-                        <ModuleEdit 
+                    {editingModule &&
+                        <ModuleEdit
                             module={editingModule}
                             editType={state.editType}
                             onUpdatedModuleSettings={onCancelEditingModule}
                             selectedPage={selectedPage}
                             /> }
-                </Modal>      
-            </div>      
+                </Modal>
+            </div>
             /* eslint-enable react/no-danger */
         );
     }

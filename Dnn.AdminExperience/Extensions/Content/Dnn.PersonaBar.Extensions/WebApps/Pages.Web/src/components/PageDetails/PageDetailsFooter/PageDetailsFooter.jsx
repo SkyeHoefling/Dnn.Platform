@@ -16,7 +16,7 @@ class PageDetailsFooter extends Component {
             onChangeField(key, event.value);
         } else {
             onChangeField(key, event.target.value);
-        }        
+        }
     }
 
     onChangeValue(key, value) {
@@ -36,9 +36,9 @@ class PageDetailsFooter extends Component {
                 onChangeIncludeInMenu={this.onChangeValue.bind(this,"includeInMenu")} />];
             if (includeTemplates && page.tabId === 0) {
                 defaultLeftColumnComponents.push(
-                    <Template 
+                    <Template
                         key={"templateKey-" + page.tabId}
-                        templates={page.templates} 
+                        templates={page.templates}
                         selectedTemplateId={page.templateId}
                         onSelect={this.onChangeField.bind(this, "templateId")} />
                 );
@@ -58,13 +58,13 @@ class PageDetailsFooter extends Component {
         for (let i = 0; i < elements.length; i++) {
             let index = this.getInteger(elements[i].order);
             const Component = elements[i].component;
-            const instance = <Component key={"component" + i.toString()} page={this.props.page} onChange={this.onChangeValue.bind(this)} 
+            const instance = <Component key={"component" + i.toString()} page={this.props.page} onChange={this.onChangeValue.bind(this)}
                 store={elements[i].store} />;
 
             if (index || index === 0) {
                 index = Math.min(array.length, Math.max(0, index));
                 array.splice(index, 0, instance);
-            }            
+            }
         }
     }
 
@@ -76,11 +76,11 @@ class PageDetailsFooter extends Component {
             return parseInt(value.toString());
         }
         return value;
-    }  
+    }
 
     getRightColumnComponents(normalPage, pageType) {
         const {page} = this.props;
-        const defaultRightColumnComponents = !normalPage ? 
+        const defaultRightColumnComponents = !normalPage ?
             [<DisplayInMenu key={"displayInMenu" + page.tabId} includeInMenu={page.includeInMenu}
                 onChangeIncludeInMenu={this.onChangeValue.bind(this, "includeInMenu")} />,
             <EnableScheduling key={"enableScheduling" + page.tabId} schedulingEnabled={page.schedulingEnabled}
@@ -95,7 +95,7 @@ class PageDetailsFooter extends Component {
                 endDate={page.endDate}
                 onChangeStartDate={this.onChangeValue.bind(this, "startDate")}
                 onChangeEndDate={this.onChangeValue.bind(this, "endDate")} />];
-        
+
         const additionalRightComponents = this.props.components.filter(
             function (component) {
                 return !component.newSection && !component.leftSide && (component.pageType === pageType || component.pageType === "all");
@@ -104,13 +104,13 @@ class PageDetailsFooter extends Component {
         this.insertElementsInArray(defaultRightColumnComponents, additionalRightComponents, "order", "component");
         return defaultRightColumnComponents;
     }
-    
+
     getNewSections(normalPage, pageType) {
         const additionalComponents = this.props.components.filter(
             function (component) {
                 return component.newSection && (component.pageType === pageType || component.pageType === "all");
             });
-            
+
         let orderedComponents = [];
         this.insertElementsInArray(orderedComponents, additionalComponents, "order", "component");
         return orderedComponents;
@@ -122,13 +122,13 @@ class PageDetailsFooter extends Component {
         const componentsInNewSection= this.getNewSections(normalPage, page.pageType);
         const includeTemplates = componentsInNewSection.length === 0;
         return (
-            <div className={styles.pageDetailsFooter}>                
+            <div className={styles.pageDetailsFooter}>
                 <GridSystem>
-                    <GridCell className="left-column">                        
+                    <GridCell className="left-column">
                         {this.getLeftColumnComponents(normalPage, page.pageType, includeTemplates)}
                     </GridCell>
-                    <GridCell className="right-column">                       
-                        {this.getRightColumnComponents(normalPage, page.pageType)}                       
+                    <GridCell className="right-column">
+                        {this.getRightColumnComponents(normalPage, page.pageType)}
                     </GridCell>
                 </GridSystem>
                 <div style={{clear: "both"}}></div>

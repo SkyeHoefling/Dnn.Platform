@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -149,7 +149,7 @@ namespace DotNetNuke.Web.UI.WebControls
                 {
                     _allTools = new Dictionary<string, RibbonBarToolInfo>
                                     {
-										//Framework
+                                        //Framework
                                         {"PageSettings", new RibbonBarToolInfo("PageSettings", false, false, "", "", "", true)},
                                         {"CopyPage", new RibbonBarToolInfo("CopyPage", false, false, "", "", "", true)},
                                         {"DeletePage", new RibbonBarToolInfo("DeletePage", false, true, "", "", "", true)},
@@ -159,7 +159,7 @@ namespace DotNetNuke.Web.UI.WebControls
                                         {"CopyPermissionsToChildren", new RibbonBarToolInfo("CopyPermissionsToChildren", false, true, "", "", "", false)},
                                         {"CopyDesignToChildren", new RibbonBarToolInfo("CopyDesignToChildren", false, true, "", "", "", false)},
                                         {"Help", new RibbonBarToolInfo("Help", false, false, "_Blank", "", "", false)},
-										//Modules On Tabs
+                                        //Modules On Tabs
                                         {"Console", new RibbonBarToolInfo("Console", false, false, "", "Console", "", false)},
                                         {"HostConsole", new RibbonBarToolInfo("HostConsole", true, false, "", "Console", "", false)},
                                         {"UploadFile", new RibbonBarToolInfo("UploadFile", false, false, "", "", "WebUpload", true)},
@@ -233,7 +233,7 @@ namespace DotNetNuke.Web.UI.WebControls
                     if ((HasToolPermissions("DeletePage")))
                     {
                         string url = TestableGlobals.Instance.NavigateURL(PortalSettings.ActiveTab.TabID, "Tab", "action=delete");
-                        Page.Response.Redirect(url, true);                        
+                        Page.Response.Redirect(url, true);
                     }
                     break;
                 case "CopyPermissionsToChildren":
@@ -254,7 +254,7 @@ namespace DotNetNuke.Web.UI.WebControls
                     if ((HasToolPermissions("ClearCache")))
                     {
                         ClearCache();
-						ClientResourceManager.ClearCache();
+                        ClientResourceManager.ClearCache();
                         Page.Response.Redirect(Page.Request.RawUrl);
                     }
                     break;
@@ -306,7 +306,7 @@ namespace DotNetNuke.Web.UI.WebControls
                         {
                             DnnLink.Enabled = false;
                         }
-                        //create popup event 
+                        //create popup event
                         else if (ToolInfo.ShowAsPopUp && PortalSettings.EnablePopUps)
                         {
                             // Prevent PageSettings in a popup if SSL is enabled and enforced, which causes redirection/javascript broswer security issues.
@@ -496,8 +496,8 @@ namespace DotNetNuke.Web.UI.WebControls
                         returnValue = TestableGlobals.Instance.FormatHelpUrl(Host.HelpURL, PortalSettings, "Home", version);
                     }
                     break;
-				case "UploadFile":
-				case "HostUploadFile":
+                case "UploadFile":
+                case "HostUploadFile":
                     returnValue = TestableGlobals.Instance.NavigateURL(PortalSettings.ActiveTab.TabID, "WebUpload");
                     break;
                 default:
@@ -587,7 +587,7 @@ namespace DotNetNuke.Web.UI.WebControls
 
             return true;
         }
-        
+
         protected virtual string GetString(string key)
         {
             return Utilities.GetLocalizedStringFromParent(key, this);

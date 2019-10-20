@@ -5,5 +5,5 @@
         <h2><dnn:TITLE runat="server" id="dnnTITLE" CssClass="TitleH2" /></h2>
     </div>
     <div id="ContentPane" runat="server"></div>
-	<div class="clear"></div>
+    <div class="clear"></div>
 </div>

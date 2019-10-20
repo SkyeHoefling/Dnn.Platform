@@ -38,7 +38,7 @@
                                 <dnn:label id="plActionOnSave" runat="server" text="On Save" suffix="?" />
                                 <asp:CheckBox ID="chkPublish" runat="server" resourcekey="chkPublish" AutoPostBack="true" />
                             </div>
-                               
+
                         </div>
                     </asp:PlaceHolder>
 
@@ -67,16 +67,16 @@
                 <h2 id="dnnSitePanelEditHTMLHistory" class="dnnFormSectionHead" runat="server"><a href=""><%=LocalizeString("dshHistory")%></a></h2>
                 <fieldset id="fsEditHtmlHistory" runat="server">
                     <dnnweb:DnnGrid ID="dgHistory" runat="server" AutoGenerateColumns="false">
-						<Columns>
-								<dnnweb:DnnGridBoundColumn HeaderText="Date" DataField="CreatedOnDate" />
-								<dnnweb:DnnGridBoundColumn HeaderText="User" DataField="DisplayName"/>
-								<dnnweb:DnnGridBoundColumn HeaderText="State" DataField="StateName"/>
-								<dnnweb:DnnGridBoundColumn HeaderText="Approved" DataField="Approved" />
-								<dnnweb:DnnGridBoundColumn HeaderText="Comment" DataField="Comment"/>
-						</Columns>
-						<EmptyDataTemplate>
-							<asp:Label ID="lblNoRecords" runat="server" resourcekey="NoHistory" />
-						</EmptyDataTemplate>
+                        <Columns>
+                                <dnnweb:DnnGridBoundColumn HeaderText="Date" DataField="CreatedOnDate" />
+                                <dnnweb:DnnGridBoundColumn HeaderText="User" DataField="DisplayName"/>
+                                <dnnweb:DnnGridBoundColumn HeaderText="State" DataField="StateName"/>
+                                <dnnweb:DnnGridBoundColumn HeaderText="Approved" DataField="Approved" />
+                                <dnnweb:DnnGridBoundColumn HeaderText="Comment" DataField="Comment"/>
+                        </Columns>
+                        <EmptyDataTemplate>
+                            <asp:Label ID="lblNoRecords" runat="server" resourcekey="NoHistory" />
+                        </EmptyDataTemplate>
                     </dnnweb:DnnGrid>
                 </fieldset>
             </asp:PlaceHolder>
@@ -89,35 +89,35 @@
                         </div>
                         <dnnweb:DnnGrid ID="dgVersions" runat="server" AutoGenerateColumns="false" AllowPaging="True" PageSize="5">
                             <PagerSettings Mode="NumericFirstLast"></PagerSettings>
-					        <Columns>
-						        <dnnweb:DnnGridBoundColumn HeaderText="Version" DataField="Version" />
-						        <dnnweb:DnnGridBoundColumn HeaderText="Date" DataField="LastModifiedOnDate"  />
-						        <dnnweb:DnnGridBoundColumn HeaderText="User" DataField="DisplayName" />
-						        <dnnweb:DnnGridBoundColumn HeaderText="State" DataField="StateName" />
-						        <dnnweb:DnnGridTemplateColumn>
-							        <HeaderTemplate>
-								        <table cellpadding="0" cellspacing="0" class="DnnGridNestedTable">
-									        <tr>
-										        <td><dnnweb:DnnImage ID="imgDelete" runat="server" IconKey="ActionDelete" resourcekey="VersionsRemove" /></td>
-										        <td><dnnweb:DnnImage ID="imgPreview" runat="server" IconKey="View"  resourcekey="VersionsPreview" /></td>
-										        <td><dnnweb:DnnImage ID="imgRollback" runat="server" IconKey="Restore"  resourcekey="VersionsRollback" /></td>
-									        </tr>
-								        </table>
-							        </HeaderTemplate>
-							        <ItemTemplate>
-								        <table cellpadding="0" cellspacing="0" class="DnnGridNestedTable">
-									        <tr style="vertical-align: top;">
-										        <td><dnnweb:DnnImageButton ID="btnRemove" runat="server" CommandName="Remove" IconKey="ActionDelete" Text="Delete" resourcekey="VersionsRemove" /></td>
-										        <td><dnnweb:DnnImageButton ID="btnPreview" runat="server" CommandName="Preview"  IconKey="View" Text="Preview" resourcekey="VersionsPreview" /></td>
-										        <td><dnnweb:DnnImageButton ID="btnRollback" runat="server" CommandName="RollBack" IconKey="Restore" Text="Rollback" resourcekey="VersionsRollback" /></td>
-									        </tr>
-								        </table>
-							        </ItemTemplate>
-						        </dnnweb:DnnGridTemplateColumn>
-					        </Columns>
-					        <EmptyDataTemplate>
-						        <asp:Label ID="lblNoRecords1" runat="server" resourcekey="NoVersions" />
-					        </EmptyDataTemplate>
+                            <Columns>
+                                <dnnweb:DnnGridBoundColumn HeaderText="Version" DataField="Version" />
+                                <dnnweb:DnnGridBoundColumn HeaderText="Date" DataField="LastModifiedOnDate"  />
+                                <dnnweb:DnnGridBoundColumn HeaderText="User" DataField="DisplayName" />
+                                <dnnweb:DnnGridBoundColumn HeaderText="State" DataField="StateName" />
+                                <dnnweb:DnnGridTemplateColumn>
+                                    <HeaderTemplate>
+                                        <table cellpadding="0" cellspacing="0" class="DnnGridNestedTable">
+                                            <tr>
+                                                <td><dnnweb:DnnImage ID="imgDelete" runat="server" IconKey="ActionDelete" resourcekey="VersionsRemove" /></td>
+                                                <td><dnnweb:DnnImage ID="imgPreview" runat="server" IconKey="View"  resourcekey="VersionsPreview" /></td>
+                                                <td><dnnweb:DnnImage ID="imgRollback" runat="server" IconKey="Restore"  resourcekey="VersionsRollback" /></td>
+                                            </tr>
+                                        </table>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <table cellpadding="0" cellspacing="0" class="DnnGridNestedTable">
+                                            <tr style="vertical-align: top;">
+                                                <td><dnnweb:DnnImageButton ID="btnRemove" runat="server" CommandName="Remove" IconKey="ActionDelete" Text="Delete" resourcekey="VersionsRemove" /></td>
+                                                <td><dnnweb:DnnImageButton ID="btnPreview" runat="server" CommandName="Preview"  IconKey="View" Text="Preview" resourcekey="VersionsPreview" /></td>
+                                                <td><dnnweb:DnnImageButton ID="btnRollback" runat="server" CommandName="RollBack" IconKey="Restore" Text="Rollback" resourcekey="VersionsRollback" /></td>
+                                            </tr>
+                                        </table>
+                                    </ItemTemplate>
+                                </dnnweb:DnnGridTemplateColumn>
+                            </Columns>
+                            <EmptyDataTemplate>
+                                <asp:Label ID="lblNoRecords1" runat="server" resourcekey="NoVersions" />
+                            </EmptyDataTemplate>
                         </dnnweb:DnnGrid>
                     </div>
                 </fieldset>
@@ -135,7 +135,7 @@
             <li>
                 <span class="separator"></span>
             </li>
-             <li>
+            <li>
                 <asp:LinkButton ID="cmdEdit" runat="server" class="dnnSecondaryAction" resourcekey="cmdEdit" Visible="true" Enabled="false" />
             </li>
             <li>
@@ -156,7 +156,7 @@
             <li>
                 <span class="separator"></span>
             </li>
-             <li>
+            <li>
                 <asp:LinkButton ID="cmdMasterContent" runat="server" class="dnnSecondaryAction" Visible="false" />
             </li>
         </ul>
@@ -228,6 +228,3 @@
         });
     }(jQuery, window.Sys));
 </script>
-
-
-

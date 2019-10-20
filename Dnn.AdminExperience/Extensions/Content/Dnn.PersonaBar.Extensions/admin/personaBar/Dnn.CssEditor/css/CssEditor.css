@@ -60,12 +60,12 @@
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
-    padding: 11px;  
-    width: 100%;  
+    padding: 11px;
+    width: 100%;
 }
 
-.customCssPanel .form-item select { 
-	cursor: pointer; 
+.customCssPanel .form-item select {
+    cursor: pointer;
 }
 
 .customCssPanel .form-item span.caption.inline + div {
@@ -79,8 +79,8 @@
     background-color: #fff;
 }
 
-.customCssPanel .form-item textarea{ 
-	height: 220px;
+.customCssPanel .form-item textarea{
+    height: 220px;
 }
 
 .customCssPanel .actions{

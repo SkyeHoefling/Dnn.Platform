@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -59,8 +59,8 @@ namespace DotNetNuke.Modules.Admin.Security
     /// -----------------------------------------------------------------------------
     public partial class SecurityRoles : PortalModuleBase, IActionable
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SecurityRoles));
-		#region "Private Members"
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SecurityRoles));
+        #region "Private Members"
 
         private int RoleId = Null.NullInteger;
         private new int UserId = Null.NullInteger;
@@ -71,9 +71,9 @@ namespace DotNetNuke.Modules.Admin.Security
         private int _totalPages = 1;
         private int _totalRecords;
 
-		#endregion
+        #endregion
 
-		#region "Protected Members"
+        #region "Protected Members"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -191,7 +191,7 @@ namespace DotNetNuke.Modules.Admin.Security
 
 #endregion
 
-		#region "Public Properties"
+        #region "Public Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -201,8 +201,8 @@ namespace DotNetNuke.Modules.Admin.Security
         /// </remarks>
         /// -----------------------------------------------------------------------------
         public PortalModuleBase ParentModule { get; set; }
-		
-		#endregion
+
+        #endregion
 
         #region IActionable Members
 
@@ -216,7 +216,7 @@ namespace DotNetNuke.Modules.Admin.Security
 
         #endregion
 
-		#region "Private Methods"
+        #region "Private Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -270,11 +270,11 @@ namespace DotNetNuke.Modules.Admin.Security
                     plRoles.Visible = false;
                 }
             }
-			
+
             //bind all portal users to dropdownlist
             if (UserId == -1)
             {
-				//Make sure user has enough permissions
+                //Make sure user has enough permissions
                 if (Role.RoleName == PortalSettings.AdministratorRoleName && !PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName))
                 {
                     UI.Skins.Skin.AddModuleMessage(this, Localization.GetString("NotAuthorized", LocalResourceFile), ModuleMessage.ModuleMessageType.YellowWarning);
@@ -327,7 +327,7 @@ namespace DotNetNuke.Modules.Admin.Security
         /// -----------------------------------------------------------------------------
         private void BindGrid()
         {
-            
+
 
             if (RoleId != Null.NullInteger)
             {
@@ -351,7 +351,7 @@ namespace DotNetNuke.Modules.Admin.Security
             ctlPagingControl.TabID = TabId;
             ctlPagingControl.QuerystringParams = System.Web.HttpUtility.UrlDecode(string.Join("&", Request.QueryString.ToString().Split('&').
                                                                         ToList().
-                                                                        Where(s => s.StartsWith("ctl", StringComparison.OrdinalIgnoreCase) 
+                                                                        Where(s => s.StartsWith("ctl", StringComparison.OrdinalIgnoreCase)
                                                                             || s.StartsWith("mid", StringComparison.OrdinalIgnoreCase)
                                                                             || s.StartsWith("RoleId", StringComparison.OrdinalIgnoreCase)
                                                                             || s.StartsWith("UserId", StringComparison.OrdinalIgnoreCase)
@@ -382,8 +382,8 @@ namespace DotNetNuke.Modules.Admin.Security
         /// -----------------------------------------------------------------------------
         private void GetDates(int UserId, int RoleId)
         {
-        	DateTime? expiryDate = null;
-        	DateTime? effectiveDate = null;
+            DateTime? expiryDate = null;
+            DateTime? effectiveDate = null;
 
             UserRoleInfo objUserRole = RoleController.Instance.GetUserRole(PortalId, UserId, RoleId);
             if (objUserRole != null)
@@ -420,15 +420,15 @@ namespace DotNetNuke.Modules.Admin.Security
                     }
                 }
             }
-			effectiveDatePicker.SelectedDate = effectiveDate;
-			expiryDatePicker.SelectedDate = expiryDate;
+            effectiveDatePicker.SelectedDate = effectiveDate;
+            expiryDatePicker.SelectedDate = expiryDate;
         }
 
-		#endregion
+        #endregion
 
-		#region "Public Methods"
+        #region "Public Methods"
 
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         /// DataBind binds the data to the controls
         /// </summary>
@@ -466,7 +466,7 @@ namespace DotNetNuke.Modules.Admin.Security
             bool canDelete = RoleController.CanRemoveUserFromRole(PortalSettings, UserID, RoleID);
             if (RoleID == PortalSettings.AdministratorRoleId && canDelete)
             {
-				//User can only delete if in Admin role
+                //User can only delete if in Admin role
                 canDelete = PortalSecurity.IsInRole(PortalSettings.AdministratorRoleName);
             }
             return canDelete;
@@ -502,9 +502,9 @@ namespace DotNetNuke.Modules.Admin.Security
             return "<a href=\"" + Globals.LinkClick("userid=" + UserID, TabId, ModuleId) + "\" class=\"CommandButton\">" + DisplayName + "</a>";
         }
 
-		#endregion
+        #endregion
 
-		#region "Event Handlers"
+        #region "Event Handlers"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -621,7 +621,7 @@ namespace DotNetNuke.Modules.Admin.Security
 
             if (!String.IsNullOrEmpty(txtUsers.Text))
             {
-				//validate username
+                //validate username
                 UserInfo objUser = UserController.GetUserByName(PortalId, txtUsers.Text);
                 if (objUser != null)
                 {
@@ -669,17 +669,17 @@ namespace DotNetNuke.Modules.Admin.Security
                 {
                     if ((Role != null) && (User != null))
                     {
-						//do not modify the portal Administrator account dates
+                        //do not modify the portal Administrator account dates
                         if (User.UserID == PortalSettings.AdministratorId && Role.RoleID == PortalSettings.AdministratorRoleId)
                         {
-                        	effectiveDatePicker.SelectedDate = null;
-                        	expiryDatePicker.SelectedDate = null;
+                            effectiveDatePicker.SelectedDate = null;
+                            expiryDatePicker.SelectedDate = null;
                         }
 
                         DateTime datEffectiveDate;
                         if (effectiveDatePicker.SelectedDate != null)
                         {
-							datEffectiveDate = effectiveDatePicker.SelectedDate.Value;
+                            datEffectiveDate = effectiveDatePicker.SelectedDate.Value;
                         }
                         else
                         {
@@ -689,16 +689,16 @@ namespace DotNetNuke.Modules.Admin.Security
                         DateTime datExpiryDate;
                         if (expiryDatePicker.SelectedDate != null)
                         {
-							datExpiryDate = expiryDatePicker.SelectedDate.Value;
+                            datExpiryDate = expiryDatePicker.SelectedDate.Value;
                         }
                         else
                         {
                             datExpiryDate = Null.NullDate;
                         }
-						
+
                         //Add User to Role
                         var isOwner = false;
-                        
+
                         if(((Role.SecurityMode == SecurityMode.SocialGroup) || (Role.SecurityMode == SecurityMode.Both)))
                             isOwner = chkIsOwner.Checked;
 
@@ -801,7 +801,7 @@ namespace DotNetNuke.Modules.Admin.Security
                 }
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 }

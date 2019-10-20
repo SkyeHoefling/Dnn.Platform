@@ -79,7 +79,7 @@ class More extends Component {
                             label={Localization.get("DisableLink") }
                             />
                         <Switch
-                                   labelHidden={false}
+                                    labelHidden={false}
                             onText={Localization.get("On") }
                             offText={Localization.get("Off") }
                             value={page.disableLink}

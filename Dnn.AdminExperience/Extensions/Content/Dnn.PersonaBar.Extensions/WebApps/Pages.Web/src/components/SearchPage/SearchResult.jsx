@@ -39,7 +39,7 @@ class SearchResult extends Component {
             return true;
         }
     }
-    
+
     /* eslint-disable react/no-danger */
     render() {
         const { searchResult, searchList } = this.props;
@@ -54,8 +54,8 @@ class SearchResult extends Component {
                     </GridCell>
                     <GridCell columnSize={100}>
                     <div>
-                        <LazyLoad 
-                            pageIndex={0} 
+                        <LazyLoad
+                            pageIndex={0}
                             loadMore={this.loadMore.bind(this)}
                             hasMore={searchList.length !== searchResult.TotalResults}
                             loadingComponent={loader}
@@ -83,13 +83,13 @@ class SearchResult extends Component {
                                     updateFilterByWorkflowOptions={this.props.updateFilterByWorkflowOptions}
                                     updateFilterStartEndDate={this.props.updateFilterStartEndDate}
                                     startDate={this.props.startDate}
-                                    endDate={this.props.endDate} 
-                                    pageInContextComponents={this.props.pageInContextComponents} 
+                                    endDate={this.props.endDate}
+                                    pageInContextComponents={this.props.pageInContextComponents}
                                     pageTypeSelectorComponents={this.props.pageTypeSelectorComponents}
                                     updateSearchAdvancedTags={this.props.updateSearchAdvancedTags}
                                     filterByWorkflow={this.props.filterByWorkflow}  />
                             );})}
-                        </LazyLoad>                            
+                        </LazyLoad>
                         </div>
                     </GridCell>
                 </GridCell>

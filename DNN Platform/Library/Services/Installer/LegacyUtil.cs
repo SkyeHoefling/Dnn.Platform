@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -51,7 +51,7 @@ namespace DotNetNuke.Services.Installer
     /// -----------------------------------------------------------------------------
     public class LegacyUtil
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (LegacyUtil));
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (LegacyUtil));
         private static string AdminModules =
             "Adsense, MarketShare, Authentication, Banners, FeedExplorer, FileManager, HostSettings, Lists, LogViewer, Newsletters, PortalAliases, Portals, RecycleBin, Scheduler, SearchAdmin, SearchInput, SearchResults, Security, SiteLog, SiteWizard, SQL, Tabs, Vendors,";
 
@@ -65,7 +65,7 @@ namespace DotNetNuke.Services.Installer
 
         private static PackageInfo CreateSkinPackage(SkinPackageInfo skin)
         {
-			//Create a Package
+            //Create a Package
             var package = new PackageInfo(new InstallerInfo());
             package.Name = skin.SkinName;
             package.FriendlyName = skin.SkinName;
@@ -148,7 +148,7 @@ namespace DotNetNuke.Services.Installer
 
         private static void ParsePackageName(PackageInfo package, string separator)
         {
-			//See if the Module is using a "Namespace" for its name
+            //See if the Module is using a "Namespace" for its name
             int ownerIndex = package.Name.IndexOf(separator);
             if (ownerIndex > 0)
             {
@@ -169,7 +169,7 @@ namespace DotNetNuke.Services.Installer
                     isCombi = true;
                 }
             }
-			
+
             //Create a writer to create the processed manifest
             var sb = new StringBuilder();
             using (XmlWriter writer = XmlWriter.Create(sb, XmlUtils.GetXmlWriterSettings(ConformanceLevel.Fragment)))
@@ -253,7 +253,7 @@ namespace DotNetNuke.Services.Installer
 
         /// <summary>
         /// Process legacy language package (that is based on manifest xml file)
-        /// </summary> 
+        /// </summary>
         public static void ProcessLegacyLanguages()
         {
             string filePath = Globals.ApplicationMapPath + Localization.Localization.SupportedLocalesFile.Substring(1).Replace("/", "\\");
@@ -272,7 +272,7 @@ namespace DotNetNuke.Services.Installer
                 {
                     HostController.Instance.Update("EnableUrlLanguage", Util.ReadAttribute(urlNav, "enabled", false, null, Null.NullString, "true"));
                 }
-				
+
                 //Process each language
                 foreach (XPathNavigator nav in doc.CreateNavigator().Select("root/language"))
                 {
@@ -317,7 +317,7 @@ namespace DotNetNuke.Services.Installer
                     }
                 }
             }
-			
+
             //Process Portal Locales files
             foreach (PortalInfo portal in PortalController.Instance.GetPortals())
             {
@@ -355,7 +355,7 @@ namespace DotNetNuke.Services.Installer
                         }
                         if (!bFound)
                         {
-							//Language is enabled - add to portal
+                            //Language is enabled - add to portal
                             Localization.Localization.AddLanguageToPortal(portalID, installedLanguage.LanguageId, false);
                         }
                     }
@@ -364,7 +364,7 @@ namespace DotNetNuke.Services.Installer
                 {
                     foreach (Locale installedLanguage in LocaleController.Instance.GetLocales(Null.NullInteger).Values)
                     {
-						//Language is enabled - add to portal
+                        //Language is enabled - add to portal
                         Localization.Localization.AddLanguageToPortal(portalID, installedLanguage.LanguageId, false);
                     }
                 }
@@ -374,7 +374,7 @@ namespace DotNetNuke.Services.Installer
         /// <summary>
         /// Process legacy module version 3 .dnn install file
         /// </summary>
-        /// <param name="desktopModule"></param> 
+        /// <param name="desktopModule"></param>
         public static void ProcessLegacyModule(DesktopModuleInfo desktopModule)
         {
             //Get the Module folder
@@ -442,7 +442,7 @@ namespace DotNetNuke.Services.Installer
             {
                 Logger.Error(exc);
 
-            }            
+            }
         }
 
         public static void ProcessLegacyModules()
@@ -458,7 +458,7 @@ namespace DotNetNuke.Services.Installer
 
         /// <summary>
         /// Process legacy skinobject version 3 .dnn install package
-        /// </summary> 
+        /// </summary>
         public static void ProcessLegacySkinControls()
         {
             foreach (SkinControlInfo skinControl in SkinControlController.GetSkinControls().Values)
@@ -467,7 +467,7 @@ namespace DotNetNuke.Services.Installer
                 {
                     try
                     {
-						//SkinControl is not affiliated with a Package
+                        //SkinControl is not affiliated with a Package
                         var package = new PackageInfo(new InstallerInfo());
                         package.Name = skinControl.ControlKey;
 
@@ -502,13 +502,13 @@ namespace DotNetNuke.Services.Installer
 
         public static void ProcessLegacySkins()
         {
-			//Process Legacy Skins
+            //Process Legacy Skins
             string skinRootPath = Path.Combine(Globals.HostMapPath, SkinController.RootSkin);
             foreach (string skinFolder in Directory.GetDirectories(skinRootPath))
             {
                 ProcessLegacySkin(skinFolder, "Skin");
             }
-			
+
             //Process Legacy Containers
             skinRootPath = Path.Combine(Globals.HostMapPath, SkinController.RootContainer);
             foreach (string skinFolder in Directory.GetDirectories(skinRootPath))

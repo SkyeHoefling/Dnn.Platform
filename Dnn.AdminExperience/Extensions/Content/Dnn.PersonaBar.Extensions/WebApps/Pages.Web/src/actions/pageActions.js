@@ -97,9 +97,9 @@ const pageActions = {
         return (dispatch) => PagesService.searchAndFilterPageList(params).then(searchResult => {
             dispatch({
                 type: SearchListActionTypes.SAVE_SEARCH_RESULT,
-                data: { 
+                data: {
                     searchResult,
-                    filtersUpdated 
+                    filtersUpdated
                 }
             });
         });
@@ -207,7 +207,7 @@ const pageActions = {
     },
 
     deletePage(page, redirectUrl) {
-        
+
         return (dispatch) => {
             dispatch({
                 type: ActionTypes.DELETE_PAGE

@@ -41,9 +41,9 @@
                 }
             );
             searchSkinObject.init();
-            
+
             <% if (!UseDropDownList)
-               { %>
+                { %>
             // attach classic search
             var siteBtn = $('#<%= SiteRadioButton.ClientID %>');
             var webBtn = $('#<%= WebRadioButton.ClientID %>');
@@ -53,16 +53,16 @@
             };
             siteBtn.on('change', clickHandler);
             webBtn.on('change', clickHandler);
-            
-            <% }
-               else
-               { %>
 
-               // attach dropdown search
+            <% }
+                else
+                { %>
+
+                // attach dropdown search
             if (typeof dnn.initDropdownSearch != 'undefined') {
                 dnn.initDropdownSearch(searchSkinObject);
             }
-            
+
             <% } %>
         }
     });

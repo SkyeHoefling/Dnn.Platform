@@ -219,14 +219,14 @@ namespace DNN.Integration.Test.Framework.Controllers
         private static ScheduleHistoryInfo LastRunningScheduleItem(int scheduleId)
         {
             const string script = @"IF EXISTS (SELECT 1 FROM {{objectQualifier}}ScheduleHistory WHERE ScheduleId = {0})
-	                SELECT TOP(1) ScheduleId, ScheduleHistoryId, COALESCE(Succeeded, CAST(0 AS BIT)) AS Succeeded,
-                           COALESCE(EndDate, {{ts '2000-01-01 00:00:00'}}) AS EndDate, LogNotes
-	                FROM   {{objectQualifier}}ScheduleHistory
-	                WHERE  ScheduleId = {0}
+                    SELECT TOP(1) ScheduleId, ScheduleHistoryId, COALESCE(Succeeded, CAST(0 AS BIT)) AS Succeeded,
+                            COALESCE(EndDate, {{ts '2000-01-01 00:00:00'}}) AS EndDate, LogNotes
+                    FROM   {{objectQualifier}}ScheduleHistory
+                    WHERE  ScheduleId = {0}
                     ORDER BY ScheduleHistoryId DESC
                 ELSE
-	                SELECT {0} AS ScheduleId, -1 AS ScheduleHistoryId, CAST(0 AS BIT) AS Succeeded,
-                           {{ts '2000-01-01 00:00:00'}} AS EndDate, CAST(NULL AS NVARCHAR) AS LogNotes";
+                    SELECT {0} AS ScheduleId, -1 AS ScheduleHistoryId, CAST(0 AS BIT) AS Succeeded,
+                            {{ts '2000-01-01 00:00:00'}} AS EndDate, CAST(NULL AS NVARCHAR) AS LogNotes";
 
             var query = string.Format(script, scheduleId);
             var result = DatabaseHelper.ExecuteQuery(query).First();

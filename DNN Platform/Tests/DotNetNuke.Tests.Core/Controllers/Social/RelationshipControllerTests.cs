@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -43,33 +43,33 @@ using NUnit.Framework;
 
 namespace DotNetNuke.Tests.Core.Controllers.Social
 {
-	/// <summary>
+    /// <summary>
     ///  Testing various aspects of RelationshipController
-	/// </summary>
-	[TestFixture]
-	public class RelationshipControllerTests
-	{
-		#region Private Properties
+    /// </summary>
+    [TestFixture]
+    public class RelationshipControllerTests
+    {
+        #region Private Properties
 
         private Mock<CachingProvider> mockCachingProvider;
-	    private Mock<IPortalController> _portalController;
+        private Mock<IPortalController> _portalController;
         private Mock<IPortalGroupController> _portalGroupController;
 
         private DataTable dtRelationshipTypes;
         private DataTable dtRelationships;
         private DataTable dtUserRelationships;
-        private DataTable dtUserRelationshipPreferences;		
+        private DataTable dtUserRelationshipPreferences;
 
-		#endregion
+        #endregion
 
-		#region Set Up
+        #region Set Up
 
-		[SetUp]
-		public void SetUp()
-		{
+        [SetUp]
+        public void SetUp()
+        {
             ComponentFactory.Container = new SimpleContainer();
             var mockDataProvider = MockComponentProvider.CreateDataProvider();
-		    mockDataProvider.Setup(dp => dp.GetProviderPath()).Returns("");
+            mockDataProvider.Setup(dp => dp.GetProviderPath()).Returns("");
 
             mockCachingProvider = MockComponentProvider.CreateDataCacheProvider();
             MockComponentProvider.CreateEventLogController();
@@ -79,7 +79,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
 
             _portalGroupController = new Mock<IPortalGroupController>();
             PortalGroupController.RegisterInstance(_portalGroupController.Object);
-            
+
             var mockHostController = new Mock<IHostController>();
             mockHostController.Setup(c => c.GetString("PerformanceSetting")).Returns("0");
             HostController.RegisterInstance(mockHostController.Object);
@@ -90,8 +90,8 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
 
             CreateLocalizationProvider();
 
-            SetupDataTables();						
-		}
+            SetupDataTables();
+        }
 
         [TearDown]
         public void TearDown()
@@ -101,7 +101,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
             UserController.ClearInstance();
         }
 
-		#endregion
+        #endregion
 
         #region Constructor Tests
 
@@ -147,9 +147,9 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
             var mockDataService = CreateMockDataServiceWithRelationshipTypes();
             var relationshipController = CreateRelationshipController(mockDataService);
             var relationshipType = new RelationshipType()
-                                       {
-                                           RelationshipTypeId = Constants.SOCIAL_FollowerRelationshipTypeID
-                                       };
+                                        {
+                                            RelationshipTypeId = Constants.SOCIAL_FollowerRelationshipTypeID
+                                        };
 
             //Act
             relationshipController.DeleteRelationshipType(relationshipType);
@@ -447,10 +447,10 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
             dtRelationships.Clear();
             for (int i = 1; i <= 5; i ++)
             {
-                dtRelationships.Rows.Add(i, DefaultRelationshipTypes.Friends, DefaultRelationshipTypes.Friends.ToString(), 
-                                            DefaultRelationshipTypes.Friends.ToString(), 
-                                            Constants.PORTAL_Zero, 
-                                            Constants.USER_ValidId, 
+                dtRelationships.Rows.Add(i, DefaultRelationshipTypes.Friends, DefaultRelationshipTypes.Friends.ToString(),
+                                            DefaultRelationshipTypes.Friends.ToString(),
+                                            Constants.PORTAL_Zero,
+                                            Constants.USER_ValidId,
                                             RelationshipStatus.None);
             }
             mockDataService.Setup(md => md.GetRelationshipsByUserId(Constants.USER_ValidId)).Returns(dtRelationships.CreateDataReader());
@@ -529,7 +529,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
             var mockPortalInfo = CreatePortalInfo(Constants.PORTAL_Zero, Constants.PORTALGROUP_ValidPortalGroupId);
             _portalController.Setup(pc => pc.GetPortal(Constants.PORTAL_Zero)).Returns(mockPortalInfo);
 
-            List<PortalGroupInfo> portalGroups = new List<PortalGroupInfo>() { CreatePortalGroupInfo(Constants.PORTALGROUP_ValidPortalGroupId, Constants.PORTAL_Zero) }; // CreatePortalGroupInfo(Constants.PORTALGROUP_ValidPortalGroupId, Constants.PORTAL_Zero);                
+            List<PortalGroupInfo> portalGroups = new List<PortalGroupInfo>() { CreatePortalGroupInfo(Constants.PORTALGROUP_ValidPortalGroupId, Constants.PORTAL_Zero) }; // CreatePortalGroupInfo(Constants.PORTALGROUP_ValidPortalGroupId, Constants.PORTAL_Zero);
             _portalGroupController.Setup(pgc => pgc.GetPortalGroups()).Returns(portalGroups);
 
             //Act
@@ -902,7 +902,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
             //Arrange
             var mockDataService = new Mock<IDataService>();
             mockDataService.Setup(ds => ds.GetUserRelationshipPreference(It.IsAny<int>(), It.IsAny<int>()))
-                            .Returns(dtUserRelationshipPreferences.CreateDataReader); 
+                            .Returns(dtUserRelationshipPreferences.CreateDataReader);
             var relationshipController = CreateRelationshipController(mockDataService);
 
             //Act
@@ -988,16 +988,16 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
 
             //Act, Assert
             relationshipController.InitiateUserRelationship(initiatingUser, targetUser, relationship);
-        }     
+        }
 
-        [Test]       
+        [Test]
         public void RelationshipController_InitiateUserRelationship_Returns_Status_Accepted_When_Default_Relationship_Action_Is_Accepted()
         {
             //Arrange
             var initiatingUser = new UserInfo { UserID = Constants.USER_TenId, PortalID = Constants.PORTAL_Zero };
             var targetUser = new UserInfo { UserID = Constants.USER_ElevenId, PortalID = Constants.PORTAL_Zero };
             var relationship = new Relationship { RelationshipId = Constants.SOCIAL_FollowerRelationshipID, RelationshipTypeId = Constants.SOCIAL_FollowerRelationshipTypeID, DefaultResponse = RelationshipStatus.Accepted };
-           
+
             dtUserRelationships.Rows.Clear();
             dtUserRelationshipPreferences.Rows.Clear();
 
@@ -1143,7 +1143,7 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
         #endregion
 
         #region Verify Update of UserRelationship Status calls Data Layer
-        
+
         [Test]
         public void RelationshipController_AcceptUserRelationship_Calls_DataService_On_Valid_RelationshipID()
         {
@@ -1337,4 +1337,3 @@ namespace DotNetNuke.Tests.Core.Controllers.Social
         #endregion
     }
 }
-

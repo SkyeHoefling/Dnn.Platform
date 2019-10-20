@@ -17,7 +17,7 @@
 
   CodeMirror.defineMode("mumps", function() {
     function wordRegexp(words) {
-      return new RegExp("^((" + words.join(")|(") + "))\\b", "i");
+    return new RegExp("^((" + words.join(")|(") + "))\\b", "i");
     }
 
     var singleOperators = new RegExp("^[\\+\\-\\*/&#!_?\\\\<>=\\'\\[\\]]");
@@ -32,115 +32,115 @@
     var command = wordRegexp(commandKeywords);
 
     function tokenBase(stream, state) {
-      if (stream.sol()) {
+    if (stream.sol()) {
         state.label = true;
         state.commandMode = 0;
-      }
+    }
 
-      // The <space> character has meaning in MUMPS. Ignoring consecutive
-      // spaces would interfere with interpreting whether the next non-space
-      // character belongs to the command or argument context.
+    // The <space> character has meaning in MUMPS. Ignoring consecutive
+    // spaces would interfere with interpreting whether the next non-space
+    // character belongs to the command or argument context.
 
-      // Examine each character and update a mode variable whose interpretation is:
-      //   >0 => command    0 => argument    <0 => command post-conditional
-      var ch = stream.peek();
+    // Examine each character and update a mode variable whose interpretation is:
+    //   >0 => command    0 => argument    <0 => command post-conditional
+    var ch = stream.peek();
 
-      if (ch == " " || ch == "\t") { // Pre-process <space>
+    if (ch == " " || ch == "\t") { // Pre-process <space>
         state.label = false;
         if (state.commandMode == 0)
-          state.commandMode = 1;
+        state.commandMode = 1;
         else if ((state.commandMode < 0) || (state.commandMode == 2))
-          state.commandMode = 0;
-      } else if ((ch != ".") && (state.commandMode > 0)) {
+        state.commandMode = 0;
+    } else if ((ch != ".") && (state.commandMode > 0)) {
         if (ch == ":")
-          state.commandMode = -1;   // SIS - Command post-conditional
+        state.commandMode = -1;   // SIS - Command post-conditional
         else
-          state.commandMode = 2;
-      }
+        state.commandMode = 2;
+    }
 
-      // Do not color parameter list as line tag
-      if ((ch === "(") || (ch === "\u0009"))
+    // Do not color parameter list as line tag
+    if ((ch === "(") || (ch === "\u0009"))
         state.label = false;
 
-      // MUMPS comment starts with ";"
-      if (ch === ";") {
+    // MUMPS comment starts with ";"
+    if (ch === ";") {
         stream.skipToEnd();
         return "comment";
-      }
+    }
 
-      // Number Literals // SIS/RLM - MUMPS permits canonic number followed by concatenate operator
-      if (stream.match(/^[-+]?\d+(\.\d+)?([eE][-+]?\d+)?/))
+    // Number Literals // SIS/RLM - MUMPS permits canonic number followed by concatenate operator
+    if (stream.match(/^[-+]?\d+(\.\d+)?([eE][-+]?\d+)?/))
         return "number";
 
-      // Handle Strings
-      if (ch == '"') {
+    // Handle Strings
+    if (ch == '"') {
         if (stream.skipTo('"')) {
-          stream.next();
-          return "string";
+        stream.next();
+        return "string";
         } else {
-          stream.skipToEnd();
-          return "error";
+        stream.skipToEnd();
+        return "error";
         }
-      }
+    }
 
-      // Handle operators and Delimiters
-      if (stream.match(doubleOperators) || stream.match(singleOperators))
+    // Handle operators and Delimiters
+    if (stream.match(doubleOperators) || stream.match(singleOperators))
         return "operator";
 
-      // Prevents leading "." in DO block from falling through to error
-      if (stream.match(singleDelimiters))
+    // Prevents leading "." in DO block from falling through to error
+    if (stream.match(singleDelimiters))
         return null;
 
-      if (brackets.test(ch)) {
+    if (brackets.test(ch)) {
         stream.next();
         return "bracket";
-      }
+    }
 
-      if (state.commandMode > 0 && stream.match(command))
+    if (state.commandMode > 0 && stream.match(command))
         return "variable-2";
 
-      if (stream.match(intrinsicFuncs))
+    if (stream.match(intrinsicFuncs))
         return "builtin";
 
-      if (stream.match(identifiers))
+    if (stream.match(identifiers))
         return "variable";
 
-      // Detect dollar-sign when not a documented intrinsic function
-      // "^" may introduce a GVN or SSVN - Color same as function
-      if (ch === "$" || ch === "^") {
+    // Detect dollar-sign when not a documented intrinsic function
+    // "^" may introduce a GVN or SSVN - Color same as function
+    if (ch === "$" || ch === "^") {
         stream.next();
         return "builtin";
-      }
+    }
 
-      // MUMPS Indirection
-      if (ch === "@") {
+    // MUMPS Indirection
+    if (ch === "@") {
         stream.next();
         return "string-2";
-      }
+    }
 
-      if (/[\w%]/.test(ch)) {
+    if (/[\w%]/.test(ch)) {
         stream.eatWhile(/[\w%]/);
         return "variable";
-      }
+    }
 
-      // Handle non-detected items
-      stream.next();
-      return "error";
+    // Handle non-detected items
+    stream.next();
+    return "error";
     }
 
     return {
-      startState: function() {
+    startState: function() {
         return {
-          label: false,
-          commandMode: 0
+        label: false,
+        commandMode: 0
         };
-      },
+    },
 
-      token: function(stream, state) {
+    token: function(stream, state) {
         var style = tokenBase(stream, state);
         if (state.label) return "tag";
         return style;
-      }
+    }
     };
   });
 

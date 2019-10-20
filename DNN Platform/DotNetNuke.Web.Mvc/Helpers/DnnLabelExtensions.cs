@@ -26,11 +26,11 @@ namespace DotNetNuke.Web.Mvc.Helpers
             var htmlHelper = dnnHelper.HtmlHelper as HtmlHelper<TModel>;
 
             return LabelHelper(htmlHelper,
-                               ModelMetadata.FromStringExpression(expression, htmlHelper.ViewData),
-                               expression,
-                               labelText,
-                               helpText,
-                               htmlAttributes);
+                                ModelMetadata.FromStringExpression(expression, htmlHelper.ViewData),
+                                expression,
+                                labelText,
+                                helpText,
+                                htmlAttributes);
         }
 
         public static MvcHtmlString LabelFor<TModel, TValue>(this DnnHelper<TModel> dnnHelper, Expression<Func<TModel, TValue>> expression)
@@ -78,11 +78,11 @@ namespace DotNetNuke.Web.Mvc.Helpers
             var htmlHelper = dnnHelper.HtmlHelper as HtmlHelper<TModel>;
 
             return LabelHelper(htmlHelper,
-                               ModelMetadata.FromLambdaExpression(expression, dnnHelper.ViewData),
-                               ExpressionHelper.GetExpressionText(expression),
-                               labelText,
-                               helpText,
-                               htmlAttributes);
+                                ModelMetadata.FromLambdaExpression(expression, dnnHelper.ViewData),
+                                ExpressionHelper.GetExpressionText(expression),
+                                labelText,
+                                helpText,
+                                htmlAttributes);
         }
 
         internal static MvcHtmlString LabelHelper(HtmlHelper html, ModelMetadata metadata, string htmlFieldName, string labelText = null, string helpText = null, IDictionary<string, object> htmlAttributes = null)

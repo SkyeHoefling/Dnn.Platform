@@ -186,8 +186,8 @@ namespace Dnn.ExportImport.Components.Services
             var createdBy = Util.GetUserIdByName(_exportImportJob, otherTab.CreatedByUserID, otherTab.CreatedByUserName);
             var modifiedBy = Util.GetUserIdByName(_exportImportJob, otherTab.LastModifiedByUserID, otherTab.LastModifiedByUserName);
             var localTab = localTabs.FirstOrDefault(t => otherTab.UniqueId.Equals(t.UniqueId)) ?? localTabs.FirstOrDefault(t =>
-                  otherTab.TabPath.Equals(t.TabPath, StringComparison.InvariantCultureIgnoreCase)
-                  && IsSameCulture(t.CultureCode, otherTab.CultureCode));
+                otherTab.TabPath.Equals(t.TabPath, StringComparison.InvariantCultureIgnoreCase)
+                && IsSameCulture(t.CultureCode, otherTab.CultureCode));
 
             var isParentPresent = IsParentTabPresentInExport(otherTab, exportedTabs, localTabs);
 
@@ -674,9 +674,9 @@ namespace Dnn.ExportImport.Components.Services
                 if (locals.Count == 0)
                 {
                     locals = new List<ModuleInfo>(localTabModules.Where(m => m.ModuleDefinition.FriendlyName == other.FriendlyName
-                                                                             && m.PaneName == other.PaneName
-                                                                             && ModuleOrderMatched(m, other, localOrders, exportOrders)
-                                                                             && m.IsDeleted == other.IsDeleted)).ToList();
+                                                                            && m.PaneName == other.PaneName
+                                                                            && ModuleOrderMatched(m, other, localOrders, exportOrders)
+                                                                            && m.IsDeleted == other.IsDeleted)).ToList();
                 }
 
                 var otherModule = exportedModules.FirstOrDefault(m => m.ModuleID == other.ModuleID);
@@ -977,11 +977,11 @@ namespace Dnn.ExportImport.Components.Services
 
             return count;
         }
-        
+
         /*
-            Update Modules.IsDeleted with ExportModule.IsDeleted and not ExportTabModule.IsDeleted. 
+            Update Modules.IsDeleted with ExportModule.IsDeleted and not ExportTabModule.IsDeleted.
             ExportTabModule.IsDeleted may different from ExportModule.IsDeleted when Module is deleted.
-            Change ModuleInfo.IsDeleted to ExportModule.IsDeleted and reverting to ExportMabModule.IsDeleted after 
+            Change ModuleInfo.IsDeleted to ExportModule.IsDeleted and reverting to ExportMabModule.IsDeleted after
             updating Modules.
         */
         private void UpdateModuleWithIsDeletedHandling(ExportTabModule exportTabModule, ExportModule exportModule, ModuleInfo importModule)
@@ -997,8 +997,8 @@ namespace Dnn.ExportImport.Components.Services
         private bool ModuleOrderMatched(ModuleInfo module, ExportTabModule exportTabModule, IDictionary<int, int> localOrders, IDictionary<int, int> exportOrders)
         {
             return localOrders.ContainsKey(module.ModuleID)
-                   && exportOrders.ContainsKey(exportTabModule.ModuleID)
-                   && localOrders[module.ModuleID] == exportOrders[exportTabModule.ModuleID];
+                    && exportOrders.ContainsKey(exportTabModule.ModuleID)
+                    && localOrders[module.ModuleID] == exportOrders[exportTabModule.ModuleID];
         }
 
         private IDictionary<int, int> BuildModuleOrders(IList<ModuleInfo> modules)

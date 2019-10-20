@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -86,7 +86,7 @@ namespace DotNetNuke.Entities.Tabs
         /// <param name="cultureCode"></param>
         /// <param name="clearCache"></param>
         void ConvertTabToNeutralLanguage(int portalId, int tabId, string cultureCode, bool clearCache);
-            
+
         /// <summary>
         /// Creates content item for the tab..
         /// </summary>
@@ -139,7 +139,7 @@ namespace DotNetNuke.Entities.Tabs
         void DeleteTabSettings(int tabId);
 
         /// <summary>
-        /// Delete a taburl 
+        /// Delete a taburl
         /// </summary>
         /// <param name="tabUrl">the taburl</param>
         /// <param name="portalId">the portal</param>
@@ -238,7 +238,7 @@ namespace DotNetNuke.Entities.Tabs
         /// <param name="forHost">if set to <c>true</c> [for host].</param>
         /// <returns>tab collection</returns>
         IDictionary<int, TabInfo> GetTabsByPackageID(int portalID, int packageID, bool forHost);
-        
+
         /// <summary>
         /// Gets the tabs by portal.
         /// </summary>
@@ -248,11 +248,11 @@ namespace DotNetNuke.Entities.Tabs
 
 
         /// <summary>
-        /// Get the actual visible tabs for a given portal id. 
+        /// Get the actual visible tabs for a given portal id.
         /// System Tabs and Admin Tabs are excluded from the result set.
         /// </summary>
         /// <param name="portalId"></param>
-        /// 
+        ///
         /// <returns>tab collection</returns>
         TabCollection GetTabsByPortal(int portalId);
 
@@ -262,7 +262,7 @@ namespace DotNetNuke.Entities.Tabs
         /// <param name="tabModuleId">The tabmodule ID.</param>
         /// <returns>tab collection</returns>
         IDictionary<int, TabInfo> GetTabsByTabModuleID(int tabModuleId);
-        
+
         /// <summary>
         /// read all settings for a tab from TabSettings table
         /// </summary>
@@ -286,7 +286,7 @@ namespace DotNetNuke.Entities.Tabs
         /// <param name="localizedTab">The localized tab.</param>
         /// <param name="users">The users.</param>
         void GiveTranslatorRoleEditRights(TabInfo localizedTab, Dictionary<int, UserInfo> users);
-        
+
         /// <summary>
         /// Returns True if a page is missing a translated version in at least one other language
         /// </summary>
@@ -308,7 +308,7 @@ namespace DotNetNuke.Entities.Tabs
         /// <param name="tab">The tab info.</param>
         /// <returns></returns>
         bool IsHostOrAdminPage(TabInfo tab);
-        
+
         /// <summary>
         /// Localizes the tab.
         /// </summary>
@@ -376,7 +376,7 @@ namespace DotNetNuke.Entities.Tabs
         /// </summary>
         /// <param name="tab">The Tab to be marked</param>
         void MarkAsPublished(TabInfo tab);
-        
+
         /// <summary>
         /// Restores the tab.
         /// </summary>

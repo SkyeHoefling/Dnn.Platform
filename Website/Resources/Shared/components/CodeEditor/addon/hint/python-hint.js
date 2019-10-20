@@ -17,13 +17,13 @@
 
   function arrayContains(arr, item) {
     if (!Array.prototype.indexOf) {
-      var i = arr.length;
-      while (i--) {
+    var i = arr.length;
+    while (i--) {
         if (arr[i] === item) {
-          return true;
+        return true;
         }
-      }
-      return false;
+    }
+    return false;
     }
     return arr.indexOf(item) != -1;
   }
@@ -35,7 +35,7 @@
 
     if (!/^[\w$_]*$/.test(token.string)) {
         token = tprop = {start: cur.ch, end: cur.ch, string: "", state: token.state,
-                         className: token.string == ":" ? "python-type" : null};
+                        className: token.string == ":" ? "python-type" : null};
     }
 
     if (!context) var context = [];
@@ -73,7 +73,7 @@
   function getCompletions(token, context) {
     var found = [], start = token.string;
     function maybeAdd(str) {
-      if (str.lastIndexOf(start, 0) == 0 && !arrayContains(found, str)) found.push(str);
+    if (str.lastIndexOf(start, 0) == 0 && !arrayContains(found, str)) found.push(str);
     }
 
     function gatherCompletions(_obj) {
@@ -84,18 +84,18 @@
     }
 
     if (context) {
-      // If this is a property, see if it belongs to some object we can
-      // find in the current environment.
-      var obj = context.pop(), base;
+    // If this is a property, see if it belongs to some object we can
+    // find in the current environment.
+    var obj = context.pop(), base;
 
-      if (obj.type == "variable")
-          base = obj.string;
-      else if(obj.type == "variable-3")
-          base = ":" + obj.string;
+    if (obj.type == "variable")
+        base = obj.string;
+    else if(obj.type == "variable-3")
+        base = ":" + obj.string;
 
-      while (base != null && context.length)
+    while (base != null && context.length)
         base = base[context.pop().string];
-      if (base != null) gatherCompletions(base);
+    if (base != null) gatherCompletions(base);
     }
     return found;
   }

@@ -22,6 +22,3 @@
             Set-AzureStorageBlobContent -File $x.fullname -Container $container.Name -Blob $targetPath -Context $ctx -Force:$Force | Out-Null
         }
     }
-
-
-

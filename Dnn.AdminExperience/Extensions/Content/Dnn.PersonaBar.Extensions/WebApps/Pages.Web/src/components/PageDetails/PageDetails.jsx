@@ -8,17 +8,17 @@ import PageIcons from "./PageIcons/PageIcons";
 
 class PageDetail extends Component {
 
-    getDetail(pageType) {        
+    getDetail(pageType) {
         switch (pageType) {
-            case "normal": 
+            case "normal":
                 return PageStandard;
             case "tab":
             case "url":
             case "file":
                 return PageUrl;
-            default: 
+            default:
                 throw "invalid page type";
-        }        
+        }
     }
 
     render() {
@@ -45,7 +45,7 @@ PageDetail.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        page: state.pages.selectedPage        
+        page: state.pages.selectedPage
     };
 };
 

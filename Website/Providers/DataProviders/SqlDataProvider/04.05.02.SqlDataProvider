@@ -13,42 +13,42 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddModuleControl
-	
-	@ModuleDefID                int,
-	@ControlKey                 nvarchar(50),
-	@ControlTitle               nvarchar(50),
-	@ControlSrc                 nvarchar(256),
-	@IconFile                   nvarchar(100),
-	@ControlType                int,
-	@ViewOrder                  int,
-	@HelpUrl                    nvarchar(200),
-	@SupportsPartialRendering   bit
+
+    @ModuleDefID                int,
+    @ControlKey                 nvarchar(50),
+    @ControlTitle               nvarchar(50),
+    @ControlSrc                 nvarchar(256),
+    @IconFile                   nvarchar(100),
+    @ControlType                int,
+    @ViewOrder                  int,
+    @HelpUrl                    nvarchar(200),
+    @SupportsPartialRendering   bit
 
 AS
-	INSERT INTO {databaseOwner}{objectQualifier}ModuleControls (
-	  ModuleDefID,
-	  ControlKey,
-	  ControlTitle,
-	  ControlSrc,
-	  IconFile,
-	  ControlType,
-	  ViewOrder,
-	  HelpUrl,
-          SupportsPartialRendering
-	)
-	VALUES (
-	  @ModuleDefID,
-	  @ControlKey,
-	  @ControlTitle,
-	  @ControlSrc,
-	  @IconFile,
-	  @ControlType,
-	  @ViewOrder,
-	  @HelpUrl,
-          @SupportsPartialRendering
-	)
+    INSERT INTO {databaseOwner}{objectQualifier}ModuleControls (
+    ModuleDefID,
+    ControlKey,
+    ControlTitle,
+    ControlSrc,
+    IconFile,
+    ControlType,
+    ViewOrder,
+    HelpUrl,
+        SupportsPartialRendering
+    )
+    VALUES (
+    @ModuleDefID,
+    @ControlKey,
+    @ControlTitle,
+    @ControlSrc,
+    @IconFile,
+    @ControlType,
+    @ViewOrder,
+    @HelpUrl,
+        @SupportsPartialRendering
+    )
 
-	SELECT SCOPE_IDENTITY()
+    SELECT SCOPE_IDENTITY()
 GO
 
 update {databaseOwner}{objectQualifier}ModuleSettings
@@ -71,8 +71,8 @@ select @ModulePermissionID = min(ModulePermissionID)
 from {databaseOwner}{objectQualifier}ModulePermission
 where UserID is not null
 while @ModulePermissionID is not NULL
-begin  
-  /* we are only dealing with records which have a UserID specified */ 
+begin
+  /* we are only dealing with records which have a UserID specified */
   select @ModuleID = ModuleID, @PermissionID = PermissionID, @RoleID = RoleID, @UserID = UserID
   from {databaseOwner}{objectQualifier}ModulePermission
   where ModulePermissionID = @ModulePermissionID
@@ -81,18 +81,18 @@ begin
   if @RoleID = -1
   begin
     /* if permission record already exists for the module/permission/user/role combination */
-    if exists ( select 1 from {databaseOwner}{objectQualifier}ModulePermission where ModuleID = @ModuleID and PermissionID = @PermissionID and UserID = @UserID and RoleID is NULL ) 
-      begin
+    if exists ( select 1 from {databaseOwner}{objectQualifier}ModulePermission where ModuleID = @ModuleID and PermissionID = @PermissionID and UserID = @UserID and RoleID is NULL )
+    begin
         /* delete the record */
         delete from {databaseOwner}{objectQualifier}ModulePermission where ModulePermissionID = @ModulePermissionID
-      end
+    end
     else
-      begin
+    begin
         /* remove the RoleID assignment */
         update {databaseOwner}{objectQualifier}ModulePermission set RoleID = NULL where ModulePermissionID = @ModulePermissionID
-      end
-    end 
-  
+    end
+    end
+
   select @ModulePermissionID = min(ModulePermissionID)
   from {databaseOwner}{objectQualifier}ModulePermission
   where UserID is not NULL
@@ -111,7 +111,7 @@ declare @Count int
 select @ModulePermissionID = min(ModulePermissionID)
 from {databaseOwner}{objectQualifier}ModulePermission
 while @ModulePermissionID is not NULL
-begin  
+begin
   select @ModuleID = ModuleID, @PermissionID = PermissionID, @RoleID = RoleID, @UserID = UserID
   from {databaseOwner}{objectQualifier}ModulePermission
   where ModulePermissionID = @ModulePermissionID
@@ -132,7 +132,7 @@ GO
 
 /* add unique constraint */
 ALTER TABLE {databaseOwner}{objectQualifier}ModulePermission ADD CONSTRAINT
-  IX_{objectQualifier}ModulePermission UNIQUE NONCLUSTERED 
+  IX_{objectQualifier}ModulePermission UNIQUE NONCLUSTERED
   (
     ModuleID,
     PermissionID,
@@ -151,8 +151,8 @@ select @TabPermissionID = min(TabPermissionID)
 from {databaseOwner}{objectQualifier}TabPermission
 where UserID is not null
 while @TabPermissionID is not NULL
-begin  
-  /* we are only dealing with records which have a UserID specified */ 
+begin
+  /* we are only dealing with records which have a UserID specified */
   select @TabID = TabID, @PermissionID = PermissionID, @RoleID = RoleID, @UserID = UserID
   from {databaseOwner}{objectQualifier}TabPermission
   where TabPermissionID = @TabPermissionID
@@ -161,18 +161,18 @@ begin
   if @RoleID = -1
   begin
     /* if permission record already exists for the tab/permission/user/role combination */
-    if exists ( select 1 from {databaseOwner}{objectQualifier}TabPermission where TabID = @TabID and PermissionID = @PermissionID and UserID = @UserID and RoleID is NULL ) 
-      begin
+    if exists ( select 1 from {databaseOwner}{objectQualifier}TabPermission where TabID = @TabID and PermissionID = @PermissionID and UserID = @UserID and RoleID is NULL )
+    begin
         /* delete the record */
         delete from {databaseOwner}{objectQualifier}TabPermission where TabPermissionID = @TabPermissionID
-      end
+    end
     else
-      begin
+    begin
         /* remove the RoleID assignment */
         update {databaseOwner}{objectQualifier}TabPermission set RoleID = NULL where TabPermissionID = @TabPermissionID
-      end
-    end 
-  
+    end
+    end
+
   select @TabPermissionID = min(TabPermissionID)
   from {databaseOwner}{objectQualifier}TabPermission
   where UserID is not NULL
@@ -191,7 +191,7 @@ declare @Count int
 select @TabPermissionID = min(TabPermissionID)
 from {databaseOwner}{objectQualifier}TabPermission
 while @TabPermissionID is not NULL
-begin  
+begin
   select @TabID = TabID, @PermissionID = PermissionID, @RoleID = RoleID, @UserID = UserID
   from {databaseOwner}{objectQualifier}TabPermission
   where TabPermissionID = @TabPermissionID
@@ -212,7 +212,7 @@ GO
 
 /* add unique constraint */
 ALTER TABLE {databaseOwner}{objectQualifier}TabPermission ADD CONSTRAINT
-  IX_{objectQualifier}TabPermission UNIQUE NONCLUSTERED 
+  IX_{objectQualifier}TabPermission UNIQUE NONCLUSTERED
   (
     TabID,
     PermissionID,
@@ -231,8 +231,8 @@ select @FolderPermissionID = min(FolderPermissionID)
 from {databaseOwner}{objectQualifier}FolderPermission
 where UserID is not null
 while @FolderPermissionID is not NULL
-begin  
-  /* we are only dealing with records which have a UserID specified */ 
+begin
+  /* we are only dealing with records which have a UserID specified */
   select @FolderID = FolderID, @PermissionID = PermissionID, @RoleID = RoleID, @UserID = UserID
   from {databaseOwner}{objectQualifier}FolderPermission
   where FolderPermissionID = @FolderPermissionID
@@ -241,18 +241,18 @@ begin
   if @RoleID = -1
   begin
     /* if permission record already exists for the tab/permission/user/role combination */
-    if exists ( select 1 from {databaseOwner}{objectQualifier}FolderPermission where FolderID = @FolderID and PermissionID = @PermissionID and UserID = @UserID and RoleID is NULL ) 
-      begin
+    if exists ( select 1 from {databaseOwner}{objectQualifier}FolderPermission where FolderID = @FolderID and PermissionID = @PermissionID and UserID = @UserID and RoleID is NULL )
+    begin
         /* delete the record */
         delete from {databaseOwner}{objectQualifier}FolderPermission where FolderPermissionID = @FolderPermissionID
-      end
+    end
     else
-      begin
+    begin
         /* remove the RoleID assignment */
         update {databaseOwner}{objectQualifier}FolderPermission set RoleID = NULL where FolderPermissionID = @FolderPermissionID
-      end
-    end 
-  
+    end
+    end
+
   select @FolderPermissionID = min(FolderPermissionID)
   from {databaseOwner}{objectQualifier}FolderPermission
   where UserID is not NULL
@@ -271,7 +271,7 @@ declare @Count int
 select @FolderPermissionID = min(FolderPermissionID)
 from {databaseOwner}{objectQualifier}FolderPermission
 while @FolderPermissionID is not NULL
-begin  
+begin
   select @FolderID = FolderID, @PermissionID = PermissionID, @RoleID = RoleID, @UserID = UserID
   from {databaseOwner}{objectQualifier}FolderPermission
   where FolderPermissionID = @FolderPermissionID
@@ -292,7 +292,7 @@ GO
 
 /* add unique constraint */
 ALTER TABLE {databaseOwner}{objectQualifier}FolderPermission ADD CONSTRAINT
-  IX_{objectQualifier}FolderPermission UNIQUE NONCLUSTERED 
+  IX_{objectQualifier}FolderPermission UNIQUE NONCLUSTERED
   (
     FolderID,
     PermissionID,
@@ -311,7 +311,7 @@ declare @Count int
 select @PermissionID = min(PermissionID)
 from {databaseOwner}{objectQualifier}Permission
 while @PermissionID is not NULL
-begin  
+begin
   select @PermissionCode = PermissionCode, @ModuleDefID = ModuleDefID, @PermissionKey = PermissionKey
   from {databaseOwner}{objectQualifier}Permission
   where PermissionID = @PermissionID
@@ -332,7 +332,7 @@ GO
 
 /* add unique constraint */
 ALTER TABLE {databaseOwner}{objectQualifier}Permission ADD CONSTRAINT
-  IX_{objectQualifier}Permission UNIQUE NONCLUSTERED 
+  IX_{objectQualifier}Permission UNIQUE NONCLUSTERED
   (
     PermissionCode,
     ModuleDefID,
@@ -344,7 +344,7 @@ GO
 
 IF (SELECT [Value] FROM {databaseOwner}{objectQualifier}Lists WHERE [Value] = 'Date') IS NULL
 BEGIN
-  INSERT INTO {databaseOwner}{objectQualifier}Lists ( [ListName], [Value], [Text], [ParentID], [Level], [SortOrder], [DefinitionID], [Description] ) 
+  INSERT INTO {databaseOwner}{objectQualifier}Lists ( [ListName], [Value], [Text], [ParentID], [Level], [SortOrder], [DefinitionID], [Description] )
   VALUES ( N'DataType', N'Date', N'DotNetNuke.UI.WebControls.DateEditControl, DotNetNuke', 0, 0, 0, -1, NULL)
 END
 GO
@@ -353,7 +353,7 @@ GO
 
 IF (SELECT [Value] FROM {databaseOwner}{objectQualifier}Lists WHERE [Value] = 'DateTime') IS NULL
 BEGIN
-  INSERT INTO {databaseOwner}{objectQualifier}Lists ( [ListName], [Value], [Text], [ParentID], [Level], [SortOrder], [DefinitionID], [Description] ) 
+  INSERT INTO {databaseOwner}{objectQualifier}Lists ( [ListName], [Value], [Text], [ParentID], [Level], [SortOrder], [DefinitionID], [Description] )
   VALUES ( N'DataType', N'DateTime', N'DotNetNuke.UI.WebControls.DateTimeEditControl, DotNetNuke', 0, 0, 0, -1, NULL)
 END
 GO
@@ -362,7 +362,7 @@ GO
 /*           script below added after RC1                   */
 /************************************************************/
 
-delete 
+delete
 from   {databaseOwner}{objectQualifier}ModuleControls
 where  ModuleDefID is null
 and    ControlKey = 'Adsense'
@@ -410,8 +410,8 @@ SET @ModuleDefID = @@IDENTITY
 insert into {databaseOwner}{objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder
@@ -429,8 +429,8 @@ values (
 insert into {databaseOwner}{objectQualifier}ModuleControls (
   ControlKey,
   ControlTitle,
-  ModuleDefID, 
-  ControlSrc, 
+  ModuleDefID,
+  ControlSrc,
   IconFile,
   ControlType,
   ViewOrder

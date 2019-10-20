@@ -8,4 +8,4 @@ const databaseTabService = {
     getDataBaseServerInfo: getDataBaseServerInfo
 };
 
-export default databaseTabService; 
+export default databaseTabService;

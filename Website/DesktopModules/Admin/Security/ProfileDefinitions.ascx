@@ -1,7 +1,7 @@
 <%@ Control Inherits="DotNetNuke.Modules.Admin.Users.ProfileDefinitions" Language="C#" AutoEventWireup="false" Codebehind="ProfileDefinitions.ascx.cs" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.UI.WebControls" Assembly="DotNetNuke" %>
 <div class="dnnForm dnnProfileProperties">
-    <asp:datagrid id="grdProfileProperties" AutoGenerateColumns="false" 
+    <asp:datagrid id="grdProfileProperties" AutoGenerateColumns="false"
                 width="96%" CellPadding="4" GridLines="None" CssClass="dnnGrid" Runat="server">
         <headerstyle cssclass="dnnGridHeader" verticalalign="Top" horizontalalign="Left" />
         <itemstyle cssclass="dnnGridItem" horizontalalign="Left" />

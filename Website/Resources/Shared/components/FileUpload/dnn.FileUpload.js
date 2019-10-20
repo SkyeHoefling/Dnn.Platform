@@ -200,7 +200,7 @@
 
         _onUploadByUrl: function (url, data, textStatus, jqXhr) {
             this._processResponse(url[0], data);
-            
+
             this.$element.trigger($.Event("onfileuploadcomplete"), [data]);
         },
 
@@ -211,7 +211,7 @@
 
             if (fileName.indexOf('http://') == 0 || fileName.indexOf('https://') == 0) {
                 var segments = fileName.split('?')[0].split('/');
-                fileName = segments[segments.length - 1];                
+                fileName = segments[segments.length - 1];
             }
 
             var path = status.path;
@@ -385,7 +385,7 @@
                         };
                     };
                 }
-                
+
                 // Don't clobber any existing jQuery.browser in case it's different
                 if (typeof $.browser === "undefined") {
                     var matched = jQuery.uaMatch(navigator.userAgent);
@@ -464,7 +464,7 @@
 
         _done: function (e, data) {
             this._processResponse(data.files[0].name, data.result);
-            
+
             this.$element.trigger($.Event("onfileuploadcomplete"), [data.result]);
         },
 
@@ -511,7 +511,7 @@
         },
 
         _showError: function ($fileUploadStatus, errorMessage) {
-            this._showFileUploadStatus($fileUploadStatus, { message: errorMessage });          
+            this._showFileUploadStatus($fileUploadStatus, { message: errorMessage });
             $fileUploadStatus.removeClass().addClass(this.options.statusErrorCss);
             var $img = $($fileUploadStatus[0].firstChild.firstChild.firstChild);
             $img.removeClass().addClass("pt");
@@ -561,7 +561,7 @@
             .on("fileuploaddragover", $.proxy(this._dragover, this))
             .on("fileuploaddrop", $.proxy(this._drop, this));
         },
-    
+
         _extract: function() {
             return this._$extract.is(':checked');
         },
@@ -576,7 +576,7 @@
                 for (var i = 1, size = selectedPathArray.length; i < size; i++) {
                     selectedPath += selectedPathArray[i].name + "/";
                 }
-            } 
+            }
             return selectedPath;
         },
 
@@ -709,7 +709,7 @@
         setFileUploadDialogWidth();
     });
     setFileUploadDialogWidth();
-    
+
     FileUploadDialog.prototype = {
         constructor: FileUploadDialog,
 
@@ -794,4 +794,3 @@ dnn.createFileUpload = function (options) {
         }
     });
 };
-

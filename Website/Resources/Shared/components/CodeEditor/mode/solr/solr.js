@@ -24,51 +24,51 @@ CodeMirror.defineMode("solr", function() {
 
   function tokenString(quote) {
     return function(stream, state) {
-      var escaped = false, next;
-      while ((next = stream.next()) != null) {
+    var escaped = false, next;
+    while ((next = stream.next()) != null) {
         if (next == quote && !escaped) break;
         escaped = !escaped && next == "\\";
-      }
+    }
 
-      if (!escaped) state.tokenize = tokenBase;
-      return "string";
+    if (!escaped) state.tokenize = tokenBase;
+    return "string";
     };
   }
 
   function tokenOperator(operator) {
     return function(stream, state) {
-      var style = "operator";
-      if (operator == "+")
+    var style = "operator";
+    if (operator == "+")
         style += " positive";
-      else if (operator == "-")
+    else if (operator == "-")
         style += " negative";
-      else if (operator == "|")
+    else if (operator == "|")
         stream.eat(/\|/);
-      else if (operator == "&")
+    else if (operator == "&")
         stream.eat(/\&/);
-      else if (operator == "^")
+    else if (operator == "^")
         style += " boost";
 
-      state.tokenize = tokenBase;
-      return style;
+    state.tokenize = tokenBase;
+    return style;
     };
   }
 
   function tokenWord(ch) {
     return function(stream, state) {
-      var word = ch;
-      while ((ch = stream.peek()) && ch.match(isStringChar) != null) {
+    var word = ch;
+    while ((ch = stream.peek()) && ch.match(isStringChar) != null) {
         word += stream.next();
-      }
+    }
 
-      state.tokenize = tokenBase;
-      if (isOperatorString.test(word))
+    state.tokenize = tokenBase;
+    if (isOperatorString.test(word))
         return "operator";
-      else if (isNumber(word))
+    else if (isNumber(word))
         return "number";
-      else if (stream.peek() == ":")
+    else if (stream.peek() == ":")
         return "field";
-      else
+    else
         return "string";
     };
   }
@@ -76,25 +76,25 @@ CodeMirror.defineMode("solr", function() {
   function tokenBase(stream, state) {
     var ch = stream.next();
     if (ch == '"')
-      state.tokenize = tokenString(ch);
+    state.tokenize = tokenString(ch);
     else if (isOperatorChar.test(ch))
-      state.tokenize = tokenOperator(ch);
+    state.tokenize = tokenOperator(ch);
     else if (isStringChar.test(ch))
-      state.tokenize = tokenWord(ch);
+    state.tokenize = tokenWord(ch);
 
     return (state.tokenize != tokenBase) ? state.tokenize(stream, state) : null;
   }
 
   return {
     startState: function() {
-      return {
+    return {
         tokenize: tokenBase
-      };
+    };
     },
 
     token: function(stream, state) {
-      if (stream.eatSpace()) return null;
-      return state.tokenize(stream, state);
+    if (stream.eatSpace()) return null;
+    return state.tokenize(stream, state);
     }
   };
 });

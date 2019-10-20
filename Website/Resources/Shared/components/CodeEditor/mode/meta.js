@@ -64,7 +64,7 @@
     {name: "Java", mime: "text/x-java", mode: "clike", ext: ["java"]},
     {name: "Java Server Pages", mime: "application/x-jsp", mode: "htmlembedded", ext: ["jsp"], alias: ["jsp"]},
     {name: "JavaScript", mimes: ["text/javascript", "text/ecmascript", "application/javascript", "application/x-javascript", "application/ecmascript"],
-     mode: "javascript", ext: ["js"], alias: ["ecmascript", "js", "node"]},
+    mode: "javascript", ext: ["js"], alias: ["ecmascript", "js", "node"]},
     {name: "JSON", mimes: ["application/json", "application/x-json"], mode: "javascript", ext: ["json", "map"], alias: ["json5"]},
     {name: "JSON-LD", mime: "application/ld+json", mode: "javascript", ext: ["jsonld"], alias: ["jsonld"]},
     {name: "Jinja2", mime: "null", mode: "jinja2"},
@@ -154,25 +154,25 @@
   CodeMirror.findModeByMIME = function(mime) {
     mime = mime.toLowerCase();
     for (var i = 0; i < CodeMirror.modeInfo.length; i++) {
-      var info = CodeMirror.modeInfo[i];
-      if (info.mime == mime) return info;
-      if (info.mimes) for (var j = 0; j < info.mimes.length; j++)
+    var info = CodeMirror.modeInfo[i];
+    if (info.mime == mime) return info;
+    if (info.mimes) for (var j = 0; j < info.mimes.length; j++)
         if (info.mimes[j] == mime) return info;
     }
   };
 
   CodeMirror.findModeByExtension = function(ext) {
     for (var i = 0; i < CodeMirror.modeInfo.length; i++) {
-      var info = CodeMirror.modeInfo[i];
-      if (info.ext) for (var j = 0; j < info.ext.length; j++)
+    var info = CodeMirror.modeInfo[i];
+    if (info.ext) for (var j = 0; j < info.ext.length; j++)
         if (info.ext[j] == ext) return info;
     }
   };
 
   CodeMirror.findModeByFileName = function(filename) {
     for (var i = 0; i < CodeMirror.modeInfo.length; i++) {
-      var info = CodeMirror.modeInfo[i];
-      if (info.file && info.file.test(filename)) return info;
+    var info = CodeMirror.modeInfo[i];
+    if (info.file && info.file.test(filename)) return info;
     }
     var dot = filename.lastIndexOf(".");
     var ext = dot > -1 && filename.substring(dot + 1, filename.length);
@@ -182,9 +182,9 @@
   CodeMirror.findModeByName = function(name) {
     name = name.toLowerCase();
     for (var i = 0; i < CodeMirror.modeInfo.length; i++) {
-      var info = CodeMirror.modeInfo[i];
-      if (info.name.toLowerCase() == name) return info;
-      if (info.alias) for (var j = 0; j < info.alias.length; j++)
+    var info = CodeMirror.modeInfo[i];
+    if (info.name.toLowerCase() == name) return info;
+    if (info.alias) for (var j = 0; j < info.alias.length; j++)
         if (info.alias[j].toLowerCase() == name) return info;
     }
   };

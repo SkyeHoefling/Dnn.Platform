@@ -4,14 +4,14 @@
             <friendlyName>Google Analytics Connector</friendlyName>
             <description>Configure your sites Google Analytics settings.</description>
             <iconFile>~/DesktopModules/Connectors/GoogleAnalytics/Images/GoogleAnalytics_32X32_Standard.png</iconFile>
-          <dependencies>
+        <dependencies>
             <dependency type="CoreVersion">09.02.00</dependency>
-          </dependencies>
-          <owner>
-              <name>DNN Community</name>
-              <organization>.NET Foundation and Contributors</organization>
-              <url>http://www.dnnsoftware.com</url>
-              <email>support@dnnsoftware.com</email>
+        </dependencies>
+        <owner>
+            <name>DNN Community</name>
+            <organization>.NET Foundation and Contributors</organization>
+            <url>http://www.dnnsoftware.com</url>
+            <email>support@dnnsoftware.com</email>
             </owner>
             <license src="license.txt" />
             <releaseNotes src="releaseNotes.txt" />

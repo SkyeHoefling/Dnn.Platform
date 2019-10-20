@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -51,14 +51,14 @@ using DotNetNuke.Web.Client.ClientResourceManagement;
 
 namespace Dnn.Modules.Console
 {
-	public partial class ViewConsole : PortalModuleBase
-	{
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ViewConsole));
-	    private ConsoleController _consoleCtrl;
-		private string _defaultSize = string.Empty;
-		private string _defaultView = string.Empty;
-	    private int _groupTabID = -1;
-		private IList<TabInfo> _tabs; 
+    public partial class ViewConsole : PortalModuleBase
+    {
+        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ViewConsole));
+        private ConsoleController _consoleCtrl;
+        private string _defaultSize = string.Empty;
+        private string _defaultView = string.Empty;
+        private int _groupTabID = -1;
+        private IList<TabInfo> _tabs;
 
         #region Public Properties
 
@@ -72,34 +72,34 @@ namespace Dnn.Modules.Console
             get { return !Settings.ContainsKey("AllowViewChange") || bool.Parse(Settings["AllowViewChange"].ToString()); }
         }
 
-	    public bool IncludeHiddenPages
-	    {
-            get { return Settings.ContainsKey("IncludeHiddenPages") && bool.Parse(Settings["IncludeHiddenPages"].ToString()); }	        
-	    }
+        public bool IncludeHiddenPages
+        {
+            get { return Settings.ContainsKey("IncludeHiddenPages") && bool.Parse(Settings["IncludeHiddenPages"].ToString()); }
+        }
 
         public ConsoleController ConsoleCtrl
-		{
-			get
-			{
-				if ((_consoleCtrl == null))
-				{
-					_consoleCtrl = new ConsoleController();
-				}
-				return _consoleCtrl;
-			}
-		}
+        {
+            get
+            {
+                if ((_consoleCtrl == null))
+                {
+                    _consoleCtrl = new ConsoleController();
+                }
+                return _consoleCtrl;
+            }
+        }
 
-		public int ConsoleTabID
-		{
-			get
-			{
+        public int ConsoleTabID
+        {
+            get
+            {
                 return (Mode == "Profile")
-                                   ? PortalSettings.UserTabId
-                                   : (Settings.ContainsKey("ParentTabID")
+                                    ? PortalSettings.UserTabId
+                                    : (Settings.ContainsKey("ParentTabID")
                                         ? int.Parse(Settings["ParentTabID"].ToString())
                                         : TabId);
-			}
-		}
+            }
+        }
 
         public string ConsoleWidth
         {
@@ -109,45 +109,45 @@ namespace Dnn.Modules.Console
             }
         }
 
-		public string DefaultSize
-		{
-			get
-			{
-				if ((_defaultSize == string.Empty && AllowSizeChange && UserId > Null.NullInteger))
-				{
-					object personalizedValue = GetUserSetting("DefaultSize");
-					if ((personalizedValue != null))
-					{
-						_defaultSize = Convert.ToString(personalizedValue);
-					}
-				}
-				if ((_defaultSize == string.Empty))
-				{
-					_defaultSize = Settings.ContainsKey("DefaultSize") ? Convert.ToString(Settings["DefaultSize"]) : "IconFile";
-				}
-				return _defaultSize;
-			}
-		}
+        public string DefaultSize
+        {
+            get
+            {
+                if ((_defaultSize == string.Empty && AllowSizeChange && UserId > Null.NullInteger))
+                {
+                    object personalizedValue = GetUserSetting("DefaultSize");
+                    if ((personalizedValue != null))
+                    {
+                        _defaultSize = Convert.ToString(personalizedValue);
+                    }
+                }
+                if ((_defaultSize == string.Empty))
+                {
+                    _defaultSize = Settings.ContainsKey("DefaultSize") ? Convert.ToString(Settings["DefaultSize"]) : "IconFile";
+                }
+                return _defaultSize;
+            }
+        }
 
-		public string DefaultView
-		{
-			get
-			{
-				if ((_defaultView == string.Empty && AllowViewChange && UserId > Null.NullInteger))
-				{
-					object personalizedValue = GetUserSetting("DefaultView");
-					if ((personalizedValue != null))
-					{
-						_defaultView = Convert.ToString(personalizedValue);
-					}
-				}
-				if ((_defaultView == string.Empty))
-				{
-					_defaultView = Settings.ContainsKey("DefaultView") ? Convert.ToString(Settings["DefaultView"]) : "Hide";
-				}
-				return _defaultView;
-			}
-		}
+        public string DefaultView
+        {
+            get
+            {
+                if ((_defaultView == string.Empty && AllowViewChange && UserId > Null.NullInteger))
+                {
+                    object personalizedValue = GetUserSetting("DefaultView");
+                    if ((personalizedValue != null))
+                    {
+                        _defaultView = Convert.ToString(personalizedValue);
+                    }
+                }
+                if ((_defaultView == string.Empty))
+                {
+                    _defaultView = Settings.ContainsKey("DefaultView") ? Convert.ToString(Settings["DefaultView"]) : "Hide";
+                }
+                return _defaultView;
+            }
+        }
 
         public int GroupId
         {
@@ -196,13 +196,13 @@ namespace Dnn.Modules.Console
             get { return !Settings.ContainsKey("ShowTooltip") || bool.Parse(Settings["ShowTooltip"].ToString()); }
         }
 
-		public bool OrderTabsByHierarchy
-		{
-			get
-			{
-				return Settings.ContainsKey("OrderTabsByHierarchy") && bool.Parse(Settings["OrderTabsByHierarchy"].ToString());
-			}
-		}
+        public bool OrderTabsByHierarchy
+        {
+            get
+            {
+                return Settings.ContainsKey("OrderTabsByHierarchy") && bool.Parse(Settings["OrderTabsByHierarchy"].ToString());
+            }
+        }
 
         #endregion
 
@@ -339,31 +339,31 @@ namespace Dnn.Modules.Console
         #endregion
 
         protected override void OnInit(EventArgs e)
-		{
-			base.OnInit(e);
+        {
+            base.OnInit(e);
 
-			try
-			{
-				JavaScript.RequestRegistration(CommonJs.jQuery);
+            try
+            {
+                JavaScript.RequestRegistration(CommonJs.jQuery);
 
                 ClientResourceManager.RegisterScript(Page, "~/desktopmodules/admin/console/scripts/jquery.console.js");
 
-				DetailView.ItemDataBound += RepeaterItemDataBound;
+                DetailView.ItemDataBound += RepeaterItemDataBound;
 
-				//Save User Preferences
-				SavePersonalizedSettings();
-			}
-			catch (Exception exc)
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
+                //Save User Preferences
+                SavePersonalizedSettings();
+            }
+            catch (Exception exc)
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
 
-		protected override void OnLoad(EventArgs e)
-		{
-			base.OnLoad(e);
-			try
-			{
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            try
+            {
                 IconSize.Visible = AllowSizeChange;
                 View.Visible = AllowViewChange;
 
@@ -377,107 +377,107 @@ namespace Dnn.Modules.Console
                 }
                 IconSize.SelectedValue = DefaultSize;
                 View.SelectedValue = DefaultView;
-                
+
                 if ((!IsPostBack))
                 {
                     Console.Attributes["class"] = Console.Attributes["class"] + " " + Mode.ToLower(CultureInfo.InvariantCulture);
 
                     SettingsBreak.Visible = (AllowSizeChange && AllowViewChange);
 
-				    List<TabInfo> tempTabs = (IsHostTab())
-										? TabController.GetTabsBySortOrder(Null.NullInteger).OrderBy(t => t.Level).ThenBy(t => t.LocalizedTabName).ToList()
-										: TabController.GetTabsBySortOrder(PortalId).OrderBy(t => t.Level).ThenBy(t => t.LocalizedTabName).ToList();
+                    List<TabInfo> tempTabs = (IsHostTab())
+                                        ? TabController.GetTabsBySortOrder(Null.NullInteger).OrderBy(t => t.Level).ThenBy(t => t.LocalizedTabName).ToList()
+                                        : TabController.GetTabsBySortOrder(PortalId).OrderBy(t => t.Level).ThenBy(t => t.LocalizedTabName).ToList();
 
-					_tabs = new List<TabInfo>();
+                    _tabs = new List<TabInfo>();
 
-					IList<int> tabIdList = new List<int>();
-					tabIdList.Add(ConsoleTabID);
+                    IList<int> tabIdList = new List<int>();
+                    tabIdList.Add(ConsoleTabID);
 
                     if(IncludeParent)
                     {
                         TabInfo consoleTab = TabController.Instance.GetTab(ConsoleTabID, PortalId);
                         if (consoleTab != null)
                         {
-							_tabs.Add(consoleTab);
+                            _tabs.Add(consoleTab);
                         }
                     }
 
-					foreach (TabInfo tab in tempTabs)
-					{
-						if ((!CanShowTab(tab)))
-						{
-							continue;
-						}
-						if ((tabIdList.Contains(tab.ParentId)))
-						{
-							if ((!tabIdList.Contains(tab.TabID)))
-							{
-								tabIdList.Add(tab.TabID);
-							}
-							_tabs.Add(tab);  
-						}
-					}
+                    foreach (TabInfo tab in tempTabs)
+                    {
+                        if ((!CanShowTab(tab)))
+                        {
+                            continue;
+                        }
+                        if ((tabIdList.Contains(tab.ParentId)))
+                        {
+                            if ((!tabIdList.Contains(tab.TabID)))
+                            {
+                                tabIdList.Add(tab.TabID);
+                            }
+                            _tabs.Add(tab);
+                        }
+                    }
 
-					//if OrderTabsByHierarchy set to true, we need reorder the tab list to move tabs which have child tabs to the end of list.
-					//so that the list display in UI can show tabs in same level in same area, and not break by child tabs.
-					if (OrderTabsByHierarchy)
-					{
-						_tabs = _tabs.OrderBy(t => t.HasChildren).ToList();
-					}
+                    //if OrderTabsByHierarchy set to true, we need reorder the tab list to move tabs which have child tabs to the end of list.
+                    //so that the list display in UI can show tabs in same level in same area, and not break by child tabs.
+                    if (OrderTabsByHierarchy)
+                    {
+                        _tabs = _tabs.OrderBy(t => t.HasChildren).ToList();
+                    }
 
-				    int minLevel = -1;
+                    int minLevel = -1;
                     if (_tabs.Count > 0)
                     {
                         minLevel = _tabs.Min(t => t.Level);
                     }
-					DetailView.DataSource = (minLevel > -1) ? _tabs.Where(t => t.Level == minLevel) : _tabs;
-					DetailView.DataBind();
-				}
-				if ((ConsoleWidth != string.Empty))
-				{
-					Console.Attributes.Add("style", "width:" + ConsoleWidth);
-				}
-			}
-			catch (Exception exc)
-			{
-				Exceptions.ProcessModuleLoadException(this, exc);
-			}
-		}
+                    DetailView.DataSource = (minLevel > -1) ? _tabs.Where(t => t.Level == minLevel) : _tabs;
+                    DetailView.DataBind();
+                }
+                if ((ConsoleWidth != string.Empty))
+                {
+                    Console.Attributes.Add("style", "width:" + ConsoleWidth);
+                }
+            }
+            catch (Exception exc)
+            {
+                Exceptions.ProcessModuleLoadException(this, exc);
+            }
+        }
 
-		private void RepeaterItemDataBound(object sender, RepeaterItemEventArgs e)
-		{
-			var tab = e.Item.DataItem as TabInfo;
-			e.Item.Controls.Add(new Literal() { Text = GetHtml(tab) });
-			if (_tabs.Any(t => t.ParentId == tab.TabID))
-			{
-				var repeater = new Repeater();
-				repeater.ItemDataBound += RepeaterItemDataBound;
-				e.Item.Controls.Add(repeater);
-				repeater.DataSource = _tabs.Where(t => t.ParentId == tab.TabID);
-				repeater.DataBind();
-			}
-		}
+        private void RepeaterItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            var tab = e.Item.DataItem as TabInfo;
+            e.Item.Controls.Add(new Literal() { Text = GetHtml(tab) });
+            if (_tabs.Any(t => t.ParentId == tab.TabID))
+            {
+                var repeater = new Repeater();
+                repeater.ItemDataBound += RepeaterItemDataBound;
+                e.Item.Controls.Add(repeater);
+                repeater.DataSource = _tabs.Where(t => t.ParentId == tab.TabID);
+                repeater.DataBind();
+            }
+        }
 
-		protected string GetHtml(TabInfo tab)
-		{
-			string returnValue = string.Empty;
-			if ((_groupTabID > -1 && _groupTabID != tab.ParentId))
-			{
-				_groupTabID = -1;
-				if ((!tab.DisableLink))
-				{
-					returnValue = "<br style=\"clear:both;\" /><br />";
-				}
-			}
-			if ((tab.DisableLink))
-			{
-				const string headerHtml = "<br style=\"clear:both;\" /><br /><h1><span class=\"TitleHead\">{0}</span></h1><br style=\"clear:both\" />";
-				returnValue += string.Format(headerHtml, tab.TabName);
-				_groupTabID = tab.TabID;
-			}
-			else
-			{
-			    var sb = new StringBuilder();
+        protected string GetHtml(TabInfo tab)
+        {
+            string returnValue = string.Empty;
+            if ((_groupTabID > -1 && _groupTabID != tab.ParentId))
+            {
+                _groupTabID = -1;
+                if ((!tab.DisableLink))
+                {
+                    returnValue = "<br style=\"clear:both;\" /><br />";
+                }
+            }
+            if ((tab.DisableLink))
+            {
+                const string headerHtml = "<br style=\"clear:both;\" /><br /><h1><span class=\"TitleHead\">{0}</span></h1><br style=\"clear:both\" />";
+                returnValue += string.Format(headerHtml, tab.TabName);
+                _groupTabID = tab.TabID;
+            }
+            else
+            {
+                var sb = new StringBuilder();
                 if(tab.TabID == PortalSettings.ActiveTab.TabID)
                 {
                     sb.Append("<div class=\"active console-none \">");
@@ -496,11 +496,11 @@ namespace Dnn.Modules.Console
                 sb.Append("</a>");
                 sb.Append("<h3>{3}</h3>");
                 sb.Append("<div>{4}</div>");
-			    sb.Append("</div>");
+                sb.Append("</div>");
 
                 //const string contentHtml = "<div>" + "<a href=\"{0}\"><img src=\"{1}\" alt=\"{3}\" width=\"16px\" height=\"16px\"/><img src=\"{2}\" alt=\"{3}\" width=\"32px\" height=\"32px\"/></a>" + "<h3>{3}</h3>" + "<div>{4}</div>" + "</div>";
 
-			    var tabUrl = tab.FullUrl;
+                var tabUrl = tab.FullUrl;
                 if (ProfileUserId > -1)
                 {
                     tabUrl = Globals.NavigateURL(tab.TabID, "", "UserId=" + ProfileUserId.ToString(CultureInfo.InvariantCulture));
@@ -511,31 +511,31 @@ namespace Dnn.Modules.Console
                     tabUrl = Globals.NavigateURL(tab.TabID, "", "GroupId=" + GroupId.ToString(CultureInfo.InvariantCulture));
                 }
 
-				returnValue += string.Format(sb.ToString(),
-                                             tabUrl,
-											 GetIconUrl(tab.IconFile, "IconFile"),
-											 GetIconUrl(tab.IconFileLarge, "IconFileLarge"),
-											 tab.LocalizedTabName,
-											 tab.Description);
-			}
-			return returnValue;
-		}
+                returnValue += string.Format(sb.ToString(),
+                                            tabUrl,
+                                            GetIconUrl(tab.IconFile, "IconFile"),
+                                            GetIconUrl(tab.IconFileLarge, "IconFileLarge"),
+                                            tab.LocalizedTabName,
+                                            tab.Description);
+            }
+            return returnValue;
+        }
 
-		protected string GetClientSideSettings()
-		{
-			string tmid = "-1";
-			if ((UserId > -1))
-			{
-				tmid = TabModuleId.ToString(CultureInfo.InvariantCulture);
-			}
-			return string.Format("allowIconSizeChange: {0}, allowDetailChange: {1}, selectedSize: '{2}', showDetails: '{3}', tabModuleID: {4}, showTooltip: {5}",
-								 AllowSizeChange.ToString(CultureInfo.InvariantCulture).ToLowerInvariant(),
-								 AllowViewChange.ToString(CultureInfo.InvariantCulture).ToLowerInvariant(),
-								 DefaultSize,
-								 DefaultView,
-								 tmid,
-								 ShowTooltip.ToString(CultureInfo.InvariantCulture).ToLowerInvariant());
-		}
+        protected string GetClientSideSettings()
+        {
+            string tmid = "-1";
+            if ((UserId > -1))
+            {
+                tmid = TabModuleId.ToString(CultureInfo.InvariantCulture);
+            }
+            return string.Format("allowIconSizeChange: {0}, allowDetailChange: {1}, selectedSize: '{2}', showDetails: '{3}', tabModuleID: {4}, showTooltip: {5}",
+                                AllowSizeChange.ToString(CultureInfo.InvariantCulture).ToLowerInvariant(),
+                                AllowViewChange.ToString(CultureInfo.InvariantCulture).ToLowerInvariant(),
+                                DefaultSize,
+                                DefaultView,
+                                tmid,
+                                ShowTooltip.ToString(CultureInfo.InvariantCulture).ToLowerInvariant());
+        }
 
-	}
+    }
 }

@@ -19,7 +19,7 @@ create procedure {databaseOwner}{objectQualifier}GetHtmlTextUser
 as
 
 select {objectQualifier}HtmlTextUsers.*,
-       {objectQualifier}WorkflowStates.StateName
+        {objectQualifier}WorkflowStates.StateName
 from   {databaseOwner}{objectQualifier}HtmlTextUsers
 inner join {databaseOwner}{objectQualifier}WorkflowStates on {databaseOwner}{objectQualifier}HtmlTextUsers.StateID = {databaseOwner}{objectQualifier}WorkflowStates.StateID
 where  {objectQualifier}HtmlTextUsers.UserID = @UserID

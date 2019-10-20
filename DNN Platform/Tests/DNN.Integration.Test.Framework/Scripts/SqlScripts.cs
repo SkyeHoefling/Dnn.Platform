@@ -59,10 +59,10 @@ namespace DNN.Integration.Test.Framework.Scripts
             SELECT  @FollowersRelationShipId = RelationshipID FROM dbo.{objectQualifier}Relationships WHERE PortalID = @PortalID AND [Name] = 'Followers'
 
             IF @ApplicationId is NULL
-	            BEGIN
-		            RAISERROR ('User does not exist', 16, 1);
-		            return
-	            END
+                BEGIN
+                    RAISERROR ('User does not exist', 16, 1);
+                    return
+                END
 
             SELECT  @RoleID = [RoleID] FROM dbo.{objectQualifier}Roles WHERE PortalID = @PortalID AND RoleName = 'Registered Users'
 
@@ -70,330 +70,330 @@ namespace DNN.Integration.Test.Framework.Scripts
             SET @StartingUserID = @StartingUserID + 1 --Start from the next
 
             BEGIN
-	            SET @AspUserID = NEWID()
-	            SET @UserName = @FirstName + '.' + @LastName
-	            SET @Email = LOWER(@UserName + '@test.com')
-	            SET @DisplayName = @FirstName + ' ' + @LastName
-	            SET @CurrentDate = GETDATE()
+                SET @AspUserID = NEWID()
+                SET @UserName = @FirstName + '.' + @LastName
+                SET @Email = LOWER(@UserName + '@test.com')
+                SET @DisplayName = @FirstName + ' ' + @LastName
+                SET @CurrentDate = GETDATE()
 
-	            IF EXISTS(SELECT * from dbo.{objectQualifier}Users where Username = @UserName)
-	            BEGIN
-		            return
-	            END
+                IF EXISTS(SELECT * from dbo.{objectQualifier}Users where Username = @UserName)
+                BEGIN
+                    return
+                END
 
-	            INSERT INTO dbo.aspnet_Users
-			            ( ApplicationId ,
-			                UserId ,
-			                UserName ,
-			                LoweredUserName ,
-			                MobileAlias ,
-			                IsAnonymous ,
-			                LastActivityDate
-			            )
-		            VALUES
-			            ( @ApplicationId , -- ApplicationId - uniqueidentifier
-			                @AspUserID , -- UserId - uniqueidentifier
-			                @UserName , -- UserName - nvarchar(256)
-			                @UserName , -- LoweredUserName - nvarchar(256)
-			                NULL , -- MobileAlias - nvarchar(16)
-			                0 , -- IsAnonymous - bit
-			                @CurrentDate  -- LastActivityDate - datetime
-			            )
+                INSERT INTO dbo.aspnet_Users
+                        ( ApplicationId ,
+                            UserId ,
+                            UserName ,
+                            LoweredUserName ,
+                            MobileAlias ,
+                            IsAnonymous ,
+                            LastActivityDate
+                        )
+                    VALUES
+                        ( @ApplicationId , -- ApplicationId - uniqueidentifier
+                            @AspUserID , -- UserId - uniqueidentifier
+                            @UserName , -- UserName - nvarchar(256)
+                            @UserName , -- LoweredUserName - nvarchar(256)
+                            NULL , -- MobileAlias - nvarchar(16)
+                            0 , -- IsAnonymous - bit
+                            @CurrentDate  -- LastActivityDate - datetime
+                        )
 
-	            INSERT INTO dbo.aspnet_Membership
-			            ( ApplicationId ,
-			                UserId ,
-			                Password ,
-			                PasswordFormat ,
-			                PasswordSalt ,
-			                MobilePIN ,
-			                Email ,
-			                LoweredEmail ,
-			                PasswordQuestion ,
-			                PasswordAnswer ,
-			                IsApproved ,
-			                IsLockedOut ,
-			                CreateDate ,
-			                LastLoginDate ,
-			                LastPasswordChangedDate ,
-			                LastLockoutDate ,
-			                FailedPasswordAttemptCount ,
-			                FailedPasswordAttemptWindowStart ,
-			                FailedPasswordAnswerAttemptCount ,
-			                FailedPasswordAnswerAttemptWindowStart ,
-			                Comment
-			            )
-		            VALUES
-			            ( @ApplicationId , -- ApplicationId - uniqueidentifier
-			                @AspUserID , -- UserId - uniqueidentifier
-			                @Password , -- Password - nvarchar(128)
-			                @PasswordFormat , -- PasswordFormat - int
-			                @PasswordSalt , -- PasswordSalt - nvarchar(128)
-			                NULL , -- MobilePIN - nvarchar(16)
-			                @Email , -- Email - nvarchar(256)
-			                @Email , -- LoweredEmail - nvarchar(256)
-			                NULL , -- PasswordQuestion - nvarchar(256)
-			                NULL , -- PasswordAnswer - nvarchar(128)
-			                1 , -- IsApproved - bit
-			                0 , -- IsLockedOut - bit
-			                @CurrentDate , -- CreateDate - datetime
-			                @CurrentDate , -- LastLoginDate - datetime
-			                @CurrentDate , -- LastPasswordChangedDate - datetime
-			                '1754-01-01 00:00:00.000' , -- LastLockoutDate - datetime
-			                0 , -- FailedPasswordAttemptCount - int
-			                '1754-01-01 00:00:00.000' , -- FailedPasswordAttemptWindowStart - datetime
-			                0 , -- FailedPasswordAnswerAttemptCount - int
-			                '1754-01-01 00:00:00.000' , -- FailedPasswordAnswerAttemptWindowStart - datetime
-			                NULL  -- Comment - ntext
-			            )
+                INSERT INTO dbo.aspnet_Membership
+                        ( ApplicationId ,
+                            UserId ,
+                            Password ,
+                            PasswordFormat ,
+                            PasswordSalt ,
+                            MobilePIN ,
+                            Email ,
+                            LoweredEmail ,
+                            PasswordQuestion ,
+                            PasswordAnswer ,
+                            IsApproved ,
+                            IsLockedOut ,
+                            CreateDate ,
+                            LastLoginDate ,
+                            LastPasswordChangedDate ,
+                            LastLockoutDate ,
+                            FailedPasswordAttemptCount ,
+                            FailedPasswordAttemptWindowStart ,
+                            FailedPasswordAnswerAttemptCount ,
+                            FailedPasswordAnswerAttemptWindowStart ,
+                            Comment
+                        )
+                    VALUES
+                        ( @ApplicationId , -- ApplicationId - uniqueidentifier
+                            @AspUserID , -- UserId - uniqueidentifier
+                            @Password , -- Password - nvarchar(128)
+                            @PasswordFormat , -- PasswordFormat - int
+                            @PasswordSalt , -- PasswordSalt - nvarchar(128)
+                            NULL , -- MobilePIN - nvarchar(16)
+                            @Email , -- Email - nvarchar(256)
+                            @Email , -- LoweredEmail - nvarchar(256)
+                            NULL , -- PasswordQuestion - nvarchar(256)
+                            NULL , -- PasswordAnswer - nvarchar(128)
+                            1 , -- IsApproved - bit
+                            0 , -- IsLockedOut - bit
+                            @CurrentDate , -- CreateDate - datetime
+                            @CurrentDate , -- LastLoginDate - datetime
+                            @CurrentDate , -- LastPasswordChangedDate - datetime
+                            '1754-01-01 00:00:00.000' , -- LastLockoutDate - datetime
+                            0 , -- FailedPasswordAttemptCount - int
+                            '1754-01-01 00:00:00.000' , -- FailedPasswordAttemptWindowStart - datetime
+                            0 , -- FailedPasswordAnswerAttemptCount - int
+                            '1754-01-01 00:00:00.000' , -- FailedPasswordAnswerAttemptWindowStart - datetime
+                            NULL  -- Comment - ntext
+                        )
 
-	            INSERT INTO dbo.{objectQualifier}Users
-			            ( Username ,
-			                FirstName ,
-			                LastName ,
-			                IsSuperUser ,
-			                AffiliateId ,
-			                Email ,
-			                DisplayName ,
-			                UpdatePassword ,
-			                LastIPAddress ,
-			                IsDeleted ,
-			                CreatedByUserID ,
-			                CreatedOnDate ,
-			                LastModifiedByUserID ,
-			                LastModifiedOnDate
-			            )
-		            VALUES
-			            ( @UserName , -- Username - nvarchar(100)
-			                @FirstName , -- FirstName - nvarchar(50)
-			                @LastName , -- LastName - nvarchar(50)
-			                @SuperUser , -- IsSuperUser - bit
-			                NULL , -- AffiliateId - int
-			                @Email , -- Email - nvarchar(256)
-			                @DisplayName , -- DisplayName - nvarchar(128)
-			                0 , -- UpdatePassword - bit
-			                N'' , -- LastIPAddress - nvarchar(50)
-			                0 , -- IsDeleted - bit
-			                0 , -- CreatedByUserID - int
-			                @CurrentDate , -- CreatedOnDate - datetime
-			                0 , -- LastModifiedByUserID - int
-			                @CurrentDate  -- LastModifiedOnDate - datetime
-			            )
+                INSERT INTO dbo.{objectQualifier}Users
+                        ( Username ,
+                            FirstName ,
+                            LastName ,
+                            IsSuperUser ,
+                            AffiliateId ,
+                            Email ,
+                            DisplayName ,
+                            UpdatePassword ,
+                            LastIPAddress ,
+                            IsDeleted ,
+                            CreatedByUserID ,
+                            CreatedOnDate ,
+                            LastModifiedByUserID ,
+                            LastModifiedOnDate
+                        )
+                    VALUES
+                        ( @UserName , -- Username - nvarchar(100)
+                            @FirstName , -- FirstName - nvarchar(50)
+                            @LastName , -- LastName - nvarchar(50)
+                            @SuperUser , -- IsSuperUser - bit
+                            NULL , -- AffiliateId - int
+                            @Email , -- Email - nvarchar(256)
+                            @DisplayName , -- DisplayName - nvarchar(128)
+                            0 , -- UpdatePassword - bit
+                            N'' , -- LastIPAddress - nvarchar(50)
+                            0 , -- IsDeleted - bit
+                            0 , -- CreatedByUserID - int
+                            @CurrentDate , -- CreatedOnDate - datetime
+                            0 , -- LastModifiedByUserID - int
+                            @CurrentDate  -- LastModifiedOnDate - datetime
+                        )
 
-	            SET @UserID = SCOPE_IDENTITY()
+                SET @UserID = SCOPE_IDENTITY()
 
-	            INSERT INTO dbo.{objectQualifier}UserRoles
-			            ( UserID ,
-			                RoleID ,
-			                ExpiryDate ,
-			                IsTrialUsed ,
-			                EffectiveDate ,
-			                CreatedByUserID ,
-			                CreatedOnDate ,
-			                LastModifiedByUserID ,
-			                LastModifiedOnDate
-			            )
-		            VALUES
-			            ( @UserID , -- UserID - int
-			                @RoleID , -- RoleID - int
-			                NULL , -- ExpiryDate - datetime
-			                1 , -- IsTrialUsed - bit
-			                NULL , -- EffectiveDate - datetime
-			                0 , -- CreatedByUserID - int
-			                @CurrentDate , -- CreatedOnDate - datetime
-			                0 , -- LastModifiedByUserID - int
-			                @CurrentDate  -- LastModifiedOnDate - datetime
-			            )
+                INSERT INTO dbo.{objectQualifier}UserRoles
+                        ( UserID ,
+                            RoleID ,
+                            ExpiryDate ,
+                            IsTrialUsed ,
+                            EffectiveDate ,
+                            CreatedByUserID ,
+                            CreatedOnDate ,
+                            LastModifiedByUserID ,
+                            LastModifiedOnDate
+                        )
+                    VALUES
+                        ( @UserID , -- UserID - int
+                            @RoleID , -- RoleID - int
+                            NULL , -- ExpiryDate - datetime
+                            1 , -- IsTrialUsed - bit
+                            NULL , -- EffectiveDate - datetime
+                            0 , -- CreatedByUserID - int
+                            @CurrentDate , -- CreatedOnDate - datetime
+                            0 , -- LastModifiedByUserID - int
+                            @CurrentDate  -- LastModifiedOnDate - datetime
+                        )
 
-	            INSERT INTO dbo.{objectQualifier}UserPortals
-			            ( UserId ,
-			                PortalId ,
-			                CreatedDate ,
-			                Authorised ,
-			                IsDeleted ,
-			                RefreshRoles
-			            )
-		            VALUES
-			            ( @UserID , -- UserId - int
-			                @PortalID , -- PortalId - int
-			                @CurrentDate , -- CreatedDate - datetime
-			                1 , -- Authorised - bit
-			                0 , -- IsDeleted - bit
-			                0  -- RefreshRoles - bit
-			            )
+                INSERT INTO dbo.{objectQualifier}UserPortals
+                        ( UserId ,
+                            PortalId ,
+                            CreatedDate ,
+                            Authorised ,
+                            IsDeleted ,
+                            RefreshRoles
+                        )
+                    VALUES
+                        ( @UserID , -- UserId - int
+                            @PortalID , -- PortalId - int
+                            @CurrentDate , -- CreatedDate - datetime
+                            1 , -- Authorised - bit
+                            0 , -- IsDeleted - bit
+                            0  -- RefreshRoles - bit
+                        )
 
-	            --Create FirstName UserProfile Property
-	            INSERT INTO dbo.{objectQualifier}UserProfile
-			            ( UserID ,
-			                PropertyDefinitionID ,
-			                PropertyValue ,
-			                PropertyText ,
-			                Visibility ,
-			                LastUpdatedDate ,
-			                ExtendedVisibility
-			            )
-		            VALUES
-			            ( @UserID , -- UserID - int
-			                @FirstNamePropertyDefinitionID , -- PropertyDefinitionID - int
-			                @FirstName , -- PropertyValue - nvarchar(3750)
-			                NULL , -- PropertyText - nvarchar(max)
-			                0 , -- Visibility - int
-			                @CurrentDate , -- LastUpdatedDate - datetime
-			                ''  -- ExtendedVisibility - varchar(400)
-			            )
+                --Create FirstName UserProfile Property
+                INSERT INTO dbo.{objectQualifier}UserProfile
+                        ( UserID ,
+                            PropertyDefinitionID ,
+                            PropertyValue ,
+                            PropertyText ,
+                            Visibility ,
+                            LastUpdatedDate ,
+                            ExtendedVisibility
+                        )
+                    VALUES
+                        ( @UserID , -- UserID - int
+                            @FirstNamePropertyDefinitionID , -- PropertyDefinitionID - int
+                            @FirstName , -- PropertyValue - nvarchar(3750)
+                            NULL , -- PropertyText - nvarchar(max)
+                            0 , -- Visibility - int
+                            @CurrentDate , -- LastUpdatedDate - datetime
+                            ''  -- ExtendedVisibility - varchar(400)
+                        )
 
-	            --Create LastName UserProfile Property
-	            INSERT INTO dbo.{objectQualifier}UserProfile
-			            ( UserID ,
-			                PropertyDefinitionID ,
-			                PropertyValue ,
-			                PropertyText ,
-			                Visibility ,
-			                LastUpdatedDate ,
-			                ExtendedVisibility
-			            )
-		            VALUES
-			            ( @UserID , -- UserID - int
-			                @LastNamePropertyDefinitionID , -- PropertyDefinitionID - int
-			                @LastName , -- PropertyValue - nvarchar(3750)
-			                NULL , -- PropertyText - nvarchar(max)
-			                0 , -- Visibility - int
-			                @CurrentDate , -- LastUpdatedDate - datetime
-			                ''  -- ExtendedVisibility - varchar(400)
-			            )
+                --Create LastName UserProfile Property
+                INSERT INTO dbo.{objectQualifier}UserProfile
+                        ( UserID ,
+                            PropertyDefinitionID ,
+                            PropertyValue ,
+                            PropertyText ,
+                            Visibility ,
+                            LastUpdatedDate ,
+                            ExtendedVisibility
+                        )
+                    VALUES
+                        ( @UserID , -- UserID - int
+                            @LastNamePropertyDefinitionID , -- PropertyDefinitionID - int
+                            @LastName , -- PropertyValue - nvarchar(3750)
+                            NULL , -- PropertyText - nvarchar(max)
+                            0 , -- Visibility - int
+                            @CurrentDate , -- LastUpdatedDate - datetime
+                            ''  -- ExtendedVisibility - varchar(400)
+                        )
 
-	            ;WITH Avatars
-	                AS (
-		            SELECT ROW_NUMBER() OVER(ORDER BY FileId)-1 AS RowNumber, fi.FileID
-		            FROM dbo.{objectQualifier}Files fi INNER JOIN dbo.{objectQualifier}Folders fo ON fi.FolderID = fo.FolderID
-		            WHERE fo.FolderPath like 'Users%'
-		                AND fi.Extension in ('png', 'gif', 'jpg', 'jpeg')
-		                AND fi.PortalId = @PortalID
-		            )
-	            SELECT @AvatarFileID = FileID
-	            FROM Avatars
-	            WHERE RowNumber = (@UserID % (SELECT COUNT(*) FROM Avatars))
+                ;WITH Avatars
+                    AS (
+                    SELECT ROW_NUMBER() OVER(ORDER BY FileId)-1 AS RowNumber, fi.FileID
+                    FROM dbo.{objectQualifier}Files fi INNER JOIN dbo.{objectQualifier}Folders fo ON fi.FolderID = fo.FolderID
+                    WHERE fo.FolderPath like 'Users%'
+                        AND fi.Extension in ('png', 'gif', 'jpg', 'jpeg')
+                        AND fi.PortalId = @PortalID
+                    )
+                SELECT @AvatarFileID = FileID
+                FROM Avatars
+                WHERE RowNumber = (@UserID % (SELECT COUNT(*) FROM Avatars))
 
-	            IF @AvatarFileID IS NULL
-	            BEGIN
-		            ;WITH Avatars2
-		                AS (
-			            SELECT ROW_NUMBER() OVER(ORDER BY FileId)-1 AS RowNumber, FileID
-			            FROM dbo.{objectQualifier}Files
-			            WHERE Extension in ('png', 'gif', 'jpg', 'jpeg')
-			                AND PortalId = @PortalID
-			            )
-		            SELECT @AvatarFileID = FileID
-		            FROM Avatars2
-		            WHERE RowNumber = (@UserID % (SELECT COUNT(*) FROM Avatars2))
-	            END
+                IF @AvatarFileID IS NULL
+                BEGIN
+                    ;WITH Avatars2
+                        AS (
+                        SELECT ROW_NUMBER() OVER(ORDER BY FileId)-1 AS RowNumber, FileID
+                        FROM dbo.{objectQualifier}Files
+                        WHERE Extension in ('png', 'gif', 'jpg', 'jpeg')
+                            AND PortalId = @PortalID
+                        )
+                    SELECT @AvatarFileID = FileID
+                    FROM Avatars2
+                    WHERE RowNumber = (@UserID % (SELECT COUNT(*) FROM Avatars2))
+                END
 
-	            --Create Photo UserProfile Property
-	            INSERT INTO dbo.{objectQualifier}UserProfile
-			            ( UserID ,
-			                PropertyDefinitionID ,
-			                PropertyValue ,
-			                PropertyText ,
-			                Visibility ,
-			                LastUpdatedDate ,
-			                ExtendedVisibility
-			            )
-		            VALUES
-			            ( @UserID , -- UserID - int
-			                @PhotoPropertyDefinitionID , -- PropertyDefinitionID - int
-			                @AvatarFileID , -- PropertyValue - nvarchar(3750)
-			                NULL , -- PropertyText - nvarchar(max)
-			                0 , -- Visibility - int
-			                @CurrentDate , -- LastUpdatedDate - datetime
-			                ''  -- ExtendedVisibility - varchar(400)
-			            )
+                --Create Photo UserProfile Property
+                INSERT INTO dbo.{objectQualifier}UserProfile
+                        ( UserID ,
+                            PropertyDefinitionID ,
+                            PropertyValue ,
+                            PropertyText ,
+                            Visibility ,
+                            LastUpdatedDate ,
+                            ExtendedVisibility
+                        )
+                    VALUES
+                        ( @UserID , -- UserID - int
+                            @PhotoPropertyDefinitionID , -- PropertyDefinitionID - int
+                            @AvatarFileID , -- PropertyValue - nvarchar(3750)
+                            NULL , -- PropertyText - nvarchar(max)
+                            0 , -- Visibility - int
+                            @CurrentDate , -- LastUpdatedDate - datetime
+                            ''  -- ExtendedVisibility - varchar(400)
+                        )
 
                 --Create Friends
                 IF @CreateFriends > 0
                 BEGIN
-	                INSERT INTO dbo.{objectQualifier}UserRelationships
-			                    ([UserID]
-			                    ,[RelatedUserID]
-			                    ,[RelationshipID]
-			                    ,[Status]
-			                    ,[CreatedByUserID]
-			                    ,[CreatedOnDate]
-			                    ,[LastModifiedByUserID]
-			                    ,[LastModifiedOnDate])
-		                SELECT DISTINCT TOP 10 @UserID, UserId, 1, 2, @UserID, @CurrentDate, @UserID, @CurrentDate
-		                FROM dbo.{objectQualifier}Users
-		                WHERE UserId <> @UserID
-		                    AND IsSuperUser = 0
-		                    AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE UserID = @userID AND RelationshipID = @FriendsRelationshipId))
+                    INSERT INTO dbo.{objectQualifier}UserRelationships
+                                ([UserID]
+                                ,[RelatedUserID]
+                                ,[RelationshipID]
+                                ,[Status]
+                                ,[CreatedByUserID]
+                                ,[CreatedOnDate]
+                                ,[LastModifiedByUserID]
+                                ,[LastModifiedOnDate])
+                        SELECT DISTINCT TOP 10 @UserID, UserId, 1, 2, @UserID, @CurrentDate, @UserID, @CurrentDate
+                        FROM dbo.{objectQualifier}Users
+                        WHERE UserId <> @UserID
+                            AND IsSuperUser = 0
+                            AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE UserID = @userID AND RelationshipID = @FriendsRelationshipId))
 
-	                INSERT INTO dbo.{objectQualifier}UserRelationships
-			                    ([UserID]
-			                    ,[RelatedUserID]
-			                    ,[RelationshipID]
-			                    ,[Status]
-			                    ,[CreatedByUserID]
-			                    ,[CreatedOnDate]
-			                    ,[LastModifiedByUserID]
-			                    ,[LastModifiedOnDate])
-		                SELECT DISTINCT TOP 15 @UserID, UserId, 1, 1, @UserID, @CurrentDate, @UserID, @CurrentDate
-		                FROM dbo.{objectQualifier}Users
-		                WHERE UserId <> @UserID
-		                    AND IsSuperUser = 0
-		                    AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE UserID = @userID AND RelationshipID = @FriendsRelationshipId))
+                    INSERT INTO dbo.{objectQualifier}UserRelationships
+                                ([UserID]
+                                ,[RelatedUserID]
+                                ,[RelationshipID]
+                                ,[Status]
+                                ,[CreatedByUserID]
+                                ,[CreatedOnDate]
+                                ,[LastModifiedByUserID]
+                                ,[LastModifiedOnDate])
+                        SELECT DISTINCT TOP 15 @UserID, UserId, 1, 1, @UserID, @CurrentDate, @UserID, @CurrentDate
+                        FROM dbo.{objectQualifier}Users
+                        WHERE UserId <> @UserID
+                            AND IsSuperUser = 0
+                            AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE UserID = @userID AND RelationshipID = @FriendsRelationshipId))
                 END
 
-	            --Create Followers
+                --Create Followers
                 IF @CreateFollowers > 0
                 BEGIN
-	                --Create Followers
-	                INSERT INTO dbo.{objectQualifier}UserRelationships
-			                    ([UserID]
-			                    ,[RelatedUserID]
-			                    ,[RelationshipID]
-			                    ,[Status]
-			                    ,[CreatedByUserID]
-			                    ,[CreatedOnDate]
-			                    ,[LastModifiedByUserID]
-			                    ,[LastModifiedOnDate])
-		                SELECT DISTINCT TOP 5 @UserID, UserId, 2, 2, @UserID, @CurrentDate, @UserID, @CurrentDate
-		                FROM dbo.{objectQualifier}Users
-		                WHERE UserId <> @UserID
-		                    AND IsSuperUser = 0
-		                    AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE UserID = @userID AND RelationshipID = @FollowersRelationshipId))
+                    --Create Followers
+                    INSERT INTO dbo.{objectQualifier}UserRelationships
+                                ([UserID]
+                                ,[RelatedUserID]
+                                ,[RelationshipID]
+                                ,[Status]
+                                ,[CreatedByUserID]
+                                ,[CreatedOnDate]
+                                ,[LastModifiedByUserID]
+                                ,[LastModifiedOnDate])
+                        SELECT DISTINCT TOP 5 @UserID, UserId, 2, 2, @UserID, @CurrentDate, @UserID, @CurrentDate
+                        FROM dbo.{objectQualifier}Users
+                        WHERE UserId <> @UserID
+                            AND IsSuperUser = 0
+                            AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE UserID = @userID AND RelationshipID = @FollowersRelationshipId))
 
-	                --Create Followings
-	                INSERT INTO dbo.{objectQualifier}UserRelationships
-			                    ([UserID]
-			                    ,[RelatedUserID]
-			                    ,[RelationshipID]
-			                    ,[Status]
-			                    ,[CreatedByUserID]
-			                    ,[CreatedOnDate]
-			                    ,[LastModifiedByUserID]
-			                    ,[LastModifiedOnDate])
-		                SELECT DISTINCT TOP 6 UserId, @UserID, 2, 2, @UserID, @CurrentDate, @UserID, @CurrentDate
-		                FROM dbo.{objectQualifier}Users
-		                WHERE UserId <> @UserID
-		                    AND IsSuperUser = 0
-		                    AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE [RelatedUserID] = @userID AND RelationshipID = @FollowersRelationshipId))
+                    --Create Followings
+                    INSERT INTO dbo.{objectQualifier}UserRelationships
+                                ([UserID]
+                                ,[RelatedUserID]
+                                ,[RelationshipID]
+                                ,[Status]
+                                ,[CreatedByUserID]
+                                ,[CreatedOnDate]
+                                ,[LastModifiedByUserID]
+                                ,[LastModifiedOnDate])
+                        SELECT DISTINCT TOP 6 UserId, @UserID, 2, 2, @UserID, @CurrentDate, @UserID, @CurrentDate
+                        FROM dbo.{objectQualifier}Users
+                        WHERE UserId <> @UserID
+                            AND IsSuperUser = 0
+                            AND (UserID NOT IN (SELECT RelatedUserID FROM dbo.{objectQualifier}UserRelationships WHERE [RelatedUserID] = @userID AND RelationshipID = @FollowersRelationshipId))
                 END
 
-	            IF DATALENGTH(@RoleName) > 0
-	            BEGIN
-		            DECLARE @ExistingRoleId INT
-		            SELECT @ExistingRoleId = RoleId from dbo.{objectQualifier}Roles where RoleName = @RoleName
+                IF DATALENGTH(@RoleName) > 0
+                BEGIN
+                    DECLARE @ExistingRoleId INT
+                    SELECT @ExistingRoleId = RoleId from dbo.{objectQualifier}Roles where RoleName = @RoleName
 
-		            IF NOT EXISTS(SELECT UserRoleID from dbo.{objectQualifier}UserRoles where UserId = @UserID and RoleID = @ExistingRoleId)
-		            BEGIN
-			                EXEC dbo.{objectQualifier}AddUserRole
-					                @PortalID = 0,
-					                @UserID = @UserID,
-					                @RoleId = @ExistingRoleId,
-					                @Status = 1,
-					                @IsOwner = 1,
-					                @CreatedByUserID = 1
-		            END
-	            END
+                    IF NOT EXISTS(SELECT UserRoleID from dbo.{objectQualifier}UserRoles where UserId = @UserID and RoleID = @ExistingRoleId)
+                    BEGIN
+                            EXEC dbo.{objectQualifier}AddUserRole
+                                    @PortalID = 0,
+                                    @UserID = @UserID,
+                                    @RoleId = @ExistingRoleId,
+                                    @Status = 1,
+                                    @IsOwner = 1,
+                                    @CreatedByUserID = 1
+                    END
+                END
             END";
 
         public const string SingleRoleCreation = @"
@@ -408,57 +408,57 @@ namespace DNN.Integration.Test.Framework.Scripts
             SET @CurrentDate = GETDATE()
 
         IF EXISTS(SELECT * from [dbo].[{objectQualifier}Roles] where [RoleName] = @RoleName)
-	        BEGIN
-		        RETURN
-	        END
+            BEGIN
+                RETURN
+            END
 
-            INSERT INTO [dbo].[{objectQualifier}Roles] 
+            INSERT INTO [dbo].[{objectQualifier}Roles]
             (
-	        [PortalID],
-	        [RoleName],
-	        [Description],
-	        [ServiceFee],
-	        [BillingFrequency],
-	        [TrialPeriod],
-	        [TrialFrequency],
-	        [BillingPeriod],
-	        [TrialFee],
-	        [IsPublic],
-	        [AutoAssignment],
-	        [RoleGroupID],
-	        [RSVPCode],
-	        [IconFile],
-	        [CreatedByUserID],
-	        [CreatedOnDate],
-	        [LastModifiedByUserID],
-	        [LastModifiedOnDate],
-	        [Status],
-	        [SecurityMode],
-	        [IsSystemRole]
+            [PortalID],
+            [RoleName],
+            [Description],
+            [ServiceFee],
+            [BillingFrequency],
+            [TrialPeriod],
+            [TrialFrequency],
+            [BillingPeriod],
+            [TrialFee],
+            [IsPublic],
+            [AutoAssignment],
+            [RoleGroupID],
+            [RSVPCode],
+            [IconFile],
+            [CreatedByUserID],
+            [CreatedOnDate],
+            [LastModifiedByUserID],
+            [LastModifiedOnDate],
+            [Status],
+            [SecurityMode],
+            [IsSystemRole]
             )
             VALUES
             (
-	        @PortalID,
-	        @RoleName,
-	        @Description,
-	        0.00,
-	        'N',
-	        -1,
-	        'N',
-	        -1,
-	        0.00,
-	        0,
-	        0,
-	        NULL,
-	        '',
-	        '',
-	        -1,
-	        @CurrentDate,
-	        -1,
-	        @CurrentDate,
-	        1,
-	        0,
-	        0
+            @PortalID,
+            @RoleName,
+            @Description,
+            0.00,
+            'N',
+            -1,
+            'N',
+            -1,
+            0.00,
+            0,
+            0,
+            NULL,
+            '',
+            '',
+            -1,
+            @CurrentDate,
+            -1,
+            @CurrentDate,
+            1,
+            0,
+            0
             )";
 
         public const string AssignRoleToUser = @"
@@ -475,31 +475,31 @@ namespace DNN.Integration.Test.Framework.Scripts
 
             INSERT INTO [dbo].[{objectQualifier}UserRoles]
             (
-	            [UserID],
-	            [RoleID],
-	            [ExpiryDate],
-	            [IsTrialUsed],
-	            [EffectiveDate],
-	            [CreatedByUserID],
-	            [CreatedOnDate],
-	            [LastModifiedByUserID],
-	            [LastModifiedOnDate],
-	            [Status],
-	            [IsOwner]
+                [UserID],
+                [RoleID],
+                [ExpiryDate],
+                [IsTrialUsed],
+                [EffectiveDate],
+                [CreatedByUserID],
+                [CreatedOnDate],
+                [LastModifiedByUserID],
+                [LastModifiedOnDate],
+                [Status],
+                [IsOwner]
             )
             VALUES
             (
-	            @UserId,
-	            @RoleId,
-	            NULL,
-	            1,
-	            NULL,
-	            -1,
-	            @CurrentDate,
-	            -1,
-	            @CurrentDate,
-	            1,
-	            0
+                @UserId,
+                @RoleId,
+                NULL,
+                1,
+                NULL,
+                -1,
+                @CurrentDate,
+                -1,
+                @CurrentDate,
+                1,
+                0
             )";
 
         public const string UserDelete = @"
@@ -512,7 +512,7 @@ namespace DNN.Integration.Test.Framework.Scripts
             SELECT @userGuid = [UserId] FROM [dbo].[aspnet_Users] WHERE UserName = @username
 
             DELETE FROM [dbo].[{objectQualifier}Journal_Comments] WHERE [UserId] = @userId
-            DELETE FROM [dbo].[{objectQualifier}Blogs_Entry] WHERE [BlogId] IN 
+            DELETE FROM [dbo].[{objectQualifier}Blogs_Entry] WHERE [BlogId] IN
                 (SELECT [BlogId] FROM [dbo].[{objectQualifier}Blogs_Blog] WHERE [UserId] = @userId)
             DELETE FROM [dbo].[{objectQualifier}Blogs_Blog] WHERE [UserId] = @userId
 
@@ -549,29 +549,29 @@ namespace DNN.Integration.Test.Framework.Scripts
 
             INSERT INTO [dbo].[{objectQualifier}ModulePermission]
             (
-	            [ModuleID],
-	            [PermissionID],
-	            [AllowAccess],
-	            [RoleID],
-	            [UserID],
-	            [CreatedByUserID],
-	            [CreatedOnDate],
-	            [LastModifiedByUserID],
-	            [LastModifiedOnDate],
-	            [PortalID]
+                [ModuleID],
+                [PermissionID],
+                [AllowAccess],
+                [RoleID],
+                [UserID],
+                [CreatedByUserID],
+                [CreatedOnDate],
+                [LastModifiedByUserID],
+                [LastModifiedOnDate],
+                [PortalID]
             )
             VALUES
             (
-	            @ModuleId,
-	            @PermissionId,
-	            1,
-	            @RoleId,
-	            NULL,
-	            -1,
-	            @CurrentDate,
-	            -1,
-	            @CurrentDate,
-	            @PortalId
+                @ModuleId,
+                @PermissionId,
+                1,
+                @RoleId,
+                NULL,
+                -1,
+                @CurrentDate,
+                -1,
+                @CurrentDate,
+                @PortalId
             )
 
             SELECT SCOPE_IDENTITY() AS ModulePermissionId";
@@ -601,17 +601,17 @@ namespace DNN.Integration.Test.Framework.Scripts
         public const string Modulenformation = @"
             DECLARE @PortalID INT = 0
                 DECLARE @friendlyName NVARCHAR(100) = 'Scheduler'
-                         
+
                 SELECT  dtm.DesktopModuleID, dtm.FriendlyName AS DtmFriendlyName,
                         mdfn.ModuleDefID, mdfn.FriendlyName AS ModuleFriendlyName, mdfn.DefinitionName,
                         mdl.ModuleID, mdl.PortalID,
                         tab.TabID, tab.TabName, tab.TabPath,
-		                tm.TabModuleID
+                        tm.TabModuleID
                 FROM    dbo.{objectQualifier}DesktopModules dtm
-			                INNER JOIN dbo.{objectQualifier}ModuleDefinitions mdfn on dtm.DesktopModuleID = mdfn.DesktopModuleID
-			                INNER JOIN dbo.{objectQualifier}Modules mdl on mdfn.ModuleDefID = mdl.ModuleDefID
-			                INNER JOIN dbo.{objectQualifier}TabModules tm on mdl.ModuleID = tm.ModuleID
-			                INNER JOIN dbo.{objectQualifier}Tabs tab on tm.TabID = tab.TabID
+                            INNER JOIN dbo.{objectQualifier}ModuleDefinitions mdfn on dtm.DesktopModuleID = mdfn.DesktopModuleID
+                            INNER JOIN dbo.{objectQualifier}Modules mdl on mdfn.ModuleDefID = mdl.ModuleDefID
+                            INNER JOIN dbo.{objectQualifier}TabModules tm on mdl.ModuleID = tm.ModuleID
+                            INNER JOIN dbo.{objectQualifier}Tabs tab on tm.TabID = tab.TabID
                 WHERE   (mdl.PortalID IS NULL OR mdl.PortalID = @PortalID) -- null for HOST modules
                 AND   (dtm.FriendlyName = @friendlyName OR mdfn.FriendlyName = @friendlyName)
                 ORDER BY dtm.FriendlyName, mdfn.FriendlyName, dtm.DesktopModuleID, mdfn.ModuleDefID, mdl.ModuleID;";

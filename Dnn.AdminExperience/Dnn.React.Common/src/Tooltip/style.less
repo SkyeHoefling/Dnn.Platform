@@ -1,8 +1,8 @@
 @import "../../styles/index";
-.dnn-ui-common-tooltip {   
+.dnn-ui-common-tooltip {
     >div{
         position: relative;
-    }    
+    }
     .tooltip-overlay{
         display: block;
         font-family: Open Sans,sans-serif;
@@ -49,14 +49,14 @@
             ::before{
                 bottom:100%;
             }
-        }        
-        
+        }
+
         &.tooltip-overlay--hidden{
             opacity:0;
             pointer-events: none;
-            visibility: hidden;     
+            visibility: hidden;
         }
-    } 
+    }
     &.error {
         .icon svg {
             color: @alizarinCrimson;
@@ -64,7 +64,7 @@
         }
         .tooltip-inner{
             background-color: @alizarinCrimson;
-        }  
+        }
         .top .tooltip-inner::before{
             border-top-color: @alizarinCrimson;
         }
@@ -79,7 +79,7 @@
         }
         .tooltip-inner{
             background-color: #EA9C00;
-        }  
+        }
         .top .tooltip-inner::before{
             border-top-color: #EA9C00;
         }
@@ -94,7 +94,7 @@
         }
         .tooltip-inner{
             background-color: @thunder;
-        }  
+        }
         .top .tooltip-inner::before{
             border-top-color: @thunder;
         }
@@ -109,16 +109,16 @@
         }
         .tooltip-inner{
             background-color: @cerulean;
-        }  
+        }
         .top .tooltip-inner::before{
             border-top-color: @cerulean;
         }
         .bottom .tooltip-inner::before{
             border-bottom-color: @cerulean;
-        }   
+        }
     }
     .icon svg {
         width: 20px;
         height: 20px;
-    }    
+    }
 }

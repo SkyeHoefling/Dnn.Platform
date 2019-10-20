@@ -12,7 +12,7 @@
             <asp:LinkButton ID="cmdSelect" resourcekey="Select" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />
             <asp:LinkButton ID="cmdDelete" resourcekey="Delete" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />
             <asp:LinkButton ID="cmdAdd" resourcekey="Add" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />
-	    </div>
+        </div>
     </asp:Panel>
     <asp:Panel ID="TabRow" runat="server" CssClass="urlControlTab dnnClear">
         <asp:Label ID="lblTab" runat="server" EnableViewState="False" resourcekey="Tab" />
@@ -26,13 +26,13 @@
                 <asp:Image ID="imgStorageLocationType" runat="server" Visible="False" />
             </div>
         </div>
-        <div class="dnnFormItem">    
+        <div class="dnnFormItem">
             <asp:Label ID="lblFile" runat="server" EnableViewState="False" resourcekey="File" CssClass="dnnFormLabel" />
             <div>
                 <asp:DropDownList ID="cboFiles" runat="server" DataTextField="Text" DataValueField="Value" />
                 <input id="txtFile" type="file" size="30" name="txtFile" runat="server" />
             </div>
-	    </div>
+        </div>
         <div class="dnnFormItem">
         <asp:LinkButton ID="cmdUpload" resourcekey="Upload" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />
         <asp:LinkButton ID="cmdSave" resourcekey="Save" CssClass="dnnSecondaryAction" runat="server" CausesValidation="False" />

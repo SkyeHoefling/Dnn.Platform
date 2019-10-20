@@ -32,7 +32,7 @@ describe("Breadcrumbs",()=>{
         {
             id:3,
             name:"Item3",
-            tabId:3   
+            tabId:3
         },{
             id:4,
             name:"Item4" ,
@@ -46,7 +46,7 @@ describe("Breadcrumbs",()=>{
             name:"Item6",
             tabId:6
         }];
-       
+
 
     it("Breadcrumbs renders",()=>{
         let breadcrumbs = shallow(<Breadcrumbs items={[]} onSelectedItem={onSelectedItem}/>);
@@ -55,7 +55,7 @@ describe("Breadcrumbs",()=>{
 
     it("Breadcrumbs renders empty when no itens passed", ()=> {
         let breadcrumbs = shallow(<Breadcrumbs items={[]} onSelectedItem={onSelectedItem}/>);
-        expect(breadcrumbs.find(".breadcrumbs-container").children().length).toBe(0); 
+        expect(breadcrumbs.find(".breadcrumbs-container").children().length).toBe(0);
     });
 
     it("Breadcrumb render one item", ()=> {
@@ -77,7 +77,7 @@ describe("Breadcrumbs",()=>{
     it("Add six items to breadccrumb", () =>{
         let breadcrumbs = shallow(<Breadcrumbs items={itemsMax} onSelectedItem={onSelectedItem}/>);
 
-        const countChildren = breadcrumbs.find(".breadcrumbs-container").children().length; 
+        const countChildren = breadcrumbs.find(".breadcrumbs-container").children().length;
         expect(countChildren).toBe(5);
     });
 

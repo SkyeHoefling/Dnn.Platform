@@ -9,8 +9,8 @@
 <script src="../../addon/edit/matchbrackets.js"></script>
 <script src="ruby.js"></script>
 <style>
-      .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
-      .cm-s-default span.cm-arrow { color: red; }
+    .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
+    .cm-s-default span.cm-arrow { color: red; }
     </style>
 <div id=nav>
   <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
@@ -63,7 +63,7 @@ def readints(prompt)
     print prompt
     line = readline.chomp
     raise EOFError.new if line == 'quit' # You can also use a real EOF.
-            
+
     # Go through each item on the line, converting each one and adding it
     # to retval.
     retval = [ ]
@@ -112,16 +112,16 @@ def polystr(p)
     result = (if p[0][0] < 0 then "-" else "" end) + term_to_str(*p[0])
 
     # Convert the rest of the terms, in each case adding the appropriate
-    # + or - separating them.  
+    # + or - separating them.
     for term in p[1...p.length]
         # Add the separator then the rep. of the term.
-        result += (if term[0] < 0 then " - " else " + " end) + 
+        result += (if term[0] < 0 then " - " else " + " end) +
                 term_to_str(*term)
     end
 
     return result
 end
-        
+
 #
 # Run until some kind of endfile.
 begin
@@ -168,11 +168,11 @@ else
 end
 </textarea></form>
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: "text/x-ruby",
         matchBrackets: true,
         indentUnit: 4
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-ruby</code>.</p>

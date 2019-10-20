@@ -22,19 +22,19 @@
     var index = -1, count = 1
     var words = string.split(tokens)
     for (var i = 0; i < words.length; i++) {
-      for(var j = 1; j <= words[i].length; j++) {
+    for(var j = 1; j <= words[i].length; j++) {
         if (count==pos) index = i
         count++
-      }
-      count++
+    }
+    count++
     }
     var ret = ["", ""]
     if (pos == 0) {
-      ret[1] = words[0]
-      ret[0] = null
+    ret[1] = words[0]
+    ret[0] = null
     } else {
-      ret[1] = words[index]
-      ret[0] = words[index-1]
+    ret[1] = words[index]
+    ret[0] = words[index-1]
     }
     return ret
   }
@@ -52,89 +52,89 @@
     var regexPrefixes=/^(\/{3}|\/)/
 
     return {
-      startState: function() {
+    startState: function() {
         return {
-          prev: false,
-          string: false,
-          escape: false,
-          inner: false,
-          comment: false,
-          num_left: 0,
-          num_right: 0,
-          doubleString: false,
-          singleString: false
+        prev: false,
+        string: false,
+        escape: false,
+        inner: false,
+        comment: false,
+        num_left: 0,
+        num_right: 0,
+        doubleString: false,
+        singleString: false
         }
-      },
-      token: function(stream, state) {
+    },
+    token: function(stream, state) {
         if (stream.eatSpace()) return null
 
         var ch = stream.next()
         if (state.string) {
-          if (state.escape) {
+        if (state.escape) {
             state.escape = false
             return "string"
-          } else {
+        } else {
             if ((ch == "\"" && (state.doubleString && !state.singleString) ||
-                 (ch == "'" && (!state.doubleString && state.singleString))) &&
+                (ch == "'" && (!state.doubleString && state.singleString))) &&
                 !state.escape) {
-              state.string = false
-              state.doubleString = false
-              state.singleString = false
-              return "string"
+            state.string = false
+            state.doubleString = false
+            state.singleString = false
+            return "string"
             } else if (ch == "\\" && stream.peek() == "(") {
-              state.inner = true
-              state.string = false
-              return "keyword"
+            state.inner = true
+            state.string = false
+            return "keyword"
             } else if (ch == "\\" && stream.peek() != "(") {
-              state.escape = true
-              state.string = true
-              return "string"
+            state.escape = true
+            state.string = true
+            return "string"
             } else {
-              return "string"
+            return "string"
             }
-          }
+        }
         } else if (state.comment) {
-          if (ch == "*" && stream.peek() == "/") {
+        if (ch == "*" && stream.peek() == "/") {
             state.prev = "*"
             return "comment"
-          } else if (ch == "/" && state.prev == "*") {
+        } else if (ch == "/" && state.prev == "*") {
             state.prev = false
             state.comment = false
             return "comment"
-          }
-          return "comment"
+        }
+        return "comment"
         } else {
-          if (ch == "/") {
+        if (ch == "/") {
             if (stream.peek() == "/") {
-              stream.skipToEnd()
-              return "comment"
+            stream.skipToEnd()
+            return "comment"
             }
             if (stream.peek() == "*") {
-              state.comment = true
-              return "comment"
+            state.comment = true
+            return "comment"
             }
-          }
-          if (ch == "(" && state.inner) {
+        }
+        if (ch == "(" && state.inner) {
             state.num_left++
             return null
-          }
-          if (ch == ")" && state.inner) {
+        }
+        if (ch == ")" && state.inner) {
             state.num_right++
             if (state.num_left == state.num_right) {
-              state.inner=false
-              state.string=true
+            state.inner=false
+            state.string=true
             }
             return null
-          }
+        }
 
-          var ret = getWord(stream.string, stream.pos)
-          var the_word = ret[1]
-          var prev_word = ret[0]
+        var ret = getWord(stream.string, stream.pos)
+        var the_word = ret[1]
+        var prev_word = ret[0]
 
-          if (operators.indexOf(ch + "") > -1) return "operator"
-          if (punc.indexOf(ch) > -1) return "punctuation"
+        if (operators.indexOf(ch + "") > -1) return "operator"
+        if (punc.indexOf(ch) > -1) return "punctuation"
 
-          if (typeof the_word != "undefined") {
+        if (typeof the_word != "undefined") {
             the_word = trim(the_word)
             if (typeof prev_word != "undefined") prev_word = trim(prev_word)
             if (the_word.charAt(0) == "#") return null
@@ -144,58 +144,58 @@
             if (numbers.indexOf(the_word) > -1) return "number"
 
             if ((numbers.indexOf(the_word.charAt(0) + "") > -1 ||
-                 operators.indexOf(the_word.charAt(0) + "") > -1) &&
+                operators.indexOf(the_word.charAt(0) + "") > -1) &&
                 numbers.indexOf(ch) > -1) {
-              return "number"
+            return "number"
             }
 
             if (keywords.indexOf(the_word) > -1 ||
                 keywords.indexOf(the_word.split(tokens)[0]) > -1)
-              return "keyword"
+            return "keyword"
             if (keywords.indexOf(prev_word) > -1) return "def"
-          }
-          if (ch == '"' && !state.doubleString) {
+        }
+        if (ch == '"' && !state.doubleString) {
             state.string = true
             state.doubleString = true
             return "string"
-          }
-          if (ch == "'" && !state.singleString) {
+        }
+        if (ch == "'" && !state.singleString) {
             state.string = true
             state.singleString = true
             return "string"
-          }
-          if (ch == "(" && state.inner)
+        }
+        if (ch == "(" && state.inner)
             state.num_left++
-          if (ch == ")" && state.inner) {
+        if (ch == ")" && state.inner) {
             state.num_right++
             if (state.num_left == state.num_right) {
-              state.inner = false
-              state.string = true
+            state.inner = false
+            state.string = true
             }
             return null
-          }
-          if (stream.match(/^-?[0-9\.]/, false)) {
+        }
+        if (stream.match(/^-?[0-9\.]/, false)) {
             if (stream.match(/^-?\d*\.\d+(e[\+\-]?\d+)?/i) ||
                 stream.match(/^-?\d+\.\d*/) ||
                 stream.match(/^-?\.\d+/)) {
-              if (stream.peek() == ".") stream.backUp(1)
-              return "number"
+            if (stream.peek() == ".") stream.backUp(1)
+            return "number"
             }
             if (stream.match(/^-?0x[0-9a-f]+/i) ||
                 stream.match(/^-?[1-9]\d*(e[\+\-]?\d+)?/) ||
                 stream.match(/^-?0(?![\dx])/i))
-              return "number"
-          }
-          if (stream.match(regexPrefixes)) {
+            return "number"
+        }
+        if (stream.match(regexPrefixes)) {
             if (stream.current()!="/" || stream.match(/^.*\//,false)) return "string"
             else stream.backUp(1)
-          }
-          if (stream.match(delimiters)) return "punctuation"
-          if (stream.match(identifiers)) return "variable"
-          if (stream.match(properties)) return "property"
-          return "variable"
         }
-      }
+        if (stream.match(delimiters)) return "punctuation"
+        if (stream.match(identifiers)) return "variable"
+        if (stream.match(properties)) return "property"
+        return "variable"
+        }
+    }
     }
   })
 

@@ -42,17 +42,17 @@
   SearchAnnotation.prototype.findMatches = function() {
     if (!this.gap) return;
     for (var i = 0; i < this.matches.length; i++) {
-      var match = this.matches[i];
-      if (match.from.line >= this.gap.to) break;
-      if (match.to.line >= this.gap.from) this.matches.splice(i--, 1);
+    var match = this.matches[i];
+    if (match.from.line >= this.gap.to) break;
+    if (match.to.line >= this.gap.from) this.matches.splice(i--, 1);
     }
     var cursor = this.cm.getSearchCursor(this.query, CodeMirror.Pos(this.gap.from, 0), this.caseFold);
     var maxMatches = this.options && this.options.maxMatches || MAX_MATCHES;
     while (cursor.findNext()) {
-      var match = {from: cursor.from(), to: cursor.to()};
-      if (match.from.line >= this.gap.to) break;
-      this.matches.splice(i++, 0, match);
-      if (this.matches.length > maxMatches) break;
+    var match = {from: cursor.from(), to: cursor.to()};
+    if (match.from.line >= this.gap.to) break;
+    this.matches.splice(i++, 0, match);
+    if (this.matches.length > maxMatches) break;
     }
     this.gap = null;
   };
@@ -67,18 +67,18 @@
     var endLine = CodeMirror.changeEnd(change).line;
     var sizeChange = endLine - change.to.line;
     if (this.gap) {
-      this.gap.from = Math.min(offsetLine(this.gap.from, startLine, sizeChange), change.from.line);
-      this.gap.to = Math.max(offsetLine(this.gap.to, startLine, sizeChange), change.from.line);
+    this.gap.from = Math.min(offsetLine(this.gap.from, startLine, sizeChange), change.from.line);
+    this.gap.to = Math.max(offsetLine(this.gap.to, startLine, sizeChange), change.from.line);
     } else {
-      this.gap = {from: change.from.line, to: endLine + 1};
+    this.gap = {from: change.from.line, to: endLine + 1};
     }
 
     if (sizeChange) for (var i = 0; i < this.matches.length; i++) {
-      var match = this.matches[i];
-      var newFrom = offsetLine(match.from.line, startLine, sizeChange);
-      if (newFrom != match.from.line) match.from = CodeMirror.Pos(newFrom, match.from.ch);
-      var newTo = offsetLine(match.to.line, startLine, sizeChange);
-      if (newTo != match.to.line) match.to = CodeMirror.Pos(newTo, match.to.ch);
+    var match = this.matches[i];
+    var newFrom = offsetLine(match.from.line, startLine, sizeChange);
+    if (newFrom != match.from.line) match.from = CodeMirror.Pos(newFrom, match.from.ch);
+    var newTo = offsetLine(match.to.line, startLine, sizeChange);
+    if (newTo != match.to.line) match.to = CodeMirror.Pos(newTo, match.to.ch);
     }
     clearTimeout(this.update);
     var self = this;

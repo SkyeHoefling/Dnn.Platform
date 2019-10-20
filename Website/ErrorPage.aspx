@@ -11,20 +11,20 @@
 <body>
     <form id="Form" runat="server">
         <table cellspacing="5" cellpadding="5" border="0" class="Error">
-	        <tr>
-		        <td><asp:Image ID="headerImage" runat="server" BorderStyle="None" AlternateText="DotNetNuke" /></td>
-	        </tr>
-	        <tr style="height:100%;">
-		        <td valign="top" style="width:650px;">
+            <tr>
+                <td><asp:Image ID="headerImage" runat="server" BorderStyle="None" AlternateText="DotNetNuke" /></td>
+            </tr>
+            <tr style="height:100%;">
+                <td valign="top" style="width:650px;">
                     <h2>DNN Error</h2>
                     <hr />
                     <p><asp:PlaceHolder ID="ErrorPlaceHolder" runat="server" /></p>
                 </td>
-	        </tr>
-	        <tr>
-	            <td align="right"><asp:Hyperlink ID="hypReturn" runat="Server" NavigateUrl="~/Default.aspx" cssClass="dnnPrimaryAction" text="Return to Site"/></td>
-	        </tr>
-	        <tr><td height="10px"></td></tr>
+            </tr>
+            <tr>
+                <td align="right"><asp:Hyperlink ID="hypReturn" runat="Server" NavigateUrl="~/Default.aspx" cssClass="dnnPrimaryAction" text="Return to Site"/></td>
+            </tr>
+            <tr><td height="10px"></td></tr>
         </table>
     </form>
 </body>

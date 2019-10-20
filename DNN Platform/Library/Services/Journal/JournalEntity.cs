@@ -53,7 +53,7 @@ namespace DotNetNuke.Services.Journal {
                     return PropertyAccess.FormatString(Vanity.ToString(), format);
                 case "avatar":
                     return PropertyAccess.FormatString(Avatar.ToString(), format);
-                
+
 
             }
 

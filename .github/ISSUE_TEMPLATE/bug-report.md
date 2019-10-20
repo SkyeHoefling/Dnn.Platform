@@ -3,8 +3,8 @@ name: Bug Report
 about: Create a report to help us improve
 ---
 
-<!-- 
-  Please read contribution guideline first: https://github.com/dnnsoftware/Dnn.Platform/blob/development/CONTRIBUTING.md 
+<!--
+  Please read contribution guideline first: https://github.com/dnnsoftware/Dnn.Platform/blob/development/CONTRIBUTING.md
   Any potential security issues should be sent to security@dnnsoftware.com, rather than posted on GitHub
 -->
 
@@ -34,7 +34,7 @@ Paste the error log that is related to this issue.
 Add any other context about the bug that may be helpful for resolution.
 
 ## Affected version
-<!-- 
+<!--
 Please add X in at least one of the boxes as appropriate. In order for an issue to be accepted, a developer needs to be able to reproduce the issue on a currently supported version. If you are looking for a workaround for an issue with an older version, please visit the forums at https://dnncommunity.org/forums
 -->
 
@@ -43,7 +43,7 @@ Please add X in at least one of the boxes as appropriate. In order for an issue 
 * [ ] 9.4.1 latest supported release
 
 ## Affected browser
-<!-- 
+<!--
   Check all that apply and add more if necessary.
   If possible, please also specify exact versions and mention the operating system
 -->

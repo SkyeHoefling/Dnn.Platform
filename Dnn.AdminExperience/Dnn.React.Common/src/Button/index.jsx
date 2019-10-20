@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.less";
 
-const Button = ({children, className, size, type, onClick, style, disabled}) => { 
+const Button = ({children, className, size, type, onClick, style, disabled}) => {
     return (
-        <button className={"dnn-ui-common-button" + (className ? (" " + className) : "") + (" " + size)} style={style} 
+        <button className={"dnn-ui-common-button" + (className ? (" " + className) : "") + (" " + size)} style={style}
             role={type} onClick={onClick} disabled={disabled}>
             {children}
         </button>

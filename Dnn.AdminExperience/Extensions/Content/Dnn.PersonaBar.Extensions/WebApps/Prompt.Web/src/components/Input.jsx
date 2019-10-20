@@ -182,12 +182,12 @@ class Input extends Component {
                     if (el) {
                         el.readOnly = this.isPaging();
                         /**
-                         * Note: this is a patch to be removed once a complete refactoring of the Redux
-                         * implementation will be done.
-                         * All changes in the DOM must happen accordingly to Redux state update and this
-                         * usage of setTimeout has to be considered wrong.
-                         * Patch needed to close DNN-10688
-                         */
+                        * Note: this is a patch to be removed once a complete refactoring of the Redux
+                        * implementation will be done.
+                        * All changes in the DOM must happen accordingly to Redux state update and this
+                        * usage of setTimeout has to be considered wrong.
+                        * Patch needed to close DNN-10688
+                        */
                         if (this.isPaging() && this.isLastPage() === true) {
                             el.value = "";
                             setTimeout(() => el.readOnly = false, 500);

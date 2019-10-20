@@ -53,7 +53,7 @@
             }
 
             markup += '<div class="dnnClear"></div>' +
-                         '</div>';
+                        '</div>';
 
             this.$el.hide();
             this.$wrap = $(markup).insertAfter(this.$el);
@@ -76,7 +76,7 @@
             if (originalVal) {
                 this.realInput.next().addClass('dnnShow').css({ right: realInputRight - 15});
             }
-        },    
+        },
 
         _makeUrl: function (param, service) {
             var url = this.options.previewUrl ? this.options.previewUrl :
@@ -103,7 +103,7 @@
                 preview.remove();
 
             var markup = '<ul class="dnnSearchBox_preview">';
-            if (data && data.length) {                
+            if (data && data.length) {
 
                 for (var i = 0; i < data.length; i++) {
                     var group = data[i];
@@ -164,7 +164,7 @@
                 this.options.searchFunction(val, urlAppend);
             }
         },
-        
+
         _ignoreKeyCodes: [9, 13, 16, 17, 18, 19, 20, 27, 33, 34, 35, 36, 37, 38, 39, 40, 45],
 
         _attachEvents: function () {
@@ -206,7 +206,7 @@
                 }
                 else {
                     clearTextBtn.css({
-                    	right: right
+                        right: right
                     }).addClass('dnnShow');
                     if (self.options.enablePreview &&
                         val.length >= self.options.previewMinChars) {
@@ -243,7 +243,7 @@
                         self.options.searchFunction &&
                         typeof self.options.searchFunction == 'function' &&
                         val.length >= self.options.refreshSearchResultMinChars) {
-                        
+
                         // enable auto search refresh
                         if (self.throttle) {
                             clearTimeout(self.throttle);
@@ -309,7 +309,7 @@
                 if (self.options.refreshSearchResult) {
                     if (self.options.beforeRefreshSearchResult && typeof self.options.beforeRefreshSearchResult == 'function')
                         self.options.beforeRefreshSearchResult();
-                    
+
                     self.realInput.triggerHandler('keyup');
                     return false;
                 }

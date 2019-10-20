@@ -5,28 +5,28 @@ import Localization from '../../../localization';
 import util from '../../../utils';
 import styles from './styles.less';
 
-export default class PageIcons extends Component {            
+export default class PageIcons extends Component {
     constructor(props) {
-        super(props);  
-    }    
+        super(props);
+    }
 
-    onChangeIcon(key, fileInfo) {        
+    onChangeIcon(key, fileInfo) {
         const {onChangeField} = this.props;
         onChangeField(key, fileInfo);
     }
 
     render() {
-        const {props} = this;  
+        const {props} = this;
         util.utilities = util.getUtilities();
         return (
             <div className={styles.pageIcons}>
                 <GridSystem>
                     <GridCell className="left-column">
-                        <Label 
+                        <Label
                             tooltipMessage={Localization.get("IconFile.Help")}
-                            label={Localization.get("IconFile")}                        
+                            label={Localization.get("IconFile")}
                         />
-                        <FileUpload 
+                        <FileUpload
                             utils={util}
                             onSelectFile={this.onChangeIcon.bind(this, 'iconFile')}
                             selectedFile={props.page.iconFile}
@@ -34,7 +34,7 @@ export default class PageIcons extends Component {
                             fileFormats={["image/png", "image/jpg", "image/jpeg", "image/bmp", "image/gif", "image/svg+xml"]}
                             browseActionText={Localization.get("BrowseAction")}                         // Press {save|[ENTER]} to save, or {cancel|[ESC]} to cancel
                             browseButtonText={Localization.get("BrowseButton")}                         // Browse Filesystem
-                            defaultText={Localization.get("DragOver")}                                  // Drag and Drop a File                            
+                            defaultText={Localization.get("DragOver")}                                  // Drag and Drop a File
                             fileText={Localization.get("File")}                                         // File
                             folderText={Localization.get("Folder")}                                     // Folder
                             imageText={Localization.get("DefaultImageTitle")}                           // Image
@@ -47,17 +47,17 @@ export default class PageIcons extends Component {
                             searchFoldersPlaceHolderText={Localization.get("SearchFoldersPlaceholder")} // Search Folders...
                             uploadButtonText={Localization.get("UploadButton")}                         // Upload a File
                             uploadCompleteText={Localization.get("UploadComplete")}                     // Upload Complete
-                            uploadingText={Localization.get("Uploading")}                               // Uploading...                            
+                            uploadingText={Localization.get("Uploading")}                               // Uploading...
                             uploadFailedText={Localization.get("UploadFailed")}                         // Upload Failed
-                            wrongFormatText={Localization.get("WrongFormat")}                           // wrong format                            
+                            wrongFormatText={Localization.get("WrongFormat")}                           // wrong format
                         />
                     </GridCell>
                     <GridCell className="right-column">
-                        <Label 
+                        <Label
                             tooltipMessage={Localization.get("IconFileLarge.Help")}
-                            label={Localization.get("IconFileLarge")}                        
+                            label={Localization.get("IconFileLarge")}
                         />
-                        <FileUpload 
+                        <FileUpload
                             utils={util}
                             onSelectFile={this.onChangeIcon.bind(this, 'iconFileLarge')}
                             selectedFile={props.page.iconFileLarge}
@@ -65,7 +65,7 @@ export default class PageIcons extends Component {
                             fileFormats={["image/png", "image/jpg", "image/jpeg", "image/bmp", "image/gif", "image/svg+xml"]}
                             browseActionText={Localization.get("BrowseAction")}                         // Press {save|[ENTER]} to save, or {cancel|[ESC]} to cancel
                             browseButtonText={Localization.get("BrowseButton")}                         // Browse Filesystem
-                            defaultText={Localization.get("DragOver")}                                  // Drag and Drop a File                            
+                            defaultText={Localization.get("DragOver")}                                  // Drag and Drop a File
                             fileText={Localization.get("File")}                                         // File
                             folderText={Localization.get("Folder")}                                     // Folder
                             imageText={Localization.get("DefaultImageTitle")}                           // Image
@@ -78,9 +78,9 @@ export default class PageIcons extends Component {
                             searchFoldersPlaceHolderText={Localization.get("SearchFoldersPlaceholder")} // Search Folders...
                             uploadButtonText={Localization.get("UploadButton")}                         // Upload a File
                             uploadCompleteText={Localization.get("UploadComplete")}                     // Upload Complete
-                            uploadingText={Localization.get("Uploading")}                               // Uploading...                            
+                            uploadingText={Localization.get("Uploading")}                               // Uploading...
                             uploadFailedText={Localization.get("UploadFailed")}                         // Upload Failed
-                            wrongFormatText={Localization.get("WrongFormat")}                           // wrong format                            
+                            wrongFormatText={Localization.get("WrongFormat")}                           // wrong format
                         />
                     </GridCell>
                 </GridSystem>

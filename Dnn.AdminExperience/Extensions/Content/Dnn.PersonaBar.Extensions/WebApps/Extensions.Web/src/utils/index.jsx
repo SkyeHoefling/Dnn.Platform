@@ -6,7 +6,7 @@ const utils = {
         this.utilities = utilities.utility;
         this.moduleName = utilities.moduleName;
         this.settings = utilities.settings;
-        this.siteRoot = utilities.siteRoot;    
+        this.siteRoot = utilities.siteRoot;
     },
     utilities: null,
     moduleName: "",

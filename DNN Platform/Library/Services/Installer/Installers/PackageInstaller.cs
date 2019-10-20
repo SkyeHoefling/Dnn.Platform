@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -42,16 +42,16 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class PackageInstaller : ComponentInstallerBase
     {
-		#region Private Members
-	
+        #region Private Members
+
         private readonly SortedList<int, ComponentInstallerBase> _componentInstallers = new SortedList<int, ComponentInstallerBase>();
         private PackageInfo _installedPackage;
         private EventMessage _eventMessage;
-		
-		#endregion
 
-		#region Constructors
-        
+        #endregion
+
+        #region Constructors
+
         /// -----------------------------------------------------------------------------
         /// <summary>
         /// This Constructor creates a new PackageInstaller instance
@@ -65,7 +65,7 @@ namespace DotNetNuke.Services.Installer.Installers
             Package = package;
             if (!string.IsNullOrEmpty(package.Manifest))
             {
-				//Create an XPathDocument from the Xml
+                //Create an XPathDocument from the Xml
                 var doc = new XPathDocument(new StringReader(package.Manifest));
                 XPathNavigator nav = doc.CreateNavigator().SelectSingleNode("package");
                 ReadComponents(nav);
@@ -75,7 +75,7 @@ namespace DotNetNuke.Services.Installer.Installers
                 ComponentInstallerBase installer = InstallerFactory.GetInstaller(package.PackageType);
                 if (installer != null)
                 {
-					//Set package
+                    //Set package
                     installer.Package = package;
 
                     //Set type
@@ -101,16 +101,16 @@ namespace DotNetNuke.Services.Installer.Installers
 
             if (!string.IsNullOrEmpty(packageManifest))
             {
-				//Create an XPathDocument from the Xml
+                //Create an XPathDocument from the Xml
                 var doc = new XPathDocument(new StringReader(packageManifest));
                 XPathNavigator nav = doc.CreateNavigator().SelectSingleNode("package");
                 ReadManifest(nav);
             }
         }
-		
-		#endregion
 
-		#region Public Properties
+        #endregion
+
+        #region Public Properties
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -128,10 +128,10 @@ namespace DotNetNuke.Services.Installer.Installers
         /// <value>A Boolean value</value>
         /// -----------------------------------------------------------------------------
         public bool IsValid { get; private set; }
-		
-		#endregion
 
-		#region Private Methods
+        #endregion
+
+        #region Private Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -144,7 +144,7 @@ namespace DotNetNuke.Services.Installer.Installers
             if (type == null)
             {
                 //This package type not registered
-				Log.Logs.Clear();
+                Log.Logs.Clear();
                 Log.AddFailure(Util.SECURITY_NotRegistered + " - " + Package.PackageType);
                 IsValid = false;
             }
@@ -169,8 +169,8 @@ namespace DotNetNuke.Services.Installer.Installers
             foreach (XPathNavigator componentNav in manifestNav.CreateNavigator().Select("components/component"))
             {
                 //Set default order to next value (ie the same as the size of the collection)
-				int order = _componentInstallers.Count;
-				
+                int order = _componentInstallers.Count;
+
                 string type = componentNav.GetAttribute("type", "");
                 if (InstallMode == InstallMode.Install)
                 {
@@ -210,15 +210,15 @@ namespace DotNetNuke.Services.Installer.Installers
             string strText = Null.NullString;
             if (Package.InstallerInfo.InstallMode != InstallMode.ManifestOnly)
             {
-				//Load from file
+                //Load from file
                 strText = FileSystemUtils.ReadFile(Package.InstallerInfo.TempInstallFolder + "\\" + source);
             }
             return strText;
         }
 
-		#endregion
+        #endregion
 
-	    #region Public Methods
+        #region Public Methods
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -264,12 +264,12 @@ namespace DotNetNuke.Services.Installer.Installers
             bool isCompleted = true;
             try
             {
-				//Save the Package Information
+                //Save the Package Information
                 if (_installedPackage != null)
                 {
                     Package.PackageID = _installedPackage.PackageID;
                 }
-				
+
                 //Save Package
                 PackageController.Instance.SaveExtensionPackage(Package);
 
@@ -307,12 +307,12 @@ namespace DotNetNuke.Services.Installer.Installers
             }
             if (isCompleted)
             {
-				//All components successfully installed so Commit any pending changes
+                //All components successfully installed so Commit any pending changes
                 Commit();
             }
             else
             {
-				//There has been a failure so Rollback
+                //There has been a failure so Rollback
                 Rollback();
             }
         }
@@ -366,11 +366,11 @@ namespace DotNetNuke.Services.Installer.Installers
             {
                 _installedPackage = PackageController.Instance.GetExtensionPackage(Package.PortalID, p => p.Name.Equals(Package.Name, StringComparison.OrdinalIgnoreCase)
                                                                                                             && p.PackageType.Equals(Package.PackageType, StringComparison.OrdinalIgnoreCase)
-                                                                                                            && p.Version == Package.Version);                
+                                                                                                            && p.Version == Package.Version);
             }
             else
             {
-                _installedPackage = PackageController.Instance.GetExtensionPackage(Package.PortalID, p => p.Name.Equals(Package.Name, StringComparison.OrdinalIgnoreCase) 
+                _installedPackage = PackageController.Instance.GetExtensionPackage(Package.PortalID, p => p.Name.Equals(Package.Name, StringComparison.OrdinalIgnoreCase)
                                                                                                             && p.PackageType.Equals(Package.PackageType, StringComparison.OrdinalIgnoreCase));
             }
 
@@ -447,7 +447,7 @@ namespace DotNetNuke.Services.Installer.Installers
                     }
                 }
             }
-			//Get Author
+            //Get Author
             XPathNavigator authorNav = manifestNav.SelectSingleNode("owner");
             if (authorNav != null)
             {
@@ -456,7 +456,7 @@ namespace DotNetNuke.Services.Installer.Installers
                 Package.Url = Util.ReadElement(authorNav, "url");
                 Package.Email = Util.ReadElement(authorNav, "email");
             }
-			
+
             //Get License
             XPathNavigator licenseNav = manifestNav.SelectSingleNode("license");
             if (licenseNav != null)
@@ -464,7 +464,7 @@ namespace DotNetNuke.Services.Installer.Installers
                 string licenseSrc = Util.ReadAttribute(licenseNav, "src");
                 if (string.IsNullOrEmpty(licenseSrc))
                 {
-					//Load from element
+                    //Load from element
                     Package.License = licenseNav.Value;
                 }
                 else
@@ -474,10 +474,10 @@ namespace DotNetNuke.Services.Installer.Installers
             }
             if (string.IsNullOrEmpty(Package.License))
             {
-				//Legacy Packages have no license
+                //Legacy Packages have no license
                 Package.License = Util.PACKAGE_NoLicense;
             }
-			
+
             //Get Release Notes
             XPathNavigator relNotesNav = manifestNav.SelectSingleNode("releaseNotes");
             if (relNotesNav != null)
@@ -485,7 +485,7 @@ namespace DotNetNuke.Services.Installer.Installers
                 string relNotesSrc = Util.ReadAttribute(relNotesNav, "src");
                 if (string.IsNullOrEmpty(relNotesSrc))
                 {
-					//Load from element
+                    //Load from element
                     Package.ReleaseNotes = relNotesNav.Value;
                 }
                 else
@@ -495,16 +495,16 @@ namespace DotNetNuke.Services.Installer.Installers
             }
             if (string.IsNullOrEmpty(Package.ReleaseNotes))
             {
-				//Legacy Packages have no Release Notes
-				Package.ReleaseNotes = Util.PACKAGE_NoReleaseNotes;
+                //Legacy Packages have no Release Notes
+                Package.ReleaseNotes = Util.PACKAGE_NoReleaseNotes;
             }
 
             //Parse the Dependencies
             var packageDependencies = Package.Dependencies;
             foreach (XPathNavigator dependencyNav in manifestNav.CreateNavigator().Select("dependencies/dependency"))
             {
-			    var dependency = DependencyFactory.GetDependency(dependencyNav);
-		        var packageDependecy = dependency as IManagedPackageDependency;
+                var dependency = DependencyFactory.GetDependency(dependencyNav);
+                var packageDependecy = dependency as IManagedPackageDependency;
 
                 if (packageDependecy != null)
                 {
@@ -539,16 +539,16 @@ namespace DotNetNuke.Services.Installer.Installers
                     Log.AddInfo(Util.COMPONENT_RolledBack + " - " + compInstaller.Type);
                 }
             }
-			
-            //If Previously Installed Package exists then we need to update the DataStore with this 
+
+            //If Previously Installed Package exists then we need to update the DataStore with this
             if (_installedPackage == null)
             {
-				//No Previously Installed Package - Delete newly added Package
+                //No Previously Installed Package - Delete newly added Package
                 PackageController.Instance.DeleteExtensionPackage(Package);
             }
             else
             {
-				//Previously Installed Package - Rollback to Previously Installed
+                //Previously Installed Package - Rollback to Previously Installed
                 PackageController.Instance.SaveExtensionPackage(_installedPackage);
             }
         }
@@ -560,7 +560,7 @@ namespace DotNetNuke.Services.Installer.Installers
         /// -----------------------------------------------------------------------------
         public override void UnInstall()
         {
-			//Iterate through all the Components
+            //Iterate through all the Components
             for (int index = 0; index <= _componentInstallers.Count - 1; index++)
             {
                 ComponentInstallerBase compInstaller = _componentInstallers.Values[index];
@@ -582,11 +582,11 @@ namespace DotNetNuke.Services.Installer.Installers
                     Log.AddWarning(Util.UNINSTALL_WarningsComp + " - " + compInstaller.Type);
                 }
             }
-			
+
             //Remove the Package information from the Data Store
             PackageController.Instance.DeleteExtensionPackage(Package);
         }
-		
-		#endregion
+
+        #endregion
     }
 }

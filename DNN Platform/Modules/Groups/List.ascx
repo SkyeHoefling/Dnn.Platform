@@ -41,7 +41,7 @@
 <script type="text/javascript">
 
     jQuery(document).ready(function ($) {
-        
+
         $('.join-group-icn a').click(function (event) {
             event.preventDefault();
             var groupId = $(this).attr('groupId');
@@ -87,7 +87,7 @@
                 }
             });
         }
-        
+
     });
 
 </script>

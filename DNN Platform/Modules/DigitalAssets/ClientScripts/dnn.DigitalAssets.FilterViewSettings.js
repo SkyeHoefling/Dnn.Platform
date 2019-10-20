@@ -9,7 +9,7 @@ dnn.DigitalAssetsFilterViewSettingsController = function (serviceSettings, servi
             });
             checkFilterOption($("input[id^=" + controls.FilterOptionGroupID + "][checked=checked]:radio").val());
         },
-        
+
         checkFilterOption = function (checkValue) {
             if (checkValue == "FilterByFolder") {
                 $("#FilterByFolderOptions").show();
@@ -25,10 +25,10 @@ dnn.DigitalAssetsFilterViewSettingsController = function (serviceSettings, servi
                     return;
                 }
             }
-            
-            args.IsValid = true;        
+
+            args.IsValid = true;
         };
-    
+
     return {
         initFilterOptionsRadioInput: initFilterOptionsRadioInput,
         ValidateFolderIsSelected: ValidateFolderIsSelected,

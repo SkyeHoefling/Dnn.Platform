@@ -9,10 +9,10 @@
 
 #Region "Copyright"
 
-' 
+'
 ' Copyright (c) _YEAR_
 ' by _OWNER_
-' 
+'
 
 #End Region
 
@@ -56,7 +56,7 @@ End Sub
 
         </div>
 
-   </fieldset>
+    </fieldset>
 
     <ul class="dnnActions dnnClear">
 
@@ -67,4 +67,3 @@ End Sub
     </ul>
 
 </div>
-

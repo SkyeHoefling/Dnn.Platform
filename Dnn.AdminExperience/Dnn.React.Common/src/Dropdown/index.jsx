@@ -122,12 +122,12 @@ class Dropdown extends Component {
     }
 
     /**
-     * We have two types of Dropdown: small and large.
-     * More informations about it here: https://dnntracker.atlassian.net/wiki/spaces/DP/pages/45940759/EVOQ+-+COLOR+AND+STYLE+GUIDE#EVOQ-COLORANDSTYLEGUIDE-SMALLDROPDOWN
-     * PS: "small" is passed as a prop and used as a CSS class name.
-     *
-     * @returns {string}
-     */
+    * We have two types of Dropdown: small and large.
+    * More informations about it here: https://dnntracker.atlassian.net/wiki/spaces/DP/pages/45940759/EVOQ+-+COLOR+AND+STYLE+GUIDE#EVOQ-COLORANDSTYLEGUIDE-SMALLDROPDOWN
+    * PS: "small" is passed as a prop and used as a CSS class name.
+    *
+    * @returns {string}
+    */
     getClassName() {
         const {props, state} = this;
         let className = "dnn-dropdown";

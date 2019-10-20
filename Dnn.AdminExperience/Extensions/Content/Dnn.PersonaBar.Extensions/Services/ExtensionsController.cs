@@ -934,7 +934,7 @@ namespace Dnn.PersonaBar.Extensions.Services
         {
             if (!string.IsNullOrEmpty(ownerFolder) &&
                 (ownerFolder.Replace("\\", "/").Contains("/")
-                 || ownerFolder.StartsWith(".")))
+                || ownerFolder.StartsWith(".")))
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "InvalidFolder");
             }

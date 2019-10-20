@@ -14,10 +14,10 @@
 /************************************************************/
 
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}HtmlText' AND COLUMN_NAME='Summary')
-	BEGIN
-		ALTER TABLE {databaseOwner}{objectQualifier}HtmlText
-			ADD [Summary] [ntext] NULL
-	END
+    BEGIN
+        ALTER TABLE {databaseOwner}{objectQualifier}HtmlText
+            ADD [Summary] [ntext] NULL
+    END
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}AddHtmlText') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
@@ -56,7 +56,7 @@ insert into {databaseOwner}{objectQualifier}HtmlText (
   CreatedOnDate,
   LastModifiedByUserID,
   LastModifiedOnDate
-) 
+)
 values (
   @ModuleID,
   @Content,
@@ -99,11 +99,11 @@ as
 
 update {databaseOwner}{objectQualifier}HtmlText
 set    Content              = @Content,
-	   Summary				= @Summary,
-       StateID              = @StateID,
-       IsPublished          = @IsPublished,
-       LastModifiedByUserID = @UserID,
-       LastModifiedOnDate   = getdate()
+        Summary				= @Summary,
+        StateID              = @StateID,
+        IsPublished          = @IsPublished,
+        LastModifiedByUserID = @UserID,
+        LastModifiedOnDate   = getdate()
 where  ItemID = @ItemID
 
 GO

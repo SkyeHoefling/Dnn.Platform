@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -200,9 +200,9 @@ namespace DotNetNuke.Modules.Admin.Modules
             var files = Globals.GetFileList(PortalId, "xml", false, folder.FolderPath);
             foreach (FileItem file in files)
             {
-				if (file.Text.IndexOf("content." + Globals.CleanName(Module.DesktopModule.ModuleName) + ".", System.StringComparison.Ordinal) != -1)
+                if (file.Text.IndexOf("content." + Globals.CleanName(Module.DesktopModule.ModuleName) + ".", System.StringComparison.Ordinal) != -1)
                 {
-					cboFiles.AddItem(file.Text.Replace("content." + Globals.CleanName(Module.DesktopModule.ModuleName) + ".", ""), file.Value);
+                    cboFiles.AddItem(file.Text.Replace("content." + Globals.CleanName(Module.DesktopModule.ModuleName) + ".", ""), file.Value);
                 }
 
                 //legacy support for files which used the FriendlyName
@@ -211,9 +211,9 @@ namespace DotNetNuke.Modules.Admin.Modules
                     continue;
                 }
 
-				if (file.Text.IndexOf("content." + Globals.CleanName(Module.DesktopModule.FriendlyName) + ".", System.StringComparison.Ordinal) != -1)
+                if (file.Text.IndexOf("content." + Globals.CleanName(Module.DesktopModule.FriendlyName) + ".", System.StringComparison.Ordinal) != -1)
                 {
-					cboFiles.AddItem(file.Text.Replace("content." + Globals.CleanName(Module.DesktopModule.FriendlyName) + ".", ""), file.Value);
+                    cboFiles.AddItem(file.Text.Replace("content." + Globals.CleanName(Module.DesktopModule.FriendlyName) + ".", ""), file.Value);
                 }
             }
         }
@@ -224,24 +224,24 @@ namespace DotNetNuke.Modules.Admin.Modules
             var folder = FolderManager.Instance.GetFolder(cboFolders.SelectedItemValueAsInt);
             if (folder == null) return;
 
-	        if (string.IsNullOrEmpty(cboFiles.SelectedValue) || cboFiles.SelectedValue == "-")
-	        {
-				txtContent.Text = string.Empty;
-		        return;
-	        }
-	        try
-	        {
-				var fileId = Convert.ToInt32(cboFiles.SelectedValue);
-		        var file = DotNetNuke.Services.FileSystem.FileManager.Instance.GetFile(fileId);
-				using (var streamReader = new StreamReader(DotNetNuke.Services.FileSystem.FileManager.Instance.GetFileContent(file)))
-				{
-					txtContent.Text = streamReader.ReadToEnd();
-				}
-	        }
-	        catch (Exception)
-	        {
-		        txtContent.Text = string.Empty;
-	        }
+            if (string.IsNullOrEmpty(cboFiles.SelectedValue) || cboFiles.SelectedValue == "-")
+            {
+                txtContent.Text = string.Empty;
+                return;
+            }
+            try
+            {
+                var fileId = Convert.ToInt32(cboFiles.SelectedValue);
+                var file = DotNetNuke.Services.FileSystem.FileManager.Instance.GetFile(fileId);
+                using (var streamReader = new StreamReader(DotNetNuke.Services.FileSystem.FileManager.Instance.GetFileContent(file)))
+                {
+                    txtContent.Text = streamReader.ReadToEnd();
+                }
+            }
+            catch (Exception)
+            {
+                txtContent.Text = string.Empty;
+            }
         }
 
         protected void OnImportClick(object sender, EventArgs e)

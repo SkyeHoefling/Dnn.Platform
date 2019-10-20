@@ -1,4 +1,4 @@
-﻿Test,							ReplaceSpaceWith,	Scheme,		Page Name,		Params,						Expected Url,	
+﻿Test,							ReplaceSpaceWith,	Scheme,		Page Name,		Params,						Expected Url,
 About Us Default,				,					http://,	About Us,		,							http://{alias}/AboutUs.aspx
 Profile Messages Default,		,					http://,	Messages,		,							http://{alias}/ActivityFeed/Messages.aspx
 Terms Default,					,					http://,	About Us,		&ctl=Terms,					http://{alias}/Terms.aspx

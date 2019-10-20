@@ -64,10 +64,10 @@ namespace Dnn.PersonaBar.Pages.Services.Dto
 
         [DataMember(Name = "customUrlEnabled")]
         public bool CustomUrlEnabled { get; set; }
-        
+
         [DataMember(Name = "pageType")]
         public string PageType { get; set; }
-        
+
         [DataMember(Name = "startDate")]
         public DateTime? StartDate { get; set; }
 
@@ -115,7 +115,7 @@ namespace Dnn.PersonaBar.Pages.Services.Dto
 
         [DataMember(Name = "sitemapPriority")]
         public float SiteMapPriority { get; set; }
-        
+
         [DataMember(Name = "permanentRedirect")]
         public bool PermanentRedirect { get; set; }
 
@@ -124,7 +124,7 @@ namespace Dnn.PersonaBar.Pages.Services.Dto
 
         [DataMember(Name = "pageStyleSheet")]
         public string PageStyleSheet { get; set; }
-        
+
         [DataMember(Name = "themeName")]
         public string ThemeName { get; set; }
 
@@ -133,7 +133,7 @@ namespace Dnn.PersonaBar.Pages.Services.Dto
 
         [DataMember(Name = "skinSrc")]
         public string SkinSrc { get; set; }
-        
+
         [DataMember(Name = "containerSrc")]
         public string ContainerSrc { get; set; }
 

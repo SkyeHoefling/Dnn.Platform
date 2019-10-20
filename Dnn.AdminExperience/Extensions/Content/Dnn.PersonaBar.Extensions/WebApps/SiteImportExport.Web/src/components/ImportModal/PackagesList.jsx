@@ -41,11 +41,11 @@ class PackagesList extends Component {
                                 isSelected={props.selectedPackage && props.selectedPackage.PackageId === pkg.PackageId} />
                             {props.selectedPackage && props.selectedPackage.PackageId === pkg.PackageId &&
                                 <div className="checkmark" dangerouslySetInnerHTML={{ __html: SvgIcons.CheckMarkIcon }}></div>
-                            }                            
+                            }
                         </PackageCard>
                         {
                             pkg.Description &&
-                            <div 
+                            <div
                                 className="package-card-tooltip"
                                 dangerouslySetInnerHTML={{ __html : this.renderTooltipMessage(pkg.Description)}}
                                 onClick={this.onSelect.bind(this, pkg)}

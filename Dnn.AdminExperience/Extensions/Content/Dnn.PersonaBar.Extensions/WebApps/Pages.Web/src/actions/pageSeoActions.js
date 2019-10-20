@@ -161,7 +161,7 @@ const pageSeoActions = {
                             pageUrls: response
                         }
                     });
-                });                
+                });
             }).catch((error) => {
                 dispatch({
                     type: ActionTypes.ERROR_SEO_DELETING_URL,

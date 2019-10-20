@@ -39,7 +39,7 @@ class PageLanguage extends Component {
         this.setState({ allModulesLinked }, () => {
             this.updateAllModules("IsLocalized", allModulesLinked);
         });
-    } 
+    }
 
     onUpdatePages(key, e) {
         const value = e.target ? e.target.value: e;
@@ -60,7 +60,7 @@ class PageLanguage extends Component {
         let panelId = window.$('.socialpanel:visible').attr('id');
         utils.getUtilities().panelViewData(panelId, {tab: [0]});
         window.parent.location = url;
-        
+
         e.preventDefault();
         e.stopPropagation();
     }
@@ -104,20 +104,20 @@ class PageLanguage extends Component {
                 <div className="page-language-row">
                     <img src={iconSrc} alt={cultureCode} />
                     <span>{cultureCode}</span>
-                    {!this.props.isDefault && <a className="icon" 
-                        onClick={this.onDeletePage.bind(this, page)} 
-                        dangerouslySetInnerHTML={{ __html: SvgIcons.TrashIcon }} 
+                    {!this.props.isDefault && <a className="icon"
+                        onClick={this.onDeletePage.bind(this, page)}
+                        dangerouslySetInnerHTML={{ __html: SvgIcons.TrashIcon }}
                         aria-label="Delete">
                     </a>}
-                    {!isCurrentPage && <a className="icon" 
-                        onClick={this.onSettingPage.bind(this, page.PageUrl)} 
-                        dangerouslySetInnerHTML={{ __html: SvgIcons.SettingsIcon }} 
+                    {!isCurrentPage && <a className="icon"
+                        onClick={this.onSettingPage.bind(this, page.PageUrl)}
+                        dangerouslySetInnerHTML={{ __html: SvgIcons.SettingsIcon }}
                         aria-label="Settings">
                     </a>}
-                    <a className="icon" 
-                        href={page.PageUrl} 
-                        onClick={this.onViewPage.bind(this, page.PageUrl)} 
-                        dangerouslySetInnerHTML={{ __html: SvgIcons.EyeIcon }} 
+                    <a className="icon"
+                        href={page.PageUrl}
+                        onClick={this.onViewPage.bind(this, page.PageUrl)}
+                        dangerouslySetInnerHTML={{ __html: SvgIcons.EyeIcon }}
                         aria-label="View">
                     </a>
                 </div>

@@ -16,7 +16,7 @@
   function toWordList(words) {
     var ret = [];
     words.split(' ').forEach(function(e){
-      ret.push({name: e});
+    ret.push({name: e});
     });
     return ret;
   }
@@ -65,115 +65,115 @@
 
   CodeMirror.defineMode('forth', function() {
     function searchWordList (wordList, word) {
-      var i;
-      for (i = wordList.length - 1; i >= 0; i--) {
+    var i;
+    for (i = wordList.length - 1; i >= 0; i--) {
         if (wordList[i].name === word.toUpperCase()) {
-          return wordList[i];
+        return wordList[i];
         }
-      }
-      return undefined;
+    }
+    return undefined;
     }
   return {
     startState: function() {
-      return {
+    return {
         state: '',
         base: 10,
         coreWordList: coreWordList,
         immediateWordList: immediateWordList,
         wordList: []
-      };
+    };
     },
     token: function (stream, stt) {
-      var mat;
-      if (stream.eatSpace()) {
+    var mat;
+    if (stream.eatSpace()) {
         return null;
-      }
-      if (stt.state === '') { // interpretation
+    }
+    if (stt.state === '') { // interpretation
         if (stream.match(/^(\]|:NONAME)(\s|$)/i)) {
-          stt.state = ' compilation';
-          return 'builtin compilation';
+        stt.state = ' compilation';
+        return 'builtin compilation';
         }
         mat = stream.match(/^(\:)\s+(\S+)(\s|$)+/);
         if (mat) {
-          stt.wordList.push({name: mat[2].toUpperCase()});
-          stt.state = ' compilation';
-          return 'def' + stt.state;
+        stt.wordList.push({name: mat[2].toUpperCase()});
+        stt.state = ' compilation';
+        return 'def' + stt.state;
         }
         mat = stream.match(/^(VARIABLE|2VARIABLE|CONSTANT|2CONSTANT|CREATE|POSTPONE|VALUE|WORD)\s+(\S+)(\s|$)+/i);
         if (mat) {
-          stt.wordList.push({name: mat[2].toUpperCase()});
-          return 'def' + stt.state;
+        stt.wordList.push({name: mat[2].toUpperCase()});
+        return 'def' + stt.state;
         }
         mat = stream.match(/^(\'|\[\'\])\s+(\S+)(\s|$)+/);
         if (mat) {
-          return 'builtin' + stt.state;
+        return 'builtin' + stt.state;
         }
         } else { // compilation
         // ; [
         if (stream.match(/^(\;|\[)(\s)/)) {
-          stt.state = '';
-          stream.backUp(1);
-          return 'builtin compilation';
+        stt.state = '';
+        stream.backUp(1);
+        return 'builtin compilation';
         }
         if (stream.match(/^(\;|\[)($)/)) {
-          stt.state = '';
-          return 'builtin compilation';
+        stt.state = '';
+        return 'builtin compilation';
         }
         if (stream.match(/^(POSTPONE)\s+\S+(\s|$)+/)) {
-          return 'builtin';
+        return 'builtin';
         }
-      }
+    }
 
-      // dynamic wordlist
-      mat = stream.match(/^(\S+)(\s+|$)/);
-      if (mat) {
+    // dynamic wordlist
+    mat = stream.match(/^(\S+)(\s+|$)/);
+    if (mat) {
         if (searchWordList(stt.wordList, mat[1]) !== undefined) {
-          return 'variable' + stt.state;
+        return 'variable' + stt.state;
         }
 
         // comments
         if (mat[1] === '\\') {
-          stream.skipToEnd();
+        stream.skipToEnd();
             return 'comment' + stt.state;
-          }
+        }
 
-          // core words
-          if (searchWordList(stt.coreWordList, mat[1]) !== undefined) {
+        // core words
+        if (searchWordList(stt.coreWordList, mat[1]) !== undefined) {
             return 'builtin' + stt.state;
-          }
-          if (searchWordList(stt.immediateWordList, mat[1]) !== undefined) {
+        }
+        if (searchWordList(stt.immediateWordList, mat[1]) !== undefined) {
             return 'keyword' + stt.state;
-          }
+        }
 
-          if (mat[1] === '(') {
+        if (mat[1] === '(') {
             stream.eatWhile(function (s) { return s !== ')'; });
             stream.eat(')');
             return 'comment' + stt.state;
-          }
+        }
 
-          // // strings
-          if (mat[1] === '.(') {
+        // // strings
+        if (mat[1] === '.(') {
             stream.eatWhile(function (s) { return s !== ')'; });
             stream.eat(')');
             return 'string' + stt.state;
-          }
-          if (mat[1] === 'S"' || mat[1] === '."' || mat[1] === 'C"') {
+        }
+        if (mat[1] === 'S"' || mat[1] === '."' || mat[1] === 'C"') {
             stream.eatWhile(function (s) { return s !== '"'; });
             stream.eat('"');
             return 'string' + stt.state;
-          }
-
-          // numbers
-          if (mat[1] - 0xfffffffff) {
-            return 'number' + stt.state;
-          }
-          // if (mat[1].match(/^[-+]?[0-9]+\.[0-9]*/)) {
-          //     return 'number' + stt.state;
-          // }
-
-          return 'atom' + stt.state;
         }
-      }
+
+        // numbers
+        if (mat[1] - 0xfffffffff) {
+            return 'number' + stt.state;
+        }
+        // if (mat[1].match(/^[-+]?[0-9]+\.[0-9]*/)) {
+        //     return 'number' + stt.state;
+        // }
+
+        return 'atom' + stt.state;
+        }
+    }
     };
   });
   CodeMirror.defineMIME("text/x-forth", "forth");

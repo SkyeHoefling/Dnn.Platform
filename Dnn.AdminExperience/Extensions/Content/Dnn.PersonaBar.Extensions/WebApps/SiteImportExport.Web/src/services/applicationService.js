@@ -46,17 +46,17 @@ class ApplicationService {
     }
 
     getJobDetails(jobId, callback, errorCallback) {
-        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");        
+        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");
         sf.getsilence("JobDetails?jobId=" + jobId, {}, callback, errorCallback);
     }
 
     exportSite(payload, callback, errorCallback) {
-        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");        
+        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");
         sf.post("Export", payload, callback, errorCallback);
     }
 
     importSite(payload, callback, errorCallback) {
-        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");        
+        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");
         sf.post("Import", payload, callback, errorCallback);
     }
 
@@ -66,17 +66,17 @@ class ApplicationService {
     }
 
     verifyImportPackage(packageId, callback, errorCallback) {
-        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");        
+        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");
         sf.get("VerifyImportPackage?packageId=" + packageId, {}, callback, errorCallback);
     }
 
     cancelJob(jobId, callback, errorCallback) {
-        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");        
+        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");
         sf.post("CancelProcess?jobId=" + jobId, {}, callback, errorCallback);
     }
 
     deleteJob(jobId, callback, errorCallback) {
-        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");        
+        const sf = this.getServiceFramework("SiteExportImport", "ExportImport");
         sf.post("RemoveJob?jobId=" + jobId, {}, callback, errorCallback);
     }
 

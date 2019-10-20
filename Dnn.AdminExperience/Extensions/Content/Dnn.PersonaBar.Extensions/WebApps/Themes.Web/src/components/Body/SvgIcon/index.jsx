@@ -52,7 +52,7 @@ class SvgIcon extends Component {
         this.state = {};
     }
 
-    
+
     render() {
         const {props} = this;
 

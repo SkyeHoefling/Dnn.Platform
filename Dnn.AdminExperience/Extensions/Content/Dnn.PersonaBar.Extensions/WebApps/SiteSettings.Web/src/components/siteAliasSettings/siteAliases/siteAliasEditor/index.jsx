@@ -44,7 +44,7 @@ class SiteAliasEditor extends Component {
             else if (props.aliasDetail["HTTPAlias"] !== "" && props.aliasDetail["HTTPAlias"] !== undefined) {
                 state.error["alias"] = false;
             }
-    
+
             this.setState({
                 aliasDetail: Object.assign({}, props.aliasDetail),
                 triedToSubmit: false,

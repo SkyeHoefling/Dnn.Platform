@@ -11,15 +11,15 @@
         <div class="dnnFormItem">
             <dnn:Label id="fileTypeLabel" runat="Server"/>
             <asp:DropDownList ID="scriptFileType" runat="server" RepeatDirection="Horizontal" AutoPostBack="true">
-				<asp:ListItem Value="CSHTML" ResourceKey="CSHTML" Selected="True" />
-				<asp:ListItem Value="VBHTML" ResourceKey="VBHTML" />
-			</asp:DropDownList>
+                <asp:ListItem Value="CSHTML" ResourceKey="CSHTML" Selected="True" />
+                <asp:ListItem Value="VBHTML" ResourceKey="VBHTML" />
+            </asp:DropDownList>
         </div>
 
         <div class="dnnFormItem">
             <dnn:Label id="fileNameLabel" runat="Server"/>
-			<asp:TextBox ID="fileName" runat="server" width="150px" />
-			<asp:Label ID="fileExtension" runat="server" />
+            <asp:TextBox ID="fileName" runat="server" width="150px" />
+            <asp:Label ID="fileExtension" runat="server" />
         </div>
     </fieldset>
 
@@ -29,7 +29,3 @@
     </ul>
 
 </div>
-
-
-
-

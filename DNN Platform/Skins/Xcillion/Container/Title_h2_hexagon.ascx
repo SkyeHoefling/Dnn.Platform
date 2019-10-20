@@ -4,10 +4,9 @@
     <div class="heading_wrapper">
         <div class="lms_heading_2">
             <h2 class="lms_heading_title"><dnn:TITLE runat="server" id="dnnTITLE" CssClass="TitleH2-v2" /></h2>
-		    <div class="hexagon"></div>
+            <div class="hexagon"></div>
         </div>
     </div>
     <div id="ContentPane" runat="server"></div>
-	<div class="clear"></div>
+    <div class="clear"></div>
 </div>
-

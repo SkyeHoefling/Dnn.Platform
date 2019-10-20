@@ -52,7 +52,7 @@ dnn.controls.triStateManager = function (images, toolTips) {
             });
         } else {
             updateImage($hdn, state);
-            
+
             //Check if View Permission is denied (can't do other tasks if can't view)
             if ($hdn.hasClass('view')) {
                 if (state === 'False') {
@@ -81,7 +81,7 @@ dnn.controls.triStateManager = function (images, toolTips) {
                     }
                 }
             }
-            
+
             var $fullControl = $hdn.parent().parent().find('td input.fullControl');
             if ($fullControl.length > 0) {
                 var fullControl = $fullControl[0];
@@ -109,7 +109,7 @@ dnn.controls.triStateManager = function (images, toolTips) {
             });
         }
     }
-    
+
     function updateImage($hdn, state) {
         var img = $hdn.siblings('img')[0];
         img.src = images[state];

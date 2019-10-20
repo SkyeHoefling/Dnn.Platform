@@ -11,7 +11,7 @@ export const getPasswordStrength = (password, passwordStrengthOptions) => {
     }
 
     let pStrengthRating = passwordStrengthRating(password,passwordStrengthOptions);
-   
+
     if (password.length <= 2 ) {
         return null;
     }

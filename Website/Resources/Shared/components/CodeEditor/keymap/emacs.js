@@ -34,9 +34,9 @@
     if (text == null) text = cm.getRange(from, to);
 
     if (mayGrow && lastKill && lastKill.cm == cm && posEq(from, lastKill.pos) && cm.isClean(lastKill.gen))
-      growRingTop(text);
+    growRingTop(text);
     else
-      addToRing(text);
+    addToRing(text);
     cm.replaceRange("", from, to, "+delete");
 
     if (mayGrow) lastKill = {cm: cm, pos: from, gen: cm.changeGeneration()};
@@ -66,13 +66,13 @@
     var sawText = /\S/.test(dir < 0 ? line.slice(0, pos.ch) : line.slice(pos.ch));
     var fst = cm.firstLine(), lst = cm.lastLine();
     for (;;) {
-      no += dir;
-      if (no < fst || no > lst)
+    no += dir;
+    if (no < fst || no > lst)
         return cm.clipPos(Pos(no - dir, dir < 0 ? 0 : null));
-      line = cm.getLine(no);
-      var hasText = /\S/.test(line);
-      if (hasText) sawText = true;
-      else if (sawText) return Pos(no, 0);
+    line = cm.getLine(no);
+    var hasText = /\S/.test(line);
+    if (hasText) sawText = true;
+    else if (sawText) return Pos(no, 0);
     }
   }
 
@@ -80,18 +80,18 @@
     var line = pos.line, ch = pos.ch;
     var text = cm.getLine(pos.line), sawWord = false;
     for (;;) {
-      var next = text.charAt(ch + (dir < 0 ? -1 : 0));
-      if (!next) { // End/beginning of line reached
+    var next = text.charAt(ch + (dir < 0 ? -1 : 0));
+    if (!next) { // End/beginning of line reached
         if (line == (dir < 0 ? cm.firstLine() : cm.lastLine())) return Pos(line, ch);
         text = cm.getLine(line + dir);
         if (!/\S/.test(text)) return Pos(line, ch);
         line += dir;
         ch = dir < 0 ? text.length : 0;
         continue;
-      }
-      if (sawWord && /[!?.]/.test(next)) return Pos(line, ch + (dir > 0 ? 1 : 0));
-      if (!sawWord) sawWord = /\w/.test(next);
-      ch += dir;
+    }
+    if (sawWord && /[!?.]/.test(next)) return Pos(line, ch + (dir > 0 ? 1 : 0));
+    if (!sawWord) sawWord = /\w/.test(next);
+    ch += dir;
     }
   }
 
@@ -99,18 +99,18 @@
     var wrap;
     if (cm.findMatchingBracket && (wrap = cm.findMatchingBracket(pos, true))
         && wrap.match && (wrap.forward ? 1 : -1) == dir)
-      return dir > 0 ? Pos(wrap.to.line, wrap.to.ch + 1) : wrap.to;
+    return dir > 0 ? Pos(wrap.to.line, wrap.to.ch + 1) : wrap.to;
 
     for (var first = true;; first = false) {
-      var token = cm.getTokenAt(pos);
-      var after = Pos(pos.line, dir < 0 ? token.start : token.end);
-      if (first && dir > 0 && token.end == pos.ch || !/\w/.test(token.string)) {
+    var token = cm.getTokenAt(pos);
+    var after = Pos(pos.line, dir < 0 ? token.start : token.end);
+    if (first && dir > 0 && token.end == pos.ch || !/\w/.test(token.string)) {
         var newPos = cm.findPosH(after, dir, "char");
         if (posEq(after, newPos)) return pos;
         else pos = newPos;
-      } else {
+    } else {
         return after;
-      }
+    }
     }
   }
 
@@ -126,9 +126,9 @@
   function repeated(cmd) {
     var f = typeof cmd == "string" ? function(cm) { cm.execCommand(cmd); } : cmd;
     return function(cm) {
-      var prefix = getPrefix(cm);
-      f(cm);
-      for (var i = 1; i < prefix; ++i) f(cm);
+    var prefix = getPrefix(cm);
+    f(cm);
+    for (var i = 1; i < prefix; ++i) f(cm);
     };
   }
 
@@ -136,16 +136,16 @@
     var prefix = getPrefix(cm);
     if (prefix < 0) { dir = -dir; prefix = -prefix; }
     for (var i = 0; i < prefix; ++i) {
-      var newPos = by(cm, pos, dir);
-      if (posEq(newPos, pos)) break;
-      pos = newPos;
+    var newPos = by(cm, pos, dir);
+    if (posEq(newPos, pos)) break;
+    pos = newPos;
     }
     return pos;
   }
 
   function move(by, dir) {
     var f = function(cm) {
-      cm.extendSelection(findEnd(cm, cm.getCursor(), by, dir));
+    cm.extendSelection(findEnd(cm, cm.getCursor(), by, dir));
     };
     f.motion = true;
     return f;
@@ -155,27 +155,27 @@
     var selections = cm.listSelections(), cursor;
     var i = selections.length;
     while (i--) {
-      cursor = selections[i].head;
-      kill(cm, cursor, findEnd(cm, cursor, by, dir), true);
+    cursor = selections[i].head;
+    kill(cm, cursor, findEnd(cm, cursor, by, dir), true);
     }
   }
 
   function killRegion(cm) {
     if (cm.somethingSelected()) {
-      var selections = cm.listSelections(), selection;
-      var i = selections.length;
-      while (i--) {
+    var selections = cm.listSelections(), selection;
+    var i = selections.length;
+    while (i--) {
         selection = selections[i];
         kill(cm, selection.anchor, selection.head);
-      }
-      return true;
+    }
+    return true;
     }
   }
 
   function addPrefix(cm, digit) {
     if (cm.state.emacsPrefix) {
-      if (digit != "-") cm.state.emacsPrefix += digit;
-      return;
+    if (digit != "-") cm.state.emacsPrefix += digit;
+    return;
     }
     // Not active yet
     cm.state.emacsPrefix = digit;
@@ -187,7 +187,7 @@
 
   function maybeClearPrefix(cm, arg) {
     if (!cm.state.emacsPrefixMap && !prefixPreservingKeys.hasOwnProperty(arg))
-      clearPrefix(cm);
+    clearPrefix(cm);
   }
 
   function clearPrefix(cm) {
@@ -199,9 +199,9 @@
   function maybeDuplicateInput(cm, event) {
     var dup = getPrefix(cm);
     if (dup > 1 && event.origin == "+input") {
-      var one = event.text.join("\n"), txt = "";
-      for (var i = 1; i < dup; ++i) txt += one;
-      cm.replaceSelection(txt);
+    var one = event.text.join("\n"), txt = "";
+    for (var i = 1; i < dup; ++i) txt += one;
+    cm.replaceSelection(txt);
     }
   }
 
@@ -235,9 +235,9 @@
 
   function getInput(cm, msg, f) {
     if (cm.openDialog)
-      cm.openDialog(msg + ": <input type=\"text\" style=\"width: 10em\"/>", f, {bottom: true});
+    cm.openDialog(msg + ": <input type=\"text\" style=\"width: 10em\"/>", f, {bottom: true});
     else
-      f(prompt(msg, ""));
+    f(prompt(msg, ""));
   }
 
   function operateOnWord(cm, op) {
@@ -250,19 +250,19 @@
     var pos = cm.getCursor(), line = pos.line, ch = pos.ch;
     var stack = [];
     while (line >= cm.firstLine()) {
-      var text = cm.getLine(line);
-      for (var i = ch == null ? text.length : ch; i > 0;) {
+    var text = cm.getLine(line);
+    for (var i = ch == null ? text.length : ch; i > 0;) {
         var ch = text.charAt(--i);
         if (ch == ")")
-          stack.push("(");
+        stack.push("(");
         else if (ch == "]")
-          stack.push("[");
+        stack.push("[");
         else if (ch == "}")
-          stack.push("{");
+        stack.push("{");
         else if (/[\(\{\[]/.test(ch) && (!stack.length || stack.pop() != ch))
-          return cm.extendSelection(Pos(line, i));
-      }
-      --line; ch = null;
+        return cm.extendSelection(Pos(line, i));
+    }
+    --line; ch = null;
     }
   }
 
@@ -276,22 +276,22 @@
   var keyMap = CodeMirror.keyMap.emacs = CodeMirror.normalizeKeyMap({
     "Ctrl-W": function(cm) {kill(cm, cm.getCursor("start"), cm.getCursor("end"));},
     "Ctrl-K": repeated(function(cm) {
-      var start = cm.getCursor(), end = cm.clipPos(Pos(start.line));
-      var text = cm.getRange(start, end);
-      if (!/\S/.test(text)) {
+    var start = cm.getCursor(), end = cm.clipPos(Pos(start.line));
+    var text = cm.getRange(start, end);
+    if (!/\S/.test(text)) {
         text += "\n";
         end = Pos(start.line + 1, 0);
-      }
-      kill(cm, start, end, true, text);
+    }
+    kill(cm, start, end, true, text);
     }),
     "Alt-W": function(cm) {
-      addToRing(cm.getSelection());
-      clearMark(cm);
+    addToRing(cm.getSelection());
+    clearMark(cm);
     },
     "Ctrl-Y": function(cm) {
-      var start = cm.getCursor();
-      cm.replaceRange(getFromRing(getPrefix(cm)), start, start, "paste");
-      cm.setSelection(start, cm.getCursor());
+    var start = cm.getCursor();
+    cm.replaceRange(getFromRing(getPrefix(cm)), start, start, "paste");
+    cm.setSelection(start, cm.getCursor());
     },
     "Alt-Y": function(cm) {cm.replaceSelection(popFromRing(), "around", "paste");},
 
@@ -326,40 +326,40 @@
     "Ctrl-Alt-F": move(byExpr, 1), "Ctrl-Alt-B": move(byExpr, -1),
 
     "Shift-Ctrl-Alt-2": function(cm) {
-      var cursor = cm.getCursor();
-      cm.setSelection(findEnd(cm, cursor, byExpr, 1), cursor);
+    var cursor = cm.getCursor();
+    cm.setSelection(findEnd(cm, cursor, byExpr, 1), cursor);
     },
     "Ctrl-Alt-T": function(cm) {
-      var leftStart = byExpr(cm, cm.getCursor(), -1), leftEnd = byExpr(cm, leftStart, 1);
-      var rightEnd = byExpr(cm, leftEnd, 1), rightStart = byExpr(cm, rightEnd, -1);
-      cm.replaceRange(cm.getRange(rightStart, rightEnd) + cm.getRange(leftEnd, rightStart) +
-                      cm.getRange(leftStart, leftEnd), leftStart, rightEnd);
+    var leftStart = byExpr(cm, cm.getCursor(), -1), leftEnd = byExpr(cm, leftStart, 1);
+    var rightEnd = byExpr(cm, leftEnd, 1), rightStart = byExpr(cm, rightEnd, -1);
+    cm.replaceRange(cm.getRange(rightStart, rightEnd) + cm.getRange(leftEnd, rightStart) +
+                    cm.getRange(leftStart, leftEnd), leftStart, rightEnd);
     },
     "Ctrl-Alt-U": repeated(toEnclosingExpr),
 
     "Alt-Space": function(cm) {
-      var pos = cm.getCursor(), from = pos.ch, to = pos.ch, text = cm.getLine(pos.line);
-      while (from && /\s/.test(text.charAt(from - 1))) --from;
-      while (to < text.length && /\s/.test(text.charAt(to))) ++to;
-      cm.replaceRange(" ", Pos(pos.line, from), Pos(pos.line, to));
+    var pos = cm.getCursor(), from = pos.ch, to = pos.ch, text = cm.getLine(pos.line);
+    while (from && /\s/.test(text.charAt(from - 1))) --from;
+    while (to < text.length && /\s/.test(text.charAt(to))) ++to;
+    cm.replaceRange(" ", Pos(pos.line, from), Pos(pos.line, to));
     },
     "Ctrl-O": repeated(function(cm) { cm.replaceSelection("\n", "start"); }),
     "Ctrl-T": repeated(function(cm) {
-      cm.execCommand("transposeChars");
+    cm.execCommand("transposeChars");
     }),
 
     "Alt-C": repeated(function(cm) {
-      operateOnWord(cm, function(w) {
+    operateOnWord(cm, function(w) {
         var letter = w.search(/\w/);
         if (letter == -1) return w;
         return w.slice(0, letter) + w.charAt(letter).toUpperCase() + w.slice(letter + 1).toLowerCase();
-      });
+    });
     }),
     "Alt-U": repeated(function(cm) {
-      operateOnWord(cm, function(w) { return w.toUpperCase(); });
+    operateOnWord(cm, function(w) { return w.toUpperCase(); });
     }),
     "Alt-L": repeated(function(cm) {
-      operateOnWord(cm, function(w) { return w.toLowerCase(); });
+    operateOnWord(cm, function(w) { return w.toLowerCase(); });
     }),
 
     "Alt-;": "toggleComment",
@@ -372,21 +372,21 @@
     "Ctrl-J": "newlineAndIndent", "Enter": false, "Tab": "indentAuto",
 
     "Alt-G G": function(cm) {
-      var prefix = getPrefix(cm, true);
-      if (prefix != null && prefix > 0) return cm.setCursor(prefix - 1);
+    var prefix = getPrefix(cm, true);
+    if (prefix != null && prefix > 0) return cm.setCursor(prefix - 1);
 
-      getInput(cm, "Goto line", function(str) {
+    getInput(cm, "Goto line", function(str) {
         var num;
         if (str && !isNaN(num = Number(str)) && num == (num|0) && num > 0)
-          cm.setCursor(num - 1);
-      });
+        cm.setCursor(num - 1);
+    });
     },
 
     "Ctrl-X Tab": function(cm) {
-      cm.indentSelection(getPrefix(cm, true) || cm.getOption("indentUnit"));
+    cm.indentSelection(getPrefix(cm, true) || cm.getOption("indentUnit"));
     },
     "Ctrl-X Ctrl-X": function(cm) {
-      cm.setSelection(cm.getCursor("head"), cm.getCursor("anchor"));
+    cm.setSelection(cm.getCursor("head"), cm.getCursor("anchor"));
     },
     "Ctrl-X Ctrl-S": "save",
     "Ctrl-X Ctrl-W": "save",

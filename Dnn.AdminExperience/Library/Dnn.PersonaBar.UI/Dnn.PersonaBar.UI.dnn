@@ -134,11 +134,11 @@
                             <name>01.05.00.SqlDataProvider</name>
                             <version>01.05.00</version>
                         </script>
-                      <script type="Install">
+                    <script type="Install">
                         <path>SqlDataProvider</path>
                         <name>09.04.01.SqlDataProvider</name>
                         <version>09.04.01</version>
-                      </script>
+                    </script>
                         <script type="UnInstall">
                             <path>SqlDataProvider</path>
                             <name>Uninstall.SqlDataProvider</name>
@@ -156,16 +156,16 @@
                     </files>
                 </component>
                 <component type="Cleanup" version="01.03.00" fileName ="01.03.00.txt" />
-              <component type="File">
+            <component type="File">
                 <files>
-                  <basePath>DesktopModules\admin\Dnn.PersonaBar</basePath>
-                  <file>
+                <basePath>DesktopModules\admin\Dnn.PersonaBar</basePath>
+                <file>
                     <name>03.00.00.txt</name>
                     <sourceFileName>03.00.00.txt</sourceFileName>
-                  </file>
+                </file>
                 </files>
-              </component>
-              <component type="Cleanup" version="03.00.00" fileName ="03.00.00.txt" />
+            </component>
+            <component type="Cleanup" version="03.00.00" fileName ="03.00.00.txt" />
             </components>
             <eventMessage>
                 <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>

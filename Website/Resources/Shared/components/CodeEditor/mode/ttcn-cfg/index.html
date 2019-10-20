@@ -90,15 +90,15 @@ LocalAddress :=
         </textarea>
     </div>
 
-    <script> 
-      var ttcnEditor = CodeMirror.fromTextArea(document.getElementById("ttcn-cfg-code"), {
+    <script>
+    var ttcnEditor = CodeMirror.fromTextArea(document.getElementById("ttcn-cfg-code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-ttcn-cfg"
-      });
-      ttcnEditor.setSize(600, 860);
-      var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
-      CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
+    });
+    ttcnEditor.setSize(600, 860);
+    var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
+    CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
     </script>
     <br/>
     <p><strong>Language:</strong> Testing and Test Control Notation -
@@ -112,4 +112,3 @@ LocalAddress :=
     </a>.</p>
     <p>Coded by Asmelash Tsegay Gebretsadkan </p>
 </article>
-

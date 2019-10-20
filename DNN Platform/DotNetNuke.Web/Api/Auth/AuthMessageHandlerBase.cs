@@ -104,7 +104,7 @@ namespace DotNetNuke.Web.Api.Auth
                 value = values.FirstOrDefault();
             }
             return !string.IsNullOrEmpty(value) &&
-                   value.Equals("XmlHttpRequest", StringComparison.InvariantCultureIgnoreCase);
+                    value.Equals("XmlHttpRequest", StringComparison.InvariantCultureIgnoreCase);
         }
 
         /// <summary>

@@ -33,7 +33,7 @@ namespace DotNetNuke.Tests.Core.Services.Mail
             //arrange
             Func<string, string> sut = DotNetNuke.Services.Mail.Mail.ConvertToText;
             //act
-            var result = sut("<style>\r\nHello</style>World");     
+            var result = sut("<style>\r\nHello</style>World");
             //assert
             Assert.AreEqual("World", result.Trim());
         }

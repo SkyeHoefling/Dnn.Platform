@@ -113,11 +113,11 @@
                     // The main function to form the object for animation
                     for (var n in newStyle) {
                         if (typeof newStyle[n] != "function" && newStyle[n] /* No functions and null properties */
-				&& n.indexOf("Moz") == -1 && n.indexOf("length") == -1 /* No mozilla spezific render properties. */
-				&& newStyle[n] != oldStyle[n] /* Only values that have changed are used for the animation */
-				&& (n.match(/color/i) || (!n.match(/color/i) && !isNaN(parseInt(newStyle[n], 10)))) /* Only things that can be parsed to integers or colors */
-				&& (oldStyle.position != "static" || (oldStyle.position == "static" && !n.match(/left|top|bottom|right/))) /* No need for positions when dealing with static positions */
-				) offset[n] = newStyle[n];
+                && n.indexOf("Moz") == -1 && n.indexOf("length") == -1 /* No mozilla spezific render properties. */
+                && newStyle[n] != oldStyle[n] /* Only values that have changed are used for the animation */
+                && (n.match(/color/i) || (!n.match(/color/i) && !isNaN(parseInt(newStyle[n], 10)))) /* Only things that can be parsed to integers or colors */
+                && (oldStyle.position != "static" || (oldStyle.position == "static" && !n.match(/left|top|bottom|right/))) /* No need for positions when dealing with static positions */
+                ) offset[n] = newStyle[n];
                     }
 
                     that.animate(offset, duration, ea, function() { // Animate the newly constructed offset object
@@ -177,8 +177,8 @@
 
             toggle: function() {
                 if (!arguments[0] ||
-			(arguments[0].constructor == Number || (/(slow|normal|fast)/).test(arguments[0])) ||
-			($.isFunction(arguments[0]) || typeof arguments[0] == 'boolean')) {
+            (arguments[0].constructor == Number || (/(slow|normal|fast)/).test(arguments[0])) ||
+            ($.isFunction(arguments[0]) || typeof arguments[0] == 'boolean')) {
                     return this.__toggle.apply(this, arguments);
                 } else {
                     return this.effect.apply(this, _normalizeArguments(arguments, 'toggle'));
@@ -227,10 +227,10 @@
                 }
 
                 fx.elem.style[attr] = "rgb(" + [
-						Math.max(Math.min(parseInt((fx.pos * (fx.end[0] - fx.start[0])) + fx.start[0], 10), 255), 0),
-						Math.max(Math.min(parseInt((fx.pos * (fx.end[1] - fx.start[1])) + fx.start[1], 10), 255), 0),
-						Math.max(Math.min(parseInt((fx.pos * (fx.end[2] - fx.start[2])) + fx.start[2], 10), 255), 0)
-				].join(",") + ")";
+                        Math.max(Math.min(parseInt((fx.pos * (fx.end[0] - fx.start[0])) + fx.start[0], 10), 255), 0),
+                        Math.max(Math.min(parseInt((fx.pos * (fx.end[1] - fx.start[1])) + fx.start[1], 10), 255), 0),
+                        Math.max(Math.min(parseInt((fx.pos * (fx.end[2] - fx.start[2])) + fx.start[2], 10), 255), 0)
+                ].join(",") + ")";
             };
         });
 
@@ -640,7 +640,7 @@
                     $.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
                     if (o.callback) o.callback.apply(el[0], arguments); // Callback
                     el.dequeue();
-                } 
+                }
                 });
 
             });
@@ -691,7 +691,7 @@
                     $.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
                     if (o.callback) o.callback.apply(this, arguments); // Callback
                     el.dequeue();
-                } 
+                }
                 });
 
             });
@@ -734,30 +734,30 @@
                 for (var i = 0; i < rows; i++) { // =
                     for (var j = 0; j < cells; j++) { // ||
                         el
-				.clone()
-				.appendTo('body')
-				.wrap('<div></div>')
-				.css({
-				    position: 'absolute',
-				    visibility: 'visible',
-				    left: -j * (width / cells),
-				    top: -i * (height / rows)
-				})
-				.parent()
-				.addClass('ui-effects-explode')
-				.css({
-				    position: 'absolute',
-				    overflow: 'hidden',
-				    width: width / cells,
-				    height: height / rows,
-				    left: offset.left + j * (width / cells) + (o.options.mode == 'show' ? (j - Math.floor(cells / 2)) * (width / cells) : 0),
-				    top: offset.top + i * (height / rows) + (o.options.mode == 'show' ? (i - Math.floor(rows / 2)) * (height / rows) : 0),
-				    opacity: o.options.mode == 'show' ? 0 : 1
-				}).animate({
-				    left: offset.left + j * (width / cells) + (o.options.mode == 'show' ? 0 : (j - Math.floor(cells / 2)) * (width / cells)),
-				    top: offset.top + i * (height / rows) + (o.options.mode == 'show' ? 0 : (i - Math.floor(rows / 2)) * (height / rows)),
-				    opacity: o.options.mode == 'show' ? 1 : 0
-				}, o.duration || 500);
+                .clone()
+                .appendTo('body')
+                .wrap('<div></div>')
+                .css({
+                    position: 'absolute',
+                    visibility: 'visible',
+                    left: -j * (width / cells),
+                    top: -i * (height / rows)
+                })
+                .parent()
+                .addClass('ui-effects-explode')
+                .css({
+                    position: 'absolute',
+                    overflow: 'hidden',
+                    width: width / cells,
+                    height: height / rows,
+                    left: offset.left + j * (width / cells) + (o.options.mode == 'show' ? (j - Math.floor(cells / 2)) * (width / cells) : 0),
+                    top: offset.top + i * (height / rows) + (o.options.mode == 'show' ? (i - Math.floor(rows / 2)) * (height / rows) : 0),
+                    opacity: o.options.mode == 'show' ? 0 : 1
+                }).animate({
+                    left: offset.left + j * (width / cells) + (o.options.mode == 'show' ? 0 : (j - Math.floor(cells / 2)) * (width / cells)),
+                    top: offset.top + i * (height / rows) + (o.options.mode == 'show' ? 0 : (i - Math.floor(rows / 2)) * (height / rows)),
+                    opacity: o.options.mode == 'show' ? 1 : 0
+                }, o.duration || 500);
                     }
                 }
 
@@ -822,12 +822,12 @@
 
                 // Animate
                 wrapper.animate(animation1, duration, o.options.easing)
-		.animate(animation2, duration, o.options.easing, function() {
-		    if (mode == 'hide') el.hide(); // Hide
-		    $.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
-		    if (o.callback) o.callback.apply(el[0], arguments); // Callback
-		    el.dequeue();
-		});
+        .animate(animation2, duration, o.options.easing, function() {
+            if (mode == 'hide') el.hide(); // Hide
+            $.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
+            if (o.callback) o.callback.apply(el[0], arguments); // Callback
+            el.dequeue();
+        });
 
             });
 
@@ -1007,7 +1007,7 @@
                     $.effects.restore(el, restore ? props : props1); $.effects.removeWrapper(el); // Restore
                     if (o.callback) o.callback.apply(this, arguments); // Callback
                     el.dequeue();
-                } 
+                }
                 });
 
             });
@@ -1058,7 +1058,7 @@
                     $.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
                     if (o.callback) o.callback.apply(this, arguments); // Callback
                     el.dequeue();
-                } 
+                }
                 });
 
             });

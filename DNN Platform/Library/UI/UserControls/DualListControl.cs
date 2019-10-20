@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -34,7 +34,7 @@ namespace DotNetNuke.UI.UserControls
 {
     public abstract class DualListControl : UserControlBase
     {
-		#region "Private Members"
+        #region "Private Members"
         protected Label Label1;
         protected Label Label2;
         private string MyFileName = "DualListControl.ascx";
@@ -51,10 +51,10 @@ namespace DotNetNuke.UI.UserControls
         protected LinkButton cmdRemoveAll;
         protected ListBox lstAssigned;
         protected ListBox lstAvailable;
-		
-		#endregion
-		
-		#region "Public Properties"
+
+        #endregion
+
+        #region "Public Properties"
 
         public string ListBoxWidth
         {
@@ -137,13 +137,13 @@ namespace DotNetNuke.UI.UserControls
                 _Enabled = value;
             }
         }
-		
-		#endregion
-		
-		#region "Protected Event Handlers"
+
+        #endregion
+
+        #region "Protected Event Handlers"
 
         /// <summary>The Page_Load server event handler on this page is used to populate the role information for the page</summary>
-		protected override void OnLoad(EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
@@ -164,7 +164,7 @@ namespace DotNetNuke.UI.UserControls
 
                 if (!Page.IsPostBack)
                 {
-					//set dimensions of control
+                    //set dimensions of control
                     if (!String.IsNullOrEmpty(_ListBoxWidth))
                     {
                         lstAvailable.Width = Unit.Parse(_ListBoxWidth);
@@ -175,7 +175,7 @@ namespace DotNetNuke.UI.UserControls
                         lstAvailable.Height = Unit.Parse(_ListBoxHeight);
                         lstAssigned.Height = Unit.Parse(_ListBoxHeight);
                     }
-					
+
                     //load available
                     lstAvailable.DataTextField = _DataTextField;
                     lstAvailable.DataValueField = _DataValueField;
@@ -268,10 +268,10 @@ namespace DotNetNuke.UI.UserControls
             lstAssigned.ClearSelection();
             Sort(lstAvailable);
         }
-		
-		#endregion
-		
-		#region "Private Methods"
+
+        #endregion
+
+        #region "Private Methods"
 
         private void Sort(ListBox ctlListBox)
         {
@@ -287,8 +287,8 @@ namespace DotNetNuke.UI.UserControls
                 ctlListBox.Items.Add(objListItem);
             }
         }
-		
-		#endregion
+
+        #endregion
     }
 
     public class ListItemComparer : IComparer

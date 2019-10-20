@@ -48,13 +48,13 @@ If this is your first time working with Dnn:AdminExperience. You will need to fo
 
     - Bullet points are okay, too.
     - Typically a hyphen or asterisk is used for the bullet, followed by a
-      single space. Use a hanging indent.
-  
+    single space. Use a hanging indent.
+
     Fix bug #123 #345
 ````
 * For bonus points run and add unit tests
-	* Make sure you have added the necessary tests for your changes.
-	* Run _all_ the tests to assure nothing else was accidentally broken.
+    * Make sure you have added the necessary tests for your changes.
+    * Run _all_ the tests to assure nothing else was accidentally broken.
 
 
 ## Making Trivial Changes
@@ -64,11 +64,11 @@ If this is your first time working with Dnn:AdminExperience. You will need to fo
 For changes of a trivial nature to comments and documentation, it is not
 always necessary to create a new ticket in the issue tracker. In this case, it is
 appropriate to start the first line of a commit with '(doc)' instead of
-a ticket number. 
+a ticket number.
 
 ````
-    Short (72 chars or less) summary starting with (doc). 
-    
+    Short (72 chars or less) summary starting with (doc).
+
     The first line is a real-life imperative statement with '(doc)' in place of what would have been the ticket number in a non-documentation related commit. The body describes the nature of the new documentation or comments added.
 ````
 

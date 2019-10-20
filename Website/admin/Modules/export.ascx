@@ -4,11 +4,11 @@
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 <div class="dnnForm dnnExport dnnClear" id="dnnLogViewer">
     <fieldset>
-		<div class="dnnFormItem">
+        <div class="dnnFormItem">
             <dnn:label id="plFolder" runat="server" controlname="cboFolders" suffix=":" />
             <dnn:DnnFolderDropDownList ID="cboFolders" runat="server" />
         </div>
-		<div class="dnnFormItem">
+        <div class="dnnFormItem">
             <dnn:label id="plFile" runat="server" controlname="txtFile" suffix=":" />
             <asp:textbox id="txtFile" runat="server" maxlength="200" />
         </div>

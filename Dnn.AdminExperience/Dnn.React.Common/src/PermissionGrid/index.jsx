@@ -89,14 +89,14 @@ class PermissionGrid extends Component {
             }
         });
     }
-    
+
     renderRolesGrid() {
         const {props, state} = this;
 
-        return  <Grid 
-            service={props.service} 
-            localization={state.localization} 
-            type="role" 
+        return  <Grid
+            service={props.service}
+            localization={state.localization}
+            type="role"
             definitions={state.definitions}
             permissions={state.rolePermissions}
             onChange={this.onPermissionsChanged.bind(this, "role")}
@@ -106,10 +106,10 @@ class PermissionGrid extends Component {
     renderUsersGrid() {
         const {props, state} = this;
 
-        return  <Grid 
-            service={props.service} 
-            localization={state.localization} 
-            type="user" 
+        return  <Grid
+            service={props.service}
+            localization={state.localization}
+            type="user"
             definitions={state.definitions}
             permissions={state.userPermissions}
             onChange={this.onPermissionsChanged.bind(this, "user")}

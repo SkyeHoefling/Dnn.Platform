@@ -6,7 +6,7 @@ import IconButton from "./IconButton";
 class StatusSwitch extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
         };
     }
@@ -49,7 +49,7 @@ class StatusSwitch extends Component {
                 break;
         }
         return (
-            
+
             <IconButton type={type} className={className} onClick={this.changeState.bind(this)} />
         );
     }

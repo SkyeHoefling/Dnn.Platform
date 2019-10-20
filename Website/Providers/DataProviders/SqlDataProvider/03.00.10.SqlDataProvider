@@ -8,10 +8,10 @@
 /*****                                                  *****/
 /************************************************************/
 
-IF NOT EXISTS (SELECT * FROM SysObjects O INNER JOIN SysColumns C ON O.ID=C.ID WHERE ObjectProperty(O.ID,'IsUserTable')=1 AND O.Name='{objectQualifier}UserPortals' AND C.Name='CreatedDate') 
+IF NOT EXISTS (SELECT * FROM SysObjects O INNER JOIN SysColumns C ON O.ID=C.ID WHERE ObjectProperty(O.ID,'IsUserTable')=1 AND O.Name='{objectQualifier}UserPortals' AND C.Name='CreatedDate')
 BEGIN
   ALTER TABLE {databaseOwner}{objectQualifier}UserPortals ADD
-	CreatedDate datetime DEFAULT getDate() NOT NULL
+    CreatedDate datetime DEFAULT getDate() NOT NULL
 END
 GO
 
@@ -23,9 +23,9 @@ GO
 ---------------------------------------------------------------------------------------------------
 UPDATE {databaseOwner}{objectQualifier}UserPortals
 SET CreatedDate = aM.CreateDate
-FROM         {databaseOwner}{objectQualifier}Users U 
-INNER JOIN	dbo.aspnet_Users aU ON U.Username = aU.UserName 
-INNER JOIN	dbo.aspnet_Membership aM ON aU.UserId = aM.UserId 
+FROM         {databaseOwner}{objectQualifier}Users U
+INNER JOIN	dbo.aspnet_Users aU ON U.Username = aU.UserName
+INNER JOIN	dbo.aspnet_Membership aM ON aU.UserId = aM.UserId
 INNER JOIN	{databaseOwner}{objectQualifier}UserPortals UP ON U.UserID = UP.UserId
 WHERE     (aM.CreateDate IS NOT NULL)
 
@@ -45,19 +45,19 @@ CREATE procedure {databaseOwner}{objectQualifier}DeleteRole
 
 as
 
-delete 
+delete
 from {objectQualifier}FolderPermission
 where  RoleId = @RoleId
 
-delete 
+delete
 from {objectQualifier}ModulePermission
 where  RoleId = @RoleId
 
-delete 
+delete
 from {objectQualifier}TabPermission
 where  RoleId = @RoleId
 
-delete 
+delete
 from {objectQualifier}Roles
 where  RoleId = @RoleId
 
@@ -73,14 +73,14 @@ create procedure {databaseOwner}{objectQualifier}GetTopLevelMessages
 as
 
 select ItemId,
-		ModuleId,
-       DisplayOrder,
-       'Parent' = LEFT(DisplayOrder, 19),    
-       'ChildCount' = (SELECT COUNT(*) -1  from {objectQualifier}Discussion Disc2 WHERE LEFT(Disc2.DisplayOrder,LEN(RTRIM({objectQualifier}Discussion.DisplayOrder))) = {objectQualifier}Discussion.DisplayOrder),
-       Title,  
-       'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       {objectQualifier}Discussion.CreatedDate,
-       body
+        ModuleId,
+        DisplayOrder,
+        'Parent' = LEFT(DisplayOrder, 19),
+        'ChildCount' = (SELECT COUNT(*) -1  from {objectQualifier}Discussion Disc2 WHERE LEFT(Disc2.DisplayOrder,LEN(RTRIM({objectQualifier}Discussion.DisplayOrder))) = {objectQualifier}Discussion.DisplayOrder),
+        Title,
+        'CreatedByUser' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        {objectQualifier}Discussion.CreatedDate,
+        body
 from {objectQualifier}Discussion
 left outer join {objectQualifier}Users on {objectQualifier}Discussion.CreatedByUser = {objectQualifier}Users.UserId
 where  ModuleId = @ModuleId
@@ -95,42 +95,42 @@ DROP PROCEDURE {databaseOwner}{objectQualifier}GetModulePermissionsByModuleID
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetModulePermissionsByModuleID
-	@ModuleID int, 
-	@PermissionID int
+    @ModuleID int,
+    @PermissionID int
 AS
 
 SELECT
-	M.[ModulePermissionID],
-	M.[ModuleID],
-	P.[PermissionID],
-	M.[RoleID],
-	case M.RoleID
-		when -1 then 'All Users'
-		when -2 then 'Superuser'		
-		when -3 then 'Unauthenticated Users'
-		else 	R.RoleName
-	end
-	'RoleName',
-	M.[AllowAccess],
-	P.[PermissionCode],
-	P.[ModuleDefID],
-	P.[PermissionKey],
-	P.[PermissionName]
+    M.[ModulePermissionID],
+    M.[ModuleID],
+    P.[PermissionID],
+    M.[RoleID],
+    case M.RoleID
+        when -1 then 'All Users'
+        when -2 then 'Superuser'
+        when -3 then 'Unauthenticated Users'
+        else 	R.RoleName
+    end
+    'RoleName',
+    M.[AllowAccess],
+    P.[PermissionCode],
+    P.[ModuleDefID],
+    P.[PermissionKey],
+    P.[PermissionName]
 FROM
-	{objectQualifier}ModulePermission M
+    {objectQualifier}ModulePermission M
 LEFT JOIN
-	{objectQualifier}Permission P
+    {objectQualifier}Permission P
 ON	M.PermissionID = P.PermissionID
 LEFT JOIN
-	{objectQualifier}ModuleDefinitions MD
+    {objectQualifier}ModuleDefinitions MD
 ON	P.ModuleDefID = MD.ModuleDefID
 LEFT JOIN
-	{objectQualifier}Roles R
+    {objectQualifier}Roles R
 ON	M.RoleID = R.RoleID
 WHERE
-	(@ModuleID = -1 OR 
-	M.[ModuleID] = @ModuleID
-	OR (M.ModuleID IS NULL and P.PermissionCode = 'SYSTEM_MODULE_DEFINITION'))
+    (@ModuleID = -1 OR
+    M.[ModuleID] = @ModuleID
+    OR (M.ModuleID IS NULL and P.PermissionCode = 'SYSTEM_MODULE_DEFINITION'))
 AND	(P.[PermissionID] = @PermissionID or @PermissionID = -1)
 
 
@@ -160,31 +160,31 @@ CREATE procedure {databaseOwner}{objectQualifier}GetModuleByDefinition
 as
 
 select M.ModuleID,
-       M.ModuleDefID,
-       M.ModuleTitle,
-       M.AllTabs,
-       M.IsDeleted,
-       M.InheritViewPermissions,
-       M.Header,
-       M.Footer,
-       M.StartDate,
-       M.EndDate,
-       M.PortalID,
-       TM.TabModuleId,
-       TM.TabId,
-       TM.PaneName,
-       TM.ModuleOrder,
-       TM.CacheTime,
-       TM.Alignment,
-       TM.Color,
-       TM.Border,
-       TM.Visibility,
-       TM.ContainerSrc,
-       TM.DisplayTitle,
-       TM.DisplayPrint,
-       TM.DisplaySyndicate,
-       'IconFile' = case when F.FileName is null then TM.IconFile else F.Folder + F.FileName end,
-       DM.*
+        M.ModuleDefID,
+        M.ModuleTitle,
+        M.AllTabs,
+        M.IsDeleted,
+        M.InheritViewPermissions,
+        M.Header,
+        M.Footer,
+        M.StartDate,
+        M.EndDate,
+        M.PortalID,
+        TM.TabModuleId,
+        TM.TabId,
+        TM.PaneName,
+        TM.ModuleOrder,
+        TM.CacheTime,
+        TM.Alignment,
+        TM.Color,
+        TM.Border,
+        TM.Visibility,
+        TM.ContainerSrc,
+        TM.DisplayTitle,
+        TM.DisplayPrint,
+        TM.DisplaySyndicate,
+        'IconFile' = case when F.FileName is null then TM.IconFile else F.Folder + F.FileName end,
+        DM.*
 from {objectQualifier}Modules M
 inner join {objectQualifier}ModuleDefinitions MD on M.ModuleDefId = MD.ModuleDefId
 inner join {objectQualifier}DesktopModules DM on MD.DesktopModuleId = DM.DesktopModuleId
@@ -207,18 +207,18 @@ CREATE procedure {databaseOwner}{objectQualifier}GetEvents
 as
 
 select {objectQualifier}Events.ItemId,
-       {objectQualifier}Events.ModuleId,
-       {objectQualifier}Events.Description,
-       {objectQualifier}Events.DateTime,
-       {objectQualifier}Events.Title,
-       {objectQualifier}Events.ExpireDate,
-       {objectQualifier}Events.CreatedByUser,
-       {objectQualifier}Events.CreatedDate,
-       {objectQualifier}Events.Every,
-       {objectQualifier}Events.Period,
-       'IconFile' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Events.IconFile else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end,
-       {objectQualifier}Events.AltText,
-       'MaxWIdth' = (select max(WIdth) from {objectQualifier}Events left outer join {objectQualifier}Files on {objectQualifier}Events.IconFile = 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) where ModuleId = @ModuleId and (ExpireDate > getdate() or ExpireDate is null))
+        {objectQualifier}Events.ModuleId,
+        {objectQualifier}Events.Description,
+        {objectQualifier}Events.DateTime,
+        {objectQualifier}Events.Title,
+        {objectQualifier}Events.ExpireDate,
+        {objectQualifier}Events.CreatedByUser,
+        {objectQualifier}Events.CreatedDate,
+        {objectQualifier}Events.Every,
+        {objectQualifier}Events.Period,
+        'IconFile' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Events.IconFile else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end,
+        {objectQualifier}Events.AltText,
+        'MaxWIdth' = (select max(WIdth) from {objectQualifier}Events left outer join {objectQualifier}Files on {objectQualifier}Events.IconFile = 'fileid=' + convert(varchar,{objectQualifier}Files.FileID) where ModuleId = @ModuleId and (ExpireDate > getdate() or ExpireDate is null))
 from   {objectQualifier}Events
 left outer join {objectQualifier}Files on {objectQualifier}Events.IconFile = 'fileid=' + convert(varchar,{objectQualifier}Files.FileID)
 where  ModuleId = @ModuleId
@@ -238,25 +238,25 @@ CREATE procedure {databaseOwner}{objectQualifier}GetTabsByParentId
 
 as
 
-select TabID, 
-       TabOrder, 
-       {objectQualifier}Tabs.PortalID, 
-       TabName, 
-       IsVisible, 
-       ParentId, 
-       [Level], 
-       'IconFile' = case when Files_1.FileName is null then {objectQualifier}Tabs.IconFile else Files_1.Folder + Files_1.FileName end,
-       DisableLink, 
-       Title, 
-       Description, 
-       KeyWords, 
-       IsDeleted,
-       SkinSrc,
-       ContainerSrc,
-       TabPath,
-       StartDate,
-       EndDate,
-       'URL' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Tabs.URL else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end
+select TabID,
+        TabOrder,
+        {objectQualifier}Tabs.PortalID,
+        TabName,
+        IsVisible,
+        ParentId,
+        [Level],
+        'IconFile' = case when Files_1.FileName is null then {objectQualifier}Tabs.IconFile else Files_1.Folder + Files_1.FileName end,
+        DisableLink,
+        Title,
+        Description,
+        KeyWords,
+        IsDeleted,
+        SkinSrc,
+        ContainerSrc,
+        TabPath,
+        StartDate,
+        EndDate,
+        'URL' = case when {objectQualifier}Files.FileName is null then {objectQualifier}Tabs.URL else {objectQualifier}Files.Folder + {objectQualifier}Files.FileName end
 from   {objectQualifier}Tabs
 left outer join {objectQualifier}Files on {objectQualifier}Tabs.URL = 'fileid=' + convert(varchar,{objectQualifier}Files.FileID)
 left outer join {objectQualifier}Files Files_1 ON {objectQualifier}Tabs.IconFile = 'fileid=' + convert(varchar,Files_1.FileID)

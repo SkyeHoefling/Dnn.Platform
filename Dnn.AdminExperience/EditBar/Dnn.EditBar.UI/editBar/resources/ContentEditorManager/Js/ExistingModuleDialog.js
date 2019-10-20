@@ -221,7 +221,7 @@ if (typeof dnn.ContentEditorManager === "undefined" || dnn.ContentEditorManager 
                             '</div>' +
                         '</div>' +
                     '</div>' +
-					'<div class="dnnProgressBar"><span /></div>' +
+                    '<div class="dnnProgressBar"><span /></div>' +
                 '</div>');
 
             return layout;

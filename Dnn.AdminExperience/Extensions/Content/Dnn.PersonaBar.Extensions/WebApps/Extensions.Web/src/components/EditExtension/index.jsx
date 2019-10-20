@@ -334,7 +334,7 @@ class EditExtension extends Component {
                     extensionBeingEdited={extensionBeingEdited}
                     updateExtensionBeingEdited={this.updateExtensionBeingEdited.bind(this)} />
             </GridCell>,
-            <License key="fourth" 
+            <License key="fourth"
                 value={extensionBeingEdited.license.value}
                 onChange={this.onChange.bind(this)}
                 disabled={!this.isHost}

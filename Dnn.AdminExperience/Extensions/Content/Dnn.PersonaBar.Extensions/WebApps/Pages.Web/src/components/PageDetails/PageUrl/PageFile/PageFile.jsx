@@ -20,7 +20,7 @@ class PageFile extends Component {
         const utilities = {
             utilities: utils.getUtilities()
         };
-        
+
         const selectedFile = page.fileIdRedirection ? {
             fileId: page.fileIdRedirection,
             folderPath: page.fileFolderPathRedirection,

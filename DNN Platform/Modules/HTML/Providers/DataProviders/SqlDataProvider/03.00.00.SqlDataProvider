@@ -11,61 +11,61 @@
 /** Create Table **/
 
 if not exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}HtmlText]') and OBJECTPROPERTY(id, N'IsTable') = 1)
-	BEGIN
-		CREATE TABLE {databaseOwner}[{objectQualifier}HtmlText]
-		(
-			[ModuleID] [int] NOT NULL,
-			[DesktopHtml] [ntext] NOT NULL,
-			[DesktopSummary] [ntext] NULL,
-			[CreatedByUser] [int] NULL,
-			[CreatedDate] [datetime] NULL
-		)
+    BEGIN
+        CREATE TABLE {databaseOwner}[{objectQualifier}HtmlText]
+        (
+            [ModuleID] [int] NOT NULL,
+            [DesktopHtml] [ntext] NOT NULL,
+            [DesktopSummary] [ntext] NULL,
+            [CreatedByUser] [int] NULL,
+            [CreatedDate] [datetime] NULL
+        )
 
-		ALTER TABLE {databaseOwner}[{objectQualifier}HtmlText] ADD CONSTRAINT [PK_{objectQualifier}HtmlText] PRIMARY KEY NONCLUSTERED  ([ModuleID])
+        ALTER TABLE {databaseOwner}[{objectQualifier}HtmlText] ADD CONSTRAINT [PK_{objectQualifier}HtmlText] PRIMARY KEY NONCLUSTERED  ([ModuleID])
 
-		ALTER TABLE {databaseOwner}[{objectQualifier}HtmlText] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}HtmlText_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE
-	END
+        ALTER TABLE {databaseOwner}[{objectQualifier}HtmlText] WITH NOCHECK ADD CONSTRAINT [FK_{objectQualifier}HtmlText_{objectQualifier}Modules] FOREIGN KEY ([ModuleID]) REFERENCES {databaseOwner}[{objectQualifier}Modules] ([ModuleID]) ON DELETE CASCADE
+    END
 GO
 
 
 /** Drop Existing Stored Procedures **/
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}AddHtmlText]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}AddHtmlText
+    drop procedure {databaseOwner}{objectQualifier}AddHtmlText
 GO
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}GetHtmlText]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}GetHtmlText
+    drop procedure {databaseOwner}{objectQualifier}GetHtmlText
 GO
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}UpdateHtmlText]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	drop procedure {databaseOwner}{objectQualifier}UpdateHtmlText
+    drop procedure {databaseOwner}{objectQualifier}UpdateHtmlText
 GO
 
 /** Create Stored Procedures **/
 
 create procedure {databaseOwner}{objectQualifier}AddHtmlText
 
-	@ModuleId       int,
-	@DesktopHtml    ntext,
-	@DesktopSummary ntext,
-	@UserID         int
+    @ModuleId       int,
+    @DesktopHtml    ntext,
+    @DesktopSummary ntext,
+    @UserID         int
 
 as
 
 insert into {objectQualifier}HtmlText (
-	ModuleId,
-	DesktopHtml,
-	DesktopSummary,
-	CreatedByUser,
-	CreatedDate
-) 
+    ModuleId,
+    DesktopHtml,
+    DesktopSummary,
+    CreatedByUser,
+    CreatedDate
+)
 values (
-	@ModuleId,
-	@DesktopHtml,
-	@DesktopSummary,
-	@UserID,
-	getdate()
+    @ModuleId,
+    @DesktopHtml,
+    @DesktopSummary,
+    @UserID,
+    getdate()
 )
 
 GO
@@ -73,7 +73,7 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}GetHtmlText
 
-	@ModuleId int
+    @ModuleId int
 
 as
 
@@ -86,18 +86,18 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}UpdateHtmlText
 
-	@ModuleId       int,
-	@DesktopHtml    ntext,
-	@DesktopSummary ntext,
-	@UserID         int
+    @ModuleId       int,
+    @DesktopHtml    ntext,
+    @DesktopSummary ntext,
+    @UserID         int
 
 as
 
 update {objectQualifier}HtmlText
 set    DesktopHtml    = @DesktopHtml,
-       DesktopSummary = @DesktopSummary,
-       CreatedByUser  = @UserID,
-       CreatedDate    = getdate()
+        DesktopSummary = @DesktopSummary,
+        CreatedByUser  = @UserID,
+        CreatedDate    = getdate()
 where  ModuleId = @ModuleId
 
 GO

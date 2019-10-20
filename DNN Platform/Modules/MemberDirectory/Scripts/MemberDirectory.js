@@ -94,7 +94,7 @@
 
             return location;
         });
-        
+
         self.getProfilePicture = function (w, h) {
             return profilePicHandler.replace("{0}", self.UserId()).replace("{1}", h).replace("{2}", w);
         };
@@ -202,7 +202,7 @@
         self.Members = ko.observableArray(initialMembers);
         self.CanLoadMore = ko.observable(initialMembers.length == pageSize);
         self.SearchTerm = ko.observable('');
-		self.disablePrivateMessage = ko.observable(settings.disablePrivateMessage);
+        self.disablePrivateMessage = ko.observable(settings.disablePrivateMessage);
 
         self.ResetEnabled = ko.observable(false);
 
@@ -437,7 +437,7 @@
                     $(this).addClass("active");
                     $(".mdSearch").addClass("active");
                 });
-                
+
                 var timer;
                 var cursorIsOnAdvancedSearchForm;
                 $('a#mdAdvancedSearch').mouseleave(function () {
@@ -461,19 +461,19 @@
                     $(".mdSearch").removeClass("active");
                 });
 
-            	//Compose Message
-	            if (!settings.disablePrivateMessage) {
-		            var options = $.extend({}, {
-			            openTriggerSelector: containerElement + " .ComposeMessage",
-			            onPrePopulate: function(target) {
-				            var context = ko.contextFor(target);
-				            var prePopulatedRecipients = [{ id: "user-" + context.$data.UserId(), name: context.$data.DisplayName() }];
-				            return prePopulatedRecipients;
-			            },
-			            servicesFramework: serviceFramework
-		            }, composeMessageSettings);
-		            $.fn.dnnComposeMessage(options);
-	            }
+                //Compose Message
+                if (!settings.disablePrivateMessage) {
+                    var options = $.extend({}, {
+                        openTriggerSelector: containerElement + " .ComposeMessage",
+                        onPrePopulate: function(target) {
+                            var context = ko.contextFor(target);
+                            var prePopulatedRecipients = [{ id: "user-" + context.$data.UserId(), name: context.$data.DisplayName() }];
+                            return prePopulatedRecipients;
+                        },
+                        servicesFramework: serviceFramework
+                    }, composeMessageSettings);
+                    $.fn.dnnComposeMessage(options);
+                }
             } else {
                 displayMessage(settings.serverErrorText, "dnnFormWarning");
             }

@@ -1,22 +1,22 @@
 ﻿#region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -51,8 +51,8 @@ namespace DotNetNuke.Entities.Urls
         {
             var options = new FriendlyUrlOptions
                 {
-                    PunctuationReplacement = (settings.ReplaceSpaceWith != FriendlyUrlSettings.ReplaceSpaceWithNothing) 
-                                                    ? settings.ReplaceSpaceWith 
+                    PunctuationReplacement = (settings.ReplaceSpaceWith != FriendlyUrlSettings.ReplaceSpaceWithNothing)
+                                                    ? settings.ReplaceSpaceWith
                                                     : String.Empty,
                     SpaceEncoding = settings.SpaceEncodingValue,
                     MaxUrlPathLength = 200,
@@ -62,8 +62,8 @@ namespace DotNetNuke.Entities.Urls
                     ReplaceChars = settings.ReplaceChars,
                     ReplaceDoubleChars = settings.ReplaceDoubleChars,
                     ReplaceCharWithChar = settings.ReplaceCharacterDictionary,
-                    PageExtension = (settings.PageExtensionUsageType == PageExtensionUsageType.Never) 
-                                            ? "" 
+                    PageExtension = (settings.PageExtensionUsageType == PageExtensionUsageType.Never)
+                                            ? ""
                                             : settings.PageExtension
                 };
             return options;
@@ -93,7 +93,7 @@ namespace DotNetNuke.Entities.Urls
         }
 
         /// <summary>
-        /// Logs the 404 error to a table for later checking 
+        /// Logs the 404 error to a table for later checking
         /// </summary>
         /// <param name="request"></param>
         /// <param name="settings"></param>
@@ -135,7 +135,7 @@ namespace DotNetNuke.Entities.Urls
             if (ex != null)
             {
                 //831 : improve exception logging by logging custom properties instead of just the raw exception
-                //this logic prevents a site logging an exception for every request made.  Instead 
+                //this logic prevents a site logging an exception for every request made.  Instead
                 //the exception will be logged once for the life of the cache / application restart or 1 hour, whichever is shorter.
                 //create a cache key for this exception type
                 string cacheKey = ex.GetType().ToString();
@@ -158,8 +158,8 @@ namespace DotNetNuke.Entities.Urls
                         log.AddProperty("Final Url", result.FinalUrl ?? "null");
 
                         log.AddProperty("Rewrite Result", !string.IsNullOrEmpty(result.RewritePath)
-                                                                     ? result.RewritePath
-                                                                     : "[no rewrite]");
+                                                                    ? result.RewritePath
+                                                                    : "[no rewrite]");
                         log.AddProperty("Redirect Location", string.IsNullOrEmpty(result.FinalUrl)
                                                                     ? "[no redirect]"
                                                                     : result.FinalUrl);
@@ -202,17 +202,17 @@ namespace DotNetNuke.Entities.Urls
             }
         }
 
-		/// <summary>
-		/// Clean Page name to remove page extension.
-		/// </summary>
-		/// <param name="value">page name.</param>
-		/// <param name="settings">friendly url settings.</param>
-		/// <param name="langParms">language.</param>
-		/// <returns></returns>
-	    public static string CleanExtension(string value, FriendlyUrlSettings settings, string langParms)
-		{
-			bool replaced;
-		    return RewriteController.CleanExtension(value, settings, langParms, out replaced);
-	    }
+        /// <summary>
+        /// Clean Page name to remove page extension.
+        /// </summary>
+        /// <param name="value">page name.</param>
+        /// <param name="settings">friendly url settings.</param>
+        /// <param name="langParms">language.</param>
+        /// <returns></returns>
+        public static string CleanExtension(string value, FriendlyUrlSettings settings, string langParms)
+        {
+            bool replaced;
+            return RewriteController.CleanExtension(value, settings, langParms, out replaced);
+        }
     }
 }

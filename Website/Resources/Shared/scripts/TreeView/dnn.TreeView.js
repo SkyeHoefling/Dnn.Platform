@@ -1,6 +1,6 @@
 ﻿; if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn || {};
 
-// the semi-colon before function invocation is a safety net against concatenated 
+// the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
 (function ($, window, document, undefined) {
     "use strict";
@@ -27,7 +27,7 @@
 
         init: function () {
             // Place initialization logic here
-            // You already have access to the DOM element and the options via the instance, 
+            // You already have access to the DOM element and the options via the instance,
             // e.g., this.element and this.options
             this.options = $.extend(TreeView.defaults(), this.options);
             this._onRedrawHandler = $.proxy(this._onRedraw, this);
@@ -106,7 +106,7 @@
             var e = $.Event('onredrawtree');
             this.$this.trigger(e, [nodeContext]);
         },
-        
+
         _onShowChildren: function (nodeContext) {
             var e = $.Event('onredrawtree');
             this.$this.trigger(e, [nodeContext]);
@@ -137,9 +137,9 @@
         },
 
         /*_removeSelections: function() {
-			var rootElement = this.getRootElement();
-			$(rootElement).find('li').andSelf().each(function (index, element) { $(element).children().eq(1).removeClass("selected"); });
-		},*/
+            var rootElement = this.getRootElement();
+            $(rootElement).find('li').andSelf().each(function (index, element) { $(element).children().eq(1).removeClass("selected"); });
+        },*/
 
         addNodeClass: function (nodeContext, add, className) {
             if (!nodeContext) {
@@ -208,4 +208,3 @@
     };
 
 }).apply(dnn, [jQuery, window, document]);
-

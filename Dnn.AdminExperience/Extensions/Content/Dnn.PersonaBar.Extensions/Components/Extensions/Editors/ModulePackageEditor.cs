@@ -31,7 +31,7 @@ namespace Dnn.PersonaBar.Extensions.Components.Editors
             {
                 return new PackageInfoDto(portalId, package);
             }
-        
+
             var isHostUser = UserController.Instance.GetCurrentUserInfo().IsSuperUser;
 
             var detail = isHostUser ? new ModulePackageDetailDto(portalId, package, desktopModule)

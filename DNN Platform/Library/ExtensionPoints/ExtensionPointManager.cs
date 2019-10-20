@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -42,7 +42,7 @@ namespace DotNetNuke.ExtensionPoints
 
         [ImportMany]
         private IEnumerable<Lazy<IEditPageTabExtensionPoint, IExtensionPointData>> _editPageTabExtensionPoint;
-        
+
         [ImportMany]
         private IEnumerable<Lazy<IToolBarButtonExtensionPoint, IExtensionPointData>> _toolbarButtonExtensionPoints;
 
@@ -64,7 +64,7 @@ namespace DotNetNuke.ExtensionPoints
 #pragma warning restore 649
 
         public ExtensionPointManager()
-        {        
+        {
             ComposeParts(this);
         }
 
@@ -75,7 +75,7 @@ namespace DotNetNuke.ExtensionPoints
             var catalog = new AggregateCatalog();
             var path = Path.Combine(Globals.ApplicationMapPath, "bin");
             catalog.Catalogs.Add(new SafeDirectoryCatalog(path));
-            return new CompositionContainer(catalog, true);            
+            return new CompositionContainer(catalog, true);
         }
 
         public static void ComposeParts(params object[] attributeParts)
@@ -94,10 +94,10 @@ namespace DotNetNuke.ExtensionPoints
         public IEnumerable<IEditPageTabExtensionPoint> GetEditPageTabExtensionPoints(string module, string group)
         {
             return from e in _editPageTabExtensionPoint
-                   where e.Metadata.Module == module
+                    where e.Metadata.Module == module
                         && (string.IsNullOrEmpty(@group) || e.Metadata.Group == @group)
-                   orderby e.Value.Order
-                   select e.Value;
+                    orderby e.Value.Order
+                    select e.Value;
         }
 
         public IEnumerable<IToolBarButtonExtensionPoint> GetToolBarButtonExtensionPoints(string module)
@@ -111,11 +111,11 @@ namespace DotNetNuke.ExtensionPoints
         }
 
         public IEnumerable<IToolBarButtonExtensionPoint> GetToolBarButtonExtensionPoints(string module, string group, IExtensionPointFilter filter)
-        {            
+        {
             return from e in _toolbarButtonExtensionPoints
-                   where FilterCondition(e.Metadata, module, @group) && filter.Condition(e.Metadata)
-                   orderby e.Value.Order
-                   select e.Value;                
+                    where FilterCondition(e.Metadata, module, @group) && filter.Condition(e.Metadata)
+                    orderby e.Value.Order
+                    select e.Value;
         }
 
         public IToolBarButtonExtensionPoint GetToolBarButtonExtensionPointFirstByPriority(string module, string name)
@@ -123,7 +123,7 @@ namespace DotNetNuke.ExtensionPoints
             return (from e in _toolbarButtonExtensionPoints
                     where e.Metadata.Module == module && e.Metadata.Name == name
                     orderby e.Metadata.Priority
-                    select e.Value).FirstOrDefault();            
+                    select e.Value).FirstOrDefault();
         }
 
 
@@ -135,8 +135,8 @@ namespace DotNetNuke.ExtensionPoints
         public IEnumerable<IScriptItemExtensionPoint> GetScriptItemExtensionPoints(string module, string group)
         {
             return from e in _scripts
-                where e.Metadata.Module == module 
-                    && (string.IsNullOrEmpty(@group) || e.Metadata.Group == @group)     
+                where e.Metadata.Module == module
+                    && (string.IsNullOrEmpty(@group) || e.Metadata.Group == @group)
                 orderby e.Value.Order
                 select e.Value;
         }
@@ -149,18 +149,18 @@ namespace DotNetNuke.ExtensionPoints
         public IEnumerable<IEditPagePanelExtensionPoint> GetEditPagePanelExtensionPoints(string module, string group)
         {
             return from e in _editPagePanelExtensionPoints
-                   where e.Metadata.Module == module
+                    where e.Metadata.Module == module
                         && (string.IsNullOrEmpty(@group) || e.Metadata.Group == @group)
-                   orderby e.Value.Order
-                   select e.Value;
+                    orderby e.Value.Order
+                    select e.Value;
         }
 
         public IEditPagePanelExtensionPoint GetEditPagePanelExtensionPointFirstByPriority(string module, string name)
         {
-            return (from e in _editPagePanelExtensionPoints 
+            return (from e in _editPagePanelExtensionPoints
                     where e.Metadata.Module == module && e.Metadata.Name == name
                     orderby e.Metadata.Priority
-                    select e.Value).FirstOrDefault(); 
+                    select e.Value).FirstOrDefault();
         }
 
         public IEnumerable<IContextMenuItemExtensionPoint> GetContextMenuItemExtensionPoints(string module)
@@ -169,12 +169,12 @@ namespace DotNetNuke.ExtensionPoints
         }
 
         public IEnumerable<IContextMenuItemExtensionPoint> GetContextMenuItemExtensionPoints(string module, string group)
-        {            
+        {
             return from e in _ctxMenuItemExtensionPoints
-                   where e.Metadata.Module == module
+                    where e.Metadata.Module == module
                         && (string.IsNullOrEmpty(@group) || e.Metadata.Group == @group)
-                   orderby e.Value.Order 
-                   select e.Value;
+                    orderby e.Value.Order
+                    select e.Value;
         }
 
         public IUserControlExtensionPoint GetUserControlExtensionPointFirstByPriority(string module, string name)
@@ -182,7 +182,7 @@ namespace DotNetNuke.ExtensionPoints
             return (from e in _userControlExtensionPoints
                     where e.Metadata.Module == module && e.Metadata.Name == name
                     orderby e.Metadata.Priority
-                    select e.Value).FirstOrDefault();            
+                    select e.Value).FirstOrDefault();
         }
 
         public IEnumerable<IUserControlExtensionPoint> GetUserControlExtensionPoints(string module, string group)
@@ -206,11 +206,11 @@ namespace DotNetNuke.ExtensionPoints
         public IEnumerable<IMenuItemExtensionPoint> GetMenuItemExtensionPoints(string module, string group, IExtensionPointFilter filter)
         {
             return from e in _menuItems
-                   where FilterCondition(e.Metadata, module, @group) && filter.Condition(e.Metadata)
-                   orderby e.Value.Order 
-                   select e.Value;
+                    where FilterCondition(e.Metadata, module, @group) && filter.Condition(e.Metadata)
+                    orderby e.Value.Order
+                    select e.Value;
         }
-        
+
         public IEnumerable<IGridColumnExtensionPoint> GetGridColumnExtensionPoints(string module)
         {
             return GetGridColumnExtensionPoints(module, null);
@@ -224,9 +224,9 @@ namespace DotNetNuke.ExtensionPoints
         public IEnumerable<IGridColumnExtensionPoint> GetGridColumnExtensionPoints(string module, string group, IExtensionPointFilter filter)
         {
             return from e in _gridColumns
-                   where FilterCondition(e.Metadata, module, @group) && filter.Condition(e.Metadata)
-                   orderby e.Value.Order
-                   select e.Value;
+                    where FilterCondition(e.Metadata, module, @group) && filter.Condition(e.Metadata)
+                    orderby e.Value.Order
+                    select e.Value;
         }
 
         private bool FilterCondition(IExtensionPointData data, string module, string group)

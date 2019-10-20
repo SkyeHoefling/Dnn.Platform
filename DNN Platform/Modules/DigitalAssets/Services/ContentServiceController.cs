@@ -1,21 +1,21 @@
 ﻿#region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
@@ -34,7 +34,7 @@ using DotNetNuke.Web.Api;
 
 namespace DotNetNuke.Modules.DigitalAssets.Services
 {
-    [SupportedModules("DotNetNuke.Modules.DigitalAssets")]    
+    [SupportedModules("DotNetNuke.Modules.DigitalAssets")]
     [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
     [DamExceptionFilter]
     public class ContentServiceController : DnnApiController
@@ -59,7 +59,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage SearchFolderContent(SearchFolderContentRequest r)
         {
             var moduleId = Request.FindModuleId();
@@ -68,7 +68,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage DeleteItems(DeleteItemsRequest request)
         {
             var notDeletedItems = DigitalAssetsController.DeleteItems(request.Items);
@@ -92,23 +92,23 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage RenameFile(RenameFileRequest request)
         {
-	        try
-	        {
-		        var itemViewModel = DigitalAssetsController.RenameFile(request.FileId, request.NewFileName);
-		        return Request.CreateResponse(HttpStatusCode.OK, itemViewModel);
-	        }
-	        catch (FileAlreadyExistsException ex)
-	        {
-				return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
-	        }
-            
+            try
+            {
+                var itemViewModel = DigitalAssetsController.RenameFile(request.FileId, request.NewFileName);
+                return Request.CreateResponse(HttpStatusCode.OK, itemViewModel);
+            }
+            catch (FileAlreadyExistsException ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex);
+            }
+
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage CopyFile(CopyMoveItemRequest request)
         {
             var copyFileResponse = DigitalAssetsController.CopyFile(request.ItemId, request.DestinationFolderId, request.Overwrite);
@@ -116,7 +116,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage MoveFile(CopyMoveItemRequest request)
         {
             var copyMoveFileResponse = DigitalAssetsController.MoveFile(request.ItemId, request.DestinationFolderId, request.Overwrite);
@@ -124,7 +124,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage MoveFolder(CopyMoveItemRequest request)
         {
             var copyMoveFolderResponse = DigitalAssetsController.MoveFolder(request.ItemId, request.DestinationFolderId, request.Overwrite);
@@ -141,7 +141,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage RenameFolder(RenameFolderRequest request)
         {
             DigitalAssetsController.RenameFolder(request.FolderId, request.NewFolderName);
@@ -149,7 +149,7 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage CreateNewFolder(CreateNewFolderRequest request)
         {
             var folder = DigitalAssetsController.CreateFolder(request.FolderName, request.ParentFolderId,
@@ -162,11 +162,11 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
         public HttpResponseMessage SynchronizeFolder(SynchronizeFolderRequest request)
         {
             DigitalAssetsController.SyncFolderContent(request.FolderId, request.Recursive);
-            return Request.CreateResponse(HttpStatusCode.OK, "Success");            
+            return Request.CreateResponse(HttpStatusCode.OK, "Success");
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
         public HttpResponseMessage UnzipFile(UnzipFileRequest request)
         {
             var model = DigitalAssetsController.UnzipFile(request.FileId, request.Overwrite);

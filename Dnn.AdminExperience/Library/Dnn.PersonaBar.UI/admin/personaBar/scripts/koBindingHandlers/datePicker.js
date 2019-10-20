@@ -10,7 +10,7 @@ define(['jquery', 'knockout', 'pikaday', 'moment'], function ($, ko, pikaday, mo
 
     ko.bindingHandlers.datePicker = {
         init: function (element, valueAccessor, allBindings) {
-            var value = valueAccessor();             
+            var value = valueAccessor();
             var valueUnwrapped = ko.unwrap(value);
 
             var minDate = allBindings.get('minDate');

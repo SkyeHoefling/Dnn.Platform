@@ -3,354 +3,354 @@
 /************************************************************/
 
 CREATE TABLE [dbo].[BannerTypes] (
-	[BannerTypeId] [int] IDENTITY (1, 1) NOT NULL ,
-	[BannerTypeName] [nvarchar] (50) NOT NULL 
+    [BannerTypeId] [int] IDENTITY (1, 1) NOT NULL ,
+    [BannerTypeName] [nvarchar] (50) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Classification] (
-	[ClassificationId] [int] IDENTITY (1, 1) NOT NULL ,
-	[ClassificationName] [nvarchar] (200) NOT NULL ,
-	[ParentId] [int] NULL 
+    [ClassificationId] [int] IDENTITY (1, 1) NOT NULL ,
+    [ClassificationName] [nvarchar] (200) NOT NULL ,
+    [ParentId] [int] NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[CodeCountry] (
-	[Code] [char] (2) NOT NULL ,
-	[Description] [varchar] (100) NOT NULL 
+    [Code] [char] (2) NOT NULL ,
+    [Description] [varchar] (100) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[CodeCurrency] (
-	[Code] [char] (3) NOT NULL ,
-	[Description] [varchar] (100) NOT NULL 
+    [Code] [char] (3) NOT NULL ,
+    [Description] [varchar] (100) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[CodeFrequency] (
-	[Code] [char] (1) NOT NULL ,
-	[Description] [nvarchar] (50) NOT NULL 
+    [Code] [char] (1) NOT NULL ,
+    [Description] [nvarchar] (50) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[CodeRegion] (
-	[Code] [char] (2) NOT NULL ,
-	[Description] [varchar] (100) NOT NULL ,
-	[Country] [char] (2) NOT NULL 
+    [Code] [char] (2) NOT NULL ,
+    [Description] [varchar] (100) NOT NULL ,
+    [Country] [char] (2) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[FAQs] (
-	[ItemID] [int] IDENTITY (0, 1) NOT NULL ,
-	[ModuleID] [int] NOT NULL ,
-	[CreatedByUser] [nvarchar] (100) NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[Question] [text] NULL ,
-	[Answer] [text] NULL 
+    [ItemID] [int] IDENTITY (0, 1) NOT NULL ,
+    [ModuleID] [int] NOT NULL ,
+    [CreatedByUser] [nvarchar] (100) NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [Question] [text] NULL ,
+    [Answer] [text] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Files] (
-	[FileId] [int] IDENTITY (1, 1) NOT NULL ,
-	[PortalId] [int] NULL ,
-	[FileName] [nvarchar] (100) NOT NULL ,
-	[Extension] [nvarchar] (100) NOT NULL ,
-	[Size] [int] NOT NULL ,
-	[Width] [int] NULL ,
-	[Height] [int] NULL ,
-	[ContentType] [nvarchar] (200) NOT NULL 
+    [FileId] [int] IDENTITY (1, 1) NOT NULL ,
+    [PortalId] [int] NULL ,
+    [FileName] [nvarchar] (100) NOT NULL ,
+    [Extension] [nvarchar] (100) NOT NULL ,
+    [Size] [int] NOT NULL ,
+    [Width] [int] NULL ,
+    [Height] [int] NULL ,
+    [ContentType] [nvarchar] (200) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[ModuleDefinitions] (
-	[ModuleDefID] [int] IDENTITY (1, 1) NOT NULL ,
-	[FriendlyName] [nvarchar] (128) NOT NULL ,
-	[DesktopSrc] [nvarchar] (256) NULL ,
-	[MobileSrc] [nvarchar] (256) NULL ,
-	[AdminOrder] [int] NULL ,
-	[EditSrc] [nvarchar] (256) NULL ,
-	[Secure] [bit] NOT NULL 
+    [ModuleDefID] [int] IDENTITY (1, 1) NOT NULL ,
+    [FriendlyName] [nvarchar] (128) NOT NULL ,
+    [DesktopSrc] [nvarchar] (256) NULL ,
+    [MobileSrc] [nvarchar] (256) NULL ,
+    [AdminOrder] [int] NULL ,
+    [EditSrc] [nvarchar] (256) NULL ,
+    [Secure] [bit] NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Portals] (
-	[PortalID] [int] IDENTITY (-1, 1) NOT NULL ,
-	[PortalAlias] [nvarchar] (200) NOT NULL ,
-	[PortalName] [nvarchar] (128) NOT NULL ,
-	[UploadDirectory] [nvarchar] (100) NOT NULL ,
-	[LogoFile] [nvarchar] (50) NULL ,
-	[FooterText] [nvarchar] (100) NULL ,
-	[ExpiryDate] [datetime] NULL ,
-	[UserRegistration] [int] NULL ,
-	[BannerAdvertising] [int] NULL ,
-	[AdministratorId] [int] NULL ,
-	[PayPalId] [nvarchar] (50) NULL ,
-	[Currency] [char] (3) NULL ,
-	[HostFee] [nvarchar] (10) NULL ,
-	[HostSpace] [int] NULL ,
-	[AdministratorRoleId] [int] NULL ,
-	[RegisteredRoleId] [int] NULL ,
-	[GUID] [uniqueidentifier] NOT NULL CONSTRAINT DF_Portals_GUID DEFAULT newid()
+    [PortalID] [int] IDENTITY (-1, 1) NOT NULL ,
+    [PortalAlias] [nvarchar] (200) NOT NULL ,
+    [PortalName] [nvarchar] (128) NOT NULL ,
+    [UploadDirectory] [nvarchar] (100) NOT NULL ,
+    [LogoFile] [nvarchar] (50) NULL ,
+    [FooterText] [nvarchar] (100) NULL ,
+    [ExpiryDate] [datetime] NULL ,
+    [UserRegistration] [int] NULL ,
+    [BannerAdvertising] [int] NULL ,
+    [AdministratorId] [int] NULL ,
+    [PayPalId] [nvarchar] (50) NULL ,
+    [Currency] [char] (3) NULL ,
+    [HostFee] [nvarchar] (10) NULL ,
+    [HostSpace] [int] NULL ,
+    [AdministratorRoleId] [int] NULL ,
+    [RegisteredRoleId] [int] NULL ,
+    [GUID] [uniqueidentifier] NOT NULL CONSTRAINT DF_Portals_GUID DEFAULT newid()
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Users] (
-	[UserID] [int] IDENTITY (1, 1) NOT NULL ,
-	[FirstName] [nvarchar] (50) NOT NULL ,
-	[LastName] [nvarchar] (50) NULL ,
-	[Street] [nvarchar] (20) NULL ,
-	[City] [nvarchar] (20) NULL ,
-	[Region] [nvarchar] (20) NULL ,
-	[PostalCode] [nvarchar] (10) NULL ,
-	[Country] [nvarchar] (20) NULL ,
-	[Password] [nvarchar] (20) NOT NULL ,
-	[Email] [nvarchar] (100) NOT NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[LastLoginDate] [datetime] NULL ,
-	[Unit] [nvarchar] (50) NULL 
+    [UserID] [int] IDENTITY (1, 1) NOT NULL ,
+    [FirstName] [nvarchar] (50) NOT NULL ,
+    [LastName] [nvarchar] (50) NULL ,
+    [Street] [nvarchar] (20) NULL ,
+    [City] [nvarchar] (20) NULL ,
+    [Region] [nvarchar] (20) NULL ,
+    [PostalCode] [nvarchar] (10) NULL ,
+    [Country] [nvarchar] (20) NULL ,
+    [Password] [nvarchar] (20) NOT NULL ,
+    [Email] [nvarchar] (100) NOT NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [LastLoginDate] [datetime] NULL ,
+    [Unit] [nvarchar] (50) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Roles] (
-	[RoleID] [int] IDENTITY (0, 1) NOT NULL ,
-	[PortalID] [int] NULL ,
-	[RoleName] [nvarchar] (50) NOT NULL ,
-	[Description] [nvarchar] (1000) NULL ,
-	[ServiceFee] [decimal](5, 2) NULL ,
-	[BillingFrequency] [char] (1) NULL ,
-	[TrialPeriod] [int] NULL ,
-	[TrialFrequency] [char] (1) NULL 
+    [RoleID] [int] IDENTITY (0, 1) NOT NULL ,
+    [PortalID] [int] NULL ,
+    [RoleName] [nvarchar] (50) NOT NULL ,
+    [Description] [nvarchar] (1000) NULL ,
+    [ServiceFee] [decimal](5, 2) NULL ,
+    [BillingFrequency] [char] (1) NULL ,
+    [TrialPeriod] [int] NULL ,
+    [TrialFrequency] [char] (1) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[SiteLog] (
-	[SiteLogId] [int] IDENTITY (1, 1) NOT NULL ,
-	[DateTime] [smalldatetime] NOT NULL ,
-	[PortalId] [int] NOT NULL ,
-	[UserId] [int] NULL ,
-	[Referrer] [nvarchar] (255) NULL ,
-	[Url] [nvarchar] (255) NULL ,
-	[UserAgent] [nvarchar] (255) NULL ,
-	[UserHostAddress] [nvarchar] (255) NULL ,
-	[UserHostName] [nvarchar] (255) NULL 
+    [SiteLogId] [int] IDENTITY (1, 1) NOT NULL ,
+    [DateTime] [smalldatetime] NOT NULL ,
+    [PortalId] [int] NOT NULL ,
+    [UserId] [int] NULL ,
+    [Referrer] [nvarchar] (255) NULL ,
+    [Url] [nvarchar] (255) NULL ,
+    [UserAgent] [nvarchar] (255) NULL ,
+    [UserHostAddress] [nvarchar] (255) NULL ,
+    [UserHostName] [nvarchar] (255) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Tabs] (
-	[TabID] [int] IDENTITY (0, 1) NOT NULL ,
-	[TabOrder] [int] NOT NULL ,
-	[PortalID] [int] NULL ,
-	[TabName] [nvarchar] (50) NOT NULL ,
-	[MobileTabName] [nvarchar] (50) NOT NULL ,
-	[AuthorizedRoles] [nvarchar] (256) NULL ,
-	[ShowMobile] [bit] NOT NULL ,
-	[LeftPaneWidth] [nvarchar] (5) NOT NULL ,
-	[RightPaneWidth] [nvarchar] (5) NOT NULL ,
-	[IsVisible] [bit] NOT NULL 
+    [TabID] [int] IDENTITY (0, 1) NOT NULL ,
+    [TabOrder] [int] NOT NULL ,
+    [PortalID] [int] NULL ,
+    [TabName] [nvarchar] (50) NOT NULL ,
+    [MobileTabName] [nvarchar] (50) NOT NULL ,
+    [AuthorizedRoles] [nvarchar] (256) NULL ,
+    [ShowMobile] [bit] NOT NULL ,
+    [LeftPaneWidth] [nvarchar] (5) NOT NULL ,
+    [RightPaneWidth] [nvarchar] (5) NOT NULL ,
+    [IsVisible] [bit] NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[UserPortals] (
-	[UserId] [int] NOT NULL ,
-	[PortalId] [int] NOT NULL ,
-	[Authorized] [bit] NULL 
+    [UserId] [int] NOT NULL ,
+    [PortalId] [int] NOT NULL ,
+    [Authorized] [bit] NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[VendorLog] (
-	[VendorLogId] [int] IDENTITY (1, 1) NOT NULL ,
-	[DateTime] [datetime] NOT NULL ,
-	[PortalId] [int] NOT NULL ,
-	[VendorId] [int] NOT NULL ,
-	[BannerId] [int] NULL ,
-	[Search] [nvarchar] (200) NULL 
+    [VendorLogId] [int] IDENTITY (1, 1) NOT NULL ,
+    [DateTime] [datetime] NOT NULL ,
+    [PortalId] [int] NOT NULL ,
+    [VendorId] [int] NOT NULL ,
+    [BannerId] [int] NULL ,
+    [Search] [nvarchar] (200) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[VendorSearch] (
-	[VendorSearchId] [int] IDENTITY (1, 1) NOT NULL ,
-	[PortalId] [int] NULL ,
-	[DateTime] [datetime] NOT NULL ,
-	[Search] [nvarchar] (200) NOT NULL 
+    [VendorSearchId] [int] IDENTITY (1, 1) NOT NULL ,
+    [PortalId] [int] NULL ,
+    [DateTime] [datetime] NOT NULL ,
+    [Search] [nvarchar] (200) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Vendors] (
-	[VendorId] [int] IDENTITY (1, 1) NOT NULL ,
-	[VendorName] [nvarchar] (50) NOT NULL ,
-	[Street] [nvarchar] (50) NULL ,
-	[City] [nvarchar] (50) NULL ,
-	[Region] [nvarchar] (50) NULL ,
-	[Country] [nvarchar] (50) NULL ,
-	[PostalCode] [nvarchar] (50) NULL ,
-	[Telephone] [nvarchar] (50) NULL ,
-	[PortalId] [int] NULL ,
-	[Fax] [nvarchar] (50) NULL ,
-	[Email] [nvarchar] (50) NULL ,
-	[Website] [nvarchar] (100) NULL ,
-	[Contact] [nvarchar] (50) NULL ,
-	[ClickThroughs] [int] NOT NULL ,
-	[Views] [int] NOT NULL ,
-	[CreatedByUser] [nvarchar] (100) NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[LogoFile] [nvarchar] (100) NULL ,
-	[KeyWords] [text] NULL ,
-	[Unit] [nvarchar] (50) NULL 
+    [VendorId] [int] IDENTITY (1, 1) NOT NULL ,
+    [VendorName] [nvarchar] (50) NOT NULL ,
+    [Street] [nvarchar] (50) NULL ,
+    [City] [nvarchar] (50) NULL ,
+    [Region] [nvarchar] (50) NULL ,
+    [Country] [nvarchar] (50) NULL ,
+    [PostalCode] [nvarchar] (50) NULL ,
+    [Telephone] [nvarchar] (50) NULL ,
+    [PortalId] [int] NULL ,
+    [Fax] [nvarchar] (50) NULL ,
+    [Email] [nvarchar] (50) NULL ,
+    [Website] [nvarchar] (100) NULL ,
+    [Contact] [nvarchar] (50) NULL ,
+    [ClickThroughs] [int] NOT NULL ,
+    [Views] [int] NOT NULL ,
+    [CreatedByUser] [nvarchar] (100) NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [LogoFile] [nvarchar] (100) NULL ,
+    [KeyWords] [text] NULL ,
+    [Unit] [nvarchar] (50) NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Banners] (
-	[BannerId] [int] IDENTITY (1, 1) NOT NULL ,
-	[VendorId] [int] NOT NULL ,
-	[ImageFile] [nvarchar] (100) NOT NULL ,
-	[BannerName] [nvarchar] (100) NOT NULL ,
-	[URL] [nvarchar] (100) NULL ,
-	[Impressions] [int] NOT NULL ,
-	[CPM] [float] NOT NULL ,
-	[Views] [int] NOT NULL ,
-	[ClickThroughs] [int] NOT NULL ,
-	[StartDate] [datetime] NULL ,
-	[EndDate] [datetime] NULL ,
-	[CreatedByUser] [nvarchar] (100) NOT NULL ,
-	[CreatedDate] [datetime] NOT NULL ,
-	[BannerTypeId] [int] NULL 
+    [BannerId] [int] IDENTITY (1, 1) NOT NULL ,
+    [VendorId] [int] NOT NULL ,
+    [ImageFile] [nvarchar] (100) NOT NULL ,
+    [BannerName] [nvarchar] (100) NOT NULL ,
+    [URL] [nvarchar] (100) NULL ,
+    [Impressions] [int] NOT NULL ,
+    [CPM] [float] NOT NULL ,
+    [Views] [int] NOT NULL ,
+    [ClickThroughs] [int] NOT NULL ,
+    [StartDate] [datetime] NULL ,
+    [EndDate] [datetime] NULL ,
+    [CreatedByUser] [nvarchar] (100) NOT NULL ,
+    [CreatedDate] [datetime] NOT NULL ,
+    [BannerTypeId] [int] NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Modules] (
-	[ModuleID] [int] IDENTITY (0, 1) NOT NULL ,
-	[TabID] [int] NOT NULL ,
-	[ModuleDefID] [int] NOT NULL ,
-	[ModuleOrder] [int] NOT NULL ,
-	[PaneName] [nvarchar] (50) NOT NULL ,
-	[ModuleTitle] [nvarchar] (256) NULL ,
-	[AuthorizedEditRoles] [nvarchar] (256) NULL ,
-	[CacheTime] [int] NOT NULL ,
-	[ShowMobile] [bit] NULL ,
-	[AuthorizedViewRoles] [nvarchar] (256) NULL ,
-	[Alignment] [nvarchar] (10) NULL ,
-	[Color] [nvarchar] (20) NULL ,
-	[Border] [nvarchar] (1) NULL ,
-	[IconFile] [nvarchar] (100) NULL 
+    [ModuleID] [int] IDENTITY (0, 1) NOT NULL ,
+    [TabID] [int] NOT NULL ,
+    [ModuleDefID] [int] NOT NULL ,
+    [ModuleOrder] [int] NOT NULL ,
+    [PaneName] [nvarchar] (50) NOT NULL ,
+    [ModuleTitle] [nvarchar] (256) NULL ,
+    [AuthorizedEditRoles] [nvarchar] (256) NULL ,
+    [CacheTime] [int] NOT NULL ,
+    [ShowMobile] [bit] NULL ,
+    [AuthorizedViewRoles] [nvarchar] (256) NULL ,
+    [Alignment] [nvarchar] (10) NULL ,
+    [Color] [nvarchar] (20) NULL ,
+    [Border] [nvarchar] (1) NULL ,
+    [IconFile] [nvarchar] (100) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[UserRoles] (
-	[UserRoleID] [int] IDENTITY (1, 1) NOT NULL ,
-	[UserID] [int] NOT NULL ,
-	[RoleID] [int] NOT NULL ,
-	[ExpiryDate] [datetime] NULL ,
-	[IsTrialUsed] [bit] NULL 
+    [UserRoleID] [int] IDENTITY (1, 1) NOT NULL ,
+    [UserID] [int] NOT NULL ,
+    [RoleID] [int] NOT NULL ,
+    [ExpiryDate] [datetime] NULL ,
+    [IsTrialUsed] [bit] NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[VendorClassification] (
-	[VendorClassificationId] [int] IDENTITY (1, 1) NOT NULL ,
-	[VendorId] [int] NOT NULL ,
-	[ClassificationId] [int] NOT NULL 
+    [VendorClassificationId] [int] IDENTITY (1, 1) NOT NULL ,
+    [VendorId] [int] NOT NULL ,
+    [ClassificationId] [int] NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[VendorFeedback] (
-	[VendorFeedbackId] [int] IDENTITY (1, 1) NOT NULL ,
-	[VendorId] [int] NOT NULL ,
-	[UserId] [int] NOT NULL ,
-	[Date] [datetime] NOT NULL ,
-	[Comment] [nvarchar] (4000) NOT NULL ,
-	[Value] [int] NOT NULL 
+    [VendorFeedbackId] [int] IDENTITY (1, 1) NOT NULL ,
+    [VendorId] [int] NOT NULL ,
+    [UserId] [int] NOT NULL ,
+    [Date] [datetime] NOT NULL ,
+    [Comment] [nvarchar] (4000) NOT NULL ,
+    [Value] [int] NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Announcements] (
-	[ItemID] [int] IDENTITY (0, 1) NOT NULL ,
-	[ModuleID] [int] NOT NULL ,
-	[CreatedByUser] [nvarchar] (100) NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[Title] [nvarchar] (150) NULL ,
-	[URL] [nvarchar] (150) NULL ,
-	[ExpireDate] [datetime] NULL ,
-	[Description] [nvarchar] (2000) NULL ,
-	[Syndicate] [bit] NULL 
+    [ItemID] [int] IDENTITY (0, 1) NOT NULL ,
+    [ModuleID] [int] NOT NULL ,
+    [CreatedByUser] [nvarchar] (100) NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [Title] [nvarchar] (150) NULL ,
+    [URL] [nvarchar] (150) NULL ,
+    [ExpireDate] [datetime] NULL ,
+    [Description] [nvarchar] (2000) NULL ,
+    [Syndicate] [bit] NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Contacts] (
-	[ItemID] [int] IDENTITY (0, 1) NOT NULL ,
-	[ModuleID] [int] NOT NULL ,
-	[CreatedByUser] [nvarchar] (100) NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[Name] [nvarchar] (50) NULL ,
-	[Role] [nvarchar] (100) NULL ,
-	[Email] [nvarchar] (100) NULL ,
-	[Contact1] [nvarchar] (250) NULL ,
-	[Contact2] [nvarchar] (250) NULL 
+    [ItemID] [int] IDENTITY (0, 1) NOT NULL ,
+    [ModuleID] [int] NOT NULL ,
+    [CreatedByUser] [nvarchar] (100) NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [Name] [nvarchar] (50) NULL ,
+    [Role] [nvarchar] (100) NULL ,
+    [Email] [nvarchar] (100) NULL ,
+    [Contact1] [nvarchar] (250) NULL ,
+    [Contact2] [nvarchar] (250) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Discussion] (
-	[ItemID] [int] IDENTITY (0, 1) NOT NULL ,
-	[ModuleID] [int] NOT NULL ,
-	[Title] [nvarchar] (100) NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[Body] [nvarchar] (3000) NULL ,
-	[DisplayOrder] [nvarchar] (750) NULL ,
-	[CreatedByUser] [nvarchar] (100) NULL 
+    [ItemID] [int] IDENTITY (0, 1) NOT NULL ,
+    [ModuleID] [int] NOT NULL ,
+    [Title] [nvarchar] (100) NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [Body] [nvarchar] (3000) NULL ,
+    [DisplayOrder] [nvarchar] (750) NULL ,
+    [CreatedByUser] [nvarchar] (100) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Documents] (
-	[ItemID] [int] IDENTITY (0, 1) NOT NULL ,
-	[ModuleID] [int] NOT NULL ,
-	[CreatedByUser] [nvarchar] (100) NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[URL] [nvarchar] (250) NULL ,
-	[Title] [nvarchar] (150) NULL ,
-	[Category] [nvarchar] (50) NULL ,
-	[Syndicate] [bit] NULL 
+    [ItemID] [int] IDENTITY (0, 1) NOT NULL ,
+    [ModuleID] [int] NOT NULL ,
+    [CreatedByUser] [nvarchar] (100) NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [URL] [nvarchar] (250) NULL ,
+    [Title] [nvarchar] (150) NULL ,
+    [Category] [nvarchar] (50) NULL ,
+    [Syndicate] [bit] NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[HtmlText] (
-	[ModuleID] [int] NOT NULL ,
-	[DesktopHtml] [ntext] NOT NULL ,
-	[MobileSummary] [ntext] NOT NULL ,
-	[MobileDetails] [ntext] NOT NULL 
+    [ModuleID] [int] NOT NULL ,
+    [DesktopHtml] [ntext] NOT NULL ,
+    [MobileSummary] [ntext] NOT NULL ,
+    [MobileDetails] [ntext] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Links] (
-	[ItemID] [int] IDENTITY (0, 1) NOT NULL ,
-	[ModuleID] [int] NOT NULL ,
-	[CreatedByUser] [nvarchar] (100) NULL ,
-	[CreatedDate] [datetime] NULL ,
-	[Title] [nvarchar] (100) NULL ,
-	[Url] [nvarchar] (250) NULL ,
-	[MobileUrl] [nvarchar] (250) NULL ,
-	[ViewOrder] [int] NULL ,
-	[Description] [nvarchar] (2000) NULL ,
-	[NewWindow] [bit] NOT NULL 
+    [ItemID] [int] IDENTITY (0, 1) NOT NULL ,
+    [ModuleID] [int] NOT NULL ,
+    [CreatedByUser] [nvarchar] (100) NULL ,
+    [CreatedDate] [datetime] NULL ,
+    [Title] [nvarchar] (100) NULL ,
+    [Url] [nvarchar] (250) NULL ,
+    [MobileUrl] [nvarchar] (250) NULL ,
+    [ViewOrder] [int] NULL ,
+    [Description] [nvarchar] (2000) NULL ,
+    [NewWindow] [bit] NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[ModuleEvents] (
-	[ItemID] [int] IDENTITY (0, 1) NOT NULL ,
-	[ModuleID] [int] NOT NULL ,
-	[Description] [nvarchar] (2000) NOT NULL ,
-	[DateTime] [datetime] NOT NULL ,
-	[Title] [nvarchar] (100) NOT NULL ,
-	[ExpireDate] [datetime] NULL ,
-	[CreatedByUser] [nvarchar] (200) NOT NULL ,
-	[CreatedDate] [datetime] NOT NULL ,
-	[Every] [int] NULL ,
-	[Period] [char] (1) NULL ,
-	[IconFile] [nvarchar] (256) NULL 
+    [ItemID] [int] IDENTITY (0, 1) NOT NULL ,
+    [ModuleID] [int] NOT NULL ,
+    [Description] [nvarchar] (2000) NOT NULL ,
+    [DateTime] [datetime] NOT NULL ,
+    [Title] [nvarchar] (100) NOT NULL ,
+    [ExpireDate] [datetime] NULL ,
+    [CreatedByUser] [nvarchar] (200) NOT NULL ,
+    [CreatedDate] [datetime] NOT NULL ,
+    [Every] [int] NULL ,
+    [Period] [char] (1) NULL ,
+    [IconFile] [nvarchar] (256) NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[ModuleSettings] (
-	[ModuleID] [int] NOT NULL ,
-	[SettingName] [nvarchar] (50) NOT NULL ,
-	[SettingValue] [nvarchar] (256) NOT NULL 
+    [ModuleID] [int] NOT NULL ,
+    [SettingName] [nvarchar] (50) NOT NULL ,
+    [SettingValue] [nvarchar] (256) NOT NULL
 ) ON [PRIMARY]
 GO
 
@@ -360,449 +360,449 @@ GO
 /************************************************************/
 
 
-ALTER TABLE [dbo].[BannerTypes] WITH NOCHECK ADD 
-	CONSTRAINT [PK_BannerType] PRIMARY KEY  CLUSTERED 
-	(
-		[BannerTypeId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[BannerTypes] WITH NOCHECK ADD
+    CONSTRAINT [PK_BannerType] PRIMARY KEY  CLUSTERED
+    (
+        [BannerTypeId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Classification] WITH NOCHECK ADD 
-	CONSTRAINT [PK_VendorCategory] PRIMARY KEY  CLUSTERED 
-	(
-		[ClassificationId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Classification] WITH NOCHECK ADD
+    CONSTRAINT [PK_VendorCategory] PRIMARY KEY  CLUSTERED
+    (
+        [ClassificationId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CodeCurrency] WITH NOCHECK ADD 
-	CONSTRAINT [PK_CodeCurrency] PRIMARY KEY  CLUSTERED 
-	(
-		[Code]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[CodeCurrency] WITH NOCHECK ADD
+    CONSTRAINT [PK_CodeCurrency] PRIMARY KEY  CLUSTERED
+    (
+        [Code]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[CodeFrequency] WITH NOCHECK ADD 
-	CONSTRAINT [PK_CodeFrequency] PRIMARY KEY  CLUSTERED 
-	(
-		[Code]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[CodeFrequency] WITH NOCHECK ADD
+    CONSTRAINT [PK_CodeFrequency] PRIMARY KEY  CLUSTERED
+    (
+        [Code]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Files] WITH NOCHECK ADD 
-	CONSTRAINT [PK_File] PRIMARY KEY  CLUSTERED 
-	(
-		[FileId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Files] WITH NOCHECK ADD
+    CONSTRAINT [PK_File] PRIMARY KEY  CLUSTERED
+    (
+        [FileId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[SiteLog] WITH NOCHECK ADD 
-	CONSTRAINT [PK_SiteLog] PRIMARY KEY  CLUSTERED 
-	(
-		[SiteLogId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[SiteLog] WITH NOCHECK ADD
+    CONSTRAINT [PK_SiteLog] PRIMARY KEY  CLUSTERED
+    (
+        [SiteLogId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[UserPortals] WITH NOCHECK ADD 
-	CONSTRAINT [PK_UserPortals] PRIMARY KEY  CLUSTERED 
-	(
-		[UserId],
-		[PortalId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[UserPortals] WITH NOCHECK ADD
+    CONSTRAINT [PK_UserPortals] PRIMARY KEY  CLUSTERED
+    (
+        [UserId],
+        [PortalId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[VendorLog] WITH NOCHECK ADD 
-	CONSTRAINT [PK_VendorLog] PRIMARY KEY  CLUSTERED 
-	(
-		[VendorLogId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[VendorLog] WITH NOCHECK ADD
+    CONSTRAINT [PK_VendorLog] PRIMARY KEY  CLUSTERED
+    (
+        [VendorLogId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[VendorSearch] WITH NOCHECK ADD 
-	CONSTRAINT [PK_VendorSearch] PRIMARY KEY  CLUSTERED 
-	(
-		[VendorSearchId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[VendorSearch] WITH NOCHECK ADD
+    CONSTRAINT [PK_VendorSearch] PRIMARY KEY  CLUSTERED
+    (
+        [VendorSearchId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Vendors] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Vendor] PRIMARY KEY  CLUSTERED 
-	(
-		[VendorId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Vendors] WITH NOCHECK ADD
+    CONSTRAINT [PK_Vendor] PRIMARY KEY  CLUSTERED
+    (
+        [VendorId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Banners] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Banner] PRIMARY KEY  CLUSTERED 
-	(
-		[BannerId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Banners] WITH NOCHECK ADD
+    CONSTRAINT [PK_Banner] PRIMARY KEY  CLUSTERED
+    (
+        [BannerId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[UserRoles] WITH NOCHECK ADD 
-	CONSTRAINT [PK_UserRoles] PRIMARY KEY  CLUSTERED 
-	(
-		[UserRoleID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[UserRoles] WITH NOCHECK ADD
+    CONSTRAINT [PK_UserRoles] PRIMARY KEY  CLUSTERED
+    (
+        [UserRoleID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[VendorClassification] WITH NOCHECK ADD 
-	CONSTRAINT [PK_VendorClassification] PRIMARY KEY  CLUSTERED 
-	(
-		[VendorClassificationId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[VendorClassification] WITH NOCHECK ADD
+    CONSTRAINT [PK_VendorClassification] PRIMARY KEY  CLUSTERED
+    (
+        [VendorClassificationId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[VendorFeedback] WITH NOCHECK ADD 
-	CONSTRAINT [PK_VendorFeedback] PRIMARY KEY  CLUSTERED 
-	(
-		[VendorFeedbackId]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[VendorFeedback] WITH NOCHECK ADD
+    CONSTRAINT [PK_VendorFeedback] PRIMARY KEY  CLUSTERED
+    (
+        [VendorFeedbackId]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ModuleDefinitions] WITH NOCHECK ADD 
-	CONSTRAINT [DF_ModuleDefinitions_Secure] DEFAULT (1) FOR [Secure],
-	CONSTRAINT [PK_ModuleDefinitions] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ModuleDefID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[ModuleDefinitions] WITH NOCHECK ADD
+    CONSTRAINT [DF_ModuleDefinitions_Secure] DEFAULT (1) FOR [Secure],
+    CONSTRAINT [PK_ModuleDefinitions] PRIMARY KEY  NONCLUSTERED
+    (
+        [ModuleDefID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Portals] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Portals] PRIMARY KEY  NONCLUSTERED 
-	(
-		[PortalID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Portals] WITH NOCHECK ADD
+    CONSTRAINT [PK_Portals] PRIMARY KEY  NONCLUSTERED
+    (
+        [PortalID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Users] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Users] PRIMARY KEY  NONCLUSTERED 
-	(
-		[UserID]
-	)  ON [PRIMARY] ,
-	CONSTRAINT [IX_Users] UNIQUE  NONCLUSTERED 
-	(
-		[Email]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Users] WITH NOCHECK ADD
+    CONSTRAINT [PK_Users] PRIMARY KEY  NONCLUSTERED
+    (
+        [UserID]
+    )  ON [PRIMARY] ,
+    CONSTRAINT [IX_Users] UNIQUE  NONCLUSTERED
+    (
+        [Email]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Roles] WITH NOCHECK ADD 
-	CONSTRAINT [DF_Roles_ServiceFee] DEFAULT (0) FOR [ServiceFee],
-	CONSTRAINT [PK_Roles] PRIMARY KEY  NONCLUSTERED 
-	(
-		[RoleID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Roles] WITH NOCHECK ADD
+    CONSTRAINT [DF_Roles_ServiceFee] DEFAULT (0) FOR [ServiceFee],
+    CONSTRAINT [PK_Roles] PRIMARY KEY  NONCLUSTERED
+    (
+        [RoleID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Tabs] WITH NOCHECK ADD 
-	CONSTRAINT [DF_Tabs_IsVisible] DEFAULT (1) FOR [IsVisible],
-	CONSTRAINT [PK_Tabs] PRIMARY KEY  NONCLUSTERED 
-	(
-		[TabID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Tabs] WITH NOCHECK ADD
+    CONSTRAINT [DF_Tabs_IsVisible] DEFAULT (1) FOR [IsVisible],
+    CONSTRAINT [PK_Tabs] PRIMARY KEY  NONCLUSTERED
+    (
+        [TabID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Vendors] WITH NOCHECK ADD 
-	CONSTRAINT [DF_Vendors_ClickThroughs] DEFAULT (0) FOR [ClickThroughs],
-	CONSTRAINT [DF_Vendors_Views] DEFAULT (0) FOR [Views]
+ALTER TABLE [dbo].[Vendors] WITH NOCHECK ADD
+    CONSTRAINT [DF_Vendors_ClickThroughs] DEFAULT (0) FOR [ClickThroughs],
+    CONSTRAINT [DF_Vendors_Views] DEFAULT (0) FOR [Views]
 GO
 
-ALTER TABLE [dbo].[Banners] WITH NOCHECK ADD 
-	CONSTRAINT [DF_Banners_Views] DEFAULT (0) FOR [Views],
-	CONSTRAINT [DF_Banners_ClickThroughs] DEFAULT (0) FOR [ClickThroughs]
+ALTER TABLE [dbo].[Banners] WITH NOCHECK ADD
+    CONSTRAINT [DF_Banners_Views] DEFAULT (0) FOR [Views],
+    CONSTRAINT [DF_Banners_ClickThroughs] DEFAULT (0) FOR [ClickThroughs]
 GO
 
-ALTER TABLE [dbo].[Modules] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Modules] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ModuleID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Modules] WITH NOCHECK ADD
+    CONSTRAINT [PK_Modules] PRIMARY KEY  NONCLUSTERED
+    (
+        [ModuleID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Announcements] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Announcements] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ItemID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Announcements] WITH NOCHECK ADD
+    CONSTRAINT [PK_Announcements] PRIMARY KEY  NONCLUSTERED
+    (
+        [ItemID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Contacts] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Contacts] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ItemID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Contacts] WITH NOCHECK ADD
+    CONSTRAINT [PK_Contacts] PRIMARY KEY  NONCLUSTERED
+    (
+        [ItemID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Discussion] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Discussion] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ItemID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Discussion] WITH NOCHECK ADD
+    CONSTRAINT [PK_Discussion] PRIMARY KEY  NONCLUSTERED
+    (
+        [ItemID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Documents] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Documents] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ItemID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Documents] WITH NOCHECK ADD
+    CONSTRAINT [PK_Documents] PRIMARY KEY  NONCLUSTERED
+    (
+        [ItemID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[HtmlText] WITH NOCHECK ADD 
-	CONSTRAINT [PK_HtmlText] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ModuleID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[HtmlText] WITH NOCHECK ADD
+    CONSTRAINT [PK_HtmlText] PRIMARY KEY  NONCLUSTERED
+    (
+        [ModuleID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Links] WITH NOCHECK ADD 
-	CONSTRAINT [DF_Links_NewWindow] DEFAULT (0) FOR [NewWindow],
-	CONSTRAINT [PK_Links] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ItemID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[Links] WITH NOCHECK ADD
+    CONSTRAINT [DF_Links_NewWindow] DEFAULT (0) FOR [NewWindow],
+    CONSTRAINT [PK_Links] PRIMARY KEY  NONCLUSTERED
+    (
+        [ItemID]
+    )  ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ModuleEvents] WITH NOCHECK ADD 
-	CONSTRAINT [PK_Events] PRIMARY KEY  NONCLUSTERED 
-	(
-		[ItemID]
-	)  ON [PRIMARY] 
+ALTER TABLE [dbo].[ModuleEvents] WITH NOCHECK ADD
+    CONSTRAINT [PK_Events] PRIMARY KEY  NONCLUSTERED
+    (
+        [ItemID]
+    )  ON [PRIMARY]
 GO
 
  CREATE  INDEX [IX_ModuleSettings] ON [dbo].[ModuleSettings]([ModuleID], [SettingName]) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Classification] ADD 
-	CONSTRAINT [FK_Classification_Classification] FOREIGN KEY 
-	(
-		[ParentId]
-	) REFERENCES [dbo].[Classification] (
-		[ClassificationId]
-	) NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Classification] ADD
+    CONSTRAINT [FK_Classification_Classification] FOREIGN KEY
+    (
+        [ParentId]
+    ) REFERENCES [dbo].[Classification] (
+        [ClassificationId]
+    ) NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Roles] ADD 
-	CONSTRAINT [FK_Roles_CodeFrequency] FOREIGN KEY 
-	(
-		[BillingFrequency]
-	) REFERENCES [dbo].[CodeFrequency] (
-		[Code]
-	) NOT FOR REPLICATION ,
-	CONSTRAINT [FK_Roles_Portals] FOREIGN KEY 
-	(
-		[PortalID]
-	) REFERENCES [dbo].[Portals] (
-		[PortalID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Roles] ADD
+    CONSTRAINT [FK_Roles_CodeFrequency] FOREIGN KEY
+    (
+        [BillingFrequency]
+    ) REFERENCES [dbo].[CodeFrequency] (
+        [Code]
+    ) NOT FOR REPLICATION ,
+    CONSTRAINT [FK_Roles_Portals] FOREIGN KEY
+    (
+        [PortalID]
+    ) REFERENCES [dbo].[Portals] (
+        [PortalID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[SiteLog] ADD 
-	CONSTRAINT [FK_SiteLog_Portals] FOREIGN KEY 
-	(
-		[PortalId]
-	) REFERENCES [dbo].[Portals] (
-		[PortalID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[SiteLog] ADD
+    CONSTRAINT [FK_SiteLog_Portals] FOREIGN KEY
+    (
+        [PortalId]
+    ) REFERENCES [dbo].[Portals] (
+        [PortalID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Tabs] ADD 
-	CONSTRAINT [FK_Tabs_Portals] FOREIGN KEY 
-	(
-		[PortalID]
-	) REFERENCES [dbo].[Portals] (
-		[PortalID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Tabs] ADD
+    CONSTRAINT [FK_Tabs_Portals] FOREIGN KEY
+    (
+        [PortalID]
+    ) REFERENCES [dbo].[Portals] (
+        [PortalID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[UserPortals] ADD 
-	CONSTRAINT [FK_UserPortals_Portals] FOREIGN KEY 
-	(
-		[PortalId]
-	) REFERENCES [dbo].[Portals] (
-		[PortalID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION ,
-	CONSTRAINT [FK_UserPortals_Users] FOREIGN KEY 
-	(
-		[UserId]
-	) REFERENCES [dbo].[Users] (
-		[UserID]
-	) NOT FOR REPLICATION 
+ALTER TABLE [dbo].[UserPortals] ADD
+    CONSTRAINT [FK_UserPortals_Portals] FOREIGN KEY
+    (
+        [PortalId]
+    ) REFERENCES [dbo].[Portals] (
+        [PortalID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION ,
+    CONSTRAINT [FK_UserPortals_Users] FOREIGN KEY
+    (
+        [UserId]
+    ) REFERENCES [dbo].[Users] (
+        [UserID]
+    ) NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[VendorLog] ADD 
-	CONSTRAINT [FK_VendorLog_Portals] FOREIGN KEY 
-	(
-		[PortalId]
-	) REFERENCES [dbo].[Portals] (
-		[PortalID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[VendorLog] ADD
+    CONSTRAINT [FK_VendorLog_Portals] FOREIGN KEY
+    (
+        [PortalId]
+    ) REFERENCES [dbo].[Portals] (
+        [PortalID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[VendorSearch] ADD 
-	CONSTRAINT [FK_VendorSearch_Portals] FOREIGN KEY 
-	(
-		[PortalId]
-	) REFERENCES [dbo].[Portals] (
-		[PortalID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[VendorSearch] ADD
+    CONSTRAINT [FK_VendorSearch_Portals] FOREIGN KEY
+    (
+        [PortalId]
+    ) REFERENCES [dbo].[Portals] (
+        [PortalID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Vendors] ADD 
-	CONSTRAINT [FK_Vendor_Portals] FOREIGN KEY 
-	(
-		[PortalId]
-	) REFERENCES [dbo].[Portals] (
-		[PortalID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Vendors] ADD
+    CONSTRAINT [FK_Vendor_Portals] FOREIGN KEY
+    (
+        [PortalId]
+    ) REFERENCES [dbo].[Portals] (
+        [PortalID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Banners] ADD 
-	CONSTRAINT [FK_Banner_Vendor] FOREIGN KEY 
-	(
-		[VendorId]
-	) REFERENCES [dbo].[Vendors] (
-		[VendorId]
-	) ON DELETE CASCADE  NOT FOR REPLICATION ,
-	CONSTRAINT [FK_Banners_BannerType] FOREIGN KEY 
-	(
-		[BannerTypeId]
-	) REFERENCES [dbo].[BannerTypes] (
-		[BannerTypeId]
-	) NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Banners] ADD
+    CONSTRAINT [FK_Banner_Vendor] FOREIGN KEY
+    (
+        [VendorId]
+    ) REFERENCES [dbo].[Vendors] (
+        [VendorId]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION ,
+    CONSTRAINT [FK_Banners_BannerType] FOREIGN KEY
+    (
+        [BannerTypeId]
+    ) REFERENCES [dbo].[BannerTypes] (
+        [BannerTypeId]
+    ) NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Modules] ADD 
-	CONSTRAINT [FK_Modules_ModuleDefinitions] FOREIGN KEY 
-	(
-		[ModuleDefID]
-	) REFERENCES [dbo].[ModuleDefinitions] (
-		[ModuleDefID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION ,
-	CONSTRAINT [FK_Modules_Tabs] FOREIGN KEY 
-	(
-		[TabID]
-	) REFERENCES [dbo].[Tabs] (
-		[TabID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Modules] ADD
+    CONSTRAINT [FK_Modules_ModuleDefinitions] FOREIGN KEY
+    (
+        [ModuleDefID]
+    ) REFERENCES [dbo].[ModuleDefinitions] (
+        [ModuleDefID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION ,
+    CONSTRAINT [FK_Modules_Tabs] FOREIGN KEY
+    (
+        [TabID]
+    ) REFERENCES [dbo].[Tabs] (
+        [TabID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[UserRoles] ADD 
-	CONSTRAINT [FK_UserRoles_Roles] FOREIGN KEY 
-	(
-		[RoleID]
-	) REFERENCES [dbo].[Roles] (
-		[RoleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION ,
-	CONSTRAINT [FK_UserRoles_Users] FOREIGN KEY 
-	(
-		[UserID]
-	) REFERENCES [dbo].[Users] (
-		[UserID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[UserRoles] ADD
+    CONSTRAINT [FK_UserRoles_Roles] FOREIGN KEY
+    (
+        [RoleID]
+    ) REFERENCES [dbo].[Roles] (
+        [RoleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION ,
+    CONSTRAINT [FK_UserRoles_Users] FOREIGN KEY
+    (
+        [UserID]
+    ) REFERENCES [dbo].[Users] (
+        [UserID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[VendorClassification] ADD 
-	CONSTRAINT [FK_VendorClassification_Classification] FOREIGN KEY 
-	(
-		[ClassificationId]
-	) REFERENCES [dbo].[Classification] (
-		[ClassificationId]
-	) NOT FOR REPLICATION ,
-	CONSTRAINT [FK_VendorClassification_Vendors] FOREIGN KEY 
-	(
-		[VendorId]
-	) REFERENCES [dbo].[Vendors] (
-		[VendorId]
-	) NOT FOR REPLICATION 
+ALTER TABLE [dbo].[VendorClassification] ADD
+    CONSTRAINT [FK_VendorClassification_Classification] FOREIGN KEY
+    (
+        [ClassificationId]
+    ) REFERENCES [dbo].[Classification] (
+        [ClassificationId]
+    ) NOT FOR REPLICATION ,
+    CONSTRAINT [FK_VendorClassification_Vendors] FOREIGN KEY
+    (
+        [VendorId]
+    ) REFERENCES [dbo].[Vendors] (
+        [VendorId]
+    ) NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[VendorFeedback] ADD 
-	CONSTRAINT [FK_VendorFeedback_Vendors] FOREIGN KEY 
-	(
-		[VendorId]
-	) REFERENCES [dbo].[Vendors] (
-		[VendorId]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[VendorFeedback] ADD
+    CONSTRAINT [FK_VendorFeedback_Vendors] FOREIGN KEY
+    (
+        [VendorId]
+    ) REFERENCES [dbo].[Vendors] (
+        [VendorId]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Announcements] ADD 
-	CONSTRAINT [FK_Announcements_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Announcements] ADD
+    CONSTRAINT [FK_Announcements_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Contacts] ADD 
-	CONSTRAINT [FK_Contacts_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Contacts] ADD
+    CONSTRAINT [FK_Contacts_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Discussion] ADD 
-	CONSTRAINT [FK_Discussion_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Discussion] ADD
+    CONSTRAINT [FK_Discussion_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Documents] ADD 
-	CONSTRAINT [FK_Documents_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Documents] ADD
+    CONSTRAINT [FK_Documents_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[HtmlText] ADD 
-	CONSTRAINT [FK_HtmlText_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[HtmlText] ADD
+    CONSTRAINT [FK_HtmlText_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[Links] ADD 
-	CONSTRAINT [FK_Links_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[Links] ADD
+    CONSTRAINT [FK_Links_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[ModuleEvents] ADD 
-	CONSTRAINT [FK_Events_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[ModuleEvents] ADD
+    CONSTRAINT [FK_Events_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
-ALTER TABLE [dbo].[ModuleSettings] ADD 
-	CONSTRAINT [FK_ModuleSettings_Modules] FOREIGN KEY 
-	(
-		[ModuleID]
-	) REFERENCES [dbo].[Modules] (
-		[ModuleID]
-	) ON DELETE CASCADE  NOT FOR REPLICATION 
+ALTER TABLE [dbo].[ModuleSettings] ADD
+    CONSTRAINT [FK_ModuleSettings_Modules] FOREIGN KEY
+    (
+        [ModuleID]
+    ) REFERENCES [dbo].[Modules] (
+        [ModuleID]
+    ) ON DELETE CASCADE  NOT FOR REPLICATION
 GO
 
 /************************************************************/
 /*****          Create Stored Procedures                *****/
 /************************************************************/
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 create procedure AddTab
@@ -846,14 +846,14 @@ select @TabID = @@IDENTITY
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -874,14 +874,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -899,14 +899,14 @@ where  BannerId = @BannerId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -926,14 +926,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -953,14 +953,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -978,14 +978,14 @@ WHERE
     ItemID = @ItemID
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1005,14 +1005,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1023,22 +1023,22 @@ CREATE PROCEDURE DeleteModule
 )
 AS
 
-DELETE FROM 
-    Modules 
-WHERE 
+DELETE FROM
+    Modules
+WHERE
     ModuleID = @ModuleID
 
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1058,14 +1058,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1081,14 +1081,14 @@ where  ItemID = @ItemID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1104,14 +1104,14 @@ where  PortalID = @PortalID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1132,14 +1132,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1155,14 +1155,14 @@ where  VendorID = @VendorID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1179,7 +1179,7 @@ set    ClickThroughs = ClickThroughs + 1
 where  BannerId = @BannerId
 
 select URL,
-       VendorId
+        VendorId
 from   Banners
 where  BannerId = @BannerId
 
@@ -1187,14 +1187,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1205,15 +1205,15 @@ create procedure GetBanners
 as
 
 select BannerId,
-       BannerName,
-       BannerTypeName,
-       URL,
-       Impressions,
-       CPM,
-       Views,
-       ClickThroughs,
-       StartDate,
-       EndDate
+        BannerName,
+        BannerTypeName,
+        URL,
+        Impressions,
+        CPM,
+        Views,
+        ClickThroughs,
+        StartDate,
+        EndDate
 from   Banners
 inner join BannerTypes on Banners.BannerTypeId = BannerTypes.BannerTypeId
 where  VendorId = @VendorId
@@ -1223,19 +1223,19 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure GetBillingFrequencyCode
-    
+
 @Code char(1)
 
 as
@@ -1246,19 +1246,19 @@ where  Code = @Code
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure GetBillingFrequencyCodes
-    
+
 as
 
 select *
@@ -1266,14 +1266,14 @@ from   CodeFrequency
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1298,14 +1298,14 @@ WHERE
     ModuleID = @ModuleID
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1328,14 +1328,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1359,14 +1359,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1378,7 +1378,7 @@ create procedure GetSingleUserDefinedRow
 as
 
 select UserDefinedFields.FieldTitle,
-       UserDefinedData.FieldValue
+        UserDefinedData.FieldValue
 from   UserDefinedData
 inner join UserDefinedFields on UserDefinedData.UserDefinedFieldId = UserDefinedFields.UserDefinedFieldId
 where  UserDefinedData.UserDefinedRowID = @UserDefinedRowID
@@ -1386,14 +1386,14 @@ and    UserDefinedFields.ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1404,27 +1404,27 @@ create procedure GetTabById
 as
 
 select TabID,
-       TabOrder,
-       TabName,
-       MobileTabName,
-       AuthorizedRoles,
-       ShowMobile,
-       LeftPaneWidth,
-       RightPaneWidth,
-       IsVisible
+        TabOrder,
+        TabName,
+        MobileTabName,
+        AuthorizedRoles,
+        ShowMobile,
+        LeftPaneWidth,
+        RightPaneWidth,
+        IsVisible
 from   Tabs
 where  TabId = @TabId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1436,21 +1436,21 @@ create procedure GetTabByName
 as
 
 select TabID,
-       TabOrder
+        TabOrder
 from   Tabs
 where  PortalID = @PortalID
 and    TabName = @TabName
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1485,14 +1485,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1507,21 +1507,21 @@ as
 
 update FAQs
 set    Question = @Question,
-       Answer = @Answer,
-       CreatedByUser = @UserName,
-       CreatedDate = getdate()
+        Answer = @Answer,
+        CreatedByUser = @UserName,
+        CreatedDate = getdate()
 where  ItemID = @ItemID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 CREATE PROCEDURE UpdateHtmlText
@@ -1534,11 +1534,11 @@ CREATE PROCEDURE UpdateHtmlText
 AS
 
 IF NOT EXISTS (
-    SELECT 
-        * 
-    FROM 
-        HtmlText 
-    WHERE 
+    SELECT
+        *
+    FROM
+        HtmlText
+    WHERE
         ModuleID = @ModuleID
 )
 INSERT INTO HtmlText (
@@ -1546,7 +1546,7 @@ INSERT INTO HtmlText (
     DesktopHtml,
     MobileSummary,
     MobileDetails
-) 
+)
 VALUES (
     @ModuleID,
     @DesktopHtml,
@@ -1568,21 +1568,21 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure UpdateImage
 
-@EntityType nvarchar(20), 
-@EntityId int, 
+@EntityType nvarchar(20),
+@EntityId int,
 @ImagePath varchar(50),
 @ImageWidth int,
 @ImageHeight int
@@ -1601,23 +1601,23 @@ begin
   if @ImageId is null
   begin
     insert into GroupsImages (
-      GroupId,
-      ImagePath,
-      ImageWidth,
-      ImageHeight
+    GroupId,
+    ImagePath,
+    ImageWidth,
+    ImageHeight
     )
     values (
-      @EntityId,
-      @ImagePath,
-      @ImageWidth,
-      @ImageHeight
+    @EntityId,
+    @ImagePath,
+    @ImageWidth,
+    @ImageHeight
     )
   end
   else
   begin
     update GroupsImages
     set    ImageWidth = @ImageWidth,
-           ImageHeight = @ImageHeight
+            ImageHeight = @ImageHeight
     where  GroupImageId = @ImageId
   end
 end
@@ -1632,23 +1632,23 @@ begin
   if @ImageId is null
   begin
     insert into ParticipantsImages (
-      ParticipantId,
-      ImagePath,
-      ImageWidth,
-      ImageHeight
+    ParticipantId,
+    ImagePath,
+    ImageWidth,
+    ImageHeight
     )
     values (
-      @EntityId,
-      @ImagePath,
-      @ImageWidth,
-      @ImageHeight
+    @EntityId,
+    @ImagePath,
+    @ImageWidth,
+    @ImageHeight
     )
   end
   else
   begin
     update ParticipantsImages
     set    ImageWidth = @ImageWidth,
-           ImageHeight = @ImageHeight
+            ImageHeight = @ImageHeight
     where  ParticipantImageId = @ImageId
   end
 end
@@ -1663,23 +1663,23 @@ begin
   if @ImageId is null
   begin
     insert into EventsImages (
-      EventId,
-      ImagePath,
-      ImageWidth,
-      ImageHeight
+    EventId,
+    ImagePath,
+    ImageWidth,
+    ImageHeight
     )
     values (
-      @EntityId,
-      @ImagePath,
-      @ImageWidth,
-      @ImageHeight
+    @EntityId,
+    @ImagePath,
+    @ImageWidth,
+    @ImageHeight
     )
   end
   else
   begin
     update EventsImages
     set    ImageWidth = @ImageWidth,
-           ImageHeight = @ImageHeight
+            ImageHeight = @ImageHeight
     where  EventImageId = @ImageId
   end
 end
@@ -1688,14 +1688,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1721,14 +1721,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1742,20 +1742,20 @@ CREATE PROCEDURE UpdateModuleSetting
 AS
 
 IF NOT EXISTS (
-    SELECT 
-        * 
-    FROM 
-        ModuleSettings 
-    WHERE 
+    SELECT
+        *
+    FROM
+        ModuleSettings
+    WHERE
         ModuleID = @ModuleID
-      AND
+    AND
         SettingName = @SettingName
 )
 INSERT INTO ModuleSettings (
     ModuleID,
     SettingName,
     SettingValue
-) 
+)
 VALUES (
     @ModuleID,
     @SettingName,
@@ -1776,14 +1776,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1801,28 +1801,28 @@ as
 
 update Roles
 set    RoleName = @RoleName,
-       Description = @Description,
-       ServiceFee = @ServiceFee,
-       BillingFrequency = @BillingFrequency,
-       TrialPeriod = @TrialPeriod,
-       TrialFrequency = @TrialFrequency
+        Description = @Description,
+        ServiceFee = @ServiceFee,
+        BillingFrequency = @BillingFrequency,
+        TrialPeriod = @TrialPeriod,
+        TrialFrequency = @TrialFrequency
 where  RoleID = @RoleID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure UpdateService
-    
+
 @UserId       int,
 @RoleId       int,
 @Units        int
@@ -1834,7 +1834,7 @@ declare @ExpiryDate datetime
 declare @IsTrialUsed bit
 
 select @ExpiryDate = ExpiryDate,
-       @IsTrialUsed = IsTrialUsed
+        @IsTrialUsed = IsTrialUsed
 from   UserRoles
 where  UserId = @UserId
 and    RoleId = @RoleId
@@ -1844,17 +1844,17 @@ begin
   if @IsTrialUsed is null /* trial period not used */
   begin
     select @Frequency = TrialFrequency,
-           @Units = TrialPeriod
+            @Units = TrialPeriod
     from   Roles
     where  RoleId = @RoleId
 
     if @Units is null /* no trial period for role */
     begin
-      select @Frequency = '0'
+    select @Frequency = '0'
     end
     else
     begin
-      if @ExpiryDate is null or @ExpiryDate < getdate()
+    if @ExpiryDate is null or @ExpiryDate < getdate()
         select @ExpiryDate = getdate()
     end
   end
@@ -1887,7 +1887,7 @@ if exists ( select 1 from UserRoles where UserId = @UserId and RoleId = @RoleId 
 begin
   update UserRoles
   set    ExpiryDate = @ExpiryDate,
-         IsTrialUsed = 1
+        IsTrialUsed = 1
   where  UserId = @UserId
   and    RoleId = @RoleId
 end
@@ -1909,14 +1909,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1935,24 +1935,24 @@ as
 
 update Tabs
 set    TabName = @TabName,
-       ShowMobile = @ShowMobile,
-       MobileTabName = @MobileTabName,
-       AuthorizedRoles = @AuthorizedRoles,
-       LeftPaneWidth = @LeftPaneWidth,
-       RightPaneWidth = @RightPaneWidth,
-       IsVisible = @IsVisible
+        ShowMobile = @ShowMobile,
+        MobileTabName = @MobileTabName,
+        AuthorizedRoles = @AuthorizedRoles,
+        LeftPaneWidth = @LeftPaneWidth,
+        RightPaneWidth = @RightPaneWidth,
+        IsVisible = @IsVisible
 where  TabID = @TabID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -1976,14 +1976,14 @@ WHERE
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2013,14 +2013,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2047,14 +2047,14 @@ and    PortalId = @PortalId
 
 if @FileId is null
 begin
-  insert Files ( 
+  insert Files (
     PortalId,
     FileName,
     Extension,
     Size,
     Width,
     Height,
-    ContentType 
+    ContentType
   )
   values (
     @PortalId,
@@ -2063,30 +2063,30 @@ begin
     @Size,
     @Width,
     @Height,
-    @ContentType 
+    @ContentType
   )
 end
 else
 begin
   update Files
   set    FileName = @FileName,
-         Extension = @Extension,
-         Size = @Size,
-         Width = @Width,
-         Height = @Height,
-         ContentType = @ContentType
+        Extension = @Extension,
+        Size = @Size,
+        Width = @Width,
+        Height = @Height,
+        ContentType = @ContentType
   where  FileId = @FileId
 end
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2097,7 +2097,7 @@ create procedure DeleteFile
 
 as
 
-delete 
+delete
 from   Files
 where  FileName = @FileName
 and    PortalId = @PortalId
@@ -2105,14 +2105,14 @@ and    PortalId = @PortalId
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2124,13 +2124,13 @@ as
 
 if @PortalId is null
 begin
-  delete 
+  delete
   from   Files
   where  PortalId is null
 end
 else
 begin
-  delete 
+  delete
   from   Files
   where  PortalId = @PortalId
 end
@@ -2138,14 +2138,14 @@ end
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2154,25 +2154,25 @@ create procedure GetBannerTypes
 as
 
 select BannerTypeId,
-       BannerTypeName
+        BannerTypeName
 from   BannerTypes
 
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure GetCountryCodes
-    
+
 as
 
 select *
@@ -2181,14 +2181,14 @@ order by Description
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2197,20 +2197,20 @@ create procedure GetCurrencies
 as
 
 select Code,
-       Description
+        Description
 from   CodeCurrency
 
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2223,26 +2223,26 @@ as
 if @PortalId is null
 begin
   select FileId,
-         PortalId,
-         FileName,
-         Extension,
-         Size,
-         Width,
-         Height,
-         ContentType
+        PortalId,
+        FileName,
+        Extension,
+        Size,
+        Width,
+        Height,
+        ContentType
   from   Files
   where  PortalId is null
 end
 else
 begin
   select FileId,
-         PortalId,
-         FileName,
-         Extension,
-         Size,
-         Width,
-         Height,
-         ContentType
+        PortalId,
+        FileName,
+        Extension,
+        Size,
+        Width,
+        Height,
+        ContentType
   from   Files
   where  PortalId = @PortalId
 end
@@ -2250,14 +2250,14 @@ end
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2270,18 +2270,18 @@ as
 if @Admin = 1
 begin
   select FriendlyName,
-         DesktopSrc,
-         MobileSrc,
-         ModuleDefID
+        DesktopSrc,
+        MobileSrc,
+        ModuleDefID
   from   ModuleDefinitions
   order  by FriendlyName
 end
 else
 begin
   select FriendlyName,
-         DesktopSrc,
-         MobileSrc,
-         ModuleDefID
+        DesktopSrc,
+        MobileSrc,
+        ModuleDefID
   from   ModuleDefinitions
   where  AdminOrder is null
   and    DesktopSrc is not null
@@ -2290,14 +2290,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2314,14 +2314,14 @@ where  PortalAlias like '%' + @PortalAlias + '%'
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2338,19 +2338,19 @@ where  PortalId = @PortalId
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure GetRegionCodes
-    
+
 @Country char(2)
 
 as
@@ -2362,14 +2362,14 @@ order by Description
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2381,11 +2381,11 @@ create procedure GetSingleFAQ
 as
 
 select ItemID,
-       ModuleID,
-       Question,
-       Answer,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       FAQs.CreatedDate
+        ModuleID,
+        Question,
+        Answer,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        FAQs.CreatedDate
 from   FAQs
 left outer join Users on FAQs.CreatedByUser = Users.UserID
 where  ItemID = @ItemID
@@ -2393,14 +2393,14 @@ and    ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2412,11 +2412,11 @@ create procedure GetSingleFile
 as
 
 select FileName,
-       Extension,
-       Size,
-       Width,
-       Height,
-       ContentType
+        Extension,
+        Size,
+        Width,
+        Height,
+        ContentType
 from   Files
 where  FileName = @FileName
 and    PortalId = @PortalId
@@ -2424,14 +2424,14 @@ and    PortalId = @PortalId
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2442,24 +2442,24 @@ create procedure GetSingleModuleDefinition
 as
 
 select FriendlyName,
-       DesktopSrc,
-       MobileSrc,
-       AdminOrder,
-       EditSrc,
-       Secure
+        DesktopSrc,
+        MobileSrc,
+        AdminOrder,
+        EditSrc,
+        Secure
 from   ModuleDefinitions
 where  ModuleDefID = @ModuleDefID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2470,25 +2470,25 @@ create procedure GetSingleModuleDefinitionByName
 as
 
 select ModuleDefId,
-       FriendlyName,
-       DesktopSrc,
-       MobileSrc,
-       AdminOrder,
-       EditSrc,
-       Secure
+        FriendlyName,
+        DesktopSrc,
+        MobileSrc,
+        AdminOrder,
+        EditSrc,
+        Secure
 from   ModuleDefinitions
 where  FriendlyName = @FriendlyName
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2504,14 +2504,14 @@ where  PortalID = @PortalID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2520,32 +2520,32 @@ create procedure GetSingleUserByEmail
 @Email nvarchar(100)
 
 as
- 
+
 select UserId,
-       Email,
-       Password,
-       'FullName' = FirstName + ' ' + LastName,
-       FirstName,
-       LastName,
-       Unit,
-       Street,
-       City,
-       Region,
-       PostalCode,
-       Country
+        Email,
+        Password,
+        'FullName' = FirstName + ' ' + LastName,
+        FirstName,
+        LastName,
+        Unit,
+        Street,
+        City,
+        Region,
+        PostalCode,
+        Country
 from   Users
 where  Email  = @Email
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2570,30 +2570,30 @@ as
 
 update Portals
 set    PortalName = @PortalName,
-       PortalAlias = isnull(@PortalAlias,PortalAlias),
-       UploadDirectory = isnull(@UploadDirectory,UploadDirectory),
-       LogoFile = @LogoFile,
-       FooterText = @FooterText,
-       ExpiryDate = @ExpiryDate,
-       UserRegistration = @UserRegistration,
-       BannerAdvertising = @BannerAdvertising,
-       Currency = @Currency,
-       AdministratorId = @AdministratorId,
-       HostFee = @HostFee,
-       HostSpace = @HostSpace,
-       PayPalId = @PayPalId
+        PortalAlias = isnull(@PortalAlias,PortalAlias),
+        UploadDirectory = isnull(@UploadDirectory,UploadDirectory),
+        LogoFile = @LogoFile,
+        FooterText = @FooterText,
+        ExpiryDate = @ExpiryDate,
+        UserRegistration = @UserRegistration,
+        BannerAdvertising = @BannerAdvertising,
+        Currency = @Currency,
+        AdministratorId = @AdministratorId,
+        HostFee = @HostFee,
+        HostSpace = @HostSpace,
+        PayPalId = @PayPalId
 where  PortalID = @PortalID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2630,14 +2630,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2652,8 +2652,8 @@ create procedure AddSiteLog
 @UserHostName                  nvarchar(255)         = null
 
 as
- 
-insert SiteLog ( 
+
+insert SiteLog (
   DateTime,
   PortalId,
   UserId,
@@ -2678,14 +2678,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2709,7 +2709,7 @@ as
 
 select	@UserID = UserID
 from 	Users
-where	Email = @Email 
+where	Email = @Email
 and Password = @Password
 
 if @UserID is null
@@ -2717,10 +2717,10 @@ begin
   insert into Users (
     FirstName,
     LastName,
-    Unit, 
-    Street, 
+    Unit,
+    Street,
     City,
-    Region, 
+    Region,
     PostalCode,
     Country,
     Email,
@@ -2762,14 +2762,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2833,7 +2833,7 @@ values (
   0,
   0,
   @UserName,
-  getdate(), 
+  getdate(),
   @LogoFile,
   @KeyWords
 )
@@ -2842,14 +2842,14 @@ select @VendorID = @@IDENTITY
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2862,21 +2862,21 @@ as
 
 if @RoleID <> 0 /* Admins Role */
 begin
-  delete 
+  delete
   from   Roles
   where  RoleID = @RoleID
 end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2922,14 +2922,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2940,7 +2940,7 @@ create procedure GetBannerLog
 as
 
 select 'LogDate' = convert(varchar,DateTime,102),
-       'Views' = count(*)
+        'Views' = count(*)
 from   VendorLog
 where  BannerId = @BannerId
 group by convert(varchar,DateTime,102)
@@ -2950,14 +2950,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -2970,12 +2970,12 @@ create procedure GetPortalRoles
 as
 
 select Roles.RoleID,
-       Roles.RoleName,
-       Roles.Description,
-       Roles.ServiceFee,
-       'BillingFrequency' = case when Roles.ServiceFee is not null then C1.Description else null end,
-       Roles.TrialPeriod,
-       'TrialFrequency' = case when Roles.TrialPeriod is not null then C2.Description else null end
+        Roles.RoleName,
+        Roles.Description,
+        Roles.ServiceFee,
+        'BillingFrequency' = case when Roles.ServiceFee is not null then C1.Description else null end,
+        Roles.TrialPeriod,
+        'TrialFrequency' = case when Roles.TrialPeriod is not null then C2.Description else null end
 from   Roles
 left outer join CodeFrequency C1 on Roles.BillingFrequency = C1.Code
 left outer join CodeFrequency C2 on Roles.TrialFrequency = C2.Code
@@ -2984,14 +2984,14 @@ or     PortalID is null
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3000,20 +3000,20 @@ create procedure GetPortals
 as
 
 select Portals.*,
-       'Users' = ( select count(*) from UserPortals where UserPortals.PortalId = Portals.PortalId )
+        'Users' = ( select count(*) from UserPortals where UserPortals.PortalId = Portals.PortalId )
 from   Portals
 order by PortalName
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3025,25 +3025,25 @@ create procedure GetSingleRole
 as
 
 select RoleName,
-       Description,
-       ServiceFee,
-       BillingFrequency,
-       TrialPeriod,
-       TrialFrequency
+        Description,
+        ServiceFee,
+        BillingFrequency,
+        TrialPeriod,
+        TrialFrequency
 from   Roles
 where  RoleID = @RoleID
 and    PortalId = @PortalId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3055,20 +3055,20 @@ create procedure GetSingleUser
 as
 
 select Users.UserID,
-       'FullName' = FirstName + ' ' + LastName,
-       FirstName,
-       LastName,
-       Unit,
-       Street,
-       City,
-       Region,
-       PostalCode,
-       Country,
-       Email,
-       Authorized,
-       CreatedDate,
-       LastLoginDate,
-       Password
+        'FullName' = FirstName + ' ' + LastName,
+        FirstName,
+        LastName,
+        Unit,
+        Street,
+        City,
+        Region,
+        PostalCode,
+        Country,
+        Email,
+        Authorized,
+        CreatedDate,
+        LastLoginDate,
+        Password
 from   Users
 inner join UserPortals on Users.UserId = UserPortals.UserId
 where  Users.UserId = @UserId
@@ -3076,14 +3076,14 @@ and    UserPortals.PortalId = @PortalId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3093,38 +3093,38 @@ create procedure GetSingleVendor
 
 as
 
-select Vendors.VendorName, 
-       Vendors.Unit, 
-       Vendors.Street, 
-       Vendors.City, 
-       Vendors.Region, 
-       Vendors.Country, 
-       Vendors.PostalCode, 
-       Vendors.Telephone,
-       Vendors.Fax,
-       Vendors.Email,
-       Vendors.Website,
-       Vendors.Contact,
-       Vendors.ClickThroughs,
-       Vendors.Views,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Vendors.CreatedDate,
-       Vendors.LogoFile,
-       Vendors.KeyWords
+select Vendors.VendorName,
+        Vendors.Unit,
+        Vendors.Street,
+        Vendors.City,
+        Vendors.Region,
+        Vendors.Country,
+        Vendors.PostalCode,
+        Vendors.Telephone,
+        Vendors.Fax,
+        Vendors.Email,
+        Vendors.Website,
+        Vendors.Contact,
+        Vendors.ClickThroughs,
+        Vendors.Views,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Vendors.CreatedDate,
+        Vendors.LogoFile,
+        Vendors.KeyWords
 from   Vendors
 left outer join Users on Vendors.CreatedByUser = Users.UserID
 where  VendorID = @VendorID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3139,10 +3139,10 @@ create procedure GetSiteLog
 as
 
 select 'Pages' = count(*),
-       'Visitors' = count(distinct SiteLog.UserHostAddress),
-       'Users' = count(distinct SiteLog.UserId)
+        'Visitors' = count(distinct SiteLog.UserHostAddress),
+        'Users' = count(distinct SiteLog.UserId)
 from SiteLog
-left outer join Users on SiteLog.UserId = Users.UserId 
+left outer join Users on SiteLog.UserId = Users.UserId
 where SiteLog.PortalId = @PortalId
 and   SiteLog.DateTime between @StartDate and @EndDate
 
@@ -3150,14 +3150,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3176,49 +3176,49 @@ from   Portals
 where  PortalID = @PortalID
 
 select SiteLog.DateTime,
-       'FullName' = 
-	  case
+        'FullName' =
+    case
             when SiteLog.UserId is null then null
             else Users.FirstName + ' ' + Users.LastName
-          end,
-       'Referrer' = 
-         case 
-           when SiteLog.Referrer like '%' + @PortalAlias + '%' then null 
-           else SiteLog.Referrer
-         end,
-       'URL' = substring(SiteLog.URL,len(@PortalAlias) + 8,500),
-       'UserAgent' = 
-         case 
-           when SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
-           when SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
-           when SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
-           when SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
-           when SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
-           when SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
-           when SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
-           when SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
-           when SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
-           when SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
-           when SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
-           else 'Unknown UserAgent'
-         end,
-         SiteLog.UserHostAddress
+        end,
+        'Referrer' =
+        case
+            when SiteLog.Referrer like '%' + @PortalAlias + '%' then null
+            else SiteLog.Referrer
+        end,
+        'URL' = substring(SiteLog.URL,len(@PortalAlias) + 8,500),
+        'UserAgent' =
+        case
+            when SiteLog.UserAgent like '%MSIE 1%' then 'Internet Explorer 1'
+            when SiteLog.UserAgent like '%MSIE 2%' then 'Internet Explorer 2'
+            when SiteLog.UserAgent like '%MSIE 3%' then 'Internet Explorer 3'
+            when SiteLog.UserAgent like '%MSIE 4%' then 'Internet Explorer 4'
+            when SiteLog.UserAgent like '%MSIE 5%' then 'Internet Explorer 5'
+            when SiteLog.UserAgent like '%MSIE 6%' then 'Internet Explorer 6'
+            when SiteLog.UserAgent like '%MSIE%' then 'Internet Explorer'
+            when SiteLog.UserAgent like '%Mozilla/1%' then 'Netscape Navigator 1'
+            when SiteLog.UserAgent like '%Mozilla/2%' then 'Netscape Navigator 2'
+            when SiteLog.UserAgent like '%Mozilla/3%' then 'Netscape Navigator 3'
+            when SiteLog.UserAgent like '%Mozilla/4%' then 'Netscape Navigator 4'
+            else 'Unknown UserAgent'
+        end,
+        SiteLog.UserHostAddress
 from SiteLog
-left outer join Users on SiteLog.UserId = Users.UserId 
+left outer join Users on SiteLog.UserId = Users.UserId
 where SiteLog.PortalId = @PortalId
 and   SiteLog.DateTime between @StartDate and @EndDate
 order by SiteLog.DateTime desc
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3232,33 +3232,33 @@ as
 if @PortalId is null
 begin
   select UserID,
-         Email,
-         'FullName' = FirstName + ' ' + LastName,
-         FirstName,
-         LastName,
-         Unit,
-         Street,
-         City,
-         Region,
-         Country,
-         PostalCode
+        Email,
+        'FullName' = FirstName + ' ' + LastName,
+        FirstName,
+        LastName,
+        Unit,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode
   from   Users
   order  by 'FullName'
 end
 else
 begin
   select Users.UserID,
-         Users.Email,
-         'FullName' = Users.FirstName + ' ' + Users.LastName,
-         Users.FirstName,
-         Users.LastName,
-         Users.Unit,
-         Users.Street,
-         Users.City,
-         Users.Region,
-         Users.Country,
-         Users.PostalCode,
-         'Authorized' = case when UserPortals.Authorized = 1 then 'Y' else 'N' end
+        Users.Email,
+        'FullName' = Users.FirstName + ' ' + Users.LastName,
+        Users.FirstName,
+        Users.LastName,
+        Users.Unit,
+        Users.Street,
+        Users.City,
+        Users.Region,
+        Users.Country,
+        Users.PostalCode,
+        'Authorized' = case when UserPortals.Authorized = 1 then 'Y' else 'N' end
   from   Users
   inner join UserPortals on Users.UserId = UserPortals.UserId
   where  UserPortals.PortalId = @PortalId
@@ -3268,14 +3268,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3290,18 +3290,18 @@ set    ClickThroughs = ClickThroughs + 1
 where  VendorId = @VendorId
 
 select VendorId,
-       VendorName,
-       Street,
-       City,
-       Region,
-       Country,
-       PostalCode,
-       Telephone,
-       PortalId,
-       Fax,
-       Email,
-       Website,
-       Contact
+        VendorName,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode,
+        Telephone,
+        PortalId,
+        Fax,
+        Email,
+        Website,
+        Contact
 from   Vendors
 where  VendorId = @VendorId
 
@@ -3309,14 +3309,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3327,8 +3327,8 @@ create procedure GetVendorLog
 as
 
 select Search,
-       'Requests' = count(*),
-       'LastRequest' = max(DateTime)
+        'Requests' = count(*),
+        'LastRequest' = max(DateTime)
 from   VendorLog
 where  VendorId = @VendorId
 and    BannerId is null
@@ -3339,14 +3339,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3371,15 +3371,15 @@ as
 
 update Users
 set    FirstName = @FirstName,
-       LastName	 = @LastName,
-       Unit	 = @Unit,
-       Street	 = @Street,
-       City	 = @City,
-       Region	 = @Region,
-       PostalCode = @PostalCode,
-       Country	 = @Country,
-       Email	 = @Email,
-       Password	 = isnull(@Password,Password)
+        LastName	 = @LastName,
+        Unit	 = @Unit,
+        Street	 = @Street,
+        City	 = @City,
+        Region	 = @Region,
+        PostalCode = @PostalCode,
+        Country	 = @Country,
+        Email	 = @Email,
+        Password	 = isnull(@Password,Password)
 where  UserId = @UserID
 
 if @Authorized is not null
@@ -3392,14 +3392,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3427,33 +3427,33 @@ as
 
 update Vendors
 set    VendorName    = @VendorName,
-       Unit          = @Unit,
-       Street        = @Street,
-       City          = @City,
-       Region        = @Region,
-       Country       = @Country,
-       PostalCode    = @PostalCode,
-       Telephone     = @Telephone,
-       Fax           = @Fax,
-       Email         = @Email,
-       Website       = @Website,
-       Contact       = @Contact,
-       CreatedByUser = @UserName,
-       CreatedDate   = getdate(),
-       LogoFile      = @LogoFile,
-       KeyWords      = @KeyWords
+        Unit          = @Unit,
+        Street        = @Street,
+        City          = @City,
+        Region        = @Region,
+        Country       = @Country,
+        PostalCode    = @PostalCode,
+        Telephone     = @Telephone,
+        Fax           = @Fax,
+        Email         = @Email,
+        Website       = @Website,
+        Contact       = @Contact,
+        CreatedByUser = @UserName,
+        CreatedDate   = getdate(),
+        LogoFile      = @LogoFile,
+        KeyWords      = @KeyWords
 where  VendorId = @VendorId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3504,14 +3504,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3567,19 +3567,19 @@ values
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure AddModule
-    
+
 @TabID          int,
 @ModuleOrder    int,
 @ModuleTitle    nvarchar(256),
@@ -3600,7 +3600,7 @@ insert into Modules (
   CacheTime,
   AuthorizedEditRoles,
   ShowMobile
-) 
+)
 values (
   @TabID,
   @ModuleOrder,
@@ -3614,19 +3614,19 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure AddModuleDefinition
-    
+
 @FriendlyName nvarchar(128),
 @DesktopSrc   nvarchar(256),
 @MobileSrc    nvarchar(256),
@@ -3679,7 +3679,7 @@ begin
 
     if not exists ( select 1 from Modules where TabID = @TabId and ModuleDefID = @ModuleDefId )
     begin
-      insert into Modules (
+    insert into Modules (
         TabID,
         ModuleDefID,
         ModuleOrder,
@@ -3689,8 +3689,8 @@ begin
         CacheTime,
         ShowMobile,
         AuthorizedViewRoles
-      )
-      values (
+    )
+    values (
         @TabId,
         @ModuleDefId,
         @ModuleOrder,
@@ -3700,7 +3700,7 @@ begin
         0,
         0,
         ''
-      )
+    )
     end
 
     select @TabId = min(TabId)
@@ -3712,14 +3712,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -3847,7 +3847,7 @@ insert into Tabs (
     ShowMobile,
     LeftPaneWidth,
     RightPaneWidth
-) 
+)
 values (
     @PortalID,
     1,
@@ -3856,7 +3856,7 @@ values (
     'Home',
     1,
     '200',
-    '200'   
+    '200'
 )
 
 select @TabId = @@IDENTITY
@@ -3865,7 +3865,7 @@ select @ModuleDefId = ModuleDefId
 from   ModuleDefinitions
 where  FriendlyName = 'HTML'
 
-insert Modules ( 
+insert Modules (
   TabID,
   ModuleDefID,
   ModuleOrder,
@@ -3895,7 +3895,7 @@ insert into Tabs (
     ShowMobile,
     LeftPaneWidth,
     RightPaneWidth
-) 
+)
 values (
     @PortalID,
     5,
@@ -3904,7 +3904,7 @@ values (
     'Admin',
     0,
     '200',
-    '200'   
+    '200'
 )
 
 select @TabId = @@IDENTITY
@@ -3918,7 +3918,7 @@ and    AdminOrder > 0
 while @AdminOrder is not null
 begin
   select @ModuleDefId = ModuleDefId,
-         @FriendlyName = FriendlyName
+        @FriendlyName = FriendlyName
   from   ModuleDefinitions
   where  AdminOrder = @AdminOrder
 
@@ -3926,7 +3926,7 @@ begin
 
   select @PaneName = 'ContentPane'
 
-  insert Modules ( 
+  insert Modules (
     TabID,
     ModuleDefID,
     ModuleOrder,
@@ -3951,7 +3951,7 @@ begin
   from   ModuleDefinitions
   where  AdminOrder is not null
   and    AdminOrder > @AdminOrder
-end 
+end
 
 select @UserId = null
 
@@ -3966,10 +3966,10 @@ if @UserId is null
 begin
   insert into Users (
     FirstName,
-    LastName, 
+    LastName,
     Email,
     Password,
-    CreatedDate 
+    CreatedDate
   )
   values (
     @FirstName,
@@ -4023,9 +4023,9 @@ end
 
 update Portals
 set    UploadDirectory = @UploadDirectory + '/' + convert(varchar,@PortalID) + '/',
-       AdministratorId = @UserId,
-       AdministratorRoleId = @AdministratorRoleId,
-       RegisteredRoleId = @RegisteredRoleId
+        AdministratorId = @UserId,
+        AdministratorRoleId = @AdministratorRoleId,
+        RegisteredRoleId = @RegisteredRoleId
 where  PortalID = @PortalID
 
 if @@error <> 0
@@ -4035,14 +4035,14 @@ else
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4064,7 +4064,7 @@ inner join UserPortals on UserPortals.UserId = @UserID
 where  UserRoles.UserID = @UserID
 and    UserRoles.RoleID = @RoleID
 and    PortalID = @PortalID
- 
+
 if @UserRoleID is not null
 begin
   update UserRoles
@@ -4087,14 +4087,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4105,7 +4105,7 @@ create procedure AddVendorClassification
 
 as
 
-insert VendorClassification ( 
+insert VendorClassification (
   VendorId,
   ClassificationId
 )
@@ -4117,14 +4117,14 @@ values (
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4139,7 +4139,7 @@ declare @RoleID int
 declare @AdministratorRoleId int
 
 select @UserID = UserID,
-       @RoleID = RoleID
+        @RoleID = RoleID
 from   UserRoles
 where  UserRoleID = @UserRoleID
 
@@ -4149,7 +4149,7 @@ inner join Portals on Roles.PortalID = Portals.PortalID
 where  RoleID = @RoleID
 
 /* do not remove Administrators role from Portal Administrator */
-if not exists ( select 1 from Portals where AdministratorId = @UserID and @RoleID = @AdministratorRoleId ) 
+if not exists ( select 1 from Portals where AdministratorId = @UserID and @RoleID = @AdministratorRoleId )
 begin
   delete
   from   UserRoles
@@ -4158,14 +4158,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4182,14 +4182,14 @@ where  VendorId = @VendorId
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4207,14 +4207,14 @@ and    UserId = @UserId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4291,8 +4291,8 @@ set rowcount @Banners
 if @SelectPortalId is null
 begin
   select BannerId,
-         BannerName,
-         ImageFile
+        BannerName,
+        ImageFile
   from   Banners
   inner join Vendors on Banners.VendorId = Vendors.VendorId
   where  Banners.BannerTypeId = @BannerTypeId
@@ -4305,8 +4305,8 @@ end
 else
 begin
   select BannerId,
-         BannerName,
-         ImageFile
+        BannerName,
+        ImageFile
   from   Banners
   inner join Vendors on Banners.VendorId = Vendors.VendorId
   where  Banners.BannerTypeId = @BannerTypeId
@@ -4344,12 +4344,12 @@ begin
     @VendorId,
     @BannerId,
     null
-  ) 
+  )
 
   select @StartDate = StartDate,
-         @EndDate = EndDate,
-         @Views = Views,
-         @Impressions = Impressions
+        @EndDate = EndDate,
+        @Views = Views,
+        @Impressions = Impressions
   from   Banners
   where  BannerId = @BannerId
 
@@ -4360,7 +4360,7 @@ begin
 
   update Banners
   set    StartDate = @StartDate,
-         EndDate = @EndDate
+        EndDate = @EndDate
   where  BannerId = @BannerId
 
   select @BannerId = min(Banners.BannerId)
@@ -4380,14 +4380,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4426,7 +4426,7 @@ begin
     and    (VendorName like '%' + @Search + '%' or KeyWords like '%' + @Search + '%' or ClassificationName like '%' + @Search + '%')
   )
 
-  insert VendorLog ( VendorId, DateTime, PortalId, BannerId, Search ) 
+  insert VendorLog ( VendorId, DateTime, PortalId, BannerId, Search )
     select distinct Vendors.VendorId, getdate(), @DisplayPortalId, null, @Search
     from   Vendors
     left outer join VendorClassification on Vendors.VendorId = VendorClassification.VendorId
@@ -4435,21 +4435,21 @@ begin
     and    (VendorName like '%' + @Search + '%' or KeyWords like '%' + @Search + '%' or ClassificationName like '%' + @Search + '%')
 
   select distinct Vendors.VendorId,
-         VendorName,
-         Unit,
-         Street,
-         City,
-         Region,
-         Country,
-         PostalCode,
-         Telephone,
-         PortalId,
-         Fax,
-         Email,
-         Website,
-         Contact,
-         LogoFile,
-         'Feedback' = ( select sum(Value) from VendorFeedback where VendorFeedback.VendorId = Vendors.VendorId )
+        VendorName,
+        Unit,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode,
+        Telephone,
+        PortalId,
+        Fax,
+        Email,
+        Website,
+        Contact,
+        LogoFile,
+        'Feedback' = ( select sum(Value) from VendorFeedback where VendorFeedback.VendorId = Vendors.VendorId )
   from   Vendors
   left outer join VendorClassification on Vendors.VendorId = VendorClassification.VendorId
   left outer join Classification on VendorClassification.ClassificationId = Classification.ClassificationId
@@ -4469,7 +4469,7 @@ begin
     and    (VendorName like '%' + @Search + '%' or KeyWords like '%' + @Search + '%' or ClassificationName like '%' + @Search + '%')
   )
 
-  insert VendorLog ( VendorId, DateTime, PortalId, BannerId, Search ) 
+  insert VendorLog ( VendorId, DateTime, PortalId, BannerId, Search )
     select distinct Vendors.VendorId, getdate(), @DisplayPortalId, null, @Search
     from   Vendors
     left outer join VendorClassification on Vendors.VendorId = VendorClassification.VendorId
@@ -4478,21 +4478,21 @@ begin
     and    (VendorName like '%' + @Search + '%' or KeyWords like '%' + @Search + '%' or ClassificationName like '%' + @Search + '%')
 
   select distinct Vendors.VendorId,
-         VendorName,
-         Unit,
-         Street,
-         City,
-         Region,
-         Country,
-         PostalCode,
-         Telephone,
-         PortalId,
-         Fax,
-         Email,
-         Website,
-         Contact,
-         LogoFile,
-         'Feedback' = ( select sum(Value) from VendorFeedback where VendorFeedback.VendorId = Vendors.VendorId )
+        VendorName,
+        Unit,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode,
+        Telephone,
+        PortalId,
+        Fax,
+        Email,
+        Website,
+        Contact,
+        LogoFile,
+        'Feedback' = ( select sum(Value) from VendorFeedback where VendorFeedback.VendorId = Vendors.VendorId )
   from   Vendors
   left outer join VendorClassification on Vendors.VendorId = VendorClassification.VendorId
   left outer join Classification on VendorClassification.ClassificationId = Classification.ClassificationId
@@ -4504,14 +4504,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4523,7 +4523,7 @@ create procedure GetAuthRoles
 as
 
 select Tabs.AuthorizedRoles,
-       Modules.AuthorizedEditRoles
+        Modules.AuthorizedEditRoles
 from   Modules
 inner join Tabs ON Modules.TabID = Tabs.TabID
 where  Modules.ModuleID = @ModuleID
@@ -4531,14 +4531,14 @@ and    Tabs.PortalID = @PortalID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4555,14 +4555,14 @@ where  ModuleID = @ModuleID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4608,31 +4608,31 @@ end
 
 /* First, get Out Params */
 select Portals.PortalAlias,
-       Portals.PortalID,
-       Portals.PortalName,
-       Portals.UploadDirectory,
-       Portals.LogoFile,
-       Portals.FooterText,
-       Portals.ExpiryDate,
-       Portals.UserRegistration,
-       Portals.BannerAdvertising,
-       Portals.Currency,
-       Portals.AdministratorId,
-       Users.Email,
-       Portals.HostFee,
-       Portals.HostSpace,
-       Portals.PayPalId,
-       Portals.AdministratorRoleId,
-       Portals.RegisteredRoleId,
-       Tabs.TabID,
-       Tabs.TabOrder,
-       Tabs.TabName,
-       Tabs.MobileTabName,
-       Tabs.AuthorizedRoles,
-       Tabs.ShowMobile,
-       Tabs.LeftPaneWidth,
-       Tabs.RightPaneWidth,
-       Tabs.IsVisible
+        Portals.PortalID,
+        Portals.PortalName,
+        Portals.UploadDirectory,
+        Portals.LogoFile,
+        Portals.FooterText,
+        Portals.ExpiryDate,
+        Portals.UserRegistration,
+        Portals.BannerAdvertising,
+        Portals.Currency,
+        Portals.AdministratorId,
+        Users.Email,
+        Portals.HostFee,
+        Portals.HostSpace,
+        Portals.PayPalId,
+        Portals.AdministratorRoleId,
+        Portals.RegisteredRoleId,
+        Tabs.TabID,
+        Tabs.TabOrder,
+        Tabs.TabName,
+        Tabs.MobileTabName,
+        Tabs.AuthorizedRoles,
+        Tabs.ShowMobile,
+        Tabs.LeftPaneWidth,
+        Tabs.RightPaneWidth,
+        Tabs.IsVisible
 from   Tabs
 inner join Portals on Portals.PortalID = @PortalID
 inner join Users on Portals.AdministratorId = Users.UserId
@@ -4640,20 +4640,20 @@ where  TabID = @TabID
 
 /* Get Tabs list */
 select TabName,
-       AuthorizedRoles,
-       TabID,
-       TabOrder,
-       IsVisible
+        AuthorizedRoles,
+        TabID,
+        TabOrder,
+        IsVisible
 from   Tabs
 where  PortalID = @PortalID
 order  by TabOrder
 
 /* Get Mobile Tabs list */
 select MobileTabName,
-       AuthorizedRoles,
-       TabID,
-       IsVisible,
-       ShowMobile
+        AuthorizedRoles,
+        TabID,
+        IsVisible,
+        ShowMobile
 from   Tabs
 where  PortalID = @PortalID
 and    ShowMobile = 1
@@ -4668,14 +4668,14 @@ order by ModuleOrder
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4691,11 +4691,11 @@ as
 if @RoleId is null
 begin
   select UserRoles.UserRoleID,
-         UserRoles.UserId,
-         'FullName' = Users.FirstName + ' ' + Users.LastName,
-         UserRoles.RoleId,
-         Roles.RoleName,
-         UserRoles.ExpiryDate
+        UserRoles.UserId,
+        'FullName' = Users.FirstName + ' ' + Users.LastName,
+        UserRoles.RoleId,
+        Roles.RoleName,
+        UserRoles.ExpiryDate
   from   UserRoles
   inner join Users On Users.UserId = UserRoles.UserId
   inner join Roles On Roles.RoleId = UserRoles.RoleId
@@ -4705,11 +4705,11 @@ end
 else
 begin
   select UserRoles.UserRoleID,
-         UserRoles.UserId,
-         'FullName' = Users.FirstName + ' ' + Users.LastName,
-         UserRoles.RoleId,
-         Roles.RoleName,
-         UserRoles.ExpiryDate
+        UserRoles.UserId,
+        'FullName' = Users.FirstName + ' ' + Users.LastName,
+        UserRoles.RoleId,
+        Roles.RoleName,
+        UserRoles.ExpiryDate
   from   UserRoles
   inner join Users On Users.UserId = UserRoles.UserId
   inner join Roles On Roles.RoleId = UserRoles.RoleId
@@ -4720,27 +4720,27 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 
 create procedure dbo.GetRolesByUser
-    
+
 @UserId        int,
 @PortalId      int
 
 as
 
 select Roles.RoleName,
-       Roles.RoleID
+        Roles.RoleID
 from   UserRoles
 inner join Users on UserRoles.UserID = Users.UserID
 inner join Roles on UserRoles.RoleID = Roles.RoleID
@@ -4751,34 +4751,34 @@ and    (ExpiryDate >= getdate() or ExpiryDate is null)
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 
 
 create procedure GetServices
-    
+
 @PortalId  int,
 @UserId    int = null
 
 as
 
 select RoleID,
-       Roles.RoleName,
-       Roles.Description,
-       Roles.ServiceFee,
-       'BillingFrequency' = C1.Description,
-       Roles.TrialPeriod,
-       'TrialFrequency' = C2.Description,
-       'ExpiryDate' = ( select ExpiryDate from UserRoles where UserRoles.RoleId = Roles.RoleID and UserRoles.UserID = @UserID )
+        Roles.RoleName,
+        Roles.Description,
+        Roles.ServiceFee,
+        'BillingFrequency' = C1.Description,
+        Roles.TrialPeriod,
+        'TrialFrequency' = C2.Description,
+        'ExpiryDate' = ( select ExpiryDate from UserRoles where UserRoles.RoleId = Roles.RoleID and UserRoles.UserID = @UserID )
 from   Roles
 inner join CodeFrequency C1 on Roles.BillingFrequency = C1.Code
 left outer join CodeFrequency C2 on Roles.TrialFrequency = C2.Code
@@ -4789,31 +4789,31 @@ and    Roles.ServiceFee is not null
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 
 create procedure GetServicesByUser
-    
+
 @UserId        int,
 @PortalId      int
 
 as
 
 select RoleID,
-       Roles.RoleName,
-       Roles.Description,
-       Roles.ServiceFee,
-       'BillingFrequency' = CodeFrequency.Description,
-       'ExpiryDate' = ( select ExpiryDate from UserRoles where UserRoles.RoleId = Roles.RoleID and UserRoles.UserID = @UserID )
+        Roles.RoleName,
+        Roles.Description,
+        Roles.ServiceFee,
+        'BillingFrequency' = CodeFrequency.Description,
+        'ExpiryDate' = ( select ExpiryDate from UserRoles where UserRoles.RoleId = Roles.RoleID and UserRoles.UserID = @UserID )
 from   Roles
 inner join CodeFrequency on Roles.BillingFrequency = CodeFrequency.Code
 where  Roles.PortalId = @PortalId
@@ -4822,14 +4822,14 @@ and    (Roles.ServiceFee is not null and Roles.ServiceFee > 0)
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4842,19 +4842,19 @@ create procedure GetSingleBanner
 as
 
 select BannerId,
-       VendorId,
-       ImageFile,
-       BannerName,
-       URL,
-       Impressions,
-       CPM,
-       Views,
-       ClickThroughs,
-       StartDate,
-       EndDate,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Banners.CreatedDate,
-       BannerTypeId       
+        VendorId,
+        ImageFile,
+        BannerName,
+        URL,
+        Impressions,
+        CPM,
+        Views,
+        ClickThroughs,
+        StartDate,
+        EndDate,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Banners.CreatedDate,
+        BannerTypeId
 from   Banners
 left outer join Users on Banners.CreatedByUser = Users.UserID
 where  BannerId = @BannerId
@@ -4862,20 +4862,20 @@ and    vendorId = @VendorId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 
 create procedure dbo.GetSingleUserRole
-    
+
 @UserId        int,
 @RoleId        int,
 @PortalId      int
@@ -4883,7 +4883,7 @@ create procedure dbo.GetSingleUserRole
 as
 
 select UserRoles.UserID,
-       UserRoles.RoleID
+        UserRoles.RoleID
 from   UserRoles
 inner join Roles on UserRoles.RoleID = Roles.RoleID
 where  UserRoles.UserId = @UserId
@@ -4894,14 +4894,14 @@ and    (UserRoles.ExpiryDate >= getdate() or UserRoles.ExpiryDate is null)
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4913,11 +4913,11 @@ create procedure GetSingleVendorFeedback
 as
 
 select VendorFeedbackId,
-       VendorId,
-       UserId,
-       Date,
-       Comment,
-       Value
+        VendorId,
+        UserId,
+        Date,
+        Comment,
+        Value
 from   VendorFeedback
 where  VendorId = @VendorId
 and    UserId = @UserId
@@ -4925,14 +4925,14 @@ and    UserId = @UserId
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -4945,45 +4945,45 @@ as
 if @VendorId is null
 begin
   select ClassificationId,
-         ClassificationName,
-         'IsAssociated' = 0
+        ClassificationName,
+        'IsAssociated' = 0
   from   Classification
 end
 else
 begin
   select ClassificationId,
-         ClassificationName,
-         'IsAssociated' = case when exists ( select 1 from VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = Classification.ClassificationId ) then 1 else 0 end
+        ClassificationName,
+        'IsAssociated' = case when exists ( select 1 from VendorClassification vc where vc.VendorId = @VendorId and vc.ClassificationId = Classification.ClassificationId ) then 1 else 0 end
   from   Classification
 end
 
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure GetVendorFeedback
 
-@VendorId  int 
+@VendorId  int
 
 as
 
 select VendorFeedback.VendorFeedbackId,
-       VendorFeedback.UserId,
-       'FullName' = Users.FirstName + ' ' + Users.LastName,
-       Users.Email,
-       VendorFeedback.Date,
-       VendorFeedback.Comment,
-       VendorFeedback.Value
+        VendorFeedback.UserId,
+        'FullName' = Users.FirstName + ' ' + Users.LastName,
+        Users.Email,
+        VendorFeedback.Date,
+        VendorFeedback.Comment,
+        VendorFeedback.Value
 from   VendorFeedback
 inner join Users on VendorFeedback.UserId = Users.UserId
 where  VendorId = @VendorId
@@ -4992,14 +4992,14 @@ order by Date desc
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5013,21 +5013,21 @@ as
 if @PortalId is null
 begin
   select VendorID,
-         VendorName,
-         Unit, 
-         Street, 
-         City, 
-         Region, 
-         Country, 
-         PostalCode, 
-         Telephone,
-         Fax,
-         Email,
-         Website,
-         Contact,
-         ClickThroughs,
-         Views,
-         'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
+        VendorName,
+        Unit,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode,
+        Telephone,
+        Fax,
+        Email,
+        Website,
+        Contact,
+        ClickThroughs,
+        Views,
+        'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
   from   Vendors
   where  PortalId is null
   order  by VendorName
@@ -5035,21 +5035,21 @@ end
 else
 begin
   select VendorID,
-         VendorName,
-         Unit, 
-         Street, 
-         City, 
-         Region, 
-         Country, 
-         PostalCode, 
-         Telephone,
-         Fax,
-         Email,
-         Website,
-         Contact,
-         ClickThroughs,
-         Views,
-         'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
+        VendorName,
+        Unit,
+        Street,
+        City,
+        Region,
+        Country,
+        PostalCode,
+        Telephone,
+        Fax,
+        Email,
+        Website,
+        Contact,
+        ClickThroughs,
+        Views,
+        'Banners' = ( select count(*) from Banners where Banners.VendorId = Vendors.VendorId )
   from   Vendors
   where  PortalId = @PortalId
   order  by VendorName
@@ -5059,14 +5059,14 @@ return 1
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5087,27 +5087,27 @@ as
 
 update Banners
 set    ImageFile     = @ImageFile,
-       BannerName    = @BannerName,
-       URL           = @URL,
-       Impressions   = @Impressions,
-       CPM           = @CPM,
-       StartDate     = @StartDate,
-       EndDate       = @EndDate,
-       CreatedByUser = @UserName,
-       CreatedDate   = getdate(),
-       BannerTypeId  = @BannerTypeId
-where  BannerId = @BannerId 
+        BannerName    = @BannerName,
+        URL           = @URL,
+        Impressions   = @Impressions,
+        CPM           = @CPM,
+        StartDate     = @StartDate,
+        EndDate       = @EndDate,
+        CreatedByUser = @UserName,
+        CreatedDate   = getdate(),
+        BannerTypeId  = @BannerTypeId
+where  BannerId = @BannerId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5129,27 +5129,27 @@ as
 
 update Modules
 set    ModuleTitle = @ModuleTitle,
-       CacheTime   = @CacheTime,
-       ShowMobile  = @ShowMobile,
-       AuthorizedViewRoles = @ViewRoles,
-       AuthorizedEditRoles = @EditRoles,
-       Alignment = @Alignment,
-       Color = @Color,
-       Border = @Border,
-       IconFile = @IconFile,
-       TabId = @TabId
+        CacheTime   = @CacheTime,
+        ShowMobile  = @ShowMobile,
+        AuthorizedViewRoles = @ViewRoles,
+        AuthorizedEditRoles = @EditRoles,
+        Alignment = @Alignment,
+        Color = @Color,
+        Border = @Border,
+        IconFile = @IconFile,
+        TabId = @TabId
 where  ModuleID = @ModuleID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5171,11 +5171,11 @@ declare @AdministratorRoleId int
 
 update ModuleDefinitions
 set    FriendlyName = @FriendlyName,
-       DesktopSrc   = @DesktopSrc,
-       MobileSrc    = @MobileSrc,
-       AdminOrder   = @AdminOrder,
-       EditSrc      = @EditSrc,
-       Secure       = @Secure
+        DesktopSrc   = @DesktopSrc,
+        MobileSrc    = @MobileSrc,
+        AdminOrder   = @AdminOrder,
+        EditSrc      = @EditSrc,
+        Secure       = @Secure
 where  ModuleDefID = @ModuleDefID
 
 /* add to all Admin tabs */
@@ -5197,7 +5197,7 @@ begin
 
     if not exists ( select 1 from Modules where TabID = @TabId and ModuleDefID = @ModuleDefId )
     begin
-      insert into Modules (
+    insert into Modules (
         TabID,
         ModuleDefID,
         ModuleOrder,
@@ -5207,8 +5207,8 @@ begin
         CacheTime,
         ShowMobile,
         AuthorizedViewRoles
-      )
-      values (
+    )
+    values (
         @TabId,
         @ModuleDefId,
         @ModuleOrder,
@@ -5218,7 +5218,7 @@ begin
         0,
         0,
         ''
-      )
+    )
     end
 
     select @TabId = min(TabId)
@@ -5230,14 +5230,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5252,7 +5252,7 @@ as
 
 if not exists ( select 1 from VendorFeedback where VendorId = @VendorId and UserId = @UserId )
 begin
-  insert VendorFeedback ( 
+  insert VendorFeedback (
     VendorId,
     UserId,
     Date,
@@ -5271,8 +5271,8 @@ else
 begin
   update VendorFeedback
   set    Date = getdate(),
-         Comment = @Comment,
-         Value = @Value
+        Comment = @Comment,
+        Value = @Value
   where  VendorId = @VendorId
   and    UserId = @UserId
 end
@@ -5280,14 +5280,14 @@ end
 return 1
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5327,14 +5327,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5373,14 +5373,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5418,14 +5418,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5468,14 +5468,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5494,14 +5494,14 @@ declare @ParentDisplayOrder nvarchar(750)
 select @ParentDisplayOrder = ''
 
 select @ParentDisplayOrder = DisplayOrder
-from   Discussion 
+from   Discussion
 where  ItemID = @ParentID
 
 insert into Discussion (
   Title,
   Body,
   DisplayOrder,
-  CreatedDate, 
+  CreatedDate,
   CreatedByUser,
   ModuleID
 )
@@ -5516,14 +5516,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5542,7 +5542,7 @@ create procedure AddModuleEvent
 
 as
 
-insert ModuleEvents ( 
+insert ModuleEvents (
   ModuleID,
   Description,
   DateTime,
@@ -5570,14 +5570,14 @@ values (
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5592,8 +5592,8 @@ declare @Start int
 declare @Parent nvarchar(23)
 
 select @ModuleId = ModuleId,
-       @Start = len(DisplayOrder) - 22,
-       @Parent = substring(DisplayOrder,len(DisplayOrder) - 22,23)
+        @Start = len(DisplayOrder) - 22,
+        @Parent = substring(DisplayOrder,len(DisplayOrder) - 22,23)
 from   Discussion
 where  ItemId = @ItemId
 
@@ -5604,14 +5604,14 @@ and    substring(DisplayOrder, @Start,23) = @Parent
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5622,27 +5622,27 @@ create procedure GetAnnouncements
 as
 
 select ItemID,
-       CreatedByUser,
-       CreatedDate,
-       Title,
-       URL,
-       Syndicate,
-       ExpireDate,
-       Description
+        CreatedByUser,
+        CreatedDate,
+        Title,
+        URL,
+        Syndicate,
+        ExpireDate,
+        Description
 from   Announcements
 where  ModuleID = @ModuleID
 and    ExpireDate > GetDate()
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5653,27 +5653,27 @@ create procedure GetContacts
 as
 
 select ItemID,
-       CreatedDate,
-       CreatedByUser,
-       Name,
-       Role,
-       Email,
-       Contact1,
-       Contact2
+        CreatedDate,
+        CreatedByUser,
+        Name,
+        Role,
+        Email,
+        Contact1,
+        Contact2
 from   Contacts
 where  ModuleID = @ModuleID
 
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5684,27 +5684,27 @@ create procedure GetLinks
 as
 
 select ItemID,
-       CreatedByUser,
-       CreatedDate,
-       Title,
-       Url,
-       ViewOrder,
-       Description,
-       NewWindow
+        CreatedByUser,
+        CreatedDate,
+        Title,
+        Url,
+        ViewOrder,
+        Description,
+        NewWindow
 from   Links
 where  ModuleID = @ModuleID
 order by ViewOrder, Title
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5727,14 +5727,14 @@ begin
   and    (ExpireDate > getdate() or ExpireDate is null)
 
   select ItemID,
-         Description,
-         DateTime,
-         Title,
-         ExpireDate,
-         CreatedByUser,
-         CreatedDate,
-         IconFile,
-         'MaxWidth' = @MaxWidth
+        Description,
+        DateTime,
+        Title,
+        ExpireDate,
+        CreatedByUser,
+        CreatedDate,
+        IconFile,
+        'MaxWidth' = @MaxWidth
   from   ModuleEvents
   where  ModuleID = @ModuleID
   and    (ExpireDate > getdate() or ExpireDate is null)
@@ -5743,15 +5743,15 @@ end
 else
 begin
   select ItemID,
-         Description,
-         DateTime,
-         Title,
-         ExpireDate,
-         CreatedByUser,
-         CreatedDate,
-         Every,
-         Period,
-         IconFile
+        Description,
+        DateTime,
+        Title,
+        ExpireDate,
+        CreatedByUser,
+        CreatedDate,
+        Every,
+        Period,
+        IconFile
   from   ModuleEvents
   where  ModuleID = @ModuleID
   and    ( (Period is null and (DateTime >= @StartDate and DateTime <= @EndDate)) or Period is not null )
@@ -5760,14 +5760,14 @@ end
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5779,12 +5779,12 @@ create procedure GetSingleAnnouncement
 as
 
 select Title,
-       URL,
-       Syndicate,
-       ExpireDate,
-       Description,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Announcements.CreatedDate
+        URL,
+        Syndicate,
+        ExpireDate,
+        Description,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Announcements.CreatedDate
 from   Announcements
 left outer join Users on Announcements.CreatedByUser = Users.UserID
 where  ItemID = @ItemID
@@ -5792,14 +5792,14 @@ and    ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5811,12 +5811,12 @@ create procedure GetSingleContact
 as
 
 select Name,
-       Role,
-       Contacts.Email,
-       Contact1,
-       Contact2,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Contacts.CreatedDate
+        Role,
+        Contacts.Email,
+        Contact1,
+        Contact2,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Contacts.CreatedDate
 from   Contacts
 left outer join Users on Contacts.CreatedByUser = Users.UserID
 where  ItemID = @ItemID
@@ -5824,14 +5824,14 @@ and    ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5843,11 +5843,11 @@ create procedure GetSingleDocument
 as
 
 select Title,
-       URL,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Documents.CreatedDate,
-       Category,
-       Syndicate
+        URL,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Documents.CreatedDate,
+        Category,
+        Syndicate
 from   Documents
 left outer join Users on Documents.CreatedByUser = Users.UserID
 where  ItemID = @ItemID
@@ -5856,14 +5856,14 @@ and    ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5875,13 +5875,13 @@ create procedure GetSingleLink
 as
 
 select Title,
-       Url,
-       MobileUrl,
-       ViewOrder,
-       Description,
-       NewWindow,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Links.CreatedDate
+        Url,
+        MobileUrl,
+        ViewOrder,
+        Description,
+        NewWindow,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Links.CreatedDate
 from   Links
 left outer join Users on Links.CreatedByUser = Users.UserID
 where  ItemID = @ItemID
@@ -5889,14 +5889,14 @@ and    ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5908,11 +5908,11 @@ create procedure GetSingleMessage
 as
 
 select ItemID,
-       Title,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Discussion.CreatedDate,
-       Body,
-       DisplayOrder
+        Title,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Discussion.CreatedDate,
+        Body,
+        DisplayOrder
 from   Discussion
 left outer join Users on Discussion.CreatedByUser = Users.UserID
 where  ItemID = @ItemID
@@ -5920,14 +5920,14 @@ and    ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5939,15 +5939,15 @@ create procedure GetSingleModuleEvent
 as
 
 select ItemID,
-       Description,
-       DateTime,
-       Title,
-       ExpireDate,
-       'CreatedByUser' = FirstName + ' ' + LastName,
-       ModuleEvents.CreatedDate,
-       Every,
-       Period,
-       IconFile
+        Description,
+        DateTime,
+        Title,
+        ExpireDate,
+        'CreatedByUser' = FirstName + ' ' + LastName,
+        ModuleEvents.CreatedDate,
+        Every,
+        Period,
+        IconFile
 from   ModuleEvents
 left outer join Users on ModuleEvents.CreatedByUser = Users.UserId
 where  ItemID = @ItemID
@@ -5955,14 +5955,14 @@ and    ModuleId = @ModuleId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -5974,12 +5974,12 @@ create procedure GetThreadMessages
 as
 
 select ItemID,
-       DisplayOrder,
-       'Indent' = REPLICATE( '&nbsp;', ( ( LEN( DisplayOrder ) / 23 ) - 1 ) * 5 ),
-       Title,  
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Discussion.CreatedDate,
-       Body
+        DisplayOrder,
+        'Indent' = REPLICATE( '&nbsp;', ( ( LEN( DisplayOrder ) / 23 ) - 1 ) * 5 ),
+        Title,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Discussion.CreatedDate,
+        Body
 from   Discussion
 left outer join Users on Discussion.CreatedByUser = Users.UserID
 where  LEFT(DisplayOrder, 23) = @Parent
@@ -5989,14 +5989,14 @@ order by DisplayOrder
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -6008,12 +6008,12 @@ create procedure GetTopLevelMessages
 as
 
 select ItemID,
-       DisplayOrder,
-       'Parent' = LEFT(DisplayOrder, 23),    
-       'ChildCount' = (SELECT COUNT(*) -1  FROM Discussion Disc2 WHERE LEFT(Disc2.DisplayOrder,LEN(RTRIM(Disc.DisplayOrder))) = Disc.DisplayOrder),
-       Title,  
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Disc.CreatedDate
+        DisplayOrder,
+        'Parent' = LEFT(DisplayOrder, 23),
+        'ChildCount' = (SELECT COUNT(*) -1  FROM Discussion Disc2 WHERE LEFT(Disc2.DisplayOrder,LEN(RTRIM(Disc.DisplayOrder))) = Disc.DisplayOrder),
+        Title,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Disc.CreatedDate
 from   Discussion Disc
 left outer join Users on Disc.CreatedByUser = Users.UserID
 where  ModuleID = @ModuleID
@@ -6023,14 +6023,14 @@ order by DisplayOrder
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -6048,24 +6048,24 @@ as
 
 update Announcements
 set    CreatedByUser   = @UserName,
-       CreatedDate     = GetDate(),
-       Title           = @Title,
-       URL             = @URL,
-       Syndicate       = @Syndicate,
-       ExpireDate      = @ExpireDate,
-       Description     = @Description
+        CreatedDate     = GetDate(),
+        Title           = @Title,
+        URL             = @URL,
+        Syndicate       = @Syndicate,
+        ExpireDate      = @ExpireDate,
+        Description     = @Description
 where  ItemID = @ItemID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -6082,28 +6082,28 @@ as
 
 update Documents
 set    Title             = @Title,
-       URL               = @URL,
-       CreatedByUser     = @UserName,
-       CreatedDate       = getdate(),
-       Category          = @Category,
-       Syndicate         = @Syndicate
+        URL               = @URL,
+        CreatedByUser     = @UserName,
+        CreatedDate       = getdate(),
+        Category          = @Category,
+        Syndicate         = @Syndicate
 where  ItemID = @ItemID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
 create procedure UpdateLink
-  
+
 @ItemID      int,
 @UserName    nvarchar(100),
 @Title       nvarchar(100),
@@ -6117,25 +6117,25 @@ as
 
 update Links
 set    CreatedByUser = @UserName,
-       CreatedDate   = GetDate(),
-       Title         = @Title,
-       Url           = @Url,
-       MobileUrl     = @MobileUrl,
-       ViewOrder     = @ViewOrder,
-       Description   = @Description,
-       NewWindow     = @NewWindow
+        CreatedDate   = GetDate(),
+        Title         = @Title,
+        Url           = @Url,
+        MobileUrl     = @MobileUrl,
+        ViewOrder     = @ViewOrder,
+        Description   = @Description,
+        NewWindow     = @NewWindow
 where  ItemID = @ItemID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -6150,21 +6150,21 @@ as
 
 update Discussion
 set    Title             = @Title,
-       Body              = @Body,
-       CreatedByUser     = @UserName,
-       CreatedDate       = getdate()
+        Body              = @Body,
+        CreatedByUser     = @UserName,
+        CreatedDate       = getdate()
 where  ItemID = @ItemID
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -6184,26 +6184,26 @@ as
 
 update ModuleEvents
 set    Description = @Description,
-       DateTime = @DateTime,
-       Title = @Title,
-       ExpireDate = @ExpireDate,
-       CreatedByUser = @UserName,
-       CreatedDate = getdate(),
-       Every = @Every,
-       Period = @Period,
-       IconFile = @IconFile
+        DateTime = @DateTime,
+        Title = @Title,
+        ExpireDate = @ExpireDate,
+        CreatedByUser = @UserName,
+        CreatedDate = getdate(),
+        Every = @Every,
+        Period = @Period,
+        IconFile = @IconFile
 where  ItemId = @ItemId
 
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
-SET QUOTED_IDENTIFIER ON 
+SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 create procedure GetDocuments
@@ -6214,13 +6214,13 @@ create procedure GetDocuments
 as
 
 select ItemID,
-       Title,
-       URL,
-       'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
-       Documents.CreatedDate,
-       Category,
-       Size,
-       Syndicate
+        Title,
+        URL,
+        'CreatedByUser' = Users.FirstName + ' ' + Users.LastName,
+        Documents.CreatedDate,
+        Category,
+        Size,
+        Syndicate
 from   Documents
 left outer join Users on Documents.CreatedByUser = Users.UserID
 left outer join Files on Documents.URL = Files.FileName and Files.PortalId = @PortalId
@@ -6229,9 +6229,9 @@ where  ModuleID = @ModuleID
 GO
 
 GO
-SET QUOTED_IDENTIFIER OFF 
+SET QUOTED_IDENTIFIER OFF
 GO
-SET ANSI_NULLS ON 
+SET ANSI_NULLS ON
 GO
 
 
@@ -7273,10 +7273,3 @@ GO
 
 SET IDENTITY_INSERT [dbo].[Links] OFF
 GO
-
-
-
-
-
-
-

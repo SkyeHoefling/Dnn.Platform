@@ -13,9 +13,9 @@
 
     var htmlSubstring = function (s, n) {
         var m, r = /<([^>\s]*)[^>]*>/g,
-			stack = [],
-			lasti = 0,
-			result = '';
+            stack = [],
+            lasti = 0,
+            result = '';
 
         //for each tag, while we don't have enough characters
         while ((m = r.exec(s)) && n) {
@@ -100,7 +100,7 @@
             var cookieId = 'nebula-toast-position';
             var cookieValue = dnn.dom.getCookie(cookieId);
             if (cookieValue) {
-                var splitCookieValue = cookieValue.split('|');               
+                var splitCookieValue = cookieValue.split('|');
                 top = parseInt(splitCookieValue[0], 10);
                 right = parseInt(splitCookieValue[1], 10);
                 toastWrapAll.css({

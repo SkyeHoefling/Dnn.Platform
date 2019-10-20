@@ -28,7 +28,7 @@ function replacejscssfile(oldfilename, newfilename, filetype) {
 
 try {
     if (__editorOverrideCSSPath) {
-    	document.body.appendChild(createjscssfile(__editorOverrideCSSPath, 'css'));
+        document.body.appendChild(createjscssfile(__editorOverrideCSSPath, 'css'));
     }
 } catch (e) {
 }

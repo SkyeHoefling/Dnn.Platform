@@ -581,8 +581,8 @@ Thank you, we appreciate your support...
   </data>
   <data name="MESSAGE_RETRIEVEPASSWORD_INSTRUCTIONS.Text" xml:space="preserve">
     <value>In order to retrieve your password, you will need to provide your user name, and the
-			answer to the Password Question.
-		</value>
+      answer to the Password Question.
+    </value>
   </data>
   <data name="EMAIL_PASSWORD_REMINDER_SUBJECT.Text" xml:space="preserve">
     <value>[Portal:PortalName] Password Reminder</value>
@@ -649,7 +649,7 @@ Country: [Profile:Country]
 Postal Code: [Profile:PostalCode]
 Telephone: [Profile:Telephone]
 Email: [User:Email]
-		</value>
+    </value>
   </data>
   <data name="EMAIL_USER_REGISTRATION_VERIFIED_SUBJECT.Text" xml:space="preserve">
     <value>[Portal:PortalName] New User Registration</value>
@@ -838,21 +838,21 @@ Thank you,
         menu ( please note that if you are using Windows XP you may need to &lt;a href="http://support.microsoft.com/default.aspx/kb/307874"
             target="_blank"&gt;Disable Simple File Sharing&lt;/a&gt; before these options are displayed
         ). Select the Security tab. Add the appropriate User Account and set the Permissions.&lt;/p&gt;
-		&lt;ul style="text-align: left; list-style-type: none; list-style-position: outside;"&gt;
+    &lt;ul style="text-align: left; list-style-type: none; list-style-position: outside;"&gt;
             &lt;li&gt;&lt;strong&gt;If using Windows 2000 - IIS5&lt;/strong&gt;
-		    &lt;br/&gt;
-		    &lt;ol style="list-style-type: circle;"&gt;
-		      &lt;li&gt;the [SERVER]\ASPNET User Account must have Read, Write, and Change Control of the virtual root of your website.&lt;/li&gt;
-		    &lt;/ol&gt;
-		    &lt;br/&gt;
-		  &lt;/li&gt;
+        &lt;br/&gt;
+        &lt;ol style="list-style-type: circle;"&gt;
+          &lt;li&gt;the [SERVER]\ASPNET User Account must have Read, Write, and Change Control of the virtual root of your website.&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;br/&gt;
+      &lt;/li&gt;
             &lt;li&gt;&lt;strong&gt;If using Windows 2003 - IIS6 or Vista/Windows 2008 - IIS7&lt;/strong&gt;
-		    &lt;br/&gt;
-		    &lt;ol style="list-style-type: circle;"&gt;
-		      &lt;li&gt;the NT AUTHORITY\NETWORK SERVICE User Account must have Read, Write, and Change Control of the virtual root of your website.&lt;/li&gt;
-		    &lt;/ol&gt;
-		  &lt;/li&gt;
-		&lt;/ul&gt;
+        &lt;br/&gt;
+        &lt;ol style="list-style-type: circle;"&gt;
+          &lt;li&gt;the NT AUTHORITY\NETWORK SERVICE User Account must have Read, Write, and Change Control of the virtual root of your website.&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
         &lt;p&gt;&lt;img alt="Image showing the security settings for the root folder of the website must be set to Read, Write and Change Control for the ASPNET or NT AUTHORITY/NETWORK SERVICE accounts." src="images/403-3.gif"&gt;&lt;/p&gt;
   &lt;/div&gt;</value>
   </data>
@@ -871,7 +871,7 @@ Thank you,
     [Custom:4|Number of errors:{0}&lt;br /&gt;]
     &lt;br /&gt;
     Status Report: &lt;br /&gt;
-           &lt;pre&gt;[Custom:5]&lt;/pre&gt;
+          &lt;pre&gt;[Custom:5]&lt;/pre&gt;
     [Custom:6|&lt;hr /&gt;&lt;strong&gt;Recipients:&lt;/strong&gt;&lt;br /&gt;{0}]</value>
   </data>
   <data name="EMAIL_BulkMailConf_Text_Body.Text" xml:space="preserve">

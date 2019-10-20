@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -232,16 +232,16 @@ namespace DotNetNuke.Security.Membership
             {
                 user.UserID =
                     Convert.ToInt32(_dataProvider.AddUser(user.PortalID,
-                                                          user.Username,
-                                                          user.FirstName,
-                                                          user.LastName,
-                                                          user.AffiliateID,
-                                                          user.IsSuperUser,
-                                                          user.Email,
-                                                          user.DisplayName,
-                                                          updatePassword,
-                                                          isApproved,
-                                                          UserController.Instance.GetCurrentUserInfo().UserID));
+                                                        user.Username,
+                                                        user.FirstName,
+                                                        user.LastName,
+                                                        user.AffiliateID,
+                                                        user.IsSuperUser,
+                                                        user.Email,
+                                                        user.DisplayName,
+                                                        updatePassword,
+                                                        isApproved,
+                                                        UserController.Instance.GetCurrentUserInfo().UserID));
 
                 //Save the user password history
                 new MembershipPasswordController().IsPasswordInHistory(user.UserID, user.PortalID, user.Membership.Password);
@@ -260,33 +260,33 @@ namespace DotNetNuke.Security.Membership
         {
             var portalSecurity = PortalSecurity.Instance;
             string userName = portalSecurity.InputFilter(user.Username,
-                                                         PortalSecurity.FilterFlag.NoScripting |
-                                                         PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                         PortalSecurity.FilterFlag.NoMarkup);
+                                                        PortalSecurity.FilterFlag.NoScripting |
+                                                        PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                        PortalSecurity.FilterFlag.NoMarkup);
             string email = portalSecurity.InputFilter(user.Email,
-                                                      PortalSecurity.FilterFlag.NoScripting |
-                                                      PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                      PortalSecurity.FilterFlag.NoMarkup);
+                                                    PortalSecurity.FilterFlag.NoScripting |
+                                                    PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                    PortalSecurity.FilterFlag.NoMarkup);
             MembershipCreateStatus status;
             if (MembershipProviderConfig.RequiresQuestionAndAnswer)
             {
                 System.Web.Security.Membership.CreateUser(userName,
-                                                          user.Membership.Password,
-                                                          email,
-                                                          user.Membership.PasswordQuestion,
-                                                          user.Membership.PasswordAnswer,
-                                                          true,
-                                                          out status);
+                                                        user.Membership.Password,
+                                                        email,
+                                                        user.Membership.PasswordQuestion,
+                                                        user.Membership.PasswordAnswer,
+                                                        true,
+                                                        out status);
             }
             else
             {
                 System.Web.Security.Membership.CreateUser(userName,
-                                                          user.Membership.Password,
-                                                          email,
-                                                          null,
-                                                          null,
-                                                          true,
-                                                          out status);
+                                                        user.Membership.Password,
+                                                        email,
+                                                        null,
+                                                        null,
+                                                        true,
+                                                        out status);
             }
             var createStatus = UserCreateStatus.Success;
             switch (status)
@@ -599,7 +599,7 @@ namespace DotNetNuke.Security.Membership
             return
                 CBO.GetCachedObject<MembershipUser>(
                     new CacheItemArgs(GetCacheKey(userName), DataCache.UserCacheTimeOut, DataCache.UserCachePriority,
-                                      userName), GetMembershipUserCallBack);
+                                    userName), GetMembershipUserCallBack);
         }
 
         private static MembershipUser GetMembershipUserByUserKey(string userKey)
@@ -641,9 +641,9 @@ namespace DotNetNuke.Security.Membership
         {
             var portalSecurity = PortalSecurity.Instance;
             string email = portalSecurity.InputFilter(user.Email,
-                                                      PortalSecurity.FilterFlag.NoScripting |
-                                                      PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                      PortalSecurity.FilterFlag.NoMarkup);
+                                                    PortalSecurity.FilterFlag.NoScripting |
+                                                    PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                    PortalSecurity.FilterFlag.NoMarkup);
 
             //Persist the Membership Properties to the AspNet Data Store
             MembershipUser membershipUser = System.Web.Security.Membership.GetUser(user.Username);
@@ -667,8 +667,8 @@ namespace DotNetNuke.Security.Membership
         }
 
         private static UserLoginStatus ValidateLogin(string username, string authType, UserInfo user,
-                                                     UserLoginStatus loginStatus, string password, ref bool bValid,
-                                                     int portalId)
+                                                    UserLoginStatus loginStatus, string password, ref bool bValid,
+                                                    int portalId)
         {
             if (loginStatus != UserLoginStatus.LOGIN_USERLOCKEDOUT &&
                 (loginStatus != UserLoginStatus.LOGIN_USERNOTAPPROVED || user.IsInRole("Unverified Users")))
@@ -745,9 +745,9 @@ namespace DotNetNuke.Security.Membership
             Requires.NotNullOrEmpty("newUsername", newUsername);
 
             var userName = PortalSecurity.Instance.InputFilter(newUsername,
-                                                      PortalSecurity.FilterFlag.NoScripting |
-                                                      PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                      PortalSecurity.FilterFlag.NoMarkup);
+                                                    PortalSecurity.FilterFlag.NoScripting |
+                                                    PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                    PortalSecurity.FilterFlag.NoMarkup);
 
             if (!userName.Equals(newUsername))
             {
@@ -783,10 +783,10 @@ namespace DotNetNuke.Security.Membership
             _dataProvider.ChangeUsername(userId, userName);
 
             EventLogController.Instance.AddLog("userId",
-                               userId.ToString(),
-                               portalSettings,
-                               UserController.Instance.GetCurrentUserInfo().UserID,
-                               EventLogController.EventLogType.USERNAME_UPDATED);
+                                userId.ToString(),
+                                portalSettings,
+                                UserController.Instance.GetCurrentUserInfo().UserID,
+                                EventLogController.EventLogType.USERNAME_UPDATED);
 
             DataCache.ClearCache();
         }
@@ -847,7 +847,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>A Boolean indicating success or failure.</returns>
         /// -----------------------------------------------------------------------------
         public override bool ChangePasswordQuestionAndAnswer(UserInfo user, string password, string passwordQuestion,
-                                                             string passwordAnswer)
+                                                            string passwordAnswer)
         {
             MembershipUser aspnetUser = GetMembershipUser(user);
             if (password == Null.NullString)
@@ -967,7 +967,7 @@ namespace DotNetNuke.Security.Membership
                     }
 
                     //If asp user has been successfully created or we are adding a existing user
-                    //to a new portal 
+                    //to a new portal
                     if (createStatus == UserCreateStatus.Success || createStatus == UserCreateStatus.AddUserToPortal)
                     {
                         //Create the DNN User Record
@@ -1072,7 +1072,7 @@ namespace DotNetNuke.Security.Membership
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        /// Gets the Current Password Information for the User 
+        /// Gets the Current Password Information for the User
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -1099,7 +1099,7 @@ namespace DotNetNuke.Security.Membership
         public override ArrayList GetUnAuthorizedUsers(int portalId, bool includeDeleted, bool superUsersOnly)
         {
             return FillUserCollection(portalId,
-                                      _dataProvider.GetUnAuthorizedUsers(portalId, includeDeleted, superUsersOnly));
+                                    _dataProvider.GetUnAuthorizedUsers(portalId, includeDeleted, superUsersOnly));
         }
 
         /// -----------------------------------------------------------------------------
@@ -1280,7 +1280,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>An ArrayList of UserInfo objects.</returns>
         /// -----------------------------------------------------------------------------
         public override ArrayList GetUsers(int portalId, int pageIndex, int pageSize, ref int totalRecords,
-                                           bool includeDeleted, bool superUsersOnly)
+                                            bool includeDeleted, bool superUsersOnly)
         {
             if (pageIndex == -1)
             {
@@ -1293,7 +1293,7 @@ namespace DotNetNuke.Security.Membership
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="portalId"></param>
         /// <param name="userId"></param>
@@ -1309,21 +1309,21 @@ namespace DotNetNuke.Security.Membership
         /// <param name="propertyValues"></param>
         /// <returns></returns>
         public override IList<UserInfo> GetUsersAdvancedSearch(int portalId, int userId, int filterUserId,
-                                                               int filterRoleId, int relationshipTypeId,
-                                                               bool isAdmin, int pageIndex, int pageSize,
-                                                               string sortColumn,
-                                                               bool sortAscending, string propertyNames,
-                                                               string propertyValues)
+                                                                int filterRoleId, int relationshipTypeId,
+                                                                bool isAdmin, int pageIndex, int pageSize,
+                                                                string sortColumn,
+                                                                bool sortAscending, string propertyNames,
+                                                                string propertyValues)
         {
             return FillUserList(portalId,
                                 _dataProvider.GetUsersAdvancedSearch(portalId, userId, filterUserId, filterRoleId,
-                                                                     relationshipTypeId, isAdmin, pageIndex, pageSize,
-                                                                     sortColumn, sortAscending, propertyNames,
-                                                                     propertyValues));
+                                                                    relationshipTypeId, isAdmin, pageIndex, pageSize,
+                                                                    sortColumn, sortAscending, propertyNames,
+                                                                    propertyValues));
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="portalId"></param>
         /// <param name="pageIndex"></param>
@@ -1356,7 +1356,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>An ArrayList of UserInfo objects.</returns>
         /// -----------------------------------------------------------------------------
         public override ArrayList GetUsersByEmail(int portalId, string emailToMatch, int pageIndex, int pageSize,
-                                                  ref int totalRecords)
+                                                ref int totalRecords)
         {
             return GetUsersByEmail(portalId, emailToMatch, pageIndex, pageSize, ref totalRecords, false, false);
         }
@@ -1377,7 +1377,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>An ArrayList of UserInfo objects.</returns>
         /// -----------------------------------------------------------------------------
         public override ArrayList GetUsersByEmail(int portalId, string emailToMatch, int pageIndex, int pageSize,
-                                                  ref int totalRecords, bool includeDeleted, bool superUsersOnly)
+                                                ref int totalRecords, bool includeDeleted, bool superUsersOnly)
         {
             if (pageIndex == -1)
             {
@@ -1386,7 +1386,7 @@ namespace DotNetNuke.Security.Membership
             }
 
             return FillUserCollection(portalId,
-                                      _dataProvider.GetUsersByEmail(portalId, emailToMatch, pageIndex, pageSize,
+                                    _dataProvider.GetUsersByEmail(portalId, emailToMatch, pageIndex, pageSize,
                                                                     includeDeleted, superUsersOnly), ref totalRecords);
         }
 
@@ -1404,7 +1404,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>An ArrayList of UserInfo objects.</returns>
         /// -----------------------------------------------------------------------------
         public override ArrayList GetUsersByUserName(int portalId, string userNameToMatch, int pageIndex, int pageSize,
-                                                     ref int totalRecords)
+                                                    ref int totalRecords)
         {
             return GetUsersByUserName(portalId, userNameToMatch, pageIndex, pageSize, ref totalRecords, false, false);
         }
@@ -1425,7 +1425,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>An ArrayList of UserInfo objects.</returns>
         /// -----------------------------------------------------------------------------
         public override ArrayList GetUsersByUserName(int portalId, string userNameToMatch, int pageIndex, int pageSize,
-                                                     ref int totalRecords, bool includeDeleted, bool superUsersOnly)
+                                                    ref int totalRecords, bool includeDeleted, bool superUsersOnly)
         {
             if (pageIndex == -1)
             {
@@ -1434,8 +1434,8 @@ namespace DotNetNuke.Security.Membership
             }
 
             return FillUserCollection(portalId,
-                                      _dataProvider.GetUsersByUsername(portalId, userNameToMatch, pageIndex, pageSize,
-                                                                       includeDeleted, superUsersOnly), ref totalRecords);
+                                    _dataProvider.GetUsersByUsername(portalId, userNameToMatch, pageIndex, pageSize,
+                                                                        includeDeleted, superUsersOnly), ref totalRecords);
         }
 
         /// -----------------------------------------------------------------------------
@@ -1454,7 +1454,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>An ArrayList of UserInfo objects.</returns>
         /// -----------------------------------------------------------------------------
         public override ArrayList GetUsersByDisplayName(int portalId, string nameToMatch, int pageIndex, int pageSize,
-                                                     ref int totalRecords, bool includeDeleted, bool superUsersOnly)
+                                                    ref int totalRecords, bool includeDeleted, bool superUsersOnly)
         {
             if (pageIndex == -1)
             {
@@ -1463,8 +1463,8 @@ namespace DotNetNuke.Security.Membership
             }
 
             return FillUserCollection(portalId,
-                                      _dataProvider.GetUsersByDisplayname(portalId, nameToMatch, pageIndex, pageSize,
-                                                                       includeDeleted, superUsersOnly), ref totalRecords);
+                                    _dataProvider.GetUsersByDisplayname(portalId, nameToMatch, pageIndex, pageSize,
+                                                                        includeDeleted, superUsersOnly), ref totalRecords);
         }
 
         /// -----------------------------------------------------------------------------
@@ -1486,7 +1486,7 @@ namespace DotNetNuke.Security.Membership
                                                             int pageIndex, int pageSize, ref int totalRecords)
         {
             return GetUsersByProfileProperty(portalId, propertyName, propertyValue, pageIndex, pageSize,
-                                             ref totalRecords, false, false);
+                                            ref totalRecords, false, false);
         }
 
         /// -----------------------------------------------------------------------------
@@ -1517,9 +1517,9 @@ namespace DotNetNuke.Security.Membership
             }
 
             return FillUserCollection(portalId,
-                                      _dataProvider.GetUsersByProfileProperty(portalId, propertyName, propertyValue,
-                                                                              pageIndex, pageSize, includeDeleted,
-                                                                              superUsersOnly), ref totalRecords);
+                                    _dataProvider.GetUsersByProfileProperty(portalId, propertyName, propertyValue,
+                                                                            pageIndex, pageSize, includeDeleted,
+                                                                            superUsersOnly), ref totalRecords);
         }
 
         /// -----------------------------------------------------------------------------
@@ -1703,7 +1703,7 @@ namespace DotNetNuke.Security.Membership
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
+            .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         /// <summary>
@@ -1728,21 +1728,21 @@ namespace DotNetNuke.Security.Membership
         {
             var objSecurity = PortalSecurity.Instance;
             string firstName = objSecurity.InputFilter(user.FirstName,
-                                                       PortalSecurity.FilterFlag.NoScripting |
-                                                       PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                       PortalSecurity.FilterFlag.NoMarkup);
+                                                        PortalSecurity.FilterFlag.NoScripting |
+                                                        PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                        PortalSecurity.FilterFlag.NoMarkup);
             string lastName = objSecurity.InputFilter(user.LastName,
-                                                      PortalSecurity.FilterFlag.NoScripting |
-                                                      PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                      PortalSecurity.FilterFlag.NoMarkup);
+                                                    PortalSecurity.FilterFlag.NoScripting |
+                                                    PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                    PortalSecurity.FilterFlag.NoMarkup);
             string email = objSecurity.InputFilter(user.Email,
-                                                   PortalSecurity.FilterFlag.NoScripting |
-                                                   PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                   PortalSecurity.FilterFlag.NoMarkup);
+                                                    PortalSecurity.FilterFlag.NoScripting |
+                                                    PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                    PortalSecurity.FilterFlag.NoMarkup);
             string displayName = objSecurity.InputFilter(user.DisplayName,
-                                                         PortalSecurity.FilterFlag.NoScripting |
-                                                         PortalSecurity.FilterFlag.NoAngleBrackets |
-                                                         PortalSecurity.FilterFlag.NoMarkup);
+                                                        PortalSecurity.FilterFlag.NoScripting |
+                                                        PortalSecurity.FilterFlag.NoAngleBrackets |
+                                                        PortalSecurity.FilterFlag.NoMarkup);
             if (displayName.Contains("<"))
             {
                 displayName = HttpUtility.HtmlEncode(displayName);
@@ -1770,21 +1770,21 @@ namespace DotNetNuke.Security.Membership
 
             //Persist the DNN User to the Database
             _dataProvider.UpdateUser(user.UserID,
-                                     user.PortalID,
-                                     firstName,
-                                     lastName,
-                                     user.IsSuperUser,
-                                     email,
-                                     displayName,
-                                     user.VanityUrl,
-                                     updatePassword,
-                                     isApproved,
-                                     false,
-                                     user.LastIPAddress,
-                                     user.PasswordResetToken,
-                                     user.PasswordResetExpiration,
-                                     user.IsDeleted,
-                                     UserController.Instance.GetCurrentUserInfo().UserID);
+                                    user.PortalID,
+                                    firstName,
+                                    lastName,
+                                    user.IsSuperUser,
+                                    email,
+                                    displayName,
+                                    user.VanityUrl,
+                                    updatePassword,
+                                    isApproved,
+                                    false,
+                                    user.LastIPAddress,
+                                    user.PasswordResetToken,
+                                    user.PasswordResetExpiration,
+                                    user.IsDeleted,
+                                    UserController.Instance.GetCurrentUserInfo().UserID);
 
             //Persist the Profile to the Data Store
             ProfileController.UpdateUserProfile(user);
@@ -1817,7 +1817,7 @@ namespace DotNetNuke.Security.Membership
         /// <returns>The User as a UserInfo object</returns>
         /// -----------------------------------------------------------------------------
         public override UserInfo UserLogin(int portalId, string username, string password, string verificationCode,
-                                           ref UserLoginStatus loginStatus)
+                                            ref UserLoginStatus loginStatus)
         {
             return UserLogin(portalId, username, password, "DNN", verificationCode, ref loginStatus);
         }
@@ -1837,9 +1837,9 @@ namespace DotNetNuke.Security.Membership
         /// <returns>The User as a UserInfo object</returns>
         /// -----------------------------------------------------------------------------
         public override UserInfo UserLogin(int portalId, string username, string password, string authType,
-                                           string verificationCode, ref UserLoginStatus loginStatus)
+                                            string verificationCode, ref UserLoginStatus loginStatus)
         {
-            //For now, we are going to ignore the possibility that the User may exist in the 
+            //For now, we are going to ignore the possibility that the User may exist in the
             //Global Data Store but not in the Local DataStore ie. A shared Global Data Store
 
             //Initialise Login Status to Failure
@@ -1922,7 +1922,7 @@ namespace DotNetNuke.Security.Membership
 
                     aspnetUser = System.Web.Security.Membership.GetUser(username);
 
-                    // If user has been locked out for current invalid attempt 
+                    // If user has been locked out for current invalid attempt
                     // return locked out status
                     if (aspnetUser.IsLockedOut)
                     {

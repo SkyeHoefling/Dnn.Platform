@@ -1,4 +1,4 @@
-const rolesActionTypes =  {    
+const rolesActionTypes =  {
     RETRIEVED_GROUPS_LIST: "RETRIEVED_GROUPS_LIST",
     RETRIEVED_ROLES_LIST: "RETRIEVED_ROLES_LIST",
     UPDATE_ROLEGROUP: "UPDATE_ROLEGROUP",

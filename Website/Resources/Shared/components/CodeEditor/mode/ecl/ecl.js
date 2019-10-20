@@ -41,52 +41,52 @@ CodeMirror.defineMode("ecl", function(config) {
   function tokenBase(stream, state) {
     var ch = stream.next();
     if (hooks[ch]) {
-      var result = hooks[ch](stream, state);
-      if (result !== false) return result;
+    var result = hooks[ch](stream, state);
+    if (result !== false) return result;
     }
     if (ch == '"' || ch == "'") {
-      state.tokenize = tokenString(ch);
-      return state.tokenize(stream, state);
+    state.tokenize = tokenString(ch);
+    return state.tokenize(stream, state);
     }
     if (/[\[\]{}\(\),;\:\.]/.test(ch)) {
-      curPunc = ch;
-      return null;
+    curPunc = ch;
+    return null;
     }
     if (/\d/.test(ch)) {
-      stream.eatWhile(/[\w\.]/);
-      return "number";
+    stream.eatWhile(/[\w\.]/);
+    return "number";
     }
     if (ch == "/") {
-      if (stream.eat("*")) {
+    if (stream.eat("*")) {
         state.tokenize = tokenComment;
         return tokenComment(stream, state);
-      }
-      if (stream.eat("/")) {
+    }
+    if (stream.eat("/")) {
         stream.skipToEnd();
         return "comment";
-      }
+    }
     }
     if (isOperatorChar.test(ch)) {
-      stream.eatWhile(isOperatorChar);
-      return "operator";
+    stream.eatWhile(isOperatorChar);
+    return "operator";
     }
     stream.eatWhile(/[\w\$_]/);
     var cur = stream.current().toLowerCase();
     if (keyword.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "keyword";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "keyword";
     } else if (variable.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "variable";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "variable";
     } else if (variable_2.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "variable-2";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "variable-2";
     } else if (variable_3.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "variable-3";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "variable-3";
     } else if (builtin.propertyIsEnumerable(cur)) {
-      if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
-      return "builtin";
+    if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
+    return "builtin";
     } else { //Data types are of from KEYWORD##
                 var i = cur.length - 1;
                 while(i >= 0 && (!isNaN(cur[i]) || cur[i] == '_'))
@@ -106,25 +106,25 @@ CodeMirror.defineMode("ecl", function(config) {
 
   function tokenString(quote) {
     return function(stream, state) {
-      var escaped = false, next, end = false;
-      while ((next = stream.next()) != null) {
+    var escaped = false, next, end = false;
+    while ((next = stream.next()) != null) {
         if (next == quote && !escaped) {end = true; break;}
         escaped = !escaped && next == "\\";
-      }
-      if (end || !escaped)
+    }
+    if (end || !escaped)
         state.tokenize = tokenBase;
-      return "string";
+    return "string";
     };
   }
 
   function tokenComment(stream, state) {
     var maybeEnd = false, ch;
     while (ch = stream.next()) {
-      if (ch == "/" && maybeEnd) {
+    if (ch == "/" && maybeEnd) {
         state.tokenize = tokenBase;
         break;
-      }
-      maybeEnd = (ch == "*");
+    }
+    maybeEnd = (ch == "*");
     }
     return "comment";
   }
@@ -142,7 +142,7 @@ CodeMirror.defineMode("ecl", function(config) {
   function popContext(state) {
     var t = state.context.type;
     if (t == ")" || t == "]" || t == "}")
-      state.indented = state.context.indented;
+    state.indented = state.context.indented;
     return state.context = state.context.prev;
   }
 
@@ -150,51 +150,51 @@ CodeMirror.defineMode("ecl", function(config) {
 
   return {
     startState: function(basecolumn) {
-      return {
+    return {
         tokenize: null,
         context: new Context((basecolumn || 0) - indentUnit, 0, "top", false),
         indented: 0,
         startOfLine: true
-      };
+    };
     },
 
     token: function(stream, state) {
-      var ctx = state.context;
-      if (stream.sol()) {
+    var ctx = state.context;
+    if (stream.sol()) {
         if (ctx.align == null) ctx.align = false;
         state.indented = stream.indentation();
         state.startOfLine = true;
-      }
-      if (stream.eatSpace()) return null;
-      curPunc = null;
-      var style = (state.tokenize || tokenBase)(stream, state);
-      if (style == "comment" || style == "meta") return style;
-      if (ctx.align == null) ctx.align = true;
+    }
+    if (stream.eatSpace()) return null;
+    curPunc = null;
+    var style = (state.tokenize || tokenBase)(stream, state);
+    if (style == "comment" || style == "meta") return style;
+    if (ctx.align == null) ctx.align = true;
 
-      if ((curPunc == ";" || curPunc == ":") && ctx.type == "statement") popContext(state);
-      else if (curPunc == "{") pushContext(state, stream.column(), "}");
-      else if (curPunc == "[") pushContext(state, stream.column(), "]");
-      else if (curPunc == "(") pushContext(state, stream.column(), ")");
-      else if (curPunc == "}") {
+    if ((curPunc == ";" || curPunc == ":") && ctx.type == "statement") popContext(state);
+    else if (curPunc == "{") pushContext(state, stream.column(), "}");
+    else if (curPunc == "[") pushContext(state, stream.column(), "]");
+    else if (curPunc == "(") pushContext(state, stream.column(), ")");
+    else if (curPunc == "}") {
         while (ctx.type == "statement") ctx = popContext(state);
         if (ctx.type == "}") ctx = popContext(state);
         while (ctx.type == "statement") ctx = popContext(state);
-      }
-      else if (curPunc == ctx.type) popContext(state);
-      else if (ctx.type == "}" || ctx.type == "top" || (ctx.type == "statement" && curPunc == "newstatement"))
+    }
+    else if (curPunc == ctx.type) popContext(state);
+    else if (ctx.type == "}" || ctx.type == "top" || (ctx.type == "statement" && curPunc == "newstatement"))
         pushContext(state, stream.column(), "statement");
-      state.startOfLine = false;
-      return style;
+    state.startOfLine = false;
+    return style;
     },
 
     indent: function(state, textAfter) {
-      if (state.tokenize != tokenBase && state.tokenize != null) return 0;
-      var ctx = state.context, firstChar = textAfter && textAfter.charAt(0);
-      if (ctx.type == "statement" && firstChar == "}") ctx = ctx.prev;
-      var closing = firstChar == ctx.type;
-      if (ctx.type == "statement") return ctx.indented + (firstChar == "{" ? 0 : indentUnit);
-      else if (ctx.align) return ctx.column + (closing ? 0 : 1);
-      else return ctx.indented + (closing ? 0 : indentUnit);
+    if (state.tokenize != tokenBase && state.tokenize != null) return 0;
+    var ctx = state.context, firstChar = textAfter && textAfter.charAt(0);
+    if (ctx.type == "statement" && firstChar == "}") ctx = ctx.prev;
+    var closing = firstChar == ctx.type;
+    if (ctx.type == "statement") return ctx.indented + (firstChar == "{" ? 0 : indentUnit);
+    else if (ctx.align) return ctx.column + (closing ? 0 : 1);
+    else return ctx.indented + (closing ? 0 : indentUnit);
     },
 
     electricChars: "{}"

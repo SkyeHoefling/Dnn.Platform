@@ -17,7 +17,7 @@ class Application extends Component {
     componentDidMount() {
         if (!this.props.isApplicationInfoLoaded) {
             this.props.onRetrieveApplicationInfo();
-        }        
+        }
     }
 
     UNSAFE_componentWillReceiveProps(newProps) {
@@ -31,63 +31,63 @@ class Application extends Component {
         return <div className="dnn-servers-info-panel">
             <GridSystem>
                 <div>
-                    <InfoBlock label={Localization.get("plProduct")} 
-                        tooltip={Localization.get("plProduct.Help")} 
-                        text={props.applicationInfo.product || defaultPlaceHolder} />   
+                    <InfoBlock label={Localization.get("plProduct")}
+                        tooltip={Localization.get("plProduct.Help")}
+                        text={props.applicationInfo.product || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("plVersion")} 
-                        tooltip={Localization.get("plVersion.Help")} 
-                        text={props.applicationInfo.version || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("plVersion")}
+                        tooltip={Localization.get("plVersion.Help")}
+                        text={props.applicationInfo.version || defaultPlaceHolder} />
 
-                    {utils.isHostUser() && 
+                    {utils.isHostUser() &&
                         <div className="tooltipAdjustment">
-                            <InfoBlock label={Localization.get("plGUID")} 
-                                tooltip={Localization.get("plGUID.Help")} 
-                                text={props.applicationInfo.guid || defaultPlaceHolder} /> 
+                            <InfoBlock label={Localization.get("plGUID")}
+                                tooltip={Localization.get("plGUID.Help")}
+                                text={props.applicationInfo.guid || defaultPlaceHolder} />
                         </div>
                     }
-                    
-                    <InfoBlock label={Localization.get("HostInfo_HtmlEditorProvider")} 
-                        tooltip={Localization.get("HostInfo_HtmlEditorProvider.Help")} 
+
+                    <InfoBlock label={Localization.get("HostInfo_HtmlEditorProvider")}
+                        tooltip={Localization.get("HostInfo_HtmlEditorProvider.Help")}
                         text={props.applicationInfo.htmlEditorProvider || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("plDataProvider")} 
-                        tooltip={Localization.get("plDataProvider.Help")} 
-                        text={props.applicationInfo.dataProvider || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("plDataProvider")}
+                        tooltip={Localization.get("plDataProvider.Help")}
+                        text={props.applicationInfo.dataProvider || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("HostInfo_CachingProvider")} 
-                        tooltip={Localization.get("HostInfo_CachingProvider.Help")} 
-                        text={props.applicationInfo.cachingProvider || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("HostInfo_CachingProvider")}
+                        tooltip={Localization.get("HostInfo_CachingProvider.Help")}
+                        text={props.applicationInfo.cachingProvider || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("HostInfo_LoggingProvider")} 
-                        tooltip={Localization.get("HostInfo_LoggingProvider.Help")} 
-                        text={props.applicationInfo.loggingProvider || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("HostInfo_LoggingProvider")}
+                        tooltip={Localization.get("HostInfo_LoggingProvider.Help")}
+                        text={props.applicationInfo.loggingProvider || defaultPlaceHolder} />
                 </div>
                 <div>
-                    <InfoBlock label={Localization.get("HostInfo_FriendlyUrlProvider")} 
-                        tooltip={Localization.get("HostInfo_FriendlyUrlProvider.Help")} 
-                        text={props.applicationInfo.friendlyUrlProvider || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("HostInfo_FriendlyUrlProvider")}
+                        tooltip={Localization.get("HostInfo_FriendlyUrlProvider.Help")}
+                        text={props.applicationInfo.friendlyUrlProvider || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("HostInfo_FriendlyUrlEnabled")} 
-                        tooltip={Localization.get("HostInfo_FriendlyUrlEnabled.Help")} 
-                        text={props.applicationInfo.friendlyUrlsEnabled || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("HostInfo_FriendlyUrlEnabled")}
+                        tooltip={Localization.get("HostInfo_FriendlyUrlEnabled.Help")}
+                        text={props.applicationInfo.friendlyUrlsEnabled || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("HostInfo_FriendlyUrlType")} 
-                        tooltip={Localization.get("HostInfo_FriendlyUrlType.Help")} 
-                        text={props.applicationInfo.friendlyUrlType || defaultPlaceHolder} /> 
+                    <InfoBlock label={Localization.get("HostInfo_FriendlyUrlType")}
+                        tooltip={Localization.get("HostInfo_FriendlyUrlType.Help")}
+                        text={props.applicationInfo.friendlyUrlType || defaultPlaceHolder} />
 
                     <div className="tooltipAdjustment">
-                        <InfoBlock label={Localization.get("HostInfo_SchedulerMode")} 
-                            tooltip={Localization.get("HostInfo_SchedulerMode.Help")} 
+                        <InfoBlock label={Localization.get("HostInfo_SchedulerMode")}
+                            tooltip={Localization.get("HostInfo_SchedulerMode.Help")}
                             text={props.applicationInfo.schedulerMode || defaultPlaceHolder} />
                     </div>
 
-                    <InfoBlock label={Localization.get("HostInfo_WebFarmEnabled")} 
-                        tooltip={Localization.get("HostInfo_WebFarmEnabled.Help")} 
+                    <InfoBlock label={Localization.get("HostInfo_WebFarmEnabled")}
+                        tooltip={Localization.get("HostInfo_WebFarmEnabled.Help")}
                         text={props.applicationInfo.webFarmEnabled || defaultPlaceHolder} />
 
-                    <InfoBlock label={Localization.get("HostInfo_Permissions")} 
-                        tooltip={Localization.get("HostInfo_Permissions.Help")} 
+                    <InfoBlock label={Localization.get("HostInfo_Permissions")}
+                        tooltip={Localization.get("HostInfo_Permissions.Help")}
                         text={props.applicationInfo.casPermissions || defaultPlaceHolder} />
                 </div>
             </GridSystem>
@@ -95,14 +95,14 @@ class Application extends Component {
     }
 }
 
-Application.propTypes = {   
+Application.propTypes = {
     applicationInfo: PropTypes.object.isRequired,
     isApplicationInfoLoaded: PropTypes.bool.isRequired,
     errorMessage: PropTypes.string,
     onRetrieveApplicationInfo: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {    
+function mapStateToProps(state) {
     return {
         applicationInfo: state.applicationTab.applicationInfo,
         isApplicationInfoLoaded: state.applicationTab.isApplicationInfoLoaded,
@@ -113,7 +113,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators ({
-            onRetrieveApplicationInfo: ApplicationTabActions.loadApplicationInfo     
+            onRetrieveApplicationInfo: ApplicationTabActions.loadApplicationInfo
         }, dispatch)
     };
 }

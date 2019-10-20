@@ -23,7 +23,7 @@ const application = {
         utilities.load(options);
         const viewName = utils.getViewName();
 
-        //Check if page translation is enabled 
+        //Check if page translation is enabled
         application.dispatch(languagesActions.getContentLocalizationEnabled());
 
         if (viewName === "edit") {

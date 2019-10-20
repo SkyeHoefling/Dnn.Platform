@@ -156,7 +156,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
                                                 continuationToken = resultSegment.ContinuationToken;
                                             }
                                             while (continuationToken != null);
-                                            
+
                                             return list;
                                         });
 
@@ -202,7 +202,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 
             // Set the content type
             blob.Properties.ContentType = FileContentTypeManager.Instance.GetContentType(Path.GetExtension(uri));
-			blob.SetProperties();
+            blob.SetProperties();
 
             ClearCache(folderMapping.FolderMappingID);
         }
@@ -228,16 +228,16 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
         {
             Requires.NotNull("file", file);
 
-			var folderMapping = FolderMappingController.Instance.GetFolderMapping(file.PortalId, file.FolderMappingID);
-	        var directLink = string.IsNullOrEmpty(GetSetting(folderMapping, Constants.DirectLink)) || GetSetting(folderMapping, Constants.DirectLink).ToLowerInvariant() == "true";
+            var folderMapping = FolderMappingController.Instance.GetFolderMapping(file.PortalId, file.FolderMappingID);
+            var directLink = string.IsNullOrEmpty(GetSetting(folderMapping, Constants.DirectLink)) || GetSetting(folderMapping, Constants.DirectLink).ToLowerInvariant() == "true";
 
-	        if (directLink)
-	        {
-	            var folder = FolderManager.Instance.GetFolder(file.FolderId);
+            if (directLink)
+            {
+                var folder = FolderManager.Instance.GetFolder(file.FolderId);
                 var uri = folder.MappedPath + file.FileName;
 
-		        var container = GetContainer(folderMapping);
-		        var blob = container.GetBlobReference(uri);
+                var container = GetContainer(folderMapping);
+                var blob = container.GetBlobReference(uri);
                 var absuri = blob.Uri.AbsoluteUri;
                 var customDomain = GetEncryptedSetting(folderMapping.FolderMappingSettings, Constants.CustomDomain);
 
@@ -251,48 +251,48 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 
                 const string groupPolicyIdentifier = "DNNFileManagerPolicy";
 
-		        var permissions = container.GetPermissions();
+                var permissions = container.GetPermissions();
 
-		        SharedAccessBlobPolicy policy;
+                SharedAccessBlobPolicy policy;
 
-		        permissions.SharedAccessPolicies.TryGetValue(groupPolicyIdentifier, out policy);
+                permissions.SharedAccessPolicies.TryGetValue(groupPolicyIdentifier, out policy);
 
-		        if (policy == null)
-		        {
-			        policy = new SharedAccessBlobPolicy { Permissions = SharedAccessBlobPermissions.Read, SharedAccessExpiryTime = DateTime.UtcNow.AddYears(100)};
+                if (policy == null)
+                {
+                    policy = new SharedAccessBlobPolicy { Permissions = SharedAccessBlobPermissions.Read, SharedAccessExpiryTime = DateTime.UtcNow.AddYears(100)};
 
-			        permissions.SharedAccessPolicies.Add(groupPolicyIdentifier, policy);
-		        }
-		        else
-		        {
-			        policy.Permissions = SharedAccessBlobPermissions.Read;
-			        policy.SharedAccessExpiryTime = DateTime.UtcNow.AddYears(100);
-		        }
+                    permissions.SharedAccessPolicies.Add(groupPolicyIdentifier, policy);
+                }
+                else
+                {
+                    policy.Permissions = SharedAccessBlobPermissions.Read;
+                    policy.SharedAccessExpiryTime = DateTime.UtcNow.AddYears(100);
+                }
 
                 /*
-                 * Workaround for CONTENT-3662
-                 * The Azure Client Storage api has issue when used with Italian Thread.Culture or eventually other cultures
-                 * (see this article for further information https://connect.microsoft.com/VisualStudio/feedback/details/760974/windows-azure-sdk-cloudblobcontainer-setpermissions-permissions-as-microsoft-windowsazure-storageclient-blobcontainerpermissions-error).
-                 * This code changes the thread culture to en-US
-                 */
+                * Workaround for CONTENT-3662
+                * The Azure Client Storage api has issue when used with Italian Thread.Culture or eventually other cultures
+                * (see this article for further information https://connect.microsoft.com/VisualStudio/feedback/details/760974/windows-azure-sdk-cloudblobcontainer-setpermissions-permissions-as-microsoft-windowsazure-storageclient-blobcontainerpermissions-error).
+                * This code changes the thread culture to en-US
+                */
                 var currentCulture = Thread.CurrentThread.CurrentCulture;
                 if (currentCulture.Name != "en-US")
                 {
                     Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
                 }
 
-	            container.SetPermissions(permissions);
+                container.SetPermissions(permissions);
 
-		        var signature = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy(), groupPolicyIdentifier);
+                var signature = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy(), groupPolicyIdentifier);
 
                 // Reset original Thread Culture
                 if (currentCulture.Name != "en-US")
-	            {
-	                Thread.CurrentThread.CurrentCulture = currentCulture;
-	            }
+                {
+                    Thread.CurrentThread.CurrentCulture = currentCulture;
+                }
 
                 return absuri + signature;
-	        }
+            }
 
             return FileLinkClickController.Instance.GetFileLinkClick(file);
         }

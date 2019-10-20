@@ -82,29 +82,29 @@
     "[tag p] { [builtin #hello] { [property color]:[keyword red]; } }");
 
   MT('indent_mixin',
-     "[def @mixin] [tag container] (",
-     "  [variable-2 $a]: [number 10],",
-     "  [variable-2 $b]: [number 10])",
-     "{}");
+    "[def @mixin] [tag container] (",
+    "  [variable-2 $a]: [number 10],",
+    "  [variable-2 $b]: [number 10])",
+    "{}");
 
   MT('indent_nested',
-     "[tag foo] {",
-     "  [tag bar] {",
-     "  }",
-     "}");
+    "[tag foo] {",
+    "  [tag bar] {",
+    "  }",
+    "}");
 
   MT('indent_parentheses',
-     "[tag foo] {",
-     "  [property color]: [variable darken]([variable-2 $blue],",
-     "    [number 9%]);",
-     "}");
+    "[tag foo] {",
+    "  [property color]: [variable darken]([variable-2 $blue],",
+    "    [number 9%]);",
+    "}");
 
   MT('indent_vardef',
-     "[variable-2 $name]:",
-     "  [string 'val'];",
-     "[tag tag] {",
-     "  [tag inner] {",
-     "    [property margin]: [number 3px];",
-     "  }",
-     "}");
+    "[variable-2 $name]:",
+    "  [string 'val'];",
+    "[tag tag] {",
+    "  [tag inner] {",
+    "    [property margin]: [number 3px];",
+    "  }",
+    "}");
 })();

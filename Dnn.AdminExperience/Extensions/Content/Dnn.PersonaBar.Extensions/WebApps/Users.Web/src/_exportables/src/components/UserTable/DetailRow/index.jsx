@@ -52,7 +52,7 @@ class DetailsRow extends Component {
         const show = !this.state.showMenu;
         this.setState({ showMenu: show });
     }
-    
+
     /* eslint-disable react/no-danger */
     getUserActions(user, opened) {
         let actionIcons = [];
@@ -93,7 +93,7 @@ class DetailsRow extends Component {
             <div className={"extension-action " + !this.state.showMenu} dangerouslySetInnerHTML={{ __html: SvgIcons.MoreMenuIcon }}
                 onClick={this.toggleUserMenu.bind(this) }>
             </div>
-            { this.state.showMenu && <UserMenu filter={this.props.filter} appSettings={this.props.appSettings} getUserMenu={this.props.getUserMenu && this.props.getUserMenu.bind(this)} userMenuAction={this.props.userMenuAction && this.props.userMenuAction.bind(this)} onClose={this.toggleUserMenu.bind(this) } 
+            { this.state.showMenu && <UserMenu filter={this.props.filter} appSettings={this.props.appSettings} getUserMenu={this.props.getUserMenu && this.props.getUserMenu.bind(this)} userMenuAction={this.props.userMenuAction && this.props.userMenuAction.bind(this)} onClose={this.toggleUserMenu.bind(this) }
                 userId={user.userId}/> }
         </div>]).concat(userActions);
     }
@@ -121,7 +121,7 @@ class DetailsRow extends Component {
             } else if (!user.hasAgreedToTerms) {
                 statusClass = "grey";
                 hoverText = Localization.get("HasNotAgreedToTerms.title");
-            } 
+            }
             userColumns = [
                 {
                     index: 3,

@@ -58,7 +58,7 @@ namespace DotNetNuke.Modules.Journal.Controls {
 
         public int CurrentIndex { get; set; }
 
-        protected override void Render(HtmlTextWriter output) 
+        protected override void Render(HtmlTextWriter output)
         {
             if (Enabled) {
                 if (CurrentIndex < 0) {
@@ -67,7 +67,7 @@ namespace DotNetNuke.Modules.Journal.Controls {
                 JournalParser jp = new JournalParser(portalSettings, ModuleId, ProfileId, SocialGroupId, userInfo){JournalId = JournalId};
                 output.Write(jp.GetList(CurrentIndex, PageSize));
             }
-            
+
         }
     }
 }

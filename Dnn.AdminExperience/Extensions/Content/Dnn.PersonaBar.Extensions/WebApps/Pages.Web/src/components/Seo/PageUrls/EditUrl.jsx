@@ -26,14 +26,14 @@ class EditUrl extends Component {
         }  else if (event.target) {
             value = event.target.value;
         }
-        
+
         onChange(key, value);
 
         this.setState({
             hasChanges: true
         });
     }
-    
+
     getUrlTypeOptions() {
         return [
             {
@@ -46,7 +46,7 @@ class EditUrl extends Component {
             }
         ];
     }
-    
+
     getOptions(siteAliases) {
         return siteAliases.map(alias => {
             return {
@@ -55,22 +55,22 @@ class EditUrl extends Component {
             };
         });
     }
-    
+
     getSiteAliasUsageOptions(hasParent) {
         let options = [
-            {value: portalAliasUsageType.ChildPagesDoNotInherit, label: Localization.get("Pages_Seo_SelectedAliasUsageOptionThisPageOnly")}, 
+            {value: portalAliasUsageType.ChildPagesDoNotInherit, label: Localization.get("Pages_Seo_SelectedAliasUsageOptionThisPageOnly")},
             {value: portalAliasUsageType.ChildPagesInherit, label: Localization.get("Pages_Seo_SelectedAliasUsageOptionPageAndChildPages")}
         ];
-                       
+
         if (hasParent) {
             options.push({
                 value: portalAliasUsageType.InheritedFromParent, label: Localization.get("Pages_Seo_SelectedAliasUsageOptionSameAsParent")
             });
         }
-        
+
         return options;
     }
-    
+
     render() {
         const {url, saving, pageHasParent, siteAliases, primaryAliasId, isOpened, onSave, onCancel} = this.props;
         const aliases = this.getOptions(siteAliases);
@@ -85,8 +85,8 @@ class EditUrl extends Component {
                                 tooltipMessage={Localization.get("Pages_Seo_SiteAlias.Help")}
                                 label={Localization.get("Pages_Seo_SiteAlias")} />
                             <Dropdown options={aliases}
-                                value={url.siteAlias.Key} 
-                                onSelect={this.onChangeField.bind(this, "siteAlias")} 
+                                value={url.siteAlias.Key}
+                                onSelect={this.onChangeField.bind(this, "siteAlias")}
                                 withBorder={true} />
                         </GridCell>
                         <GridCell columnSize={50} className="right-column">
@@ -94,7 +94,7 @@ class EditUrl extends Component {
                                 style={{width: "100%"}}
                                 label={Localization.get("Pages_Seo_UrlPath")}
                                 tooltipMessage={Localization.get("Pages_Seo_UrlPath.Help")}
-                                value={url.path} 
+                                value={url.path}
                                 onChange={this.onChangeField.bind(this, "path")} />
                         </GridCell>
                     </GridCell>
@@ -106,9 +106,9 @@ class EditUrl extends Component {
                                 tooltipMessage={Localization.get("Pages_Seo_SelectedAliasUsage.Help")}
                                 label={Localization.get("Pages_Seo_SelectedAliasUsage")} />
                             <RadioButtons
-                                    options={siteAliasUsageOptions} 
+                                    options={siteAliasUsageOptions}
                                     onChange={this.onChangeField.bind(this, "siteAliasUsage")}
-                                    value={url.siteAliasUsage}/>                        
+                                    value={url.siteAliasUsage}/>
                         </GridCell>
                     </GridCell>}
                     <GridCell>
@@ -118,17 +118,17 @@ class EditUrl extends Component {
                                 tooltipMessage={Localization.get("Pages_Seo_UrlType.Help")}
                                 label={Localization.get("Pages_Seo_UrlType")} />
                             <Dropdown options={this.getUrlTypeOptions()}
-                                value={url.statusCode.Key} 
-                                onSelect={this.onChangeField.bind(this, "statusCode")} 
+                                value={url.statusCode.Key}
+                                onSelect={this.onChangeField.bind(this, "statusCode")}
                                 withBorder={true} />
                         </GridCell>
                         <GridCell columnSize={50} className="right-column">
-                            {url.statusCode.Key === 301 && 
+                            {url.statusCode.Key === 301 &&
                             <SingleLineInputWithError
                                 style={{width: "100%"}}
                                 label={Localization.get("Pages_Seo_QueryString")}
                                 tooltipMessage={Localization.get("Pages_Seo_QueryString.Help")}
-                                value={url.queryString} 
+                                value={url.queryString}
                                 onChange={this.onChangeField.bind(this, "queryString")} />}
                         </GridCell>
                     </GridCell>
@@ -154,7 +154,7 @@ EditUrl.propTypes = {
     onChange: PropTypes.func.isRequired,
     isOpened: PropTypes.bool,
     pageHasParent: PropTypes.bool,
-    className: PropTypes.string, 
+    className: PropTypes.string,
     onSave: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     saving: PropTypes.bool

@@ -239,19 +239,19 @@
                 var dropItem = ui.item;
                 if (dnn.controlBar && dropItem.hasClass('ControlBar_ModuleDiv')) {
                     // add module
-                	var pane = ui.item.parent();
+                    var pane = ui.item.parent();
                     var order = -1;
                     var paneName = pane.attr("id").substring(4);
-	                if ($('div.DnnModule', pane).length > 0) {
-		                var modules = $('div.DnnModule, div.ControlBar_ModuleDiv', pane);
-		                for (var i = 0; i < modules.length; i++) {
-			                var module = modules.get(i);
-			                if ($(module).hasClass('ControlBar_ModuleDiv')) {
-				                order = i;
-			                }
-		                }
-	                }
-	                dropItem.remove();
+                    if ($('div.DnnModule', pane).length > 0) {
+                        var modules = $('div.DnnModule, div.ControlBar_ModuleDiv', pane);
+                        for (var i = 0; i < modules.length; i++) {
+                            var module = modules.get(i);
+                            if ($(module).hasClass('ControlBar_ModuleDiv')) {
+                                order = i;
+                            }
+                        }
+                    }
+                    dropItem.remove();
                     dnn.controlBar.addModule(dnn.controlBar.dragdropModule + '',
                         dnn.controlBar.dragdropPage,
                         paneName,
@@ -285,7 +285,7 @@
                     }
 
                     $("div[data-tipholder=\"" + "ModuleDragToolTip-" + mid + "\"] .dnnHelpText").text(settings.dragHintText);
-                   
+
                     $('.dnnDropEmptyPanes').each(function () {
                         $(this).removeClass('dnnDropEmptyPanes').addClass('DNNEmptyPane');
                     });

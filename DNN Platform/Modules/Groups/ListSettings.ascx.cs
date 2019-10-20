@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -63,7 +63,7 @@ namespace DotNetNuke.Modules.Groups
                 {
                     BindGroups();
                     BindPages();
-                    
+
                     if (Settings.ContainsKey(Constants.DefaultRoleGroupSetting)) {
                         drpRoleGroup.SelectedIndex = drpRoleGroup.Items.IndexOf(drpRoleGroup.Items.FindByValue(Settings[Constants.DefaultRoleGroupSetting].ToString()));
                     }
@@ -81,7 +81,7 @@ namespace DotNetNuke.Modules.Groups
                         txtViewTemplate.Text = Settings[Constants.GroupViewTemplate].ToString();
                     }
 
-                    if (Settings.ContainsKey(Constants.GroupModerationEnabled)) 
+                    if (Settings.ContainsKey(Constants.GroupModerationEnabled))
                     {
                         chkGroupModeration.Checked = Convert.ToBoolean(Settings[Constants.GroupModerationEnabled].ToString());
                     }
@@ -152,7 +152,7 @@ namespace DotNetNuke.Modules.Groups
         #endregion
         private void BindGroups() {
             var arrGroups = RoleController.GetRoleGroups(PortalId);
-			drpRoleGroup.Items.Add(new ListItem(Localization.GetString("AllRoles"), "-2"));
+            drpRoleGroup.Items.Add(new ListItem(Localization.GetString("AllRoles"), "-2"));
             drpRoleGroup.Items.Add(new ListItem(Localization.GetString("GlobalRoles"), "-1"));
 
             foreach (RoleGroupInfo roleGroup in arrGroups) {
@@ -160,20 +160,20 @@ namespace DotNetNuke.Modules.Groups
             }
         }
         private void BindPages() {
-            foreach (ModuleInfo moduleInfo in ModuleController.Instance.GetModules(PortalId)) 
+            foreach (ModuleInfo moduleInfo in ModuleController.Instance.GetModules(PortalId))
             {
                 if (moduleInfo.DesktopModule.ModuleName.Contains("Social Groups") && moduleInfo.IsDeleted == false)
                 {
                     TabInfo tabInfo = TabController.Instance.GetTab(moduleInfo.TabID, PortalId, false);
-                    if (tabInfo != null) 
+                    if (tabInfo != null)
                     {
-                        if (tabInfo.IsDeleted == false) 
+                        if (tabInfo.IsDeleted == false)
                         {
-                            foreach (KeyValuePair<string, ModuleDefinitionInfo> def in moduleInfo.DesktopModule.ModuleDefinitions) 
+                            foreach (KeyValuePair<string, ModuleDefinitionInfo> def in moduleInfo.DesktopModule.ModuleDefinitions)
                             {
-                                if (moduleInfo.ModuleDefinition.FriendlyName == def.Key) 
+                                if (moduleInfo.ModuleDefinition.FriendlyName == def.Key)
                                 {
-                                    if (drpGroupViewPage.Items.FindByValue(tabInfo.TabID.ToString()) == null) 
+                                    if (drpGroupViewPage.Items.FindByValue(tabInfo.TabID.ToString()) == null)
                                     {
                                         drpGroupViewPage.Items.Add(new ListItem(tabInfo.TabName + " - " + def.Key, tabInfo.TabID.ToString()));
                                     }

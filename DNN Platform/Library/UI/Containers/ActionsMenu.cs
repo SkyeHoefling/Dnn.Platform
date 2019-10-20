@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -50,7 +50,7 @@ namespace DotNetNuke.UI.Containers
     /// -----------------------------------------------------------------------------
     public class ActionsMenu : Control, IActionControl
     {
-		#region "Private Members"
+        #region "Private Members"
 
         private ActionManager _ActionManager;
         private ModuleAction _ActionRoot;
@@ -58,9 +58,9 @@ namespace DotNetNuke.UI.Containers
         private NavigationProvider _ProviderControl;
         private string _ProviderName = "DNNMenuNavigationProvider";
 
-		#endregion
+        #endregion
 
-		#region "Protected Properties"
+        #region "Protected Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -93,10 +93,10 @@ namespace DotNetNuke.UI.Containers
                 return _ProviderControl;
             }
         }
-		
-		#endregion
 
-		#region "Public Properties"
+        #endregion
+
+        #region "Public Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -120,20 +120,20 @@ namespace DotNetNuke.UI.Containers
             }
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets and Sets the Path to the Script Library for the provider
-		/// </summary>
-		/// <returns>A String</returns>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets and Sets the Path to the Script Library for the provider
+        /// </summary>
+        /// <returns>A String</returns>
+        /// -----------------------------------------------------------------------------
         public string PathSystemScript { get; set; }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets and Sets whether the Menu should be populated from the client
-		/// </summary>
-		/// <returns>A Boolean</returns>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets and Sets whether the Menu should be populated from the client
+        /// </summary>
+        /// <returns>A Boolean</returns>
+        /// -----------------------------------------------------------------------------
         public bool PopulateNodesFromClient { get; set; }
 
         /// -----------------------------------------------------------------------------
@@ -185,10 +185,10 @@ namespace DotNetNuke.UI.Containers
         public IModuleControl ModuleControl { get; set; }
 
         #endregion
-		
-		#endregion
 
-		#region "Private Methods"
+        #endregion
+
+        #region "Private Methods"
 
 
         /// -----------------------------------------------------------------------------
@@ -212,12 +212,12 @@ namespace DotNetNuke.UI.Containers
             }
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		/// ProcessNodes proceses a single node and its children
-		/// </summary>
-		/// <param name="objParent">The Node to process</param>
-		/// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// ProcessNodes proceses a single node and its children
+        /// </summary>
+        /// <param name="objParent">The Node to process</param>
+        /// -----------------------------------------------------------------------------
         private void ProcessNodes(DNNNode objParent)
         {
             if (!String.IsNullOrEmpty(objParent.JSFunction))
@@ -239,7 +239,7 @@ namespace DotNetNuke.UI.Containers
         {
             try
             {
-				//--- original page set attributes ---
+                //--- original page set attributes ---
                 ProviderControl.StyleIconWidth = 15;
                 ProviderControl.MouseOutHideDelay = 500;
                 ProviderControl.MouseOverAction = NavigationProvider.HoverAction.Expand;
@@ -255,7 +255,7 @@ namespace DotNetNuke.UI.Containers
                 ProviderControl.CSSNodeHover = "ModuleTitle_MenuItemSel";
                 ProviderControl.CSSIndicateChildSub = "ModuleTitle_MenuArrow";
                 ProviderControl.CSSIndicateChildRoot = "ModuleTitle_RootMenuArrow";
-                
+
                 ProviderControl.PathImage = Globals.ApplicationPath + "/Images/";
                 ProviderControl.PathSystemImage = Globals.ApplicationPath + "/Images/";
                 ProviderControl.IndicateChildImageSub = "action_right.gif";
@@ -268,10 +268,10 @@ namespace DotNetNuke.UI.Containers
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
-		
-		#endregion
 
-		#region "Protected Methods"
+        #endregion
+
+        #region "Protected Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -338,9 +338,9 @@ namespace DotNetNuke.UI.Containers
             BindMenu();
         }
 
-		#endregion
+        #endregion
 
-		#region "Event Handlers"
+        #region "Event Handlers"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -381,7 +381,7 @@ namespace DotNetNuke.UI.Containers
             ProviderControl.ClearNodes(); //since we always bind we need to clear the nodes for providers that maintain their state
             BindMenu(Navigation.GetActionNodes(objAction, args.Node, this, ExpandDepth));
         }
-		
-		#endregion
+
+        #endregion
     }
 }

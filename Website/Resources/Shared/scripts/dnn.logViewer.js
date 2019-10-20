@@ -7,7 +7,7 @@
     $(window).on('beforeunload', function () {
         windowUnloaded = true;
     });
-    
+
     dnn.logViewer.init = function () {
         if (windowUnloaded) {
             return;

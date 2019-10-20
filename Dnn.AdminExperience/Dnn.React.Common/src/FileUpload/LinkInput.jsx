@@ -10,7 +10,7 @@ const KEY = {
 export default class LinkInput extends Component {
     constructor(props) {
         super(props);
-        const url = this.props.linkPath; 
+        const url = this.props.linkPath;
         this.state = {url};
         this.onKeyDown = this.onKeyDown.bind(this);
     }
@@ -59,10 +59,10 @@ export default class LinkInput extends Component {
         return <div className="file-upload-container">
             <h4>{this.props.linkInputTitleText}</h4>
             <div className="textarea-container">
-                <textarea 
-                    value={this.state.url} 
-                    onChange={this.onChange.bind(this) } 
-                    placeholder={this.props.linkInputPlaceholderText} 
+                <textarea
+                    value={this.state.url}
+                    onChange={this.onChange.bind(this) }
+                    placeholder={this.props.linkInputPlaceholderText}
                     aria-label="Link" />
                 <span>{this.renderActions()}</span>
             </div>

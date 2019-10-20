@@ -19,4 +19,3 @@ function add(first, second) {
     //return first + second; -- deliberate mistake
     return first + second;
 }
-

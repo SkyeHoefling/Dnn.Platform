@@ -61,7 +61,7 @@ class ProviderRow extends Component {
 ProviderRow.propTypes = {
     providerId: PropTypes.number,
     name: PropTypes.string,
-    enabled: PropTypes.bool,    
+    enabled: PropTypes.bool,
     OpenCollapse: PropTypes.func,
     Collapse: PropTypes.func,
     id: PropTypes.string,

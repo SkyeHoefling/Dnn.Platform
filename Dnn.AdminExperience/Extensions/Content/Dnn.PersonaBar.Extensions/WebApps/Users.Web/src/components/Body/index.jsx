@@ -98,13 +98,13 @@ class Body extends Component {
             <GridCell>
                 <PersonaBarPageHeader title={Localization.get("nav_Users") }>
                     {
-                        this.canAddUser() &&  
+                        this.canAddUser() &&
                     <Button type="primary" size="large" onClick={this.toggleCreateBox.bind(this) } title={Localization.get("btnCreateUser")}>
                         {Localization.get("btnCreateUser") }
                     </Button>
                     }
                     {
-                        appSettings.applicationSettings.settings.isAdmin &&  
+                        appSettings.applicationSettings.settings.isAdmin &&
                     <Button type="secondary" size="large" onClick={() => {this.onRemoveDeletedUsers()}} title={Localization.get("RemoveDeleted.Btn")}>
                         {Localization.get("RemoveDeleted.Btn") }
                     </Button>
@@ -114,8 +114,8 @@ class Body extends Component {
                     <UserTable ref={(node) => this.userTable = node} appSettings={appSettings} filter={state.searchParameters.filter}/>
                     {
                         <div className="users-paging">
-                            <Pager pageSizeDropDownWithoutBorder={true} 
-                                showSummary={true} 
+                            <Pager pageSizeDropDownWithoutBorder={true}
+                                showSummary={true}
                                 showPageInfo={false}
                                 pageSizeOptionText={Localization.get("usersPageSizeOptionText")}
                                 summaryText={Localization.get("usersSummaryText")}

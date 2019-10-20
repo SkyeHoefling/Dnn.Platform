@@ -46,15 +46,15 @@ clock t =
 hand clr len time =
   let angle = degrees (90 - 6 * inSeconds time)
   in
-      segment (0,0) (fromPolar (len,angle))
+    segment (0,0) (fromPolar (len,angle))
         |> traced (solid clr)
 </textarea></div>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         mode: "text/x-elm"
-      });
+    });
     </script>
 
     <p><strong>MIME types defined:</strong> <code>text/x-elm</code>.</p>

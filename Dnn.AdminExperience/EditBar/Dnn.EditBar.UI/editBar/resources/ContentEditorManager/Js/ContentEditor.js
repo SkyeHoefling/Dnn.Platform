@@ -33,153 +33,153 @@ dnn.ContentEditorManager = $.extend({}, dnn.ContentEditorManager, {
 });
 
 (function ($) {
-	//update jquery to add custom logic
-	var originaljQueryReady = $.fn.ready;
-	var readyFunctionsInAjaxMode;
+    //update jquery to add custom logic
+    var originaljQueryReady = $.fn.ready;
+    var readyFunctionsInAjaxMode;
 
-	var runReadyFunctionsInAjaxMode = function() {
-		setTimeout(function () {
-			var $this = $(document);
-			for (var i = 0; i < readyFunctionsInAjaxMode.length; i++) {
-			    (function(readyFunction) {
-			        originaljQueryReady.call($this, function () {
-			            try {
-			                readyFunction.call($this);
-			            } catch (ex) {
-			                console.log('function execute failed: "' + ex.message + '" on: ' + readyFunction);
-			            };
-			        });
-			    })(readyFunctionsInAjaxMode[i]);
-			}
+    var runReadyFunctionsInAjaxMode = function() {
+        setTimeout(function () {
+            var $this = $(document);
+            for (var i = 0; i < readyFunctionsInAjaxMode.length; i++) {
+                (function(readyFunction) {
+                    originaljQueryReady.call($this, function () {
+                        try {
+                            readyFunction.call($this);
+                        } catch (ex) {
+                            console.log('function execute failed: "' + ex.message + '" on: ' + readyFunction);
+                        };
+                    });
+                })(readyFunctionsInAjaxMode[i]);
+            }
 
-			readyFunctionsInAjaxMode = undefined;
-		}, 100);
-	}
-	$.fn.ready = function(fn) {
-		var $this = this;
-		if (typeof window.dnnLoadScriptsInAjaxMode === "undefined") {
-			originaljQueryReady.call($this, fn);
-		} else {
-			if (typeof readyFunctionsInAjaxMode == "undefined") {
-				readyFunctionsInAjaxMode = [];
-				if (window.dnnLoadScriptsInAjaxMode.length == 0) {
-					runReadyFunctionsInAjaxMode();
-				} else {
-					$(window).one('dnnScriptLoadComplete', function() {
-						runReadyFunctionsInAjaxMode();
-					});
-				}
-				
-			}
+            readyFunctionsInAjaxMode = undefined;
+        }, 100);
+    }
+    $.fn.ready = function(fn) {
+        var $this = this;
+        if (typeof window.dnnLoadScriptsInAjaxMode === "undefined") {
+            originaljQueryReady.call($this, fn);
+        } else {
+            if (typeof readyFunctionsInAjaxMode == "undefined") {
+                readyFunctionsInAjaxMode = [];
+                if (window.dnnLoadScriptsInAjaxMode.length == 0) {
+                    runReadyFunctionsInAjaxMode();
+                } else {
+                    $(window).one('dnnScriptLoadComplete', function() {
+                        runReadyFunctionsInAjaxMode();
+                    });
+                }
 
-			readyFunctionsInAjaxMode.push(fn);
-		}
-	};
+            }
+
+            readyFunctionsInAjaxMode.push(fn);
+        }
+    };
 
     dnn.ContentEditorManager.triggerChangeOnPageContentEvent = function () {
         $(document).trigger("changeOnPageContent");
     };
 
-	dnn.ContentEditorManager.catchSortEvents = function (callback) {
-    	var $allPanes = $('.dnnSortable');
-    	var allPanesCount = $allPanes.length;
-    	var catchedPanes = 0;
+    dnn.ContentEditorManager.catchSortEvents = function (callback) {
+        var $allPanes = $('.dnnSortable');
+        var allPanesCount = $allPanes.length;
+        var catchedPanes = 0;
 
         $allPanes.each(function () {
-        	var instance = this;
-	        var catchSortEvents = function() {
-		        if (!$(instance).data('ui-sortable')) {
-		        	setTimeout(catchSortEvents, 100);
-			        return;
-		        }
+            var instance = this;
+            var catchSortEvents = function() {
+                if (!$(instance).data('ui-sortable')) {
+                    setTimeout(catchSortEvents, 100);
+                    return;
+                }
 
-		        catchedPanes++;
+                catchedPanes++;
 
-		        $(instance).sortable('option', 'helper', function(event, element) {
-			        var helper = element.clone();
-			        helper.addClass('floating forDrag').removeClass('CatchDragState');
+                $(instance).sortable('option', 'helper', function(event, element) {
+                    var helper = element.clone();
+                    helper.addClass('floating forDrag').removeClass('CatchDragState');
 
-			        var $dragHint = helper.find('> div.dnnDragHint');
-			        var $dragContent = $('<div />');
-			        $dragHint.append($dragContent);
+                    var $dragHint = helper.find('> div.dnnDragHint');
+                    var $dragContent = $('<div />');
+                    $dragHint.append($dragContent);
 
-			        var title = helper.find('span[id$="titleLabel"]:eq(0)').html();
-			        $('<span class="title" />').appendTo($dragContent).html(title);
+                    var title = helper.find('span[id$="titleLabel"]:eq(0)').html();
+                    $('<span class="title" />').appendTo($dragContent).html(title);
 
-		            var $body = $(document.body);
-		            var positionCss = $body.css('position');
-		            var marginLeft = parseInt($body.css('margin-left'));
-			        if (positionCss === "relative" && marginLeft) {
-			            helper.css('margin-left', (0 - marginLeft) + "px");
-			        }
+                    var $body = $(document.body);
+                    var positionCss = $body.css('position');
+                    var marginLeft = parseInt($body.css('margin-left'));
+                    if (positionCss === "relative" && marginLeft) {
+                        helper.css('margin-left', (0 - marginLeft) + "px");
+                    }
 
-			        $body.append(helper);
-			        return helper;
-		        });
-		        $(instance).sortable('option', 'cursorAt', { left: 0, top: 0 });
+                    $body.append(helper);
+                    return helper;
+                });
+                $(instance).sortable('option', 'cursorAt', { left: 0, top: 0 });
 
-		        //catch stop event
-		        if ($(instance).sortable('option', 'start') === dnn.ContentEditorManager.sortStart) {
-					if (catchedPanes === allPanesCount && typeof callback == "function") {
-						callback();
-					}
+                //catch stop event
+                if ($(instance).sortable('option', 'start') === dnn.ContentEditorManager.sortStart) {
+                    if (catchedPanes === allPanesCount && typeof callback == "function") {
+                        callback();
+                    }
 
-			        return;
-		        }
+                    return;
+                }
 
-		        $(instance).data('sortStartEvent', $(instance).sortable('option', 'start'));
-		        $(instance).sortable('option', 'start', dnn.ContentEditorManager.sortStart);
+                $(instance).data('sortStartEvent', $(instance).sortable('option', 'start'));
+                $(instance).sortable('option', 'start', dnn.ContentEditorManager.sortStart);
 
-		        if (!$(instance).data('eventCatched')) {
-			        $(instance).on('sortbeforestop', function(event, ui) {
-				        //catch stop event
-				        var $newPane = ui.item.parent();
-				        if ($newPane.sortable('option', 'stop') == dnn.ContentEditorManager.sortStop) {
-					        return;
-				        }
+                if (!$(instance).data('eventCatched')) {
+                    $(instance).on('sortbeforestop', function(event, ui) {
+                        //catch stop event
+                        var $newPane = ui.item.parent();
+                        if ($newPane.sortable('option', 'stop') == dnn.ContentEditorManager.sortStop) {
+                            return;
+                        }
 
-				        $newPane.data('sortStopEvent', $newPane.sortable('option', 'stop'));
-				        $newPane.sortable('option', 'stop', dnn.ContentEditorManager.sortStop);
+                        $newPane.data('sortStopEvent', $newPane.sortable('option', 'stop'));
+                        $newPane.sortable('option', 'stop', dnn.ContentEditorManager.sortStop);
 
-				        //catch stop event on original pane
-				        var $oldPane = $(event.target);
-				        if ($oldPane.sortable('option', 'stop') == dnn.ContentEditorManager.sortStop) {
-					        return;
-				        }
+                        //catch stop event on original pane
+                        var $oldPane = $(event.target);
+                        if ($oldPane.sortable('option', 'stop') == dnn.ContentEditorManager.sortStop) {
+                            return;
+                        }
 
-				        $oldPane.data('sortStopEvent', $oldPane.sortable('option', 'stop'));
-				        $oldPane.sortable('option', 'stop', dnn.ContentEditorManager.sortStop);
-			        });
+                        $oldPane.data('sortStopEvent', $oldPane.sortable('option', 'stop'));
+                        $oldPane.sortable('option', 'stop', dnn.ContentEditorManager.sortStop);
+                    });
 
-			        $(instance).find('div.dnnDragHint').on('mousedown', dnn.ContentEditorManager.dragHandlerCheck);
+                    $(instance).find('div.dnnDragHint').on('mousedown', dnn.ContentEditorManager.dragHandlerCheck);
 
-			        $(instance).data('eventCatched', true);
-		        }
+                    $(instance).data('eventCatched', true);
+                }
 
-				if (catchedPanes === allPanesCount && typeof callback == "function") {
-					callback();
-				}
-	        };
+                if (catchedPanes === allPanesCount && typeof callback == "function") {
+                    callback();
+                }
+            };
 
-	        catchSortEvents();
+            catchSortEvents();
         });
     };
 
     dnn.ContentEditorManager.refreshContent = function (pane) {
         setTimeout(function() {
-        	dnn.ContentEditorManager.catchSortEvents(function () {
-	            $('div.actionMenu').show();
+            dnn.ContentEditorManager.catchSortEvents(function () {
+                $('div.actionMenu').show();
 
-				//try to catch new add module and trigger addmodule event.
-				var moduleDialog = dnn.ContentEditorManager.getModuleDialog();
-				var cookieNewModuleId = moduleDialog.getModuleId();
-				if (cookieNewModuleId) {
-					var newModule = pane.find('div.DnnModule-' + cookieNewModuleId);
-					if (newModule.length > 0) {
-						moduleDialog.setModuleId(-1);
-						newModule.trigger('editmodule');
-					}
-				}
+                //try to catch new add module and trigger addmodule event.
+                var moduleDialog = dnn.ContentEditorManager.getModuleDialog();
+                var cookieNewModuleId = moduleDialog.getModuleId();
+                if (cookieNewModuleId) {
+                    var newModule = pane.find('div.DnnModule-' + cookieNewModuleId);
+                    if (newModule.length > 0) {
+                        moduleDialog.setModuleId(-1);
+                        newModule.trigger('editmodule');
+                    }
+                }
             });
         }, 100);
     };
@@ -187,7 +187,7 @@ dnn.ContentEditorManager = $.extend({}, dnn.ContentEditorManager, {
     dnn.ContentEditorManager.sortStart = function(event, ui) {
         window['cem_dragging'] = true; //add a global status when dragging module/layout.
         $(document.body).addClass('dnnModuleSorting');
-	    $(this).data('sortStartEvent').call(this, event, ui);
+        $(this).data('sortStartEvent').call(this, event, ui);
     };
 
     dnn.ContentEditorManager.sortStop = function (event, ui) {
@@ -195,7 +195,7 @@ dnn.ContentEditorManager = $.extend({}, dnn.ContentEditorManager, {
         var instance = this;
         var $item = ui.item;
         $(document.body).removeClass('dnnModuleSorting');
-		$('div.DnnModule.CatchDragState').removeClass('dragging').trigger('dragend');
+        $('div.DnnModule.CatchDragState').removeClass('dragging').trigger('dragend');
         $item.removeClass('floating').css({left: '', top: '', position: '', zIndex: ''});
         $('.actionMenu').removeClass('floating');
 
@@ -239,8 +239,8 @@ dnn.ContentEditorManager = $.extend({}, dnn.ContentEditorManager, {
 
         var moduleDialog = dnn.ContentEditorManager.getModuleDialog();
 
-		var getPanesId = function() {
-			var oldPaneId = oldPane.attr('id');
+        var getPanesId = function() {
+            var oldPaneId = oldPane.attr('id');
             var newPaneId = newPane.attr('id');
 
             if (oldPane.data('parentpane')) {
@@ -252,45 +252,45 @@ dnn.ContentEditorManager = $.extend({}, dnn.ContentEditorManager, {
             }
 
             var panes = [oldPaneId];
-			if (newPaneId !== oldPaneId) {
-				panes.push(newPaneId);
-			}
+            if (newPaneId !== oldPaneId) {
+                panes.push(newPaneId);
+            }
 
-			return panes;
-		}
+            return panes;
+        }
 
-		var refreshPane = function () {
-			var panesId = getPanesId();
+        var refreshPane = function () {
+            var panesId = getPanesId();
             moduleDialog.refreshPane(panesId[0], '', function() {
                 dnn.ContentEditorManager.refreshContent(this);
 
                 if (panesId.length > 1) {
-	                setTimeout(function() {
-		                moduleDialog.refreshPane(panesId[1], '', function() {
-			                dnn.ContentEditorManager.refreshContent(this);
-		                });
-	                }, 100);
+                    setTimeout(function() {
+                        moduleDialog.refreshPane(panesId[1], '', function() {
+                            dnn.ContentEditorManager.refreshContent(this);
+                        });
+                    }, 100);
                 }
             });
-		}
+        }
 
-		var showLoading = function (paneId) {
-			var $pane = $('#' + paneId);
-			 var loading = $("<div class=\"dnnLoading\"></div>");
+        var showLoading = function (paneId) {
+            var $pane = $('#' + paneId);
+            var loading = $("<div class=\"dnnLoading\"></div>");
             loading.css({
                 width: $pane.outerWidth(),
                 height: $pane.outerHeight()
             });
             $pane.before(loading);
-		}
+        }
 
         var refreshContent = function() {
-        	moduleDialog._resetPending();
+            moduleDialog._resetPending();
 
             var panesId = getPanesId();
-			for (var i = 0; i < panesId.length; i++) {
-				showLoading(panesId[i]);
-			}
+            for (var i = 0; i < panesId.length; i++) {
+                showLoading(panesId[i]);
+            }
 
             $(instance).data('sortStopEvent').call(instance, event, ui, function () {
                 dnn.ContentEditorManager.triggerChangeOnPageContentEvent();
@@ -301,21 +301,21 @@ dnn.ContentEditorManager = $.extend({}, dnn.ContentEditorManager, {
         refreshContent();
     };
 
-	dnn.ContentEditorManager.dragHandlerCheck = function(e) {
+    dnn.ContentEditorManager.dragHandlerCheck = function(e) {
         if ($(this).hasClass('dnnDragDisabled')) {
             e.stopImmediatePropagation();
         }
 
-		if ($(this).parent().hasClass('CatchDragState')) {
-		    $('div.DnnModule.CatchDragState').find('div.pane').trigger('dragstart');
-	    }
+        if ($(this).parent().hasClass('CatchDragState')) {
+            $('div.DnnModule.CatchDragState').find('div.pane').trigger('dragstart');
+        }
     };
 
-	$(document).ready(function() {
+    $(document).ready(function() {
         dnn.ContentEditorManager.catchSortEvents();
     });
 
-	$(window).on('load', function handlerNewModuleFromCookie() {
+    $(window).on('load', function handlerNewModuleFromCookie() {
         //handle the floating module from cookie
         var handleNewModuleFromCookie = function handleNewModuleFromCookie() {
             var moduleDialog = dnn.ContentEditorManager.getModuleDialog();

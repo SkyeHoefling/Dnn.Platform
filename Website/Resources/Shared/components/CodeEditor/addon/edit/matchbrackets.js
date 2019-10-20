@@ -44,22 +44,22 @@
     var stack = [];
     var re = config && config.bracketRegex ? config.bracketRegex : /[(){}[\]]/;
     var lineEnd = dir > 0 ? Math.min(where.line + maxScanLines, cm.lastLine() + 1)
-                          : Math.max(cm.firstLine() - 1, where.line - maxScanLines);
+                        : Math.max(cm.firstLine() - 1, where.line - maxScanLines);
     for (var lineNo = where.line; lineNo != lineEnd; lineNo += dir) {
-      var line = cm.getLine(lineNo);
-      if (!line) continue;
-      var pos = dir > 0 ? 0 : line.length - 1, end = dir > 0 ? line.length : -1;
-      if (line.length > maxScanLen) continue;
-      if (lineNo == where.line) pos = where.ch - (dir < 0 ? 1 : 0);
-      for (; pos != end; pos += dir) {
+    var line = cm.getLine(lineNo);
+    if (!line) continue;
+    var pos = dir > 0 ? 0 : line.length - 1, end = dir > 0 ? line.length : -1;
+    if (line.length > maxScanLen) continue;
+    if (lineNo == where.line) pos = where.ch - (dir < 0 ? 1 : 0);
+    for (; pos != end; pos += dir) {
         var ch = line.charAt(pos);
         if (re.test(ch) && (style === undefined || cm.getTokenTypeAt(Pos(lineNo, pos + 1)) == style)) {
-          var match = matching[ch];
-          if ((match.charAt(1) == ">") == (dir > 0)) stack.push(ch);
-          else if (!stack.length) return {pos: Pos(lineNo, pos), ch: ch};
-          else stack.pop();
+        var match = matching[ch];
+        if ((match.charAt(1) == ">") == (dir > 0)) stack.push(ch);
+        else if (!stack.length) return {pos: Pos(lineNo, pos), ch: ch};
+        else stack.pop();
         }
-      }
+    }
     }
     return lineNo - dir == (dir > 0 ? cm.lastLine() : cm.firstLine()) ? false : null;
   }
@@ -69,44 +69,44 @@
     var maxHighlightLen = cm.state.matchBrackets.maxHighlightLineLength || 1000;
     var marks = [], ranges = cm.listSelections();
     for (var i = 0; i < ranges.length; i++) {
-      var match = ranges[i].empty() && findMatchingBracket(cm, ranges[i].head, false, config);
-      if (match && cm.getLine(match.from.line).length <= maxHighlightLen) {
+    var match = ranges[i].empty() && findMatchingBracket(cm, ranges[i].head, false, config);
+    if (match && cm.getLine(match.from.line).length <= maxHighlightLen) {
         var style = match.match ? "CodeMirror-matchingbracket" : "CodeMirror-nonmatchingbracket";
         marks.push(cm.markText(match.from, Pos(match.from.line, match.from.ch + 1), {className: style}));
         if (match.to && cm.getLine(match.to.line).length <= maxHighlightLen)
-          marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
-      }
+        marks.push(cm.markText(match.to, Pos(match.to.line, match.to.ch + 1), {className: style}));
+    }
     }
 
     if (marks.length) {
-      // Kludge to work around the IE bug from issue #1193, where text
-      // input stops going to the textare whever this fires.
-      if (ie_lt8 && cm.state.focused) cm.focus();
+    // Kludge to work around the IE bug from issue #1193, where text
+    // input stops going to the textare whever this fires.
+    if (ie_lt8 && cm.state.focused) cm.focus();
 
-      var clear = function() {
+    var clear = function() {
         cm.operation(function() {
-          for (var i = 0; i < marks.length; i++) marks[i].clear();
+        for (var i = 0; i < marks.length; i++) marks[i].clear();
         });
-      };
-      if (autoclear) setTimeout(clear, 800);
-      else return clear;
+    };
+    if (autoclear) setTimeout(clear, 800);
+    else return clear;
     }
   }
 
   var currentlyHighlighted = null;
   function doMatchBrackets(cm) {
     cm.operation(function() {
-      if (currentlyHighlighted) {currentlyHighlighted(); currentlyHighlighted = null;}
-      currentlyHighlighted = matchBrackets(cm, false, cm.state.matchBrackets);
+    if (currentlyHighlighted) {currentlyHighlighted(); currentlyHighlighted = null;}
+    currentlyHighlighted = matchBrackets(cm, false, cm.state.matchBrackets);
     });
   }
 
   CodeMirror.defineOption("matchBrackets", false, function(cm, val, old) {
     if (old && old != CodeMirror.Init)
-      cm.off("cursorActivity", doMatchBrackets);
+    cm.off("cursorActivity", doMatchBrackets);
     if (val) {
-      cm.state.matchBrackets = typeof val == "object" ? val : {};
-      cm.on("cursorActivity", doMatchBrackets);
+    cm.state.matchBrackets = typeof val == "object" ? val : {};
+    cm.on("cursorActivity", doMatchBrackets);
     }
   });
 

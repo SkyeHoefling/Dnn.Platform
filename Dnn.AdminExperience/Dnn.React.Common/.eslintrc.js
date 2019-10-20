@@ -14,11 +14,11 @@ module.exports = {
         },
         "react": {
             "createClass": "createReactClass",
-            "pragma": "React",  
+            "pragma": "React",
             "version": "16.4.2",
             "flowVersion": "0.53"
-          },
-          "propWrapperFunctions": [ "forbidExtraProps" ]
+        },
+        "propWrapperFunctions": [ "forbidExtraProps" ]
     },
     "parser": "babel-eslint",
     "parserOptions": {
@@ -48,8 +48,8 @@ module.exports = {
         "no-var": "error",
         "quotes": ["warn", "double" ],
         "indent": ["warn", 4, {"SwitchCase": 1}],
-        "no-console": "warn",      
-        "keyword-spacing": "warn", 
+        "no-console": "warn",
+        "keyword-spacing": "warn",
         "eqeqeq": "warn",
         "space-before-function-paren": ["warn", { "anonymous": "always", "named": "never" }],
         "space-before-blocks": "warn",

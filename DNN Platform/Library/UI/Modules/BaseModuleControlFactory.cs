@@ -17,8 +17,8 @@ namespace DotNetNuke.UI.Modules
             moduleControl.ModuleContext.Configuration = moduleConfiguration;
 
             moduleControl.LocalResourceFile = moduleConfiguration.ModuleControl.ControlSrc.Replace(Path.GetFileName(moduleConfiguration.ModuleControl.ControlSrc), "") +
-                                       Localization.LocalResourceDirectory + "/" +
-                                       Path.GetFileName(moduleConfiguration.ModuleControl.ControlSrc);
+                                        Localization.LocalResourceDirectory + "/" +
+                                        Path.GetFileName(moduleConfiguration.ModuleControl.ControlSrc);
 
             return moduleControl;
         }

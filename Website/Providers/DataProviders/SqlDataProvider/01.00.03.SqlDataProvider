@@ -14,13 +14,13 @@ as
 if @PortalId is null
 begin
   select FileId,
-         PortalId,
-         FileName,
-         Extension,
-         Size,
-         Width,
-         Height,
-         ContentType
+        PortalId,
+        FileName,
+        Extension,
+        Size,
+        Width,
+        Height,
+        ContentType
   from   Files
   where  PortalId is null
   order by FileName
@@ -28,13 +28,13 @@ end
 else
 begin
   select FileId,
-         PortalId,
-         FileName,
-         Extension,
-         Size,
-         Width,
-         Height,
-         ContentType
+        PortalId,
+        FileName,
+        Extension,
+        Size,
+        Width,
+        Height,
+        ContentType
   from   Files
   where  PortalId = @PortalId
   order by FileName
@@ -47,5 +47,3 @@ GO
 /************************************************************/
 /*****              Upgrade Script 1.0.3                *****/
 /************************************************************/
-
-

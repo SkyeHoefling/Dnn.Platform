@@ -12,33 +12,33 @@
 <%@ Register TagPrefix="dnnweb" TagName="Label" Src="~/controls/LabelControl.ascx" %>
 
 <asp:Panel ID="ScopeWrapper" runat="server">
-    
+
     <div class="dnnModuleDigitalAssetsBackground" oncontextmenu="return false;">
-        
+
         <div class="dnnModuleDigitalAssetsLoading dnnModuleDigitalAssetsMainLoading"></div>
         <dnnext:EditPageTabExtensionControl runat="server" Module="DigitalAssets" Group="LeftPaneTabs" TabControlId="LeftPaneTabsControl" PanelControlId="LeftPaneContents"></dnnext:EditPageTabExtensionControl>
         <div id="dnnModuleDigitalAssetsLeftPane">
             <ul class="dnnAdminTabNav dnnModuleDigitalAssetsTabNav buttonGroup" runat="server" id="LeftPaneTabsControl">
                 <li>
-                    <asp:HyperLink href="#dnnModuleDigitalAssetsLeftPaneFilesTabContent" runat="server" resourcekey="LeftPaneFilesTab.Text"/>            
+                    <asp:HyperLink href="#dnnModuleDigitalAssetsLeftPaneFilesTabContent" runat="server" resourcekey="LeftPaneFilesTab.Text"/>
                 </li>
             </ul>
             <asp:Panel runat="server" ID="LeftPaneContents" CssClass="dnnModuleDigitalAssetsLeftPaneContents">
                 <div class="dnnModuleDigitalAssetsFilesView" id="dnnModuleDigitalAssetsLeftPaneFilesTabContent">
                     <div id="dnnModuleDigitalAssetsLeftPaneFilesTabContentScroll">
-                        <dnnweb:DnnTreeView ID="FolderTreeView" runat="server" CssClass="dnnModuledigitalAssetsTreeView" 
-                            OnClientNodeExpanding="dnnModule.digitalAssets.treeViewOnNodeExpanding" 
+                        <dnnweb:DnnTreeView ID="FolderTreeView" runat="server" CssClass="dnnModuledigitalAssetsTreeView"
+                            OnClientNodeExpanding="dnnModule.digitalAssets.treeViewOnNodeExpanding"
                             OnClientNodeCollapsing="dnnModule.digitalAssets.treeViewOnNodeCollapsing"
-                            OnClientNodeClicking="dnnModule.digitalAssets.treeViewOnNodeClicking" 
+                            OnClientNodeClicking="dnnModule.digitalAssets.treeViewOnNodeClicking"
                             OnClientNodeAnimationEnd="dnnModule.digitalAssets.treeViewRefreshScrollbars"
                             OnClientContextMenuItemClicking="dnnModule.digitalAssets.treeViewOnContextMenuItemClicking"
                             OnClientContextMenuShowing="dnnModule.digitalAssets.treeViewOnContextMenuShowing"
                             OnClientNodeEditing="dnnModule.digitalAssets.treeViewOnNodeEditing"
                             OnClientContextMenuShown="dnnModule.digitalAssets.treeViewOnContextMenuShown"
-                            OnClientLoad="dnnModule.digitalAssets.treeViewOnLoad">  
+                            OnClientLoad="dnnModule.digitalAssets.treeViewOnLoad">
                             <ContextMenus>
-                                <dnnweb:DnnTreeViewContextMenu ID="MainContextMenu" runat="server" CssClass="dnnModuleDigitalAssetsContextMenu" 
-                                    OnClientLoad="dnnModule.digitalAssets.treeViewContextMenuOnLoad" 
+                                <dnnweb:DnnTreeViewContextMenu ID="MainContextMenu" runat="server" CssClass="dnnModuleDigitalAssetsContextMenu"
+                                    OnClientLoad="dnnModule.digitalAssets.treeViewContextMenuOnLoad"
                                     OnClientHiding="dnnModule.digitalAssets.treeViewContextMenuOnHiding" >
                                     <CollapseAnimation Type="none"></CollapseAnimation>
                                 </dnnweb:DnnTreeViewContextMenu>
@@ -51,9 +51,9 @@
         </div>
 
         <div id="dnnModuleDigitalAssetsContentPane">
-                        
-            <asp:Panel runat="server" ID="SearchBoxPanel" />                
-            
+
+            <asp:Panel runat="server" ID="SearchBoxPanel" />
+
             <div id="dnnModuleDigitalAssetsBreadcrumb">
                 <ul></ul>
             </div>
@@ -62,21 +62,21 @@
                 <span class="title-actions"><%=Localization.GetString("ToolbarTitle.Actions.Text", LocalResourceFile)%></span>
                 <span class="title-currentFolder"></span>
             </div>
-            <div id="dnnModuleDigitalAssetsMainToolbar">                
-                <dnnext:ToolBarButtonExtensionControl Module="DigitalAssets" runat="server" ID="MainToolBar" Group="Main" IsHost="<%# IsHostPortal %>" />                
+            <div id="dnnModuleDigitalAssetsMainToolbar">
+                <dnnext:ToolBarButtonExtensionControl Module="DigitalAssets" runat="server" ID="MainToolBar" Group="Main" IsHost="<%# IsHostPortal %>" />
             </div>
             <div id="dnnModuleDigitalAssetsSelectionToolbar">
                 <span id="dnnModuleDigitalAssetsSelectionText"></span>
                 <dnnext:ToolBarButtonExtensionControl Module="DigitalAssets" runat="server" ID="SelectionToolBar" Group="Selection" IsHost="<%# IsHostPortal %>" />
             </div>
-            
-            <div id="dnnModuleDigitalAssetsListContainer" class="emptySpace"> 
-                
-                <div id="dnnModuleDigitalAssetsListViewContainer" style="display: none" class="emptySpace">                    
+
+            <div id="dnnModuleDigitalAssetsListContainer" class="emptySpace">
+
+                <div id="dnnModuleDigitalAssetsListViewContainer" style="display: none" class="emptySpace">
                     <div id="dnnModuleDigitalAssetsListViewToolbar">
                         <input type="checkbox" />
                         <span class="dnnModuleDigitalAssetsListViewToolbarTitle"><%=Localization.GetString("SelectAll", LocalResourceFile)%></span>
-                    </div>      
+                    </div>
                     <div id="dnnModuleDigitalAssetsListViewNoItems" style="display: none;" class="emptySpace">
                         <span class="dnnModuleDigitalAssetsNoItems emptySpace"></span>
                     </div>
@@ -88,7 +88,7 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <div id="dnnModuleDigitalAssetsListViewItem_#= index #" class="dnnModuleDigitalAssetsListViewItem" data-index="#= index #"
-                                        oncontextmenu="dnnModule.digitalAssets.listviewOnContextMenu(this, event);" 
+                                        oncontextmenu="dnnModule.digitalAssets.listviewOnContextMenu(this, event);"
                                         onclick="dnnModule.digitalAssets.listviewOnClick(this, event);">
                                         <input type="checkbox" class="dnnModuleDigitalAssetsListViewItemCheckBox" />
                                         <div class="dnnModuleDigitalAssetsThumbnail">
@@ -101,25 +101,25 @@
                             <ClientEvents OnListViewCreated="dnnModule.digitalAssets.listViewOnCreated" />
                         </ClientSettings>
                     </dnnweb:DnnListView>
-                </div>   
+                </div>
 
                 <dnnweb:DnnGrid runat="server" ID="Grid" AutoGenerateColumns="false" AllowRowSelect="True" AllowMultiRowSelection="True"
                     AllowPaging="True" AllowSorting="True" CssClass="dnnModuleDigitalAssetsGrid emptySpace" OnItemCreated="GridOnItemCreated">
                     <ClientSettings EnablePostBackOnRowClick="false" >
                         <Selecting AllowRowSelect="True" UseClientSelectColumnOnly="False" EnableDragToSelectRows="False" />
-                        <ClientEvents 
-                            OnGridCreated="dnnModule.digitalAssets.gridOnGridCreated" 
-                            OnCommand="dnnModule.digitalAssets.gridOnCommand" 
+                        <ClientEvents
+                            OnGridCreated="dnnModule.digitalAssets.gridOnGridCreated"
+                            OnCommand="dnnModule.digitalAssets.gridOnCommand"
                             OnRowContextMenu="dnnModule.digitalAssets.gridOnRowContextMenu"
-                            OnRowSelected="dnnModule.digitalAssets.gridOnRowSelected" 
+                            OnRowSelected="dnnModule.digitalAssets.gridOnRowSelected"
                             OnRowDeselected="dnnModule.digitalAssets.gridOnRowDeselected"
                             OnRowDataBound="dnnModule.digitalAssets.gridOnRowDataBound"
                             OnDataBound="dnnModule.digitalAssets.gridOnDataBound"
-                            OnColumnHidden="dnnModule.digitalAssets.gridOnColumnHidden" /> 
+                            OnColumnHidden="dnnModule.digitalAssets.gridOnColumnHidden" />
                     </ClientSettings>
                     <MasterTableView TableLayout="Fixed" AllowCustomSorting="True" AllowSorting="true" EditMode="InPlace" EnableColumnsViewState="false">
                         <Columns>
-                            <dnnweb:DnnGridClientSelectColumn HeaderStyle-Width="44px" UniqueName="Select" />                        
+                            <dnnweb:DnnGridClientSelectColumn HeaderStyle-Width="44px" UniqueName="Select" />
                             <dnnweb:DnnGridBoundColumn UniqueName="ItemName" SortExpression="ItemName" DataField="ItemName" HeaderText="Name"  HeaderStyle-Width="100%" />
                             <dnnweb:DnnGridBoundColumn UniqueName="LastModifiedOnDate" DataField="LastModifiedOnDate" HeaderText="Modified" HeaderStyle-Width="170px" ReadOnly="True" />
                             <dnnweb:DnnGridBoundColumn UniqueName="Size" DataField="Size" HeaderText="Size" Visible="True" ReadOnly="True" HeaderStyle-Width="80px" />
@@ -134,23 +134,23 @@
                         </NoRecordsTemplate>
                         <PagerStyle AlwaysVisible="true" PageButtonCount="6" CssClass="dnnModuleDigitalAssetsPagerStyle" Mode="NextPrevAndNumeric"/>
                     </MasterTableView>
-                </dnnweb:DnnGrid>            
-            
+                </dnnweb:DnnGrid>
+
             </div>
 
-            <dnnweb:DnnContextMenu ID="GridMenu" runat="server" CssClass="dnnModuleDigitalAssetsContextMenu" 
-                OnClientItemClicked="dnnModule.digitalAssets.contextMenuOnItemClicked" 
+            <dnnweb:DnnContextMenu ID="GridMenu" runat="server" CssClass="dnnModuleDigitalAssetsContextMenu"
+                OnClientItemClicked="dnnModule.digitalAssets.contextMenuOnItemClicked"
                 OnClientShown="dnnModule.digitalAssets.contextMenuOnShown"
                 OnClientLoad="dnnModule.digitalAssets.contextMenuOnLoad">
-            </dnnweb:DnnContextMenu>         
-            
-            <dnnweb:DnnContextMenu ID="EmptySpaceMenu" runat="server" CssClass="dnnModuleDigitalAssetsContextMenu" 
-                OnClientItemClicked="dnnModule.digitalAssets.emptySpaceMenuOnItemClicked" 
+            </dnnweb:DnnContextMenu>
+
+            <dnnweb:DnnContextMenu ID="EmptySpaceMenu" runat="server" CssClass="dnnModuleDigitalAssetsContextMenu"
+                OnClientItemClicked="dnnModule.digitalAssets.emptySpaceMenuOnItemClicked"
                 OnClientLoad="dnnModule.digitalAssets.emptySpaceMenuOnLoad">
-            </dnnweb:DnnContextMenu>   
-                
-        </div>  
-    
+            </dnnweb:DnnContextMenu>
+
+        </div>
+
     </div>
 
     <div id="dnnModuleDigitalAssetsCreateFolderModal" style="display: none;">
@@ -159,7 +159,7 @@
             <fieldset>
                 <div class="dnnFormItem">
                     <dnnweb:Label ID="ParentFolderLabel" runat="server" ResourceKey="ParentFolder" Suffix=":" HelpKey="ParentFolder.Help" ControlName="FolderNameTextBox" />
-                    <span id="dnnModuleDigitalAssetsCreateFolderModalParent" class="dnnModuleDigitalAssetsCreateFolderModalNoEditableField"></span>                
+                    <span id="dnnModuleDigitalAssetsCreateFolderModalParent" class="dnnModuleDigitalAssetsCreateFolderModalNoEditableField"></span>
                 </div>
                 <div class="dnnFormItem">
                     <dnnweb:Label ID="FolderNameLabel" runat="server" ResourceKey="FolderName" Suffix=":" HelpKey="FolderName.Help" ControlName="FolderNameTextBox" CssClass="dnnFormRequired" />
@@ -172,22 +172,22 @@
                     <dnnweb:DnnComboBox id="FolderTypeComboBox" DataTextField="Name" DataValueField="Id" runat="server" OnClientSelectedIndexChanged="dnnModule.digitalAssets.folderTypeComboBoxOnSelectedIndexChanged"></dnnweb:DnnComboBox>
                     <span id="dnnModuleDigitalAssetsFolderTypeNoEditableLabel" class="dnnModuleDigitalAssetsCreateFolderModalNoEditableField"></span>
                 </div>
-                <div class="dnnFormItem" id="dnnModuleDigitalAssetsCreateFolderMappedPathFieldRow">                    
+                <div class="dnnFormItem" id="dnnModuleDigitalAssetsCreateFolderMappedPathFieldRow">
                     <dnnweb:Label ID="MappedPathLabel" runat="server" ResourceKey="MappedPath" Suffix=":" HelpKey="MappedPath.Help" ControlName="MappedPathTextBox" />
-                    <asp:TextBox ID="MappedPathTextBox" runat="server" />                    
-                    <asp:RegularExpressionValidator Width="222" ID="MappedPathRegExValidator" ValidationGroup="CreateFolder" 
-                        CssClass="dnnFormMessage dnnFormError" EnableViewState="false" runat="server" Display="Dynamic" 
+                    <asp:TextBox ID="MappedPathTextBox" runat="server" />
+                    <asp:RegularExpressionValidator Width="222" ID="MappedPathRegExValidator" ValidationGroup="CreateFolder"
+                        CssClass="dnnFormMessage dnnFormError" EnableViewState="false" runat="server" Display="Dynamic"
                         ControlToValidate="MappedPathTextBox" ValidationExpression="^(?!\s*[\\/]).*$" resourcekey="MappedPathRegExValidator.ErrorMessage"/>
                 </div>
                 <div id="dnnModuleDigitalAssetsCreateFolderMessage" class="dnnFormMessage dnnFormError" style="display: none; margin-bottom: 7px; padding: 10px;"></div>
             </fieldset>
         </div>
     </div>
-    
+
     <div id="dnnModuleDigitalAssetsUploadFileModal" class="dnnModuleDigitalAssetsUploadFileScope" style="display: none; width: 100%;">
-        
+
         <div id="dnnModuleDigitalAssetsUploadFileMessage" class="dnnFormMessage dnnFormError" style="display: none;"></div>
-        
+
         <p id="dnnModuleDigitalAssetsUploadFileInfo">
             <span id="dnnModuleDigitalAssetsUploadFileMultiplesFileInfo"><%=Localization.GetString("UploadFiles.Info", LocalResourceFile) %></span>
             <span id="dnnModuleDigitalAssetsUploadFileDragDropInfo"><%=Localization.GetString("UploadFilesDragDrop.Info", LocalResourceFile) %></span>
@@ -202,7 +202,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="dnnModuleDigitalAssetsUploadFileFooter">
             <a id="dnnModuleDigitalAssetsUploadFileDialogClose" href="#" class="dnnSecondaryAction"><%=Localization.GetString("Close.Text", LocalResourceFile) %></a>
         </div>
@@ -225,7 +225,7 @@
                                 OnClientLoad="dnnModule.digitalAssets.destinationTreeViewOnLoad" />
         </div>
     </div>
-    
+
     <div id="dnnModuleDigitalAssetsGetUrlModal" style="display: none;">
         <br />
         <span><%=LocalizeString("GetUrlLabel") %></span>
@@ -262,14 +262,14 @@
             gridViewInactiveImageUrl: '<%= ResolveUrl(IconController.IconURL("ListView", "16x16", "Gray")) %>',
             listViewActiveImageUrl: '<%= ResolveUrl(IconController.IconURL("ThumbViewActive", "16x16", "Gray")) %>',
             listViewInactiveImageUrl: '<%= ResolveUrl(IconController.IconURL("ThumbView", "16x16", "Gray")) %>',
-            navigateUrl: '<%= Localization.GetSafeJSString(NavigateUrl)%>',            
+            navigateUrl: '<%= Localization.GetSafeJSString(NavigateUrl)%>',
             selectedTab: '<%= InitialTab %>',
             isHostMenu: <%= IsHostPortal ? "true" : "false" %>,
             isAuthenticated: <%= Request.IsAuthenticated ? "true" : "false" %>,
             maxFileUploadSize: <%= MaxUploadSize.ToString(CultureInfo.InvariantCulture) %>,
             maxFileUploadSizeHumanReadable: '<%= string.Format(new FileSizeFormatProvider(), "{0:fs}", MaxUploadSize) %>',
             defaultFolderTypeId: '<%= DefaultFolderTypeId %>',
-            pageSize: '<%= PageSize %>', 
+            pageSize: '<%= PageSize %>',
             view: '<%= ActiveView %>',
             userId: '<%= UserId %>',
             groupId: '<%= Request.Params["GroupId"] %>',
@@ -309,7 +309,7 @@
             noItemsDeletedTitle: '<%= Localization.GetSafeJSString(LocalizeString("NoItemsDeleted.Title")) %>',
             moveText: '<%= Localization.GetSafeJSString(LocalizeString("Move")) %>',
             moveTitle: '<%= Localization.GetSafeJSString(LocalizeString("Move.Title")) %>',
-            moveError: '<%= Localization.GetSafeJSString(LocalizeString("Move.Error")) %>',            
+            moveError: '<%= Localization.GetSafeJSString(LocalizeString("Move.Error")) %>',
             duplicateFilesExistText: '<%= Localization.GetSafeJSString(LocalizeString("DuplicateFilesExist.Text")) %>',
             duplicateCopySubtext: '<%= Localization.GetSafeJSString(LocalizeString("DuplicateCopy.Subtext")) %>',
             duplicateMoveSubtext: '<%= Localization.GetSafeJSString(LocalizeString("DuplicateMove.Subtext")) %>',
@@ -337,8 +337,8 @@
             invalidCharsErrorText: '<%= Localization.GetSafeJSString(InvalidCharactersErrorText) %>',
             getUrlTitle: '<%= Localization.GetSafeJSString(LocalizeString("GetUrl.Title")) %>',
             getUrlErrorTitle: '<%= Localization.GetSafeJSString(LocalizeString("GetUrlError.Title")) %>',
-            getUrlLabel: '<%= Localization.GetSafeJSString(LocalizeString("GetUrlLabel.Text")) %>',            
-            getFileUrlTitle: '<%= Localization.GetSafeJSString(LocalizeString("GetFileUrl.Title")) %>',     
+            getUrlLabel: '<%= Localization.GetSafeJSString(LocalizeString("GetUrlLabel.Text")) %>',
+            getFileUrlTitle: '<%= Localization.GetSafeJSString(LocalizeString("GetFileUrl.Title")) %>',
             searchBreadcrumb: '<%= Localization.GetSafeJSString(LocalizeString("SearchBreadcrumb.Text")) %>',
             moving: '<%= Localization.GetSafeJSString(LocalizeString("Moving.Text")) %>',
             selectAll: '<%= Localization.GetSafeJSString(LocalizeString("SelectAll.Text")) %>',
@@ -366,5 +366,5 @@
         },
         new dnnModule.DigitalAssetsController($.ServicesFramework(<%=ModuleId %>), {}, {userId: '<%= UserId %>'})
     );
-    
+
 </script>

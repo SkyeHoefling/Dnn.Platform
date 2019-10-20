@@ -40,6 +40,6 @@ export default class BackupGrid extends Component {
     }
 }
 
-BackupGrid.propTypes = {   
+BackupGrid.propTypes = {
     backups: PropTypes.array
 };

@@ -17,41 +17,41 @@
   var methods = ["get", "post", "put", "delete"];
   var encs = ["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"];
   var media = ["all", "screen", "print", "embossed", "braille", "handheld", "print", "projection", "screen", "tty", "tv", "speech",
-               "3d-glasses", "resolution [>][<][=] [X]", "device-aspect-ratio: X/Y", "orientation:portrait",
-               "orientation:landscape", "device-height: [X]", "device-width: [X]"];
+                "3d-glasses", "resolution [>][<][=] [X]", "device-aspect-ratio: X/Y", "orientation:portrait",
+                "orientation:landscape", "device-height: [X]", "device-width: [X]"];
   var s = { attrs: {} }; // Simple tag, reused for a whole lot of tags
 
   var data = {
     a: {
-      attrs: {
+    attrs: {
         href: null, ping: null, type: null,
         media: media,
         target: targets,
         hreflang: langs
-      }
+    }
     },
     abbr: s,
     acronym: s,
     address: s,
     applet: s,
     area: {
-      attrs: {
+    attrs: {
         alt: null, coords: null, href: null, target: null, ping: null,
         media: media, hreflang: langs, type: null,
         shape: ["default", "rect", "circle", "poly"]
-      }
+    }
     },
     article: s,
     aside: s,
     audio: {
-      attrs: {
+    attrs: {
         src: null, mediagroup: null,
         crossorigin: ["anonymous", "use-credentials"],
         preload: ["none", "metadata", "auto"],
         autoplay: ["", "autoplay"],
         loop: ["", "loop"],
         controls: ["", "controls"]
-      }
+    }
     },
     b: s,
     base: { attrs: { href: null, target: targets } },
@@ -63,7 +63,7 @@
     body: s,
     br: s,
     button: {
-      attrs: {
+    attrs: {
         form: null, formaction: null, name: null, value: null,
         autofocus: ["", "autofocus"],
         disabled: ["", "autofocus"],
@@ -72,7 +72,7 @@
         formnovalidate: ["", "novalidate"],
         formtarget: targets,
         type: ["submit", "reset", "button"]
-      }
+    }
     },
     canvas: { attrs: { width: null, height: null } },
     caption: s,
@@ -82,12 +82,12 @@
     col: { attrs: { span: null } },
     colgroup: { attrs: { span: null } },
     command: {
-      attrs: {
+    attrs: {
         type: ["command", "checkbox", "radio"],
         label: null, icon: null, radiogroup: null, command: null, title: null,
         disabled: ["", "disabled"],
         checked: ["", "checked"]
-      }
+    }
     },
     data: { attrs: { value: null } },
     datagrid: { attrs: { disabled: ["", "disabled"], multiple: ["", "multiple"] } },
@@ -109,7 +109,7 @@
     font: s,
     footer: s,
     form: {
-      attrs: {
+    attrs: {
         action: null, name: null,
         "accept-charset": charsets,
         autocomplete: ["on", "off"],
@@ -117,38 +117,38 @@
         method: methods,
         novalidate: ["", "novalidate"],
         target: targets
-      }
+    }
     },
     frame: s,
     frameset: s,
     h1: s, h2: s, h3: s, h4: s, h5: s, h6: s,
     head: {
-      attrs: {},
-      children: ["title", "base", "link", "style", "meta", "script", "noscript", "command"]
+    attrs: {},
+    children: ["title", "base", "link", "style", "meta", "script", "noscript", "command"]
     },
     header: s,
     hgroup: s,
     hr: s,
     html: {
-      attrs: { manifest: null },
-      children: ["head", "body"]
+    attrs: { manifest: null },
+    children: ["head", "body"]
     },
     i: s,
     iframe: {
-      attrs: {
+    attrs: {
         src: null, srcdoc: null, name: null, width: null, height: null,
         sandbox: ["allow-top-navigation", "allow-same-origin", "allow-forms", "allow-scripts"],
         seamless: ["", "seamless"]
-      }
+    }
     },
     img: {
-      attrs: {
+    attrs: {
         alt: null, src: null, ismap: null, usemap: null, width: null, height: null,
         crossorigin: ["anonymous", "use-credentials"]
-      }
+    }
     },
     input: {
-      attrs: {
+    attrs: {
         alt: null, dirname: null, form: null, formaction: null,
         height: null, list: null, max: null, maxlength: null, min: null,
         name: null, pattern: null, placeholder: null, size: null, src: null,
@@ -166,51 +166,51 @@
         readonly: ["", "readonly"],
         required: ["", "required"],
         type: ["hidden", "text", "search", "tel", "url", "email", "password", "datetime", "date", "month",
-               "week", "time", "datetime-local", "number", "range", "color", "checkbox", "radio",
-               "file", "submit", "image", "reset", "button"]
-      }
+                "week", "time", "datetime-local", "number", "range", "color", "checkbox", "radio",
+                "file", "submit", "image", "reset", "button"]
+    }
     },
     ins: { attrs: { cite: null, datetime: null } },
     kbd: s,
     keygen: {
-      attrs: {
+    attrs: {
         challenge: null, form: null, name: null,
         autofocus: ["", "autofocus"],
         disabled: ["", "disabled"],
         keytype: ["RSA"]
-      }
+    }
     },
     label: { attrs: { "for": null, form: null } },
     legend: s,
     li: { attrs: { value: null } },
     link: {
-      attrs: {
+    attrs: {
         href: null, type: null,
         hreflang: langs,
         media: media,
         sizes: ["all", "16x16", "16x16 32x32", "16x16 32x32 64x64"]
-      }
+    }
     },
     map: { attrs: { name: null } },
     mark: s,
     menu: { attrs: { label: null, type: ["list", "context", "toolbar"] } },
     meta: {
-      attrs: {
+    attrs: {
         content: null,
         charset: charsets,
         name: ["viewport", "application-name", "author", "description", "generator", "keywords"],
         "http-equiv": ["content-language", "content-type", "default-style", "refresh"]
-      }
+    }
     },
     meter: { attrs: { value: null, min: null, low: null, high: null, max: null, optimum: null } },
     nav: s,
     noframes: s,
     noscript: s,
     object: {
-      attrs: {
+    attrs: {
         data: null, type: null, name: null, usemap: null, form: null, width: null, height: null,
         typemustmatch: ["", "typemustmatch"]
-      }
+    }
     },
     ol: { attrs: { reversed: ["", "reversed"], start: null, type: ["1", "a", "A", "i", "I"] } },
     optgroup: { attrs: { disabled: ["", "disabled"], label: null } },
@@ -227,22 +227,22 @@
     s: s,
     samp: s,
     script: {
-      attrs: {
+    attrs: {
         type: ["text/javascript"],
         src: null,
         async: ["", "async"],
         defer: ["", "defer"],
         charset: charsets
-      }
+    }
     },
     section: s,
     select: {
-      attrs: {
+    attrs: {
         form: null, name: null, size: null,
         autofocus: ["", "autofocus"],
         disabled: ["", "disabled"],
         multiple: ["", "multiple"]
-      }
+    }
     },
     small: s,
     source: { attrs: { src: null, type: null, media: null } },
@@ -250,11 +250,11 @@
     strike: s,
     strong: s,
     style: {
-      attrs: {
+    attrs: {
         type: ["text/css"],
         media: media,
         scoped: null
-      }
+    }
     },
     sub: s,
     summary: s,
@@ -263,7 +263,7 @@
     tbody: s,
     td: { attrs: { colspan: null, rowspan: null, headers: null } },
     textarea: {
-      attrs: {
+    attrs: {
         dirname: null, form: null, maxlength: null, name: null, placeholder: null,
         rows: null, cols: null,
         autofocus: ["", "autofocus"],
@@ -271,7 +271,7 @@
         readonly: ["", "readonly"],
         required: ["", "required"],
         wrap: ["soft", "hard"]
-      }
+    }
     },
     tfoot: s,
     th: { attrs: { colspan: null, rowspan: null, headers: null, scope: ["row", "col", "rowgroup", "colgroup"] } },
@@ -280,18 +280,18 @@
     title: s,
     tr: s,
     track: {
-      attrs: {
+    attrs: {
         src: null, label: null, "default": null,
         kind: ["subtitles", "captions", "descriptions", "chapters", "metadata"],
         srclang: langs
-      }
+    }
     },
     tt: s,
     u: s,
     ul: s,
     "var": s,
     video: {
-      attrs: {
+    attrs: {
         src: null, poster: null, width: null, height: null,
         crossorigin: ["anonymous", "use-credentials"],
         preload: ["auto", "metadata", "none"],
@@ -299,7 +299,7 @@
         mediagroup: ["movie"],
         muted: ["", "muted"],
         controls: ["", "controls"]
-      }
+    }
     },
     wbr: s
   };
@@ -331,7 +331,7 @@
   };
   function populate(obj) {
     for (var attr in globalAttrs) if (globalAttrs.hasOwnProperty(attr))
-      obj.attrs[attr] = globalAttrs[attr];
+    obj.attrs[attr] = globalAttrs[attr];
   }
 
   populate(s);

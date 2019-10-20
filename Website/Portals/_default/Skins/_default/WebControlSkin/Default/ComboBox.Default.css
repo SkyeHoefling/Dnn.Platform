@@ -64,33 +64,33 @@ div.RadComboBox_Default .rcbArrowCell a {
     background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%) !important; /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)) !important; /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #fff 1%,#f0f2f1 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* IE10+ */
+    background: -o-linear-gradient(top,  #fff 1%,#f0f2f1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* IE10+ */
     background: linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* W3C */
     color: #999;
     text-decoration: none;
     margin: 0 !important;
 }
 .RadComboBox_Default td.rcbInputCellLeft {
-	border-right: none;
-	border-top-left-radius: 3px;
+    border-right: none;
+    border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     -webkit-border-top-left-radius: 3px;
     -webkit-border-bottom-left-radius: 3px;
 }
 .RadComboBox_Default td.rcbInputCellRight {
-	border-left: none;
-	border-top-right-radius: 3px;
+    border-left: none;
+    border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     -webkit-border-top-right-radius: 3px;
     -webkit-border-bottom-right-radius: 3px;
 }
 .RadComboBox_Default .rcbFocused td.rcbInputCellLeft, .RadComboBox_Default .rcbFocused td.rcbInputCellRight, .RadComboBox_Default .rcbFocused td.rcbArrowCellRight {
-	border-color:#65a9fd;
+    border-color:#65a9fd;
     box-shadow:0 0 2px #65a9fd;
 }
 .RadComboBox_Default td.rcbInputCellLeft input[readonly], .RadComboBox_Default td.rcbInputCellRight input[readonly] {
-	cursor: auto;
+    cursor: auto;
 }
 .dnnError td.rcbInputCellLeft, .dnnError td.rcbInputCellRight {
     border: 1px solid red !important;
@@ -112,23 +112,23 @@ div.RadComboBox_Default .rcbArrowCell a {
     background: -moz-linear-gradient(top, #fff 0%, #f0f2f1 100%) !important; /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f0f2f1)) !important; /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #fff 1%,#f0f2f1 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* IE10+ */
+    background: -o-linear-gradient(top,  #fff 1%,#f0f2f1 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* IE10+ */
     background: linear-gradient(top, #fff 0%,#f0f2f1 100%) !important; /* W3C */
     color: #333;
     text-decoration: none;
     vertical-align: middle !important;
 }
 .RadComboBox_Default td.rcbArrowCellRight {
-	border-left: none;
-	border-top-right-radius: 3px;
+    border-left: none;
+    border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     -webkit-border-top-right-radius: 3px;
     -webkit-border-bottom-right-radius: 3px;
 }
 .RadComboBox_Default td.rcbArrowCellLeft {
-	border-right: none;
-	border-top-left-radius: 3px;
+    border-right: none;
+    border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     -webkit-border-top-left-radius: 3px;
     -webkit-border-bottom-left-radius: 3px;
@@ -205,7 +205,7 @@ div.RadComboBoxDropDown_Default .rcbHeader {
 
 .RadComboBox_Default .rcbDisabled .rcbInputCell .rcbInput, .RadComboBoxDropDown_Default .rcbDisabled {
     color: #999;
-	padding: 8px;
+    padding: 8px;
 }
 
 .RadComboBoxDropDown_Default .rcbLoading {
@@ -255,7 +255,7 @@ div.RadComboBoxDropDown_Default .rcbHeader {
 .RadComboBoxDropDown_Default_rtl .jspScrollable .jspContainer .rcbList{ margin: 0 9px 0 -9px !important;}
 
 /* hierarchy combox */
-.dnnOptGroupItem, 
+.dnnOptGroupItem,
 .SkinListHeader{
     background: none !important;
     color: #000 !important;

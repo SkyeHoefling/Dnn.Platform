@@ -14,52 +14,52 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}UpdateLanguagePack]
-	@LanguagePackID			int,
-	@PackageID			    int,
-	@LanguageID			    int,
-	@DependentPackageID		int,
-	@LastModifiedByUserID	int
+    @LanguagePackID			int,
+    @PackageID			    int,
+    @LanguageID			    int,
+    @DependentPackageID		int,
+    @LastModifiedByUserID	int
 
 AS
-	UPDATE {databaseOwner}{objectQualifier}LanguagePacks
-		SET
-			PackageID = @PackageID,
-			LanguageID = @LanguageID,
-			DependentPackageID = @DependentPackageID,
-			[LastModifiedByUserID] = @LastModifiedByUserID,	
-			[LastModifiedOnDate] = GETDATE()
-	WHERE LanguagePackID = @LanguagePackID
+    UPDATE {databaseOwner}{objectQualifier}LanguagePacks
+        SET
+            PackageID = @PackageID,
+            LanguageID = @LanguageID,
+            DependentPackageID = @DependentPackageID,
+            [LastModifiedByUserID] = @LastModifiedByUserID,
+            [LastModifiedOnDate] = GETDATE()
+    WHERE LanguagePackID = @LanguagePackID
 
-	SELECT @LanguagePackID
+    SELECT @LanguagePackID
 GO
 
 /***** Fix bug 24221: add unique index on MetaData table. *****/
 DELETE FROM {databaseOwner}[{objectQualifier}MetaData] WHERE MetaDataID NOT IN (SELECT MIN(MetaDataID) FROM {databaseOwner}[{objectQualifier}MetaData] GROUP BY MetaDataName)
 GO
 IF EXISTS (SELECT * FROM sys.indexes WHERE name='IX_{objectQualifier}MetaData_MetaDataName')
-	DROP INDEX [IX_{objectQualifier}MetaData_MetaDataName] ON {databaseOwner}[{objectQualifier}MetaData]
+    DROP INDEX [IX_{objectQualifier}MetaData_MetaDataName] ON {databaseOwner}[{objectQualifier}MetaData]
 GO
-CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}MetaData_MetaDataName ON {databaseOwner}[{objectQualifier}MetaData](MetaDataName) 
+CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}MetaData_MetaDataName ON {databaseOwner}[{objectQualifier}MetaData](MetaDataName)
 GO
 
 
 /*Fix bug 24977  */
 
-UPDATE {databaseOwner}[{objectQualifier}ModuleControls] 
+UPDATE {databaseOwner}[{objectQualifier}ModuleControls]
 SET [ControlType] = 2 WHERE [ControlSrc] = N'DesktopModules/Admin/Extensions/UsageDetails.ascx'
 
 
 /***** DNN-25176 - Core allows duplicate ContentType. *****/
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name='IX_{objectQualifier}ContentTypes_ContentType')
-	CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}ContentTypes_ContentType ON {databaseOwner}[{objectQualifier}ContentTypes](ContentType) 
+    CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}ContentTypes_ContentType ON {databaseOwner}[{objectQualifier}ContentTypes](ContentType)
 GO
 
-IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}ContentTypes WHERE [ContentType] = 'DNNCorp_JournalProfile') 
-		 INSERT INTO  {databaseOwner}{objectQualifier}ContentTypes (ContentType) VALUES ('DNNCorp_JournalProfile')
+IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}ContentTypes WHERE [ContentType] = 'DNNCorp_JournalProfile')
+        INSERT INTO  {databaseOwner}{objectQualifier}ContentTypes (ContentType) VALUES ('DNNCorp_JournalProfile')
 GO
 
-IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}ContentTypes WHERE [ContentType] = 'DNNCorp_JournalGroup') 
-		 INSERT INTO  {databaseOwner}{objectQualifier}ContentTypes (ContentType) VALUES ('DNNCorp_JournalGroup')
+IF NOT EXISTS(SELECT * FROM {databaseOwner}{objectQualifier}ContentTypes WHERE [ContentType] = 'DNNCorp_JournalGroup')
+        INSERT INTO  {databaseOwner}{objectQualifier}ContentTypes (ContentType) VALUES ('DNNCorp_JournalGroup')
 GO
 
 
@@ -236,11 +236,11 @@ UPDATE {databaseOwner}{objectQualifier}ModuleControls SET HelpUrl = 'http://help
 
 GO
 
-IF NOT EXISTS(SELECT * FROM sys.default_constraints WHERE parent_object_id = (SELECT object_id FROM sys.objects WHERE name = '{objectQualifier}Tabs') 
-                     AND parent_column_id = (SELECT column_id FROM sys.columns WHERE object_id = (SELECT object_id FROM sys.objects WHERE name = '{objectQualifier}Tabs') AND name = 'Level'))
+IF NOT EXISTS(SELECT * FROM sys.default_constraints WHERE parent_object_id = (SELECT object_id FROM sys.objects WHERE name = '{objectQualifier}Tabs')
+                    AND parent_column_id = (SELECT column_id FROM sys.columns WHERE object_id = (SELECT object_id FROM sys.objects WHERE name = '{objectQualifier}Tabs') AND name = 'Level'))
 BEGIN
-	ALTER TABLE {databaseOwner}{objectQualifier}Tabs ADD CONSTRAINT
-		DF_{objectQualifier}Tabs_Level DEFAULT 0 FOR [Level]
+    ALTER TABLE {databaseOwner}{objectQualifier}Tabs ADD CONSTRAINT
+        DF_{objectQualifier}Tabs_Level DEFAULT 0 FOR [Level]
 END
 GO
 
@@ -253,44 +253,44 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateOnlineUser
 @UserID 	INT,
 @PortalID 	INT,
 @TabID 		INT,
-@LastActiveDate DATETIME 
+@LastActiveDate DATETIME
 AS
 BEGIN
-	IF EXISTS (SELECT UserID FROM {databaseOwner}{objectQualifier}Users WHERE UserID = @UserID)
-	BEGIN
-		IF EXISTS (SELECT UserID FROM {databaseOwner}{objectQualifier}UsersOnline WHERE UserID = @UserID and PortalID = @PortalID)
-			UPDATE 
-				{databaseOwner}{objectQualifier}UsersOnline
-			SET 
-				TabID = @TabID,
-				LastActiveDate = @LastActiveDate
-			WHERE
-				UserID = @UserID
-				and 
-				PortalID = @PortalID
-		ELSE
-			INSERT INTO
-				{databaseOwner}{objectQualifier}UsersOnline
-				(UserID, PortalID, TabID, CreationDate, LastActiveDate) 
-			VALUES
-				(@UserID, @PortalID, @TabID, GetDate(), @LastActiveDate)
-	END
+    IF EXISTS (SELECT UserID FROM {databaseOwner}{objectQualifier}Users WHERE UserID = @UserID)
+    BEGIN
+        IF EXISTS (SELECT UserID FROM {databaseOwner}{objectQualifier}UsersOnline WHERE UserID = @UserID and PortalID = @PortalID)
+            UPDATE
+                {databaseOwner}{objectQualifier}UsersOnline
+            SET
+                TabID = @TabID,
+                LastActiveDate = @LastActiveDate
+            WHERE
+                UserID = @UserID
+                and
+                PortalID = @PortalID
+        ELSE
+            INSERT INTO
+                {databaseOwner}{objectQualifier}UsersOnline
+                (UserID, PortalID, TabID, CreationDate, LastActiveDate)
+            VALUES
+                (@UserID, @PortalID, @TabID, GetDate(), @LastActiveDate)
+    END
 
 END
 GO
 
 /*****Journal Updates *****/
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}Journal' AND COLUMN_NAME='CommentsDisabled')
-	BEGIN
-		ALTER TABLE {databaseOwner}{objectQualifier}Journal
-			ADD CommentsDisabled bit NOT NULL CONSTRAINT DF_{objectQualifier}Journal_CommentsDisabled DEFAULT 0
-	END
+    BEGIN
+        ALTER TABLE {databaseOwner}{objectQualifier}Journal
+            ADD CommentsDisabled bit NOT NULL CONSTRAINT DF_{objectQualifier}Journal_CommentsDisabled DEFAULT 0
+    END
 GO
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME='{objectQualifier}Journal' AND COLUMN_NAME='CommentsHidden')
-	BEGIN
-		ALTER TABLE {databaseOwner}{objectQualifier}Journal
-			ADD CommentsHidden bit NOT NULL CONSTRAINT DF_{objectQualifier}Journal_CommentsHidden DEFAULT 0
-	END
+    BEGIN
+        ALTER TABLE {databaseOwner}{objectQualifier}Journal
+            ADD CommentsHidden bit NOT NULL CONSTRAINT DF_{objectQualifier}Journal_CommentsHidden DEFAULT 0
+    END
 GO
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}Journal_GetByKey]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
   DROP PROCEDURE {databaseOwner}{objectQualifier}Journal_GetByKey
@@ -320,231 +320,231 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
   DROP PROCEDURE {databaseOwner}{objectQualifier}Journal_Comments_ToggleHidden
 GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_GetByKey]
-	@PortalId int,
-	@ObjectKey nvarchar(255),
-	@IncludeAllItems int = 0,
-	@IsDeleted int = 0
-	AS
-	SELECT     j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
-				j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
-				"JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
-				"JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
-				"JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
-				 jt.Icon, jt.JournalType,
-				"Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
-				jd.JournalXML, ContentItemId, j.ItemData, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
-	FROM       	{databaseOwner}[{objectQualifier}Journal] AS j INNER JOIN
-				{databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
-	WHERE		((@IncludeAllItems = 0) AND (j.ObjectKey = @ObjectKey AND j.ObjectKey IS NOT NULL AND @ObjectKey <> '' AND j.IsDeleted = @IsDeleted)) 
-				OR 
-				((@IncludeAllItems = 1) AND (j.ObjectKey = @ObjectKey AND j.ObjectKey IS NOT NULL AND @ObjectKey <> ''))
+    @PortalId int,
+    @ObjectKey nvarchar(255),
+    @IncludeAllItems int = 0,
+    @IsDeleted int = 0
+    AS
+    SELECT     j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
+                j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
+                "JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
+                "JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
+                "JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
+                jt.Icon, jt.JournalType,
+                "Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
+                jd.JournalXML, ContentItemId, j.ItemData, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
+    FROM       	{databaseOwner}[{objectQualifier}Journal] AS j INNER JOIN
+                {databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
+    WHERE		((@IncludeAllItems = 0) AND (j.ObjectKey = @ObjectKey AND j.ObjectKey IS NOT NULL AND @ObjectKey <> '' AND j.IsDeleted = @IsDeleted))
+                OR
+                ((@IncludeAllItems = 1) AND (j.ObjectKey = @ObjectKey AND j.ObjectKey IS NOT NULL AND @ObjectKey <> ''))
 GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_ListForSummary]
-	@PortalId int,
-	@ModuleId int,
-	@CurrentUserId int,
-	@RowIndex int,
-	@MaxRows int,
-	@IncludeAllItems int = 0,
-	@IsDeleted int = 0	
-	AS
-	IF @RowIndex = 0
-	BEGIN
-		SET @RowIndex = 1
-	END
-	DECLARE @EndRow int
-	SET @EndRow = @RowIndex + @MaxRows - 1;
-	DECLARE @j TABLE(id int IDENTITY, journalid int, datecreated datetime)
-	IF EXISTS(SELECT * from {databaseOwner}[{objectQualifier}Journal_TypeFilters] WHERE ModuleId = @ModuleId)
-	INSERT INTO @j 
-		SELECT j.journalid, jt.datecreated from (
-			SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
-				WHERE j.PortalId = @PortalId
-			) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
-			INNER JOIN {databaseOwner}[{objectQualifier}Journal_TypeFilters] as jf ON jf.JournalTypeId = jt.JournalTypeId AND jf.ModuleId = @ModuleId
-			ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
-	ELSE
-	INSERT INTO @j 
-		SELECT j.journalid, jt.datecreated from (
-			SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
-				WHERE j.PortalId = @PortalId
-			) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
-			ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
-	WITH journalItems  AS
-	(
-		SELECT	j.JournalId,
-				ROW_NUMBER() OVER (ORDER BY j.JournalId DESC) AS RowNumber
-		FROM	{databaseOwner}[{objectQualifier}Journal] as j INNER JOIN @j as jtmp ON jtmp.JournalId = j.JournalId
-		WHERE j.PortalId = @PortalId
-	)
-	SELECT	j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
-				j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
-				"JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
-				"JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
-				"JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
-				 jt.Icon, jt.JournalType,
-				"Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
-				jd.JournalXML, j.ContentItemId, j.ItemData, RowNumber, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
-	FROM	journalItems as ji INNER JOIN 
-		{databaseOwner}[{objectQualifier}Journal] as j ON j.JournalId = ji.JournalId INNER JOIN
-	{databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
-	WHERE	((@IncludeAllItems = 0) AND (RowNumber BETWEEN @RowIndex AND @EndRow AND j.IsDeleted = @IsDeleted)) 
-			OR 
-			((@IncludeAllItems = 1) AND (RowNumber BETWEEN @RowIndex AND @EndRow ))
-	ORDER BY RowNumber ASC;
+    @PortalId int,
+    @ModuleId int,
+    @CurrentUserId int,
+    @RowIndex int,
+    @MaxRows int,
+    @IncludeAllItems int = 0,
+    @IsDeleted int = 0
+    AS
+    IF @RowIndex = 0
+    BEGIN
+        SET @RowIndex = 1
+    END
+    DECLARE @EndRow int
+    SET @EndRow = @RowIndex + @MaxRows - 1;
+    DECLARE @j TABLE(id int IDENTITY, journalid int, datecreated datetime)
+    IF EXISTS(SELECT * from {databaseOwner}[{objectQualifier}Journal_TypeFilters] WHERE ModuleId = @ModuleId)
+    INSERT INTO @j
+        SELECT j.journalid, jt.datecreated from (
+            SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
+                WHERE j.PortalId = @PortalId
+            ) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
+            INNER JOIN {databaseOwner}[{objectQualifier}Journal_TypeFilters] as jf ON jf.JournalTypeId = jt.JournalTypeId AND jf.ModuleId = @ModuleId
+            ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
+    ELSE
+    INSERT INTO @j
+        SELECT j.journalid, jt.datecreated from (
+            SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
+                WHERE j.PortalId = @PortalId
+            ) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
+            ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
+    WITH journalItems  AS
+    (
+        SELECT	j.JournalId,
+                ROW_NUMBER() OVER (ORDER BY j.JournalId DESC) AS RowNumber
+        FROM	{databaseOwner}[{objectQualifier}Journal] as j INNER JOIN @j as jtmp ON jtmp.JournalId = j.JournalId
+        WHERE j.PortalId = @PortalId
+    )
+    SELECT	j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
+                j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
+                "JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
+                "JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
+                "JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
+                jt.Icon, jt.JournalType,
+                "Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
+                jd.JournalXML, j.ContentItemId, j.ItemData, RowNumber, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
+    FROM	journalItems as ji INNER JOIN
+        {databaseOwner}[{objectQualifier}Journal] as j ON j.JournalId = ji.JournalId INNER JOIN
+    {databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
+    WHERE	((@IncludeAllItems = 0) AND (RowNumber BETWEEN @RowIndex AND @EndRow AND j.IsDeleted = @IsDeleted))
+            OR
+            ((@IncludeAllItems = 1) AND (RowNumber BETWEEN @RowIndex AND @EndRow ))
+    ORDER BY RowNumber ASC;
 GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_ListForProfile]
-	@PortalId int,
-	@ModuleId int,
-	@CurrentUserId int,
-	@ProfileId int,
-	@RowIndex int,
-	@MaxRows int,
-	@IncludeAllItems int = 0,
-	@IsDeleted int = 0
-	AS
-	DECLARE @EndRow int
-	SET @EndRow = @RowIndex + @MaxRows;
-	DECLARE @j TABLE(id int IDENTITY, journalid int, datecreated datetime)
-	IF EXISTS(SELECT * from {databaseOwner}[{objectQualifier}Journal_TypeFilters] WHERE ModuleId = @ModuleId)
-	INSERT INTO @j 
-		SELECT j.journalid, jt.datecreated from (
-			SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
-				WHERE j.ProfileId = @ProfileId AND j.PortalId = @PortalId
-			) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
-			INNER JOIN {databaseOwner}[{objectQualifier}Journal_TypeFilters] as jf ON jf.JournalTypeId = jt.JournalTypeId AND jf.ModuleId = @ModuleId
-			ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
-	ELSE
-	INSERT INTO @j 
-		SELECT j.journalid, jt.datecreated from (
-			SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
-				WHERE j.ProfileId = @ProfileId AND j.PortalId = @PortalId
-			) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
-			ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
-	WITH journalItems  AS
-	(
-		SELECT	j.JournalId,
-				ROW_NUMBER() OVER (ORDER BY j.JournalId DESC) AS RowNumber
-		FROM	{databaseOwner}[{objectQualifier}Journal] as j INNER JOIN @j as jtmp ON jtmp.JournalId = j.JournalId
-		WHERE j.PortalId = @PortalId AND j.ProfileId = @ProfileId
-	)
-	SELECT	j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
-				j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
-				"JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
-				"JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
-				"JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
-				 jt.Icon, jt.JournalType,
-				"Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
-				jd.JournalXML, j.ContentItemId, j.ItemData, RowNumber, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
-	FROM	journalItems as ji INNER JOIN 
-		{databaseOwner}[{objectQualifier}Journal] as j ON j.JournalId = ji.JournalId INNER JOIN
-	{databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
-	WHERE	((@IncludeAllItems = 0) AND (RowNumber BETWEEN @RowIndex AND @EndRow AND j.IsDeleted = @IsDeleted)) 
-			OR 
-			((@IncludeAllItems = 1) AND (RowNumber BETWEEN @RowIndex AND @EndRow))	
-	ORDER BY RowNumber ASC;
+    @PortalId int,
+    @ModuleId int,
+    @CurrentUserId int,
+    @ProfileId int,
+    @RowIndex int,
+    @MaxRows int,
+    @IncludeAllItems int = 0,
+    @IsDeleted int = 0
+    AS
+    DECLARE @EndRow int
+    SET @EndRow = @RowIndex + @MaxRows;
+    DECLARE @j TABLE(id int IDENTITY, journalid int, datecreated datetime)
+    IF EXISTS(SELECT * from {databaseOwner}[{objectQualifier}Journal_TypeFilters] WHERE ModuleId = @ModuleId)
+    INSERT INTO @j
+        SELECT j.journalid, jt.datecreated from (
+            SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
+                WHERE j.ProfileId = @ProfileId AND j.PortalId = @PortalId
+            ) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
+            INNER JOIN {databaseOwner}[{objectQualifier}Journal_TypeFilters] as jf ON jf.JournalTypeId = jt.JournalTypeId AND jf.ModuleId = @ModuleId
+            ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
+    ELSE
+    INSERT INTO @j
+        SELECT j.journalid, jt.datecreated from (
+            SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t ON t.seckey = js.SecurityKey
+                WHERE j.ProfileId = @ProfileId AND j.PortalId = @PortalId
+            ) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId
+            ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
+    WITH journalItems  AS
+    (
+        SELECT	j.JournalId,
+                ROW_NUMBER() OVER (ORDER BY j.JournalId DESC) AS RowNumber
+        FROM	{databaseOwner}[{objectQualifier}Journal] as j INNER JOIN @j as jtmp ON jtmp.JournalId = j.JournalId
+        WHERE j.PortalId = @PortalId AND j.ProfileId = @ProfileId
+    )
+    SELECT	j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
+                j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
+                "JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
+                "JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
+                "JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
+                jt.Icon, jt.JournalType,
+                "Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
+                jd.JournalXML, j.ContentItemId, j.ItemData, RowNumber, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
+    FROM	journalItems as ji INNER JOIN
+        {databaseOwner}[{objectQualifier}Journal] as j ON j.JournalId = ji.JournalId INNER JOIN
+    {databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
+    WHERE	((@IncludeAllItems = 0) AND (RowNumber BETWEEN @RowIndex AND @EndRow AND j.IsDeleted = @IsDeleted))
+            OR
+            ((@IncludeAllItems = 1) AND (RowNumber BETWEEN @RowIndex AND @EndRow))
+    ORDER BY RowNumber ASC;
 GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_ListForGroup]
-	@PortalId int,
-	@ModuleId int,
-	@CurrentUserId int,
-	@GroupId int,
-	@RowIndex int,
-	@MaxRows int,
-	@IncludeAllItems int = 0,
-	@IsDeleted int = 0
-	AS
-	DECLARE @EndRow int
-	SET @EndRow = @RowIndex + @MaxRows;
-		DECLARE @j TABLE(id int IDENTITY, journalid int, datecreated datetime)
-	IF EXISTS(SELECT * from {databaseOwner}[{objectQualifier}Journal_TypeFilters] WHERE ModuleId = @ModuleId)
-	INSERT INTO @j 
-		SELECT j.journalid, jt.datecreated from (
-			SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
-					INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t 
-					ON t.seckey = js.SecurityKey AND (js.SecurityKey = 'R' + CAST(@GroupId as nvarchar(100)) OR js.SecurityKey = 'E')
-					WHERE j.PortalId = @PortalId
-			) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId AND jt.GroupId = @GroupId
-			INNER JOIN {databaseOwner}[{objectQualifier}Journal_TypeFilters] as jf ON jf.JournalTypeId = jt.JournalTypeId AND jf.ModuleId = @ModuleId
-			ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
-	ELSE
-	INSERT INTO @j 
-		SELECT j.journalid, jt.datecreated from (
-			SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
-				INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t 
-					ON t.seckey = js.SecurityKey AND (js.SecurityKey = 'R' + CAST(@GroupId as nvarchar(100)) OR js.SecurityKey = 'E')
-					WHERE j.PortalId = @PortalId
-			) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId AND jt.GroupId = @GroupId
-			ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
-	WITH journalItems  AS
-	(
-		SELECT	j.JournalId,
-				ROW_NUMBER() OVER (ORDER BY j.JournalId DESC) AS RowNumber
-		FROM	{databaseOwner}[{objectQualifier}Journal] as j INNER JOIN @j as jtmp ON jtmp.JournalId = j.JournalId
-		WHERE j.PortalId = @PortalId
-	)
-	SELECT	j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
-				j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
-				"JournalOwner" = '<entity><id>' + CAST(r.RoleId as nvarchar(150)) + '</id><name><![CDATA[' + r.RoleName + ']]></name></entity>',
-				"JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
-				"JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
-				 jt.Icon, jt.JournalType,
-				"Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
-				jd.JournalXML, j.ContentItemId, j.ItemData, RowNumber, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
-	FROM	journalItems as ji INNER JOIN 
-		{databaseOwner}[{objectQualifier}Journal] as j ON j.JournalId = ji.JournalId INNER JOIN
-		{databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId INNER JOIN
-		{databaseOwner}[{objectQualifier}Roles] as r ON j.GroupId = r.RoleId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
-	WHERE		((@IncludeAllItems = 0) AND (RowNumber BETWEEN @RowIndex AND @EndRow AND j.IsDeleted = @IsDeleted)) 
-				OR 
-				((@IncludeAllItems = 1) AND (RowNumber BETWEEN @RowIndex AND @EndRow))
-	ORDER BY RowNumber ASC;
+    @PortalId int,
+    @ModuleId int,
+    @CurrentUserId int,
+    @GroupId int,
+    @RowIndex int,
+    @MaxRows int,
+    @IncludeAllItems int = 0,
+    @IsDeleted int = 0
+    AS
+    DECLARE @EndRow int
+    SET @EndRow = @RowIndex + @MaxRows;
+        DECLARE @j TABLE(id int IDENTITY, journalid int, datecreated datetime)
+    IF EXISTS(SELECT * from {databaseOwner}[{objectQualifier}Journal_TypeFilters] WHERE ModuleId = @ModuleId)
+    INSERT INTO @j
+        SELECT j.journalid, jt.datecreated from (
+            SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
+                    INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t
+                    ON t.seckey = js.SecurityKey AND (js.SecurityKey = 'R' + CAST(@GroupId as nvarchar(100)) OR js.SecurityKey = 'E')
+                    WHERE j.PortalId = @PortalId
+            ) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId AND jt.GroupId = @GroupId
+            INNER JOIN {databaseOwner}[{objectQualifier}Journal_TypeFilters] as jf ON jf.JournalTypeId = jt.JournalTypeId AND jf.ModuleId = @ModuleId
+            ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
+    ELSE
+    INSERT INTO @j
+        SELECT j.journalid, jt.datecreated from (
+            SELECT DISTINCT js.JournalId from {databaseOwner}[{objectQualifier}Journal] as j
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_Security] as js ON js.JournalId = j.JournalId
+                INNER JOIN {databaseOwner}[{objectQualifier}Journal_User_Permissions](@PortalId,@CurrentUserId ,1) as t
+                    ON t.seckey = js.SecurityKey AND (js.SecurityKey = 'R' + CAST(@GroupId as nvarchar(100)) OR js.SecurityKey = 'E')
+                    WHERE j.PortalId = @PortalId
+            ) as j INNER JOIN {databaseOwner}[{objectQualifier}Journal] jt ON jt.JournalId = j.JournalId AND jt.PortalId = @PortalId AND jt.GroupId = @GroupId
+            ORDER BY jt.DateCreated DESC, jt.JournalId DESC;
+    WITH journalItems  AS
+    (
+        SELECT	j.JournalId,
+                ROW_NUMBER() OVER (ORDER BY j.JournalId DESC) AS RowNumber
+        FROM	{databaseOwner}[{objectQualifier}Journal] as j INNER JOIN @j as jtmp ON jtmp.JournalId = j.JournalId
+        WHERE j.PortalId = @PortalId
+    )
+    SELECT	j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
+                j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
+                "JournalOwner" = '<entity><id>' + CAST(r.RoleId as nvarchar(150)) + '</id><name><![CDATA[' + r.RoleName + ']]></name></entity>',
+                "JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
+                "JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
+                jt.Icon, jt.JournalType,
+                "Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
+                jd.JournalXML, j.ContentItemId, j.ItemData, RowNumber, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
+    FROM	journalItems as ji INNER JOIN
+        {databaseOwner}[{objectQualifier}Journal] as j ON j.JournalId = ji.JournalId INNER JOIN
+        {databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId INNER JOIN
+        {databaseOwner}[{objectQualifier}Roles] as r ON j.GroupId = r.RoleId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
+    WHERE		((@IncludeAllItems = 0) AND (RowNumber BETWEEN @RowIndex AND @EndRow AND j.IsDeleted = @IsDeleted))
+                OR
+                ((@IncludeAllItems = 1) AND (RowNumber BETWEEN @RowIndex AND @EndRow))
+    ORDER BY RowNumber ASC;
 GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_Get]
-	@PortalId int,
-	@CurrentUserId int,
-	@JournalId int,
-	@IncludeAllItems int = 0,
-	@IsDeleted int = 0
-	AS
-	SELECT     j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
-				j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
-				"JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
-				"JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
-				"JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
-				 jt.Icon, jt.JournalType,
-				"Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
-				jd.JournalXML, ContentItemId, j.ItemData, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
-	FROM       	{databaseOwner}[{objectQualifier}Journal] AS j INNER JOIN
-				{databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
-				{databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
-	WHERE		((@IncludeAllItems = 0) AND (j.JournalId = @JournalId AND j.IsDeleted = @IsDeleted)) 
-				OR 
-				((@IncludeAllItems = 1) AND (j.JournalId = @JournalId))
+    @PortalId int,
+    @CurrentUserId int,
+    @JournalId int,
+    @IncludeAllItems int = 0,
+    @IsDeleted int = 0
+    AS
+    SELECT     j.JournalId, j.JournalTypeId, j.Title, j.Summary, j.UserId, j.DateCreated, j.DateUpdated, j.PortalId,
+                j.ProfileId, j.GroupId, j.ObjectKey, j.AccessKey,
+                "JournalOwner" = '<entity><id>' + CAST(p.UserId as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name></entity>',
+                "JournalAuthor" = CASE WHEN ISNULL(a.UserId,-1) >0 THEN '<entity><id>' + CAST(a.UserId as nvarchar(150)) + '</id><name><![CDATA[' + a.DisplayName + ']]></name></entity>' ELSE '' END,
+                "JournalOwnerId" = ISNULL(j.ProfileId,j.UserId),
+                jt.Icon, jt.JournalType,
+                "Profile" = CASE WHEN j.ProfileId > 0 THEN '<entity><id>' + CAST(p.UserID as nvarchar(150)) + '</id><name><![CDATA[' + p.DisplayName + ']]></name><vanity></vanity></entity>' ELSE '' END,
+                jd.JournalXML, ContentItemId, j.ItemData, j.IsDeleted, j.CommentsDisabled, j.CommentsHidden
+    FROM       	{databaseOwner}[{objectQualifier}Journal] AS j INNER JOIN
+                {databaseOwner}[{objectQualifier}Journal_Types] as jt ON jt.JournalTypeId = j.JournalTypeId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Journal_Data] as jd on jd.JournalId = j.JournalId LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS p ON j.ProfileId = p.UserID LEFT OUTER JOIN
+                {databaseOwner}[{objectQualifier}Users] AS a ON j.UserId = a.UserID
+    WHERE		((@IncludeAllItems = 0) AND (j.JournalId = @JournalId AND j.IsDeleted = @IsDeleted))
+                OR
+                ((@IncludeAllItems = 1) AND (j.JournalId = @JournalId))
 GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_Save]
 @PortalId int,
@@ -564,21 +564,21 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_Save]
 @CommentsHidden bit
 AS
 INSERT INTO {databaseOwner}[{objectQualifier}Journal]
-	(JournalTypeId, UserId, DateCreated, DateUpdated, PortalId, ProfileId, GroupId,Title,Summary, ObjectKey, AccessKey, ItemData, CommentsHidden, CommentsDisabled)
-	VALUES
-	(@JournalTypeId, @UserId, GETUTCDATE(), GETUTCDATE(), @PortalId, @ProfileId, @GroupId, @Title, @Summary, @ObjectKey, @AccessKey, @ItemData, @CommentsHidden, @CommentsDisabled)
+    (JournalTypeId, UserId, DateCreated, DateUpdated, PortalId, ProfileId, GroupId,Title,Summary, ObjectKey, AccessKey, ItemData, CommentsHidden, CommentsDisabled)
+    VALUES
+    (@JournalTypeId, @UserId, GETUTCDATE(), GETUTCDATE(), @PortalId, @ProfileId, @GroupId, @Title, @Summary, @ObjectKey, @AccessKey, @ItemData, @CommentsHidden, @CommentsDisabled)
 SET @JournalId = SCOPE_IDENTITY()
 BEGIN
 INSERT INTO {databaseOwner}[{objectQualifier}Journal_Security]
-	(JournalId, SecurityKey) 
-	SELECT @JournalId, string from {databaseOwner}[{objectQualifier}Journal_SplitText](@SecuritySet,',')
+    (JournalId, SecurityKey)
+    SELECT @JournalId, string from {databaseOwner}[{objectQualifier}Journal_SplitText](@SecuritySet,',')
 END
 IF @JournalXML IS NOT NULL
 BEGIN
 INSERT INTO {databaseOwner}[{objectQualifier}Journal_Data]
-	(JournalId, JournalXML)
-	VALUES
-	(@JournalId, @JournalXML)
+    (JournalId, JournalXML)
+    VALUES
+    (@JournalId, @JournalXML)
 END
 SELECT @JournalId
 GO
@@ -600,27 +600,27 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_Update]
 @CommentsHidden bit
 AS
 UPDATE {databaseOwner}[{objectQualifier}Journal]
-	SET 
-		JournalTypeId = @JournalTypeId,
-		UserId = @UserId,
-		DateUpdated = GETUTCDATE(),
-		PortalId = @PortalId,
-		ProfileId = @ProfileId,
-		GroupId = @GroupId,
-		Title = @Title,
-		Summary = @Summary,
-		ObjectKey = @ObjectKey,
-		AccessKey = @AccessKey,
-		ItemData = @ItemData,
-		CommentsHidden = @CommentsHidden,
-		CommentsDisabled = @CommentsDisabled
-	WHERE JournalId = @JournalId
+    SET
+        JournalTypeId = @JournalTypeId,
+        UserId = @UserId,
+        DateUpdated = GETUTCDATE(),
+        PortalId = @PortalId,
+        ProfileId = @ProfileId,
+        GroupId = @GroupId,
+        Title = @Title,
+        Summary = @Summary,
+        ObjectKey = @ObjectKey,
+        AccessKey = @AccessKey,
+        ItemData = @ItemData,
+        CommentsHidden = @CommentsHidden,
+        CommentsDisabled = @CommentsDisabled
+    WHERE JournalId = @JournalId
 IF @SecuritySet IS NOT NULL AND @SecuritySet <> ''
 BEGIN
 DELETE FROM {databaseOwner}[{objectQualifier}Journal_Security] WHERE JournalId = @JournalId
 INSERT INTO {databaseOwner}[{objectQualifier}Journal_Security]
-	(JournalId, SecurityKey) 
-	SELECT @JournalId, string from {databaseOwner}[{objectQualifier}Journal_SplitText](@SecuritySet,',')
+    (JournalId, SecurityKey)
+    SELECT @JournalId, string from {databaseOwner}[{objectQualifier}Journal_SplitText](@SecuritySet,',')
 END
 SELECT @JournalId
 GO
@@ -630,8 +630,8 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_Comments_ToggleDisable
 @Disabled bit
 AS
 UPDATE {databaseOwner}[{objectQualifier}Journal]
-	SET CommentsDisabled = @Disabled
-	WHERE PortalId = @PortalId AND JournalId = @JournalId
+    SET CommentsDisabled = @Disabled
+    WHERE PortalId = @PortalId AND JournalId = @JournalId
 GO
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_Comments_ToggleHidden]
 @PortalId int,
@@ -639,8 +639,8 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}Journal_Comments_ToggleHidden]
 @Hidden bit
 AS
 UPDATE {databaseOwner}[{objectQualifier}Journal]
-	SET CommentsHidden = @Hidden
-	WHERE PortalId = @PortalId AND JournalId = @JournalId
+    SET CommentsHidden = @Hidden
+    WHERE PortalId = @PortalId AND JournalId = @JournalId
 GO
 /************************************************************/
 

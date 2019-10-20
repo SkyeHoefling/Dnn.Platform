@@ -24,7 +24,7 @@ class SiteAliasSettingsPanelBody extends Component {
     }
 
     componentDidUpdate() {
-        const { props } = this;        
+        const { props } = this;
         if (props.urlMappingSettings) {
             let portalIdChanged = false;
             if (props.portalId === undefined || props.urlMappingSettings.PortalId === props.portalId) {

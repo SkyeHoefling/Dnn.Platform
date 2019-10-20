@@ -20,7 +20,7 @@ define(['jquery',
                     };
                 };
                 utility.loadBundleScript('modules/dnn.sitesettings/scripts/bundles/site-settings-bundle.js');
-                
+
                 if (typeof callback === "function") {
                     callback();
                 }
@@ -33,5 +33,3 @@ define(['jquery',
             }
         };
     });
-
-

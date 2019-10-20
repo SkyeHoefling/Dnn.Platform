@@ -204,7 +204,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
                     case LanguageResourceMode.Host:
                     case LanguageResourceMode.Portal:
                         {
-                            
+
                             break;
                         }
                     default:
@@ -975,7 +975,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
                     }));
             }
             return pages;
-        }        
+        }
     }
 
     internal static class KpvExtension

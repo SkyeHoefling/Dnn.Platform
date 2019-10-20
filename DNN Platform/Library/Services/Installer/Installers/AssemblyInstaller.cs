@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -100,10 +100,10 @@ namespace DotNetNuke.Services.Installer.Installers
                 return PhysicalSitePath + "\\";
             }
         }
-		
-		#endregion
 
-		#region "Public Properties"
+        #endregion
+
+        #region "Public Properties"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -117,11 +117,11 @@ namespace DotNetNuke.Services.Installer.Installers
                 return "dll,pdb";
             }
         }
-		
-		
-		#endregion
 
-		#region "Protected Methods"
+
+        #endregion
+
+        #region "Protected Methods"
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -135,9 +135,9 @@ namespace DotNetNuke.Services.Installer.Installers
             if (DataProvider.Instance().UnRegisterAssembly(Package.PackageID, file.Name))
             {
                 Log.AddInfo(Util.ASSEMBLY_UnRegistered + " - " + file.FullName);
-                
+
                 RemoveBindingRedirect(file);
-                
+
                 //Call base class version to deleteFile file from \bin
                 base.DeleteFile(file);
             }
@@ -185,11 +185,11 @@ namespace DotNetNuke.Services.Installer.Installers
                         break;
                     case 2:
                     case 3:
-						//Assembly already Registered
+                        //Assembly already Registered
                         Log.AddInfo(Util.ASSEMBLY_Registered + " - " + file.FullName);
                         break;
                 }
-				
+
                 //If assembly not registered, is newer (or is the same version and we are in repair mode)
                 if (returnCode < 2 || (returnCode == 2 && file.InstallerInfo.RepairInstall))
                 {
@@ -200,8 +200,8 @@ namespace DotNetNuke.Services.Installer.Installers
             }
             return bSuccess;
         }
-		
-		#endregion
+
+        #endregion
 
         #region "Private Methods"
 
@@ -246,7 +246,7 @@ namespace DotNetNuke.Services.Installer.Installers
             var xmlMergeDoc = GetXmlMergeDoc(xmlMergePath, name, publicKeyToken, OldVersion, newVersion);
             var xmlMerge = new XmlMerge(xmlMergeDoc, file.Version.ToString(), this.Package.Name);
             xmlMerge.UpdateConfigs();
-            
+
             return true;
         }
 
@@ -280,7 +280,7 @@ namespace DotNetNuke.Services.Installer.Installers
                 return null;
             }
         }
-        
+
         private static string ReadPublicKey(AssemblyName assemblyName)
         {
             if (assemblyName == null || !assemblyName.Flags.HasFlag(AssemblyNameFlags.PublicKey))

@@ -110,7 +110,7 @@ class UserTable extends Component {
         }
         return headers;
     }
-    
+
     render() {
         const {props} = this;
         let i = 0;
@@ -151,7 +151,7 @@ class UserTable extends Component {
                             key={"user-" + index}
                             getUserColumns={props.getUserColumns && props.getUserColumns.bind(this) }
                             getUserTabsIcons={props.getUserTabsIcons && props.getUserTabsIcons.bind(this) }
-                            getUserMenu={props.getUserMenu && props.getUserMenu.bind(this)} 
+                            getUserMenu={props.getUserMenu && props.getUserMenu.bind(this)}
                             userMenuAction={props.userMenuAction && props.userMenuAction.bind(this)}
                             appSettings={props.appSettings}
                             columnSizes={props.columnSizes}
@@ -161,7 +161,7 @@ class UserTable extends Component {
                                 {children}
                             </CollapsibleSwitcher>
                         </DetailRow>;
-                    }) 
+                    })
                 }
                 {
                     props.users && props.users.length === 0 && <GridCell className="no-users">{Localization.get("noUsers")}</GridCell>

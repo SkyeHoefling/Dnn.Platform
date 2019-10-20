@@ -20,7 +20,7 @@ CodeMirror.defineMode("pegjs", function (config) {
 
   return {
     startState: function () {
-      return {
+    return {
         inString: false,
         stringType: null,
         inComment: false,
@@ -28,85 +28,85 @@ CodeMirror.defineMode("pegjs", function (config) {
         braced: 0,
         lhs: true,
         localState: null
-      };
+    };
     },
     token: function (stream, state) {
-      if (stream)
+    if (stream)
 
-      //check for state changes
-      if (!state.inString && !state.inComment && ((stream.peek() == '"') || (stream.peek() == "'"))) {
+    //check for state changes
+    if (!state.inString && !state.inComment && ((stream.peek() == '"') || (stream.peek() == "'"))) {
         state.stringType = stream.peek();
         stream.next(); // Skip quote
         state.inString = true; // Update state
-      }
-      if (!state.inString && !state.inComment && stream.match(/^\/\*/)) {
+    }
+    if (!state.inString && !state.inComment && stream.match(/^\/\*/)) {
         state.inComment = true;
-      }
+    }
 
-      //return state
-      if (state.inString) {
+    //return state
+    if (state.inString) {
         while (state.inString && !stream.eol()) {
-          if (stream.peek() === state.stringType) {
+        if (stream.peek() === state.stringType) {
             stream.next(); // Skip quote
             state.inString = false; // Clear flag
-          } else if (stream.peek() === '\\') {
+        } else if (stream.peek() === '\\') {
             stream.next();
             stream.next();
-          } else {
+        } else {
             stream.match(/^.[^\\\"\']*/);
-          }
+        }
         }
         return state.lhs ? "property string" : "string"; // Token style
-      } else if (state.inComment) {
+    } else if (state.inComment) {
         while (state.inComment && !stream.eol()) {
-          if (stream.match(/\*\//)) {
+        if (stream.match(/\*\//)) {
             state.inComment = false; // Clear flag
-          } else {
+        } else {
             stream.match(/^.[^\*]*/);
-          }
+        }
         }
         return "comment";
-      } else if (state.inChracterClass) {
-          while (state.inChracterClass && !stream.eol()) {
+    } else if (state.inChracterClass) {
+        while (state.inChracterClass && !stream.eol()) {
             if (!(stream.match(/^[^\]\\]+/) || stream.match(/^\\./))) {
-              state.inChracterClass = false;
+            state.inChracterClass = false;
             }
-          }
-      } else if (stream.peek() === '[') {
+        }
+    } else if (stream.peek() === '[') {
         stream.next();
         state.inChracterClass = true;
         return 'bracket';
-      } else if (stream.match(/^\/\//)) {
+    } else if (stream.match(/^\/\//)) {
         stream.skipToEnd();
         return "comment";
-      } else if (state.braced || stream.peek() === '{') {
+    } else if (state.braced || stream.peek() === '{') {
         if (state.localState === null) {
-          state.localState = jsMode.startState();
+        state.localState = jsMode.startState();
         }
         var token = jsMode.token(stream, state.localState);
         var text = stream.current();
         if (!token) {
-          for (var i = 0; i < text.length; i++) {
+        for (var i = 0; i < text.length; i++) {
             if (text[i] === '{') {
-              state.braced++;
+            state.braced++;
             } else if (text[i] === '}') {
-              state.braced--;
+            state.braced--;
             }
-          };
+        };
         }
         return token;
-      } else if (identifier(stream)) {
+    } else if (identifier(stream)) {
         if (stream.peek() === ':') {
-          return 'variable';
+        return 'variable';
         }
         return 'variable-2';
-      } else if (['[', ']', '(', ')'].indexOf(stream.peek()) != -1) {
+    } else if (['[', ']', '(', ')'].indexOf(stream.peek()) != -1) {
         stream.next();
         return 'bracket';
-      } else if (!stream.eatSpace()) {
+    } else if (!stream.eatSpace()) {
         stream.next();
-      }
-      return null;
+    }
+    return null;
     }
   };
 }, "javascript");

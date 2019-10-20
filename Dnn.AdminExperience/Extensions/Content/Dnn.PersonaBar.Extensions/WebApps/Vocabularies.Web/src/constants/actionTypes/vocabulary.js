@@ -1,4 +1,4 @@
-const vocabularyActionTypes =  {    
+const vocabularyActionTypes =  {
     RETRIEVED_VOCABULARY_LIST: "RETRIEVED_VOCABULARY_LIST",
     UPDATED_VOCABULARY: "UPDATED_VOCABULARY",
     ADDED_VOCABULARY: "ADDED_VOCABULARY",

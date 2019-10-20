@@ -26,13 +26,13 @@ export function canEditSettings(settings)
 
 export function canDeleteUser(settings, userId)
 {
-    return (settings.isAdmin || settings.permissions.DELETE_USER) 
+    return (settings.isAdmin || settings.permissions.DELETE_USER)
         && userId!==settings.userId;
 }
 
 export function canAuthorizeUnAuthorizeUser(settings, userId)
 {
-    return (settings.isAdmin || settings.permissions.AUTHORIZE_UNAUTHORIZE_USER) 
+    return (settings.isAdmin || settings.permissions.AUTHORIZE_UNAUTHORIZE_USER)
         && userId!==settings.userId;
 }
 

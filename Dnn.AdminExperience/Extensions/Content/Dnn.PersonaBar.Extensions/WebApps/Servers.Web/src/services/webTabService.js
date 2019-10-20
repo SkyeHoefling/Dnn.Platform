@@ -8,4 +8,4 @@ const webTabService = {
     getWebServerInfo: getWebServerInfo
 };
 
-export default webTabService; 
+export default webTabService;

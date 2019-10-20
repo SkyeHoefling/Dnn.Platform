@@ -1,22 +1,22 @@
 #region Copyright
 
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
 #endregion
@@ -41,7 +41,7 @@ namespace DotNetNuke.Entities.Portals
 {
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// The PortalSettings class encapsulates all of the settings for the Portal, 
+    /// The PortalSettings class encapsulates all of the settings for the Portal,
     /// as well as the configuration settings required to execute the current tab
     /// view within the portal.
     /// </summary>
@@ -181,67 +181,67 @@ namespace DotNetNuke.Entities.Portals
 
         public TabInfo ActiveTab { get; set; }
 
-		public int AdministratorId { get; set; }
+        public int AdministratorId { get; set; }
 
-		public int AdministratorRoleId { get; set; }
+        public int AdministratorRoleId { get; set; }
 
-		public string AdministratorRoleName { get; set; }
+        public string AdministratorRoleName { get; set; }
 
-		public int AdminTabId { get; set; }
+        public int AdminTabId { get; set; }
 
-		public string BackgroundFile { get; set; }
+        public string BackgroundFile { get; set; }
 
-		public int BannerAdvertising { get; set; }
+        public int BannerAdvertising { get; set; }
 
-		public string CultureCode { get; set; }
+        public string CultureCode { get; set; }
 
-		public string Currency { get; set; }
+        public string Currency { get; set; }
 
-		public string DefaultLanguage { get; set; }
+        public string DefaultLanguage { get; set; }
 
-		public string Description { get; set; }
+        public string Description { get; set; }
 
-		public string Email { get; set; }
+        public string Email { get; set; }
 
         public DateTime ExpiryDate { get; set; }
 
-		public string FooterText { get; set; }
+        public string FooterText { get; set; }
 
-		public Guid GUID { get; set; }
+        public Guid GUID { get; set; }
 
-		public string HomeDirectory { get; set; }
+        public string HomeDirectory { get; set; }
 
-		public string HomeSystemDirectory { get; set; }
+        public string HomeSystemDirectory { get; set; }
 
-		public int HomeTabId { get; set; }
+        public int HomeTabId { get; set; }
 
-		public float HostFee { get; set; }
+        public float HostFee { get; set; }
 
-		public int HostSpace { get; set; }
+        public int HostSpace { get; set; }
 
-		public string KeyWords { get; set; }
+        public string KeyWords { get; set; }
 
-		public int LoginTabId { get; set; }
+        public int LoginTabId { get; set; }
 
-		public string LogoFile { get; set; }
+        public string LogoFile { get; set; }
 
-		public int PageQuota { get; set; }
+        public int PageQuota { get; set; }
 
-		public int Pages { get; set; }
+        public int Pages { get; set; }
 
-		public int PortalId { get; set; }
+        public int PortalId { get; set; }
 
-		public PortalAliasInfo PortalAlias { get; set; }
+        public PortalAliasInfo PortalAlias { get; set; }
 
-		public PortalAliasInfo PrimaryAlias { get; set; }
+        public PortalAliasInfo PrimaryAlias { get; set; }
 
-		public string PortalName { get; set; }
+        public string PortalName { get; set; }
 
-		public int RegisteredRoleId { get; set; }
+        public int RegisteredRoleId { get; set; }
 
-		public string RegisteredRoleName { get; set; }
+        public string RegisteredRoleName { get; set; }
 
-		public int RegisterTabId { get; set; }
+        public int RegisterTabId { get; set; }
 
         public RegistrationSettings Registration { get; set; }
 
@@ -250,22 +250,22 @@ namespace DotNetNuke.Entities.Portals
         [Obsolete("Deprecated in 8.0.0. Scheduled removal in v10.0.0.")]
         public int SiteLogHistory { get; set; }
 
-		public int SplashTabId { get; set; }
+        public int SplashTabId { get; set; }
 
-		public int SuperTabId { get; set; }
+        public int SuperTabId { get; set; }
 
-		public int UserQuota { get; set; }
+        public int UserQuota { get; set; }
 
-		public int UserRegistration { get; set; }
+        public int UserRegistration { get; set; }
 
-		public int Users { get; set; }
+        public int Users { get; set; }
 
-		public int UserTabId { get; set; }
+        public int UserTabId { get; set; }
 
         public int TermsTabId { get; set; }
 
-		public int PrivacyTabId { get; set; }
-        
+        public int PrivacyTabId { get; set; }
+
         #endregion
 
         #region Read-Only Properties
@@ -387,14 +387,14 @@ namespace DotNetNuke.Entities.Portals
         public int ErrorPage500 { get; internal set; }
 
         /// -----------------------------------------------------------------------------
-		/// <summary>
-		///   Gets whether folders which are hidden or whose name begins with underscore
-		///   are included in folder synchronization.
-		/// </summary>
-		/// <remarks>
-		///   Defaults to True
-		/// </remarks>
-		/// -----------------------------------------------------------------------------
+        /// <summary>
+        ///   Gets whether folders which are hidden or whose name begins with underscore
+        ///   are included in folder synchronization.
+        /// </summary>
+        /// <remarks>
+        ///   Defaults to True
+        /// </remarks>
+        /// -----------------------------------------------------------------------------
         public bool HideFoldersEnabled { get; internal set; }
 
         /// -----------------------------------------------------------------------------
@@ -410,11 +410,11 @@ namespace DotNetNuke.Entities.Portals
         public string HomeSystemDirectoryMapPath { get; internal set; }
 
         /// -----------------------------------------------------------------------------
-		/// <summary>
-		/// Gets whether the Inline Editor is enabled
-		/// </summary>
-		/// <remarks>Defaults to True</remarks>
-		/// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets whether the Inline Editor is enabled
+        /// </summary>
+        /// <remarks>Defaults to True</remarks>
+        /// -----------------------------------------------------------------------------
         public bool InlineEditorEnabled { get; internal set; }
 
         /// -----------------------------------------------------------------------------
@@ -522,7 +522,7 @@ namespace DotNetNuke.Entities.Portals
 
         /// <summary>Gets the currently logged in user identifier.</summary>
         /// <value>The user identifier.</value>
-		public int UserId
+        public int UserId
         {
             get
             {
@@ -536,7 +536,7 @@ namespace DotNetNuke.Entities.Portals
 
         /// <summary>Gets the currently logged in user.</summary>
         /// <value>The current user information.</value>
-		public UserInfo UserInfo
+        public UserInfo UserInfo
         {
             get
             {
@@ -618,12 +618,12 @@ namespace DotNetNuke.Entities.Portals
         }
 
         /*
-         * add <a name="[moduleid]"></a> on the top of the module
-         * 
-         * Desactivate this remove the html5 compatibility warnings
-         * (and make the output smaller)
-         * 
-         */
+        * add <a name="[moduleid]"></a> on the top of the module
+        *
+        * Desactivate this remove the html5 compatibility warnings
+        * (and make the output smaller)
+        *
+        */
         public bool InjectModuleHyperLink
         {
             get
@@ -632,10 +632,10 @@ namespace DotNetNuke.Entities.Portals
             }
         }
         /*
-         * generates a : Page.Response.AddHeader("X-UA-Compatible", "");
-         * 
-         
-         */
+        * generates a : Page.Response.AddHeader("X-UA-Compatible", "");
+        *
+
+        */
         public string AddCompatibleHttpHeader
         {
             get
@@ -652,11 +652,11 @@ namespace DotNetNuke.Entities.Portals
         }
 
         /*
-         * add a cachebuster parameter to generated file URI's
-         * 
-         * of the form ver=[file timestame] ie ver=2015-02-17-162255-735
-         * 
-         */
+        * add a cachebuster parameter to generated file URI's
+        *
+        * of the form ver=[file timestame] ie ver=2015-02-17-162255-735
+        *
+        */
         public bool AddCachebusterToResourceUris
         {
             get

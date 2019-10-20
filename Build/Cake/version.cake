@@ -22,8 +22,8 @@ Task("GitVersion")
 
 Task("UpdateDnnManifests")
   .IsDependentOn("GitVersion")
-  .DoesForEach(GetFiles("**/*.dnn"), (file) => 
-  { 
+  .DoesForEach(GetFiles("**/*.dnn"), (file) =>
+  {
     var transformFile = File(System.IO.Path.GetTempFileName());
     FileAppendText(transformFile, GetXdtTransformation());
     XdtTransformConfig(file, transformFile, file);
@@ -46,9 +46,9 @@ public string GetXdtTransformation()
     return $@"<?xml version=""1.0""?>
 <dotnetnuke xmlns:xdt=""http://schemas.microsoft.com/XML-Document-Transform"">
   <packages>
-    <package version=""{versionString}"" 
-             xdt:Transform=""SetAttributes(version)""
-             xdt:Locator=""Condition([not(@version)])"" />
+    <package version=""{versionString}""
+            xdt:Transform=""SetAttributes(version)""
+            xdt:Locator=""Condition([not(@version)])"" />
   </packages>
 </dotnetnuke>";
 }

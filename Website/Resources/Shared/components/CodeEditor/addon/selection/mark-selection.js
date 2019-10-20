@@ -20,16 +20,16 @@
   CodeMirror.defineOption("styleSelectedText", false, function(cm, val, old) {
     var prev = old && old != CodeMirror.Init;
     if (val && !prev) {
-      cm.state.markedSelection = [];
-      cm.state.markedSelectionStyle = typeof val == "string" ? val : "CodeMirror-selectedtext";
-      reset(cm);
-      cm.on("cursorActivity", onCursorActivity);
-      cm.on("change", onChange);
+    cm.state.markedSelection = [];
+    cm.state.markedSelectionStyle = typeof val == "string" ? val : "CodeMirror-selectedtext";
+    reset(cm);
+    cm.on("cursorActivity", onCursorActivity);
+    cm.on("change", onChange);
     } else if (!val && prev) {
-      cm.off("cursorActivity", onCursorActivity);
-      cm.off("change", onChange);
-      clear(cm);
-      cm.state.markedSelection = cm.state.markedSelectionStyle = null;
+    cm.off("cursorActivity", onCursorActivity);
+    cm.off("change", onChange);
+    clear(cm);
+    cm.state.markedSelection = cm.state.markedSelectionStyle = null;
     }
   });
 
@@ -39,7 +39,7 @@
 
   function onChange(cm) {
     if (cm.state.markedSelection.length)
-      cm.operation(function() { clear(cm); });
+    cm.operation(function() { clear(cm); });
   }
 
   var CHUNK_SIZE = 8;
@@ -51,14 +51,14 @@
     var array = cm.state.markedSelection;
     var cls = cm.state.markedSelectionStyle;
     for (var line = from.line;;) {
-      var start = line == from.line ? from : Pos(line, 0);
-      var endLine = line + CHUNK_SIZE, atEnd = endLine >= to.line;
-      var end = atEnd ? to : Pos(endLine, 0);
-      var mark = cm.markText(start, end, {className: cls});
-      if (addAt == null) array.push(mark);
-      else array.splice(addAt++, 0, mark);
-      if (atEnd) break;
-      line = endLine;
+    var start = line == from.line ? from : Pos(line, 0);
+    var endLine = line + CHUNK_SIZE, atEnd = endLine >= to.line;
+    var end = atEnd ? to : Pos(endLine, 0);
+    var mark = cm.markText(start, end, {className: cls});
+    if (addAt == null) array.push(mark);
+    else array.splice(addAt++, 0, mark);
+    if (atEnd) break;
+    line = endLine;
     }
   }
 
@@ -72,7 +72,7 @@
     clear(cm);
     var ranges = cm.listSelections();
     for (var i = 0; i < ranges.length; i++)
-      coverRange(cm, ranges[i].from(), ranges[i].to());
+    coverRange(cm, ranges[i].from(), ranges[i].to());
   }
 
   function update(cm) {
@@ -87,32 +87,32 @@
     var coverStart = array[0].find(), coverEnd = array[array.length - 1].find();
     if (!coverStart || !coverEnd || to.line - from.line < CHUNK_SIZE ||
         cmp(from, coverEnd.to) >= 0 || cmp(to, coverStart.from) <= 0)
-      return reset(cm);
+    return reset(cm);
 
     while (cmp(from, coverStart.from) > 0) {
-      array.shift().clear();
-      coverStart = array[0].find();
+    array.shift().clear();
+    coverStart = array[0].find();
     }
     if (cmp(from, coverStart.from) < 0) {
-      if (coverStart.to.line - from.line < CHUNK_SIZE) {
+    if (coverStart.to.line - from.line < CHUNK_SIZE) {
         array.shift().clear();
         coverRange(cm, from, coverStart.to, 0);
-      } else {
+    } else {
         coverRange(cm, from, coverStart.from, 0);
-      }
+    }
     }
 
     while (cmp(to, coverEnd.to) < 0) {
-      array.pop().clear();
-      coverEnd = array[array.length - 1].find();
+    array.pop().clear();
+    coverEnd = array[array.length - 1].find();
     }
     if (cmp(to, coverEnd.to) > 0) {
-      if (to.line - coverEnd.from.line < CHUNK_SIZE) {
+    if (to.line - coverEnd.from.line < CHUNK_SIZE) {
         array.pop().clear();
         coverRange(cm, coverEnd.from, to);
-      } else {
+    } else {
         coverRange(cm, coverEnd.to, to);
-      }
+    }
     }
   }
 });

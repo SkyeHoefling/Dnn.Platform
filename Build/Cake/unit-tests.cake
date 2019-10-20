@@ -5,9 +5,9 @@ Task("EnsureAllProjectsBuilt")
   .Does(() =>
   {
     MSBuild("DNN_Platform.sln", new MSBuildSettings {
-      Verbosity = Verbosity.Minimal,
-      ToolVersion = MSBuildToolVersion.VS2017,
-      Configuration = configuration
+    Verbosity = Verbosity.Minimal,
+    ToolVersion = MSBuildToolVersion.VS2017,
+    Configuration = configuration
     });
   });
 
@@ -22,13 +22,13 @@ Task("UnitTests")
     testAssemblies -= GetFiles(@"**\DotNetNuke.Tests.Urls.dll");
 
     foreach (var file in testAssemblies) {
-      VSTest(file.FullPath, FixToolPath(new VSTestSettings() {
+    VSTest(file.FullPath, FixToolPath(new VSTestSettings() {
         Logger = $"trx;LogFileName={file.GetFilename()}.xml",
         Parallel = true,
         EnableCodeCoverage = true,
         FrameworkVersion = VSTestFrameworkVersion.NET45,
         TestAdapterPath = @"tools\NUnitTestAdapter.2.1.1\tools"
-      }));
+    }));
     }
   });
 

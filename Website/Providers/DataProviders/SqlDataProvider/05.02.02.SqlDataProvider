@@ -21,25 +21,25 @@ GO
 /***********************/
 
 if exists (select * from dbo.sysobjects where id = object_id(N'{databaseOwner}[{objectQualifier}GetTabCount]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabCount]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetTabCount]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetTabCount]
-	
-	@PortalId	int
+
+    @PortalId	int
 
 AS
 
 DECLARE @AdminTabId int
-SET @AdminTabId = (SELECT AdminTabId 
-						FROM {databaseOwner}{objectQualifier}vw_Portals 
-						WHERE PortalID = @PortalID)
+SET @AdminTabId = (SELECT AdminTabId
+                        FROM {databaseOwner}{objectQualifier}vw_Portals
+                        WHERE PortalID = @PortalID)
 
-SELECT COUNT(*) - 1 
+SELECT COUNT(*) - 1
 FROM  {databaseOwner}{objectQualifier}Tabs
-WHERE (PortalID = @PortalID) 
-	AND (TabID <> @AdminTabId) 
-	AND (ParentId <> @AdminTabId OR ParentId IS NULL)
+WHERE (PortalID = @PortalID)
+    AND (TabID <> @AdminTabId)
+    AND (ParentId <> @AdminTabId OR ParentId IS NULL)
 GO
 
 

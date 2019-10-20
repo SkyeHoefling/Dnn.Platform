@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-// General Information about an assembly is controlled through the following 
+// General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
@@ -20,4 +20,3 @@ using System.Runtime.InteropServices;
 [assembly: Guid("d396c63f-4cb7-4258-9ec6-7052f7d756cb")]
 
 [assembly: AssemblyDelaySign(false)]
-

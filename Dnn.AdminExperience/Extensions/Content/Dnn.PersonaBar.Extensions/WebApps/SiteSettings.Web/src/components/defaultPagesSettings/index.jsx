@@ -31,7 +31,7 @@ class DefaultPagesSettingsPanelBody extends Component {
         let { props} = this;
         if (props.defaultPagesSettings) {
             let portalIdChanged = false;
-            let cultureCodeChanged = false;            
+            let cultureCodeChanged = false;
             if (props.portalId === undefined || props.defaultPagesSettings.PortalId === props.portalId) {
                 portalIdChanged = false;
             }
@@ -187,8 +187,8 @@ class DefaultPagesSettingsPanelBody extends Component {
                         TODO: remove the style once the underlying issue is resolved */}
                     <Label
                         tooltipMessage={resx.get("plRegisterTabId.Help")}
-                        label={resx.get("plRegisterTabId")}                        
-                        tooltipStyle={{ float: "", width : "68%"}}                        
+                        label={resx.get("plRegisterTabId")}
+                        tooltipStyle={{ float: "", width : "68%"}}
                     />
                     <PagePicker
                         serviceFramework={util.utilities.sf}

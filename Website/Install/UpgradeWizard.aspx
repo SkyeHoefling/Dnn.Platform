@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" class="needVer" href="../Resources/Shared/stylesheets/dnndefault/7.0.0/default.css?refresh" />
     <link rel="stylesheet" type="text/css" class="needVer" href="Install.css?refresh" />
     <script type="text/javascript" src="../Resources/Shared/scripts/jquery/jquery.min.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
-	<script type="text/javascript" src="../Resources/Shared/scripts/jquery/jquery-migrate.min.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
+    <script type="text/javascript" src="../Resources/Shared/scripts/jquery/jquery-migrate.min.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
     <script type="text/javascript" src="../Resources/Shared/Scripts/jquery/jquery-ui.min.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
     <script type="text/javascript" src="../Resources/Shared/Scripts/jquery/jquery.hoverIntent.min.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
     <asp:placeholder id="SCRIPTS" runat="server"></asp:placeholder>
@@ -21,7 +21,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="scManager" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         <asp:placeholder id="BodySCRIPTS" runat="server">
-	        <script type="text/javascript" src="../js/dnn.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
+            <script type="text/javascript" src="../js/dnn.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
             <script type="text/javascript" src="../Resources/Shared/Scripts/dnn.jquery.js?ver=<%=DotNetNuke.Common.Globals.FormatVersion(ApplicationVersion)%>"></script>
         </asp:placeholder>
 
@@ -39,7 +39,7 @@
                 <asp:Label ID="lblDotNetNukeUpgrade" runat="server" ResourceKey="Title" />
                 <h5><asp:Label ID="currentVersionLabel" runat="server" /></h5>
                 <h5><asp:Label ID="versionLabel" runat="server" /></h5>
-				<h5><asp:Label ID="versionsMatch" runat="server" /></h5>
+                <h5><asp:Label ID="versionsMatch" runat="server" /></h5>
             </h2>
             <br/>
             <div class="dnnForm dnnInstall dnnClear" id="dnnInstall" runat="server">
@@ -58,15 +58,15 @@
                         </a>
                     </li>
                     <li><a href="#upgradeInstallation">
-                         <div class="dnnWizardStep">
+                        <div class="dnnWizardStep">
                             <span class="dnnWizardStepNumber">2</span>
                             <span class="dnnWizardStepTitle"><%= LocalizeString("Upgrade")%></span>
                             <span class="dnnWizardStepArrow"></span>
                         </div>
                         </a>
-                     </li>
+                    </li>
                     <li><a href="#upgradeViewWebsite">
-                         <div class="dnnWizardStep">
+                        <div class="dnnWizardStep">
                             <span><img id="finishImage" src="../images/finishflag.png" alt="" /></span>
                             <span class="dnnWizardStepTitle"><%= LocalizeString("ViewWebsite")%></span>
                         </div>
@@ -265,7 +265,7 @@
             }
             //Next Step
             $('#<%= continueLink.ClientID %>').click(function () {
-                
+
                 if (!$(this).hasClass('dnnDisabledAction')) {
                     upgradeWizard.accountInfo = {
                         username: $('#<%= txtUsername.ClientID %>')[0].value,

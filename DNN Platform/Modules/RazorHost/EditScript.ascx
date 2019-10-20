@@ -7,9 +7,9 @@
         <div class="dnnFormItem">
             <dnn:Label id="scriptsLabel" runat="Server" controlname="scriptList" />
             <asp:DropDownList ID="scriptList" runat="server" AutoPostBack="true" />
-			<asp:linkbutton ID="cmdAdd" runat="server" ResourceKey="AddNew" cssclass="dnnSecondaryAction" />
+            <asp:linkbutton ID="cmdAdd" runat="server" ResourceKey="AddNew" cssclass="dnnSecondaryAction" />
         </div>
-		<div class="dnnFormItem razorHostModSource"><asp:Label ID="lblSourceFile" runat="server" /></div>        
+        <div class="dnnFormItem razorHostModSource"><asp:Label ID="lblSourceFile" runat="server" /></div>
         <div class="dnnFormItem">
             <dnn:label id="plSource" controlname="txtSource" runat="server" />
             <asp:TextBox ID="txtSource" runat="server" TextMode="MultiLine" Rows="16" />

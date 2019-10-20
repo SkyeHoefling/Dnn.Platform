@@ -14,106 +14,106 @@ GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUsersBasicSearch]
 (
-	@PortalID int,					-- portal
-	@PageSize int,					-- page size
-	@PageIndex int,					-- 0 based page index
-	@SortBy nvarchar(100),			-- sort field
-	@SortAscending bit,				-- sort flag indicating whether sort is asc or desc
-	@PropertyName nvarchar(256),    -- property to filter by (username, diaplayname, email)
-	@PropertyValue nvarchar(256)	-- value of property
+    @PortalID int,					-- portal
+    @PageSize int,					-- page size
+    @PageIndex int,					-- 0 based page index
+    @SortBy nvarchar(100),			-- sort field
+    @SortAscending bit,				-- sort flag indicating whether sort is asc or desc
+    @PropertyName nvarchar(256),    -- property to filter by (username, diaplayname, email)
+    @PropertyValue nvarchar(256)	-- value of property
 )
 AS
-	-- Set up Top XX
-	DECLARE @topSql nvarchar(20)
-	SET @topSql = CONVERT(nvarchar(20), @PageSize)
+    -- Set up Top XX
+    DECLARE @topSql nvarchar(20)
+    SET @topSql = CONVERT(nvarchar(20), @PageSize)
 
-	--Set up Count
-	DECLARE @minRowNumberSql nvarchar(20)
-	SET @minRowNumberSql =  CONVERT(nvarchar(20), ((@PageIndex * @PageSize) + 1))
+    --Set up Count
+    DECLARE @minRowNumberSql nvarchar(20)
+    SET @minRowNumberSql =  CONVERT(nvarchar(20), ((@PageIndex * @PageSize) + 1))
 
-	-- Set up Sort
-	DECLARE @sortSql nvarchar(1000)
-	SET @sortSql = {databaseOwner}{objectQualifier}GetSortSql(@SortBy, @SortAscending, 'UserID')
+    -- Set up Sort
+    DECLARE @sortSql nvarchar(1000)
+    SET @sortSql = {databaseOwner}{objectQualifier}GetSortSql(@SortBy, @SortAscending, 'UserID')
 
-	-- Setup Pivot Field List
-	DECLARE @pivotSql nvarchar(max)
-	SELECT @pivotSql = {databaseOwner}{objectQualifier}GetProfileFieldSql(@PortalID, '')
+    -- Setup Pivot Field List
+    DECLARE @pivotSql nvarchar(max)
+    SELECT @pivotSql = {databaseOwner}{objectQualifier}GetProfileFieldSql(@PortalID, '')
 
-	-- Setup FieldName Field List for temporary table
-	DECLARE @fieldNames nvarchar(max)
-	SELECT @fieldNames = {databaseOwner}{objectQualifier}GetProfileFieldSql(@PortalID, ' nvarchar(max)')
+    -- Setup FieldName Field List for temporary table
+    DECLARE @fieldNames nvarchar(max)
+    SELECT @fieldNames = {databaseOwner}{objectQualifier}GetProfileFieldSql(@PortalID, ' nvarchar(max)')
 
-	DECLARE @sql nvarchar(max)
-	SELECT @sql=
-				'
-					DECLARE @pivotedUsers TABLE
-					(
-						RowNumber int,
-						UserID int,
-						PortalID int,
-						Username nvarchar(100),
-						Email nvarchar(256),
-						DisplayName nvarchar(128),
-						IsSuperUser bit,
-						IsDeleted bit,
-						AffiliateID int,
-						UpdatePassword bit,
-						Authorised bit,
-						' + @fieldNames + '
-					);
+    DECLARE @sql nvarchar(max)
+    SELECT @sql=
+                '
+                    DECLARE @pivotedUsers TABLE
+                    (
+                        RowNumber int,
+                        UserID int,
+                        PortalID int,
+                        Username nvarchar(100),
+                        Email nvarchar(256),
+                        DisplayName nvarchar(128),
+                        IsSuperUser bit,
+                        IsDeleted bit,
+                        AffiliateID int,
+                        UpdatePassword bit,
+                        Authorised bit,
+                        ' + @fieldNames + '
+                    );
 
-					WITH TempUsers
-					AS
-					(
-						SELECT TOP ' + @topSql + ' * FROM (
-							SELECT
-								ROW_NUMBER() OVER(' + @sortSql + ') AS RowNumber,
-								U.UserID,
-								U.PortalID,
-								U.Username,
-								U.Email,
-								U.DisplayName,
-								U.IsSuperUser,
-								U.IsDeleted,
-								U.AffiliateID,
-								U.UpdatePassword,
-								U.Authorised
-								FROM {databaseOwner}{objectQualifier}vw_Users AS U
-							WHERE (U.PortalID = ' + CONVERT(nvarchar(20), @PortalID) + ' OR U.PortalID Is NULL )
-								AND ((U.' + @PropertyName + ' LIKE N''' + @PropertyValue + '%'')
-									OR (U.' + @PropertyName + ' LIKE N''% ' + @PropertyValue + '%''))
-								AND U.IsDeleted = 0
-						) AS U
-						WHERE RowNumber >= ' + @minRowNumberSql + '
-					),
-					TempUsersWithProfile
-					AS
-					(
-						SELECT
-							U.UserID,
-							U.PortalID,
-							U.Username,
-							U.Email,
-							U.DisplayName,
-							U.IsSuperUser,
-							U.IsDeleted,
-							U.AffiliateID,
-							U.UpdatePassword,
-							U.Authorised,
-							P.PropertyName,
-							P.PropertyValue
-						FROM TempUsers U
-							INNER JOIN {databaseOwner}{objectQualifier}vw_Profile P ON P.UserID = U.UserID
-					)
-				    SELECT  * FROM (
-					    SELECT  * FROM TempUsersWithProfile
-					    PIVOT
-					    (
-						    MAX(PropertyValue) for PropertyName in (' + @pivotSql + ')
-					    ) as pivotTable
+                    WITH TempUsers
+                    AS
+                    (
+                        SELECT TOP ' + @topSql + ' * FROM (
+                            SELECT
+                                ROW_NUMBER() OVER(' + @sortSql + ') AS RowNumber,
+                                U.UserID,
+                                U.PortalID,
+                                U.Username,
+                                U.Email,
+                                U.DisplayName,
+                                U.IsSuperUser,
+                                U.IsDeleted,
+                                U.AffiliateID,
+                                U.UpdatePassword,
+                                U.Authorised
+                                FROM {databaseOwner}{objectQualifier}vw_Users AS U
+                            WHERE (U.PortalID = ' + CONVERT(nvarchar(20), @PortalID) + ' OR U.PortalID Is NULL )
+                                AND ((U.' + @PropertyName + ' LIKE N''' + @PropertyValue + '%'')
+                                    OR (U.' + @PropertyName + ' LIKE N''% ' + @PropertyValue + '%''))
+                                AND U.IsDeleted = 0
+                        ) AS U
+                        WHERE RowNumber >= ' + @minRowNumberSql + '
+                    ),
+                    TempUsersWithProfile
+                    AS
+                    (
+                        SELECT
+                            U.UserID,
+                            U.PortalID,
+                            U.Username,
+                            U.Email,
+                            U.DisplayName,
+                            U.IsSuperUser,
+                            U.IsDeleted,
+                            U.AffiliateID,
+                            U.UpdatePassword,
+                            U.Authorised,
+                            P.PropertyName,
+                            P.PropertyValue
+                        FROM TempUsers U
+                            INNER JOIN {databaseOwner}{objectQualifier}vw_Profile P ON P.UserID = U.UserID
+                    )
+                    SELECT  * FROM (
+                        SELECT  * FROM TempUsersWithProfile
+                        PIVOT
+                        (
+                            MAX(PropertyValue) for PropertyName in (' + @pivotSql + ')
+                        ) as pivotTable
                     ) T
-					' + @sortSql
-	EXEC(@sql)
+                    ' + @sortSql
+    EXEC(@sql)
 
 GO
 
@@ -130,70 +130,70 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetAvailableUsersForIndex]
     @numberOfUsers INT = 500
 AS
     BEGIN
-		DECLARE @PivotSql NVARCHAR(MAX)
+        DECLARE @PivotSql NVARCHAR(MAX)
 
-		SELECT @PivotSql = COALESCE(@PivotSql + ',','') + '[' + PropertyName + ']'
-		 FROM {databaseOwner}[{objectQualifier}ProfilePropertyDefinition] pd
-		 INNER JOIN {databaseOwner}[{objectQualifier}Lists] l ON ListName = 'DataType' AND SystemList = 1 AND Value IN ( 'Text', 'RichText' ) AND l.EntryID = pd.DataType
-		 WHERE ISNULL(pd.PortalID, -1) = ISNULL(@PortalId, -1)
-		   AND Deleted = 0
-		ORDER BY ViewOrder
+        SELECT @PivotSql = COALESCE(@PivotSql + ',','') + '[' + PropertyName + ']'
+        FROM {databaseOwner}[{objectQualifier}ProfilePropertyDefinition] pd
+        INNER JOIN {databaseOwner}[{objectQualifier}Lists] l ON ListName = 'DataType' AND SystemList = 1 AND Value IN ( 'Text', 'RichText' ) AND l.EntryID = pd.DataType
+        WHERE ISNULL(pd.PortalID, -1) = ISNULL(@PortalId, -1)
+            AND Deleted = 0
+        ORDER BY ViewOrder
 
-		DECLARE @Sql NVARCHAR(MAX)
+        DECLARE @Sql NVARCHAR(MAX)
 
-		SELECT @Sql = '
+        SELECT @Sql = '
         WITH    ValidDataType
-                  AS ( SELECT   EntryID
-                       FROM     {databaseOwner}[{objectQualifier}Lists]
-                       WHERE    ListName = ''DataType''
+                AS ( SELECT   EntryID
+                        FROM     {databaseOwner}[{objectQualifier}Lists]
+                        WHERE    ListName = ''DataType''
                                 AND SystemList = 1
                                 AND Value IN ( ''Text'', ''RichText'' )
-                     ),
-                  ValidUsers AS
-                  (
-                                      SELECT UserId FROM ( SELECT   UserId, ROW_NUMBER() OVER(ORDER BY UserId ASC) AS rownumber
-                         FROM ( SELECT DISTINCT
+                    ),
+                ValidUsers AS
+                (
+                                    SELECT UserId FROM ( SELECT   UserId, ROW_NUMBER() OVER(ORDER BY UserId ASC) AS rownumber
+                        FROM ( SELECT DISTINCT
                                             ( u.UserID )
-                                  FROM      {databaseOwner}[{objectQualifier}Users] u
+                                FROM      {databaseOwner}[{objectQualifier}Users] u
                                             INNER JOIN {databaseOwner}[{objectQualifier}UserPortals] up ON up.UserId = u.UserID
                                             INNER JOIN {databaseOwner}[{objectQualifier}vw_Profile] p ON p.UserID = u.UserID
                                             INNER JOIN {databaseOwner}[{objectQualifier}ProfilePropertyDefinition] pd ON pd.PropertyDefinitionID = p.PropertyDefinitionID AND pd.Visible = 1 AND pd.PortalID = @PortalId
                                             INNER JOIN ValidDataType dt ON dt.EntryID = pd.DataType
-                                  WHERE     (up.PortalId = @PortalId OR up.PortalId IS NULL)
+                                WHERE     (up.PortalId = @PortalId OR up.PortalId IS NULL)
                                             AND (u.LastModifiedOnDate > @StartDate OR (p.LastUpdatedDate IS NOT NULL AND (p.LastUpdatedDate > @StartDate OR pd.LastModifiedOnDate > @StartDate)))
                                             AND ((p.PropertyValue IS NOT NULL AND p.PropertyValue <> '''') OR u.LastModifiedOnDate > @StartDate OR p.LastUpdatedDate IS NULL OR p.LastUpdatedDate > @StartDate)
                                 ) AS T WHERE UserID > @startUserId) AS T
                                 WHERE rownumber <= @numberOfUsers
-                     )
+                    )
 
-		SELECT * FROM (
+        SELECT * FROM (
         SELECT u.UserID ,
-               u.DisplayName,
-               u.LastModifiedOnDate,
-			   u.Username,
-			   u.IsSuperUser,
-			   u.Email,
-			   u.CreatedOnDate,
-			   p.PropertyName,
-			   REPLACE(p.PropertyValue, ''$$$'', ''[$][$][$]'') + ''$$$'' +
-			   CAST(CASE WHEN (p.Visibility IS NULL) THEN 0 ELSE p.Visibility END AS VARCHAR(10)) + ''$$$'' +
-			   p.ExtendedVisibility + ''$$$'' +
-			   CONVERT(VARCHAR(20), CASE WHEN u.LastModifiedOnDate > p.LastUpdatedDate OR p.LastUpdatedDate IS NULL THEN u.LastModifiedOnDate ELSE p.LastUpdatedDate END, 20) AS [PropertyValue]
-		FROM
-			{databaseOwner}[{objectQualifier}Users] u
-			INNER JOIN ValidUsers vu on vu.UserId = u.UserID
-			INNER JOIN {databaseOwner}[{objectQualifier}vw_Profile] p ON p.UserID = u.UserID
-			INNER JOIN {databaseOwner}[{objectQualifier}ProfilePropertyDefinition] pd ON pd.PropertyDefinitionID = p.PropertyDefinitionID AND pd.Visible = 1 AND pd.PortalID = @PortalID
-			INNER JOIN ValidDataType dt ON dt.EntryID = pd.DataType) AS T
-		PIVOT (MAX(PropertyValue) for PropertyName in (' + @PivotSql + ')) AS T
-		ORDER BY UserId
-		'
-		EXECUTE sp_executesql @Sql,
-                              N'@PortalId INT ,
+                u.DisplayName,
+                u.LastModifiedOnDate,
+                u.Username,
+                u.IsSuperUser,
+                u.Email,
+                u.CreatedOnDate,
+                p.PropertyName,
+                REPLACE(p.PropertyValue, ''$$$'', ''[$][$][$]'') + ''$$$'' +
+                CAST(CASE WHEN (p.Visibility IS NULL) THEN 0 ELSE p.Visibility END AS VARCHAR(10)) + ''$$$'' +
+                p.ExtendedVisibility + ''$$$'' +
+                CONVERT(VARCHAR(20), CASE WHEN u.LastModifiedOnDate > p.LastUpdatedDate OR p.LastUpdatedDate IS NULL THEN u.LastModifiedOnDate ELSE p.LastUpdatedDate END, 20) AS [PropertyValue]
+        FROM
+            {databaseOwner}[{objectQualifier}Users] u
+            INNER JOIN ValidUsers vu on vu.UserId = u.UserID
+            INNER JOIN {databaseOwner}[{objectQualifier}vw_Profile] p ON p.UserID = u.UserID
+            INNER JOIN {databaseOwner}[{objectQualifier}ProfilePropertyDefinition] pd ON pd.PropertyDefinitionID = p.PropertyDefinitionID AND pd.Visible = 1 AND pd.PortalID = @PortalID
+            INNER JOIN ValidDataType dt ON dt.EntryID = pd.DataType) AS T
+        PIVOT (MAX(PropertyValue) for PropertyName in (' + @PivotSql + ')) AS T
+        ORDER BY UserId
+        '
+        EXECUTE sp_executesql @Sql,
+                            N'@PortalId INT ,
                                 @StartDate DATETIME ,
                                 @startUserId INT,
                                 @numberOfUsers INT',
-                              @PortalId, @StartDate, @startUserId, @numberOfUsers
+                            @PortalId, @StartDate, @startUserId, @numberOfUsers
     END
 GO
 
@@ -233,99 +233,99 @@ INSERT INTO {databaseOwner}[{objectQualifier}Lists]
 GO
 
 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}JavaScriptLibraries]') AND name = 'Version' AND max_length = 100)
-	BEGIN
-		ALTER TABLE {databaseOwner}[{objectQualifier}JavaScriptLibraries]
-			ALTER COLUMN [Version] [nvarchar](50) NOT NULL;
-	END
+    BEGIN
+        ALTER TABLE {databaseOwner}[{objectQualifier}JavaScriptLibraries]
+            ALTER COLUMN [Version] [nvarchar](50) NOT NULL;
+    END
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SaveJavaScriptLibrary]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}SaveJavaScriptLibrary]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}SaveJavaScriptLibrary]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}SaveJavaScriptLibrary]
-	@JavaScriptLibraryID INT,
-	@PackageID INT,
-	@LibraryName NVARCHAR(200),
-	@Version NVARCHAR(50),
-	@FileName NVARCHAR(100),
-	@ObjectName NVARCHAR(100),
-	@PreferredScriptLocation int,
-	@CDNPath NVARCHAR(250)
+    @JavaScriptLibraryID INT,
+    @PackageID INT,
+    @LibraryName NVARCHAR(200),
+    @Version NVARCHAR(50),
+    @FileName NVARCHAR(100),
+    @ObjectName NVARCHAR(100),
+    @PreferredScriptLocation int,
+    @CDNPath NVARCHAR(250)
 AS
 
-	IF EXISTS (SELECT JavaScriptLibraryID FROM {objectQualifier}JavaScriptLibraries WHERE JavaScriptLibraryID = @JavaScriptLibraryID)
-		BEGIN
-			UPDATE {databaseOwner}[{objectQualifier}JavaScriptLibraries]
-			   SET [PackageID] = @PackageID,
-					[LibraryName] = @LibraryName,
-					[Version] = @Version,
-					[FileName] = @FileName,
-					[ObjectName] = @ObjectName,
-					[PreferredScriptLocation] = @PreferredScriptLocation,
-					[CDNPath] = @CDNPath
-			 WHERE JavaScriptLibraryID = @JavaScriptLibraryID
-	 	END
-	ELSE
-		BEGIN
-			INSERT INTO {databaseOwner}[{objectQualifier}JavaScriptLibraries] (
-				[PackageID],
-				[LibraryName],
-				[Version],
-				[FileName],
-				[ObjectName],
-				[PreferredScriptLocation],
-				[CDNPath]
-			)
-			VALUES (
-				@PackageID,
-				@LibraryName,
-				@Version,
-				@FileName,
-				@ObjectName,
-				@PreferredScriptLocation,
-				@CDNPath
-			)
-			SET @JavaScriptLibraryID = (SELECT @@IDENTITY)
-		END
+    IF EXISTS (SELECT JavaScriptLibraryID FROM {objectQualifier}JavaScriptLibraries WHERE JavaScriptLibraryID = @JavaScriptLibraryID)
+        BEGIN
+            UPDATE {databaseOwner}[{objectQualifier}JavaScriptLibraries]
+                SET [PackageID] = @PackageID,
+                    [LibraryName] = @LibraryName,
+                    [Version] = @Version,
+                    [FileName] = @FileName,
+                    [ObjectName] = @ObjectName,
+                    [PreferredScriptLocation] = @PreferredScriptLocation,
+                    [CDNPath] = @CDNPath
+            WHERE JavaScriptLibraryID = @JavaScriptLibraryID
+        END
+    ELSE
+        BEGIN
+            INSERT INTO {databaseOwner}[{objectQualifier}JavaScriptLibraries] (
+                [PackageID],
+                [LibraryName],
+                [Version],
+                [FileName],
+                [ObjectName],
+                [PreferredScriptLocation],
+                [CDNPath]
+            )
+            VALUES (
+                @PackageID,
+                @LibraryName,
+                @Version,
+                @FileName,
+                @ObjectName,
+                @PreferredScriptLocation,
+                @CDNPath
+            )
+            SET @JavaScriptLibraryID = (SELECT @@IDENTITY)
+        END
 
-	SELECT @JavaScriptLibraryID
+    SELECT @JavaScriptLibraryID
 GO
 
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}SavePackageDependency]') AND type in (N'P', N'PC'))
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}SavePackageDependency]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}SavePackageDependency]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}SavePackageDependency]
-	@PackageDependencyID INT,
-	@PackageID INT,
-	@PackageName NVARCHAR(128),
-	@Version NVARCHAR(50)
+    @PackageDependencyID INT,
+    @PackageID INT,
+    @PackageName NVARCHAR(128),
+    @Version NVARCHAR(50)
 AS
-	IF EXISTS (SELECT PackageDependencyID FROM {objectQualifier}PackageDependencies WHERE PackageID = @PackageID AND PackageName = @PackageName AND Version = @Version)
-		BEGIN
-			UPDATE {databaseOwner}[{objectQualifier}PackageDependencies]
-			   SET [PackageID] = @PackageID,
-					[PackageName] = @PackageName,
-					[Version] = @Version
-			 WHERE PackageDependencyID = @PackageDependencyID
-		END
-	ELSE
-		BEGIN
-			INSERT INTO {databaseOwner}[{objectQualifier}PackageDependencies] (
-				[PackageID],
-				[PackageName],
-				[Version]
-			)
-			VALUES (
-				@PackageID,
-				@PackageName,
-				@Version
-			)
-			SET @PackageDependencyID = (SELECT @@IDENTITY)
-		END
+    IF EXISTS (SELECT PackageDependencyID FROM {objectQualifier}PackageDependencies WHERE PackageID = @PackageID AND PackageName = @PackageName AND Version = @Version)
+        BEGIN
+            UPDATE {databaseOwner}[{objectQualifier}PackageDependencies]
+                SET [PackageID] = @PackageID,
+                    [PackageName] = @PackageName,
+                    [Version] = @Version
+            WHERE PackageDependencyID = @PackageDependencyID
+        END
+    ELSE
+        BEGIN
+            INSERT INTO {databaseOwner}[{objectQualifier}PackageDependencies] (
+                [PackageID],
+                [PackageName],
+                [Version]
+            )
+            VALUES (
+                @PackageID,
+                @PackageName,
+                @Version
+            )
+            SET @PackageDependencyID = (SELECT @@IDENTITY)
+        END
 
-	SELECT @PackageDependencyID
+    SELECT @PackageDependencyID
 GO
 
 /***** DNN-6099: always remove user roles in current portal. *****/
@@ -334,37 +334,37 @@ IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}RemoveUser]
-	@UserID		int,
-	@PortalID   int
+    @UserID		int,
+    @PortalID   int
 AS
-	IF @PortalID IS NULL
-		BEGIN
-			-- Delete SuperUser
-			DELETE FROM {databaseOwner}{objectQualifier}Users
-				WHERE  UserId = @UserID
-		END
-	ELSE
-		BEGIN
-			-- Remove User from Portal
-			DELETE FROM {databaseOwner}{objectQualifier}UserPortals
-				WHERE  UserId = @UserID
-                 AND PortalId = @PortalID
-			IF NOT EXISTS (SELECT 1 FROM {databaseOwner}{objectQualifier}UserPortals WHERE  UserId = @UserID)
-				-- Delete User (but not if SuperUser)
-				BEGIN
-					DELETE FROM {databaseOwner}{objectQualifier}Users
-						WHERE  UserId = @UserID
-							AND IsSuperUser = 0
-					DELETE FROM {databaseOwner}{objectQualifier}UserRoles
-						WHERE  UserID = @UserID
-				END
-			ELSE
-				BEGIN
-					DELETE ur FROM {databaseOwner}{objectQualifier}UserRoles ur
-						INNER JOIN {databaseOwner}{objectQualifier}Roles r ON r.RoleID = ur.RoleID
-						WHERE  UserID = @UserID AND r.PortalID = @PortalID
-				END
-		END
+    IF @PortalID IS NULL
+        BEGIN
+            -- Delete SuperUser
+            DELETE FROM {databaseOwner}{objectQualifier}Users
+                WHERE  UserId = @UserID
+        END
+    ELSE
+        BEGIN
+            -- Remove User from Portal
+            DELETE FROM {databaseOwner}{objectQualifier}UserPortals
+                WHERE  UserId = @UserID
+                AND PortalId = @PortalID
+            IF NOT EXISTS (SELECT 1 FROM {databaseOwner}{objectQualifier}UserPortals WHERE  UserId = @UserID)
+                -- Delete User (but not if SuperUser)
+                BEGIN
+                    DELETE FROM {databaseOwner}{objectQualifier}Users
+                        WHERE  UserId = @UserID
+                            AND IsSuperUser = 0
+                    DELETE FROM {databaseOwner}{objectQualifier}UserRoles
+                        WHERE  UserID = @UserID
+                END
+            ELSE
+                BEGIN
+                    DELETE ur FROM {databaseOwner}{objectQualifier}UserRoles ur
+                        INNER JOIN {databaseOwner}{objectQualifier}Roles r ON r.RoleID = ur.RoleID
+                        WHERE  UserID = @UserID AND r.PortalID = @PortalID
+                END
+        END
 GO
 
 -- DNN6390:
@@ -384,32 +384,32 @@ BEGIN
             SET @FilterBy = Substring(@FilterBy, 2, Len(@FilterBy) - 1)
         IF Substring(@FilterBy, Len(@FilterBy), 1) = '%'
             SET @FilterBy = Substring(@FilterBy, 1, Len(@FilterBy) - 1)
-     END;
+    END;
 
-	IF IsNull(@PageIndex,-1) >= 0 AND IsNull(@PageSize, 0) > 0 AND IsNull(@PageSize, 0) < Cast(0x7fffffff AS Int)
-		WITH OrderedRoles AS (
-			SELECT RoleID, PortalID, RoleName, [Description], ServiceFee, BillingFrequency, TrialPeriod, TrialFrequency, BillingPeriod, TrialFee,
-				   IsPublic, AutoAssignment, RoleGroupID, RSVPCode, {databaseOwner}{objectQualifier}FilePath(IconFile) AS IconFile, Status, SecurityMode,
-				   CreatedByUserID,CreatedOnDate,LastModifiedByUserID,LastModifiedOnDate,
-				   ROW_NUMBER() OVER (ORDER BY RoleName ASC, PortalID DESC) AS RowNum
-			 FROM {databaseOwner}[{objectQualifier}Roles]
-			 WHERE (RoleName LIKE '%' + @FilterBy + '%' OR IsNull(@FilterBy,'') = '')
-			   AND (PortalID = @PortalID OR IsNull(@PortalID, -1)  = -1)
-			   AND (RoleId  >= 0) -- DNN-4288: ignore virtual roles
-			)
-		SELECT * FROM OrderedRoles WHERE RowNum >= {databaseOwner}{objectQualifier}PageLowerBound(@PageIndex, @Pagesize)
-									 AND RowNum <= {databaseOwner}{objectQualifier}PageUpperBound(@PageIndex, @Pagesize) ORDER BY RowNum
-		 OPTION (OPTIMIZE FOR (@PortalId UNKNOWN));
-	ELSE -- no paging
+    IF IsNull(@PageIndex,-1) >= 0 AND IsNull(@PageSize, 0) > 0 AND IsNull(@PageSize, 0) < Cast(0x7fffffff AS Int)
+        WITH OrderedRoles AS (
+            SELECT RoleID, PortalID, RoleName, [Description], ServiceFee, BillingFrequency, TrialPeriod, TrialFrequency, BillingPeriod, TrialFee,
+                    IsPublic, AutoAssignment, RoleGroupID, RSVPCode, {databaseOwner}{objectQualifier}FilePath(IconFile) AS IconFile, Status, SecurityMode,
+                    CreatedByUserID,CreatedOnDate,LastModifiedByUserID,LastModifiedOnDate,
+                    ROW_NUMBER() OVER (ORDER BY RoleName ASC, PortalID DESC) AS RowNum
+            FROM {databaseOwner}[{objectQualifier}Roles]
+            WHERE (RoleName LIKE '%' + @FilterBy + '%' OR IsNull(@FilterBy,'') = '')
+                AND (PortalID = @PortalID OR IsNull(@PortalID, -1)  = -1)
+                AND (RoleId  >= 0) -- DNN-4288: ignore virtual roles
+            )
+        SELECT * FROM OrderedRoles WHERE RowNum >= {databaseOwner}{objectQualifier}PageLowerBound(@PageIndex, @Pagesize)
+                                    AND RowNum <= {databaseOwner}{objectQualifier}PageUpperBound(@PageIndex, @Pagesize) ORDER BY RowNum
+        OPTION (OPTIMIZE FOR (@PortalId UNKNOWN));
+    ELSE -- no paging
         SELECT RoleID, PortalID, RoleName, [Description], ServiceFee, BillingFrequency, TrialPeriod, TrialFrequency, BillingPeriod, TrialFee,
-               IsPublic, AutoAssignment, RoleGroupID, RSVPCode, {databaseOwner}{objectQualifier}FilePath(IconFile) AS IconFile, Status, SecurityMode,
-               CreatedByUserID,CreatedOnDate,LastModifiedByUserID,LastModifiedOnDate,
-               ROW_NUMBER() OVER (ORDER BY RoleName ASC, PortalID DESC) AS RowNum
-         FROM {databaseOwner}[{objectQualifier}Roles]
-         WHERE (RoleName LIKE '%' + @FilterBy + '%' OR IsNull(@FilterBy,'') = '')
-           AND (PortalID = @PortalID OR IsNull(@PortalID, -1)  = -1)
-           AND (RoleId  >= 0) -- DNN-4288: ignore virtual roles
-		 OPTION (OPTIMIZE FOR (@PortalId UNKNOWN))
+                IsPublic, AutoAssignment, RoleGroupID, RSVPCode, {databaseOwner}{objectQualifier}FilePath(IconFile) AS IconFile, Status, SecurityMode,
+                CreatedByUserID,CreatedOnDate,LastModifiedByUserID,LastModifiedOnDate,
+                ROW_NUMBER() OVER (ORDER BY RoleName ASC, PortalID DESC) AS RowNum
+        FROM {databaseOwner}[{objectQualifier}Roles]
+        WHERE (RoleName LIKE '%' + @FilterBy + '%' OR IsNull(@FilterBy,'') = '')
+            AND (PortalID = @PortalID OR IsNull(@PortalID, -1)  = -1)
+            AND (RoleId  >= 0) -- DNN-4288: ignore virtual roles
+        OPTION (OPTIMIZE FOR (@PortalId UNKNOWN))
 END
 GO
 
@@ -420,7 +420,7 @@ GO
 UPDATE {databaseOwner}[{objectQualifier}Tabs]
 SET SiteMapPriority = 0
 WHERE TabId IN (SELECT Custom404TabId FROM {databaseOwner}[{objectQualifier}PortalLocalization]) OR
-      TabId IN (SELECT Custom500TabId FROM {databaseOwner}[{objectQualifier}PortalLocalization])
+    TabId IN (SELECT Custom500TabId FROM {databaseOwner}[{objectQualifier}PortalLocalization])
 GO
 
 
@@ -428,63 +428,63 @@ GO
 -- DNN-6702: fix an issue with shared modules in Site Groups
 -- ---------------------------------------------------------
 IF EXISTS(SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}ModulePermission' AND object_id = OBJECT_ID('{objectQualifier}ModulePermission'))
-	ALTER TABLE	{databaseOwner}[{objectQualifier}ModulePermission] DROP CONSTRAINT [IX_{objectQualifier}ModulePermission] 
+    ALTER TABLE	{databaseOwner}[{objectQualifier}ModulePermission] DROP CONSTRAINT [IX_{objectQualifier}ModulePermission]
 GO
 
 IF EXISTS(SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}ModulePermission_Portals' AND object_id = OBJECT_ID('{objectQualifier}ModulePermission'))
-	DROP INDEX [IX_{objectQualifier}ModulePermission_Portals] ON {databaseOwner}[{objectQualifier}ModulePermission]
+    DROP INDEX [IX_{objectQualifier}ModulePermission_Portals] ON {databaseOwner}[{objectQualifier}ModulePermission]
 GO
 
 IF EXISTS(SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}ModulePermission_Modules' AND object_id = OBJECT_ID('{objectQualifier}ModulePermission'))
-	DROP INDEX [IX_{objectQualifier}ModulePermission_Modules] ON {databaseOwner}[{objectQualifier}ModulePermission]
+    DROP INDEX [IX_{objectQualifier}ModulePermission_Modules] ON {databaseOwner}[{objectQualifier}ModulePermission]
 GO
 
 IF EXISTS(SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}ModulePermission_Users' AND object_id = OBJECT_ID('{objectQualifier}ModulePermission'))
-	DROP INDEX [IX_{objectQualifier}ModulePermission_Users] ON {databaseOwner}[{objectQualifier}ModulePermission]
+    DROP INDEX [IX_{objectQualifier}ModulePermission_Users] ON {databaseOwner}[{objectQualifier}ModulePermission]
 GO
 
 IF EXISTS(SELECT * FROM sys.indexes WHERE name = 'IX_{objectQualifier}ModulePermission_Roles' AND object_id = OBJECT_ID('{objectQualifier}ModulePermission'))
-	DROP INDEX [IX_{objectQualifier}ModulePermission_Roles] ON {databaseOwner}[{objectQualifier}ModulePermission]
+    DROP INDEX [IX_{objectQualifier}ModulePermission_Roles] ON {databaseOwner}[{objectQualifier}ModulePermission]
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}ModulePermission_Modules ON {databaseOwner}[{objectQualifier}ModulePermission]
-	(ModuleID, PermissionID, PortalID, RoleID, UserID) 
-	INCLUDE (AllowAccess)
+    (ModuleID, PermissionID, PortalID, RoleID, UserID)
+    INCLUDE (AllowAccess)
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}ModulePermission_Users ON {databaseOwner}[{objectQualifier}ModulePermission]
-	(UserID, ModuleID, PermissionID, PortalID) 
-	INCLUDE (AllowAccess)
-	WHERE UserID IS NOT Null
+    (UserID, ModuleID, PermissionID, PortalID)
+    INCLUDE (AllowAccess)
+    WHERE UserID IS NOT Null
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX IX_{objectQualifier}ModulePermission_Roles ON {databaseOwner}[{objectQualifier}ModulePermission]
-	(RoleID, ModuleID, PermissionID, PortalID) 
-	INCLUDE (AllowAccess)
-	WHERE RoleID IS NOT Null
+    (RoleID, ModuleID, PermissionID, PortalID)
+    INCLUDE (AllowAccess)
+    WHERE RoleID IS NOT Null
 GO
 
 -- DNN-5743 / DNN-6419 / DNN-6580 / DNN-6620 / DNN-6742 / DNN-6779:
 IF  EXISTS (
-	SELECT * 
-	FROM sys.procedures 
-	WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPortals]'))
-    
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortals]
+    SELECT *
+    FROM sys.procedures
+    WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}GetPortals]'))
+
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetPortals]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetPortals]
-	@CultureCode	nVarChar(50) -- pass Null | '' to return portal default language
+    @CultureCode	nVarChar(50) -- pass Null | '' to return portal default language
 AS
 BEGIN
-	SELECT * 
-	FROM  {databaseOwner}[{objectQualifier}vw_Portals]
-	WHERE CultureCode = 
-		CASE 
-			WHEN IsNull(@CultureCode, N'') = N'' THEN DefaultLanguage
-			ELSE @CultureCode 
-		END 
-	ORDER BY PortalName;
+    SELECT *
+    FROM  {databaseOwner}[{objectQualifier}vw_Portals]
+    WHERE CultureCode =
+        CASE
+            WHEN IsNull(@CultureCode, N'') = N'' THEN DefaultLanguage
+            ELSE @CultureCode
+        END
+    ORDER BY PortalName;
 END
 GO
 

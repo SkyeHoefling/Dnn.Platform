@@ -16,7 +16,7 @@ export default class Folders extends Component {
     componentDidUpdate(prevProps) {
         const { props } = this;
         if (props.folders !== prevProps.folders) {
-            if (!props.folders || !props.folders.children || !props.folders.children[0] || 
+            if (!props.folders || !props.folders.children || !props.folders.children[0] ||
                 !props.folders.children[0].data || !props.folders.children[0].data.key) {
                 return;
             }
@@ -69,9 +69,9 @@ export default class Folders extends Component {
             const isOpen = this.state.openFolders.some(id => id === child.data.key);
             const className = isOpen ? "open" : "";
             return <li className={className} key={child.data.key}>
-                {child.data.hasChildren && 
-                    <div 
-                        className="has-children" 
+                {child.data.hasChildren &&
+                    <div
+                        className="has-children"
                         onClick={this.onParentClick.bind(this, child)}>
                     </div>
                 }
@@ -79,8 +79,8 @@ export default class Folders extends Component {
                     {folderIcon}
                     <div className="item-name">{child.data.value}</div>
                 </div>
-                {child.data.hasChildren && 
-                    this.getFolders(child) 
+                {child.data.hasChildren &&
+                    this.getFolders(child)
                 }
             </li>;
         });

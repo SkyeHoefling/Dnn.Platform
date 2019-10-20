@@ -20,7 +20,7 @@
     <div id="smMainContent" class="dnnForm DnnModule-Messaging-Notifications">
         <ul class="dnnAdminTabNav">
             <li><a href="#dnnCoreMessaging" data-bind="click: loadMessagesTab, attr: { title: TotalNewThreads() + '<%=LocalizeString("NewUnreadMessages") %>    '}"><span data-bind="    text: TotalNewThreads, visible: TotalNewThreads() > 0"></span><%=LocalizeString("Messages") %></a></li>
-            <li><a href="#dnnCoreNotification" data-bind="click: loadNotificationsTab, attr: {title: TotalNotifications() + '<%=LocalizeString("TotalNotifications") %>    '}"><span data-bind="    text: TotalNotifications, visible: TotalNotifications() > 0"></span><%=LocalizeString("Notifications") %></a></li>            
+            <li><a href="#dnnCoreNotification" data-bind="click: loadNotificationsTab, attr: {title: TotalNotifications() + '<%=LocalizeString("TotalNotifications") %>    '}"><span data-bind="    text: TotalNotifications, visible: TotalNotifications() > 0"></span><%=LocalizeString("Notifications") %></a></li>
         </ul>
         <!-- start core messaging -->
         <div class="coreMessaging" id="dnnCoreMessaging">
@@ -31,7 +31,7 @@
                     <div class="messageFolders">
                         <p><strong data-bind="text: getPageNumbers()"></strong><%=LocalizeString("Of")%><strong data-bind="    text: TotalConversations"></strong></p>
                         <ul class="dnnButtonGroup">
-							<li class="dnnButtonGroup-first"></li>
+                            <li class="dnnButtonGroup-first"></li>
                             <li class="alpha">
                                 <a href="#" title='<%=LocalizeString("Conversations")%>' data-bind="click: $root.myinbox, css: {'active': showInbox}"><span><%=LocalizeString("Conversations") %></span></a>
                             </li>
@@ -46,7 +46,7 @@
                     <!-- MESSAGE SELECT: SELECT | ACTIONS | ARCHIVE -->
                     <div class="messageSelect">
                         <ul class="dnnButtonGroup">
-							<li class="dnnButtonGroup-first"></li>
+                            <li class="dnnButtonGroup-first"></li>
                             <li id="SelectMenu" class="alpha selectDrop" data-bind="css: { 'active': selectMenuOn }, click: toogleSelectMenu, event: { blur: toogleSelectMenu }, visible: showInbox()">
                                 <a href="#" title='<%=LocalizeString("SelectMessages")%>'><span><%=LocalizeString("Select")%></span></a>
                                 <ul>
@@ -64,11 +64,11 @@
                                     <li><a href="#" data-bind="click: moveSelectedToArchive"><%=LocalizeString("MarkArchive")%></a></li>
                                 </ul>
                             </li>
-							<li id="ArchiveButton" class="omega" data-bind="visible: showInbox()">
-								<a href="#" title='<%=LocalizeString("ArchiveMessages")%>' class="ArchiveItems" data-bind="click: moveSelectedToArchive"><span><%=LocalizeString("MarkArchive")%></span></a>
-							</li>
+                            <li id="ArchiveButton" class="omega" data-bind="visible: showInbox()">
+                                <a href="#" title='<%=LocalizeString("ArchiveMessages")%>' class="ArchiveItems" data-bind="click: moveSelectedToArchive"><span><%=LocalizeString("MarkArchive")%></span></a>
+                            </li>
                         </ul>
-                        
+
                     </div>
                     <!-- MESSAGE ACTIONS: ARRANGE | ORDER | FILTER -->
                     <div class="messageActions" style="display:none">
@@ -129,7 +129,7 @@
                                                 <a href="#" data-bind="click: $root.unarchive"><%=LocalizeString("MarkUnarchive")%></a>
                                                 <!-- /ko -->
                                                 <!-- ko if: $root.showArchivebox -->
-                                                 | <a href="#" data-bind="click: $root.delete"><%=LocalizeString("Delete")%></a>
+                                                | <a href="#" data-bind="click: $root.delete"><%=LocalizeString("Delete")%></a>
                                                 <!-- /ko -->
                                                 <!-- ko if: ($root.showInbox() || $root.showArchivebox()) --> | <!-- /ko -->
                                                 <a href="#" data-bind="click: $root.getRepliesAndReply"><%=LocalizeString("Reply")%></a>
@@ -153,8 +153,8 @@
                         <div class="messageHeader">
                             <p><strong><%=LocalizeString("Subject")%>:</strong> <span data-bind="text: threadSubject"></span><br/><strong><%=LocalizeString("SentTo")%>:</strong> <span data-bind="    text: threadTo"></span></p>
                             <div class="returnLink">
-                                <a href="#" data-bind="click: toggleArchiveConversation, text: (TotalArchivedThreads() === 0 ? '<%=Localization.GetSafeJSString(LocalizeString("MarkArchive"))%>    ' : '<%=Localization.GetSafeJSString(LocalizeString("MarkUnarchive"))%>    ')"></a> | 
-                                <a href="#" data-bind="click: toggleConversationState, text: (conversationRead() === true ? '<%=Localization.GetSafeJSString(LocalizeString("MarkUnread"))%>    ' : '<%=Localization.GetSafeJSString(LocalizeString("MarkRead"))%>    '), visible: TotalArchivedThreads() === 0"></a> | 
+                                <a href="#" data-bind="click: toggleArchiveConversation, text: (TotalArchivedThreads() === 0 ? '<%=Localization.GetSafeJSString(LocalizeString("MarkArchive"))%>    ' : '<%=Localization.GetSafeJSString(LocalizeString("MarkUnarchive"))%>    ')"></a> |
+                                <a href="#" data-bind="click: toggleConversationState, text: (conversationRead() === true ? '<%=Localization.GetSafeJSString(LocalizeString("MarkUnread"))%>    ' : '<%=Localization.GetSafeJSString(LocalizeString("MarkRead"))%>    '), visible: TotalArchivedThreads() === 0"></a> |
                                 <a href="#" data-bind="click: backToMessages"><%=LocalizeString("BackToMessages")%></a>
                             </div>
                             <div class="dnnClear"></div>
@@ -167,9 +167,9 @@
                                 <li>
                                     <ul>
                                         <li class="ListCol-1">
-										    <a class="profileImg" data-bind="attr: { href: SenderProfileUrl }">
-											    <span><em><img alt="Display Name" data-bind="attr: { src: SenderAvatar, alt: SenderDisplayName, title: SenderDisplayName }" /></em></span>
-										    </a>
+                                            <a class="profileImg" data-bind="attr: { href: SenderProfileUrl }">
+                                                <span><em><img alt="Display Name" data-bind="attr: { src: SenderAvatar, alt: SenderDisplayName, title: SenderDisplayName }" /></em></span>
+                                            </a>
                                         </li>
                                         <li class="ListCol-2">
                                             <dl>
@@ -251,41 +251,41 @@
             <div class="dnnCoreMessagingFooter"><a href="#" class="dnnTertiaryAction" data-bind="click: loadMoreNotifications, visible: loadMoreNotificationsVisible"><%=LocalizeString("LoadMore")%></a></div>
         </div>
         <!-- end core notification -->
-		
+
     </div>
 </div>
 <script type="text/javascript">
-	jQuery(document).ready(function ($) {
-		var sm = new CoreMessaging($, ko, {
-			profilePicHandler: '<% = DotNetNuke.Common.Globals.UserProfilePicRelativeUrl() %>',
-			conversationSetAsReadText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationSetAsRead"))%>',
-			conversationSetAsUnreadText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationSetAsUnread"))%>',
-			loadingText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Loading"))%>',
-			loadMoreText: '<%= ClientAPI.GetSafeJSString(LocalizeString("LoadMore"))%>',
-			conversationArchivedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationArchived"))%>',
-			conversationUnarchivedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationUnarchived"))%>',
-			notificationConfirmTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("NotificationConfirmTitle"))%>',
-			notificationConfirmYesText: '<%= ClientAPI.GetSafeJSString(LocalizeString("NotificationConfirmYes"))%>',
-			notificationConfirmNoText: '<%= ClientAPI.GetSafeJSString(LocalizeString("NotificationConfirmNo"))%>',
-			actionPerformedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ActionPerformed"))%>',
-			actionNotPerformedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ActionNotPerformed"))%>',
-			replyHasNoRecipientsText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ReplyHasNoRecipients"))%>',
-			messageSentText: '<%= ClientAPI.GetSafeJSString(LocalizeString("MessageSent")) %>',
-			serverErrorText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ServerError"))%>',
-			serverErrorWithDescriptionText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ServerErrorWithDescription"))%>',
-			dismissAllConfirmText: '<%= ClientAPI.GetSafeJSString(LocalizeString("DismissAllConfirm")) %>',
-			text: '<%= Localization.GetSafeJSString("DeleteItem.Text", Localization.SharedResourceFile) %>',
-			yesText: '<%= Localization.GetSafeJSString("Yes.Text", Localization.SharedResourceFile) %>',
-			noText: '<%= Localization.GetSafeJSString("No.Text", Localization.SharedResourceFile) %>',
-			title: '<%= Localization.GetSafeJSString("Confirm.Text", Localization.SharedResourceFile) %>',
-		    disablePrivateMessage: <%= DisablePrivateMessage.ToString().ToLowerInvariant() %>,
-		    messageTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Messages")) %>',
-		    notificationTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Notifications")) %>',
-		    archiveTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("MarkArchive")) %>',
-		    sentTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Sent")) %>',
-		    currentUserText: '<%= ClientAPI.GetSafeJSString(UserController.Instance.GetCurrentUserInfo().DisplayName) %>',
+    jQuery(document).ready(function ($) {
+        var sm = new CoreMessaging($, ko, {
+            profilePicHandler: '<% = DotNetNuke.Common.Globals.UserProfilePicRelativeUrl() %>',
+            conversationSetAsReadText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationSetAsRead"))%>',
+            conversationSetAsUnreadText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationSetAsUnread"))%>',
+            loadingText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Loading"))%>',
+            loadMoreText: '<%= ClientAPI.GetSafeJSString(LocalizeString("LoadMore"))%>',
+            conversationArchivedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationArchived"))%>',
+            conversationUnarchivedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ConversationUnarchived"))%>',
+            notificationConfirmTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("NotificationConfirmTitle"))%>',
+            notificationConfirmYesText: '<%= ClientAPI.GetSafeJSString(LocalizeString("NotificationConfirmYes"))%>',
+            notificationConfirmNoText: '<%= ClientAPI.GetSafeJSString(LocalizeString("NotificationConfirmNo"))%>',
+            actionPerformedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ActionPerformed"))%>',
+            actionNotPerformedText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ActionNotPerformed"))%>',
+            replyHasNoRecipientsText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ReplyHasNoRecipients"))%>',
+            messageSentText: '<%= ClientAPI.GetSafeJSString(LocalizeString("MessageSent")) %>',
+            serverErrorText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ServerError"))%>',
+            serverErrorWithDescriptionText: '<%= ClientAPI.GetSafeJSString(LocalizeString("ServerErrorWithDescription"))%>',
+            dismissAllConfirmText: '<%= ClientAPI.GetSafeJSString(LocalizeString("DismissAllConfirm")) %>',
+            text: '<%= Localization.GetSafeJSString("DeleteItem.Text", Localization.SharedResourceFile) %>',
+            yesText: '<%= Localization.GetSafeJSString("Yes.Text", Localization.SharedResourceFile) %>',
+            noText: '<%= Localization.GetSafeJSString("No.Text", Localization.SharedResourceFile) %>',
+            title: '<%= Localization.GetSafeJSString("Confirm.Text", Localization.SharedResourceFile) %>',
+            disablePrivateMessage: <%= DisablePrivateMessage.ToString().ToLowerInvariant() %>,
+            messageTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Messages")) %>',
+            notificationTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Notifications")) %>',
+            archiveTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("MarkArchive")) %>',
+            sentTitleText: '<%= ClientAPI.GetSafeJSString(LocalizeString("Sent")) %>',
+            currentUserText: '<%= ClientAPI.GetSafeJSString(UserController.Instance.GetCurrentUserInfo().DisplayName) %>',
             portalText: '<%= ClientAPI.GetSafeJSString(PortalSettings.PortalName) %>'
-	}, {
+    }, {
             openTriggerScope: '#<%= coreMessaging.ClientID %>',
             openTriggerSelector: '.ComposeMessage',
             title: '<%= ClientAPI.GetSafeJSString(LocalizeString("Title")) %>',
@@ -328,7 +328,7 @@
             },
             servicesFramework: $.ServicesFramework(<%=ModuleId %>)
         });
-        
+
         sm.init('#<%= coreMessaging.ClientID %>');
         $("#<%=coreMessaging.ClientID %>").parentsUntil("div[id$=ContentPane]").parent().find(".dnnActionMenu").css({left: "232px", top: "1px"});
     });

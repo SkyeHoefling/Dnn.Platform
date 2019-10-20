@@ -38,16 +38,16 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
   function in_array(state) {
     var ch = cur_scope(state);
     if(ch=="[" || ch=="{") {
-      return true;
+    return true;
     }
     else {
-      return false;
+    return false;
     }
   }
 
   function cur_scope(state) {
     if(state.scopes.length==0) {
-      return null;
+    return null;
     }
     return state.scopes[state.scopes.length - 1];
   }
@@ -57,22 +57,22 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
     // Handle scope changes
     var leaving_expr = state.leaving_expr;
     if(stream.sol()) {
-      leaving_expr = false;
+    leaving_expr = false;
     }
     state.leaving_expr = false;
     if(leaving_expr) {
-      if(stream.match(/^'+/)) {
+    if(stream.match(/^'+/)) {
         return 'operator';
-      }
+    }
 
     }
 
     if(stream.match(/^\.{2,3}/)) {
-      return 'operator';
+    return 'operator';
     }
 
     if (stream.eatSpace()) {
-      return null;
+    return null;
     }
 
     var ch = stream.peek();
@@ -82,128 +82,128 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
         return 'comment';
     }
     if(ch==='[') {
-      state.scopes.push("[");
+    state.scopes.push("[");
     }
 
     if(ch==='{') {
-      state.scopes.push("{");
+    state.scopes.push("{");
     }
 
     var scope=cur_scope(state);
 
     if(scope==='[' && ch===']') {
-      state.scopes.pop();
-      state.leaving_expr=true;
+    state.scopes.pop();
+    state.leaving_expr=true;
     }
 
     if(scope==='{' && ch==='}') {
-      state.scopes.pop();
-      state.leaving_expr=true;
+    state.scopes.pop();
+    state.leaving_expr=true;
     }
 
     if(ch===')') {
-      state.leaving_expr = true;
+    state.leaving_expr = true;
     }
 
     var match;
     if(!in_array(state) && (match=stream.match(openers, false))) {
-      state.scopes.push(match);
+    state.scopes.push(match);
     }
 
     if(!in_array(state) && stream.match(closers, false)) {
-      state.scopes.pop();
+    state.scopes.pop();
     }
 
     if(in_array(state)) {
-      if(stream.match(/^end/)) {
+    if(stream.match(/^end/)) {
         return 'number';
-      }
+    }
 
     }
 
     if(stream.match(/^=>/)) {
-      return 'operator';
+    return 'operator';
     }
 
 
     // Handle Number Literals
     if (stream.match(/^[0-9\.]/, false)) {
-      var imMatcher = RegExp(/^im\b/);
-      var floatLiteral = false;
-      // Floats
-      if (stream.match(/^\d*\.(?!\.)\d+([ef][\+\-]?\d+)?/i)) { floatLiteral = true; }
-      if (stream.match(/^\d+\.(?!\.)\d*/)) { floatLiteral = true; }
-      if (stream.match(/^\.\d+/)) { floatLiteral = true; }
-      if (floatLiteral) {
-          // Float literals may be "imaginary"
-          stream.match(imMatcher);
-          state.leaving_expr = true;
-          return 'number';
-      }
-      // Integers
-      var intLiteral = false;
-      // Hex
-      if (stream.match(/^0x[0-9a-f]+/i)) { intLiteral = true; }
-      // Binary
-      if (stream.match(/^0b[01]+/i)) { intLiteral = true; }
-      // Octal
-      if (stream.match(/^0o[0-7]+/i)) { intLiteral = true; }
-      // Decimal
-      if (stream.match(/^[1-9]\d*(e[\+\-]?\d+)?/)) {
-          intLiteral = true;
-      }
-      // Zero by itself with no other piece of number.
-      if (stream.match(/^0(?![\dx])/i)) { intLiteral = true; }
-      if (intLiteral) {
-          // Integer literals may be "long"
-          stream.match(imMatcher);
-          state.leaving_expr = true;
-          return 'number';
-      }
+    var imMatcher = RegExp(/^im\b/);
+    var floatLiteral = false;
+    // Floats
+    if (stream.match(/^\d*\.(?!\.)\d+([ef][\+\-]?\d+)?/i)) { floatLiteral = true; }
+    if (stream.match(/^\d+\.(?!\.)\d*/)) { floatLiteral = true; }
+    if (stream.match(/^\.\d+/)) { floatLiteral = true; }
+    if (floatLiteral) {
+        // Float literals may be "imaginary"
+        stream.match(imMatcher);
+        state.leaving_expr = true;
+        return 'number';
+    }
+    // Integers
+    var intLiteral = false;
+    // Hex
+    if (stream.match(/^0x[0-9a-f]+/i)) { intLiteral = true; }
+    // Binary
+    if (stream.match(/^0b[01]+/i)) { intLiteral = true; }
+    // Octal
+    if (stream.match(/^0o[0-7]+/i)) { intLiteral = true; }
+    // Decimal
+    if (stream.match(/^[1-9]\d*(e[\+\-]?\d+)?/)) {
+        intLiteral = true;
+    }
+    // Zero by itself with no other piece of number.
+    if (stream.match(/^0(?![\dx])/i)) { intLiteral = true; }
+    if (intLiteral) {
+        // Integer literals may be "long"
+        stream.match(imMatcher);
+        state.leaving_expr = true;
+        return 'number';
+    }
     }
 
     if(stream.match(/^(::)|(<:)/)) {
-      return 'operator';
+    return 'operator';
     }
 
     // Handle symbols
     if(!leaving_expr && stream.match(symbol)) {
-      return 'string';
+    return 'string';
     }
 
     // Handle operators and Delimiters
     if (stream.match(operators)) {
-      return 'operator';
+    return 'operator';
     }
 
 
     // Handle Strings
     if (stream.match(stringPrefixes)) {
-      state.tokenize = tokenStringFactory(stream.current());
-      return state.tokenize(stream, state);
+    state.tokenize = tokenStringFactory(stream.current());
+    return state.tokenize(stream, state);
     }
 
     if (stream.match(macro)) {
-      return 'meta';
+    return 'meta';
     }
 
 
     if (stream.match(delimiters)) {
-      return null;
+    return null;
     }
 
     if (stream.match(keywords)) {
-      return 'keyword';
+    return 'keyword';
     }
 
     if (stream.match(builtins)) {
-      return 'builtin';
+    return 'builtin';
     }
 
 
     if (stream.match(identifiers)) {
-      state.leaving_expr=true;
-      return 'variable';
+    state.leaving_expr=true;
+    return 'variable';
     }
     // Handle non-detected items
     stream.next();
@@ -212,18 +212,18 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
 
   function tokenStringFactory(delimiter) {
     while ('rub'.indexOf(delimiter.charAt(0).toLowerCase()) >= 0) {
-      delimiter = delimiter.substr(1);
+    delimiter = delimiter.substr(1);
     }
     var singleline = delimiter.length == 1;
     var OUTCLASS = 'string';
 
     function tokenString(stream, state) {
-      while (!stream.eol()) {
+    while (!stream.eol()) {
         stream.eatWhile(/[^'"\\]/);
         if (stream.eat('\\')) {
             stream.next();
             if (singleline && stream.eol()) {
-              return OUTCLASS;
+            return OUTCLASS;
             }
         } else if (stream.match(delimiter)) {
             state.tokenize = tokenBase;
@@ -231,15 +231,15 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
         } else {
             stream.eat(/['"]/);
         }
-      }
-      if (singleline) {
+    }
+    if (singleline) {
         if (parserConf.singleLineStringErrors) {
             return ERRORCLASS;
         } else {
             state.tokenize = tokenBase;
         }
-      }
-      return OUTCLASS;
+    }
+    return OUTCLASS;
     }
     tokenString.isString = true;
     return tokenString;
@@ -251,13 +251,13 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
 
     // Handle '.' connected identifiers
     if (current === '.') {
-      style = stream.match(identifiers, false) ? null : ERRORCLASS;
-      if (style === null && state.lastStyle === 'meta') {
-          // Apply 'meta' style to '.' connected identifiers when
-          // appropriate.
+    style = stream.match(identifiers, false) ? null : ERRORCLASS;
+    if (style === null && state.lastStyle === 'meta') {
+        // Apply 'meta' style to '.' connected identifiers when
+        // appropriate.
         style = 'meta';
-      }
-      return style;
+    }
+    return style;
     }
 
     return style;
@@ -265,25 +265,25 @@ CodeMirror.defineMode("julia", function(_conf, parserConf) {
 
   var external = {
     startState: function() {
-      return {
+    return {
         tokenize: tokenBase,
         scopes: [],
         leaving_expr: false
-      };
+    };
     },
 
     token: function(stream, state) {
-      var style = tokenLexer(stream, state);
-      state.lastStyle = style;
-      return style;
+    var style = tokenLexer(stream, state);
+    state.lastStyle = style;
+    return style;
     },
 
     indent: function(state, textAfter) {
-      var delta = 0;
-      if(textAfter=="end" || textAfter=="]" || textAfter=="}" || textAfter=="else" || textAfter=="elseif" || textAfter=="catch" || textAfter=="finally") {
+    var delta = 0;
+    if(textAfter=="end" || textAfter=="]" || textAfter=="}" || textAfter=="else" || textAfter=="elseif" || textAfter=="catch" || textAfter=="finally") {
         delta = -1;
-      }
-      return (state.scopes.length + delta) * 4;
+    }
+    return (state.scopes.length + delta) * 4;
     },
 
     lineComment: "#",

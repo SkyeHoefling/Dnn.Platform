@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 #region Usings
@@ -67,12 +67,12 @@ namespace DotNetNuke.Common.Utilities
         {
             Default,
             Disabled,
-            NotSet, 
+            NotSet,
             Single
         }
 
         #endregion
-        
+
             /// <summary>
         /// Adds a new AppSetting to Web.Config. The update parameter allows you to define if,
         /// when the key already exists, this need to be updated or not
@@ -84,7 +84,7 @@ namespace DotNetNuke.Common.Utilities
         /// <returns></returns>
         public static XmlDocument AddAppSetting(XmlDocument xmlDoc, string key, string value, bool update)
         {
-            //retrieve the appSettings node 
+            //retrieve the appSettings node
             XmlNode xmlAppSettings = xmlDoc.SelectSingleNode("//appSettings");
             if (xmlAppSettings != null)
             {
@@ -260,8 +260,8 @@ namespace DotNetNuke.Common.Utilities
         {
             var configNav = Load();
 
-            var httpNode = configNav.SelectSingleNode("configuration//system.web//httpRuntime") ?? 
-                           configNav.SelectSingleNode("configuration//location//system.web//httpRuntime");
+            var httpNode = configNav.SelectSingleNode("configuration//system.web//httpRuntime") ??
+                            configNav.SelectSingleNode("configuration//location//system.web//httpRuntime");
             long maxRequestLength = 0;
             if (httpNode != null)
             {
@@ -269,7 +269,7 @@ namespace DotNetNuke.Common.Utilities
             }
 
             httpNode = configNav.SelectSingleNode("configuration//system.webServer//security//requestFiltering//requestLimits") ??
-                       configNav.SelectSingleNode("configuration//location//system.webServer//security//requestFiltering//requestLimits");
+                        configNav.SelectSingleNode("configuration//location//system.webServer//security//requestFiltering//requestLimits");
 
             if (httpNode == null && Iis7AndAbove())
             {
@@ -297,7 +297,7 @@ namespace DotNetNuke.Common.Utilities
             var configNav = Load();
             const int defaultRequestFilter = 30000000/1024/1024;
             var httpNode = configNav.SelectSingleNode("configuration//system.webServer//security//requestFiltering//requestLimits") ??
-                       configNav.SelectSingleNode("configuration//location//system.webServer//security//requestFiltering//requestLimits");
+                        configNav.SelectSingleNode("configuration//location//system.webServer//security//requestFiltering//requestLimits");
             if (httpNode == null && Iis7AndAbove())
             {
                 return defaultRequestFilter;
@@ -331,7 +331,7 @@ namespace DotNetNuke.Common.Utilities
             }
 
             httpNode = configNav.SelectSingleNode("configuration//system.webServer//security//requestFiltering//requestLimits") ??
-                       configNav.SelectSingleNode("configuration//location//system.webServer//security//requestFiltering//requestLimits");
+                        configNav.SelectSingleNode("configuration//location//system.webServer//security//requestFiltering//requestLimits");
             if (httpNode != null)
             {
                 httpNode.Attributes["maxAllowedContentLength"].InnerText = newSize.ToString("#");
@@ -703,7 +703,7 @@ namespace DotNetNuke.Common.Utilities
 
         public static string UpdateMachineKey()
         {
-			string backupFolder = string.Concat(Globals.glbConfigFolder, "Backup_", DateTime.Now.ToString("yyyyMMddHHmm"), "\\");
+            string backupFolder = string.Concat(Globals.glbConfigFolder, "Backup_", DateTime.Now.ToString("yyyyMMddHHmm"), "\\");
             var xmlConfig = new XmlDocument { XmlResolver = null };
             string strError = "";
 
@@ -750,7 +750,7 @@ namespace DotNetNuke.Common.Utilities
 
         public static string UpdateValidationKey()
         {
-			string backupFolder = string.Concat(Globals.glbConfigFolder, "Backup_", DateTime.Now.ToString("yyyyMMddHHmm"), "\\");
+            string backupFolder = string.Concat(Globals.glbConfigFolder, "Backup_", DateTime.Now.ToString("yyyyMMddHHmm"), "\\");
             var xmlConfig = new XmlDocument { XmlResolver = null };
             string strError = "";
 
@@ -840,7 +840,7 @@ namespace DotNetNuke.Common.Utilities
                     return file + ".config";
             }
         }
-        
+
         /// <summary>
         /// UpdateInstallVersion, but only if the setting does not already exist
         /// </summary>
@@ -854,7 +854,7 @@ namespace DotNetNuke.Common.Utilities
             {
                 // we need to add the InstallVersion
 
-				string backupFolder = string.Concat(Globals.glbConfigFolder, "Backup_", DateTime.Now.ToString("yyyyMMddHHmm"), "\\");
+                string backupFolder = string.Concat(Globals.glbConfigFolder, "Backup_", DateTime.Now.ToString("yyyyMMddHHmm"), "\\");
                 var xmlConfig = new XmlDocument { XmlResolver = null };
                 //save the current config files
                 BackupConfig();
@@ -902,7 +902,7 @@ namespace DotNetNuke.Common.Utilities
         {
             try
             {
-                
+
                 //check current .net version and if attribute has been added already
                 if ((IsNet45OrNewer()) && GetFcnMode() != fcnMode.ToString())
                 {
@@ -922,7 +922,7 @@ namespace DotNetNuke.Common.Utilities
                 //in case of error installation shouldn't be stopped, log into log4net
                 Logger.Error(ex);
             }
-            return "";  
+            return "";
         }
     }
 }

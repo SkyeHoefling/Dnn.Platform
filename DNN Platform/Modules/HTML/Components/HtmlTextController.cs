@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -59,7 +59,7 @@ namespace DotNetNuke.Modules.Html
     /// </remarks>
     public class HtmlTextController : ModuleSearchBase, IPortable, IUpgradeable
     {
-		public const int MAX_DESCRIPTION_LENGTH = 100;
+        public const int MAX_DESCRIPTION_LENGTH = 100;
         private const string PortalRootToken = "{{PortalRoot}}";
 
         #region Private Methods
@@ -108,7 +108,7 @@ namespace DotNetNuke.Modules.Html
             // if not published
             if (objHtmlText.IsPublished == false)
             {
-                arrUsers.Add(objHtmlText.CreatedByUserID); // include content owner 
+                arrUsers.Add(objHtmlText.CreatedByUserID); // include content owner
             }
 
             // if not draft and not published
@@ -148,17 +148,17 @@ namespace DotNetNuke.Modules.Html
             // process notifications
             if (arrUsers.Count > 0 || (objHtmlText.IsPublished && objHtmlText.Notify))
             {
-                // get tabid from module 
+                // get tabid from module
                 ModuleInfo objModule = ModuleController.Instance.GetModule(objHtmlText.ModuleID, Null.NullInteger, true);
 
                 PortalSettings objPortalSettings = PortalController.Instance.GetCurrentPortalSettings();
                 if (objPortalSettings != null)
                 {
                     string strResourceFile = string.Format("{0}/DesktopModules/{1}/{2}/{3}",
-                                                           Globals.ApplicationPath,
-                                                           objModule.DesktopModule.FolderName,
-                                                           Localization.LocalResourceDirectory,
-                                                           Localization.LocalSharedResourceFile);
+                                                            Globals.ApplicationPath,
+                                                            objModule.DesktopModule.FolderName,
+                                                            Localization.LocalResourceDirectory,
+                                                            Localization.LocalSharedResourceFile);
                     string strSubject = Localization.GetString("NotificationSubject", strResourceFile);
                     string strBody = Localization.GetString("NotificationBody", strResourceFile);
                     strBody = strBody.Replace("[URL]", Globals.NavigateURL(objModule.TabID));
@@ -168,7 +168,7 @@ namespace DotNetNuke.Modules.Html
 
                     foreach (int intUserID in arrUsers)
                     {
-                        // create user notification record 
+                        // create user notification record
                         _htmlTextUser = new HtmlTextUserInfo();
                         _htmlTextUser.ItemID = objHtmlText.ItemID;
                         _htmlTextUser.StateID = objHtmlText.StateID;
@@ -265,7 +265,7 @@ namespace DotNetNuke.Modules.Html
             var aliases = PortalAliasController.Instance.GetPortalAliases();
             if (!aliases.Contains(domain))
             {
-                // this is no not a portal url so even if it contains /portals/.. 
+                // this is no not a portal url so even if it contains /portals/..
                 // we do not need to replace it with a token
                 return m.ToString();
             }
@@ -296,42 +296,42 @@ namespace DotNetNuke.Modules.Html
             ModuleController.SynchronizeModule(ModuleID);
         }
 
-		/// -----------------------------------------------------------------------------
-		/// <summary>
-		///   FormatHtmlText formats HtmlText content for display in the browser
-		/// </summary>
-		/// <remarks>
-		/// </remarks>
-		/// <param name="moduleId">The ModuleID</param>
-		/// <param name = "content">The HtmlText Content</param>
-		/// <param name = "settings">Module Settings</param>
-		/// <param name="portalSettings">The Portal Settings.</param>
-		/// <param name="page">The Page Instance.</param>
-		public static string FormatHtmlText(int moduleId, string content, HtmlModuleSettings settings, PortalSettings portalSettings, Page page)
-		{
-			// token replace
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        ///   FormatHtmlText formats HtmlText content for display in the browser
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="moduleId">The ModuleID</param>
+        /// <param name = "content">The HtmlText Content</param>
+        /// <param name = "settings">Module Settings</param>
+        /// <param name="portalSettings">The Portal Settings.</param>
+        /// <param name="page">The Page Instance.</param>
+        public static string FormatHtmlText(int moduleId, string content, HtmlModuleSettings settings, PortalSettings portalSettings, Page page)
+        {
+            // token replace
 
-			if (settings.ReplaceTokens)
-			{
-			    var tr = new HtmlTokenReplace(page)
-			    {
-			        AccessingUser = UserController.Instance.GetCurrentUserInfo(),
-			        DebugMessages = portalSettings.UserMode != PortalSettings.Mode.View,
-			        ModuleId = moduleId,
-			        PortalSettings = portalSettings
-			    };
-			    content = tr.ReplaceEnvironmentTokens(content);
-			}
+            if (settings.ReplaceTokens)
+            {
+                var tr = new HtmlTokenReplace(page)
+                {
+                    AccessingUser = UserController.Instance.GetCurrentUserInfo(),
+                    DebugMessages = portalSettings.UserMode != PortalSettings.Mode.View,
+                    ModuleId = moduleId,
+                    PortalSettings = portalSettings
+                };
+                content = tr.ReplaceEnvironmentTokens(content);
+            }
 
-			// Html decode content
-			content = HttpUtility.HtmlDecode(content);
+            // Html decode content
+            content = HttpUtility.HtmlDecode(content);
 
-			// manage relative paths
-			content = ManageRelativePaths(content, portalSettings.HomeDirectory, "src", portalSettings.PortalId);
-			content = ManageRelativePaths(content, portalSettings.HomeDirectory, "background", portalSettings.PortalId);
+            // manage relative paths
+            content = ManageRelativePaths(content, portalSettings.HomeDirectory, "src", portalSettings.PortalId);
+            content = ManageRelativePaths(content, portalSettings.HomeDirectory, "background", portalSettings.PortalId);
 
-			return content;
-		}
+            return content;
+        }
 
         /// -----------------------------------------------------------------------------
         /// <summary>
@@ -380,8 +380,8 @@ namespace DotNetNuke.Modules.Html
                     htmlText.WorkflowName = "[REPAIR_WORKFLOW]";
 
                     var workflowStateController = new WorkflowStateController();
-                    htmlText.StateID = htmlText.IsPublished 
-                                        ? workflowStateController.GetLastWorkflowStateID(workflowId) 
+                    htmlText.StateID = htmlText.IsPublished
+                                        ? workflowStateController.GetLastWorkflowStateID(workflowId)
                                         : workflowStateController.GetFirstWorkflowStateID(workflowId);
                     // update object
                     UpdateHtmlText(htmlText, GetMaximumVersionHistory(htmlText.PortalID));
@@ -516,7 +516,7 @@ namespace DotNetNuke.Modules.Html
                             strURL = strURL.Substring(strURL.IndexOf(strDirectory) + strDirectory.Length);
                         }
                         // add upload directory
-                        if (!strURL.StartsWith("/") 
+                        if (!strURL.StartsWith("/")
                             && !String.IsNullOrEmpty(strURL.Trim())) //We don't write the UploadDirectory if the token/attribute has not value. Therefore we will avoid an unnecessary request
                         {
                             sbBuff.Append(uploadDirectory);
@@ -583,17 +583,17 @@ namespace DotNetNuke.Modules.Html
             {
                 // add content
                 htmlContent.ItemID = DataProvider.Instance().AddHtmlText(htmlContent.ModuleID,
-                                                                         htmlContent.Content,
-																		 htmlContent.Summary,
-                                                                         htmlContent.StateID,
-                                                                         htmlContent.IsPublished,
-                                                                         UserController.Instance.GetCurrentUserInfo().UserID,
-                                                                         MaximumVersionHistory);
+                                                                        htmlContent.Content,
+                                                                        htmlContent.Summary,
+                                                                        htmlContent.StateID,
+                                                                        htmlContent.IsPublished,
+                                                                        UserController.Instance.GetCurrentUserInfo().UserID,
+                                                                        MaximumVersionHistory);
             }
             else
             {
                 // update content
-				DataProvider.Instance().UpdateHtmlText(htmlContent.ItemID, htmlContent.Content, htmlContent.Summary, htmlContent.StateID, htmlContent.IsPublished, UserController.Instance.GetCurrentUserInfo().UserID);
+                DataProvider.Instance().UpdateHtmlText(htmlContent.ItemID, htmlContent.Content, htmlContent.Summary, htmlContent.StateID, htmlContent.IsPublished, UserController.Instance.GetCurrentUserInfo().UserID);
             }
 
             // add log history
@@ -715,7 +715,7 @@ namespace DotNetNuke.Modules.Html
 
         #region IPortable Members
 
-         /// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
         /// <summary>
         ///   ExportModule implements the IPortable ExportModule Interface
         /// </summary>
@@ -791,7 +791,7 @@ namespace DotNetNuke.Modules.Html
 
             if (htmlTextInfo != null &&
                 (htmlTextInfo.LastModifiedOnDate.ToUniversalTime() > beginDateUtc &&
-                 htmlTextInfo.LastModifiedOnDate.ToUniversalTime() < DateTime.UtcNow))
+                htmlTextInfo.LastModifiedOnDate.ToUniversalTime() < DateTime.UtcNow))
             {
                 var strContent = HtmlUtils.Clean(htmlTextInfo.Content, false);
 
@@ -837,7 +837,7 @@ namespace DotNetNuke.Modules.Html
 
             return collectTagsFunc(terms, new List<string>());
         }
-		
+
         #endregion
 
         #region IUpgradeable Members
@@ -866,7 +866,7 @@ namespace DotNetNuke.Modules.Html
                     break;
             }
 
-           return string.Empty;
+            return string.Empty;
         }
 
         private void AddNotificationTypes()

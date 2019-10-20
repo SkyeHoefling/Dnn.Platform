@@ -36,7 +36,7 @@ class Dropdown extends Component {
         this.hideTimeSelector();
         setTimeout( ()=> {this.props.onUpdate(value);}, 200);
     }
-    
+
     showTimeSelector() {
         this.setState({ isTimeSelectorVisible: true }, () => {
             setTimeout(() => {
@@ -58,7 +58,7 @@ class Dropdown extends Component {
         const layoutOptions = options.map((option) => {
             return <div className="time-option" key={option.value} onClick={this.onUpdate.bind(this, option.value) }>{option.label}</div>;
         });
-        
+
         return (
             <div className={"dnn-time-picker " +  (className || "")} ref={this.timePickerRef}>
                 <div className="time-text" onClick={this.showTimeSelector.bind(this)}>

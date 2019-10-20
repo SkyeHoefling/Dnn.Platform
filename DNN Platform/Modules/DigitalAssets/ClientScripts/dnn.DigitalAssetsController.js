@@ -36,7 +36,7 @@ dnnModule.DigitalAssetsController.prototype = function () {
         },
         loadContent = function (folderId, startIndex, numItems, sortExpression, settings, scopeId) {
             return false;
-        },        
+        },
         onLoadFolder = function () {
         },
         executeCommandOnSelectedItems = function (commandName, items) {
@@ -82,7 +82,7 @@ dnnModule.DigitalAssetsController.prototype = function () {
                 var p = deparam(window.location.search);
                 $.extend(p, state);
                 history.replaceState(null, null, '?' + $.param(p));
-            }            
+            }
         },
         getCurrentState = function (grid,  view) {
             var stateMode = "folderId";

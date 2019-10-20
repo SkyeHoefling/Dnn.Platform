@@ -33,7 +33,7 @@ namespace DotNetNuke.Services.Upgrade.Internals
 
         /// <summary>
         /// SetInstallConfig - Saves configuration n DotNetNuke.Install.Config
-        /// </summary>        
+        /// </summary>
         void SetInstallConfig(InstallConfig installConfig);
 
         /// <summary>

@@ -84,87 +84,87 @@ CodeMirror.defineMode("apl", function() {
     var prev;
     prev = false;
     return function(c) {
-      prev = c;
-      if (c === type) {
+    prev = c;
+    if (c === type) {
         return prev === "\\";
-      }
-      return true;
+    }
+    return true;
     };
   };
   return {
     startState: function() {
-      return {
+    return {
         prev: false,
         func: false,
         op: false,
         string: false,
         escape: false
-      };
+    };
     },
     token: function(stream, state) {
-      var ch, funcName;
-      if (stream.eatSpace()) {
+    var ch, funcName;
+    if (stream.eatSpace()) {
         return null;
-      }
-      ch = stream.next();
-      if (ch === '"' || ch === "'") {
+    }
+    ch = stream.next();
+    if (ch === '"' || ch === "'") {
         stream.eatWhile(stringEater(ch));
         stream.next();
         state.prev = true;
         return "string";
-      }
-      if (/[\[{\(]/.test(ch)) {
+    }
+    if (/[\[{\(]/.test(ch)) {
         state.prev = false;
         return null;
-      }
-      if (/[\]}\)]/.test(ch)) {
+    }
+    if (/[\]}\)]/.test(ch)) {
         state.prev = true;
         return null;
-      }
-      if (isNiladic.test(ch)) {
+    }
+    if (isNiladic.test(ch)) {
         state.prev = false;
         return "niladic";
-      }
-      if (/[¯\d]/.test(ch)) {
+    }
+    if (/[¯\d]/.test(ch)) {
         if (state.func) {
-          state.func = false;
-          state.prev = false;
+        state.func = false;
+        state.prev = false;
         } else {
-          state.prev = true;
+        state.prev = true;
         }
         stream.eatWhile(/[\w\.]/);
         return "number";
-      }
-      if (isOperator.test(ch)) {
+    }
+    if (isOperator.test(ch)) {
         return "operator apl-" + builtInOps[ch];
-      }
-      if (isArrow.test(ch)) {
+    }
+    if (isArrow.test(ch)) {
         return "apl-arrow";
-      }
-      if (isFunction.test(ch)) {
+    }
+    if (isFunction.test(ch)) {
         funcName = "apl-";
         if (builtInFuncs[ch] != null) {
-          if (state.prev) {
+        if (state.prev) {
             funcName += builtInFuncs[ch][1];
-          } else {
+        } else {
             funcName += builtInFuncs[ch][0];
-          }
+        }
         }
         state.func = true;
         state.prev = false;
         return "function " + funcName;
-      }
-      if (isComment.test(ch)) {
+    }
+    if (isComment.test(ch)) {
         stream.skipToEnd();
         return "comment";
-      }
-      if (ch === "∘" && stream.peek() === ".") {
+    }
+    if (ch === "∘" && stream.peek() === ".") {
         stream.next();
         return "function jot-dot";
-      }
-      stream.eatWhile(/[\w\$_]/);
-      state.prev = true;
-      return "keyword";
+    }
+    stream.eatWhile(/[\w\$_]/);
+    state.prev = true;
+    return "keyword";
     }
   };
 });

@@ -1,21 +1,21 @@
 #region Copyright
-// 
+//
 // DotNetNuke® - https://www.dnnsoftware.com
 // Copyright (c) 2002-2018
 // by DotNetNuke Corporation
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
-// documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and 
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
 // to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions 
+//
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions
 // of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
-// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
-// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
+// TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+// THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
@@ -38,7 +38,7 @@ namespace DotNetNuke.Web.Api
         {
             Requires.NotNullOrEmpty("moduleFolderName", moduleFolderName);
             Requires.NotNegative("count", count);
-            
+
             return moduleFolderName + "-" + routeName + "-" + count.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -63,7 +63,7 @@ namespace DotNetNuke.Web.Api
             {
                 return "";
             }
-            
+
             string prefix = "";
 
             for (int i = count - 1; i >= 0; i--)
@@ -79,15 +79,15 @@ namespace DotNetNuke.Web.Api
             var allRouteValues = new HttpRouteValueDictionary(routeValues);
 
             var segments = portalAliasInfo.HTTPAlias.Split('/');
-            
+
             if(segments.Length > 1)
             {
-                  for(int i = 1; i < segments.Length; i++)
-                  {
-                      var key = "prefix" + (i - 1).ToString(CultureInfo.InvariantCulture);
-                      var value = segments[i];
-                      allRouteValues.Add(key, value);
-                  }
+                for(int i = 1; i < segments.Length; i++)
+                {
+                    var key = "prefix" + (i - 1).ToString(CultureInfo.InvariantCulture);
+                    var value = segments[i];
+                    allRouteValues.Add(key, value);
+                }
             }
 
             return allRouteValues;
@@ -123,9 +123,9 @@ namespace DotNetNuke.Web.Api
                 //prefixCounts are required for each route that is mapped but they only change
                 //when a new portal is added so cache them until that time
 
-                
+
                 var portals = PortalController.Instance.GetPortals();
-               
+
 
                 var segmentCounts1 = new List<int>();
 

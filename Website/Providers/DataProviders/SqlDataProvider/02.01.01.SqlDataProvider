@@ -18,7 +18,7 @@ drop procedure {databaseOwner}{objectQualifier}AddDesktopModule
 GO
 
 create procedure {databaseOwner}{objectQualifier}AddDesktopModule
-    
+
 @FriendlyName   nvarchar(128),
 @Description    nvarchar(2000),
 @Version        nvarchar(8),
@@ -51,7 +51,7 @@ GO
 
 create procedure {databaseOwner}{objectQualifier}UpdateDesktopModule
 
-@DesktopModuleId int,    
+@DesktopModuleId int,
 @FriendlyName    nvarchar(128),
 @Description     nvarchar(2000),
 @Version         nvarchar(8),
@@ -62,48 +62,48 @@ as
 
 update {objectQualifier}DesktopModules
 set    FriendlyName    = @FriendlyName,
-       Description     = @Description,
-       Version         = @Version,
-       IsPremium       = @IsPremium,
-       IsAdmin         = @IsAdmin
+        Description     = @Description,
+        Version         = @Version,
+        IsPremium       = @IsPremium,
+        IsAdmin         = @IsAdmin
 where  DesktopModuleId = @DesktopModuleId
 
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}SystemMessages
-	(
-	MessageID int NOT NULL IDENTITY (1, 1),
-	PortalID int NULL,
-	MessageName nvarchar(50) NOT NULL,
-	MessageValue ntext NOT NULL
-	)  ON [PRIMARY]
-	 TEXTIMAGE_ON [PRIMARY]
+    (
+    MessageID int NOT NULL IDENTITY (1, 1),
+    PortalID int NULL,
+    MessageName nvarchar(50) NOT NULL,
+    MessageValue ntext NOT NULL
+    )  ON [PRIMARY]
+    TEXTIMAGE_ON [PRIMARY]
 GO
 ALTER TABLE {databaseOwner}{objectQualifier}SystemMessages ADD CONSTRAINT
-	PK_SystemMessages PRIMARY KEY CLUSTERED 
-	(
-	MessageID
-	) ON [PRIMARY]
+    PK_SystemMessages PRIMARY KEY CLUSTERED
+    (
+    MessageID
+    ) ON [PRIMARY]
 
 GO
 ALTER TABLE {databaseOwner}{objectQualifier}SystemMessages ADD CONSTRAINT
-	IX_SystemMessages UNIQUE NONCLUSTERED 
-	(
-	MessageName,
-	PortalID
-	) ON [PRIMARY]
+    IX_SystemMessages UNIQUE NONCLUSTERED
+    (
+    MessageName,
+    PortalID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}SystemMessages WITH NOCHECK ADD CONSTRAINT
-	FK_SystemMessages_Portals FOREIGN KEY
-	(
-	PortalID
-	) REFERENCES {databaseOwner}{objectQualifier}Portals
-	(
-	PortalID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_SystemMessages_Portals FOREIGN KEY
+    (
+    PortalID
+    ) REFERENCES {databaseOwner}{objectQualifier}Portals
+    (
+    PortalID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
@@ -166,7 +166,7 @@ as
 
 select MessageValue
 from   {objectQualifier}SystemMessages
-where  ((PortalID = @PortalID) or (PortalID is null and @PortalID is null)) 
+where  ((PortalID = @PortalID) or (PortalID is null and @PortalID is null))
 and    MessageName = @MessageName
 
 GO
@@ -182,109 +182,109 @@ where  PortalID is null
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}Urls
-	(
-	UrlID int NOT NULL IDENTITY (1, 1),
-	PortalID int NULL,
-	Url nvarchar(255) NOT NULL
-	)  ON [PRIMARY]
+    (
+    UrlID int NOT NULL IDENTITY (1, 1),
+    PortalID int NULL,
+    Url nvarchar(255) NOT NULL
+    )  ON [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Urls ADD CONSTRAINT
-	PK_Urls PRIMARY KEY CLUSTERED 
-	(
-	UrlID
-	) ON [PRIMARY]
+    PK_Urls PRIMARY KEY CLUSTERED
+    (
+    UrlID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Urls ADD CONSTRAINT
-	IX_Urls UNIQUE NONCLUSTERED 
-	(
-	Url,
-	PortalID
-	) ON [PRIMARY]
+    IX_Urls UNIQUE NONCLUSTERED
+    (
+    Url,
+    PortalID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Urls WITH NOCHECK ADD CONSTRAINT
-	FK_Urls_Portals FOREIGN KEY
-	(
-	PortalID
-	) REFERENCES {databaseOwner}{objectQualifier}Portals
-	(
-	PortalID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_Urls_Portals FOREIGN KEY
+    (
+    PortalID
+    ) REFERENCES {databaseOwner}{objectQualifier}Portals
+    (
+    PortalID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}UrlTracking
-	(
-	UrlTrackingID int NOT NULL IDENTITY (1, 1),
-	PortalID int NULL,
-	Url nvarchar(255) NOT NULL,
+    (
+    UrlTrackingID int NOT NULL IDENTITY (1, 1),
+    PortalID int NULL,
+    Url nvarchar(255) NOT NULL,
         UrlType char(1) NOT NULL,
-	Clicks int NOT NULL,
+    Clicks int NOT NULL,
         LastClick datetime NULL,
         CreatedDate datetime NOT NULL,
         LogActivity bit NOT NULL
-	)  ON [PRIMARY]
+    )  ON [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UrlTracking ADD CONSTRAINT
-	PK_UrlTracking PRIMARY KEY CLUSTERED 
-	(
-	UrlTrackingID
-	) ON [PRIMARY]
+    PK_UrlTracking PRIMARY KEY CLUSTERED
+    (
+    UrlTrackingID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UrlTracking ADD CONSTRAINT
-	IX_UrlTracking UNIQUE NONCLUSTERED 
-	(
-	Url,
-	PortalID
-	) ON [PRIMARY]
+    IX_UrlTracking UNIQUE NONCLUSTERED
+    (
+    Url,
+    PortalID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UrlTracking WITH NOCHECK ADD CONSTRAINT
-	FK_UrlTracking_Portals FOREIGN KEY
-	(
-	PortalID
-	) REFERENCES {databaseOwner}{objectQualifier}Portals
-	(
-	PortalID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_UrlTracking_Portals FOREIGN KEY
+    (
+    PortalID
+    ) REFERENCES {databaseOwner}{objectQualifier}Portals
+    (
+    PortalID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}UrlLog
-	(
-	UrlLogID int NOT NULL IDENTITY (1, 1),
-	UrlTrackingID int NOT NULL,
-	ClickDate datetime NOT NULL,
-	UserID int NULL,
+    (
+    UrlLogID int NOT NULL IDENTITY (1, 1),
+    UrlTrackingID int NOT NULL,
+    ClickDate datetime NOT NULL,
+    UserID int NULL,
         ModuleID int NULL
-	)  ON [PRIMARY]
+    )  ON [PRIMARY]
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UrlLog ADD CONSTRAINT
-	PK_{objectQualifier}UrlLog PRIMARY KEY CLUSTERED 
-	(
-	UrlLogID
-	) ON [PRIMARY]
+    PK_{objectQualifier}UrlLog PRIMARY KEY CLUSTERED
+    (
+    UrlLogID
+    ) ON [PRIMARY]
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}UrlLog WITH NOCHECK ADD CONSTRAINT
-	FK_{objectQualifier}UrlLog_{objectQualifier}UrlTracking FOREIGN KEY
-	(
-	UrlTrackingID
-	) REFERENCES {databaseOwner}{objectQualifier}UrlTracking
-	(
-	UrlTrackingID
-	) ON DELETE CASCADE
-	 NOT FOR REPLICATION
+    FK_{objectQualifier}UrlLog_{objectQualifier}UrlTracking FOREIGN KEY
+    (
+    UrlTrackingID
+    ) REFERENCES {databaseOwner}{objectQualifier}UrlTracking
+    (
+    UrlTrackingID
+    ) ON DELETE CASCADE
+    NOT FOR REPLICATION
 
 GO
 
@@ -394,10 +394,10 @@ as
 
 update {objectQualifier}UrlTracking
 set    UrlType = @UrlType,
-       Clicks = @Clicks,
-       LastClick = @LastClick,
-       CreatedDate = @CreatedDate,
-       LogActivity = @LogActivity
+        Clicks = @Clicks,
+        LastClick = @LastClick,
+        CreatedDate = @CreatedDate,
+        LogActivity = @LogActivity
 where  PortalID = @PortalID
 and    Url = @Url
 
@@ -464,8 +464,8 @@ create procedure {databaseOwner}{objectQualifier}GetUrlLog
 as
 
 select {objectQualifier}UrlLog.*,
-       'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
-       ModuleTitle
+        'FullName' = {objectQualifier}Users.FirstName + ' ' + {objectQualifier}Users.LastName,
+        ModuleTitle
 from   {objectQualifier}UrlLog
 left outer join {objectQualifier}Users on {objectQualifier}UrlLog.UserId = {objectQualifier}Users.UserId
 left outer join {objectQualifier}Modules on {objectQualifier}UrlLog.ModuleId = {objectQualifier}Modules.ModuleId
@@ -487,35 +487,35 @@ DROP PROCEDURE {databaseOwner}{objectQualifier}UpdateClicks
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}Schedule (
-	[ScheduleID] [int] IDENTITY (1, 1) NOT NULL ,
-	[TypeFullName] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
-	[TimeLapse] [int] NOT NULL ,
-	[TimeLapseMeasurement] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
-	[RetryTimeLapse] [int] NOT NULL ,
-	[RetryTimeLapseMeasurement] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
-	[RetainHistoryNum] [int] NOT NULL ,
-	[AttachToEvent] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
-	[CatchUpEnabled] [bit] NOT NULL ,
-	[Enabled] [bit] NOT NULL ,
-	[ObjectDependencies] [varchar] (300) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL 
+    [ScheduleID] [int] IDENTITY (1, 1) NOT NULL ,
+    [TypeFullName] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+    [TimeLapse] [int] NOT NULL ,
+    [TimeLapseMeasurement] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+    [RetryTimeLapse] [int] NOT NULL ,
+    [RetryTimeLapseMeasurement] [varchar] (2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+    [RetainHistoryNum] [int] NOT NULL ,
+    [AttachToEvent] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+    [CatchUpEnabled] [bit] NOT NULL ,
+    [Enabled] [bit] NOT NULL ,
+    [ObjectDependencies] [varchar] (300) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}ScheduleHistory (
-	[ScheduleHistoryID] [int] IDENTITY (1, 1) NOT NULL ,
-	[ScheduleID] [int] NOT NULL ,
-	[StartDate] [datetime] NOT NULL ,
-	[EndDate] [datetime] NULL ,
-	[Succeeded] [bit] NULL ,
-	[LogNotes] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
-	[NextStart] [datetime] NULL 
+    [ScheduleHistoryID] [int] IDENTITY (1, 1) NOT NULL ,
+    [ScheduleID] [int] NOT NULL ,
+    [StartDate] [datetime] NOT NULL ,
+    [EndDate] [datetime] NULL ,
+    [Succeeded] [bit] NULL ,
+    [LogNotes] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+    [NextStart] [datetime] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
 CREATE TABLE {databaseOwner}{objectQualifier}ScheduleItemSettings (
-	[ScheduleID] [int] NOT NULL ,
-	[SettingName] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
-	[SettingValue] [nvarchar] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL 
+    [ScheduleID] [int] NOT NULL ,
+    [SettingName] [nvarchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+    [SettingValue] [nvarchar] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 GO
 
@@ -603,7 +603,7 @@ GROUP BY S.ScheduleID, S.TypeFullName, S.TimeLapse, S.TimeLapseMeasurement,  S.R
 
 
 GO
- 
+
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetScheduleByScheduleID
 @ScheduleID int
 AS
@@ -612,8 +612,8 @@ FROM {databaseOwner}{objectQualifier}Schedule S
 WHERE S.ScheduleID = @ScheduleID
 
 GO
- 
-CREATE PROCEDURE {databaseOwner}{objectQualifier}GetScheduleItemSettings 
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}GetScheduleItemSettings
 @ScheduleID int
 AS
 SELECT *
@@ -621,7 +621,7 @@ FROM {databaseOwner}{objectQualifier}ScheduleItemSettings
 WHERE ScheduleID = @ScheduleID
 
 GO
- 
+
 CREATE PROCEDURE {databaseOwner}{objectQualifier}PurgeScheduleHistory
 AS
 DELETE FROM {databaseOwner}{objectQualifier}ScheduleHistory
@@ -687,9 +687,9 @@ CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateScheduleHistory
 AS
 UPDATE {databaseOwner}{objectQualifier}ScheduleHistory
 SET	EndDate = @EndDate,
-	Succeeded = @Succeeded,
-	LogNotes = @LogNotes,
-	NextStart = @NextStart
+    Succeeded = @Succeeded,
+    LogNotes = @LogNotes,
+    NextStart = @NextStart
 WHERE ScheduleHistoryID = @ScheduleHistoryID
 
 GO
@@ -720,16 +720,16 @@ drop procedure {databaseOwner}{objectQualifier}GetPremiumDesktopModules
 GO
 
 create procedure {databaseOwner}{objectQualifier}GetPremiumDesktopModules
-    
+
 @PortalId int
 
 as
 
 select distinct({objectQualifier}DesktopModules.DesktopModuleId) as DesktopModuleId,
-       PortalModuleDefinitionId,
-       {objectQualifier}DesktopModules.FriendlyName,
-       {objectQualifier}DesktopModules.Description,
-       'HostFee' = case when HostFee is null then 0 else HostFee end
+        PortalModuleDefinitionId,
+        {objectQualifier}DesktopModules.FriendlyName,
+        {objectQualifier}DesktopModules.Description,
+        'HostFee' = case when HostFee is null then 0 else HostFee end
 from {objectQualifier}DesktopModules
 left outer join {objectQualifier}PortalModuleDefinitions on {objectQualifier}DesktopModules.DesktopModuleId = {objectQualifier}PortalModuleDefinitions.DesktopModuleId AND PortalId = @PortalId
 where  {objectQualifier}DesktopModules.IsPremium = 1
@@ -740,7 +740,3 @@ GO
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
-
-
-
-

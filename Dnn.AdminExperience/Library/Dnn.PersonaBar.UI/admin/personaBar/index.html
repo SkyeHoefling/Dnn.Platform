@@ -35,7 +35,7 @@
                     <li data-bind="
                         attr: {
                             'id': menuItem.id,
-                            'data-path': menuItem.path, 
+                            'data-path': menuItem.path,
                             'data-query': menuItem.query,
                             'data-module-name': menuItem.moduleName,
                             'data-folder-name': menuItem.folderName,
@@ -50,8 +50,8 @@
                         <span class="icon-loader" data-bind="visible: menuItem.icon.length > 0, attr: {'data-path': menuItem.icon, 'data-name': menuItem.displayName, 'data-id': menuItem.id}"></span>
                             <!-- ko if: menuItem.menuItems.length > 0 -->
                         <div class="hovermenu" data-bind="
-                             attr: { 'id': menuItem.id + 'hovermenu' }, 
-                             css: menuItem.id + 'hovermenu'">
+                            attr: { 'id': menuItem.id + 'hovermenu' },
+                            css: menuItem.id + 'hovermenu'">
                             <label data-bind="html: menuItem.displayName"></label>
                             <!-- ko foreach: { data: menuItem.menuItems, as: 'columnItem' } -->
                             <ul data-bind="foreach: { data: columnItem, as: 'subMenuItem' }">

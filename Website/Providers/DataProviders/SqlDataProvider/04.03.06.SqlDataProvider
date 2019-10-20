@@ -9,51 +9,51 @@
 /************************************************************/
 
 if exists (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}GetUsersByRolename]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
-	DROP PROCEDURE {databaseOwner}[{objectQualifier}GetUsersByRolename]
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}GetUsersByRolename]
 GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}GetUsersByRolename]
 
-	@PortalId	int,
-	@Rolename	nvarchar(50)
+    @PortalId	int,
+    @Rolename	nvarchar(50)
 
 AS
 
-SELECT     
-		U.UserID, 
-		UP.PortalId, 
-		U.Username, 
-		U.FirstName, 
-		U.LastName, 
-		U.DisplayName, 
-		U.IsSuperUser, 
-		U.Email, 
-		U.AffiliateId, 
-		U.UpdatePassword
-	FROM {databaseOwner}{objectQualifier}UserPortals AS UP 
-			RIGHT OUTER JOIN {databaseOwner}{objectQualifier}UserRoles  UR 
-			INNER JOIN {databaseOwner}{objectQualifier}Roles R ON UR.RoleID = R.RoleID 
-			RIGHT OUTER JOIN {databaseOwner}{objectQualifier}Users AS U ON UR.UserID = U.UserID 
-		ON UP.UserId = U.UserID	
-	WHERE ( UP.PortalId = @PortalId OR @PortalId IS Null )
-		AND (R.RoleName = @Rolename)
-		AND (R.PortalId = @PortalId OR @PortalId IS Null )
-	ORDER BY U.FirstName + ' ' + U.LastName
-    
+SELECT
+        U.UserID,
+        UP.PortalId,
+        U.Username,
+        U.FirstName,
+        U.LastName,
+        U.DisplayName,
+        U.IsSuperUser,
+        U.Email,
+        U.AffiliateId,
+        U.UpdatePassword
+    FROM {databaseOwner}{objectQualifier}UserPortals AS UP
+            RIGHT OUTER JOIN {databaseOwner}{objectQualifier}UserRoles  UR
+            INNER JOIN {databaseOwner}{objectQualifier}Roles R ON UR.RoleID = R.RoleID
+            RIGHT OUTER JOIN {databaseOwner}{objectQualifier}Users AS U ON UR.UserID = U.UserID
+        ON UP.UserId = U.UserID
+    WHERE ( UP.PortalId = @PortalId OR @PortalId IS Null )
+        AND (R.RoleName = @Rolename)
+        AND (R.PortalId = @PortalId OR @PortalId IS Null )
+    ORDER BY U.FirstName + ' ' + U.LastName
+
 GO
 
 UPDATE {databaseOwner}{objectQualifier}HostSettings
-	SET SettingValue = 'D'
-	WHERE SettingName = 'ModuleCaching'
-    
+    SET SettingValue = 'D'
+    WHERE SettingName = 'ModuleCaching'
+
 GO
 
 If (SELECT {databaseOwner}{objectQualifier}fn_GetVersion(3,3,6)) = 0
-	BEGIN
-		IF (SELECT COLUMNPROPERTY( OBJECT_ID('{databaseOwner}[{objectQualifier}DesktopModules]'),'CompatibleVersions','AllowsNull')) IS Null
-		ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules ADD
-			CompatibleVersions nvarchar(500) NULL
-	END
+    BEGIN
+        IF (SELECT COLUMNPROPERTY( OBJECT_ID('{databaseOwner}[{objectQualifier}DesktopModules]'),'CompatibleVersions','AllowsNull')) IS Null
+        ALTER TABLE {databaseOwner}{objectQualifier}DesktopModules ADD
+            CompatibleVersions nvarchar(500) NULL
+    END
 GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}AddDesktopModule]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
@@ -63,43 +63,43 @@ GO
 
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddDesktopModule
-    
-	@ModuleName		nvarchar(128),
-	@FolderName		nvarchar(128),
-	@FriendlyName		nvarchar(128),
-	@Description		nvarchar(2000),
-	@Version		nvarchar(8),
-	@IsPremium		bit,
-	@IsAdmin		bit,
-	@BusinessController 	nvarchar(200),
-	@SupportedFeatures	int,
-	@CompatibleVersions	nvarchar(500)
+
+    @ModuleName		nvarchar(128),
+    @FolderName		nvarchar(128),
+    @FriendlyName		nvarchar(128),
+    @Description		nvarchar(2000),
+    @Version		nvarchar(8),
+    @IsPremium		bit,
+    @IsAdmin		bit,
+    @BusinessController 	nvarchar(200),
+    @SupportedFeatures	int,
+    @CompatibleVersions	nvarchar(500)
 
 AS
 
 INSERT INTO {databaseOwner}{objectQualifier}DesktopModules (
-	ModuleName,
-	FolderName,
-	FriendlyName,
-	Description,
-	Version,
-	IsPremium,
-	IsAdmin,
-	BusinessControllerClass,
-	SupportedFeatures,
-	CompatibleVersions
+    ModuleName,
+    FolderName,
+    FriendlyName,
+    Description,
+    Version,
+    IsPremium,
+    IsAdmin,
+    BusinessControllerClass,
+    SupportedFeatures,
+    CompatibleVersions
 )
 VALUES (
-	@ModuleName,
-	@FolderName,
-	@FriendlyName,
-	@Description,
-	@Version,
-	@IsPremium,
-	@IsAdmin,
-	@BusinessController,
-	@SupportedFeatures,
-	@CompatibleVersions
+    @ModuleName,
+    @FolderName,
+    @FriendlyName,
+    @Description,
+    @Version,
+    @IsPremium,
+    @IsAdmin,
+    @BusinessController,
+    @SupportedFeatures,
+    @CompatibleVersions
 )
 
 SELECT SCOPE_IDENTITY()
@@ -114,25 +114,25 @@ GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetDesktopModulesByPortal
 
-	@PortalId int
+    @PortalId int
 
 AS
 
 SELECT distinct({databaseOwner}{objectQualifier}DesktopModules.DesktopModuleId) AS DesktopModuleId,
-       {databaseOwner}{objectQualifier}DesktopModules.FriendlyName,
-       {databaseOwner}{objectQualifier}DesktopModules.Description,
-       {databaseOwner}{objectQualifier}DesktopModules.Version,
-       {databaseOwner}{objectQualifier}DesktopModules.IsPremium,
-       {databaseOwner}{objectQualifier}DesktopModules.IsAdmin,
-       {databaseOwner}{objectQualifier}DesktopModules.businesscontrollerclass,
-       {databaseOwner}{objectQualifier}DesktopModules.foldername,
-       {databaseOwner}{objectQualifier}DesktopModules.modulename,
-       {databaseOwner}{objectQualifier}DesktopModules.supportedfeatures,
-       {databaseOwner}{objectQualifier}DesktopModules.compatibleversions
+        {databaseOwner}{objectQualifier}DesktopModules.FriendlyName,
+        {databaseOwner}{objectQualifier}DesktopModules.Description,
+        {databaseOwner}{objectQualifier}DesktopModules.Version,
+        {databaseOwner}{objectQualifier}DesktopModules.IsPremium,
+        {databaseOwner}{objectQualifier}DesktopModules.IsAdmin,
+        {databaseOwner}{objectQualifier}DesktopModules.businesscontrollerclass,
+        {databaseOwner}{objectQualifier}DesktopModules.foldername,
+        {databaseOwner}{objectQualifier}DesktopModules.modulename,
+        {databaseOwner}{objectQualifier}DesktopModules.supportedfeatures,
+        {databaseOwner}{objectQualifier}DesktopModules.compatibleversions
 FROM {databaseOwner}{objectQualifier}DesktopModules
 LEFT OUTER JOIN {databaseOwner}{objectQualifier}PortalDesktopModules on {databaseOwner}{objectQualifier}DesktopModules.DesktopModuleId = {databaseOwner}{objectQualifier}PortalDesktopModules.DesktopModuleId
 WHERE  IsAdmin = 0
-AND    ( IsPremium = 0 OR (PortalId = @PortalId AND PortalDesktopModuleId IS NOT Null)) 
+AND    ( IsPremium = 0 OR (PortalId = @PortalId AND PortalDesktopModuleId IS NOT Null))
 ORDER BY FriendlyName
 
 GO
@@ -144,31 +144,31 @@ GO
 
 CREATE  PROCEDURE {databaseOwner}{objectQualifier}UpdateDesktopModule
 
-	@DesktopModuleId	int,    
-	@ModuleName		nvarchar(128),
-	@FolderName		nvarchar(128),
-	@FriendlyName		nvarchar(128),
-	@Description		nvarchar(2000),
-	@Version		nvarchar(8),
-	@IsPremium		bit,
-	@IsAdmin		bit,
-	@BusinessController 	nvarchar(200),
-	@SupportedFeatures	int,
-	@CompatibleVersions 	nvarchar(500)
+    @DesktopModuleId	int,
+    @ModuleName		nvarchar(128),
+    @FolderName		nvarchar(128),
+    @FriendlyName		nvarchar(128),
+    @Description		nvarchar(2000),
+    @Version		nvarchar(8),
+    @IsPremium		bit,
+    @IsAdmin		bit,
+    @BusinessController 	nvarchar(200),
+    @SupportedFeatures	int,
+    @CompatibleVersions 	nvarchar(500)
 
 AS
 
 UPDATE 	{databaseOwner}{objectQualifier}DesktopModules
 SET    	ModuleName = @ModuleName,
-	FolderName = @FolderName,
-	FriendlyName = @FriendlyName,
-	Description = @Description,
-	Version = @Version,
-	IsPremium = @IsPremium,
-	IsAdmin = @IsAdmin,
-	BusinessControllerClass = @BusinessController,
-	SupportedFeatures = @SupportedFeatures,
-	CompatibleVersions = @CompatibleVersions
+    FolderName = @FolderName,
+    FriendlyName = @FriendlyName,
+    Description = @Description,
+    Version = @Version,
+    IsPremium = @IsPremium,
+    IsAdmin = @IsAdmin,
+    BusinessControllerClass = @BusinessController,
+    SupportedFeatures = @SupportedFeatures,
+    CompatibleVersions = @CompatibleVersions
 WHERE  DesktopModuleId = @DesktopModuleId
 
 GO
@@ -178,21 +178,21 @@ GO
 
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}DF_{objectQualifier}Folders_LastUpdated') AND OBJECTPROPERTY(id, N'IsConstraint') = 1)
 ALTER TABLE {databaseOwner}{objectQualifier}Folders
-	DROP CONSTRAINT DF_{objectQualifier}Folders_LastUpdated
-    
+    DROP CONSTRAINT DF_{objectQualifier}Folders_LastUpdated
+
 GO
 
 IF (SELECT COLUMNPROPERTY( OBJECT_ID('{databaseOwner}[{objectQualifier}Folders]'),'LastUpdated','AllowsNull')) IS NOT Null
 ALTER TABLE {databaseOwner}{objectQualifier}Folders
-	DROP COLUMN LastUpdated
+    DROP COLUMN LastUpdated
 
 GO
 
 ALTER TABLE {databaseOwner}{objectQualifier}Folders ADD
-	LastUpdated datetime NULL
+    LastUpdated datetime NULL
 
 GO
-   
+
 IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}[{objectQualifier}AddFolder]') AND OBJECTPROPERTY(id, N'IsPROCEDURE') = 1)
 DROP PROCEDURE {databaseOwner}{objectQualifier}AddFolder
 
@@ -200,29 +200,29 @@ GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddFolder
 
-	@PortalID int,
-	@FolderPath varchar(300),
-	@StorageLocation int,
-	@IsProtected bit,
-	@IsCached bit,
-	@LastUpdated datetime
+    @PortalID int,
+    @FolderPath varchar(300),
+    @StorageLocation int,
+    @IsProtected bit,
+    @IsCached bit,
+    @LastUpdated datetime
 
 AS
 
 INSERT INTO {databaseOwner}{objectQualifier}Folders (
-  PortalID, 
-  FolderPath, 
-  StorageLocation, 
-  IsProtected, 
-  IsCached, 
+  PortalID,
+  FolderPath,
+  StorageLocation,
+  IsProtected,
+  IsCached,
   LastUpdated
 )
 VALUES (
-  @PortalID, 
-  @FolderPath, 
-  @StorageLocation, 
-  @IsProtected, 
-  @IsCached, 
+  @PortalID,
+  @FolderPath,
+  @StorageLocation,
+  @IsProtected,
+  @IsCached,
   @LastUpdated
 )
 
@@ -236,11 +236,11 @@ GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateFolder
 
-	@PortalID int,
-	@FolderID int,
-	@FolderPath varchar(300),
-	@StorageLocation int,
-	@IsProtected bit,
+    @PortalID int,
+    @FolderID int,
+    @FolderPath varchar(300),
+    @StorageLocation int,
+    @IsProtected bit,
         @IsCached bit,
         @LastUpdated datetime
 
@@ -248,10 +248,10 @@ AS
 
 UPDATE {databaseOwner}{objectQualifier}Folders
 SET    FolderPath = @FolderPath,
-       StorageLocation = @StorageLocation,
-       IsProtected = @IsProtected,
-       IsCached = @IsCached,
-       LastUpdated = @LastUpdated
+        StorageLocation = @StorageLocation,
+        IsProtected = @IsProtected,
+        IsCached = @IsCached,
+        LastUpdated = @LastUpdated
 WHERE  ((PortalID = @PortalID) OR (PortalID IS Null AND @PortalID IS Null))
 AND    FolderID = @FolderID
 
@@ -263,15 +263,15 @@ GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}AddFile
 
-	@PortalId    int,
-	@FileName    nvarchar(100),
-	@Extension   nvarchar(100),
-	@Size        int,
-	@Width       int,
-	@Height      int,
-	@ContentType nvarchar(200),
-	@Folder      nvarchar(200),
-	@FolderID    int
+    @PortalId    int,
+    @FileName    nvarchar(100),
+    @Extension   nvarchar(100),
+    @Size        int,
+    @Width       int,
+    @Height      int,
+    @ContentType nvarchar(200),
+    @Folder      nvarchar(200),
+    @FolderID    int
 AS
 
 DECLARE @FileID int
@@ -280,7 +280,7 @@ SELECT @FileId = FileID FROM {databaseOwner}{objectQualifier}Files WHERE FolderI
 
 IF @FileID IS Null
     BEGIN
-      INSERT INTO {databaseOwner}{objectQualifier}Files (
+    INSERT INTO {databaseOwner}{objectQualifier}Files (
         PortalId,
         FileName,
         Extension,
@@ -290,8 +290,8 @@ IF @FileID IS Null
         ContentType,
         Folder,
         FolderID
-      )
-      VALUES (
+    )
+    VALUES (
         @PortalId,
         @FileName,
         @Extension,
@@ -301,22 +301,22 @@ IF @FileID IS Null
         @ContentType,
         @Folder,
         @FolderID
-      )
+    )
 
-      SELECT @FileID = SCOPE_IDENTITY()
+    SELECT @FileID = SCOPE_IDENTITY()
     END
 ELSE
     BEGIN
-      UPDATE {databaseOwner}{objectQualifier}Files
-      SET    FileName = @FileName,
-             Extension = @Extension,
-             Size = @Size,
-             Width = @Width,
-             Height = @Height,
-             ContentType = @ContentType,
-             Folder = @Folder,
-             FolderID = @FolderID
-      WHERE  FileId = @FileID
+    UPDATE {databaseOwner}{objectQualifier}Files
+    SET    FileName = @FileName,
+            Extension = @Extension,
+            Size = @Size,
+            Width = @Width,
+            Height = @Height,
+            ContentType = @ContentType,
+            Folder = @Folder,
+            FolderID = @FolderID
+    WHERE  FileId = @FileID
     END
 
 SELECT @FileID
@@ -328,13 +328,13 @@ DROP PROCEDURE {databaseOwner}{objectQualifier}DeleteFile
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}DeleteFile
-	@PortalId int,
-	@FileName nvarchar(100),
-	@FolderID int
+    @PortalId int,
+    @FileName nvarchar(100),
+    @FolderID int
 
 AS
 
-DELETE 
+DELETE
 FROM   {databaseOwner}{objectQualifier}Files
 WHERE  FileName = @FileName
 AND    FolderID = @FolderID
@@ -348,27 +348,27 @@ DROP PROCEDURE {databaseOwner}{objectQualifier}UpdateFile
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}UpdateFile
-	@FileId      int,
-	@FileName    nvarchar(100),
-	@Extension   nvarchar(100),
-	@Size        int,
-	@Width       int,
-	@Height      int,
-	@ContentType nvarchar(200),
-	@Folder      nvarchar(200),
-	@FolderID    int
+    @FileId      int,
+    @FileName    nvarchar(100),
+    @Extension   nvarchar(100),
+    @Size        int,
+    @Width       int,
+    @Height      int,
+    @ContentType nvarchar(200),
+    @Folder      nvarchar(200),
+    @FolderID    int
 
 AS
 
 UPDATE {databaseOwner}{objectQualifier}Files
 SET    FileName = @FileName,
-       Extension = @Extension,
-       Size = @Size,
-       Width = @Width,
-       Height = @Height,
-       ContentType = @ContentType,
-       Folder = @Folder,
-       FolderID = @FolderID
+        Extension = @Extension,
+        Size = @Size,
+        Width = @Width,
+        Height = @Height,
+        ContentType = @ContentType,
+        Folder = @Folder,
+        FolderID = @FolderID
 WHERE  FileId = @FileId
 
 GO
@@ -379,39 +379,39 @@ DROP PROCEDURE {databaseOwner}{objectQualifier}GetFoldersByUser
 GO
 
 CREATE PROCEDURE {databaseOwner}{objectQualifier}GetFoldersByUser
-	@PortalID int,
-	@UserID int,
-	@IncludeSecure bit,
-	@IncludeDatabase bit,
-	@AllowAccess bit,
-	@PermissionKeys nvarchar(200)
+    @PortalID int,
+    @UserID int,
+    @IncludeSecure bit,
+    @IncludeDatabase bit,
+    @AllowAccess bit,
+    @PermissionKeys nvarchar(200)
 
 AS
 SELECT DISTINCT
-	F.FolderID,
-	F.PortalID,
-	F.FolderPath,
-	F.StorageLocation,
-	F.IsProtected,
-	F.IsCached,
-	F.LastUpdated
+    F.FolderID,
+    F.PortalID,
+    F.FolderPath,
+    F.StorageLocation,
+    F.IsProtected,
+    F.IsCached,
+    F.LastUpdated
 FROM {databaseOwner}{objectQualifier}Roles R
-	INNER JOIN {databaseOwner}{objectQualifier}UserRoles UR ON R.RoleID = UR.RoleID 
-	RIGHT OUTER JOIN {databaseOwner}{objectQualifier}Folders F
-		INNER JOIN {databaseOwner}{objectQualifier}FolderPermission FP ON F.FolderID = FP.FolderID 
-		INNER JOIN {databaseOwner}{objectQualifier}Permission P ON FP.PermissionID = P.PermissionID 
-	ON R.RoleID = FP.RoleID
+    INNER JOIN {databaseOwner}{objectQualifier}UserRoles UR ON R.RoleID = UR.RoleID
+    RIGHT OUTER JOIN {databaseOwner}{objectQualifier}Folders F
+        INNER JOIN {databaseOwner}{objectQualifier}FolderPermission FP ON F.FolderID = FP.FolderID
+        INNER JOIN {databaseOwner}{objectQualifier}Permission P ON FP.PermissionID = P.PermissionID
+    ON R.RoleID = FP.RoleID
 WHERE (	UR.UserID = @UserID
-			OR (FP.RoleID = - 1 AND @UserID IS NOT Null)
-			OR (FP.RoleID = - 3)
-			)
-		AND CHARINDEX(P.PermissionKey, @PermissionKeys) > 0
-		AND FP.AllowAccess = @AllowAccess
-	AND F.PortalID = @PortalID
-	AND (F.StorageLocation = 0 
-		OR (F.StorageLocation = 1 AND @IncludeSecure = 1) 
-		OR (F.StorageLocation = 2 AND @IncludeDatabase = 1)
-	)
+            OR (FP.RoleID = - 1 AND @UserID IS NOT Null)
+            OR (FP.RoleID = - 3)
+            )
+        AND CHARINDEX(P.PermissionKey, @PermissionKeys) > 0
+        AND FP.AllowAccess = @AllowAccess
+    AND F.PortalID = @PortalID
+    AND (F.StorageLocation = 0
+        OR (F.StorageLocation = 1 AND @IncludeSecure = 1)
+        OR (F.StorageLocation = 2 AND @IncludeDatabase = 1)
+    )
 ORDER BY F.FolderPath
 
 GO

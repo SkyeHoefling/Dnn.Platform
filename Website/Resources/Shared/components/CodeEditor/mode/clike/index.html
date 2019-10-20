@@ -171,10 +171,10 @@ public enum Enum {
 
 public class Class<T, V> implements MyInterface {
   public static final MyType<T, V> member;
-  
+
   private class InnerClass {
     public int zero() {
-      return 0;
+    return 0;
     }
   }
 
@@ -197,9 +197,9 @@ public class Class<T, V> implements MyInterface {
 object FilterTest extends App {
   def filter(xs: List[Int], threshold: Int) = {
     def process(ys: List[Int]): List[Int] =
-      if (ys.isEmpty) ys
-      else if (ys.head < threshold) ys.head :: process(ys.tail)
-      else process(ys.tail)
+    if (ys.isEmpty) ys
+    else if (ys.head < threshold) ys.head :: process(ys.tail)
+    else process(ys.tail)
     process(xs)
   }
   println(filter(List(1, 9, 2, 8, 3, 7, 4), 5))
@@ -207,33 +207,33 @@ object FilterTest extends App {
 </textarea></div>
 
     <script>
-      var cEditor = CodeMirror.fromTextArea(document.getElementById("c-code"), {
+    var cEditor = CodeMirror.fromTextArea(document.getElementById("c-code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-csrc"
-      });
-      var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
+    });
+    var cppEditor = CodeMirror.fromTextArea(document.getElementById("cpp-code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-c++src"
-      });
-      var javaEditor = CodeMirror.fromTextArea(document.getElementById("java-code"), {
+    });
+    var javaEditor = CodeMirror.fromTextArea(document.getElementById("java-code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-java"
-      });
-      var objectivecEditor = CodeMirror.fromTextArea(document.getElementById("objectivec-code"), {
+    });
+    var objectivecEditor = CodeMirror.fromTextArea(document.getElementById("objectivec-code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-objectivec"
-      });
-      var scalaEditor = CodeMirror.fromTextArea(document.getElementById("scala-code"), {
+    });
+    var scalaEditor = CodeMirror.fromTextArea(document.getElementById("scala-code"), {
         lineNumbers: true,
         matchBrackets: true,
         mode: "text/x-scala"
-      });
-      var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
-      CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
+    });
+    var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
+    CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
     </script>
 
     <p>Simple mode that tries to handle C-like languages as well as it

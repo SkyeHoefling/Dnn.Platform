@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { security as SecurityActions } from "../../actions";
-import { 
-    InputGroup, 
-    SingleLineInputWithError, 
+import {
+    InputGroup,
+    SingleLineInputWithError,
     Switch,
     Tooltip,
     Label,
@@ -89,7 +89,7 @@ class MemberManagementPanelBody extends Component {
         else if (passwordExpiry !== "" && re2.test(passwordExpiry)) {
             state.error["passwordExpiry"] = false;
         }
-        
+
         let passwordExpiryReminder = memberSettings["PasswordExpiryReminder"];
         if (passwordExpiryReminder === "" || !re2.test(passwordExpiryReminder)) {
             state.error["passwordExpiryReminder"] = true;

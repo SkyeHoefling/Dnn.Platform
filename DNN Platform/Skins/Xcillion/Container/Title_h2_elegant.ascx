@@ -8,6 +8,5 @@
         </div>
     </div>
     <div id="ContentPane" class="content" runat="server"></div>
-	<div class="clear"></div>
+    <div class="clear"></div>
 </div>
-

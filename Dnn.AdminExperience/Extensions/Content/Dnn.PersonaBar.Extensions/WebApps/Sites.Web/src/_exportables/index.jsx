@@ -9,7 +9,7 @@ if (!window.dnn.Sites) {
     window.dnn.Sites = {};
 }
 
-window.dnn.Sites.CommonActionTypes = CommonActionTypes; 
+window.dnn.Sites.CommonActionTypes = CommonActionTypes;
 window.dnn.Sites.CommonComponents = CommonComponents;
 window.dnn.Sites.CommonReducers = CommonReducers;
 window.dnn.Sites.CommonActions = CommonActions;
