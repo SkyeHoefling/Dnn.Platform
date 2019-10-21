@@ -1,4 +1,4 @@
-﻿define(['jquery', 'main/extension', 'main/config', './exportables/Sites/SitesListView'], function ($, ext, cf, slv) {
+define(['jquery', 'main/extension', 'main/config', './exportables/Sites/SitesListView'], function ($, ext, cf, slv) {
     'use strict';
     var identifier;
     var config = cf.init();

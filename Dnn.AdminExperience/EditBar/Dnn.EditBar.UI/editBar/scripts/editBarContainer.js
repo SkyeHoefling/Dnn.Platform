@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $(document.body).ready(function () {
         var loadEditBar = function () {
             var w = window,

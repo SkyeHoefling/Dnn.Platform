@@ -1,4 +1,4 @@
-﻿(function ($, window, document, undefined) {
+(function ($, window, document, undefined) {
     "use strict";
 
     var WebResourceUrl = this.WebResourceUrl = function (pathAndQuery) {

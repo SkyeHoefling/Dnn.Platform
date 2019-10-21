@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.controls');dnn.extend(dnn.controls,{initTextSuggest:function(ctl)
 {if(ctl&&dnn.controls.controls[ctl.id]==null)
 {var ts=new dnn.controls.DNNTextSuggest(ctl);ts.initialize();return ts;}}});dnn.controls.DNNTextSuggest=function(o)

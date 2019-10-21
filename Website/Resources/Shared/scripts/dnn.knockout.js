@@ -1,4 +1,4 @@
-﻿ko.bindingHandlers.dnnDatePicker = {
+ko.bindingHandlers.dnnDatePicker = {
     init: function (element, valueAccessor) {
         Sys.Application.add_load(function () {
             var picker = $find(element.id.replace('_wrapper', ''));

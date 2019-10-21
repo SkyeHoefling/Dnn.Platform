@@ -1,4 +1,4 @@
-﻿window.postBackConfirm = function(text, mozEvent, oWidth, oHeight, callerObj, oTitle)
+window.postBackConfirm = function(text, mozEvent, oWidth, oHeight, callerObj, oTitle)
 {
     try
     {

@@ -1,4 +1,4 @@
-﻿const webpack = require("webpack");
+const webpack = require("webpack");
 const I18nPlugin = require("i18n-webpack-plugin");
 const packageJson = require("./package.json");
 const path = require("path");

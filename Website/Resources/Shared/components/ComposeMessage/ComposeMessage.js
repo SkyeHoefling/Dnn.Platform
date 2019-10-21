@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.fn.dnnComposeMessage = function (options) {
         var opts = $.extend({}, $.fn.dnnComposeMessage.defaultOptions, options),
             $wrap = $(opts.openTriggerScope),

@@ -1,4 +1,4 @@
-﻿// IE8 doesn't like using var dnnModule = dnnModule || {}
+// IE8 doesn't like using var dnnModule = dnnModule || {}
 if (typeof dnnModule === "undefined" || dnnModule === null) { dnnModule = {}; };
 
 dnnModule.digitalAssets = function ($, $find, $telerik, dnnModal) {

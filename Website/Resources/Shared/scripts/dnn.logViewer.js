@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     if (typeof dnn === 'undefined') dnn = {};
     dnn.logViewer = dnn.logViewer || {};
 

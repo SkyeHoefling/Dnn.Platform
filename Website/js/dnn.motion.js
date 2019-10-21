@@ -1,4 +1,4 @@
-﻿
+
 dnn.extend(dnn.dom,{tweens:[],animate:function(ctl,type,dir,easingType,easingDir,length,interval,onStartFunc,onFinishFunc)
 {var dims=new dnn.dom.positioning.dims(ctl);var anims=[];var vertical=(dir==dnn.motion.animationDir.Down||dir==dnn.motion.animationDir.Up);var expand=(dir==dnn.motion.animationDir.Down||dir==dnn.motion.animationDir.Right);var coord=vertical?'t':'l';var size=coord=='t'?'h':'w';var prop=coord=='t'?'top':'left';var easingFunc=dnn.getEnumByValue(dnn.motion.easingDir,easingDir)+dnn.getEnumByValue(dnn.motion.easingType,easingType);if(type==dnn.motion.animationType.Slide)
 {anims.push({prop:'clip'+prop,begin:dims[size],finish:0});anims.push({prop:prop,begin:dims[coord]-dims[size],finish:dims[coord]});}

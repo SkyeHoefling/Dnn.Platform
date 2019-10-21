@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.controls');dnn.extend(dnn.controls,{initMenu:function(ctl)
 {if(ctl&&dnn.controls.controls[ctl.id]==null)
 {var menu=new dnn.controls.DNNMenu(ctl);menu.initialize();return menu;}}});dnn.controls.DNNMenu=function(o)

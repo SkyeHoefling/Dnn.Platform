@@ -1,4 +1,4 @@
-﻿/*
+/*
 * @depend jquery.tokeninput
 */
 

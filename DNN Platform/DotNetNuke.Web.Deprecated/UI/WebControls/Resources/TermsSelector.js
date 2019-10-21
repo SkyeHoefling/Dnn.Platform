@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     if (typeof webcontrols === "undefined" || webcontrols === null) { webcontrols = {}; };
     webcontrols.termsSelector = {
         OnClientDropDownOpened: function (sender, e) {

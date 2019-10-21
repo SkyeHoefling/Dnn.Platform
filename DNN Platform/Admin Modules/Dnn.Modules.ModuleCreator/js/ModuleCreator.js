@@ -1,4 +1,4 @@
-﻿function moduleCreatorPost(moduleid, method, data, node, callback) {
+function moduleCreatorPost(moduleid, method, data, node, callback) {
     sf = $.ServicesFramework(moduleid);
     $.ajax({
         type: "POST",

@@ -1,4 +1,4 @@
-﻿/// <reference path="dnn.DataStructures.js"/>
+/// <reference path="dnn.DataStructures.js"/>
 /// <reference path="jquery/jquery.js"/>
 
 // First test

@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.xml');dnn.extend(dnn.xml,{pns:'dnn',ns:'xml',parserName:null,get_parserName:function()
 {if(this.parserName==null)
 this.parserName=this._getParser();return this.parserName;},createDocument:function()

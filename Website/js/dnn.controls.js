@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.controls');dnn.controls.orient=function(){};dnn.controls.orient.prototype={horizontal:0,vertical:1}
 dnn.controls.orient.registerEnum("dnn.controls.orient");dnn.controls.action=function(){};dnn.controls.action.prototype={postback:0,expand:1,none:2,nav:3}
 dnn.controls.action.registerEnum("dnn.controls.action");dnn.extend(dnn.controls,{version:new Number('02.03'),pns:'dnn',ns:'controls',isLoaded:false,controls:[],toolbars:[],_behaviorIDs:[],find:function(behaviorID)

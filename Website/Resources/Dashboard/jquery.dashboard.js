@@ -1,4 +1,4 @@
-﻿(function($) {
+(function($) {
 
     $.fn.zebratable = function(options) {
 

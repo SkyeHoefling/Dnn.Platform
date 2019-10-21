@@ -1,4 +1,4 @@
-﻿$(window).on('load', function () {
+$(window).on('load', function () {
     window.cookieconsentoptions = window.cookieconsentoptions || {};
     window.cookieconsentoptions.content = {
         message: window.dnn.getVar('cc_message'),

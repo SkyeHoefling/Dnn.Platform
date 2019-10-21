@@ -1,4 +1,4 @@
-﻿(function ($, window) {
+(function ($, window) {
     $.fn.journalEditor = function (options) {
         $.fn.journalEditor.defaultOptions = {
             buttonSelector: 'button',

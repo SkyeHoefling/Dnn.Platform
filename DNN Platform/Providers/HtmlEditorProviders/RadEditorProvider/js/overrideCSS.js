@@ -1,4 +1,4 @@
-﻿function createjscssfile(filename, filetype) {
+function createjscssfile(filename, filetype) {
     if (filetype == "js") { //if filename is a external JavaScript file
         var fileref = document.createElement('script');
         fileref.setAttribute("type", "text/javascript");

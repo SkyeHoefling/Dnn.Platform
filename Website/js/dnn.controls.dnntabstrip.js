@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.controls');dnn.extend(dnn.controls,{initTabStrip:function(ctl)
 {if(ctl&&dnn.controls.controls[ctl.id]==null)
 {var ts=new dnn.controls.DNNTabStrip(ctl);ts.initialize();return ts;}}});dnn.controls.DNNTabStrip=function(o)

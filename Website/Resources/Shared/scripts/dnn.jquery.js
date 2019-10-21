@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.fn.dnnTabs = function (options) {
         var opts = $.extend({}, $.fn.dnnTabs.defaultOptions, options),
         $wrap = this;

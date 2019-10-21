@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('Sys.WebForms');Sys.WebForms.BeginRequestEventArgs=function Sys$WebForms$BeginRequestEventArgs(request,postBackElement){var e=Function._validateParams(arguments,[{name:"request",type:Sys.Net.WebRequest},{name:"postBackElement",domElement:true}]);if(e)throw e;Sys.WebForms.BeginRequestEventArgs.initializeBase(this);this._request=request;this._postBackElement=postBackElement;}
 function Sys$WebForms$BeginRequestEventArgs$get_postBackElement(){if(arguments.length!==0)throw Error.parameterCount();return this._postBackElement;}
 function Sys$WebForms$BeginRequestEventArgs$get_request(){if(arguments.length!==0)throw Error.parameterCount();return this._request;}

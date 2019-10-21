@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.fn.dnnModuleDragDrop = function (options) {
 
         var isEditMode = $('body').hasClass('dnnEditState');

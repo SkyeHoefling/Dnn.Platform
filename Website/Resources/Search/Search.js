@@ -1,4 +1,4 @@
-﻿(function ($, dnn) {
+(function ($, dnn) {
     var isDropDownVisible = false;
     var searchSkinObject = null;
     var toggleDropDown = function(eventElement) {

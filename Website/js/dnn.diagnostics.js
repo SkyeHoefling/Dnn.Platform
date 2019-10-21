@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.diagnostics');dnn.extend(dnn.diagnostics,{pns:'dnn',ns:'diagnostics',parserName:null,debugCtl:null,debugWait:(document.all!=null),debugArray:[],clearDebug:function()
 {if(this.debugCtl!=null)
 {this.debugCtl.value='';return true;}

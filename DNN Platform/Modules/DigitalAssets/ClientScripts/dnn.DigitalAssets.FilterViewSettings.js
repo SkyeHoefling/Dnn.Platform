@@ -1,4 +1,4 @@
-﻿; if (typeof window.dnn === "undefined" || window.dnn === null) { window.dnn = {}; };
+; if (typeof window.dnn === "undefined" || window.dnn === null) { window.dnn = {}; };
 
 dnn.DigitalAssetsFilterViewSettingsController = function (serviceSettings, serviceControls) {
     var controls = serviceControls,

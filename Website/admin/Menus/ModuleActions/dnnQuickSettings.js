@@ -1,4 +1,4 @@
-﻿(function($) {
+(function($) {
     "use strict";
     /*
     * Creates a new quick setting object.

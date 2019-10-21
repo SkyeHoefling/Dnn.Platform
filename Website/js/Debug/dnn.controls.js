@@ -1,4 +1,4 @@
-﻿Type.registerNamespace('dnn.controls');
+Type.registerNamespace('dnn.controls');
 dnn.controls.orient = function(){};
 dnn.controls.orient.prototype = {
     horizontal: 0,

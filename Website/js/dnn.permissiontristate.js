@@ -1,4 +1,4 @@
-﻿/// <reference name="MicrosoftAjax.js" />
+/// <reference name="MicrosoftAjax.js" />
 
 Type.registerNamespace('dnn.controls');
 

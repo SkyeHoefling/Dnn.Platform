@@ -1,4 +1,4 @@
-﻿
+
 dnn.xmlhttp.parserName='JS';dnn.xmlhttp.JsXmlHttpRequest=function()
 {dnn.xmlhttp.contextId+=1;this.contextId=dnn.xmlhttp.contextId;this.method=null;this.url=null;this.async=true;this.doc=null;this.iframe=document.createElement('IFRAME');this.iframe.name='dnniframe'+this.contextId;this.iframe.id='dnniframe'+this.contextId;this.iframe.src='';this.iframe.height=0;this.iframe.width=0;this.iframe.style.visibility='hidden';document.body.appendChild(this.iframe);}
 dnn.xmlhttp.JsXmlHttpRequest.prototype={open:function(sMethod,sURL,bAsync)

@@ -1,4 +1,4 @@
-﻿(function ($, dnn) {
+(function ($, dnn) {
     if (typeof dnn == 'undefined' || dnn == null) dnn = {};
     dnn.searchResult = {};
 

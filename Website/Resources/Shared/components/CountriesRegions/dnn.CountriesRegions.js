@@ -1,4 +1,4 @@
-﻿var dnnCountryRegionService;
+var dnnCountryRegionService;
 
 function CountryRegionService($) {
     var baseServicepath = $.dnnSF(-1).getServiceRoot('InternalServices') + 'CountryRegion/';

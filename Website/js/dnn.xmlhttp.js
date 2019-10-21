@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.xmlhttp');dnn.xmlhttp.callbackType=function(){};dnn.xmlhttp.callbackType.prototype={simple:0,processPage:1,callBackMethod:2,processPageCallbackMethod:3}
 dnn.xmlhttp.callbackType.registerEnum("dnn.xmlhttp.callbackType");dnn.xmlhttp.callbackStatus=function(){};dnn.xmlhttp.callbackStatus.prototype={ok:200,genericFailure:400,controlNotFound:404,interfactNotSupported:501}
 dnn.xmlhttp.callbackStatus.registerEnum("dnn.xmlhttp.callbackStatus");dnn.extend(dnn.xmlhttp,{pns:'dnn',ns:'xmlhttp',parserName:null,contextId:0,requests:[],cleanUpTimer:null,callBackMethods:null,init:function()

@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.fn.dnnControlPanel = function (options) {
         var opts = $.extend({}, $.fn.dnnControlPanel.defaultOptions, options),
         $wrap = this;

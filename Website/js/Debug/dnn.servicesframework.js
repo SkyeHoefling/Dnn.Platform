@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.dnnSF = function (moduleId) {
         // To avoid scope issues, use 'base' instead of 'this'
         // to reference this class from internal events and functions.

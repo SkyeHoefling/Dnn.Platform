@@ -1,4 +1,4 @@
-﻿
+
 Function.__typeName='Function';Function.__class=true;Function.createCallback=function Function$createCallback(method,context){var e=Function._validateParams(arguments,[{name:"method",type:Function},{name:"context",mayBeNull:true}]);if(e)throw e;return function(){var l=arguments.length;if(l>0){var args=[];for(var i=0;i<l;i++){args[i]=arguments[i];}
 args[l]=context;return method.apply(this,args);}
 return method.call(this,context);}}

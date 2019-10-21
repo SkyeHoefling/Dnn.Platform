@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.fn.dnnConsole = function (options) {
         var opts = $.extend({}, $.fn.dnnConsole.defaults, options);
 

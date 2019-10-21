@@ -1,4 +1,4 @@
-﻿(function ($, window) {
+(function ($, window) {
     $.fn.journalComments = function (options) {
         $.fn.journalComments.defaultOptions = {
             maxLength: 2000

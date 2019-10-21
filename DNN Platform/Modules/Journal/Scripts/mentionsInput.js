@@ -1,4 +1,4 @@
-﻿(function($) {
+(function($) {
     $.fn.mentionsInput = function(options) {
         if (this.length == 0)
             return this;

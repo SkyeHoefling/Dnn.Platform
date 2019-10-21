@@ -1,4 +1,4 @@
-﻿/// <reference name="MicrosoftAjax.js" />
+/// <reference name="MicrosoftAjax.js" />
 /// <reference name="dnn.js" assembly="DotNetNuke.WebUtility" />
 
 dnn.extend(dnn.dom, {

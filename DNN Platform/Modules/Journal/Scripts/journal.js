@@ -1,4 +1,4 @@
-﻿;
+;
 var journalItem = {};
 journalItem.JournalType = 'status';
 journalItem.Title = '';

@@ -1,4 +1,4 @@
-﻿; if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn || {};
+; if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn || {};
 
 // the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.

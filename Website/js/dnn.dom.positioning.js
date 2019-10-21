@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.dom.positioning');dnn.extend(dnn.dom.positioning,{pns:'dnn.dom',ns:'positioning',dragCtr:null,dragCtrDims:null,bodyScrollLeft:function()
 {if(window.pageYOffset)
 return window.pageYOffset;var oBody=(document.compatMode&&document.compatMode!="BackCompat")?document.documentElement:document.body;return oBody.scrollLeft;},bodyScrollTop:function()

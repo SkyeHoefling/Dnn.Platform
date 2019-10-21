@@ -1,4 +1,4 @@
-﻿; if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn || {};
+; if (typeof dnn === "undefined" || dnn === null) { dnn = {}; }; //var dnn = dnn || {};
 
 (function ($, window, document, undefined) {
     "use strict";

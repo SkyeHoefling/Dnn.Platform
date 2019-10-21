@@ -1,4 +1,4 @@
-﻿
+
 dnn.xml.parserName='JS';dnn.xml.JsDocument=function()
 {this.root=new dnn.xml.JsXmlNode(this,'__root');this.childNodes=this.root.childNodes;this.currentHashCode=0;}
 dnn.xml.JsDocument.prototype={hasChildNodes:function()

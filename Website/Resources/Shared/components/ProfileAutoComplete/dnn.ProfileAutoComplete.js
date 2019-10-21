@@ -1,4 +1,4 @@
-﻿var dnnProfileAutoCompleteService;
+var dnnProfileAutoCompleteService;
 
 function ProfileAutoCompleteService($) {
     var baseServicepath = $.dnnSF(-1).getServiceRoot('InternalServices') + 'ProfileService/';

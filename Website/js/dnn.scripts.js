@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.scripts');dnn.extend(dnn.scripts,{pns:'dnn',ns:'scripts'});dnn.scripts.ScriptBatchRequest=function(aSrc,aText,callBack)
 {this.ref=aSrc;this.inline=aText;this.requests=[];this.callBack=callBack;this.numComplete=0;this.numToComplete=0;}
 dnn.scripts.ScriptBatchRequest.prototype={load:function()

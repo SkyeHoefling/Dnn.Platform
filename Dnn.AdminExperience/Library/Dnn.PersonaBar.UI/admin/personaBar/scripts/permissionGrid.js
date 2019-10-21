@@ -1,4 +1,4 @@
-﻿/*
+/*
 * @depend jquery
 * @depend jquery.ui
 */

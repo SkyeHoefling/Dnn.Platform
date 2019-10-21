@@ -1,4 +1,4 @@
-﻿function OnClientCommandExecuting(editor, args) {
+function OnClientCommandExecuting(editor, args) {
     if (typeof jQuery === "undefined" || typeof jQuery.fn.dnnControlPanel === "undefined") return;
 
     var commandName = args.get_commandName();

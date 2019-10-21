@@ -1,4 +1,4 @@
-﻿/* eslint-disable no-undef */
+/* eslint-disable no-undef */
 /* eslint-disable spellcheck/spell-checker */
 const webpack = require("webpack");
 const path = require("path");

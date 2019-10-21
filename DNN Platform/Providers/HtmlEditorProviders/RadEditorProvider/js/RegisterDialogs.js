@@ -1,4 +1,4 @@
-﻿var initToolCommands = function() {
+var initToolCommands = function() {
     if (typeof Telerik !== "undefined" && typeof Telerik.Web.UI.Editor !== "undefined") {
         Telerik.Web.UI.Editor.CommandList["SaveTemplate"] = function(commandName, editor, args) {
             var htmlText = editor.get_html();

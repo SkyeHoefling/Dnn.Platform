@@ -1,4 +1,4 @@
-﻿/*globals jQuery, knockout */
+/*globals jQuery, knockout */
 (function ($, ko) {
     "use strict";
     $.fn.userFileManager = function (options) {

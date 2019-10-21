@@ -1,4 +1,4 @@
-﻿
+
 dnn.controls.DNNInputText=function(multiLine)
 {if(multiLine)
 this.control=document.createElement('textarea');else

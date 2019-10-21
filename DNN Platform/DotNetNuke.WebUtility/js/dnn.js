@@ -1,4 +1,4 @@
-﻿/// <reference name="MicrosoftAjax.js" />
+/// <reference name="MicrosoftAjax.js" />
 /// <reference name="dnn.js" assembly="DotNetNuke.WebUtility" />
 
 var DNN_HIGHLIGHT_COLOR = '#9999FF';

@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.fn.qaTooltip = function (options) {
         var opts = $.extend({}, $.fn.qaTooltip.defaultOptions, options),
                     $wrap = this;

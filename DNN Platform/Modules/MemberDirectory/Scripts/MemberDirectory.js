@@ -1,4 +1,4 @@
-﻿function MemberDirectory($, ko, settings, composeMessageSettings) {
+function MemberDirectory($, ko, settings, composeMessageSettings) {
     var opts = $.extend({}, MemberDirectory.defaultSettings, settings);
     var serviceFramework = settings.servicesFramework;
     var baseServicepath = serviceFramework.getServiceRoot('MemberDirectory') + 'MemberDirectory/';

@@ -1,4 +1,4 @@
-﻿
+
 Type.registerNamespace('dnn.util');dnn.extend(dnn.util, { tableReorderMove: function (ctl, bUp, sKey) {
     var oTR = dnn.dom.getParentByTagName(ctl, 'tr'); if (oTR != null) {
         var oCtr = oTR.parentNode; if (oCtr.childNodes[oCtr.childNodes.length - 1].nodeName == "#text") { dnn.dom.removeChild(oCtr.childNodes[oCtr.childNodes.length - 1]); }; var iIdx = oTR.rowIndex; if (dnn.dom.getAttr(oTR, 'origidx', '') == '-1')

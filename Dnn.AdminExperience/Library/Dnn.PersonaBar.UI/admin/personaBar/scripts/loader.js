@@ -1,4 +1,4 @@
-﻿define(['jquery'], function ($) {
+define(['jquery'], function ($) {
     var loadingbarId = '#personaBar-loadingbar';
     var loaded = false;
     var error = true;

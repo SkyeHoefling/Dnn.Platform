@@ -1,4 +1,4 @@
-﻿(function(window, $) {
+(function(window, $) {
     function parseUri (str) {
         var	o   = parseUri.options,
             m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),

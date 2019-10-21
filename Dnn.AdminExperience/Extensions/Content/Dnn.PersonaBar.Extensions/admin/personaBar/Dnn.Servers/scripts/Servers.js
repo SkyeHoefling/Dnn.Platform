@@ -1,4 +1,4 @@
-﻿define(['main/config'], function (cf) {
+define(['main/config'], function (cf) {
     'use strict';
     var config = cf.init();
 

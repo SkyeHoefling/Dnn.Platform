@@ -1,4 +1,4 @@
-﻿(function ($, window) {
+(function ($, window) {
 
     $.dnnSearchBox = function (options, element) {
         this.$el = $(element);

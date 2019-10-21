@@ -1,4 +1,4 @@
-﻿"use strict";
+"use strict";
 define(["jquery", "knockout", "templatePath/scripts/config", "templatePath/scripts/PersonaBarDialog"], function ($, ko, cf) {
     var helper,
         bindViewModel,

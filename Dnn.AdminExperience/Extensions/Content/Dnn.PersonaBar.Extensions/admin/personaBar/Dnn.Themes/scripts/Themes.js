@@ -1,4 +1,4 @@
-﻿define(['jquery', 'main/extension', 'main/config'], function ($, ext, cf) {
+define(['jquery', 'main/extension', 'main/config'], function ($, ext, cf) {
     'use strict';
     var identifier;
     var config = cf.init();

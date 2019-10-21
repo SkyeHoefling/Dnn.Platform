@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     if (typeof dnn == 'undefined') window.dnn = {};
     if (typeof dnn.searchSkinObject == 'undefined') {
         dnn.searchSkinObject = function (options) {

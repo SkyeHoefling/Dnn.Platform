@@ -1,4 +1,4 @@
-﻿(function ($) {
+(function ($) {
     $.fn.dnnModuleActions = function (options) {
         var opts = $.extend({}, $.fn.dnnModuleActions.defaultOptions, options);
         var $self = this;

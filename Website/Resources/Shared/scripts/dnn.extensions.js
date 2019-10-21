@@ -1,4 +1,4 @@
-﻿Object.isNullOrUndefined = function (value) {
+Object.isNullOrUndefined = function (value) {
     return (typeof (value) === "undefined" || value === null);
 };
 

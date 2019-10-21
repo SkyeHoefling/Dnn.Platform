@@ -1,4 +1,4 @@
-﻿
+
 dnn.controls.DNNRichText=function(initFunc)
 {this.supportsCE=(document.body.contentEditable!=null);this.text='';this.supportsMultiLine=true;this.document=null;this.control=null;this.initialized=false;this.isRichText=true;this.loaded=false;if(this.supportsCE)
 {this.document=document;this.container=document.createElement('div');this.container.contentEditable=true;this.control=this.container;this.initialized=true;}

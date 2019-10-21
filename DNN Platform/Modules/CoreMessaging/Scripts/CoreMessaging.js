@@ -1,4 +1,4 @@
-﻿function CoreMessaging($, ko, settings, composeMessageOptions) {
+function CoreMessaging($, ko, settings, composeMessageOptions) {
     var profilePicHandler = settings.profilePicHandler;
     var serviceFramework = composeMessageOptions.servicesFramework;
     var baseServicepath = serviceFramework.getServiceRoot('CoreMessaging') + 'MessagingService/';
