@@ -16,7 +16,7 @@ end_of_line = crlf
 [*.sln]
 indent_style = tab
 
-[project.json]
+[*.json]
 indent_size = 2
 
 # C# files
