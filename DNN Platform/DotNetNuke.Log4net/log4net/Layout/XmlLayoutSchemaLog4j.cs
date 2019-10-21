@@ -36,6 +36,27 @@ namespace log4net.Layout
     /// </para>
     /// </remarks>
     /// <author>Nicko Cadell</author>
+    /// <example>
+    /// // Example log4j schema event
+    /// <log4j:event logger="first logger" level="ERROR" thread="Thread-3" timestamp="1051494121460">
+    ///   <log4j:message><![CDATA[errormsg 3]]></log4j:message>
+    ///   <log4j:NDC><![CDATA[third]]></log4j:NDC>
+    ///   <log4j:MDC>
+    ///     <log4j:data name = "some string" value="some valuethird"/>
+    ///   </log4j:MDC>
+    ///   <log4j:throwable><![CDATA[java.lang.Exception: someexception-third
+    ///     at org.apache.log4j.chainsaw.Generator.run(Generator.java:94)
+    /// ]]></log4j:throwable>
+    ///   <log4j:locationInfo class="org.apache.log4j.chainsaw.Generator"
+    /// method="run" file="Generator.java" line="94"/>
+    ///   <log4j:properties>
+    ///     <log4j:data name = "log4jmachinename" value="windows"/>
+    ///     <log4j:data name = "log4japp" value="udp-generator"/>
+    ///   </log4j:properties>
+    /// </log4j:event>
+    ///
+    /// // Since log4j 1.3 the log4j:MDC has been combined into the log4j:properties element */
+    /// </example>
     public class XmlLayoutSchemaLog4j : XmlLayoutBase
     {
         #region Static Members
@@ -102,29 +123,6 @@ namespace log4net.Layout
         }
 
         #endregion
-
-        /* Example log4j schema event
-
-<log4j:event logger="first logger" level="ERROR" thread="Thread-3" timestamp="1051494121460">
-  <log4j:message><![CDATA[errormsg 3]]></log4j:message>
-  <log4j:NDC><![CDATA[third]]></log4j:NDC>
-  <log4j:MDC>
-    <log4j:data name="some string" value="some valuethird"/>
-  </log4j:MDC>
-  <log4j:throwable><![CDATA[java.lang.Exception: someexception-third
-    at org.apache.log4j.chainsaw.Generator.run(Generator.java:94)
-]]></log4j:throwable>
-  <log4j:locationInfo class="org.apache.log4j.chainsaw.Generator"
-method="run" file="Generator.java" line="94"/>
-  <log4j:properties>
-    <log4j:data name="log4jmachinename" value="windows"/>
-    <log4j:data name="log4japp" value="udp-generator"/>
-  </log4j:properties>
-</log4j:event>
-
-        */
-
-        /* Since log4j 1.3 the log4j:MDC has been combined into the log4j:properties element */
 
         /// <summary>
         /// Actually do the writing of the xml

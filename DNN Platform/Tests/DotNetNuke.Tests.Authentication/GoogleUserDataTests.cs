@@ -31,15 +31,15 @@ namespace DotNetNuke.Tests.Authentication
     public class GoogleUserDataTests
     {
         private const string SampleUserJson = @"{
- ""id"": ""108453011160062628399"",
- ""name"": ""Fred the Dinosaur"",
- ""given_name"": ""Frederick"",
- ""family_name"": ""Franklin"",
- ""link"": ""https://plus.google.com/108453011160062628399"",
- ""picture"": ""https://lh3.googleusercontent.com/-aii-uOqdr1M/AAAAAAAAAAI/AAAAAAAAADg/dNL75Dg7lbc/photo.jpg"",
- ""gender"": ""male"",
- ""locale"": ""en""
-}";
+            ""id"": ""108453011160062628399"",
+            ""name"": ""Fred the Dinosaur"",
+            ""given_name"": ""Frederick"",
+            ""family_name"": ""Franklin"",
+            ""link"": ""https://plus.google.com/108453011160062628399"",
+            ""picture"": ""https://lh3.googleusercontent.com/-aii-uOqdr1M/AAAAAAAAAAI/AAAAAAAAADg/dNL75Dg7lbc/photo.jpg"",
+            ""gender"": ""male"",
+            ""locale"": ""en""
+            }";
 
         [Test]
         public void GoogleUserData_Populates_Inherited_Name_Properties_When_Deserialized()

@@ -19,6 +19,12 @@ indent_style = tab
 [*.json]
 indent_size = 2
 
+[*.md]
+indent_size = 2
+
+[*.yml]
+index_size = 2
+
 # C# files
 [*.cs]
 # New line preferences
@@ -166,7 +172,7 @@ curly_bracket_next_line = true
 indent_brace_style = Allman
 
 # Xml project files
-[*.{csproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
+[*.{csproj,build,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
 indent_size = 2
 
 # Xml build files
@@ -178,7 +184,7 @@ indent_size = 2
 indent_size = 2
 
 # Xml config files
-[*.{props,targets,config,nuspec}]
+[*.{props,targets,config,Config,nuspec}]
 indent_size = 2
 
 # Shell scripts

@@ -31,13 +31,13 @@ namespace DotNetNuke.Tests.Authentication
     public class LiveUserDataTests
     {
         private const string SampleUserJson = @"{
-  ""id"" : ""contact.c1678ab4000000000000000000000000"",
-  ""first_name"" : ""Frederick"",
-  ""last_name"" : ""Franklin"",
-  ""name"" : ""Fred the Dinosaur"",
-  ""gender"" : ""male"",
-  ""locale"" : ""en_US""
-} ";
+            ""id"" : ""contact.c1678ab4000000000000000000000000"",
+            ""first_name"" : ""Frederick"",
+            ""last_name"" : ""Franklin"",
+            ""name"" : ""Fred the Dinosaur"",
+            ""gender"" : ""male"",
+            ""locale"" : ""en_US""
+        } ";
 
         [Test]
         public void LiveUserData_Populates_Inherited_Name_Properties_When_Deserialized()
