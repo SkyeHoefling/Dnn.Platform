@@ -183,12 +183,12 @@ namespace DotNetNuke.Services.Installer.Writers
             }
         }
 
- /// -----------------------------------------------------------------------------
- /// <summary>
- /// Gets and sets whether a project file is found in the folder
- /// </summary>
- /// <value>A String</value>
- /// -----------------------------------------------------------------------------
+        /// -----------------------------------------------------------------------------
+        /// <summary>
+        /// Gets and sets whether a project file is found in the folder
+        /// </summary>
+        /// <value>A String</value>
+        /// -----------------------------------------------------------------------------
         public bool HasProjectFile { get; set; }
 
         /// -----------------------------------------------------------------------------

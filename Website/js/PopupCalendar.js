@@ -294,20 +294,20 @@ function calPopupSetDate()
 // utility function
 function padZero(num)
 {
-  return ((num <= 9) ? ("0" + num) : num);
+    return ((num <= 9) ? ("0" + num) : num);
 }
 
 // Format short date
 function constructDate(d,m,y)
 {
-  var fmtDate = this.popCalDstFmt
-  fmtDate = fmtDate.replace ('dd', padZero(d))
-  fmtDate = fmtDate.replace ('d', d)
-  fmtDate = fmtDate.replace ('MM', padZero(m))
-  fmtDate = fmtDate.replace ('M', m)
-  fmtDate = fmtDate.replace ('yyyy', y)
-  fmtDate = fmtDate.replace ('yy', padZero(y%100))
-  return fmtDate;
+    var fmtDate = this.popCalDstFmt
+    fmtDate = fmtDate.replace ('dd', padZero(d))
+    fmtDate = fmtDate.replace ('d', d)
+    fmtDate = fmtDate.replace ('MM', padZero(m))
+    fmtDate = fmtDate.replace ('M', m)
+    fmtDate = fmtDate.replace ('yyyy', y)
+    fmtDate = fmtDate.replace ('yy', padZero(y%100))
+    return fmtDate;
 }
 
 // ------------------------------------------------------------------
