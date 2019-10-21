@@ -19,6 +19,14 @@ indent_style = tab
 [*.json]
 indent_size = 2
 
+[*.js]
+quote_type = single
+curly_bracket_next_line = false
+spaces_around_operators = true
+spaces_around_brackets = none
+tab_width = 2
+charset = utf-8
+
 [*.md]
 indent_size = 2
 
