@@ -39,6 +39,7 @@ namespace DotNetNuke.Instrumentation
     /// <summary>
     /// Please use LoggerSource.Instance as a more unit testable way to create loggers
     /// </summary>
+    [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
     public sealed class DnnLogger : LoggerWrapperImpl
     {
         #region Private Fields
@@ -117,11 +118,13 @@ namespace DotNetNuke.Instrumentation
 
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public static DnnLogger GetClassLogger(Type type)
         {
             return new DnnLogger(LogManager.GetLogger(Assembly.GetCallingAssembly(), type).Logger);
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public static DnnLogger GetLogger(string name)
         {
             return new DnnLogger(LogManager.GetLogger(name).Logger);
@@ -152,6 +155,8 @@ namespace DotNetNuke.Instrumentation
         ///     <see cref = "Error(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
+        /// 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Debug(object message)
         {
             Logger.Log(_stackBoundary, LevelDebug, message, null);
@@ -180,6 +185,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void DebugFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelDebug, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
@@ -203,6 +209,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void DebugFormat(IFormatProvider provider, string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelDebug, new SystemStringFormat(provider, format, args), null);
@@ -231,6 +238,7 @@ namespace DotNetNuke.Instrumentation
         ///     <see cref = "Error(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Info(object message)
         {
             Logger.Log(_stackBoundary, LevelInfo, message, null);
@@ -259,6 +267,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InfoFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelInfo, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
@@ -283,6 +292,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InfoFormat(IFormatProvider provider, string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelInfo, new SystemStringFormat(provider, format, args), null);
@@ -327,6 +337,7 @@ namespace DotNetNuke.Instrumentation
         ///     <see cref = "Warn(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Warn(object message)
         {
             Logger.Log(_stackBoundary, LevelWarn, message, null);
@@ -348,6 +359,7 @@ namespace DotNetNuke.Instrumentation
         ///   </para>
         /// </remarks>
         /// <seealso cref = "Warn(object)" />
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Warn(object message, Exception exception)
         {
             Logger.Log(_stackBoundary, LevelWarn, message, exception);
@@ -375,6 +387,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void WarnFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelWarn, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
@@ -398,6 +411,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void WarnFormat(IFormatProvider provider, string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelWarn, new SystemStringFormat(provider, format, args), null);
@@ -426,6 +440,7 @@ namespace DotNetNuke.Instrumentation
         ///     <see cref = "Error(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Error(object message)
         {
             Logger.Log(_stackBoundary, LevelError, message, null);
@@ -447,6 +462,7 @@ namespace DotNetNuke.Instrumentation
         ///   </para>
         /// </remarks>
         /// <seealso cref = "Error(object)" />
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Error(object message, Exception exception)
         {
             Logger.Log(_stackBoundary, LevelError, message, exception);
@@ -474,6 +490,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void ErrorFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelError, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
@@ -497,6 +514,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void ErrorFormat(IFormatProvider provider, string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelError, new SystemStringFormat(provider, format, args), null);
@@ -525,6 +543,7 @@ namespace DotNetNuke.Instrumentation
         ///     <see cref = "Fatal(object,Exception)" /> form instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Fatal(object message)
         {
             Logger.Log(_stackBoundary, LevelFatal, message, null);
@@ -546,6 +565,7 @@ namespace DotNetNuke.Instrumentation
         ///   </para>
         /// </remarks>
         /// <seealso cref = "Fatal(object)" />
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void Fatal(object message, Exception exception)
         {
             Logger.Log(_stackBoundary, LevelFatal, message, exception);
@@ -573,6 +593,7 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void FatalFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelFatal, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
@@ -596,42 +617,50 @@ namespace DotNetNuke.Instrumentation
         ///     methods instead.
         ///   </para>
         /// </remarks>
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void FatalFormat(IFormatProvider provider, string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelFatal, new SystemStringFormat(provider, format, args), null);
         }
 
         #region Install log levels
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InstallLogError(object message)
         {
             Logger.Log(_stackBoundary, LevelLogError, message, null);
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InstallLogError(string message, Exception exception)
         {
             Logger.Log(_stackBoundary, LevelLogError, message, exception);
         }
-        
+
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InstallLogErrorFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelLogError, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InstallLogErrorFormat(IFormatProvider provider, string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelLogError, new SystemStringFormat(provider, format, args), null);
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InstallLogInfo(object message)
         {
             Logger.Log(_stackBoundary, LevelLogInfo, message, null);
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InstallLogInfoFormat(string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelLogInfo, new SystemStringFormat(CultureInfo.InvariantCulture, format, args), null);
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public void InstallLogInfoFormat(IFormatProvider provider, string format, params object[] args)
         {
             Logger.Log(_stackBoundary, LevelLogInfo, new SystemStringFormat(provider, format, args), null);

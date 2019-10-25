@@ -1,31 +1,54 @@
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Security;
-using System.Web;
-
 using log4net;
 using log4net.Config;
 using log4net.Core;
 using log4net.Repository;
 using log4net.Util;
+using System;
+using System.Globalization;
+using System.IO;
 
 namespace DotNetNuke.Instrumentation
 {
+    public interface ILoggerThing
+    {
+        Microsoft.Extensions.Logging.ILogger GetLogger(Type type);
+        Microsoft.Extensions.Logging.ILogger GetLogger(string name);
+        Microsoft.Extensions.Logging.ILogger GetLogger();
+    }
+    public class LoggerThing : ILoggerThing
+    {
+        public Microsoft.Extensions.Logging.ILogger GetLogger(Type type)
+        {
+            return new LoggerSourceImpl.Logger(LogManager.GetLogger(type).Logger, type);
+        }
+
+        public Microsoft.Extensions.Logging.ILogger GetLogger(string name)
+        {
+            return new LoggerSourceImpl.Logger(LogManager.GetLogger(name).Logger, null);
+        }
+
+        public Microsoft.Extensions.Logging.ILogger GetLogger()
+        {
+            return new LoggerSourceImpl.Logger(LogManager.GetLogger("DotNetNuke").Logger, null);
+        }
+    }
+
+    [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
     public class LoggerSourceImpl : ILoggerSource
     {
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public ILog GetLogger(Type type)
         {
             return new Logger(LogManager.GetLogger(type).Logger, type);
         }
 
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
         public ILog GetLogger(string name)
         {
             return new Logger(LogManager.GetLogger(name).Logger, null);
         }
 
-        class Logger : LoggerWrapperImpl, ILog
+        internal class Logger : LoggerWrapperImpl, ILog, Microsoft.Extensions.Logging.ILogger
         {
             private static Level _levelTrace;
             private static Level _levelDebug;
@@ -125,131 +148,222 @@ namespace DotNetNuke.Instrumentation
                 }
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public bool IsDebugEnabled { get { return Logger.IsEnabledFor(_levelDebug); } }
+
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public bool IsInfoEnabled { get { return Logger.IsEnabledFor(_levelInfo); } }
+
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public bool IsTraceEnabled { get { return Logger.IsEnabledFor(_levelTrace); } }
+
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public bool IsWarnEnabled { get { return Logger.IsEnabledFor(_levelWarn); } }
+
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public bool IsErrorEnabled { get { return Logger.IsEnabledFor(_levelError); } }
+
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public bool IsFatalEnabled { get { return Logger.IsEnabledFor(_levelFatal); } }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Debug(object message)
             {
                 Debug(message, null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Debug(object message, Exception exception)
             {
                 Logger.Log(_stackBoundary, _levelDebug, message, exception);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void DebugFormat(string format, params object[] args)
             {
                 DebugFormat(CultureInfo.InvariantCulture, format, args);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void DebugFormat(IFormatProvider provider, string format, params object[] args)
             {
                 Logger.Log(_stackBoundary, _levelDebug, new SystemStringFormat(provider, format, args), null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Info(object message)
             {
                 Info(message, null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Info(object message, Exception exception)
             {
                 Logger.Log(_stackBoundary, _levelInfo, message, exception);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void InfoFormat(string format, params object[] args)
             {
                 InfoFormat(CultureInfo.InvariantCulture, format, args);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void InfoFormat(IFormatProvider provider, string format, params object[] args)
             {
                 Logger.Log(_stackBoundary, _levelInfo, new SystemStringFormat(provider, format, args), null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Trace(object message)
             {
                 Trace(message, null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Trace(object message, Exception exception)
             {
                 Logger.Log(_stackBoundary, _levelTrace, message, exception);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void TraceFormat(string format, params object[] args)
             {
                 TraceFormat(CultureInfo.InvariantCulture, format, args);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void TraceFormat(IFormatProvider provider, string format, params object[] args)
             {
                 Logger.Log(_stackBoundary, _levelTrace, new SystemStringFormat(provider, format, args), null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Warn(object message)
             {
                 Warn(message, null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Warn(object message, Exception exception)
             {
                 Logger.Log(_stackBoundary, _levelWarn, message, exception);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void WarnFormat(string format, params object[] args)
             {
                 WarnFormat(CultureInfo.InvariantCulture, format, args);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void WarnFormat(IFormatProvider provider, string format, params object[] args)
             {
                 Logger.Log(_stackBoundary, _levelWarn, new SystemStringFormat(provider, format, args), null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Error(object message)
             {
                 Error(message, null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Error(object message, Exception exception)
             {
                 Logger.Log(_stackBoundary, _levelError, message, exception);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void ErrorFormat(string format, params object[] args)
             {
                 ErrorFormat(CultureInfo.InvariantCulture, format, args);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void ErrorFormat(IFormatProvider provider, string format, params object[] args)
             {
                 Logger.Log(_stackBoundary, _levelError, new SystemStringFormat(provider, format, args), null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Fatal(object message)
             {
                 Fatal(message, null);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void Fatal(object message, Exception exception)
             {
                 Logger.Log(_stackBoundary, _levelFatal, message, exception);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void FatalFormat(string format, params object[] args)
             {
                 FatalFormat(CultureInfo.InvariantCulture, format, args);
             }
 
+            [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v11.0.0.")]
             public void FatalFormat(IFormatProvider provider, string format, params object[] args)
             {
                 Logger.Log(_stackBoundary, _levelFatal, new SystemStringFormat(provider, format, args), null);
+            }
+
+            void Microsoft.Extensions.Logging.ILogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel logLevel, Microsoft.Extensions.Logging.EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            {
+                var message = formatter(state, exception);
+                switch (logLevel)
+                {
+                    case Microsoft.Extensions.Logging.LogLevel.Trace:
+                        Logger.Log(_stackBoundary, _levelTrace, message, exception);
+                        break;
+                    case Microsoft.Extensions.Logging.LogLevel.Debug:
+                        Logger.Log(_stackBoundary, _levelDebug, message, exception);
+                        break;
+                    case Microsoft.Extensions.Logging.LogLevel.Information:
+                        Logger.Log(_stackBoundary, _levelInfo, message, exception);
+                        break;
+                    case Microsoft.Extensions.Logging.LogLevel.Warning:
+                        Logger.Log(_stackBoundary, _levelWarn, message, exception);
+                        break;
+                    case Microsoft.Extensions.Logging.LogLevel.Error:
+                        Logger.Log(_stackBoundary, _levelError, message, exception);
+                        break;
+                    case Microsoft.Extensions.Logging.LogLevel.Critical:
+                        Logger.Log(_stackBoundary, _levelFatal, message, exception);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            bool Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel)
+            {
+                switch (logLevel)
+                {
+                    case Microsoft.Extensions.Logging.LogLevel.Trace:
+                        return IsTraceEnabled;
+                    case Microsoft.Extensions.Logging.LogLevel.Debug:
+                        return IsDebugEnabled;
+                    case Microsoft.Extensions.Logging.LogLevel.Information:
+                        return IsInfoEnabled;
+                    case Microsoft.Extensions.Logging.LogLevel.Warning:
+                        return IsWarnEnabled;
+                    case Microsoft.Extensions.Logging.LogLevel.Error:
+                        return IsErrorEnabled;
+                    case Microsoft.Extensions.Logging.LogLevel.Critical:
+                        return IsFatalEnabled;
+                    default:
+                        break;
+                }
+
+                return false;
+            }
+
+            IDisposable Microsoft.Extensions.Logging.ILogger.BeginScope<TState>(TState state)
+            {
+                return null;
             }
         }
     }
