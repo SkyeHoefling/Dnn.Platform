@@ -25,7 +25,6 @@ using DotNetNuke.Services.Installer.Blocker;
 #region Usings
 
 using System;
-using System.Data;
 using System.IO;
 using System.Web;
 using System.Web.UI;
@@ -43,6 +42,9 @@ using DotNetNuke.Services.Upgrade.InternalController.Steps;
 using DotNetNuke.Services.Upgrade.Internals;
 using DotNetNuke.Services.Upgrade.Internals.Steps;
 using DotNetNuke.Web.Client.ClientResourceManagement;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+
 
 #endregion
 
@@ -51,8 +53,14 @@ namespace DotNetNuke.Services.Install
 {
     public partial class Install : Page
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Install));
+        private readonly ILogger _logger;
         private static readonly object installLocker = new object();
+        public Install()
+        {
+            _logger = Globals.DependencyProvider.GetService<ILoggerThing>().GetLogger(typeof(Install));
+            _logger.LogInformation("LOGGER RESOLVED CREATED by Dependency Injection");
+        }
+
         #region Private Methods
 
         private void ExecuteScripts()
@@ -178,7 +186,7 @@ namespace DotNetNuke.Services.Install
                         strError += Config.AddFCNMode(Config.FcnMode.Single);
                         if (!string.IsNullOrEmpty(strError))
                         {
-                            Logger.Error(strError);
+                            _logger.LogError(strError);
                         }
 
                         Response.Write("<h2>Installation Complete</h2>");
@@ -341,7 +349,7 @@ namespace DotNetNuke.Services.Install
                         strError += Config.AddFCNMode(Config.FcnMode.Single);
                         if (!string.IsNullOrEmpty(strError))
                         {
-                            Logger.Error(strError);
+                            _logger.LogError(strError);
                         }
                         Response.Write("<h2>Upgrade Complete</h2>");
                         Response.Write("<br><br><h2><a href='../Default.aspx'>Click Here To Access Your Site</a></h2><br><br>");
@@ -411,7 +419,7 @@ namespace DotNetNuke.Services.Install
                 catch (Exception ex)
                 {
                     //error removing the file
-                    Logger.Error(ex);
+                    _logger.LogError(ex, string.Empty);
                 }
 
                 Response.Write("<h2>Installation Complete</h2>");
@@ -499,7 +507,7 @@ namespace DotNetNuke.Services.Install
                 catch (Exception ex)
                 {
                     //Write out Header
-                    Logger.Error(ex);
+                    _logger.LogError(ex, string.Empty);
                     HtmlUtils.WriteHeader(Response, "error");
                     Response.Write("<h2>Current Assembly Version: " + DotNetNukeContext.Current.Application.Version.ToString(3) + "</h2>");
 

@@ -74,8 +74,6 @@ namespace DotNetNuke.Framework
     /// -----------------------------------------------------------------------------
     public partial class DefaultPage : CDefault, IClientAPICallbackEventHandler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DefaultPage));
-
         private static readonly Regex HeaderTextRegex = new Regex("<meta([^>])+name=('|\")robots('|\")",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
 
