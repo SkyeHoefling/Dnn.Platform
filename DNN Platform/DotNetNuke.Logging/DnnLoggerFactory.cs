@@ -1,12 +1,29 @@
 ﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 
 namespace DotNetNuke.Logging
 {
-    internal class DnnLoggerFactory : ILoggerFactory
+    public sealed class DnnLoggerFactory : ILoggerFactory
     {
         private readonly List<ILoggerProvider> _providers = new List<ILoggerProvider>();
-        public void AddProvider(ILoggerProvider provider)
+        private static readonly Lazy<ILoggerFactory> _lazyInstance = new Lazy<ILoggerFactory>(() => CreateFactory());
+        private DnnLoggerFactory() { }
+
+        // This is marked deprecated as the factory pattern should not be used going forward.
+        // Dependency Injection should be used if possible.
+        [Obsolete("Deprecated in Platform 9.4.2. Scheduled removal in v12.0.0.")]
+        public static ILoggerFactory Instance
+        {
+            get => _lazyInstance.Value;
+        }
+
+        private static ILoggerFactory CreateFactory()
+        {
+            return new DnnLoggerFactory();
+        }
+
+        void ILoggerFactory.AddProvider(ILoggerProvider provider)
         {
             if (_providers.Contains(provider))
                 return;
@@ -14,7 +31,7 @@ namespace DotNetNuke.Logging
             _providers.Add(provider);
         }
 
-        public ILogger CreateLogger(string categoryName)
+        ILogger ILoggerFactory.CreateLogger(string categoryName)
         {
             ILogger[] loggers = new ILogger[_providers.Count];
             for (int index = 0; index < _providers.Count; index++)
@@ -24,7 +41,7 @@ namespace DotNetNuke.Logging
         }
 
         // todo - Add proper IDisposable implementation
-        public void Dispose()
+        void IDisposable.Dispose()
         {
             for (int index = 0; index < _providers.Count; index++)
                 _providers[index].Dispose();
