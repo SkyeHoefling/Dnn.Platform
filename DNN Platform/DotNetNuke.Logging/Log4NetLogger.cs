@@ -24,6 +24,7 @@ namespace DotNetNuke.Logging
         private static bool _configured;
         private static readonly object ConfigLock = new object();
 
+        internal Log4NetLogger() : this(LogManager.GetLogger("DotNetNuke").Logger) { }
         internal Log4NetLogger(ILog4NetLogger logger) : this(logger, null) { }
         internal Log4NetLogger(ILog4NetLogger logger, Type type) : base(logger)
         {
