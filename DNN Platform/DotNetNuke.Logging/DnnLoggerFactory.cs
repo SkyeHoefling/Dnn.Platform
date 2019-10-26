@@ -1,28 +1,35 @@
-﻿using log4net;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace DotNetNuke.Logging
 {
-    internal class DnnLoggerFactory : IDnnLoggerFactory
+    internal class DnnLoggerFactory : ILoggerFactory
     {
+        private readonly List<ILoggerProvider> _providers = new List<ILoggerProvider>();
         public void AddProvider(ILoggerProvider provider)
         {
-            throw new NotImplementedException();
+            if (_providers.Contains(provider))
+                return;
+
+            _providers.Add(provider);
         }
 
         public ILogger CreateLogger(string categoryName)
         {
-            return new Log4NetLogger(LogManager.GetLogger(categoryName).Logger);
+            ILogger[] loggers = new ILogger[_providers.Count];
+            for (int index = 0; index < _providers.Count; index++)
+                loggers[index] = _providers[index].CreateLogger(categoryName);
+
+            return new DnnAggregateLogger(loggers);
         }
 
-        public ILogger CreateLogger(Type type)
-        {
-            return CreateLogger(type.FullName);
-        }
-
+        // todo - Add proper IDisposable implementation
         public void Dispose()
         {
+            for (int index = 0; index < _providers.Count; index++)
+                _providers[index].Dispose();
+
+            _providers.Clear();
         }
     }
 }
