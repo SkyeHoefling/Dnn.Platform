@@ -8,8 +8,12 @@ namespace DotNetNuke.Logging
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ILoggerFactory, DnnLoggerFactory>();
-            services.AddTransient<ILogger>(x => x.GetService<ILoggerFactory>().CreateLogger("DotNetNuke"));
+            services.AddSingleton(x => CreateLoggerFactory());
+            services.AddTransient(x => x.GetService<ILoggerFactory>().CreateLogger("DotNetNuke"));
+
+            ILoggerFactory CreateLoggerFactory() =>  
+                DnnLoggerFactory.Builder()
+                    .AddDnnLog4Net();
         }
     }
 }

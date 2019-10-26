@@ -7,7 +7,7 @@ namespace DotNetNuke.Logging
     public sealed class DnnLoggerFactory : ILoggerFactory
     {
         private readonly List<ILoggerProvider> _providers = new List<ILoggerProvider>();
-        private static readonly Lazy<ILoggerFactory> _lazyInstance = new Lazy<ILoggerFactory>(() => CreateFactory());
+        private static readonly Lazy<ILoggerFactory> _lazyInstance = new Lazy<ILoggerFactory>(() => Builder());
         private DnnLoggerFactory() { }
 
         // This is marked deprecated as the factory pattern should not be used going forward.
@@ -18,7 +18,7 @@ namespace DotNetNuke.Logging
             get => _lazyInstance.Value;
         }
 
-        private static ILoggerFactory CreateFactory()
+        internal static ILoggerFactory Builder()
         {
             return new DnnLoggerFactory();
         }
