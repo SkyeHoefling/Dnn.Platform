@@ -57,7 +57,7 @@ namespace DotNetNuke.Services.Install
         private static readonly object installLocker = new object();
         public Install()
         {
-            _logger = Globals.DependencyProvider.GetService<ILoggerThing>().GetLogger(typeof(Install));
+            _logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Install));
             _logger.LogInformation("LOGGER RESOLVED CREATED by Dependency Injection");
         }
 
