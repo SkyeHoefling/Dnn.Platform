@@ -4,6 +4,17 @@
   <Target Name="DebugProject">
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.DependencyInjection.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.Abstractions.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Logging.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Options.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Primitives.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Configuration.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Configuration.Abstractions.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Extensions.Configuration.Binder.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Buffers.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Memory.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Numerics.Vectors.dll" DestinationFolder="..\..\Website\bin\" />
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Runtime.CompilerServices.Unsafe.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Microsoft.Web.Infrastructure.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\Newtonsoft.Json.dll" DestinationFolder="..\..\Website\bin\" />
     <Copy SourceFiles="$(MSBuildProjectDirectory)\bin\System.Net.Http.Formatting.dll" DestinationFolder="..\..\Website\bin\" />
