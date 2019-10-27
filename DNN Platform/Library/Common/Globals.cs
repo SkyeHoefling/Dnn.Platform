@@ -58,6 +58,7 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Framework.Providers;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
@@ -84,7 +85,9 @@ namespace DotNetNuke.Common
     [StandardModule]
     public sealed class Globals
     {
-    	private static readonly ILogger Logger = DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Globals));
+    	private static readonly ILogger Logger = DependencyProvider == null ?
+            DnnLoggerFactory.Instance.CreateLogger(typeof(Globals)) :
+            DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Globals));
 
         public static readonly Regex EmailValidatorRegex = new Regex(glbEmailRegEx, RegexOptions.Compiled);
         public static readonly Regex NonAlphanumericCharacters = new Regex("[^A-Za-z0-9]", RegexOptions.Compiled | RegexOptions.CultureInvariant);

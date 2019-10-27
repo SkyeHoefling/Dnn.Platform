@@ -34,6 +34,7 @@ using DotNetNuke.Services.Exceptions;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using DotNetNuke.Logging;
 #endregion
 
 namespace DotNetNuke.Common.Utilities
@@ -47,7 +48,9 @@ namespace DotNetNuke.Common.Utilities
     /// -----------------------------------------------------------------------------
     public class Config
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Config));
+        private static readonly ILogger Logger = Globals.DependencyProvider == null ?
+            DnnLoggerFactory.Instance.CreateLogger(typeof(Config)) :
+            Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Config));
         #region ConfigFileType enum
 
         public enum ConfigFileType
