@@ -39,15 +39,16 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Log.EventLog
 {
     public partial class LogController : ServiceLocator<ILogController, LogController>, ILogController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (LogController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (LogController));
         private const int WriterLockTimeout = 10000; //milliseconds
         private static readonly ReaderWriterLockSlim LockLog = new ReaderWriterLockSlim();
 
@@ -68,14 +69,14 @@ namespace DotNetNuke.Services.Log.EventLog
             // ReSharper disable EmptyGeneralCatchClause
             catch (Exception exc) // ReSharper restore EmptyGeneralCatchClause
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
         }
 
         private static void RaiseError(string filePath, string header, string message)
         {
-            Logger.ErrorFormat("filePath={0}, header={1}, message={2}", filePath, header, message);
+            Logger.LogError("filePath={0}, header={1}, message={2}", filePath, header, message);
 
             if (HttpContext.Current != null)
             {
@@ -121,7 +122,7 @@ namespace DotNetNuke.Services.Log.EventLog
                     }
                     catch (IOException exc)
                     {
-                        Logger.Debug(exc);
+                        Logger.LogDebug(exc, string.Empty);
                         Thread.Sleep(1);
                     }
                 }
@@ -180,7 +181,7 @@ namespace DotNetNuke.Services.Log.EventLog
         {
             if (Globals.Status == Globals.UpgradeStatus.Install)
             {
-                Logger.Info(logInfo);
+                Logger.LogInformation(logInfo.ToString());
             }
             else
             {
@@ -257,7 +258,7 @@ namespace DotNetNuke.Services.Log.EventLog
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     AddLogToFile(logInfo);
                 }
@@ -273,7 +274,7 @@ namespace DotNetNuke.Services.Log.EventLog
             }
             catch (FileNotFoundException exc)
             {
-                Logger.Debug(exc);
+                Logger.LogDebug(exc, string.Empty);
                 xmlDoc.Load(fallbackConfigFile);
             }
 

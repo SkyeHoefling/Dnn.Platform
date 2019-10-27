@@ -25,10 +25,11 @@ using System.Linq;
 using System.Collections.Generic;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Scheduling;
 using DotNetNuke.Services.Search.Entities;
 using DotNetNuke.Services.Search.Internals;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -48,7 +49,7 @@ namespace DotNetNuke.Services.Search
     /// -----------------------------------------------------------------------------
     public class TabIndexer : IndexingProvider
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(TabIndexer));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabIndexer));
         private static readonly int TabSearchTypeId = SearchHelper.Instance.GetSearchTypeByName("tab").SearchTypeId;
 
         /// -----------------------------------------------------------------------------
@@ -126,9 +127,9 @@ namespace DotNetNuke.Services.Search
                 searchDoc.Tags = tab.Terms.Select(t => t.Name);
             }
 
-            if (Logger.IsTraceEnabled)
+            if (Logger.IsEnabled(LogLevel.Trace))
             {
-                Logger.Trace("TabIndexer: Search document for metaData added for page [" + tab.Title + " tid:" + tab.TabID + "]");
+                Logger.LogTrace("TabIndexer: Search document for metaData added for page [" + tab.Title + " tid:" + tab.TabID + "]");
             }
 
             return searchDoc;

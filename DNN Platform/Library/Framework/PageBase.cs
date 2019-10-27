@@ -24,7 +24,6 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Globalization;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
@@ -37,13 +36,13 @@ using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Modules;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Framework
@@ -59,8 +58,8 @@ namespace DotNetNuke.Framework
     /// -----------------------------------------------------------------------------
     public abstract class PageBase : Page
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PageBase));
-        private readonly ILog _tracelLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (PageBase));
+        private readonly ILogger _tracelLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger("DNN.Trace");
 
         private const string LinkItemPattern = "<(a|link|img|script|input|form|object).[^>]*(href|src|action)=(\\\"|'|)(.[^\\\"']*)(\\\"|'|)[^>]*>";
         private static readonly Regex LinkItemMatchRegex = new Regex(LinkItemPattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -228,8 +227,8 @@ namespace DotNetNuke.Framework
             {
                 tabId = PortalSettings.ActiveTab.TabID;
             }
-            if (_tracelLogger.IsDebugEnabled)
-                _tracelLogger.Debug($"{origin} {action} (TabId:{tabId},{message})");
+            if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                _tracelLogger.LogDebug($"{origin} {action} (TabId:{tabId},{message})");
         }
 
         #endregion
@@ -248,7 +247,7 @@ namespace DotNetNuke.Framework
         {
             base.OnError(e);
             Exception exc = Server.GetLastError();
-            Logger.Fatal("An error has occurred while loading page.", exc);
+            Logger.LogCritical("An error has occurred while loading page.", exc);
 
             string strURL = Globals.ApplicationURL();
             if (exc is HttpException && !IsViewStateFailure(exc))

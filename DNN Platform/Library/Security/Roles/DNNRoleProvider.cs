@@ -33,9 +33,10 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Membership;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Security.Roles
@@ -54,7 +55,7 @@ namespace DotNetNuke.Security.Roles
     /// -----------------------------------------------------------------------------
     public class DNNRoleProvider : RoleProvider
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DNNRoleProvider));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DNNRoleProvider));
         private readonly DataProvider dataProvider = DataProvider.Instance();
 
         #region Private Methods
@@ -232,7 +233,7 @@ namespace DotNetNuke.Security.Roles
             catch (Exception exc)
             {
 				//Clear User (duplicate User information)
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
                 createStatus = false;
             }

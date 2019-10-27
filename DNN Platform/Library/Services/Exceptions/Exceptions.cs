@@ -33,11 +33,11 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.UI.Modules;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.CompilerServices;
 
 #endregion
@@ -71,7 +71,7 @@ namespace DotNetNuke.Services.Exceptions
     [StandardModule]
     public sealed class Exceptions
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Exceptions));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Exceptions));
 		/// <summary>
 		/// Gets the exception info.
 		/// </summary>
@@ -104,7 +104,7 @@ namespace DotNetNuke.Services.Exceptions
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     objExceptionInfo.Method = "N/A - Reflection Permission required";
                 }
@@ -165,7 +165,7 @@ namespace DotNetNuke.Services.Exceptions
 	    private static void ProcessHttpException(HttpException exc, string URL)
         {
             var notFoundErrorString = Localization.Localization.GetString("ResourceNotFound", Localization.Localization.SharedResourceFile);
-            Logger.Error(notFoundErrorString + ": - " + URL, exc);
+            Logger.LogError(notFoundErrorString + ": - " + URL, exc);
 
             var log = new LogInfo
             {
@@ -352,10 +352,10 @@ namespace DotNetNuke.Services.Exceptions
             }
             catch (Exception exc2)
             {
-                Logger.Fatal(exc2);
+                Logger.LogCritical(exc2, string.Empty);
                 ProcessPageLoadException(exc2);
             }
-            Logger.ErrorFormat("FriendlyMessage=\"{0}\" ctrl=\"{1}\" exc=\"{2}\"", FriendlyMessage, ctrl, exc);
+            Logger.LogError("FriendlyMessage=\"{0}\" ctrl=\"{1}\" exc=\"{2}\"", FriendlyMessage, ctrl, exc);
 
         }
 
@@ -385,7 +385,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="URL">The URL.</param>
         public static void ProcessPageLoadException(Exception exc, string URL)
         {
-            Logger.Error(URL, exc);
+            Logger.LogError(URL, exc);
             if (ThreadAbortCheck(exc))
             {
                 return;
@@ -424,7 +424,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="exc">The exc.</param>
         public static void LogException(ModuleLoadException exc)
         {
-            Logger.Error(exc);
+            Logger.LogError(exc, string.Empty);
             var objExceptionLog = new ExceptionLogController();
             objExceptionLog.AddLog(exc, ExceptionLogController.ExceptionLogType.MODULE_LOAD_EXCEPTION);
         }
@@ -435,7 +435,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="exc">The exc.</param>
         public static void LogException(PageLoadException exc)
         {
-            Logger.Error(exc);
+            Logger.LogError(exc, string.Empty);
             var objExceptionLog = new ExceptionLogController();
             objExceptionLog.AddLog(exc, ExceptionLogController.ExceptionLogType.PAGE_LOAD_EXCEPTION);
         }
@@ -446,7 +446,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="exc">The exc.</param>
         public static void LogException(SchedulerException exc)
         {
-            Logger.Error(exc);
+            Logger.LogError(exc, string.Empty);
             var objExceptionLog = new ExceptionLogController();
             objExceptionLog.AddLog(exc, ExceptionLogController.ExceptionLogType.SCHEDULER_EXCEPTION);
         }
@@ -457,7 +457,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="exc">The exc.</param>
         public static void LogException(SecurityException exc)
         {
-            Logger.Error(exc);
+            Logger.LogError(exc, string.Empty);
             var objExceptionLog = new ExceptionLogController();
             objExceptionLog.AddLog(exc, ExceptionLogController.ExceptionLogType.SECURITY_EXCEPTION);
         }
@@ -468,7 +468,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="exc">The exc.</param>
         public static void LogException(Exception exc)
         {
-            Logger.Error(exc);
+            Logger.LogError(exc, string.Empty);
             var objExceptionLog = new ExceptionLogController();
             objExceptionLog.AddLog(exc, ExceptionLogController.ExceptionLogType.GENERAL_EXCEPTION);
         }
@@ -479,7 +479,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="exc">The exc.</param>
         public static void ProcessSchedulerException(Exception exc)
         {
-            Logger.Error(exc);
+            Logger.LogError(exc, string.Empty);
             var objExceptionLog = new ExceptionLogController();
             objExceptionLog.AddLog(exc, ExceptionLogController.ExceptionLogType.SCHEDULER_EXCEPTION);
         }
@@ -490,7 +490,7 @@ namespace DotNetNuke.Services.Exceptions
 		/// <param name="exc">The exc.</param>
         public static void LogSearchException(SearchException exc)
         {
-            Logger.Error(exc);
+            Logger.LogError(exc, string.Empty);
             var objExceptionLog = new ExceptionLogController();
             objExceptionLog.AddLog(exc, ExceptionLogController.ExceptionLogType.SEARCH_INDEXER_EXCEPTION);
         }

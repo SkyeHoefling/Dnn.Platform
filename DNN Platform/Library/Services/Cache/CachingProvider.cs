@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Internal;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel;
@@ -33,10 +34,11 @@ using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Cache
@@ -63,7 +65,7 @@ namespace DotNetNuke.Services.Cache
     {
 		#region Private Members
 
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CachingProvider));
+		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(CachingProvider));
 
         private static System.Web.Caching.Cache _cache;
         private const string CachePrefix = "DNN_";
@@ -141,7 +143,7 @@ namespace DotNetNuke.Services.Cache
 		internal static void DisableCacheExpiration()
 		{
 			CacheExpirationDisable = true;
-			Logger.Warn("Disable cache expiration.");
+			Logger.LogWarning("Disable cache expiration.");
 
 		}
 
@@ -154,7 +156,7 @@ namespace DotNetNuke.Services.Cache
 		{
 			CacheExpirationDisable = false;
 			DataCache.ClearHostCache(true);
-			Logger.Warn("Enable cache expiration.");
+			Logger.LogWarning("Enable cache expiration.");
 		}
 		
 	#endregion

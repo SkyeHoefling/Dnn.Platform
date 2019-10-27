@@ -23,31 +23,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Xml;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
-using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Roles;
-using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Localization.Internal;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Tokens;
 using DotNetNuke.UI.Modules;
-using System.Text.RegularExpressions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -114,7 +109,7 @@ namespace DotNetNuke.Services.Localization
     /// </example>
     public class Localization
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Localization));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Localization));
 
         #region Private Members
 
@@ -1534,7 +1529,7 @@ namespace DotNetNuke.Services.Localization
             }
             catch (NullReferenceException ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 return messageName;
             }
         }

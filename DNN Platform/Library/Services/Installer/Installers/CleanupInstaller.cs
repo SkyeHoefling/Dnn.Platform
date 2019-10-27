@@ -22,12 +22,13 @@
 
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Xml.XPath;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Installer.Installers
@@ -41,7 +42,7 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class CleanupInstaller : FileInstaller
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (CleanupInstaller));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (CleanupInstaller));
 		#region "Private Members"
 
         private string _fileName;
@@ -109,7 +110,7 @@ namespace DotNetNuke.Services.Installer.Installers
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
                 return false;
             }

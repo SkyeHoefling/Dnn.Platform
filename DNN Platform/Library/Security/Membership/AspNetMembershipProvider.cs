@@ -32,7 +32,6 @@ using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Membership;
 using DotNetNuke.Entities.Users.Social;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
 //DNN-4016
 using DotNetNuke.Services.Localization;
@@ -46,6 +45,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Security;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -65,7 +67,7 @@ namespace DotNetNuke.Security.Membership
     /// -----------------------------------------------------------------------------
     public class AspNetMembershipProvider : MembershipProvider
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(AspNetMembershipProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(AspNetMembershipProvider));
 
         #region Private Members
 
@@ -336,7 +338,7 @@ namespace DotNetNuke.Security.Membership
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
         }
 

@@ -29,10 +29,11 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Authentication
@@ -51,7 +52,7 @@ namespace DotNetNuke.Services.Authentication
     /// -----------------------------------------------------------------------------
     public class AuthenticationController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AuthenticationController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (AuthenticationController));
 		#region "Private Members"
 
         private static readonly DataProvider provider = DataProvider.Instance();
@@ -249,7 +250,7 @@ namespace DotNetNuke.Services.Authentication
                 }
 				catch (Exception ex)
 				{
-					Logger.Error(ex);
+					Logger.LogError(ex, string.Empty);
 				}
             }
             return objAuthentication;

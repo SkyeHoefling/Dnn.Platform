@@ -22,19 +22,20 @@
 
 using System;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Web;
 using System.Xml.Serialization;
 
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Exceptions
 {
     public class SecurityException : BasePortalException
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SecurityException));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SecurityException));
         private string m_IP;
         private string m_Querystring;
 
@@ -95,7 +96,7 @@ namespace DotNetNuke.Services.Exceptions
             {
                 m_IP = "";
                 m_Querystring = "";
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
         }

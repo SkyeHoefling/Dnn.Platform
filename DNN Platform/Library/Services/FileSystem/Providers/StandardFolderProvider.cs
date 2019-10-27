@@ -29,6 +29,8 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.FileSystem.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 // ReSharper disable CheckNamespace
 namespace DotNetNuke.Services.FileSystem
@@ -36,7 +38,7 @@ namespace DotNetNuke.Services.FileSystem
 {
     public class StandardFolderProvider : FolderProvider
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(StandardFolderProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(StandardFolderProvider));
 
         private static readonly char[] InvalidFileUrlChars = new char[] { '%', ';', '?', ':', '@', '&', '=', '+', '$', ',' };
 
@@ -145,7 +147,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
 
             return fileAttributes;
@@ -239,7 +241,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
 
             return lastModificationTime;
@@ -438,11 +440,11 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (IOException iex)
             {
-                Logger.Warn(iex.Message);
+                Logger.LogWarning(iex.Message);
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
 
             return stream;

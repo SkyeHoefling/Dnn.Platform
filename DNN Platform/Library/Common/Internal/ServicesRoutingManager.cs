@@ -20,14 +20,15 @@
 #endregion
 
 using System;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Cache;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Common.Internal
 {
     public static class ServicesRoutingManager
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ServicesRoutingManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ServicesRoutingManager));
 
         public static void RegisterServiceRoutes()
         {
@@ -48,7 +49,7 @@ namespace DotNetNuke.Common.Internal
             }
             catch (Exception e)
             {
-                Logger.Error(unableToRegisterServiceRoutes, e);
+                Logger.LogError(unableToRegisterServiceRoutes, e);
             }
         }
 

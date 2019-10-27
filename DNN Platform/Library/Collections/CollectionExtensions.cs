@@ -29,8 +29,8 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 
 using DotNetNuke.Common;
-using DotNetNuke.Common.Internal;
-using DotNetNuke.Instrumentation;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Collections
 {
@@ -39,7 +39,7 @@ namespace DotNetNuke.Collections
     /// </summary>
     public static class CollectionExtensions
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CollectionExtensions));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(CollectionExtensions));
 
         /// <summary>
         /// Converts a string with multiple key-value pairs into a Dictionary, if there are duplicated keys in your string 
@@ -781,7 +781,7 @@ namespace DotNetNuke.Collections
             }
             catch (Exception)
             {
-                Logger.ErrorFormat("Error loading portal setting: {0} Default value {1} was used instead", key + ":" + dictionary[key], defaultValue.ToString());
+                Logger.LogError("Error loading portal setting: {0} Default value {1} was used instead", key + ":" + dictionary[key], defaultValue.ToString());
             }
             return value;
         }

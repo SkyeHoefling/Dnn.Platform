@@ -23,7 +23,8 @@
 using System;
 using System.Xml;
 
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -34,7 +35,7 @@ namespace DotNetNuke.Services.Syndication
     /// </summary>
     public class Opml
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Opml));
+    	private static readonly ILogger Logger = DnnLoggerFactory.Instance.CreateLogger(typeof (Opml));
         private DateTime _dateCreated = DateTime.MinValue;
         private DateTime _dateModified = DateTime.MinValue;
         private string _docs = string.Empty;
@@ -487,7 +488,7 @@ namespace DotNetNuke.Services.Syndication
             }
 			catch (Exception ex)
 			{
-				Logger.Error(ex);
+				Logger.LogError(ex, string.Empty);
 			}
 
             newOutline.Category = ParseElement(node, "category");
@@ -497,7 +498,7 @@ namespace DotNetNuke.Services.Syndication
             }
 			catch (Exception ex)
 			{
-				Logger.Error(ex);
+				Logger.LogError(ex, string.Empty);
 			}
 
             try
@@ -506,7 +507,7 @@ namespace DotNetNuke.Services.Syndication
             }
 			catch (Exception ex)
 			{
-				Logger.Error(ex);
+				Logger.LogError(ex, string.Empty);
 			}
 
             newOutline.Language = ParseElement(node, "language");
@@ -518,7 +519,7 @@ namespace DotNetNuke.Services.Syndication
             }
 			catch (Exception ex)
 			{
-				Logger.Error(ex);
+				Logger.LogError(ex, string.Empty);
 			}
 
             newOutline.Description = ParseElement(node, "description");

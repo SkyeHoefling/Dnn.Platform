@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Content;
@@ -36,14 +37,14 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.EventQueue;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Upgrade;
-using Microsoft.VisualBasic.Logging;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Modules
@@ -59,7 +60,7 @@ namespace DotNetNuke.Entities.Modules
     /// -----------------------------------------------------------------------------
     public class DesktopModuleController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DesktopModuleController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DesktopModuleController));
         #region Private Methods
 
         private static readonly DataProvider DataProvider = DataProvider.Instance();
@@ -218,7 +219,7 @@ namespace DotNetNuke.Entities.Modules
             }
 
             if (module == null)
-                Logger.WarnFormat("Unable to find module by module ID. ID:{0} PortalID:{1}", desktopModuleID, portalID);
+                Logger.LogWarning("Unable to find module by module ID. ID:{0} PortalID:{1}", desktopModuleID, portalID);
 
             return module;
         }
@@ -237,7 +238,7 @@ namespace DotNetNuke.Entities.Modules
                 .FirstOrDefault();
 
             if (desktopModuleByPackageID == null)
-                Logger.WarnFormat("Unable to find module by package ID. ID:{0}", packageID);
+                Logger.LogWarning("Unable to find module by package ID. ID:{0}", packageID);
 
             return desktopModuleByPackageID;
         }
@@ -259,7 +260,7 @@ namespace DotNetNuke.Entities.Modules
                                                            select kvp.Value).FirstOrDefault();
 
             if (desktopModuleByModuleName == null)
-                Logger.WarnFormat("Unable to find module by name. Name:{0} portalId:{1}", moduleName, portalID);
+                Logger.LogWarning("Unable to find module by name. Name:{0} portalId:{1}", moduleName, portalID);
 
             return desktopModuleByModuleName;
         }
@@ -281,7 +282,7 @@ namespace DotNetNuke.Entities.Modules
             var module = (from kvp in GetDesktopModulesInternal(Null.NullInteger) where kvp.Value.FriendlyName == friendlyName select kvp.Value).FirstOrDefault();
 
             if (module== null)
-                Logger.WarnFormat("Unable to find module by friendly name. Name:{0}", friendlyName);
+                Logger.LogWarning("Unable to find module by friendly name. Name:{0}", friendlyName);
 
             return module;
         }

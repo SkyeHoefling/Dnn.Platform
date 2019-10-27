@@ -27,21 +27,19 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text.RegularExpressions;
-
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel;
-using DotNetNuke.Entities.Portals;
-using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Data
 {
     public sealed class SqlDataProvider : DataProvider
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SqlDataProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(SqlDataProvider));
         private static DatabaseConnectionProvider _dbConnectionProvider = DatabaseConnectionProvider.Instance() ?? new SqlDatabaseConnectionProvider();
 
         #region Private Members
@@ -108,13 +106,13 @@ namespace DotNetNuke.Data
 
                     try
                     {
-                        Logger.Trace("Executing SQL Script " + sql);
+                        Logger.LogTrace("Executing SQL Script " + sql);
 
                         _dbConnectionProvider.ExecuteNonQuery(connectionString, CommandType.Text, timeoutSec, sql);
                     }
                     catch (SqlException objException)
                     {
-                        Logger.Error(objException);
+                        Logger.LogError(objException, string.Empty);
                         exceptions += objException + Environment.NewLine + Environment.NewLine + sql + Environment.NewLine + Environment.NewLine;
                     }
                 }
@@ -144,12 +142,12 @@ namespace DotNetNuke.Data
             catch (SqlException sqlException)
             {
                 //error in SQL query
-                Logger.Error(sqlException);
+                Logger.LogError(sqlException, string.Empty);
                 errorMessage = sqlException.Message;
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 errorMessage = ex.ToString();
             }
             errorMessage += Environment.NewLine + Environment.NewLine + sql + Environment.NewLine + Environment.NewLine;
@@ -257,7 +255,7 @@ namespace DotNetNuke.Data
             }
             catch (SqlException objException)
             {
-                Logger.Error(objException);
+                Logger.LogError(objException, string.Empty);
 
                 exceptions += objException + Environment.NewLine + Environment.NewLine + sql + Environment.NewLine + Environment.NewLine;
             }
@@ -340,7 +338,7 @@ namespace DotNetNuke.Data
                 }
                 catch (SqlException objException)
                 {
-                    Logger.Error(objException);
+                    Logger.LogError(objException, string.Empty);
 
                     exceptions += objException + Environment.NewLine + Environment.NewLine + script + Environment.NewLine + Environment.NewLine;
                 }
@@ -356,7 +354,7 @@ namespace DotNetNuke.Data
                 }
                 catch (SqlException objException)
                 {
-                    Logger.Error(objException);
+                    Logger.LogError(objException, string.Empty);
 
                     exceptions += objException + Environment.NewLine + Environment.NewLine + script + Environment.NewLine + Environment.NewLine;
                 }

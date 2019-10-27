@@ -20,14 +20,16 @@
 #endregion
 #region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Upgrade.Internals.Steps;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -40,7 +42,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
     /// -----------------------------------------------------------------------------    
     public class FilePermissionCheckStep : BaseInstallationStep
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FilePermissionCheckStep));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FilePermissionCheckStep));
         #region Implementation of IInstallationStep
 
         /// <summary>
@@ -61,14 +63,14 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
                     + Localization.Localization.GetString("FileCreateCheck", LocalInstallResourceFile)
                     + Localization.Localization.GetString("FileDeleteCheck", LocalInstallResourceFile)
                     + Localization.Localization.GetString("FolderDeleteCheck", LocalInstallResourceFile);
-            Logger.TraceFormat("FilePermissionCheck - {0}", Details);
+            Logger.LogTrace("FilePermissionCheck - {0}", Details);
 
             if (!verifiers.All(v => v.VerifyAll()))
                 Errors.Add(string.Format(Localization.Localization.GetString("StepFailed", LocalInstallResourceFile), Details));
             Percentage = 100;
 
             Status = Errors.Count > 0 ? StepStatus.Retry : StepStatus.Done;
-            Logger.TraceFormat("FilePermissionCheck Status - {0}", Status);
+            Logger.LogTrace("FilePermissionCheck Status - {0}", Status);
         }
 
         #endregion

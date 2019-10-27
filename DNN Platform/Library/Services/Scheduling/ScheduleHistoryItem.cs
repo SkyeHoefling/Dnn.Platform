@@ -24,9 +24,11 @@ using System;
 using System.Data;
 using System.Text;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Scheduling
@@ -34,7 +36,7 @@ namespace DotNetNuke.Services.Scheduling
     [Serializable]
     public class ScheduleHistoryItem : ScheduleItem
     {
-        private static readonly ILog _tracelLogger = LoggerSource.Instance.GetLogger(typeof(ScheduleHistoryItem));
+        private static readonly ILogger _tracelLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ScheduleHistoryItem));
 
         private StringBuilder _LogNotes;
         private int _ScheduleHistoryID;
@@ -228,16 +230,16 @@ namespace DotNetNuke.Services.Scheduling
             set
             {
                 _Succeeded = value;
-                if (_tracelLogger.IsDebugEnabled)
-                    _tracelLogger.Debug($"ScheduleHistoryItem.Succeeded Info (ScheduledTask {(value == false ? "Start" : "End")}): {FriendlyName}");
+                if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                    _tracelLogger.LogDebug($"ScheduleHistoryItem.Succeeded Info (ScheduledTask {(value == false ? "Start" : "End")}): {FriendlyName}");
             }
         }
 
         public virtual void AddLogNote(string notes)
         {
             _LogNotes.Append(notes);
-            if (_tracelLogger.IsTraceEnabled)
-                _tracelLogger.Trace(notes.Replace(@"<br/>", Environment.NewLine));
+            if (_tracelLogger.IsEnabled(LogLevel.Trace))
+                _tracelLogger.LogTrace(notes.Replace(@"<br/>", Environment.NewLine));
         }
 
         public override void Fill(IDataReader dr)

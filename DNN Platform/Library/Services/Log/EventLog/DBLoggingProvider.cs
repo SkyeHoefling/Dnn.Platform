@@ -33,8 +33,9 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Host;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Scheduling;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -43,7 +44,7 @@ namespace DotNetNuke.Services.Log.EventLog
 {
     public class DBLoggingProvider : LoggingProvider
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DBLoggingProvider));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DBLoggingProvider));
         private const int ReaderLockTimeout = 10000;
         private const int WriterLockTimeout = 10000;
         private static readonly IList<LogQueueItem> LogQueue = new List<LogQueueItem>();
@@ -145,7 +146,7 @@ namespace DotNetNuke.Services.Log.EventLog
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
             return obj;
         }
@@ -240,12 +241,12 @@ namespace DotNetNuke.Services.Log.EventLog
             }
             catch (SqlException exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 WriteError(logTypeConfigInfo, exc, "SQL Exception", SqlUtils.TranslateSQLException(exc));
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 WriteError(logTypeConfigInfo, exc, "Unhandled Error", exc.Message);
             }
         }

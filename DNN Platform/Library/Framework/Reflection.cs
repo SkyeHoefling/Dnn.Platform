@@ -24,11 +24,13 @@ using System;
 using System.Reflection;
 using System.Web.Compilation;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Framework.Providers;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Framework
@@ -46,7 +48,7 @@ namespace DotNetNuke.Framework
     /// -----------------------------------------------------------------------------
     public class Reflection
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Reflection));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Reflection));
 		#region Public Shared Methods
 		
         /// -----------------------------------------------------------------------------
@@ -313,7 +315,7 @@ namespace DotNetNuke.Framework
                 {
                     if (!IgnoreErrors)
                     {
-                        Logger.Error(TypeName, exc);                        ;
+                        Logger.LogError(TypeName, exc);
                     }
                 }
             }

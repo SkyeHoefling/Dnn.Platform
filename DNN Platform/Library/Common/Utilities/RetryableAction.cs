@@ -21,7 +21,8 @@
 using System;
 using System.Threading;
 
-using DotNetNuke.Instrumentation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Common.Utilities.Internal
 {
@@ -31,7 +32,7 @@ namespace DotNetNuke.Common.Utilities.Internal
     /// </summary>
     public class RetryableAction
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (RetryableAction));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (RetryableAction));
         /// <summary>
         /// The Action to execute
         /// </summary>
@@ -111,20 +112,20 @@ namespace DotNetNuke.Common.Utilities.Internal
                 try
                 {
                     Action();
-                    if (Logger.IsTraceEnabled)
-                        Logger.TraceFormat("Action succeeded - {0}", Description);
+                    if (Logger.IsEnabled(LogLevel.Trace))
+                        Logger.LogTrace("Action succeeded - {0}", Description);
                     return;
                 }
                 catch(Exception)
                 {
                     if (retrysRemaining <= 0)
                     {
-                        Logger.WarnFormat("All retries of action failed - {0}", Description);
+                        Logger.LogWarning("All retries of action failed - {0}", Description);
                         throw;
                     }
 
-                    if (Logger.IsTraceEnabled)
-                        Logger.TraceFormat("Retrying action {0} - {1}", retrysRemaining, Description);
+                    if (Logger.IsEnabled(LogLevel.Trace))
+                        Logger.LogTrace("Retrying action {0} - {1}", retrysRemaining, Description);
                     SleepAction.Invoke(currentDelay);
 
                     const double epsilon = 0.0001;

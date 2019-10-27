@@ -33,18 +33,19 @@ using System.Threading;
 using System.Web;
 
 using DotNetNuke.Common;
-using DotNetNuke.Common.Internal;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel;
 using DotNetNuke.Data;
 using DotNetNuke.Entities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.FileSystem.EventArgs;
 using DotNetNuke.Services.FileSystem.Internal;
 using DotNetNuke.Services.Log.EventLog;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.FileSystem
 {
@@ -53,7 +54,7 @@ namespace DotNetNuke.Services.FileSystem
     /// </summary>
     public class FolderManager : ComponentBase<IFolderManager, FolderManager>, IFolderManager
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(FolderManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FolderManager));
         private static readonly Dictionary<int, SyncFolderData> SyncFoldersData = new Dictionary<int, SyncFolderData>();
         private const string DefaultUsersFoldersPath = "Users";
         private const string DefaultMappedPathSetting = "DefaultMappedPath";
@@ -180,7 +181,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
                 throw new FolderProviderException(
                     Localization.Localization.GetExceptionMessage("DeleteFolderUnderlyingSystemError",
@@ -499,7 +500,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("AddFolderUnderlyingSystemError", "The underlying system threw an exception. The folder has not been added."), ex);
             }
@@ -1441,7 +1442,7 @@ namespace DotNetNuke.Services.FileSystem
                 catch (Exception ex)
                 {
                     // The folders that cannot be deleted from its storage location will be handled during the next sync
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                 }
             }
         }
@@ -1600,7 +1601,7 @@ namespace DotNetNuke.Services.FileSystem
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                 }
             }
 
@@ -1937,7 +1938,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(string.Format("Could not create folder {0}. EXCEPTION: {1}", item.FolderPath, ex.Message), ex);
+                Logger.LogError(string.Format("Could not create folder {0}. EXCEPTION: {1}", item.FolderPath, ex.Message), ex);
             }
         }
         private void InitialiseSyncFoldersData(int portalId, string relativePath)
@@ -2022,7 +2023,7 @@ namespace DotNetNuke.Services.FileSystem
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex, string.Empty);
                     }
                 }
             }
@@ -2097,11 +2098,11 @@ namespace DotNetNuke.Services.FileSystem
                         }
                         catch (InvalidFileExtensionException ex)
                         {
-                            Logger.Info(ex.Message);
+                            Logger.LogInformation(ex.Message);
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error(ex);
+                            Logger.LogError(ex, string.Empty);
                         }
                     }
                 }
@@ -2110,7 +2111,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
 

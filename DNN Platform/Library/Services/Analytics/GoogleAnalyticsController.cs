@@ -28,8 +28,10 @@ using System.Security.Cryptography;
 using System.Text;
 
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Log.EventLog;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -47,7 +49,7 @@ namespace DotNetNuke.Services.Analytics
     /// -----------------------------------------------------------------------------
     public class GoogleAnalyticsController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (GoogleAnalyticsController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (GoogleAnalyticsController));
         /// -----------------------------------------------------------------------------
         /// <summary>
         ///   Handles module upgrades includes a new Google Analytics Asychronous script.
@@ -127,7 +129,7 @@ namespace DotNetNuke.Services.Analytics
                 {
                     fileReader.Close();
                 }
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
             }
 

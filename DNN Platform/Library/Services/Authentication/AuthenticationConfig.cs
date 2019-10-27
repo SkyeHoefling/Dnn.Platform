@@ -22,10 +22,12 @@
 
 using System;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Authentication
@@ -39,7 +41,7 @@ namespace DotNetNuke.Services.Authentication
     [Serializable]
     public class AuthenticationConfig : AuthenticationConfigBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AuthenticationConfig));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (AuthenticationConfig));
         private const string CACHEKEY = "Authentication.DNN";
 
         protected AuthenticationConfig(int portalID) : base(portalID)
@@ -61,7 +63,7 @@ namespace DotNetNuke.Services.Authentication
             }
 			catch (Exception ex)
 			{
-				Logger.Error(ex);
+				Logger.LogError(ex, string.Empty);
 			}
         }
 

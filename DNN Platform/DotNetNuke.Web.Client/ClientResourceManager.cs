@@ -43,13 +43,15 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
     using ClientDependency.Core;
     using System.Collections.Generic;
     using System.Threading;
+    using DotNetNuke.Logging;
+    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// Provides the ability to request that client resources (JavaScript and CSS) be loaded on the client browser.
     /// </summary>
     public class ClientResourceManager
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ClientResourceManager));
+        private static readonly ILogger Logger = DnnLoggerFactory.Instance.CreateLogger(typeof(ClientResourceManager));
         internal const string DefaultCssProvider = "DnnPageHeaderProvider";
         internal const string DefaultJsProvider = "DnnBodyProvider";
 
@@ -450,7 +452,7 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                 }
 
             }

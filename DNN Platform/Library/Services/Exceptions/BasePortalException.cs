@@ -23,16 +23,17 @@
 using System;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Web;
 using System.Xml.Serialization;
 
+using DotNetNuke.Common;
 using DotNetNuke.Application;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.Providers;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Exceptions
@@ -42,7 +43,7 @@ namespace DotNetNuke.Services.Exceptions
 	/// </summary>
     public class BasePortalException : Exception
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (BasePortalException));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (BasePortalException));
 	    private string m_InnerExceptionString;
         private string m_Message;
 	    private string m_Source;
@@ -204,7 +205,7 @@ namespace DotNetNuke.Services.Exceptions
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     DefaultDataProvider = "";
                 }
@@ -232,7 +233,7 @@ namespace DotNetNuke.Services.Exceptions
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     m_StackTrace = "";
                 }
@@ -242,7 +243,7 @@ namespace DotNetNuke.Services.Exceptions
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     m_Message = "";
                 }
@@ -252,7 +253,7 @@ namespace DotNetNuke.Services.Exceptions
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     m_Source = "";
                 }
@@ -277,7 +278,7 @@ namespace DotNetNuke.Services.Exceptions
                 m_StackTrace = "";
                 m_Message = "";
                 m_Source = "";
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
         }

@@ -26,9 +26,10 @@ using System.Web;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using MembershipProvider = DotNetNuke.Security.Membership.MembershipProvider;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Users
@@ -48,7 +49,7 @@ namespace DotNetNuke.Entities.Users
     [Obsolete("Support for users online was removed in 8.x, other solutions exist outside of the DNN Platform.  Scheduled removal in v11.0.0.")]
     public class UserOnlineController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (UserOnlineController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (UserOnlineController));
         private static readonly MembershipProvider memberProvider = MembershipProvider.Instance();
         private static readonly object Locker = new object();
         private static readonly string CacheKey = "OnlineUserList";
@@ -317,7 +318,7 @@ namespace DotNetNuke.Entities.Users
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
 			

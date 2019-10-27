@@ -24,13 +24,13 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml.XPath;
-
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Urls.Config
@@ -38,7 +38,7 @@ namespace DotNetNuke.Entities.Urls.Config
     [Serializable, XmlRoot("RewriterConfig")]
     public class RewriterConfiguration
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (RewriterConfiguration));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (RewriterConfiguration));
 		private static readonly object _threadLocker = new object();
         private RewriterRuleCollection _rules;
 
@@ -101,7 +101,7 @@ namespace DotNetNuke.Entities.Urls.Config
                 log.AddProperty("FilePath", filePath);
                 log.AddProperty("ExceptionMessage", ex.Message);
                 LogController.Instance.AddLog(log);
-                Logger.Error(log);
+                Logger.LogError(log.ToString());
             }
             finally
             {

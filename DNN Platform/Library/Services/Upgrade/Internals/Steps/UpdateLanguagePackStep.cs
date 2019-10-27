@@ -22,13 +22,15 @@
 
 using System;
 using System.Web;
-using System.Web.Configuration;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Upgrade.Internals;
 using DotNetNuke.Services.Upgrade.Internals.Steps;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -41,7 +43,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
     /// -----------------------------------------------------------------------------    
     public class UpdateLanguagePackStep : BaseInstallationStep
     {
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(UpdateLanguagePackStep));
+		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(UpdateLanguagePackStep));
         #region Implementation of IInstallationStep
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
 	            {
 					//we shouldn't break the install process when LP download failed, for admin user can install the LP after website created.
 					//so we logged what's wrong here, and user can check it later.
-		            Logger.Error(ex);
+		            Logger.LogError(ex, string.Empty);
 	            }
 
             }

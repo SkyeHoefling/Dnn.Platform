@@ -28,15 +28,16 @@ using System.Web.Caching;
 
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Cache
 {
     public class FBCachingProvider : CachingProvider
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FBCachingProvider));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FBCachingProvider));
         internal const string CacheFileExtension = ".resources";
         internal static string CachingDirectory = "Cache\\";
 
@@ -201,7 +202,7 @@ namespace DotNetNuke.Services.Cache
                         catch (Exception exc)
                         {
 							//an error occurred
-                            Logger.Error(exc);
+                            Logger.LogError(exc, string.Empty);
 
                             PurgeErrors += 1;
                         }

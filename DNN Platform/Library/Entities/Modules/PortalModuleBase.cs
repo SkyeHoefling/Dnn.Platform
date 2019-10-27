@@ -33,11 +33,11 @@ using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Modules;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Modules
@@ -62,7 +62,7 @@ namespace DotNetNuke.Entities.Modules
             @"\.([a-z]{2,3}\-[0-9A-Z]{2,4}(-[A-Z]{2})?)(\.(Host|Portal-\d+))?\.resx$",
             RegexOptions.IgnoreCase | RegexOptions.Compiled, TimeSpan.FromSeconds(1));
 
-        private readonly ILog _tracelLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
+        private readonly ILogger _tracelLogger;
         private string _localResourceFile;
         private ModuleInstanceContext _moduleContext;
 
@@ -78,6 +78,7 @@ namespace DotNetNuke.Entities.Modules
         public PortalModuleBase()
         {
             DependencyProvider = Globals.DependencyProvider;
+            _tracelLogger = DependencyProvider.GetService<ILoggerFactory>().CreateLogger("DNN.Trace");
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -326,19 +327,19 @@ namespace DotNetNuke.Entities.Modules
 
         protected override void OnInit(EventArgs e)
         {
-            if (_tracelLogger.IsDebugEnabled)
-                _tracelLogger.Debug($"PortalModuleBase.OnInit Start (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
+            if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                _tracelLogger.LogDebug($"PortalModuleBase.OnInit Start (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
             base.OnInit(e);
-            if (_tracelLogger.IsDebugEnabled)
-                _tracelLogger.Debug($"PortalModuleBase.OnInit End (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
+            if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                _tracelLogger.LogDebug($"PortalModuleBase.OnInit End (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
         }
         protected override void OnLoad(EventArgs e)
         {
-            if (_tracelLogger.IsDebugEnabled)
-                _tracelLogger.Debug($"PortalModuleBase.OnLoad Start (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
+            if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                _tracelLogger.LogDebug($"PortalModuleBase.OnLoad Start (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
             base.OnLoad(e);
-            if (_tracelLogger.IsDebugEnabled)
-                _tracelLogger.Debug($"PortalModuleBase.OnLoad End (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
+            if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                _tracelLogger.LogDebug($"PortalModuleBase.OnLoad End (TabId:{PortalSettings.ActiveTab.TabID},ModuleId:{ModuleId}): {GetType()}");
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

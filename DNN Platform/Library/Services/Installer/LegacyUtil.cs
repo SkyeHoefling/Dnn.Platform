@@ -31,11 +31,13 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Installer.Writers;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Skins;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -51,7 +53,7 @@ namespace DotNetNuke.Services.Installer
     /// -----------------------------------------------------------------------------
     public class LegacyUtil
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (LegacyUtil));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (LegacyUtil));
         private static string AdminModules =
             "Adsense, MarketShare, Authentication, Banners, FeedExplorer, FileManager, HostSettings, Lists, LogViewer, Newsletters, PortalAliases, Portals, RecycleBin, Scheduler, SearchAdmin, SearchInput, SearchResults, Security, SiteLog, SiteWizard, SQL, Tabs, Vendors,";
 
@@ -440,7 +442,7 @@ namespace DotNetNuke.Services.Installer
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }            
         }
@@ -493,7 +495,7 @@ namespace DotNetNuke.Services.Installer
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc, string.Empty);
 
                     }
                 }

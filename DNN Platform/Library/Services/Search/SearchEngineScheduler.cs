@@ -22,9 +22,11 @@
 
 using System;
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Scheduling;
 using DotNetNuke.Services.Search.Internals;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -44,7 +46,7 @@ namespace DotNetNuke.Services.Search
     /// -----------------------------------------------------------------------------
     public class SearchEngineScheduler : SchedulerClient
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SearchEngineScheduler));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(SearchEngineScheduler));
 
         public SearchEngineScheduler(ScheduleHistoryItem objScheduleHistoryItem)
         {
@@ -63,7 +65,7 @@ namespace DotNetNuke.Services.Search
             try
             {
                 var lastSuccessFulDateTime = SearchHelper.Instance.GetLastSuccessfulIndexingDateTime(ScheduleHistoryItem.ScheduleID);
-                Logger.Trace("Search: Site Crawler - Starting. Content change start time " + lastSuccessFulDateTime.ToString("g"));
+                Logger.LogTrace("Search: Site Crawler - Starting. Content change start time " + lastSuccessFulDateTime.ToString("g"));
                 ScheduleHistoryItem.AddLogNote(string.Format("Starting. Content change start time <b>{0:g}</b>", lastSuccessFulDateTime));
 
                 var searchEngine = new SearchEngine(ScheduleHistoryItem, lastSuccessFulDateTime);
@@ -83,7 +85,7 @@ namespace DotNetNuke.Services.Search
                 ScheduleHistoryItem.AddLogNote("<br/><b>Indexing Successful</b>");
                 SearchHelper.Instance.SetLastSuccessfulIndexingDateTime(ScheduleHistoryItem.ScheduleID, ScheduleHistoryItem.StartDate);
 
-                Logger.Trace("Search: Site Crawler - Indexing Successful");
+                Logger.LogTrace("Search: Site Crawler - Indexing Successful");
             }
             catch (Exception ex)
             {

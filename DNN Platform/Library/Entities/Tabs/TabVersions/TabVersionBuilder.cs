@@ -23,20 +23,23 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs.TabVersions.Exceptions;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Entities.Tabs.TabVersions
 {
     public class TabVersionBuilder : ServiceLocator<ITabVersionBuilder, TabVersionBuilder>, ITabVersionBuilder
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(TabVersionBuilder));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabVersionBuilder));
         private const int DefaultVersionNumber = 1;
 
         #region Members
@@ -190,7 +193,7 @@ namespace DotNetNuke.Entities.Tabs.TabVersions
                 }
                 catch (DnnTabVersionException e)
                 {
-                    Logger.Error(string.Format("There was a problem making rollbak of the module {0}. Message: {1}.", rollbackDetail.ModuleId, e.Message));
+                    Logger.LogError(string.Format("There was a problem making rollbak of the module {0}. Message: {1}.", rollbackDetail.ModuleId, e.Message));
                     continue;
                 }
                 _tabVersionDetailController.SaveTabVersionDetail(rollbackDetail, createdByUserId);
@@ -698,7 +701,7 @@ namespace DotNetNuke.Entities.Tabs.TabVersions
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
             
             return modules;

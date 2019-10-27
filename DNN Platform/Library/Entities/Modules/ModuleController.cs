@@ -45,7 +45,6 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
@@ -54,6 +53,9 @@ using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.ModuleCache;
 using DotNetNuke.Services.OutputCache;
 using DotNetNuke.Services.Search.Entities;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -64,7 +66,7 @@ namespace DotNetNuke.Entities.Modules
     /// </summary>
     public partial class ModuleController : ServiceLocator<IModuleController, ModuleController>, IModuleController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleController));
         private static readonly DataProvider dataProvider = DataProvider.Instance();
 
         protected override Func<IModuleController> GetFactory()
@@ -119,7 +121,7 @@ namespace DotNetNuke.Entities.Modules
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
                 }
             }
         }
@@ -1196,7 +1198,7 @@ namespace DotNetNuke.Entities.Modules
             catch (Exception exc)
             {
                 // module already in the page, ignore error
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
 
             ClearCache(sourceModule.TabID);
@@ -1885,7 +1887,7 @@ namespace DotNetNuke.Entities.Modules
             }
             catch (Exception ex)
             {
-                Logger.ErrorFormat("Error localizing module, moduleId: {0}, full exception: {1}", sourceModule.ModuleID, ex);
+                Logger.LogError("Error localizing module, moduleId: {0}, full exception: {1}", sourceModule.ModuleID, ex);
             }
         }
 

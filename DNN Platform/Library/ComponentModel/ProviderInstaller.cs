@@ -24,18 +24,18 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Compilation;
-
+using DotNetNuke.Common;
 using DotNetNuke.Framework.Providers;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Exceptions;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.ComponentModel
 {
     public class ProviderInstaller : IComponentInstaller
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ProviderInstaller));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ProviderInstaller));
         private readonly ComponentLifeStyleType _ComponentLifeStyle;
         private readonly Type _ProviderInterface;
         private readonly string _ProviderType;
@@ -108,7 +108,7 @@ namespace DotNetNuke.ComponentModel
 
                 if (type == null)
                 {
-                    Logger.Error(new ConfigurationErrorsException(string.Format("Could not load provider {0}", provider.Type)));
+                    Logger.LogError(new ConfigurationErrorsException(string.Format("Could not load provider {0}", provider.Type)), string.Empty);
                 }
                 else
                 {

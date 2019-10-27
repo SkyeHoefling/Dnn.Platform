@@ -47,7 +47,6 @@ using DotNetNuke.Entities.Tabs.TabVersions;
 using DotNetNuke.Entities.Urls;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
@@ -55,6 +54,9 @@ using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Search.Entities;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -75,7 +77,7 @@ namespace DotNetNuke.Entities.Tabs
             return () => new TabController();
         }
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(TabController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabController));
         private readonly DataProvider _dataProvider = DataProvider.Instance();
 
         private static readonly Regex TabNameCheck1 = new Regex("^LPT[1-9]$|^COM[1-9]$", RegexOptions.IgnoreCase);
@@ -211,7 +213,7 @@ namespace DotNetNuke.Entities.Tabs
         {
 			try
 			{
-				Logger.TraceFormat("Localizing TabId: {0}, TabPath: {1}, Locale: {2}", originalTab.TabID, originalTab.TabPath, locale.Code);
+				Logger.LogTrace("Localizing TabId: {0}, TabPath: {1}, Locale: {2}", originalTab.TabID, originalTab.TabPath, locale.Code);
 				var defaultLocale = LocaleController.Instance.GetDefaultLocale(originalTab.PortalID);
 
 				//First Clone the Tab
@@ -1326,7 +1328,7 @@ namespace DotNetNuke.Entities.Tabs
 
             if (tabId <= 0)
             {
-                Logger.WarnFormat("Invalid tabId {0} of portal {1}", tabId, portalId);
+                Logger.LogWarning("Invalid tabId {0} of portal {1}", tabId, portalId);
             }
             else if (ignoreCache || Host.Host.PerformanceSetting == Globals.PerformanceSettings.NoCaching)
             {
@@ -1356,7 +1358,7 @@ namespace DotNetNuke.Entities.Tabs
                     }
                     else
                     {
-                        Logger.WarnFormat("Unable to find tabId {0} of portal {1}", tabId, portalId);
+                        Logger.LogWarning("Unable to find tabId {0} of portal {1}", tabId, portalId);
                     }
                 }
             }

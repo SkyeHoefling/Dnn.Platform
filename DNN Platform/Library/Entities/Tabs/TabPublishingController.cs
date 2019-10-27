@@ -27,15 +27,17 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Entities.Tabs
 {
     public class TabPublishingController: ServiceLocator<ITabPublishingController,TabPublishingController>, ITabPublishingController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(TabPublishingController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabPublishingController));
 
         public bool IsTabPublished(int tabID, int portalID)
         {
@@ -53,7 +55,7 @@ namespace DotNetNuke.Entities.Tabs
             {
                 var errorMessage = Localization.GetExceptionMessage("PublishPagePermissionsNotMet", "Permissions are not met. The page has not been published.");
                 var permissionsNotMetExc = new PermissionsNotMetException(tabID, errorMessage);
-                Logger.Error(errorMessage, permissionsNotMetExc);
+                Logger.LogError(errorMessage, permissionsNotMetExc);
                 throw permissionsNotMetExc;
             }
 

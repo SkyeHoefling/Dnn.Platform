@@ -23,9 +23,10 @@
 using System;
 using System.IO;
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Upgrade.Internals.Steps;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Upgrade.InternalController.Steps
@@ -37,7 +38,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
     /// -----------------------------------------------------------------------------    
     public class InstallExtensionsStep : BaseInstallationStep
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (InstallExtensionsStep));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (InstallExtensionsStep));
         #region Implementation of IInstallationStep
 
         /// <summary>
@@ -64,7 +65,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
                 var packageType = package.Value.PackageType;
                 var message = string.Format(Localization.Localization.GetString("InstallingExtension", LocalInstallResourceFile), packageType, Path.GetFileName(file));
                 Details = message;
-                Logger.Trace(Details);
+                Logger.LogTrace(Details);
                 var success = Upgrade.InstallPackage(file, packageType, false);
                 if (!success)
                 {

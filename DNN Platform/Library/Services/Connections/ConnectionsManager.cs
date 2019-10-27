@@ -24,11 +24,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DotNetNuke.Common;
 using DotNetNuke.Framework;
 using DotNetNuke.Framework.Reflections;
-using DotNetNuke.Instrumentation;
 ﻿using DotNetNuke.Services.Installer.Packages;
 using System.Reflection;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.Connections
 {
@@ -45,7 +48,7 @@ namespace DotNetNuke.Services.Connections
 
         #region Properties
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ConnectionsManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ConnectionsManager));
         private static readonly object LockerObject = new object();
         private static IDictionary<string, IConnector> _processors;
 
@@ -97,7 +100,7 @@ namespace DotNetNuke.Services.Connections
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("Unable to create {0} while registering connections.{1}", type.FullName, e.Message);
+                    Logger.LogError("Unable to create {0} while registering connections.{1}", type.FullName, e.Message);
                 }
             }
         }

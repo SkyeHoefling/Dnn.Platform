@@ -23,18 +23,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Caching;
 
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Controllers;
-using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Host
@@ -48,7 +47,7 @@ namespace DotNetNuke.Entities.Host
         private const int cacheTimeout = 20;
         private const CacheItemPriority cachePriority = CacheItemPriority.High;
         private static readonly DataProvider dataProvider = DataProvider.Instance();
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ServerController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ServerController));
 
         public static bool UseAppName
         {
@@ -98,7 +97,7 @@ namespace DotNetNuke.Entities.Host
             {
                 executingServerName += "-" + Globals.IISAppName;
             }
-            Logger.Debug("GetExecutingServerName:" + executingServerName);
+            Logger.LogDebug("GetExecutingServerName:" + executingServerName);
             return executingServerName;
         }
 
@@ -109,7 +108,7 @@ namespace DotNetNuke.Entities.Host
             {
                 serverName += "-" + webServer.IISAppName;
             }
-            Logger.Debug("GetServerName:" + serverName);
+            Logger.LogDebug("GetServerName:" + serverName);
             return serverName;
         }
 
@@ -182,7 +181,7 @@ namespace DotNetNuke.Entities.Host
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 return string.Empty;
             }
         }
@@ -201,7 +200,7 @@ namespace DotNetNuke.Entities.Host
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 return string.Empty;
             }
         }

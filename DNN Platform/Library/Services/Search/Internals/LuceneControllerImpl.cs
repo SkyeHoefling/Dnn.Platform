@@ -33,15 +33,16 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Framework;
 using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.Search.Entities;
 using Lucene.Net.Analysis;
 using Lucene.Net.Documents;
 using Lucene.Net.Index;
 using Lucene.Net.Search;
 using Lucene.Net.Search.Vectorhighlight;
 using Lucene.Net.Store;
-using DotNetNuke.Instrumentation;
 using System.Web;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -65,7 +66,7 @@ namespace DotNetNuke.Services.Search.Internals
 
         #region Private Properties
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(LuceneControllerImpl));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(LuceneControllerImpl));
 
         internal string IndexFolder { get; private set; }
 
@@ -291,10 +292,10 @@ namespace DotNetNuke.Services.Search.Internals
                     searcher.Search(searchContext.LuceneQuery.Query, null, searchSecurityTrimmer);
                     luceneResults.TotalHits = searchSecurityTrimmer.TotalHits;
 
-                    if (Logger.IsDebugEnabled)
+                    if (Logger.IsEnabled(LogLevel.Debug))
                     {
                         var sb = GetSearcResultExplanation(searchContext.LuceneQuery, searchSecurityTrimmer.ScoreDocs, searcher);
-                        Logger.Trace(sb);
+                        Logger.LogTrace(sb.ToString());
                     }
 
                     //Page doesn't exist
@@ -326,8 +327,8 @@ namespace DotNetNuke.Services.Search.Internals
                         throw;
                     }
 
-                    Logger.Error(ex);
-                    Logger.Error($"Search Index Folder Is Not Available: {ex.Message}, Retry {i + 1} time(s).");
+                    Logger.LogError(ex, string.Empty);
+                    Logger.LogError($"Search Index Folder Is Not Available: {ex.Message}, Retry {i + 1} time(s).");
                     Thread.Sleep(100);
                 }
             }
@@ -426,7 +427,7 @@ namespace DotNetNuke.Services.Search.Internals
             {
                 if (doWait)
                 {
-                    Logger.Debug("Compacting Search Index - started");
+                    Logger.LogDebug("Compacting Search Index - started");
                 }
 
                 CheckDisposed();
@@ -436,7 +437,7 @@ namespace DotNetNuke.Services.Search.Internals
                 if (doWait)
                 {
                     Commit();
-                    Logger.Debug("Compacting Search Index - finished");
+                    Logger.LogDebug("Compacting Search Index - finished");
                 }
 
                 return true;
@@ -521,7 +522,7 @@ namespace DotNetNuke.Services.Search.Internals
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex, string.Empty);
                     }
                 }
             }

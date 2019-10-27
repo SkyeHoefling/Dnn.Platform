@@ -21,20 +21,21 @@
 #region Usings
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Scheduling;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.ModuleCache
 {
     public class PurgeModuleCache : SchedulerClient
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PurgeModuleCache));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (PurgeModuleCache));
         public PurgeModuleCache(ScheduleHistoryItem objScheduleHistoryItem)
         {
             ScheduleHistoryItem = objScheduleHistoryItem; //REQUIRED
@@ -58,7 +59,7 @@ namespace DotNetNuke.Services.ModuleCache
                     catch (NotSupportedException exc)
                     {
 						//some Module caching providers don't use this feature
-                        Logger.Debug(exc);
+                        Logger.LogDebug(exc, string.Empty);
 
                     }
                 }

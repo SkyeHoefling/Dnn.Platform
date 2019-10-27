@@ -32,8 +32,9 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.FileSystem
@@ -51,7 +52,7 @@ namespace DotNetNuke.Services.FileSystem
     [Serializable]
     public class FileInfo : BaseEntityInfo, IHydratable, IFileInfo
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(FileInfo));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileInfo));
         private string _folder;
         private bool? _supportsFileAttributes;
         private DateTime? _lastModificationTime;

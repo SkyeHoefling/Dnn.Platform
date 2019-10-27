@@ -20,17 +20,19 @@
 #endregion
 
 using System;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Content.Common;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.FileSystem.Internal
 {
     public class FileDeletionController : ServiceLocator< IFileDeletionController, FileDeletionController>, IFileDeletionController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(FileDeletionController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileDeletionController));
         public void DeleteFile(IFileInfo file)
         {
             string lockReason;
@@ -47,7 +49,7 @@ namespace DotNetNuke.Services.FileSystem.Internal
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("DeleteFileUnderlyingSystemError", "The underlying system threw an exception. The file has not been deleted."), ex);
             }
 

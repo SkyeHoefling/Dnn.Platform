@@ -32,17 +32,18 @@ using DotNetNuke.Entities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.FileSystem.EventArgs;
 using DotNetNuke.Services.Localization;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.FileSystem
 {
     public class FileServerHandler : IHttpHandler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FileServerHandler));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FileServerHandler));
         #region IHttpHandler Members
 
         /// -----------------------------------------------------------------------------
@@ -221,7 +222,7 @@ namespace DotNetNuke.Services.FileSystem
                                 }
                                 catch (Exception ex)
                                 {
-                                    Logger.Error(ex);
+                                    Logger.LogError(ex, string.Empty);
                                 }
                             }
 

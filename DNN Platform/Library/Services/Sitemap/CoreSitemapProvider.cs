@@ -32,10 +32,11 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Sitemap
@@ -44,7 +45,7 @@ namespace DotNetNuke.Services.Sitemap
     {
         private bool includeHiddenPages;
         private float minPagePriority;
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CoreSitemapProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(CoreSitemapProvider));
 
         private bool useLevelBasedPagePriority;
 
@@ -93,7 +94,7 @@ namespace DotNetNuke.Services.Sitemap
 							}
 							catch (Exception)
 							{
-								Logger.ErrorFormat("Error has occurred getting PageUrl for {0}", tab.TabName);
+								Logger.LogError("Error has occurred getting PageUrl for {0}", tab.TabName);
 							}
 	                    }
 	                }

@@ -41,11 +41,13 @@ using DotNetNuke.ComponentModel;
 using DotNetNuke.Data.PetaPoco;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Search.Entities;
+
 using Microsoft.ApplicationBlocks.Data;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -55,7 +57,7 @@ namespace DotNetNuke.Data
 {
     public abstract class DataProvider
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DataProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(DataProvider));
 
         private const int DuplicateKey = 2601;
 
@@ -2552,7 +2554,7 @@ namespace DotNetNuke.Data
             }
             catch (SqlException ex)
             {
-                Logger.Debug(ex);
+                Logger.LogDebug(ex, string.Empty);
 
                 //If not a duplicate (throw an Exception)
                 retValue = -ex.Number;
@@ -4229,7 +4231,7 @@ namespace DotNetNuke.Data
             }
             catch (SqlException ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
 
@@ -4241,7 +4243,7 @@ namespace DotNetNuke.Data
             }
             catch (SqlException ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
 

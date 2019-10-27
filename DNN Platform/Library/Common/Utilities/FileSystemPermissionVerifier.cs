@@ -24,8 +24,9 @@ using System;
 using System.IO;
 
 using DotNetNuke.Common.Utilities.Internal;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Common.Utilities
@@ -38,7 +39,7 @@ namespace DotNetNuke.Common.Utilities
     /// </remarks>
     public class FileSystemPermissionVerifier
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FileSystemPermissionVerifier));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FileSystemPermissionVerifier));
         private readonly string _basePath;
 
 	    private int _retryTimes = 30;
@@ -82,7 +83,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 verified = false;
             }
 
@@ -119,7 +120,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 verified = false;
             }
 
@@ -143,7 +144,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 verified = false;
             }
 
@@ -177,7 +178,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 verified = false;
             }
 

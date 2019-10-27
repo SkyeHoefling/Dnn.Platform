@@ -37,8 +37,10 @@ using System.Xml.Xsl;
 
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -53,7 +55,7 @@ namespace DotNetNuke.Common.Utilities
     /// -----------------------------------------------------------------------------
     public class XmlUtils
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (XmlUtils));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (XmlUtils));
         public static void AppendElement(ref XmlDocument objDoc, XmlNode objNode, string attName, string attValue, bool includeIfEmpty)
         {
             AppendElement(ref objDoc, objNode, attName, attValue, includeIfEmpty, false);

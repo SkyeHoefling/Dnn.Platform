@@ -58,19 +58,17 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Framework.Providers;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
-using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Upgrade;
 using DotNetNuke.Services.Url.FriendlyUrl;
-using DotNetNuke.UI.Skins;
 using DotNetNuke.UI.Utilities;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.CompilerServices;
 
 using DataCache = DotNetNuke.UI.Utilities.DataCache;
@@ -86,7 +84,7 @@ namespace DotNetNuke.Common
     [StandardModule]
     public sealed class Globals
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Globals));
+    	private static readonly ILogger Logger = DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Globals));
 
         public static readonly Regex EmailValidatorRegex = new Regex(glbEmailRegEx, RegexOptions.Compiled);
         public static readonly Regex NonAlphanumericCharacters = new Regex("[^A-Za-z0-9]", RegexOptions.Compiled | RegexOptions.CultureInvariant);
@@ -578,7 +576,7 @@ namespace DotNetNuke.Common
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
 
@@ -594,7 +592,7 @@ namespace DotNetNuke.Common
                 {
                     var tempStatus = UpgradeStatus.Unknown;
 
-                    Logger.Trace("Getting application status");
+                    Logger.LogTrace("Getting application status");
                     tempStatus = UpgradeStatus.None;
                     //first call GetProviderPath - this insures that the Database is Initialised correctly
                     //and also generates the appropriate error message if it cannot be initialised correctly
@@ -608,7 +606,7 @@ namespace DotNetNuke.Common
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error(ex);
+                            Logger.LogError(ex, string.Empty);
                             strMessage = "ERROR:" + ex.Message;
                         }
                     }
@@ -659,8 +657,8 @@ namespace DotNetNuke.Common
 
                     _status = tempStatus;
 
-                    Logger.Trace(string.Format("result of getting providerpath: {0}",strMessage));
-                    Logger.Trace("Application status is " + _status);
+                    Logger.LogTrace(string.Format("result of getting providerpath: {0}",strMessage));
+                    Logger.LogTrace("Application status is " + _status);
                 }
                 return _status;
             }
@@ -1542,7 +1540,7 @@ namespace DotNetNuke.Common
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
                     total = -1;
                 }
             }
@@ -2287,7 +2285,7 @@ namespace DotNetNuke.Common
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
 
@@ -2307,12 +2305,12 @@ namespace DotNetNuke.Common
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
 
@@ -3208,7 +3206,7 @@ namespace DotNetNuke.Common
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
                 return Null.NullString;
             }
@@ -3596,7 +3594,7 @@ namespace DotNetNuke.Common
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc, string.Empty);
 
                         objHashTable = new Hashtable();
                     }
@@ -3650,7 +3648,7 @@ namespace DotNetNuke.Common
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     strString = "";
                 }

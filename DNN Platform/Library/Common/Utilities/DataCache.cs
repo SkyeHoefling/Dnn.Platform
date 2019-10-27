@@ -30,13 +30,14 @@ using DotNetNuke.Collections.Internal;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.OutputCache;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Common.Utilities
@@ -59,7 +60,7 @@ namespace DotNetNuke.Common.Utilities
     /// -----------------------------------------------------------------------------
     public class DataCache
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DataCache));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DataCache));
         //Host keys
         public const string SecureHostSettingsCacheKey = "SecureHostSettings";
         public const string UnSecureHostSettingsCacheKey = "UnsecureHostSettings";
@@ -386,7 +387,7 @@ namespace DotNetNuke.Common.Utilities
             catch (Exception exc)
             {
                 //Swallow exception            
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
         }
 

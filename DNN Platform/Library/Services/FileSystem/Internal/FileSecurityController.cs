@@ -24,7 +24,8 @@ using System.IO;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Lists;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.FileSystem.Internal
 {
@@ -33,7 +34,7 @@ namespace DotNetNuke.Services.FileSystem.Internal
     /// </summary>
     public class FileSecurityController : ServiceLocator<IFileSecurityController, FileSecurityController>, IFileSecurityController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(FileSecurityController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileSecurityController));
 
         private const int BufferSize = 4096;
 
@@ -75,7 +76,7 @@ namespace DotNetNuke.Services.FileSystem.Internal
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error($"Create File Security Checker for '{extension}' failed.", ex);
+                    Logger.LogError($"Create File Security Checker for '{extension}' failed.", ex);
                 }
             }
 

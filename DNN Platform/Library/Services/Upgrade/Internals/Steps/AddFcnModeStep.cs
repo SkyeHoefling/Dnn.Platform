@@ -20,9 +20,10 @@
 #endregion
 using System;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Data;
-using DotNetNuke.Instrumentation;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.Upgrade.Internals.Steps
 {
@@ -33,7 +34,7 @@ namespace DotNetNuke.Services.Upgrade.Internals.Steps
     /// ------------------------------------------------------------------------------------------------  
     public class AddFcnModeStep : BaseInstallationStep
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(AddFcnModeStep));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(AddFcnModeStep));
 
         public override void Execute()
         {
@@ -44,7 +45,7 @@ namespace DotNetNuke.Services.Upgrade.Internals.Steps
             if (!string.IsNullOrEmpty(strError))
             {
                 Errors.Add(Localization.Localization.GetString("FcnMode", LocalInstallResourceFile) + ": " + strError);
-                Logger.TraceFormat("Adding FcnMode : {0}", strError);
+                Logger.LogTrace("Adding FcnMode : {0}", strError);
             }
             Status = Errors.Count > 0 ? StepStatus.Retry : StepStatus.Done;
         }

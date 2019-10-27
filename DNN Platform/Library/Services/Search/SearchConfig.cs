@@ -23,11 +23,13 @@
 using System;
 using System.Collections.Generic;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Search
@@ -41,7 +43,7 @@ namespace DotNetNuke.Services.Search
     [Serializable]
     public class SearchConfig
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SearchConfig));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SearchConfig));
 		#region "Private Members"
 
         private readonly bool _SearchIncludeCommon;
@@ -150,7 +152,7 @@ namespace DotNetNuke.Services.Search
             catch (Exception exc)
             {
                 //we just want to trap the error as we may not be installed so there will be no Settings
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
             return retValue;
@@ -175,7 +177,7 @@ namespace DotNetNuke.Services.Search
             catch (Exception exc)
             {
                 //we just want to trap the error as we may not be installed so there will be no Settings
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
             return retValue;

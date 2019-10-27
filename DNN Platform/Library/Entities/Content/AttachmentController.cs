@@ -25,16 +25,17 @@ using System.Linq;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Common;
-using DotNetNuke.Entities.Content.Data;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.FileSystem;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Entities.Content
 {
     /// <summary>Implementation of <see cref="IAttachmentController"/>.</summary>
     public class AttachmentController : IAttachmentController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AttachmentController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (AttachmentController));
         public AttachmentController()
             : this(Util.GetContentController())
         {
@@ -191,7 +192,7 @@ namespace DotNetNuke.Entities.Content
                     // has been deleted or is otherwise unavailable, there's really no reason we can't continue on handling the
                     // ContentItem without its attachment.  Better than the yellow screen of death? --cbond
 
-                    Logger.WarnFormat("Unable to load file properties for File ID {0}", file);
+                    Logger.LogWarning("Unable to load file properties for File ID {0}", file);
                 }
 
                 if (fileInfo != null)

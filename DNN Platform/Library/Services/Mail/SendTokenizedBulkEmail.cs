@@ -32,17 +32,18 @@ using System.Net.Mime;
 using System.Text;
 using System.Web;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Roles;
-using DotNetNuke.Security.Roles.Internal;
 using DotNetNuke.Services.Messaging.Data;
 using DotNetNuke.Services.Tokens;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Mail
@@ -57,7 +58,7 @@ namespace DotNetNuke.Services.Mail
     /// -----------------------------------------------------------------------------
     public class SendTokenizedBulkEmail : IDisposable
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SendTokenizedBulkEmail));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SendTokenizedBulkEmail));
         #region AddressMethods enum
 
         /// <summary>
@@ -627,7 +628,7 @@ namespace DotNetNuke.Services.Mail
             }
             catch (Exception exc) //send mail failure
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
                 Debug.Write(exc.Message);
             }

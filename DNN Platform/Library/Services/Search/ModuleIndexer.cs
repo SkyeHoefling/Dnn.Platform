@@ -31,10 +31,11 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Scheduling;
 using DotNetNuke.Services.Search.Entities;
 using DotNetNuke.Services.Search.Internals;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -56,7 +57,7 @@ namespace DotNetNuke.Services.Search
     {
         #region Private Fields
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleIndexer));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleIndexer));
         private static readonly int ModuleSearchTypeId = SearchHelper.Instance.GetSearchTypeByName("module").SearchTypeId;
 
 		private readonly IDictionary<int, IEnumerable<ModuleIndexInfo>> _searchModules;
@@ -130,9 +131,9 @@ namespace DotNetNuke.Services.Search
                             AddModuleMetaData(searchItems, module);
                             searchDocuments.AddRange(searchItems);
 
-                            if (Logger.IsTraceEnabled)
+                            if (Logger.IsEnabled(LogLevel.Trace))
                             {
-                                Logger.TraceFormat("ModuleIndexer: {0} search documents found for module [{1} mid:{2}]",
+                                Logger.LogTrace("ModuleIndexer: {0} search documents found for module [{1} mid:{2}]",
                                     searchItems.Count, module.DesktopModule.ModuleName, module.ModuleID);
                             }
 
@@ -222,7 +223,7 @@ namespace DotNetNuke.Services.Search
                             searchDoc.Tags = module.Terms.Select(t => t.Name);
                         }
 
-                        Logger.Trace("ModuleIndexer: Search document for metaData found for module [" + module.DesktopModule.ModuleName + " mid:" + module.ModuleID + "]");
+                        Logger.LogTrace("ModuleIndexer: Search document for metaData found for module [" + module.DesktopModule.ModuleName + " mid:" + module.ModuleID + "]");
 
                         searchDocuments.Add(searchDoc);
                     }
@@ -330,7 +331,7 @@ namespace DotNetNuke.Services.Search
                             searchItem.TabId = scModInfo.ModInfo.TabID;
                         }
 
-                        Logger.Trace("ModuleIndexer: " + myCollection.Count + " search documents found for module [" + scModInfo.ModInfo.DesktopModule.ModuleName + " mid:" + scModInfo.ModInfo.ModuleID + "]");
+                        Logger.LogTrace("ModuleIndexer: " + myCollection.Count + " search documents found for module [" + scModInfo.ModInfo.DesktopModule.ModuleName + " mid:" + scModInfo.ModInfo.ModuleID + "]");
 
                         searchItems.AddRange(myCollection);
                     }
@@ -390,7 +391,7 @@ namespace DotNetNuke.Services.Search
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                     ThrowLogError(module, ex);
                 }
                 finally
@@ -459,7 +460,7 @@ namespace DotNetNuke.Services.Search
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                     ThrowLogError(module, ex);
                 }
                 finally

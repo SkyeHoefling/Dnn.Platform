@@ -49,16 +49,18 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security.Membership;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.Authentication.OAuth
 {
     public abstract class OAuthClientBase
     {
         #region Private Members
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(OAuthClientBase));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(OAuthClientBase));
         private const string HMACSHA1SignatureType = "HMAC-SHA1";
 
         //oAuth 1
@@ -421,7 +423,7 @@ namespace DotNetNuke.Services.Authentication.OAuth
                     {
                         using (var responseReader = new StreamReader(responseStream))
                         {
-                            Logger.ErrorFormat("WebResponse exception: {0}", responseReader.ReadToEnd());
+                            Logger.LogError("WebResponse exception: {0}", responseReader.ReadToEnd());
                         }
                     }
                 }

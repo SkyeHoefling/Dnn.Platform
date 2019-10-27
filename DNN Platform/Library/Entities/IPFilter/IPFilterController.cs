@@ -35,10 +35,11 @@ using DotNetNuke.Common.Utils;
 using DotNetNuke.ComponentModel;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Host
@@ -47,7 +48,7 @@ namespace DotNetNuke.Entities.Host
     {
         #region Private
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (IPFilterController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (IPFilterController));
         
         private enum FilterType
         {

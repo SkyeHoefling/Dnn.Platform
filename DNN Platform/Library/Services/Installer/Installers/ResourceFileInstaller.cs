@@ -9,11 +9,13 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 
 using ICSharpCode.SharpZipLib.Zip;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Installer.Installers
@@ -27,7 +29,7 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class ResourceFileInstaller : FileInstaller
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ResourceFileInstaller));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ResourceFileInstaller));
         #region "Public Contants"
         public const string DEFAULT_MANIFESTEXT = ".manifest";
         private string _Manifest;
@@ -197,7 +199,7 @@ namespace DotNetNuke.Services.Installer.Installers
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
                 retValue = false;
             }

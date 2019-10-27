@@ -24,9 +24,11 @@ using System;
 using System.Collections.Generic;
 using System.Web.UI.HtmlControls;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Installer.Log
@@ -40,7 +42,7 @@ namespace DotNetNuke.Services.Installer.Log
     /// -----------------------------------------------------------------------------
     public class Logger
     {
-    	private static readonly ILog DnnLogger = LoggerSource.Instance.GetLogger(typeof (Logger));
+    	private static readonly ILogger DnnLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Logger));
         private readonly IList<LogEntry> _logs;
         private string _errorClass;
         private bool _hasWarnings;
@@ -168,7 +170,7 @@ namespace DotNetNuke.Services.Installer.Log
         public void AddFailure(string failure)
         {
             _logs.Add(new LogEntry(LogType.Failure, failure));
-            DnnLogger.Error(failure);
+            DnnLogger.LogError(failure);
             _valid = false;
         }
 
@@ -187,7 +189,7 @@ namespace DotNetNuke.Services.Installer.Log
         public void AddInfo(string info)
         {            
             _logs.Add(new LogEntry(LogType.Info, info));
-			DnnLogger.Info(info);
+			DnnLogger.LogInformation(info);
         }
 
         /// -----------------------------------------------------------------------------
@@ -199,7 +201,7 @@ namespace DotNetNuke.Services.Installer.Log
         public void AddWarning(string warning)
         {
             _logs.Add(new LogEntry(LogType.Warning, warning));
-			DnnLogger.Warn(warning);
+			DnnLogger.LogWarning(warning);
             _hasWarnings = true;
         }
 
@@ -212,7 +214,7 @@ namespace DotNetNuke.Services.Installer.Log
         public void EndJob(string job)
         {
             _logs.Add(new LogEntry(LogType.EndJob, job));
-            DnnLogger.Info(job);
+            DnnLogger.LogInformation(job);
         }
 
         /// -----------------------------------------------------------------------------
@@ -274,7 +276,7 @@ namespace DotNetNuke.Services.Installer.Log
         public void StartJob(string job)
         {
             _logs.Add(new LogEntry(LogType.StartJob, job));
-            DnnLogger.Info(job);
+            DnnLogger.LogInformation(job);
         }
     }
 }

@@ -27,7 +27,8 @@ using System.Net;
 using System.Web;
 using System.Xml;
 
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -38,7 +39,7 @@ namespace DotNetNuke.Services.Syndication
     /// </summary>
     internal class RssDownloadManager
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (RssDownloadManager));
+    	private static readonly ILogger Logger = DnnLoggerFactory.Instance.CreateLogger(typeof (RssDownloadManager));
         private const string RSS_Dir = "/RSS/";
         private static readonly RssDownloadManager _theManager = new RssDownloadManager();
 
@@ -147,7 +148,7 @@ namespace DotNetNuke.Services.Syndication
                     }
 					catch (Exception ex)
 					{
-						Logger.Error(ex);
+						Logger.LogError(ex, string.Empty);
 					}
 
                     // try next file

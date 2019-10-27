@@ -31,14 +31,14 @@ using System.Xml.XPath;
 
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Installer.Installers;
 using DotNetNuke.Services.Installer.Log;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Installer.Writers;
 using DotNetNuke.Services.Log.EventLog;
-using DotNetNuke.Web.Client.ClientResourceManagement;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Installer
@@ -52,7 +52,7 @@ namespace DotNetNuke.Services.Installer
     /// -----------------------------------------------------------------------------
     public class Installer
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Installer));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Installer));
 		#region Private Members
 
         private Stream _inputStream;
@@ -262,7 +262,7 @@ namespace DotNetNuke.Services.Installer
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
         }
@@ -439,7 +439,7 @@ namespace DotNetNuke.Services.Installer
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
 
@@ -458,7 +458,7 @@ namespace DotNetNuke.Services.Installer
             }
             catch (Exception ex)
             {
-                Logger.Error("Exception deleting folder "+TempInstallFolder+" while installing "+InstallerInfo.ManifestFile.Name, ex);
+                Logger.LogError("Exception deleting folder "+TempInstallFolder+" while installing "+InstallerInfo.ManifestFile.Name, ex);
                 Exceptions.Exceptions.LogException(ex);
             }            
         }

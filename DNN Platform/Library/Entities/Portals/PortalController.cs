@@ -48,7 +48,6 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Social;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
@@ -58,10 +57,14 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
-//using DotNetNuke.Services.Upgrade.Internals.InstallConfiguration;
 using DotNetNuke.Services.Search.Entities;
 using DotNetNuke.Web.Client;
+
 using ICSharpCode.SharpZipLib.Zip;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
 using FileInfo = DotNetNuke.Services.FileSystem.FileInfo;
 using IAbPortalSettings = DotNetNuke.Abstractions.Portals.IPortalSettings;
 
@@ -78,7 +81,7 @@ namespace DotNetNuke.Entities.Portals
 	/// </remarks>
     public partial class PortalController : ServiceLocator<IPortalController, PortalController>, IPortalController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PortalController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (PortalController));
 
         public const string HtmlText_TimeToAutoSave = "HtmlText_TimeToAutoSave";
         public const string HtmlText_AutoSaveEnabled = "HtmlText_AutoSaveEnabled";
@@ -184,7 +187,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 catch (Exception Exc)
                 {
-                    Logger.Error(Exc);
+                    Logger.LogError(Exc, string.Empty);
                     message += Localization.GetString("DeleteUploadFolder.Error") + Exc.Message + Exc.StackTrace;
                 }
 
@@ -232,7 +235,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception Exc)
                     {
-                        Logger.Error(Exc);
+                        Logger.LogError(Exc, string.Empty);
                         message += Localization.GetString("ChildPortal.Error") + Exc.Message + Exc.StackTrace;
                     }
                 }
@@ -249,7 +252,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception Exc)
                     {
-                        Logger.Error(Exc);
+                        Logger.LogError(Exc, string.Empty);
                         message += Localization.GetString("DefaultFolderMappings.Error") + Exc.Message + Exc.StackTrace;
                     }
                 }
@@ -268,7 +271,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception Exc)
                     {
-                        Logger.Error(Exc);
+                        Logger.LogError(Exc, string.Empty);
                         message += Localization.GetString("PortalTemplate.Error") + Exc.Message + Exc.StackTrace;
                     }
                 }
@@ -321,7 +324,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception Exc)
                     {
-                        Logger.Error(Exc);
+                        Logger.LogError(Exc, string.Empty);
                     }
 
                     //add profanity list to new portal
@@ -340,7 +343,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception Exc)
                     {
-                        Logger.Error(Exc);
+                        Logger.LogError(Exc, string.Empty);
                     }
 
                     //add banned password list to new portal
@@ -359,7 +362,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception Exc)
                     {
-                        Logger.Error(Exc);
+                        Logger.LogError(Exc, string.Empty);
                     }                    
 
                     ServicesRoutingManager.ReRegisterServiceRoutesWhileSiteIsRunning();
@@ -389,7 +392,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc, string.Empty);
                     }
 
                     EventManager.Instance.OnPortalCreated(new PortalCreatedEventArgs { PortalId = portalId });
@@ -420,7 +423,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                 }
                 //parse profile definitions if available
                 var node = xmlDoc.SelectSingleNode("//portal/profiledefinitions");
@@ -846,7 +849,7 @@ namespace DotNetNuke.Entities.Portals
 	            }
 				catch (InvalidFileExtensionException ex) //when the file is not allowed, we should not break parse process, but just log the error.
 	            {
-                    Logger.Error(ex.Message);
+                    Logger.LogError(ex.Message);
 	            }
             }
         }
@@ -920,7 +923,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception ex)
             {
-                Logger.Error(Localization.GetString("CreatingConfiguredFolderMapping.Error"), ex);                
+                Logger.LogError(Localization.GetString("CreatingConfiguredFolderMapping.Error"), ex);                
             }
             var webConfig = Config.Load();
             foreach (FolderTypeConfig folderTypeConfig in FolderMappingsConfigController.Instance.FolderTypes)
@@ -933,7 +936,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(Localization.GetString("CreatingConfiguredFolderMapping.Error") + ": " + folderTypeConfig.Name, ex);
+                    Logger.LogError(Localization.GetString("CreatingConfiguredFolderMapping.Error") + ": " + folderTypeConfig.Name, ex);
                 }                
             }
         }
@@ -1013,7 +1016,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
             return retValue;
         }
@@ -1183,7 +1186,7 @@ namespace DotNetNuke.Entities.Portals
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error(ex);
+                            Logger.LogError(ex, string.Empty);
                             folderMapping = folderMappingController.GetDefaultFolderMapping(portalId);
                         }
                         var isProtected = XmlUtils.GetNodeValueBoolean(node, "isprotected");
@@ -1195,7 +1198,7 @@ namespace DotNetNuke.Entities.Portals
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error(ex);
+                            Logger.LogError(ex, string.Empty);
                             //Retry with default folderMapping
                             var defaultFolderMapping = folderMappingController.GetDefaultFolderMapping(portalId);
                             if (folderMapping.FolderMappingID != defaultFolderMapping.FolderMappingID)
@@ -1796,7 +1799,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
             var node = xmlPortal.SelectSingleNode("//portal/settings");
             if (node != null && isNewPortal)
@@ -1923,7 +1926,7 @@ namespace DotNetNuke.Entities.Portals
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex, string.Empty);
                     }
                 }
                 ParseTabs(node, portalId, false, mergeTabs, isNewPortal);
@@ -2182,7 +2185,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 catch (Exception Exc)
                 {
-                    Logger.Error(Exc);
+                    Logger.LogError(Exc, string.Empty);
                 }
 
                 if (administratorId > 0)
@@ -2263,7 +2266,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 catch (Exception Exc)
                 {
-                    Logger.Error(Exc);
+                    Logger.LogError(Exc, string.Empty);
                     message += Localization.GetString("CreateAdminUser.Error") + Exc.Message + Exc.StackTrace;
                 }
 
@@ -2691,7 +2694,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
         }
 
@@ -2790,7 +2793,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception Exc)
             {
-                Logger.Error(Exc);
+                Logger.LogError(Exc, string.Empty);
                 message += Localization.GetString("ChildPortal.Error") + Exc.Message + Exc.StackTrace;
             }
 
@@ -3092,7 +3095,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
             return retValue;
         }
@@ -3116,7 +3119,7 @@ namespace DotNetNuke.Entities.Portals
 			}
 			catch (Exception exc)
 			{
-				Logger.Error(exc);
+				Logger.LogError(exc, string.Empty);
 			}
 			return retValue;
 		}
@@ -3146,7 +3149,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
             return retValue;
         }
@@ -3177,7 +3180,7 @@ namespace DotNetNuke.Entities.Portals
 			}
 			catch (Exception exc)
 			{
-				Logger.Error(exc);
+				Logger.LogError(exc, string.Empty);
 			}
 			return retValue;
 		}
@@ -3207,7 +3210,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
             return retValue;
         }
@@ -3237,7 +3240,7 @@ namespace DotNetNuke.Entities.Portals
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
             return retValue;
         }
@@ -3268,7 +3271,7 @@ namespace DotNetNuke.Entities.Portals
 			}
 			catch (Exception exc)
 			{
-				Logger.Error(exc);
+				Logger.LogError(exc, string.Empty);
 			}
 			return retValue;
 		}
@@ -3522,7 +3525,7 @@ namespace DotNetNuke.Entities.Portals
         public class PortalTemplateInfo
         {
             private string _resourceFilePath;
-            private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(PortalController));
+            private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(PortalController));
 
             public PortalTemplateInfo(string templateFilePath, string cultureCode)
             {
@@ -3564,7 +3567,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 catch (Exception e)
                 {
-                    Logger.Error("Error while parsing: " + TemplateFilePath, e);
+                    Logger.LogError("Error while parsing: " + TemplateFilePath, e);
                 }
             }
 
@@ -3582,7 +3585,7 @@ namespace DotNetNuke.Entities.Portals
                 }
                 catch (Exception e)
                 {
-                    Logger.Error("Error while parsing: " + TemplateFilePath, e);
+                    Logger.LogError("Error while parsing: " + TemplateFilePath, e);
                 }
             }
 

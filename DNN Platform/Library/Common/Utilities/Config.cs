@@ -29,10 +29,11 @@ using System.Xml;
 using System.Xml.XPath;
 using DotNetNuke.Common.Utilities.Internal;
 using DotNetNuke.Framework.Providers;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 #endregion
 
 namespace DotNetNuke.Common.Utilities
@@ -46,7 +47,7 @@ namespace DotNetNuke.Common.Utilities
     /// -----------------------------------------------------------------------------
     public class Config
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Config));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Config));
         #region ConfigFileType enum
 
         public enum ConfigFileType
@@ -616,7 +617,7 @@ namespace DotNetNuke.Common.Utilities
                     {
                         if (retry == 0)
                         {
-                            Logger.Error(exc);
+                            Logger.LogError(exc, string.Empty);
                             retMsg = exc.Message;
                         }
 
@@ -631,7 +632,7 @@ namespace DotNetNuke.Common.Utilities
             catch (Exception exc)
             {
                 // the file permissions may not be set properly
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 retMsg = exc.Message;
             }
 
@@ -648,7 +649,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 return false;
             }
         }
@@ -720,7 +721,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 strError += ex.Message;
             }
 
@@ -766,7 +767,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 strError += ex.Message;
             }
 
@@ -869,7 +870,7 @@ namespace DotNetNuke.Common.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                     strError += ex.Message;
                 }
 
@@ -920,7 +921,7 @@ namespace DotNetNuke.Common.Utilities
             catch (Exception ex)
             {
                 //in case of error installation shouldn't be stopped, log into log4net
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
             return "";  
         }

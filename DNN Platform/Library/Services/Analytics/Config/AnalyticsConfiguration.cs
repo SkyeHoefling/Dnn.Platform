@@ -26,12 +26,14 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml.XPath;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Analytics.Config
@@ -39,7 +41,7 @@ namespace DotNetNuke.Services.Analytics.Config
     [Serializable, XmlRoot("AnalyticsConfig")]
     public class AnalyticsConfiguration
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AnalyticsConfiguration));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (AnalyticsConfiguration));
 		#region "Private Members"
 
         private AnalyticsRuleCollection _rules;
@@ -143,7 +145,7 @@ namespace DotNetNuke.Services.Analytics.Config
                 log.AddProperty("FilePath", filePath);
                 log.AddProperty("ExceptionMessage", ex.Message);
                 LogController.Instance.AddLog(log);
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
             finally
             {

@@ -25,14 +25,15 @@ using System.ComponentModel.Composition;
 
 using DotNetNuke.ComponentModel;
 using DotNetNuke.ExtensionPoints;
-using DotNetNuke.Instrumentation;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 // ReSharper disable ConvertPropertyToExpressionBody
 
 namespace DotNetNuke.Common.Internal
 {
     internal class EventHandlersContainer<T> : ComponentBase<IEventHandlersContainer<T>, EventHandlersContainer<T>>, IEventHandlersContainer<T>        
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(EventHandlersContainer<T>));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(EventHandlersContainer<T>));
 
         [ImportMany]
         private IEnumerable<Lazy<T>> _eventHandlers = new List<Lazy<T>>();
@@ -49,7 +50,7 @@ namespace DotNetNuke.Common.Internal
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message, ex);
+                Logger.LogError(ex.Message, ex);
             }
         }
 

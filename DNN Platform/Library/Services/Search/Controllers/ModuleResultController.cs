@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Caching;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Internal;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
@@ -34,10 +35,12 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Tabs.TabVersions;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Search.Entities;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -50,7 +53,7 @@ namespace DotNetNuke.Services.Search.Controllers
     [Serializable]
     public class ModuleResultController : BaseResultController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ModuleResultController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ModuleResultController));
 
         private static Hashtable _moduleSearchControllers = new Hashtable();
         private static object _threadLock = new object();
@@ -133,7 +136,7 @@ namespace DotNetNuke.Services.Search.Controllers
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex, string.Empty);
                     }
 
                     break;

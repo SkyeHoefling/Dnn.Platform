@@ -24,23 +24,20 @@
 #region Usings
 
 using System;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Caching;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Cache;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Urls
 {
     public static class UrlRewriterUtils
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(UrlRewriterUtils));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(UrlRewriterUtils));
 
         /// <summary>
         /// Return a FriendlyUrlOptions object from the provider settings
@@ -197,7 +194,7 @@ namespace DotNetNuke.Entities.Urls
                     LogController.Instance.AddLog(log);
 
                     //Log this error in lig4net
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                 }
             }
         }

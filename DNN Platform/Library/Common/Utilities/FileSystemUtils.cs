@@ -21,28 +21,20 @@
 #region Usings
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading;
 using System.Web;
 
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Security.Permissions;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 
-using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using FileInfo = DotNetNuke.Services.FileSystem.FileInfo;
 using Directory = SchwabenCode.QuickIO.QuickIODirectory;
@@ -55,7 +47,7 @@ namespace DotNetNuke.Common.Utilities
 {
     public class FileSystemUtils
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FileSystemUtils));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FileSystemUtils));
         #region Private Methods
 
         private static string CreateFile(IFolderInfo folder, string fileName, string contentType, Stream fileContent, bool unzip, bool overwrite, bool checkPermissions)
@@ -85,7 +77,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
                 strMessage += "<br />" + string.Format(Localization.GetString("SaveFileError"), fileName);
             }
@@ -174,7 +166,7 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 objResponse.Write("Error : " + ex.Message);
             }
             finally
@@ -208,7 +200,7 @@ namespace DotNetNuke.Common.Utilities
                 var len = fs.Read(buffer, 0, buffer.Length);
                 if (len != fs.Length)
                 {
-                    Logger.ErrorFormat("Reading from " + filePath + " didn't read all data in buffer. " +
+                    Logger.LogError("Reading from " + filePath + " didn't read all data in buffer. " +
                                       "Requested to read {0} bytes, but was read {1} bytes", fs.Length, len);
                 }
 
@@ -286,7 +278,7 @@ namespace DotNetNuke.Common.Utilities
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
                     fileDeleted = false;
                 }
                 if (fileDeleted == false)
@@ -382,7 +374,7 @@ namespace DotNetNuke.Common.Utilities
                         }
                         catch(Exception ex)
                         {
-							Logger.Error(ex);
+							Logger.LogError(ex, string.Empty);
                         }
                     }
                     zipEntry = zipStream.GetNextEntry();
@@ -428,7 +420,7 @@ namespace DotNetNuke.Common.Utilities
                             }
                             catch (Exception ex)
                             {
-                                Logger.Error(ex);
+                                Logger.LogError(ex, string.Empty);
                                 strExceptions += $"Processing folder ({strPath}) Error: {ex.Message}{Environment.NewLine}";
                             }
                         }
@@ -444,7 +436,7 @@ namespace DotNetNuke.Common.Utilities
                             }
                             catch (Exception ex)
                             {
-                                Logger.Error(ex);
+                                Logger.LogError(ex, string.Empty);
                                 strExceptions += $"Processing file ({strPath}) Error: {ex.Message}{Environment.NewLine}";
                             }
                         }
@@ -477,7 +469,7 @@ namespace DotNetNuke.Common.Utilities
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error(ex);
+                            Logger.LogError(ex, string.Empty);
                         }
                     }
                 }
@@ -488,7 +480,7 @@ namespace DotNetNuke.Common.Utilities
         {
             strRoot = FixPath(strRoot);
             if (string.IsNullOrEmpty(strRoot) || !Directory.Exists(strRoot))
-            {   Logger.Info(strRoot + " does not exist. ");
+            {   Logger.LogInformation(strRoot + " does not exist. ");
                 return;
             }
 
@@ -505,8 +497,8 @@ namespace DotNetNuke.Common.Utilities
                 }
                 catch (Exception ex)
                 {
-                    Logger.Info(strRoot + " does not exist.");
-                    Logger.Error(ex);
+                    Logger.LogInformation(strRoot + " does not exist.");
+                    Logger.LogError(ex, string.Empty);
                 }
             }
 
@@ -517,8 +509,8 @@ namespace DotNetNuke.Common.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Info(strRoot + " does not exist.");
-                Logger.Error(ex);
+                Logger.LogInformation(strRoot + " does not exist.");
+                Logger.LogError(ex, string.Empty);
             }
         }
 

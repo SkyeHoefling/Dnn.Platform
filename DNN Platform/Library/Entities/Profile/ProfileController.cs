@@ -23,20 +23,19 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text.RegularExpressions;
-using System.Web;
-using DotNetNuke.Common.Internal;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Lists;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Security;
 using DotNetNuke.Security.Profile;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Log.EventLog;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -56,7 +55,7 @@ namespace DotNetNuke.Entities.Profile
     /// -----------------------------------------------------------------------------
     public class ProfileController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ProfileController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ProfileController));
 
         #region Private Members
 
@@ -103,7 +102,7 @@ namespace DotNetNuke.Entities.Profile
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
             finally
             {
@@ -581,7 +580,7 @@ namespace DotNetNuke.Entities.Profile
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex, string.Empty);
                     }
 
                 }

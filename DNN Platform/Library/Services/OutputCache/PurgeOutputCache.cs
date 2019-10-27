@@ -21,20 +21,21 @@
 #region Usings
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Scheduling;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.OutputCache
 {
     public class PurgeOutputCache : SchedulerClient
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PurgeOutputCache));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (PurgeOutputCache));
 
         public PurgeOutputCache(ScheduleHistoryItem objScheduleHistoryItem)
         {
@@ -59,7 +60,7 @@ namespace DotNetNuke.Services.OutputCache
                     catch (NotSupportedException exc)
                     {
 						//some output caching providers don't use this feature
-                        Logger.Debug(exc);
+                        Logger.LogDebug(exc, string.Empty);
                     }
                 }
                 ScheduleHistoryItem.Succeeded = true; //REQUIRED

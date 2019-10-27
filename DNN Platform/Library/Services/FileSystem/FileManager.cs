@@ -26,11 +26,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text.RegularExpressions;
 using System.Web;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Internal;
-using DotNetNuke.Common.Lists;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel;
 using DotNetNuke.Data;
@@ -40,11 +38,9 @@ using DotNetNuke.Entities.Content.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Content.Workflow;
 using DotNetNuke.Entities.Content.Workflow.Entities;
-using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.FileSystem.EventArgs;
 using DotNetNuke.Services.FileSystem.Internal;
@@ -52,6 +48,8 @@ using DotNetNuke.Services.Log.EventLog;
 using ICSharpCode.SharpZipLib.Zip;
 using System.Drawing.Imaging;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.FileSystem
 {
@@ -60,7 +58,7 @@ namespace DotNetNuke.Services.FileSystem
     /// </summary>
     public class FileManager : ComponentBase<IFileManager, FileManager>, IFileManager
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(FileManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileManager));
 
         #region Properties
 
@@ -97,7 +95,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("UnderlyingSystemError", "The underlying system threw an exception."), ex);
             }
         }
@@ -111,7 +109,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("UnderlyingSystemError", "The underlying system threw an exception."), ex);
             }
         }
@@ -205,7 +203,7 @@ namespace DotNetNuke.Services.FileSystem
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
         }
         private static ImageFormat GetImageFormat(Image img)
@@ -506,12 +504,12 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                 }
                 catch (FileLockedException fle)
                 {
-                    Logger.Error(fle);
+                    Logger.LogError(fle, string.Empty);
                     throw;
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
 
                     if (!folderProvider.FileExists(folder, file.FileName))
                     {                     
@@ -748,7 +746,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                     throw new FolderProviderException(Localization.Localization.GetExceptionMessage("CopyFileUnderlyingSystemError", "The underlying system throw an exception. The file has not been copied."), ex);
                 }
 
@@ -869,7 +867,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("UnderlyingSystemError", "The underlying system threw an exception."), ex);
             }
@@ -1018,7 +1016,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
 
                     throw new FolderProviderException(Localization.Localization.GetExceptionMessage("UnderlyingSystemError", "The underlying system threw an exception"), ex);
                 }
@@ -1082,7 +1080,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("UnderlyingSystemError", "The underlying system threw an exception."), ex);
             }
@@ -1223,7 +1221,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("RenameFileUnderlyingSystemError", "The underlying system threw an exception. The file has not been renamed."), ex);
             }
@@ -1260,7 +1258,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 throw new FolderProviderException(Localization.Localization.GetExceptionMessage("UnderlyingSystemError", "The underlying system threw an exception."), ex);
             }
         }
@@ -1391,7 +1389,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
 
             return UpdateFile(file);
@@ -1657,20 +1655,20 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
                             }
                             catch (PermissionsNotMetException exc)
                             {
-                                Logger.Warn(exc);
+                                Logger.LogWarning(exc, string.Empty);
                             }
                             catch (NoSpaceAvailableException exc)
                             {
-                                Logger.Warn(exc);
+                                Logger.LogWarning(exc, string.Empty);
                             }
                             catch (InvalidFileExtensionException exc)
                             {
                                 invalidFiles.Add(zipEntry.Name);
-                                Logger.Warn(exc);
+                                Logger.LogWarning(exc, string.Empty);
                             }
                             catch (Exception exc)
                             {
-                                Logger.Error(exc);
+                                Logger.LogError(exc, string.Empty);
                             }
                         }
 
@@ -1854,7 +1852,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
 
                 objResponse.Write("Error : " + ex.Message);
             }
@@ -1886,7 +1884,7 @@ public virtual IFileInfo AddFile(IFolderInfo folder, string fileName, Stream fil
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 objResponse.Write("Error : " + ex.Message);
             }
             finally

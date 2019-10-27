@@ -27,7 +27,7 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
-
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel;
 using DotNetNuke.Entities.Content;
@@ -35,12 +35,13 @@ using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.ModuleCache;
 using DotNetNuke.Services.Tokens;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -59,7 +60,7 @@ namespace DotNetNuke.Entities.Modules
     [Serializable]
     public class ModuleInfo : ContentItem, IPropertyAccess
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleInfo));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleInfo));
         private string _authorizedEditRoles;
         private string _authorizedViewRoles;
         private string _cultureCode;
@@ -624,7 +625,7 @@ namespace DotNetNuke.Entities.Modules
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
         }
 

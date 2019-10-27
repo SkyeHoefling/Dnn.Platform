@@ -19,7 +19,9 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 using System;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.Upgrade.Internals.Steps
 {
@@ -30,7 +32,7 @@ namespace DotNetNuke.Services.Upgrade.Internals.Steps
     /// ------------------------------------------------------------------------------------------------  
     public class ActivateLicenseStep : BaseInstallationStep
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ActivateLicenseStep));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ActivateLicenseStep));
 
         public override void Execute()
         {
@@ -52,13 +54,13 @@ namespace DotNetNuke.Services.Upgrade.Internals.Steps
                     if (!activationResult.ToLowerInvariant().Contains("success"))
                     {
                         Errors.Add(Localization.Localization.GetString("LicenseActivation", LocalInstallResourceFile) + ": " + activationResult);
-                        Logger.TraceFormat("ActivateLicense Status - {0}", activationResult);
+                        Logger.LogTrace("ActivateLicense Status - {0}", activationResult);
                     }
                 }
                 catch (Exception ex)
                 {
                     Errors.Add(Localization.Localization.GetString("LicenseActivation", LocalInstallResourceFile) + ": " + ex.Message);
-                    Logger.TraceFormat("ActivateLicense Status - {0}", ex.Message);
+                    Logger.LogTrace("ActivateLicense Status - {0}", ex.Message);
                 }
             }
 

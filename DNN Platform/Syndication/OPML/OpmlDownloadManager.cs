@@ -27,7 +27,8 @@ using System.Net;
 using System.Web;
 using System.Xml;
 
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -38,7 +39,7 @@ namespace DotNetNuke.Services.Syndication
     /// </summary>
     internal class OpmlDownloadManager
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (OpmlDownloadManager));
+    	private static readonly ILogger Logger = DnnLoggerFactory.Instance.CreateLogger(typeof (OpmlDownloadManager));
         private const string OPML_Dir = "/OPML/";
         private static readonly OpmlDownloadManager _theManager = new OpmlDownloadManager();
 
@@ -180,7 +181,7 @@ namespace DotNetNuke.Services.Syndication
                     }
 					catch (Exception ex)
 					{
-						Logger.Error(ex);
+						Logger.LogError(ex, string.Empty);
 					}
 
                     // try next file

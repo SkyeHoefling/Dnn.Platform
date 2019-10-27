@@ -31,10 +31,11 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Installer.Packages;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Installer.Writers
@@ -48,7 +49,7 @@ namespace DotNetNuke.Services.Installer.Writers
     /// -----------------------------------------------------------------------------
     public class ModulePackageWriter : PackageWriterBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModulePackageWriter));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModulePackageWriter));
 		#region "Constructors"
 
         public ModulePackageWriter(XPathNavigator manifestNav, InstallerInfo installer)
@@ -175,7 +176,7 @@ namespace DotNetNuke.Services.Installer.Writers
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     throw new Exception(Util.EXCEPTION_Type);
                 }

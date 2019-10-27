@@ -25,15 +25,17 @@ using System.Reflection;
 using System.Threading;
 using System.Web.Compilation;
 
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.Scheduling
 {
     public class ProcessGroup
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ProcessGroup));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ProcessGroup));
         //''''''''''''''''''''''''''''''''''''''''''''''''''
         //This class represents a process group for
         //our threads to run in.
@@ -104,7 +106,7 @@ namespace DotNetNuke.Services.Scheduling
                     //in case the scheduler client
                     //didn't have proper exception handling
                     //make sure we fire the Errored event
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                     if (Process != null)
                     {

@@ -22,22 +22,23 @@
 
 using System;
 using System.Web;
-
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.EventQueue;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Modules
 {
     public class EventMessageProcessor : EventMessageProcessorBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (EventMessageProcessor));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (EventMessageProcessor));
         private static void ImportModule(EventMessage message)
         {
             try
@@ -181,7 +182,7 @@ namespace DotNetNuke.Entities.Modules
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
                 message.ExceptionMessage = ex.Message;
                 return false;
             }

@@ -23,8 +23,8 @@
 using System;
 using System.Collections;
 
-using DotNetNuke.Instrumentation;
-
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Common.Lists
@@ -32,7 +32,7 @@ namespace DotNetNuke.Common.Lists
     [Serializable]
     public class ListInfoCollection : CollectionBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ListInfoCollection));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ListInfoCollection));
         private readonly Hashtable mKeyIndexLookup = new Hashtable();
 
         public ListInfo GetChildren(string ParentName)
@@ -57,7 +57,7 @@ namespace DotNetNuke.Common.Lists
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
         }
 
@@ -71,7 +71,7 @@ namespace DotNetNuke.Common.Lists
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 return null;
             }
         }
@@ -89,7 +89,7 @@ namespace DotNetNuke.Common.Lists
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 return null;
             }
             index = Convert.ToInt32(mKeyIndexLookup[key.ToLowerInvariant()]);
@@ -112,7 +112,7 @@ namespace DotNetNuke.Common.Lists
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
             //key will be in format Country.US:Region
             if (!itemExists)

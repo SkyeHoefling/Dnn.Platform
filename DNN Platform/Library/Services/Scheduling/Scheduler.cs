@@ -27,15 +27,17 @@ using System.Threading;
 using DotNetNuke.Collections.Internal;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Log.EventLog;
 using Microsoft.VisualBasic;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using CGlobals = DotNetNuke.Common.Globals;
 
 namespace DotNetNuke.Services.Scheduling
 {
     internal static class Scheduler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Scheduler));
+    	private static readonly ILogger Logger = CGlobals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Scheduler));
         internal static class CoreScheduler
         {
             //This is the heart of the scheduler mechanism.
@@ -149,8 +151,8 @@ namespace DotNetNuke.Services.Scheduling
                 {
                     // The reader lock request timed out.
                     Interlocked.Increment(ref _readerTimeouts);
-                    if (Logger.IsDebugEnabled)
-                        Logger.Debug(ex);
+                    if (Logger.IsEnabled(LogLevel.Debug))
+                        Logger.LogDebug(ex, string.Empty);
                     return false;
                 }
             }
@@ -517,8 +519,8 @@ namespace DotNetNuke.Services.Scheduling
                 {
                     // The reader lock request timed out.
                     Interlocked.Increment(ref _readerTimeouts);
-                    if (Logger.IsDebugEnabled)
-                        Logger.Debug(ex);
+                    if (Logger.IsEnabled(LogLevel.Debug))
+                        Logger.LogDebug(ex, string.Empty);
                     return 0;
                 }
             }
@@ -659,8 +661,8 @@ namespace DotNetNuke.Services.Scheduling
                 {
                     // The reader lock request timed out.
                     Interlocked.Increment(ref _readerTimeouts);
-                    if (Logger.IsDebugEnabled)
-                        Logger.Debug(ex);
+                    if (Logger.IsEnabled(LogLevel.Debug))
+                        Logger.LogDebug(ex, string.Empty);
                     return false;
                 }
             }
@@ -669,8 +671,8 @@ namespace DotNetNuke.Services.Scheduling
             {
                 var executingServer = ServerController.GetExecutingServerName();
                 List<ScheduleItem> schedule = SchedulingController.GetScheduleByEvent(eventName.ToString(), executingServer);
-                if (Logger.IsDebugEnabled)
-                    Logger.Debug("loadqueue executingServer:" + executingServer);
+                if (Logger.IsEnabled(LogLevel.Debug))
+                    Logger.LogDebug("loadqueue executingServer:" + executingServer);
                 var thisServer = GetServer(executingServer);
                 if (thisServer == null)
                 {
@@ -705,8 +707,8 @@ namespace DotNetNuke.Services.Scheduling
                 _forceReloadSchedule = false;
                 var executingServer = ServerController.GetExecutingServerName();
                 List<ScheduleItem> schedule = SchedulingController.GetSchedule(executingServer);
-                if (Logger.IsDebugEnabled)
-                    Logger.Debug("LoadQueueFromTimer executingServer:" + executingServer);
+                if (Logger.IsEnabled(LogLevel.Debug))
+                    Logger.LogDebug("LoadQueueFromTimer executingServer:" + executingServer);
                 var thisServer = GetServer(executingServer);
                 if (thisServer == null)
                 {

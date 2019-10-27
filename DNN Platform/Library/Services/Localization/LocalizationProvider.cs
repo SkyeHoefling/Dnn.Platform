@@ -33,14 +33,16 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.ComponentModel;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Cache;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Services.Localization
 {
     public class LocalizationProvider : ComponentBase<ILocalizationProvider, LocalizationProvider>, ILocalizationProvider
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(LocalizationProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(LocalizationProvider));
         #region Nested type: CustomizedLocale
 
         public enum CustomizedLocale
@@ -94,7 +96,7 @@ namespace DotNetNuke.Services.Localization
 
             if (!keyFound)
             {
-                Logger.WarnFormat("Missing localization key. key:{0} resFileRoot:{1} threadCulture:{2} userlan:{3}", key, resourceFileRoot, Thread.CurrentThread.CurrentUICulture, language);
+                Logger.LogWarning("Missing localization key. key:{0} resFileRoot:{1} threadCulture:{2} userlan:{3}", key, resourceFileRoot, Thread.CurrentThread.CurrentUICulture, language);
             }
 
             return string.IsNullOrEmpty(resourceValue) ? string.Empty : RemoveHttpUrlsIfSiteisSSLEnabled(portalSettings, resourceValue);
@@ -517,7 +519,7 @@ namespace DotNetNuke.Services.Localization
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex, string.Empty);
             }
 
             if (userLocale != null && !String.IsNullOrEmpty(userLocale.Fallback))

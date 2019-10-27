@@ -32,12 +32,14 @@ using DotNetNuke.ComponentModel;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 
 using System.Globalization;
 using DotNetNuke.Web.Client;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Entities.Controllers
@@ -58,7 +60,7 @@ namespace DotNetNuke.Entities.Controllers
 	/// </example>
     public class HostController : ComponentBase<IHostController, HostController>, IHostController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (HostController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (HostController));
         
         /// <summary>
         /// Initializes a new instance of the HostController class
@@ -111,7 +113,7 @@ namespace DotNetNuke.Entities.Controllers
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
                 //we just want to trap the error as we may not be installed so there will be no Settings
             }
             return retValue;

@@ -33,7 +33,6 @@ using DotNetNuke.Entities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Journal;
 using DotNetNuke.Services.Localization;
@@ -41,6 +40,9 @@ using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Mail;
 using DotNetNuke.Services.Messaging.Data;
 using DotNetNuke.Services.Search.Entities;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Security.Roles
 {
@@ -50,7 +52,7 @@ namespace DotNetNuke.Security.Roles
     /// -----------------------------------------------------------------------------
     public partial class RoleController : ServiceLocator<IRoleController, RoleController>, IRoleController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(RoleController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(RoleController));
         private static readonly string[] UserRoleActionsCaption = { "ASSIGNMENT", "UPDATE", "UNASSIGNMENT" };
         private static readonly RoleProvider provider = RoleProvider.Instance();
 
@@ -93,7 +95,7 @@ namespace DotNetNuke.Security.Roles
                     catch (Exception exc)
                     {
                         //user already belongs to role
-                        Logger.Error(exc);
+                        Logger.LogError(exc, string.Empty);
                     }
                 }
             }
