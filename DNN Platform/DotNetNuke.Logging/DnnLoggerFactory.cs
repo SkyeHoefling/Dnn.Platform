@@ -18,9 +18,12 @@ namespace DotNetNuke.Logging
 
         internal static ILoggerFactory Builder()
         {
+            var factory = new LoggerFactory();
+            factory.AddProvider(new DnnLog4NetLoggerProvider());
+            return factory;
             // TODO - Resolve the singleton instance of ILoggerFactory that is used
             // in the dependency injection container
-            throw new NotImplementedException("Unable to resolve ILoggerFactory");
+            //throw new NotImplementedException("Unable to resolve ILoggerFactory");
         }
     }
 }
