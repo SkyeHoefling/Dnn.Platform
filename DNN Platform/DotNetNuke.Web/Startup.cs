@@ -4,7 +4,6 @@ using DotNetNuke.Instrumentation;
 using DotNetNuke.Web.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -20,7 +19,7 @@ namespace DotNetNuke.Web
 
         private void Configure()
         {
-            var services = new ServiceCollection();
+            var services = new DependencyInjection.Startup().Services;
             ConfigureServices(services);
             DependencyProvider = services.BuildServiceProvider();
         }

@@ -1,8 +1,10 @@
-﻿using log4net;
+﻿using DotNetNuke.DependencyInjection;
+using log4net;
 using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Logging
 {
+    [LockedService]
     internal class DnnLog4NetLoggerProvider : ILoggerProvider
     {
 
@@ -13,6 +15,7 @@ namespace DotNetNuke.Logging
 
         public void Dispose()
         {
+            // todo - ah: research the recommendations from MSFT
             // left empty by design since the Log4Net logger doesn't have a dispose method.
         }
     }

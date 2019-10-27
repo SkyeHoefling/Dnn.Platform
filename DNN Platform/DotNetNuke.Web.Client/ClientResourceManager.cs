@@ -33,8 +33,6 @@ using DotNetNuke;
 
 using ClientDependency.Core.Config;
 
-using DotNetNuke.Instrumentation;
-
 
 namespace DotNetNuke.Web.Client.ClientResourceManagement
 {

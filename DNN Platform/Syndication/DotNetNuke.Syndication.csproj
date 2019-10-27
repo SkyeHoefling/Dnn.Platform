@@ -96,6 +96,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetNuke.Logging\DotNetNuke.Logging.csproj">
+      <Project>{73739bf3-13f6-4d01-9652-c37bb8971148}</Project>
+      <Name>DotNetNuke.Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">
   </Target>

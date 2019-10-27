@@ -1181,7 +1181,7 @@ namespace DotNetNuke.UI.Skins
                             }
                             catch (Exception exc) //could not load XML file
                             {
-                                Logger.Error(exc);
+                                Logger.LogError(exc, string.Empty);
                                 m_FileAttributes = SkinAttributes;
                                 m_Messages += SkinController.FormatMessage(FILE_LOAD_ERROR, FileName, 2, true);
                             }
