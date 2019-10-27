@@ -28,8 +28,10 @@ using System.Web.UI.WebControls;
 
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using Calendar = DotNetNuke.Common.Utilities.Calendar;
 
@@ -52,7 +54,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:DateEditControl runat=server></{0}:DateEditControl>")]
     public class DateEditControl : EditControl
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DateEditControl));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DateEditControl));
         private TextBox dateField;
         private HyperLink linkCalendar;
 
@@ -76,7 +78,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return dteValue;
@@ -146,7 +148,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return dteValue;

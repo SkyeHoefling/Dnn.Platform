@@ -22,8 +22,9 @@
 
 using System;
 
-using DotNetNuke.Instrumentation;
-
+using DotNetNuke.Common;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.UI.WebControls
@@ -41,7 +42,7 @@ namespace DotNetNuke.UI.WebControls
     /// -----------------------------------------------------------------------------
     public class SettingInfo
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SettingInfo));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SettingInfo));
         private Type _Type;
 
         public SettingInfo(object name, object value)
@@ -66,7 +67,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
             }
@@ -80,7 +81,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
             }

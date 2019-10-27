@@ -21,8 +21,6 @@
 #region Usings
 
 using System;
-using System.Collections;
-using System.IO;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -32,16 +30,11 @@ using DotNetNuke.Application;
 using DotNetNuke.Collections.Internal;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
-using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Containers.EventListeners;
 using DotNetNuke.UI.Modules;
@@ -49,6 +42,8 @@ using DotNetNuke.UI.Skins;
 using DotNetNuke.UI.WebControls;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.UI.Containers
@@ -64,7 +59,7 @@ namespace DotNetNuke.UI.Containers
     {
         #region Private Members
 
-        private readonly ILog _tracelLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
+        private readonly ILogger _tracelLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger("DNN.Trace");
         private HtmlContainerControl _contentPane;
         private ModuleInfo _moduleConfiguration;
         private ModuleHost _moduleHost;
@@ -330,8 +325,8 @@ namespace DotNetNuke.UI.Containers
         /// </summary>
         private void ProcessModule()
         {
-            if (_tracelLogger.IsDebugEnabled)
-                _tracelLogger.Debug($"Container.ProcessModule Start (TabId:{PortalSettings.ActiveTab.TabID},ModuleID: {ModuleConfiguration.ModuleDefinition.DesktopModuleID}): Module FriendlyName: '{ModuleConfiguration.ModuleDefinition.FriendlyName}')");
+            if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                _tracelLogger.LogDebug($"Container.ProcessModule Start (TabId:{PortalSettings.ActiveTab.TabID},ModuleID: {ModuleConfiguration.ModuleDefinition.DesktopModuleID}): Module FriendlyName: '{ModuleConfiguration.ModuleDefinition.FriendlyName}')");
 
             if (ContentPane != null)
             {
@@ -353,8 +348,8 @@ namespace DotNetNuke.UI.Containers
 
                 //Try to load the module control
                 _moduleHost = new ModuleHost(ModuleConfiguration, ParentSkin, this);
-                if (_tracelLogger.IsDebugEnabled)
-                    _tracelLogger.Debug($"Container.ProcessModule Info (TabId:{PortalSettings.ActiveTab.TabID},ModuleID: {ModuleConfiguration.ModuleDefinition.DesktopModuleID}): ControlPane.Controls.Add(ModuleHost:{_moduleHost.ID})");
+                if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                    _tracelLogger.LogDebug($"Container.ProcessModule Info (TabId:{PortalSettings.ActiveTab.TabID},ModuleID: {ModuleConfiguration.ModuleDefinition.DesktopModuleID}): ControlPane.Controls.Add(ModuleHost:{_moduleHost.ID})");
 
                 ContentPane.Controls.Add(ModuleHost);
 
@@ -370,8 +365,8 @@ namespace DotNetNuke.UI.Containers
 				//Add Module Stylesheets
                 ProcessStylesheets(ModuleHost != null);
             }
-            if (_tracelLogger.IsDebugEnabled)
-                _tracelLogger.Debug($"Container.ProcessModule End (TabId:{PortalSettings.ActiveTab.TabID},ModuleID: {ModuleConfiguration.ModuleDefinition.DesktopModuleID}): Module FriendlyName: '{ModuleConfiguration.ModuleDefinition.FriendlyName}')");
+            if (_tracelLogger.IsEnabled(LogLevel.Debug))
+                _tracelLogger.LogDebug($"Container.ProcessModule End (TabId:{PortalSettings.ActiveTab.TabID},ModuleID: {ModuleConfiguration.ModuleDefinition.DesktopModuleID}): Module FriendlyName: '{ModuleConfiguration.ModuleDefinition.FriendlyName}')");
         }
 
 		/// -----------------------------------------------------------------------------

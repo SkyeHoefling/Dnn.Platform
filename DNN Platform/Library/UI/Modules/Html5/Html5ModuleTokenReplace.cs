@@ -22,17 +22,19 @@
 using System;
 using System.Collections;
 using System.Web.UI;
+using DotNetNuke.Common;
 using DotNetNuke.Framework;
 using DotNetNuke.Services.Tokens;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.UI.Modules.Html5
 {
     public class Html5ModuleTokenReplace : HtmlTokenReplace
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Html5ModuleTokenReplace));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Html5ModuleTokenReplace));
 
         private static Hashtable _businessControllers = new Hashtable();
 
@@ -84,7 +86,7 @@ namespace DotNetNuke.UI.Modules.Html5
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
             }
            
             return null;

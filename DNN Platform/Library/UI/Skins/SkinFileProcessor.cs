@@ -23,15 +23,16 @@
 using System;
 using System.Collections;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml;
 
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Installer;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -56,7 +57,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public class SkinFileProcessor
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinFileProcessor));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SkinFileProcessor));
         #region "Private Members"
 
         private readonly string DUPLICATE_DETAIL = Util.GetLocalizedString("DuplicateSkinObject.Detail");
@@ -140,7 +141,7 @@ namespace DotNetNuke.UI.Skins
                 catch (Exception ex)
                 {
                     //could not load XML file
-                    Logger.Error(ex);
+                    Logger.LogError(ex, string.Empty);
                     Message += SkinController.FormatMessage(string.Format(PACKAGE_LOAD_ERROR, ex.Message), Path.GetFileName(FileName), 2, true);
                 }
             }

@@ -23,9 +23,11 @@
 using System;
 using System.Web.UI;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.UI.WebControls
@@ -45,7 +47,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:IntegerEditControl runat=server></{0}:IntegerEditControl>")]
     public class IntegerEditControl : EditControl
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (IntegerEditControl));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (IntegerEditControl));
 		#region "Constructors"
 
         /// -----------------------------------------------------------------------------
@@ -102,7 +104,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return intValue;
@@ -127,7 +129,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return intValue;

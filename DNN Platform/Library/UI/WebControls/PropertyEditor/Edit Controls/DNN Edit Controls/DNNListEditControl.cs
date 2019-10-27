@@ -27,11 +27,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Lists;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -50,7 +53,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:DNNListEditControl runat=server></{0}:DNNListEditControl>")]
     public class DNNListEditControl : EditControl, IPostBackEventHandler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DNNListEditControl));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DNNListEditControl));
         private List<ListEntryInfo> _listEntries;
         private string _listName = "";
 
@@ -99,7 +102,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return intValue;
@@ -187,7 +190,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return intValue;

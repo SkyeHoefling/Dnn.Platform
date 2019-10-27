@@ -27,15 +27,16 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endregion
 
 namespace DotNetNuke.Services.UserProfile
 {
     public class UserProfilePageHandler : IHttpHandler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (UserProfilePageHandler));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (UserProfilePageHandler));
         #region IHttpHandler Members
 
         /// -----------------------------------------------------------------------------
@@ -107,7 +108,7 @@ namespace DotNetNuke.Services.UserProfile
             }
             catch (Exception exc)
             {
-                Logger.Debug(exc);
+                Logger.LogDebug(exc, string.Empty);
                 //The user cannot be found (potential DOS)
                 Exceptions.Exceptions.ProcessHttpException(context.Request);
             }

@@ -25,17 +25,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using DotNetNuke.Common;
 using DotNetNuke.Collections.Internal;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Framework.Reflections;
-using DotNetNuke.Instrumentation;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.UI.Modules
 {
     internal class ModuleInjectionManager
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleInjectionManager));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleInjectionManager));
         private static NaiveLockingList<IModuleInjectionFilter> _filters;
 
         public static void RegisterInjectionFilters()
@@ -62,7 +65,7 @@ namespace DotNetNuke.UI.Modules
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("Unable to create {0} while registering module injection filters.  {1}", filterType.FullName,
+                    Logger.LogError("Unable to create {0} while registering module injection filters.  {1}", filterType.FullName,
                                  e.Message);
                     filter = null;
                 }

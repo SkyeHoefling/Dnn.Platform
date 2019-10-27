@@ -23,7 +23,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -34,9 +33,11 @@ using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using ICSharpCode.SharpZipLib.Zip;
 
@@ -57,7 +58,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public class SkinController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SkinController));
         private const string GlobalSkinPrefix = "[G]";
         private const string PortalSystemSkinPrefix = "[S]";
         private const string PortalSkinPrefix = "[L]";
@@ -578,7 +579,7 @@ namespace DotNetNuke.UI.Skins
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 
             }
             return strMessage;

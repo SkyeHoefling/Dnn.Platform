@@ -21,12 +21,14 @@
 #region Usings
 
 using System;
-using System.Collections.Specialized;
 using System.Web.UI;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -47,7 +49,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:TrueFalseEditControl runat=server></{0}:TrueFalseEditControl>")]
     public class TrueFalseEditControl : EditControl
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (TrueFalseEditControl));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (TrueFalseEditControl));
 		#region "Constructors"
 
         /// -----------------------------------------------------------------------------
@@ -82,7 +84,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return boolValue;
@@ -107,7 +109,7 @@ namespace DotNetNuke.UI.WebControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc, string.Empty);
 
                 }
                 return boolValue;

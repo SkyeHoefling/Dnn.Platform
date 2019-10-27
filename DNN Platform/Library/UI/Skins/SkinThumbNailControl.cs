@@ -27,8 +27,10 @@ using System.Web.UI.WebControls;
 
 using DotNetNuke.Common;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using Image = System.Drawing.Image;
 
@@ -46,7 +48,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public abstract class SkinThumbNailControl : UserControlBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SkinThumbNailControl));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SkinThumbNailControl));
 		#region "Private Members"
 		
         protected HtmlGenericControl ControlContainer;
@@ -299,7 +301,7 @@ namespace DotNetNuke.UI.Skins
                 }
 				catch (Exception ex)
 				{
-					Logger.Error(ex);
+					Logger.LogError(ex, string.Empty);
 				}
             }
             strThumbnail = Globals.ApplicationPath + "\\" + strThumbnail.Substring(strThumbnail.IndexOf("portals\\", StringComparison.InvariantCultureIgnoreCase));

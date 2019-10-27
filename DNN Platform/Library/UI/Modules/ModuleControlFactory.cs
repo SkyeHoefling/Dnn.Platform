@@ -20,18 +20,21 @@ using System;
 using System.IO;
 using System.Web.UI;
 
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Modules.Html5;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.UI.Modules
 {
     [Obsolete("This implementation has moved to DotNetNuke.ModulePipeline.ModuleControlFactory. Scheduled removal in v11.0.0.")]
     public class ModuleControlFactory
     {
-        private static readonly ILog TracelLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
+        private static readonly ILogger TracelLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger("DNN.Trace");
 
         [Obsolete("This implementation has moved to DotNetNuke.ModulePipeline.ModuleControlFactory. Scheduled removal in v11.0.0.")]
         private static IModuleControlFactory GetModuleControlFactory(string controlSrc)
@@ -75,8 +78,8 @@ namespace DotNetNuke.UI.Modules
         [Obsolete("This implementation has moved to DotNetNuke.ModulePipeline.ModuleControlFactory. Scheduled removal in v11.0.0.")]
         public static Control LoadModuleControl(TemplateControl containerControl, ModuleInfo moduleConfiguration, string controlKey, string controlSrc)
         {
-            if (TracelLogger.IsDebugEnabled)
-                TracelLogger.Debug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (TracelLogger.IsEnabled(LogLevel.Debug))
+                TracelLogger.LogDebug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
             IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
@@ -100,16 +103,16 @@ namespace DotNetNuke.UI.Modules
                 }
             }
 
-            if (TracelLogger.IsDebugEnabled)
-                TracelLogger.Debug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (TracelLogger.IsEnabled(LogLevel.Debug))
+                TracelLogger.LogDebug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             return control;
         }
 
         [Obsolete("This implementation has moved to DotNetNuke.ModulePipeline.ModuleControlFactory. Scheduled removal in v11.0.0.")]
         public static Control LoadModuleControl(TemplateControl containerControl, ModuleInfo moduleConfiguration)
         {
-            if (TracelLogger.IsDebugEnabled)
-                TracelLogger.Debug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (TracelLogger.IsEnabled(LogLevel.Debug))
+                TracelLogger.LogDebug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             Control control = null;
             IModuleControlFactory controlFactory = GetModuleControlFactory(moduleConfiguration.ModuleControl.ControlSrc);
 
@@ -132,16 +135,16 @@ namespace DotNetNuke.UI.Modules
                 }
             }
 
-            if (TracelLogger.IsDebugEnabled)
-                TracelLogger.Debug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (TracelLogger.IsEnabled(LogLevel.Debug))
+                TracelLogger.LogDebug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             return control;
         }
 
         [Obsolete("This implementation has moved to DotNetNuke.ModulePipeline.ModuleControlFactory. Scheduled removal in v11.0.0.")]
         public static Control LoadSettingsControl(TemplateControl containerControl, ModuleInfo moduleConfiguration, string controlSrc)
         {
-            if (TracelLogger.IsDebugEnabled)
-                TracelLogger.Debug($"ModuleControlFactory.LoadSettingsControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (TracelLogger.IsEnabled(LogLevel.Debug))
+                TracelLogger.LogDebug($"ModuleControlFactory.LoadSettingsControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
             IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
@@ -169,8 +172,8 @@ namespace DotNetNuke.UI.Modules
                 }
             }
 
-            if (TracelLogger.IsDebugEnabled)
-                TracelLogger.Debug($"ModuleControlFactory.LoadSettingsControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (TracelLogger.IsEnabled(LogLevel.Debug))
+                TracelLogger.LogDebug($"ModuleControlFactory.LoadSettingsControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             return control;
         }
 

@@ -37,17 +37,17 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs.TabVersions;
 using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.ModuleCache;
-using DotNetNuke.UI.Utilities;
 using DotNetNuke.UI.WebControls;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
 using Globals = DotNetNuke.Common.Globals;
 
 #endregion
@@ -64,7 +64,7 @@ namespace DotNetNuke.UI.Modules
     /// </summary>
     public sealed class ModuleHost : Panel
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModuleHost));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleHost));
 
         private static readonly Regex CdfMatchRegex = new Regex(@"<\!--CDF\((?<type>JAVASCRIPT|CSS|JS-LIBRARY)\|(?<path>.+?)(\|(?<provider>.+?)\|(?<priority>\d+?))?\)-->",
             RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -300,13 +300,13 @@ namespace DotNetNuke.UI.Modules
             }
             catch (ThreadAbortException exc)
             {
-                Logger.Debug(exc);
+                Logger.LogDebug(exc, string.Empty);
 
                 Thread.ResetAbort();
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc, string.Empty);
 				
 				//add module settings
                 _control = _moduleControlPipeline.CreateModuleControl(_moduleConfiguration);

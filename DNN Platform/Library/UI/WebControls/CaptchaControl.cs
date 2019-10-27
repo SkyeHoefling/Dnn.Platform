@@ -25,7 +25,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -33,13 +32,16 @@ using System.Web.Caching;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using Image = System.Web.UI.WebControls.Image;
 
@@ -56,7 +58,7 @@ namespace DotNetNuke.UI.WebControls
 	[ToolboxData("<{0}:CaptchaControl Runat=\"server\" CaptchaHeight=\"100px\" CaptchaWidth=\"300px\" />")]
 	public class CaptchaControl : WebControl, INamingContainer, IPostBackDataHandler
 	{
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (CaptchaControl));
+		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (CaptchaControl));
 
 		#region Private Constants
 
@@ -462,7 +464,7 @@ namespace DotNetNuke.UI.WebControls
 			}
 			catch (Exception exc)
 			{
-				Logger.Error(exc);
+				Logger.LogError(exc, string.Empty);
 
 			}
 			finally
@@ -491,7 +493,7 @@ namespace DotNetNuke.UI.WebControls
 			}
 			catch (ArgumentException exc)
 			{
-				Logger.Debug(exc);
+				Logger.LogDebug(exc, string.Empty);
 
 			}
 			return decryptedText;
@@ -610,7 +612,7 @@ namespace DotNetNuke.UI.WebControls
 				}
 				catch (Exception exc)
 				{
-					Logger.Error(exc);
+					Logger.LogError(exc, string.Empty);
 
 					_font = null;
 				}
