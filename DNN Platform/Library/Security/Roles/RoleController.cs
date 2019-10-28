@@ -52,7 +52,7 @@ namespace DotNetNuke.Security.Roles
     /// -----------------------------------------------------------------------------
     public partial class RoleController : ServiceLocator<IRoleController, RoleController>, IRoleController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(RoleController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<RoleController>>();
         private static readonly string[] UserRoleActionsCaption = { "ASSIGNMENT", "UPDATE", "UNASSIGNMENT" };
         private static readonly RoleProvider provider = RoleProvider.Instance();
 

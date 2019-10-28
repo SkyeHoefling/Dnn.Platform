@@ -57,7 +57,7 @@ namespace DotNetNuke.Services.Search
     {
         #region Private Fields
 
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleIndexer));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ModuleIndexer>>();
         private static readonly int ModuleSearchTypeId = SearchHelper.Instance.GetSearchTypeByName("module").SearchTypeId;
 
 		private readonly IDictionary<int, IEnumerable<ModuleIndexInfo>> _searchModules;

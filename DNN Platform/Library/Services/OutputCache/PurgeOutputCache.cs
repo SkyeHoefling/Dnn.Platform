@@ -35,7 +35,7 @@ namespace DotNetNuke.Services.OutputCache
 {
     public class PurgeOutputCache : SchedulerClient
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (PurgeOutputCache));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PurgeOutputCache>>();
 
         public PurgeOutputCache(ScheduleHistoryItem objScheduleHistoryItem)
         {

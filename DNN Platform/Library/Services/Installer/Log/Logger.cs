@@ -42,7 +42,7 @@ namespace DotNetNuke.Services.Installer.Log
     /// -----------------------------------------------------------------------------
     public class Logger
     {
-    	private static readonly ILogger DnnLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Logger));
+        private static readonly ILogger DnnLogger = Globals.DependencyProvider.GetService<ILogger<Logger>>();
         private readonly IList<LogEntry> _logs;
         private string _errorClass;
         private bool _hasWarnings;

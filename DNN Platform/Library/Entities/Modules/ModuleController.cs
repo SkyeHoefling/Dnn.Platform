@@ -66,7 +66,7 @@ namespace DotNetNuke.Entities.Modules
     /// </summary>
     public partial class ModuleController : ServiceLocator<IModuleController, ModuleController>, IModuleController
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ModuleController>>();
         private static readonly DataProvider dataProvider = DataProvider.Instance();
 
         protected override Func<IModuleController> GetFactory()

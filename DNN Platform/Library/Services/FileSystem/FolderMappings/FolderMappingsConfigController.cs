@@ -35,7 +35,7 @@ namespace DotNetNuke.Services.FileSystem
 {
     public class FolderMappingsConfigController: ServiceLocator<IFolderMappingsConfigController, FolderMappingsConfigController>, IFolderMappingsConfigController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FolderMappingsConfigController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FolderMappingsConfigController>>();
         private static readonly string defaultConfigFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DotNetNuke.folderMappings.config");
         #region Constructor
         public FolderMappingsConfigController()

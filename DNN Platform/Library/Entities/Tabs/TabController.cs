@@ -77,7 +77,7 @@ namespace DotNetNuke.Entities.Tabs
             return () => new TabController();
         }
 
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<TabController>>();
         private readonly DataProvider _dataProvider = DataProvider.Instance();
 
         private static readonly Regex TabNameCheck1 = new Regex("^LPT[1-9]$|^COM[1-9]$", RegexOptions.IgnoreCase);

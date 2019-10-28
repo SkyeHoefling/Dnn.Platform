@@ -38,7 +38,7 @@ namespace DotNetNuke.Entities.Modules
 {
     public class EventMessageProcessor : EventMessageProcessorBase
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (EventMessageProcessor));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<EventMessageProcessor>>();
         private static void ImportModule(EventMessage message)
         {
             try

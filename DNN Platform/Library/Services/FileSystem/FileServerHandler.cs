@@ -43,7 +43,7 @@ namespace DotNetNuke.Services.FileSystem
 {
     public class FileServerHandler : IHttpHandler
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FileServerHandler));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FileServerHandler>>();
         #region IHttpHandler Members
 
         /// -----------------------------------------------------------------------------

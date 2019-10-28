@@ -66,7 +66,7 @@ namespace DotNetNuke.Services.Search.Internals
 
         #region Private Properties
 
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(LuceneControllerImpl));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<LuceneControllerImpl>>();
 
         internal string IndexFolder { get; private set; }
 

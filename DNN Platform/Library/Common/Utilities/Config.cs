@@ -50,7 +50,7 @@ namespace DotNetNuke.Common.Utilities
     {
         private static readonly ILogger Logger = Globals.DependencyProvider == null ?
             DnnLoggerFactory.Instance.CreateLogger(typeof(Config)) :
-            Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Config));
+            Globals.DependencyProvider.GetService<ILogger<Config>>();
         #region ConfigFileType enum
 
         public enum ConfigFileType

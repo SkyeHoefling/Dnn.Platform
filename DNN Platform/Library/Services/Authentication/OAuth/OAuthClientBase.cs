@@ -60,7 +60,7 @@ namespace DotNetNuke.Services.Authentication.OAuth
     public abstract class OAuthClientBase
     {
         #region Private Members
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(OAuthClientBase));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<OAuthClientBase>>();
         private const string HMACSHA1SignatureType = "HMAC-SHA1";
 
         //oAuth 1

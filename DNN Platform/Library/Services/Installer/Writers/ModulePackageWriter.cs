@@ -49,7 +49,7 @@ namespace DotNetNuke.Services.Installer.Writers
     /// -----------------------------------------------------------------------------
     public class ModulePackageWriter : PackageWriterBase
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModulePackageWriter));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ModulePackageWriter>>();
 		#region "Constructors"
 
         public ModulePackageWriter(XPathNavigator manifestNav, InstallerInfo installer)

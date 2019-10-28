@@ -38,7 +38,7 @@ namespace DotNetNuke.Services.FileSystem
 {
     public class StandardFolderProvider : FolderProvider
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(StandardFolderProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<StandardFolderProvider>>();
 
         private static readonly char[] InvalidFileUrlChars = new char[] { '%', ';', '?', ':', '@', '&', '=', '+', '$', ',' };
 

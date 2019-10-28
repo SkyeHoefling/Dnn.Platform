@@ -52,7 +52,7 @@ namespace DotNetNuke.Services.FileSystem
     [Serializable]
     public class FileInfo : BaseEntityInfo, IHydratable, IFileInfo
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileInfo));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FileInfo>>();
         private string _folder;
         private bool? _supportsFileAttributes;
         private DateTime? _lastModificationTime;

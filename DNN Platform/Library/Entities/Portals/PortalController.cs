@@ -81,7 +81,7 @@ namespace DotNetNuke.Entities.Portals
 	/// </remarks>
     public partial class PortalController : ServiceLocator<IPortalController, PortalController>, IPortalController
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (PortalController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PortalController>>();
 
         public const string HtmlText_TimeToAutoSave = "HtmlText_TimeToAutoSave";
         public const string HtmlText_AutoSaveEnabled = "HtmlText_AutoSaveEnabled";
@@ -3525,7 +3525,7 @@ namespace DotNetNuke.Entities.Portals
         public class PortalTemplateInfo
         {
             private string _resourceFilePath;
-            private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(PortalController));
+            private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PortalController>>();
 
             public PortalTemplateInfo(string templateFilePath, string cultureCode)
             {

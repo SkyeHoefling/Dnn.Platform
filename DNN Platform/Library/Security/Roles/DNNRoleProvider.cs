@@ -55,7 +55,7 @@ namespace DotNetNuke.Security.Roles
     /// -----------------------------------------------------------------------------
     public class DNNRoleProvider : RoleProvider
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DNNRoleProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DNNRoleProvider>>();
         private readonly DataProvider dataProvider = DataProvider.Instance();
 
         #region Private Methods

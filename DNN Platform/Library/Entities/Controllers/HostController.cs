@@ -60,7 +60,7 @@ namespace DotNetNuke.Entities.Controllers
 	/// </example>
     public class HostController : ComponentBase<IHostController, HostController>, IHostController
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (HostController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<HostController>>();
         
         /// <summary>
         /// Initializes a new instance of the HostController class

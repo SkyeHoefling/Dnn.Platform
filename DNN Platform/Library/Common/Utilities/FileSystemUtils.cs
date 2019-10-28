@@ -47,7 +47,7 @@ namespace DotNetNuke.Common.Utilities
 {
     public class FileSystemUtils
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FileSystemUtils));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FileSystemUtils>>();
         #region Private Methods
 
         private static string CreateFile(IFolderInfo folder, string fileName, string contentType, Stream fileContent, bool unzip, bool overwrite, bool checkPermissions)

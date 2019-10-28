@@ -85,9 +85,9 @@ namespace DotNetNuke.Common
     [StandardModule]
     public sealed class Globals
     {
-    	private static readonly ILogger Logger = DependencyProvider == null ?
+        private static readonly ILogger Logger = DependencyProvider == null ?
             DnnLoggerFactory.Instance.CreateLogger(typeof(Globals)) :
-            DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Globals));
+            DependencyProvider.GetService<ILogger<Globals>>();
 
         public static readonly Regex EmailValidatorRegex = new Regex(glbEmailRegEx, RegexOptions.Compiled);
         public static readonly Regex NonAlphanumericCharacters = new Regex("[^A-Za-z0-9]", RegexOptions.Compiled | RegexOptions.CultureInvariant);

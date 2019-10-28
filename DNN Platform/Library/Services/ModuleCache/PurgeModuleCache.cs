@@ -35,7 +35,7 @@ namespace DotNetNuke.Services.ModuleCache
 {
     public class PurgeModuleCache : SchedulerClient
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (PurgeModuleCache));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PurgeModuleCache>>();
         public PurgeModuleCache(ScheduleHistoryItem objScheduleHistoryItem)
         {
             ScheduleHistoryItem = objScheduleHistoryItem; //REQUIRED

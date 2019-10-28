@@ -60,7 +60,7 @@ namespace DotNetNuke.Entities.Modules
     /// -----------------------------------------------------------------------------
     public class DesktopModuleController
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DesktopModuleController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DesktopModuleController>>();
         #region Private Methods
 
         private static readonly DataProvider DataProvider = DataProvider.Instance();

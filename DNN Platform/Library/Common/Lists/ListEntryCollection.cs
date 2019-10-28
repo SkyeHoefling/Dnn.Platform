@@ -35,7 +35,7 @@ namespace DotNetNuke.Common.Lists
     [Obsolete("Obsoleted in 6.0.1.  Replaced by using generic collections of ListEntryInfo objects. Scheduled removal in v10.0.0."), EditorBrowsable(EditorBrowsableState.Never)]
     public class ListEntryInfoCollection : CollectionBase
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ListEntryInfoCollection));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ListEntryInfoCollection>>();
         private readonly Hashtable _keyIndexLookup = new Hashtable();
 
         public ListEntryInfo Item(int index)

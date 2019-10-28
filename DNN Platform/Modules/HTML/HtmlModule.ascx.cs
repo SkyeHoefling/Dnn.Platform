@@ -36,6 +36,7 @@ using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.WebControls;
 using DotNetNuke.Modules.Html.Components;
 using DotNetNuke.Abstractions;
+using Microsoft.Extensions.Logging;
 
 
 #endregion
@@ -54,9 +55,11 @@ namespace DotNetNuke.Modules.Html
         private bool EditorEnabled;
         private int WorkflowID;
 
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
         public HtmlModule()
         {
+            _logger = DependencyProvider.GetService<ILogger<HtmlModule>>();
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
         }
 

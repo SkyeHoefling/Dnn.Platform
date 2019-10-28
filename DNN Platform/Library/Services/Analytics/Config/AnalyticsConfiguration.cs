@@ -41,7 +41,7 @@ namespace DotNetNuke.Services.Analytics.Config
     [Serializable, XmlRoot("AnalyticsConfig")]
     public class AnalyticsConfiguration
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (AnalyticsConfiguration));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AnalyticsConfiguration>>();
 		#region "Private Members"
 
         private AnalyticsRuleCollection _rules;

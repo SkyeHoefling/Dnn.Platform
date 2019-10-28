@@ -38,7 +38,7 @@ namespace DotNetNuke.UI.Modules
 {
     internal class ModuleInjectionManager
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ModuleInjectionManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ModuleInjectionManager>>();
         private static NaiveLockingList<IModuleInjectionFilter> _filters;
 
         public static void RegisterInjectionFilters()

@@ -34,7 +34,7 @@ namespace DotNetNuke.Services.Upgrade.Internals.Steps
     /// ------------------------------------------------------------------------------------------------  
     public class AddFcnModeStep : BaseInstallationStep
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(AddFcnModeStep));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AddFcnModeStep>>();
 
         public override void Execute()
         {

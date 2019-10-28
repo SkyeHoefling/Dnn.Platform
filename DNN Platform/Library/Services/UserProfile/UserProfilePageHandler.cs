@@ -36,7 +36,7 @@ namespace DotNetNuke.Services.UserProfile
 {
     public class UserProfilePageHandler : IHttpHandler
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (UserProfilePageHandler));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<UserProfilePageHandler>>();
         #region IHttpHandler Members
 
         /// -----------------------------------------------------------------------------

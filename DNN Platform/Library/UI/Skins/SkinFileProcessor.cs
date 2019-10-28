@@ -57,7 +57,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public class SkinFileProcessor
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SkinFileProcessor));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SkinFileProcessor>>();
         #region "Private Members"
 
         private readonly string DUPLICATE_DETAIL = Util.GetLocalizedString("DuplicateSkinObject.Detail");

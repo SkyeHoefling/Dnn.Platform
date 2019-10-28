@@ -58,7 +58,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public class SkinController
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SkinController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SkinController>>();
         private const string GlobalSkinPrefix = "[G]";
         private const string PortalSystemSkinPrefix = "[S]";
         private const string PortalSkinPrefix = "[L]";

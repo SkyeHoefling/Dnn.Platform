@@ -109,7 +109,7 @@ namespace DotNetNuke.Services.Localization
     /// </example>
     public class Localization
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Localization));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Localization>>();
 
         #region Private Members
 

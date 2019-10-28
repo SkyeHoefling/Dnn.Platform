@@ -42,7 +42,7 @@ namespace DotNetNuke.Services.Localization
 {
     public class LocalizationProvider : ComponentBase<ILocalizationProvider, LocalizationProvider>, ILocalizationProvider
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(LocalizationProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<LocalizationProvider>>();
         #region Nested type: CustomizedLocale
 
         public enum CustomizedLocale

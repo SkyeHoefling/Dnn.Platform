@@ -32,7 +32,7 @@ namespace DotNetNuke.Services.Upgrade.Internals.Steps
     /// ------------------------------------------------------------------------------------------------  
     public class ActivateLicenseStep : BaseInstallationStep
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ActivateLicenseStep));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ActivateLicenseStep>>();
 
         public override void Execute()
         {

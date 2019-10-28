@@ -32,7 +32,7 @@ namespace DotNetNuke.Common.Utilities.Internal
     /// </summary>
     public class RetryableAction
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (RetryableAction));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<RetryableAction>>();
         /// <summary>
         /// The Action to execute
         /// </summary>

@@ -52,7 +52,7 @@ namespace DotNetNuke.Services.Installer
     /// -----------------------------------------------------------------------------
     public class Installer
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Installer));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Installer>>();
 		#region Private Members
 
         private Stream _inputStream;

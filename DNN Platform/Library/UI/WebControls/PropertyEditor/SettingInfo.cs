@@ -42,7 +42,7 @@ namespace DotNetNuke.UI.WebControls
     /// -----------------------------------------------------------------------------
     public class SettingInfo
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SettingInfo));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SettingInfo>>();
         private Type _Type;
 
         public SettingInfo(object name, object value)

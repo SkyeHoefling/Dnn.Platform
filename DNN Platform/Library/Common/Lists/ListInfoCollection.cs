@@ -32,7 +32,7 @@ namespace DotNetNuke.Common.Lists
     [Serializable]
     public class ListInfoCollection : CollectionBase
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ListInfoCollection));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ListInfoCollection>>();
         private readonly Hashtable mKeyIndexLookup = new Hashtable();
 
         public ListInfo GetChildren(string ParentName)

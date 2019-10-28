@@ -71,7 +71,7 @@ namespace DotNetNuke.Services.Exceptions
     [StandardModule]
     public sealed class Exceptions
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Exceptions));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Exceptions>>();
 		/// <summary>
 		/// Gets the exception info.
 		/// </summary>

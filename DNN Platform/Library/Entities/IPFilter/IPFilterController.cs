@@ -48,7 +48,7 @@ namespace DotNetNuke.Entities.Host
     {
         #region Private
 
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (IPFilterController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<IPFilterController>>();
         
         private enum FilterType
         {

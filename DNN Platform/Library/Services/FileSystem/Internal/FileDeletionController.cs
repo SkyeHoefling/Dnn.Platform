@@ -32,7 +32,7 @@ namespace DotNetNuke.Services.FileSystem.Internal
 {
     public class FileDeletionController : ServiceLocator< IFileDeletionController, FileDeletionController>, IFileDeletionController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileDeletionController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FileDeletionController>>();
         public void DeleteFile(IFileInfo file)
         {
             string lockReason;

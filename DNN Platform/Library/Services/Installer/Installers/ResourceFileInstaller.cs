@@ -29,7 +29,7 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class ResourceFileInstaller : FileInstaller
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ResourceFileInstaller));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ResourceFileInstaller>>();
         #region "Public Contants"
         public const string DEFAULT_MANIFESTEXT = ".manifest";
         private string _Manifest;

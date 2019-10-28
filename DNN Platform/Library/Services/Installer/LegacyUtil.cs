@@ -53,7 +53,7 @@ namespace DotNetNuke.Services.Installer
     /// -----------------------------------------------------------------------------
     public class LegacyUtil
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (LegacyUtil));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<LegacyUtil>>();
         private static string AdminModules =
             "Adsense, MarketShare, Authentication, Banners, FeedExplorer, FileManager, HostSettings, Lists, LogViewer, Newsletters, PortalAliases, Portals, RecycleBin, Scheduler, SearchAdmin, SearchInput, SearchResults, Security, SiteLog, SiteWizard, SQL, Tabs, Vendors,";
 

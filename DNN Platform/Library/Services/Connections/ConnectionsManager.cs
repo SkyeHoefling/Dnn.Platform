@@ -48,7 +48,7 @@ namespace DotNetNuke.Services.Connections
 
         #region Properties
 
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ConnectionsManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ConnectionsManager>>();
         private static readonly object LockerObject = new object();
         private static IDictionary<string, IConnector> _processors;
 

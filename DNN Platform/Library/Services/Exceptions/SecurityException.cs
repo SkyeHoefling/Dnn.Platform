@@ -35,7 +35,7 @@ namespace DotNetNuke.Services.Exceptions
 {
     public class SecurityException : BasePortalException
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SecurityException));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SecurityException>>();
         private string m_IP;
         private string m_Querystring;
 

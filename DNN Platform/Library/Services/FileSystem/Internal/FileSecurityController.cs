@@ -34,7 +34,7 @@ namespace DotNetNuke.Services.FileSystem.Internal
     /// </summary>
     public class FileSecurityController : ServiceLocator<IFileSecurityController, FileSecurityController>, IFileSecurityController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileSecurityController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FileSecurityController>>();
 
         private const int BufferSize = 4096;
 

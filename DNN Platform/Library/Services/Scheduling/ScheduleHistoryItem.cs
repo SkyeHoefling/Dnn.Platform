@@ -36,7 +36,7 @@ namespace DotNetNuke.Services.Scheduling
     [Serializable]
     public class ScheduleHistoryItem : ScheduleItem
     {
-        private static readonly ILogger _tracelLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ScheduleHistoryItem));
+        private static readonly ILogger _tracelLogger = Globals.DependencyProvider.GetService<ILogger<ScheduleHistoryItem>>();
 
         private StringBuilder _LogNotes;
         private int _ScheduleHistoryID;

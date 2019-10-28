@@ -38,7 +38,7 @@ namespace DotNetNuke.Entities.Urls.Config
     [Serializable, XmlRoot("RewriterConfig")]
     public class RewriterConfiguration
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (RewriterConfiguration));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<RewriterConfiguration>>();
 		private static readonly object _threadLocker = new object();
         private RewriterRuleCollection _rules;
 

@@ -53,7 +53,7 @@ namespace DotNetNuke.Common
     /// </summary>
     public class Initialize
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Initialize));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Initialize>>();
         private static bool InitializedAlready;
         private static readonly object InitializeLock = new object();
 

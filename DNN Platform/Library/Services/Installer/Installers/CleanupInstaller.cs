@@ -42,7 +42,7 @@ namespace DotNetNuke.Services.Installer.Installers
     /// -----------------------------------------------------------------------------
     public class CleanupInstaller : FileInstaller
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (CleanupInstaller));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<CleanupInstaller>>();
 		#region "Private Members"
 
         private string _fileName;

@@ -47,7 +47,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:IntegerEditControl runat=server></{0}:IntegerEditControl>")]
     public class IntegerEditControl : EditControl
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (IntegerEditControl));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<IntegerEditControl>>();
 		#region "Constructors"
 
         /// -----------------------------------------------------------------------------

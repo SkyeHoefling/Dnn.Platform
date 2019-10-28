@@ -54,7 +54,7 @@ namespace DotNetNuke.UI.WebControls
     [ToolboxData("<{0}:DateEditControl runat=server></{0}:DateEditControl>")]
     public class DateEditControl : EditControl
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DateEditControl));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DateEditControl>>();
         private TextBox dateField;
         private HyperLink linkCalendar;
 

@@ -60,7 +60,7 @@ namespace DotNetNuke.Services.Search.Internals
     /// -----------------------------------------------------------------------------
     internal class InternalSearchControllerImpl : IInternalSearchController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(InternalSearchControllerImpl));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<InternalSearchControllerImpl>>();
         private const string SearchableModuleDefsKey = "{0}-{1}";
         private const string SearchableModuleDefsCacheKey = "SearchableModuleDefs";
         private const string LocalizedResxFile = "~/DesktopModules/Admin/SearchResults/App_LocalResources/SearchableModules.resx";

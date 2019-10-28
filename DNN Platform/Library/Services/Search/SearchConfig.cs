@@ -43,7 +43,7 @@ namespace DotNetNuke.Services.Search
     [Serializable]
     public class SearchConfig
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SearchConfig));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SearchConfig>>();
 		#region "Private Members"
 
         private readonly bool _SearchIncludeCommon;

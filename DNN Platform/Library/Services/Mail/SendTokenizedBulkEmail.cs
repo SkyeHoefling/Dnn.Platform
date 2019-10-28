@@ -58,7 +58,7 @@ namespace DotNetNuke.Services.Mail
     /// -----------------------------------------------------------------------------
     public class SendTokenizedBulkEmail : IDisposable
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SendTokenizedBulkEmail));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SendTokenizedBulkEmail>>();
         #region AddressMethods enum
 
         /// <summary>

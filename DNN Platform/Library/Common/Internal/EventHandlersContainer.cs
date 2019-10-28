@@ -33,7 +33,7 @@ namespace DotNetNuke.Common.Internal
 {
     internal class EventHandlersContainer<T> : ComponentBase<IEventHandlersContainer<T>, EventHandlersContainer<T>>, IEventHandlersContainer<T>        
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(EventHandlersContainer<T>));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<EventHandlersContainer<T>>>();
 
         [ImportMany]
         private IEnumerable<Lazy<T>> _eventHandlers = new List<Lazy<T>>();

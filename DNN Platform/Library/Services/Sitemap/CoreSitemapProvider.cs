@@ -45,7 +45,7 @@ namespace DotNetNuke.Services.Sitemap
     {
         private bool includeHiddenPages;
         private float minPagePriority;
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(CoreSitemapProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<CoreSitemapProvider>>();
 
         private bool useLevelBasedPagePriority;
 

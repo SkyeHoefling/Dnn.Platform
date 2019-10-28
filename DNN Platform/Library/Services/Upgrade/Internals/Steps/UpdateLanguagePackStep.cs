@@ -43,7 +43,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
     /// -----------------------------------------------------------------------------    
     public class UpdateLanguagePackStep : BaseInstallationStep
     {
-		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(UpdateLanguagePackStep));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<UpdateLanguagePackStep>>();
         #region Implementation of IInstallationStep
 
         /// <summary>

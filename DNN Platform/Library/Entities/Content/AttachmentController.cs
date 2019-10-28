@@ -35,7 +35,7 @@ namespace DotNetNuke.Entities.Content
     /// <summary>Implementation of <see cref="IAttachmentController"/>.</summary>
     public class AttachmentController : IAttachmentController
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (AttachmentController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AttachmentController>>();
         public AttachmentController()
             : this(Util.GetContentController())
         {

@@ -34,7 +34,7 @@ namespace DotNetNuke.UI.Modules
     [Obsolete("This implementation has moved to DotNetNuke.ModulePipeline.ModuleControlFactory. Scheduled removal in v11.0.0.")]
     public class ModuleControlFactory
     {
-        private static readonly ILogger TracelLogger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger("DNN.Trace");
+        private static readonly ILogger TracelLogger = Globals.DependencyProvider.GetService<ILogger<ModuleControlFactory>>();
 
         [Obsolete("This implementation has moved to DotNetNuke.ModulePipeline.ModuleControlFactory. Scheduled removal in v11.0.0.")]
         private static IModuleControlFactory GetModuleControlFactory(string controlSrc)

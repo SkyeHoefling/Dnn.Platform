@@ -48,7 +48,7 @@ namespace DotNetNuke.Framework
     /// -----------------------------------------------------------------------------
     public class Reflection
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (Reflection));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Reflection>>();
 		#region Public Shared Methods
 		
         /// -----------------------------------------------------------------------------

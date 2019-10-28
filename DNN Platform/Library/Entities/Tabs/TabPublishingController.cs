@@ -37,7 +37,7 @@ namespace DotNetNuke.Entities.Tabs
 {
     public class TabPublishingController: ServiceLocator<ITabPublishingController,TabPublishingController>, ITabPublishingController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabPublishingController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<TabPublishingController>>();
 
         public bool IsTabPublished(int tabID, int portalID)
         {

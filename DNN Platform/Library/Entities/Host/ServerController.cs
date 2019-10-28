@@ -47,7 +47,7 @@ namespace DotNetNuke.Entities.Host
         private const int cacheTimeout = 20;
         private const CacheItemPriority cachePriority = CacheItemPriority.High;
         private static readonly DataProvider dataProvider = DataProvider.Instance();
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ServerController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ServerController>>();
 
         public static bool UseAppName
         {

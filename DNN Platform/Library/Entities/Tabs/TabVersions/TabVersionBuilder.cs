@@ -39,7 +39,7 @@ namespace DotNetNuke.Entities.Tabs.TabVersions
 {
     public class TabVersionBuilder : ServiceLocator<ITabVersionBuilder, TabVersionBuilder>, ITabVersionBuilder
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabVersionBuilder));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<TabVersionBuilder>>();
         private const int DefaultVersionNumber = 1;
 
         #region Members

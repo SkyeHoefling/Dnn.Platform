@@ -44,7 +44,7 @@ namespace DotNetNuke.Services.Log.EventLog
 {
     public class DBLoggingProvider : LoggingProvider
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DBLoggingProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DBLoggingProvider>>();
         private const int ReaderLockTimeout = 10000;
         private const int WriterLockTimeout = 10000;
         private static readonly IList<LogQueueItem> LogQueue = new List<LogQueueItem>();

@@ -58,7 +58,7 @@ namespace DotNetNuke.Services.FileSystem
     /// </summary>
     public class FileManager : ComponentBase<IFileManager, FileManager>, IFileManager
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FileManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FileManager>>();
 
         #region Properties
 

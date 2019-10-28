@@ -67,7 +67,7 @@ namespace DotNetNuke.Security.Membership
     /// -----------------------------------------------------------------------------
     public class AspNetMembershipProvider : MembershipProvider
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(AspNetMembershipProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AspNetMembershipProvider>>();
 
         #region Private Members
 

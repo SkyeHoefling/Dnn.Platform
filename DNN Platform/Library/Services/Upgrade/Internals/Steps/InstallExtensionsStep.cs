@@ -38,7 +38,7 @@ namespace DotNetNuke.Services.Upgrade.InternalController.Steps
     /// -----------------------------------------------------------------------------    
     public class InstallExtensionsStep : BaseInstallationStep
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (InstallExtensionsStep));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<InstallExtensionsStep>>();
         #region Implementation of IInstallationStep
 
         /// <summary>

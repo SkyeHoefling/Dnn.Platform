@@ -39,7 +39,7 @@ namespace DotNetNuke.Data
 {
     public sealed class SqlDataProvider : DataProvider
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(SqlDataProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SqlDataProvider>>();
         private static DatabaseConnectionProvider _dbConnectionProvider = DatabaseConnectionProvider.Instance() ?? new SqlDatabaseConnectionProvider();
 
         #region Private Members

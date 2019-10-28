@@ -55,7 +55,7 @@ namespace DotNetNuke.Common.Utilities
     /// -----------------------------------------------------------------------------
     public class XmlUtils
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (XmlUtils));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<XmlUtils>>();
         public static void AppendElement(ref XmlDocument objDoc, XmlNode objNode, string attName, string attValue, bool includeIfEmpty)
         {
             AppendElement(ref objDoc, objNode, attName, attValue, includeIfEmpty, false);

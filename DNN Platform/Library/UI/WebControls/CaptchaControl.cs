@@ -58,7 +58,7 @@ namespace DotNetNuke.UI.WebControls
 	[ToolboxData("<{0}:CaptchaControl Runat=\"server\" CaptchaHeight=\"100px\" CaptchaWidth=\"300px\" />")]
 	public class CaptchaControl : WebControl, INamingContainer, IPostBackDataHandler
 	{
-		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (CaptchaControl));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<CaptchaControl>>();
 
 		#region Private Constants
 

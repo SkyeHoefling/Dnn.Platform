@@ -96,7 +96,7 @@ namespace DotNetNuke.Services.Upgrade
     ///-----------------------------------------------------------------------------
     public class Upgrade
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Upgrade));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Upgrade>>();
         private static readonly object _threadLocker = new object();
 
         #region Private Shared Field

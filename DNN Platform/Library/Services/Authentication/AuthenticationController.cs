@@ -52,7 +52,7 @@ namespace DotNetNuke.Services.Authentication
     /// -----------------------------------------------------------------------------
     public class AuthenticationController
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (AuthenticationController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AuthenticationController>>();
 		#region "Private Members"
 
         private static readonly DataProvider provider = DataProvider.Instance();

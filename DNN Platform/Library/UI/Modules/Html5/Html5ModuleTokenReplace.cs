@@ -34,7 +34,7 @@ namespace DotNetNuke.UI.Modules.Html5
 {
     public class Html5ModuleTokenReplace : HtmlTokenReplace
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Html5ModuleTokenReplace));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Html5ModuleTokenReplace>>();
 
         private static Hashtable _businessControllers = new Hashtable();
 

@@ -39,7 +39,7 @@ namespace DotNetNuke.Common.Utilities
     /// </remarks>
     public class FileSystemPermissionVerifier
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (FileSystemPermissionVerifier));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FileSystemPermissionVerifier>>();
         private readonly string _basePath;
 
 	    private int _retryTimes = 30;

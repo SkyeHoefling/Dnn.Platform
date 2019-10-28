@@ -57,7 +57,7 @@ namespace DotNetNuke.Data
 {
     public abstract class DataProvider
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(DataProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DataProvider>>();
 
         private const int DuplicateKey = 2601;
 

@@ -54,7 +54,7 @@ namespace DotNetNuke.Services.FileSystem
     /// </summary>
     public class FolderManager : ComponentBase<IFolderManager, FolderManager>, IFolderManager
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(FolderManager));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<FolderManager>>();
         private static readonly Dictionary<int, SyncFolderData> SyncFoldersData = new Dictionary<int, SyncFolderData>();
         private const string DefaultUsersFoldersPath = "Users";
         private const string DefaultMappedPathSetting = "DefaultMappedPath";

@@ -55,7 +55,7 @@ namespace DotNetNuke.Entities.Profile
     /// -----------------------------------------------------------------------------
     public class ProfileController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ProfileController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ProfileController>>();
 
         #region Private Members
 

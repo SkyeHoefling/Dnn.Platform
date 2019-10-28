@@ -48,7 +48,7 @@ namespace DotNetNuke.UI.Skins
     /// -----------------------------------------------------------------------------
     public abstract class SkinThumbNailControl : UserControlBase
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (SkinThumbNailControl));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SkinThumbNailControl>>();
 		#region "Private Members"
 		
         protected HtmlGenericControl ControlContainer;

@@ -49,7 +49,7 @@ namespace DotNetNuke.Services.Search
     /// -----------------------------------------------------------------------------
     public class TabIndexer : IndexingProvider
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(TabIndexer));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<TabIndexer>>();
         private static readonly int TabSearchTypeId = SearchHelper.Instance.GetSearchTypeByName("tab").SearchTypeId;
 
         /// -----------------------------------------------------------------------------

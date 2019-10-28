@@ -63,9 +63,9 @@ namespace DotNetNuke.Services.Cache
 	/// </example>
     public abstract class CachingProvider
     {
-		#region Private Members
+        #region Private Members
 
-		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(CachingProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<CachingProvider>>();
 
         private static System.Web.Caching.Cache _cache;
         private const string CachePrefix = "DNN_";

@@ -60,7 +60,7 @@ namespace DotNetNuke.Common.Utilities
     /// -----------------------------------------------------------------------------
     public class DataCache
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (DataCache));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DataCache>>();
         //Host keys
         public const string SecureHostSettingsCacheKey = "SecureHostSettings";
         public const string UnSecureHostSettingsCacheKey = "UnsecureHostSettings";

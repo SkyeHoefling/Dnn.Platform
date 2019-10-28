@@ -53,7 +53,7 @@ namespace DotNetNuke.Services.Search.Controllers
     [Serializable]
     public class ModuleResultController : BaseResultController
     {
-        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(ModuleResultController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ModuleResultController>>();
 
         private static Hashtable _moduleSearchControllers = new Hashtable();
         private static object _threadLock = new object();

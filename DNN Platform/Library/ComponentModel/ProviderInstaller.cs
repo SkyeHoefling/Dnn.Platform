@@ -35,7 +35,7 @@ namespace DotNetNuke.ComponentModel
 {
     public class ProviderInstaller : IComponentInstaller
     {
-    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof (ProviderInstaller));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ProviderInstaller>>();
         private readonly ComponentLifeStyleType _ComponentLifeStyle;
         private readonly Type _ProviderInterface;
         private readonly string _ProviderType;
