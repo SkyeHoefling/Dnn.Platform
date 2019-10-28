@@ -9,5 +9,11 @@ namespace DotNetNuke.Logging
             builder.AddProvider(new DnnLog4NetLoggerProvider());
             return builder;
         }
+
+        public static ILoggingBuilder AddFile(this ILoggingBuilder builder, string file)
+        {
+            builder.AddProvider(new DnnLog4NetLoggerProvider(file));
+            return builder;
+        }
     }
 }

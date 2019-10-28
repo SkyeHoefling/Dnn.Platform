@@ -7,6 +7,16 @@ namespace DotNetNuke.Logging
     [LockedService]
     internal class DnnLog4NetLoggerProvider : ILoggerProvider
     {
+        public readonly string _configFile;
+        internal DnnLog4NetLoggerProvider()
+        {
+            _configFile = "DotNetNuke.log4net.config";
+        }
+
+        internal DnnLog4NetLoggerProvider(string configFile)
+        {
+            _configFile = configFile;
+        }
 
         public ILogger CreateLogger(string categoryName)
         {

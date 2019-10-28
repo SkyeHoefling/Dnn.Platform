@@ -20,20 +20,30 @@ namespace DotNetNuke.Logging
         private static Level _levelFatal;
 
         private readonly Type _stackBoundary;
-        private const string ConfigFile = "DotNetNuke.log4net.config";
+        private readonly string _configFile;// = "DotNetNuke.log4net.config";
         private static bool _configured;
         private static readonly object ConfigLock = new object();
 
-        internal Log4NetLogger() : this(LogManager.GetLogger("DotNetNuke").Logger) { }
-        internal Log4NetLogger(ILog4NetLogger logger) : this(logger, null) { }
+        // Question: Should the default logger be "DotNetNuke" or "DNN.Trace" (which is common amongst our core codebase)
+        internal Log4NetLogger(string configFile = "DotNetNuke.log4net.config") : this(LogManager.GetLogger("DotNetNuke").Logger)
+        {
+            _configFile = configFile;
+        }
+        internal Log4NetLogger(ILog4NetLogger logger) : this(logger, default(Type)) { }
+        internal Log4NetLogger(ILog4NetLogger logger, string configFile) : this(logger, null, configFile) { }
         internal Log4NetLogger(ILog4NetLogger logger, Type type) : base(logger)
         {
             _stackBoundary = type ?? typeof(Log4NetLogger);
             EnsureConfig();
             ReloadLevels(logger.Repository);
         }
+        internal Log4NetLogger(ILog4NetLogger logger, Type type, string configFile) : this(logger, type)
+        {
+            _configFile = configFile;
+        }
 
-        private static void EnsureConfig()
+
+        private void EnsureConfig()
         {
             if (!_configured)
             {
@@ -41,8 +51,8 @@ namespace DotNetNuke.Logging
                 {
                     if (!_configured)
                     {
-                        var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigFile);
-                        var originalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config\\" + ConfigFile);
+                        var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _configFile);
+                        var originalPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config\\" + _configFile);
                         if (!File.Exists(configPath) && File.Exists(originalPath))
                         {
                             File.Copy(originalPath, configPath);
