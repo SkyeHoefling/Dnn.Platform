@@ -88,6 +88,17 @@ namespace DotNetNuke.Logging
 
         void ILogger.Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
+            // NOTE - AH:
+            // The exception isn't being logged correctly.
+            // Ex: _logger.LogError(exc);
+            // Output: 2019-10-27 22:41:11.009-04:00 [DESKTOP-8L05G7S][D:3][T:1][ERROR] DotNetNuke.ComponentModel.ProviderInstaller - 
+            // 
+            // See there is no message provided with the log statement.
+            //
+            // Potential Solution: The actual details of the exception are not being formatted correctly and the message
+            //                     is returning an empty string. Maybe we need to trace the formatter up the stack and leverage
+            //                     the object->string mapper that is in the log4net project.
+
             var message = formatter(state, exception);
             switch (logLevel)
             {
