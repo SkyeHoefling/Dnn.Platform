@@ -48,9 +48,10 @@ using DotNetNuke.Services.Search;
 using DotNetNuke.Services.Search.Internals;
 using DotNetNuke.Services.Sitemap;
 using DotNetNuke.Services.Url.FriendlyUrl;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Cookies;
 using DotNetNuke.Services.Installer.Blocker;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
 #endregion
@@ -62,7 +63,7 @@ namespace DotNetNuke.Web.Common.Internal
     /// </summary>
     public class DotNetNukeHttpApplication : HttpApplication
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DotNetNukeHttpApplication));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DotNetNukeHttpApplication>>();
 
         private void Application_Error(object sender, EventArgs eventArgs)
         {
@@ -70,20 +71,20 @@ namespace DotNetNuke.Web.Common.Internal
             if (HttpContext.Current != null)
             {
                 // Get the exception object.
-                Logger.Trace("Dumping all Application Errors");
-                foreach (Exception exc in HttpContext.Current.AllErrors) Logger.Fatal(exc);
-                Logger.Trace("End Dumping all Application Errors");
+                Logger.LogTrace("Dumping all Application Errors");
+                foreach (Exception exc in HttpContext.Current.AllErrors) Logger.LogCritical(exc);
+                Logger.LogTrace("End Dumping all Application Errors");
             }
         }
 
         private void Application_Start(object sender, EventArgs eventArgs)
         {
-            Logger.InfoFormat("Application Starting ({0})", Globals.ElapsedSinceAppStart); // just to start the timer
+            Logger.LogInformation("Application Starting ({0})", Globals.ElapsedSinceAppStart); // just to start the timer
 
             var name = Config.GetSetting("ServerName");
             Globals.ServerName = String.IsNullOrEmpty(name) ? Dns.GetHostName() : name;
 
-            var startup = new Startup();
+            var startup = new Startup(Globals.DependencyProvider.GetService<ILogger<Startup>>());
             Globals.DependencyProvider = startup.DependencyProvider;
 
             ComponentFactory.Container = new SimpleContainer();
@@ -116,7 +117,7 @@ namespace DotNetNuke.Web.Common.Internal
             ComponentFactory.InstallComponents(new ProviderInstaller("clientcapability", typeof(ClientCapabilityProvider)));
             ComponentFactory.InstallComponents(new ProviderInstaller("cryptography", typeof(CryptographyProvider),typeof(FipsCompilanceCryptographyProvider)));
 
-            Logger.InfoFormat("Application Started ({0})", Globals.ElapsedSinceAppStart); // just to start the timer
+            Logger.LogInformation("Application Started ({0})", Globals.ElapsedSinceAppStart); // just to start the timer
             DotNetNukeShutdownOverload.InitializeFcnSettings();
 
             // register the assembly-lookup to correct the breaking rename in DNN 9.2
@@ -149,7 +150,7 @@ namespace DotNetNuke.Web.Common.Internal
 
         private void Application_End(object sender, EventArgs eventArgs)
         {
-            Logger.Info("Application Ending");
+            Logger.LogInformation("Application Ending");
 
             try
             {
@@ -157,7 +158,7 @@ namespace DotNetNuke.Web.Common.Internal
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                Logger.LogError(e);
             }
 
             try
@@ -166,26 +167,26 @@ namespace DotNetNuke.Web.Common.Internal
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                Logger.LogError(e);
             }
 
             //Shutdown Lucene, but not when we are installing
             if (Globals.Status != Globals.UpgradeStatus.Install)
             {
-                Logger.Trace("Disposing Lucene");
+                Logger.LogTrace("Disposing Lucene");
                 var lucene = LuceneController.Instance as IDisposable;
                 if (lucene != null) lucene.Dispose();
             }
-            Logger.Trace("Dumping all Application Errors");
+            Logger.LogTrace("Dumping all Application Errors");
             if (HttpContext.Current != null)
             {
                 if (HttpContext.Current.AllErrors != null)
                 {
-                    foreach (Exception exc in HttpContext.Current.AllErrors) Logger.Fatal(exc);
+                    foreach (Exception exc in HttpContext.Current.AllErrors) Logger.LogCritical(exc);
                 }
             }
-            Logger.Trace("End Dumping all Application Errors");
-            Logger.Info("Application Ended");
+            Logger.LogTrace("End Dumping all Application Errors");
+            Logger.LogInformation("Application Ended");
         }
 
         private static readonly string[] Endings =

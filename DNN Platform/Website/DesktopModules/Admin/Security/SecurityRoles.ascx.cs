@@ -32,7 +32,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
@@ -42,6 +42,7 @@ using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Skins.Controls;
 using DotNetNuke.UI.Utilities;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using Calendar = DotNetNuke.Common.Utilities.Calendar;
 using Globals = DotNetNuke.Common.Globals;
@@ -60,7 +61,7 @@ namespace DotNetNuke.Modules.Admin.Security
     /// -----------------------------------------------------------------------------
     public partial class SecurityRoles : PortalModuleBase, IActionable
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SecurityRoles));
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
 		#region "Private Members"
 
@@ -78,6 +79,7 @@ namespace DotNetNuke.Modules.Admin.Security
         public SecurityRoles()
         {
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = DependencyProvider.GetService<ILogger<SecurityRoles>>();
         }
 
 		#region "Protected Members"
@@ -585,7 +587,7 @@ namespace DotNetNuke.Modules.Admin.Security
             }
             catch (ThreadAbortException exc) //Do nothing if ThreadAbort as this is caused by a redirect
             {
-                Logger.Debug(exc);
+                _logger.LogDebug(exc);
 
             }
             catch (Exception exc) //Module failed to load

@@ -75,7 +75,7 @@ namespace DotNetNuke.Services.Install
         #region Private Members
         // Hide Licensing Step for Community Edition
         private static readonly bool IsProOrEnterprise = (File.Exists(HttpContext.Current.Server.MapPath("~\\bin\\DotNetNuke.Professional.dll")) || File.Exists(HttpContext.Current.Server.MapPath("~\\bin\\DotNetNuke.Enterprise.dll")));
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(InstallWizard));
+        private static readonly ILog Logger = Globals.DependencyProvider.GetService<ILogger<InstallWizard>>();
         
         private readonly DataProvider _dataProvider = DataProvider.Instance();
         private const string LocalesFile = "/Install/App_LocalResources/Locales.xml";
@@ -341,7 +341,7 @@ namespace DotNetNuke.Services.Install
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("WIZARD ERROR:" + ex);
+                    Logger.LogError("WIZARD ERROR:" + ex);
                     CurrentStepActivity("ERROR:" + ex.Message);
                     _installerRunning = false;
                     return;

@@ -107,9 +107,9 @@ namespace DotNetNuke.Services.Log.EventLog
             return logTypeConfigInfo;
         }
 
-        private static LogInfo FillLogInfo(IDataReader dr)
+        private static LogInformation FillLogInformation(IDataReader dr)
         {
-            var obj = new LogInfo();
+            var obj = new LogInformation();
             try
             {
                 obj.LogCreateDate = Convert.ToDateTime(dr["LogCreateDate"]);
@@ -157,8 +157,8 @@ namespace DotNetNuke.Services.Log.EventLog
             {
                 while (dr.Read())
                 {
-                    LogInfo logInfo = FillLogInfo(dr);
-                    logs.Add(logInfo);
+                    LogInformation LogInformation = FillLogInformation(dr);
+                    logs.Add(LogInformation);
                 }
                 dr.NextResult();
                 while (dr.Read())
@@ -205,19 +205,19 @@ namespace DotNetNuke.Services.Log.EventLog
                 logTypeConfigInfo = logQueueItem.LogTypeConfigInfo;
                 if (logTypeConfigInfo != null)
                 {
-                    LogInfo objLogInfo = logQueueItem.LogInfo;
-                    string logProperties = objLogInfo.LogProperties.Serialize();
-                    DataProvider.Instance().AddLog(objLogInfo.LogGUID,
-                                                   objLogInfo.LogTypeKey,
-                                                   objLogInfo.LogUserID,
-                                                   objLogInfo.LogUserName,
-                                                   objLogInfo.LogPortalID,
-                                                   objLogInfo.LogPortalName,
-                                                   objLogInfo.LogCreateDate,
-                                                   objLogInfo.LogServerName,
+                    LogInformation objLogInformation = logQueueItem.LogInformation;
+                    string logProperties = objLogInformation.LogProperties.Serialize();
+                    DataProvider.Instance().AddLog(objLogInformation.LogGUID,
+                                                   objLogInformation.LogTypeKey,
+                                                   objLogInformation.LogUserID,
+                                                   objLogInformation.LogUserName,
+                                                   objLogInformation.LogPortalID,
+                                                   objLogInformation.LogPortalName,
+                                                   objLogInformation.LogCreateDate,
+                                                   objLogInformation.LogServerName,
                                                    logProperties,
-                                                   Convert.ToInt32(objLogInfo.LogConfigID),
-												   objLogInfo.Exception,
+                                                   Convert.ToInt32(objLogInformation.LogConfigID),
+												   objLogInformation.Exception,
                                                    logTypeConfigInfo.EmailNotificationIsActive);
                     if (logTypeConfigInfo.EmailNotificationIsActive)
                     {
@@ -227,7 +227,7 @@ namespace DotNetNuke.Services.Log.EventLog
                             {
                                 if (logTypeConfigInfo.NotificationThreshold == 0)
                                 {
-                                    string str = logQueueItem.LogInfo.Serialize();
+                                    string str = logQueueItem.LogInformation.Serialize();
                                     Mail.Mail.SendEmail(logTypeConfigInfo.MailFromAddress, logTypeConfigInfo.MailToAddress, "Event Notification", string.Format("<pre>{0}</pre>", HttpUtility.HtmlEncode(str)));
                                 }
                             }
@@ -251,20 +251,20 @@ namespace DotNetNuke.Services.Log.EventLog
             }
         }
 
-        public override void AddLog(LogInfo logInfo)
+        public override void AddLog(LogInformation LogInformation)
         {
-            string configPortalID = logInfo.LogPortalID != Null.NullInteger 
-                                        ? logInfo.LogPortalID.ToString() 
+            string configPortalID = LogInformation.LogPortalID != Null.NullInteger 
+                                        ? LogInformation.LogPortalID.ToString() 
                                         : "*";
-            var logTypeConfigInfo = GetLogTypeConfigInfoByKey(logInfo.LogTypeKey, configPortalID);
+            var logTypeConfigInfo = GetLogTypeConfigInfoByKey(LogInformation.LogTypeKey, configPortalID);
             if (logTypeConfigInfo == null || logTypeConfigInfo.LoggingIsActive == false)
             {
                 return;
             }
-            logInfo.LogConfigID = logTypeConfigInfo.ID;
-            var logQueueItem = new LogQueueItem {LogInfo = logInfo, LogTypeConfigInfo = logTypeConfigInfo};
+            LogInformation.LogConfigID = logTypeConfigInfo.ID;
+            var logQueueItem = new LogQueueItem {LogInformation = LogInformation, LogTypeConfigInfo = logTypeConfigInfo};
             SchedulingProvider scheduler = SchedulingProvider.Instance();
-            if (scheduler == null || logInfo.BypassBuffering || SchedulingProvider.Enabled == false 
+            if (scheduler == null || LogInformation.BypassBuffering || SchedulingProvider.Enabled == false 
                 || scheduler.GetScheduleStatus() == ScheduleStatus.STOPPED || !Host.EventLogBuffer)
             {
                 WriteLog(logQueueItem);
@@ -324,9 +324,9 @@ namespace DotNetNuke.Services.Log.EventLog
             DataProvider.Instance().ClearLog();
         }
 
-        public override void DeleteLog(LogInfo logInfo)
+        public override void DeleteLog(LogInformation LogInformation)
         {
-            DataProvider.Instance().DeleteLog(logInfo.LogGUID);
+            DataProvider.Instance().DeleteLog(LogInformation.LogGUID);
         }
 
         public override void DeleteLogType(string logTypeKey)
@@ -342,9 +342,9 @@ namespace DotNetNuke.Services.Log.EventLog
             DataCache.RemoveCache(LogTypeInfoByKeyCacheKey);
         }
 
-        public override List<LogInfo> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
+        public override List<LogInformation> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
         {
-            var logs = new List<LogInfo>();
+            var logs = new List<LogInformation>();
             FillLogs(DataProvider.Instance().GetLogs(portalID, logType, pageSize, pageIndex), logs, ref totalRecords);
             return logs;
         }
@@ -388,23 +388,23 @@ namespace DotNetNuke.Services.Log.EventLog
                 c => CBO.FillCollection(DataProvider.Instance().GetLogTypeInfo(), typeof (LogTypeInfo)));
         }
 
-        public override object GetSingleLog(LogInfo logInfo, ReturnType returnType)
+        public override object GetSingleLog(LogInformation LogInformation, ReturnType returnType)
         {
-            IDataReader dr = DataProvider.Instance().GetSingleLog(logInfo.LogGUID);
-            LogInfo log = null;
+            IDataReader dr = DataProvider.Instance().GetSingleLog(LogInformation.LogGUID);
+            LogInformation log = null;
             try
             {
                 if (dr != null)
                 {
                     dr.Read();
-                    log = FillLogInfo(dr);
+                    log = FillLogInformation(dr);
                 }
             }
             finally
             {
                 CBO.CloseDataReader(dr, true);
             }
-            if (returnType == ReturnType.LogInfoObjects)
+            if (returnType == ReturnType.LogInformationObjects)
             {
                 return log;
             }
@@ -466,8 +466,8 @@ namespace DotNetNuke.Services.Log.EventLog
                 {
                     while (dr.Read())
                     {
-                        LogInfo logInfo = FillLogInfo(dr);
-                        log += logInfo.Serialize() + Environment.NewLine + Environment.NewLine;
+                        LogInformation LogInformation = FillLogInformation(dr);
+                        log += LogInformation.Serialize() + Environment.NewLine + Environment.NewLine;
                     }
                 }
                 finally

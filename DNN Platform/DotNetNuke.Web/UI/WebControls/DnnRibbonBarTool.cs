@@ -613,7 +613,7 @@ namespace DotNetNuke.Web.UI.WebControls
 
         protected virtual void RestartApplication()
         {
-            var log = new LogInfo { BypassBuffering = true, LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString() };
+            var log = new LogInformation { BypassBuffering = true, LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString() };
             log.AddProperty("Message", GetString("UserRestart"));
             LogController.Instance.AddLog(log);
             Config.Touch();

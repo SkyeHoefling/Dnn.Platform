@@ -172,7 +172,7 @@ namespace DotNetNuke.Entities.Host
 
         private void LogBannedIPAttempt(string ipAddress)
         {
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogTypeKey = EventLogController.EventLogType.IP_LOGIN_BANNED.ToString()
             };

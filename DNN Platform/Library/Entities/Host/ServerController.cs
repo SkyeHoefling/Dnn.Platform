@@ -144,7 +144,7 @@ namespace DotNetNuke.Entities.Host
 
             
             //log the server info
-            var log = new LogInfo();
+            var log = new LogInformation();
             log.AddProperty(existServer != null ? "Server Updated" : "Add New Server", server.ServerName);
             log.AddProperty("IISAppName", server.IISAppName);
             log.AddProperty("Last Activity Date", server.LastActivityDate.ToString());

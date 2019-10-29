@@ -67,7 +67,7 @@ namespace DotNetNuke.Services.Upgrade.Internals.Steps
             set
             {
                 _details = value;
-				DnnInstallLogger.InstallLogInfo(_details);
+				DnnInstallLogger.InstallLogInformation(_details);
                 if (Activity != null)
                     Activity(_details);
             }

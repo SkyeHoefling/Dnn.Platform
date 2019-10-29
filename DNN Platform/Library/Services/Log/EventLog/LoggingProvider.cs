@@ -38,7 +38,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
         public enum ReturnType
         {
-            LogInfoObjects,
+            LogInformationObjects,
             XML
         }
 
@@ -56,7 +56,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
 		#region "Abstract Methods"
 
-        public abstract void AddLog(LogInfo logInfo);
+        public abstract void AddLog(LogInformation LogInformation);
 
         public abstract void AddLogType(string logTypeKey, string logTypeFriendlyName, string logTypeDescription, string logTypeCSSClass, string logTypeOwner);
 
@@ -64,15 +64,15 @@ namespace DotNetNuke.Services.Log.EventLog
 
         public abstract void ClearLog();
 
-        public abstract void DeleteLog(LogInfo logInfo);
+        public abstract void DeleteLog(LogInformation LogInformation);
 
         public abstract void DeleteLogType(string logTypeKey);
 
         public abstract void DeleteLogTypeConfigInfo(string id);
 
-        public virtual List<LogInfo> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
+        public virtual List<LogInformation> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
         {
-            return new List<LogInfo>();
+            return new List<LogInformation>();
         }
 
         public abstract ArrayList GetLogTypeConfigInfo();
@@ -81,7 +81,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
         public abstract LogTypeConfigInfo GetLogTypeConfigInfoByID(string id);
 
-        public abstract object GetSingleLog(LogInfo logInfo, ReturnType returnType);
+        public abstract object GetSingleLog(LogInformation LogInformation, ReturnType returnType);
 
         public abstract bool LoggingIsEnabled(string logType, int portalID);
 

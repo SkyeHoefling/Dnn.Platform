@@ -27,7 +27,8 @@ using System.Web.Http;
 using Dnn.PersonaBar.Library;
 using Dnn.PersonaBar.Library.Attributes;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.UI.Services
 {
@@ -37,8 +38,12 @@ namespace Dnn.PersonaBar.UI.Services
     [MenuPermission(Scope = ServiceScope.Regular)]
     public class PortalsController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(PortalsController));
+        private readonly ILogger Logger;
 
+        public PortalsController(ILogger<PortalsController> logger)
+        {
+            Logger = logger;
+        }
 
         /// GET: api/Portals/GetPortals
         /// <summary>
@@ -85,7 +90,7 @@ namespace Dnn.PersonaBar.UI.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

@@ -124,7 +124,7 @@ namespace DotNetNuke.Common.Utilities
             UrlTrackingInfo objUrlTracking = GetUrlTracking(PortalID, Url, ModuleId);
             if (objUrlTracking != null)
             {
-                arrUrlLog = CBO.FillCollection(DataProvider.Instance().GetUrlLog(objUrlTracking.UrlTrackingID, StartDate, EndDate), typeof (UrlLogInfo));
+                arrUrlLog = CBO.FillCollection(DataProvider.Instance().GetUrlLog(objUrlTracking.UrlTrackingID, StartDate, EndDate), typeof (UrlLogInformation));
             }
             return arrUrlLog;
         }

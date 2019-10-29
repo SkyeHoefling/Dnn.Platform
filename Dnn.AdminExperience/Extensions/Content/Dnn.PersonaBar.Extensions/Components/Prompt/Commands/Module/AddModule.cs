@@ -6,11 +6,14 @@ using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
 using Dnn.PersonaBar.Prompt.Components.Models;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using ModulesControllerLibrary = Dnn.PersonaBar.Library.Controllers.ModulesController;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Prompt.Components.Commands.Module
 {
@@ -19,7 +22,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Module
     {
         public override string LocalResourceFile => Constants.LocalResourcesFile;
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(AddModule));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AddModule>>();
 
         [FlagParameter("name", "Prompt_AddModule_FlagModuleName", "String", true)]
         private const string FlagModuleName = "name";
@@ -81,7 +84,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Module
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return new ConsoleErrorResultModel(LocalizeString("Prompt_AddModuleError"));
             }
         }

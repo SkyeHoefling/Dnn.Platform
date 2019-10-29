@@ -191,7 +191,7 @@ namespace DotNetNuke.Modules.Admin.Sales
                         }
                         else
                         {
-                            var log = new LogInfo
+                            var log = new LogInformation
                             {
                                 LogPortalID = intPortalID,
                                 LogPortalName = PortalSettings.PortalName,
@@ -213,7 +213,7 @@ namespace DotNetNuke.Modules.Admin.Sales
                         }
                         else
                         {
-                            var log = new LogInfo
+                            var log = new LogInformation
                             {
                                 LogPortalID = intPortalID,
                                 LogPortalName = PortalSettings.PortalName,

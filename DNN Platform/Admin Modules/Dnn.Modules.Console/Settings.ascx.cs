@@ -27,15 +27,16 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using Dnn.Modules.Console.Components;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Logging;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Common;
-using DotNetNuke.Web.UI.WebControls;
 using DotNetNuke.Web.UI.WebControls.Internal;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -44,8 +45,11 @@ namespace Dnn.Modules.Console
 
     public partial class Settings : ModuleSettingsBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Settings));
-
+        private readonly ILogger Logger; 
+        public Settings()
+        {
+            DependencyProvider.GetService<ILogger<Settings>>();
+        }
         private void BindTabs(int tabId, bool includeParent)
         {
             List<TabInfo> tempTabs = TabController.GetTabsBySortOrder(PortalId).OrderBy(t => t.Level).ThenBy(t => t.HasChildren).ToList();
@@ -200,7 +204,7 @@ namespace Dnn.Modules.Console
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc);
 
                         throw new Exception("ConsoleWidth value is invalid. Value must be numeric.");
                     }

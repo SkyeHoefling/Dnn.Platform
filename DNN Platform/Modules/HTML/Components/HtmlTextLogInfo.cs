@@ -26,7 +26,7 @@ namespace DotNetNuke.Modules.Html
     /// -----------------------------------------------------------------------------
     /// Namespace:  DotNetNuke.Modules.Html
     /// Project:    DotNetNuke
-    /// Class:      HtmlTextLogInfo
+    /// Class:      HtmlTextLogInformation
     /// -----------------------------------------------------------------------------
     /// <summary>
     ///   Defines an instance of an HtmlTextLog object
@@ -34,7 +34,7 @@ namespace DotNetNuke.Modules.Html
     /// <remarks>
     /// </remarks>
     /// -----------------------------------------------------------------------------
-    public class HtmlTextLogInfo
+    public class HtmlTextLogInformation
     {
         // local property declarations
 

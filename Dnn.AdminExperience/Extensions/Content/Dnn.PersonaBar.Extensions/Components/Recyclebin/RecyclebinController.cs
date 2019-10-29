@@ -27,6 +27,7 @@ using System.Text;
 using Dnn.PersonaBar.Library;
 using Dnn.PersonaBar.Recyclebin.Components.Dto;
 using DotNetNuke.Collections;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
@@ -34,11 +35,13 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Tabs.TabVersions;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 using System.Net;
 using Dnn.PersonaBar.Library.Controllers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Recyclebin.Components
 {
@@ -46,7 +49,7 @@ namespace Dnn.PersonaBar.Recyclebin.Components
         IRecyclebinController
     {
         public static string PageDateTimeFormat = "yyyy-MM-dd hh:mm tt";
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(RecyclebinController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<RecyclebinController>>();
 
         #region Fields
 
@@ -179,7 +182,7 @@ namespace Dnn.PersonaBar.Recyclebin.Components
                         }
                         catch (Exception exc)
                         {
-                            Logger.Error(exc);
+                            Logger.LogError(exc);
                         }
                     }
                 }
@@ -205,7 +208,7 @@ namespace Dnn.PersonaBar.Recyclebin.Components
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
             }
             //hard-delete Tab Module Instance
         }

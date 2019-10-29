@@ -2,16 +2,19 @@
 using System.Linq;
 using Dnn.PersonaBar.Extensions.Components.Dto;
 using Dnn.PersonaBar.Extensions.Components.Dto.Editors;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Installer.Packages;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Extensions.Components.Editors
 {
     public class JsLibraryPackageEditor : IPackageEditor
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(JsLibraryPackageEditor));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<JsLibraryPackageEditor>>();
 
         #region IPackageEditor Implementation
 
@@ -65,7 +68,7 @@ namespace Dnn.PersonaBar.Extensions.Components.Editors
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 errorMessage = ex.Message;
                 return false;
             }

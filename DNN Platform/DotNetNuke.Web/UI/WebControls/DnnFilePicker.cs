@@ -29,13 +29,16 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 
 using FileInfo = DotNetNuke.Services.FileSystem.FileInfo;
 using DotNetNuke.Entities.Host;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -47,7 +50,7 @@ namespace DotNetNuke.Web.UI.WebControls
 	/// </summary>
 	public class DnnFilePicker : CompositeControl, ILocalizable
 	{
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DnnFilePicker));
+		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DnnFilePicker>>();
 
 		#region Public Enums
 
@@ -645,7 +648,7 @@ namespace DotNetNuke.Web.UI.WebControls
                 }
                 catch (Exception)
                 {
-                    Logger.WarnFormat("Unable to create thumbnail for {0}", image.PhysicalPath);
+                    Logger.LogWarning("Unable to create thumbnail for {0}", image.PhysicalPath);
                     _pnlRightDiv.Visible = false;
                 }
 
@@ -877,7 +880,7 @@ namespace DotNetNuke.Web.UI.WebControls
 					}
 					catch (Exception ex)
 					{
-						Logger.Error(ex);
+						Logger.LogError(ex);
 
 						_lblMessage.Text += "<br />" + string.Format(Localization.GetString("SaveFileError"), fileName);
 					}

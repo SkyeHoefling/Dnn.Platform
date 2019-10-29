@@ -24,11 +24,12 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml.XPath;
-
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Log.EventLog;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -49,7 +50,7 @@ namespace DotNetNuke.HttpModules.Config
     [Serializable, XmlRoot("AnalyticsEngineConfig")]
     public class AnalyticsEngineConfiguration
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AnalyticsEngineConfiguration));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AnalyticsEngineConfiguration>>();
         private AnalyticsEngineCollection _analyticsEngines;
 
         public AnalyticsEngineCollection AnalyticsEngines
@@ -102,13 +103,13 @@ namespace DotNetNuke.HttpModules.Config
             catch (Exception ex)
             {
                 //log it
-                var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
+                var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
                 log.AddProperty("Analytics.AnalyticsEngineConfiguration", "GetConfig Failed");
                 if (!string.IsNullOrEmpty(filePath))
                     log.AddProperty("FilePath", filePath);
                 log.AddProperty("ExceptionMessage", ex.Message);
                 LogController.Instance.AddLog(log);
-                Logger.Error(log);
+                Logger.LogError(log.ToString());
 
             }
             finally

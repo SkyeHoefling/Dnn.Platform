@@ -26,10 +26,13 @@ using Dnn.ExportImport.Components.Common;
 using Dnn.ExportImport.Components.Controllers;
 using Dnn.ExportImport.Components.Engines;
 using Dnn.ExportImport.Components.Models;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Scheduling;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.ExportImport.Components.Scheduler
 {
@@ -38,7 +41,7 @@ namespace Dnn.ExportImport.Components.Scheduler
     /// </summary>
     public class ExportImportScheduler : SchedulerClient
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ExportImportScheduler));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ExportImportScheduler>>();
 
         private const int EmergencyScheduleFrequency = 120;
         private const int DefaultScheduleFrequency = 1;
@@ -121,7 +124,7 @@ namespace Dnn.ExportImport.Components.Scheduler
 
                                 SchedulingController.PurgeScheduleHistory();
 
-                                Logger.Error("The Schduler item stopped because main thread stopped, set schedule into emergency mode so it will start after app restart.");
+                                Logger.LogError("The Schduler item stopped because main thread stopped, set schedule into emergency mode so it will start after app restart.");
                                 succeeded = false;
                             }
                             catch (Exception ex)
@@ -175,7 +178,7 @@ namespace Dnn.ExportImport.Components.Scheduler
                     ScheduleHistoryItem.AddLogNote(sb.ToString());
                     engine.AddLogsToDatabase(job.JobId, result.CompleteLog);
 
-                    Logger.Trace("Site Export/Import: Job Finished");
+                    Logger.LogTrace("Site Export/Import: Job Finished");
                 }
                 //SetLastSuccessfulIndexingDateTime(ScheduleHistoryItem.ScheduleID, ScheduleHistoryItem.StartDate);
             }

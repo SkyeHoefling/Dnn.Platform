@@ -67,3 +67,8 @@ using DotNetNuke.Application;
 [assembly: InternalsVisibleTo("DotNetNuke.Modules.Journal")] // Once Globals is refactored to Dependency Injection we should be able to remove this
 [assembly: InternalsVisibleTo("DotNetNuke.Modules.RazorHost")] // Once Globals is refactored to Dependency Injection we should be able to remove this
 [assembly: InternalsVisibleTo("DotNetNuke.Website")] // Once Globals is refactored to Dependency Injection we should be able to remove this
+[assembly: InternalsVisibleTo("Dnn.AuthServices.Jwt")] // Once Globals is refactored to Dependency Injection we should be able to remove this
+[assembly: InternalsVisibleTo("DotNetNuke.Providers.AspNetClientCapabilityProvider")] // Once Globals is refactored to Dependency Injection we should be able to remove this
+[assembly: InternalsVisibleTo("DotNetNuke.Web.Deprecated")] // Once Globals is refactored to Dependency Injection we should be able to remove this
+[assembly: InternalsVisibleTo("Dnn.EditBar.UI")] // Once Globals is refactored to Dependency Injection we should be able to remove this
+[assembly: InternalsVisibleTo("DotNetNuke.Modules.CoreMessaging")] // Once Globals is refactored to Dependency Injection we should be able to remove this

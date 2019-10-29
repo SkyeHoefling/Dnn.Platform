@@ -27,18 +27,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Social.Messaging.Internal;
 using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Web.Api;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     [DnnAuthorize]
     public class NotificationsServiceController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (NotificationsServiceController));
-        
+        private readonly ILogger Logger;
+
+        public NotificationsServiceController(ILogger<NotificationsServiceController> logger)
+        {
+            Logger = logger;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public HttpResponseMessage Dismiss(NotificationDTO postData)
@@ -56,7 +62,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

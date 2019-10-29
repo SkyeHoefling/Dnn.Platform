@@ -28,9 +28,11 @@ using System.Web.UI.HtmlControls;
 using DotNetNuke.Common;
 using DotNetNuke.Framework;
 using DotNetNuke.HttpModules.Config;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Analytics;
 using DotNetNuke.Services.Log.EventLog;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -43,7 +45,7 @@ namespace DotNetNuke.HttpModules.Analytics
     /// -----------------------------------------------------------------------------
     public class AnalyticsModule : IHttpModule
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AnalyticsModule));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AnalyticsModule>>();
 
         public string ModuleName
         {
@@ -89,11 +91,11 @@ namespace DotNetNuke.HttpModules.Analytics
             }
             catch (Exception ex)
             {
-                var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
+                var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
                 log.AddProperty("Analytics.AnalyticsModule", "OnPreRequestHandlerExecute");
                 log.AddProperty("ExceptionMessage", ex.Message);
                 LogController.Instance.AddLog(log);
-                Logger.Error(log);
+                Logger.LogError(log.ToString());
 
             }
         }
@@ -162,11 +164,11 @@ namespace DotNetNuke.HttpModules.Analytics
             }
             catch (Exception ex)
             {
-                var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
+                var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
                 log.AddProperty("Analytics.AnalyticsModule", "OnPagePreRender");
                 log.AddProperty("ExceptionMessage", ex.Message);
                 LogController.Instance.AddLog(log);
-                Logger.Error(ex);
+                Logger.LogError(ex);
 
             }
         }

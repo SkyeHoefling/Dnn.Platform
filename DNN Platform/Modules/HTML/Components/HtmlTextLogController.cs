@@ -44,7 +44,7 @@ namespace DotNetNuke.Modules.Html
 
         /// -----------------------------------------------------------------------------
         /// <summary>
-        ///   GetHtmlTextLog retrieves a collection of HtmlTextLogInfo objects for an Item
+        ///   GetHtmlTextLog retrieves a collection of HtmlTextLogInformation objects for an Item
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -52,7 +52,7 @@ namespace DotNetNuke.Modules.Html
         /// -----------------------------------------------------------------------------
         public ArrayList GetHtmlTextLog(int ItemID)
         {
-            return CBO.FillCollection(DataProvider.Instance().GetHtmlTextLog(ItemID), typeof (HtmlTextLogInfo));
+            return CBO.FillCollection(DataProvider.Instance().GetHtmlTextLog(ItemID), typeof (HtmlTextLogInformation));
         }
 
         /// -----------------------------------------------------------------------------
@@ -61,9 +61,9 @@ namespace DotNetNuke.Modules.Html
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <param name = "objHtmlTextLog">An HtmlTextLogInfo object</param>
+        /// <param name = "objHtmlTextLog">An HtmlTextLogInformation object</param>
         /// -----------------------------------------------------------------------------
-        public void AddHtmlTextLog(HtmlTextLogInfo objHtmlTextLog)
+        public void AddHtmlTextLog(HtmlTextLogInformation objHtmlTextLog)
         {
             DataProvider.Instance().AddHtmlTextLog(objHtmlTextLog.ItemID, objHtmlTextLog.StateID, objHtmlTextLog.Comment, objHtmlTextLog.Approved, UserController.Instance.GetCurrentUserInfo().UserID);
         }

@@ -358,7 +358,7 @@ namespace DotNetNuke.Modules.Admin.Security
 
         private void LogResult(string message)
         {
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogPortalID = PortalSettings.PortalId,
                 LogPortalName = PortalSettings.PortalName,

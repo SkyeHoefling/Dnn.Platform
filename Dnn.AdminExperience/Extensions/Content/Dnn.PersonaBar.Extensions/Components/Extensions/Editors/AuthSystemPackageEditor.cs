@@ -6,16 +6,17 @@ using DotNetNuke.Common;
 using DotNetNuke.Abstractions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Authentication;
 using DotNetNuke.Services.Authentication.OAuth;
 using DotNetNuke.Services.Installer.Packages;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Extensions.Components.Editors
 {
     public class AuthSystemPackageEditor : IPackageEditor
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(AuthSystemPackageEditor));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AuthSystemPackageEditor>>();
         private static readonly INavigationManager NavigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
         #region IPackageEditor Implementation
 
@@ -85,7 +86,7 @@ namespace Dnn.PersonaBar.Extensions.Components.Editors
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 errorMessage = ex.Message;
                 return false;
             }

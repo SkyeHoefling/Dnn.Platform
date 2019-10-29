@@ -25,19 +25,22 @@ using System.Linq;
 using Dnn.PersonaBar.Library.Containers;
 using Dnn.PersonaBar.Library.Permissions;
 using Dnn.PersonaBar.Library.Repository;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using Newtonsoft.Json;
 using MenuItem = Dnn.PersonaBar.Library.Model.MenuItem;
 using PersonaBarMenu = Dnn.PersonaBar.Library.Model.PersonaBarMenu;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Library.Controllers
 {
     public class PersonaBarController : ServiceLocator<IPersonaBarController, PersonaBarController>, IPersonaBarController
     {
-        private static readonly DnnLogger Logger = DnnLogger.GetClassLogger(typeof(PersonaBarController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PersonaBarController>>();
 
         private readonly IPersonaBarRepository _personaBarRepository;
 
@@ -80,7 +83,7 @@ namespace Dnn.PersonaBar.Library.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                     visible = false;
                 }
                 
@@ -147,7 +150,7 @@ namespace Dnn.PersonaBar.Library.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
             }
         }
 
@@ -162,7 +165,7 @@ namespace Dnn.PersonaBar.Library.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 settings = new Dictionary<string, object>();
             }
 
@@ -206,7 +209,7 @@ namespace Dnn.PersonaBar.Library.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return null;
             }
 

@@ -30,7 +30,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Modules.CoreMessaging.ViewModels;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Localization;
@@ -38,6 +38,7 @@ using DotNetNuke.Services.Social.Messaging;
 using DotNetNuke.Services.Social.Messaging.Internal;
 using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Web.Api;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Modules.CoreMessaging.Services
 {
@@ -46,7 +47,12 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
     [DnnAuthorize]
     public class MessagingServiceController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (MessagingServiceController));
+        private readonly ILogger Logger;
+        public MessagingServiceController(ILogger<MessagingServiceController> logger)
+        {
+            Logger = logger;
+        }
+
         #region Public Methods
 
         [HttpGet]
@@ -64,7 +70,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -83,7 +89,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -102,7 +108,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -123,7 +129,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -147,7 +153,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -163,7 +169,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -179,7 +185,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -195,7 +201,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -211,7 +217,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -227,7 +233,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -298,7 +304,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -313,7 +319,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -329,7 +335,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -345,7 +351,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -366,7 +372,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -382,7 +388,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

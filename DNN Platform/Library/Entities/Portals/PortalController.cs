@@ -369,7 +369,7 @@ namespace DotNetNuke.Entities.Portals
 
                     try
                     {
-                        var log = new LogInfo
+                        var log = new LogInformation
                                                     {
                                                         BypassBuffering = true,
                                                         LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()
@@ -779,7 +779,7 @@ namespace DotNetNuke.Entities.Portals
                     if (dicSettings.ContainsKey(key))
                     {
                         dicSettings[key] = dr.GetString(1);
-                        var log = new LogInfo { 
+                        var log = new LogInformation { 
                             LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString() 
                         };
                         log.AddProperty("Duplicate PortalSettings Key", key);

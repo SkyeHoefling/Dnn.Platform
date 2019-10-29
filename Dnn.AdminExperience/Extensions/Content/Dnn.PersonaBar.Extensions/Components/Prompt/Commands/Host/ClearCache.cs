@@ -2,8 +2,11 @@
 using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Prompt.Components.Commands.Host
 {
@@ -12,7 +15,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Host
     {
         public override string LocalResourceFile => Constants.LocalResourcesFile;
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ClearCache));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ClearCache>>();
 
         public override ConsoleResultModel Run()
         {
@@ -23,7 +26,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Host
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return new ConsoleErrorResultModel(LocalizeString("Prompt_ClearCache_Error"));
             }
             return new ConsoleResultModel(LocalizeString("Prompt_ClearCache_Success")) { MustReload = true };

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Modules.Html5;
 using DotNetNuke.UI.Modules;
 using DotNetNuke.Web.Razor;
 using System.Collections.Generic;
 using DotNetNuke.Web.Mvc;
+using Microsoft.Extensions.Logging;
 
 #if NET472
 using System.Web.UI;
@@ -31,14 +30,15 @@ namespace DotNetNuke.ModulePipeline
         : IModuleControlPipeline
 #endif
     {
-        private static readonly ILog TraceLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
+        private readonly ILogger _traceLogger;
         private Dictionary<string, IModuleControlFactory> _controlFactories;
         public ModuleControlPipeline(
             WebFormsModuleControlFactory webforms,
             Html5ModuleControlFactory html5,
             RazorModuleControlFactory razor3,
             MvcModuleControlFactory mvc,
-            ReflectedModuleControlFactory fallthrough)
+            ReflectedModuleControlFactory fallthrough,
+            ILoggerFactory loggerFactory)
         {
             _controlFactories = new Dictionary<string, IModuleControlFactory>(StringComparer.OrdinalIgnoreCase);
             _controlFactories.Add(".ascx", webforms);
@@ -48,6 +48,7 @@ namespace DotNetNuke.ModulePipeline
             _controlFactories.Add(".vbhtml", razor3);
             _controlFactories.Add(".mvc", mvc);
             _controlFactories.Add("default", fallthrough);
+            _traceLogger = loggerFactory.CreateLogger("DNN.Trace");
         }
 
 #if NET472
@@ -61,8 +62,8 @@ namespace DotNetNuke.ModulePipeline
 
         public Control LoadModuleControl(TemplateControl containerControl, ModuleInfo moduleConfiguration, string controlKey, string controlSrc)
         {
-            if (TraceLogger.IsDebugEnabled)
-                TraceLogger.Debug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (_traceLogger.IsEnabled(LogLevel.Debug))
+                _traceLogger.LogDebug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
             IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
@@ -86,15 +87,15 @@ namespace DotNetNuke.ModulePipeline
                 }
             }
 
-            if (TraceLogger.IsDebugEnabled)
-                TraceLogger.Debug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (_traceLogger.IsEnabled(LogLevel.Debug))
+                _traceLogger.LogDebug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             return control;
         }
 
         public Control LoadModuleControl(TemplateControl containerControl, ModuleInfo moduleConfiguration)
         {
-            if (TraceLogger.IsDebugEnabled)
-                TraceLogger.Debug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (_traceLogger.IsEnabled(LogLevel.Debug))
+                _traceLogger.LogDebug($"ModuleControlFactory.LoadModuleControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             Control control = null;
             IModuleControlFactory controlFactory = GetModuleControlFactory(moduleConfiguration.ModuleControl.ControlSrc);
 
@@ -117,15 +118,15 @@ namespace DotNetNuke.ModulePipeline
                 }
             }
 
-            if (TraceLogger.IsDebugEnabled)
-                TraceLogger.Debug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (_traceLogger.IsEnabled(LogLevel.Debug))
+                _traceLogger.LogDebug($"ModuleControlFactory.LoadModuleControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             return control;
         }
 
         public Control LoadSettingsControl(TemplateControl containerControl, ModuleInfo moduleConfiguration, string controlSrc)
         {
-            if (TraceLogger.IsDebugEnabled)
-                TraceLogger.Debug($"ModuleControlFactory.LoadSettingsControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (_traceLogger.IsEnabled(LogLevel.Debug))
+                _traceLogger.LogDebug($"ModuleControlFactory.LoadSettingsControl Start (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
 
             Control control = null;
             IModuleControlFactory controlFactory = GetModuleControlFactory(controlSrc);
@@ -153,8 +154,8 @@ namespace DotNetNuke.ModulePipeline
                 }
             }
 
-            if (TraceLogger.IsDebugEnabled)
-                TraceLogger.Debug($"ModuleControlFactory.LoadSettingsControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
+            if (_traceLogger.IsEnabled(LogLevel.Debug))
+                _traceLogger.LogDebug($"ModuleControlFactory.LoadSettingsControl End (TabId:{moduleConfiguration.TabID},ModuleId:{moduleConfiguration.ModuleID}): ModuleControlSource:{moduleConfiguration.ModuleControl.ControlSrc}");
             return control;
         }
 

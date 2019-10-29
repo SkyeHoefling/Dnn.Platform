@@ -27,19 +27,24 @@ using System.Globalization;
 using System.Net;
 using System.Web.Http;
 using System.Net.Http;
-using DotNetNuke.Common;
 using DotNetNuke.Entities.Icons;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     public class UserFileController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (UserFileController));
+        private readonly ILogger _logger;
         private readonly IFolderManager _folderManager = FolderManager.Instance;
+
+        public UserFileController(ILogger<UserFileController> logger)
+        {
+            _logger = logger;
+        }
 
         [DnnAuthorize]
         [HttpGet]
@@ -75,7 +80,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                _logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

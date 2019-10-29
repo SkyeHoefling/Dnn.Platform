@@ -10,16 +10,18 @@ using DotNetNuke.Data.PetaPoco;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Installer;
 using DotNetNuke.Common.Utilities;
 using ICSharpCode.SharpZipLib;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Extensions.Components
 {
     public class InstallController : ServiceLocator<IInstallController, InstallController>, IInstallController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(InstallController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<InstallController>>();
 
         protected override Func<IInstallController> GetFactory()
         {
@@ -212,7 +214,7 @@ namespace Dnn.PersonaBar.Extensions.Components
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
             }
         }
 
@@ -228,7 +230,7 @@ namespace Dnn.PersonaBar.Extensions.Components
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
             }
         }
 
@@ -266,7 +268,7 @@ namespace Dnn.PersonaBar.Extensions.Components
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                 }
 
             }

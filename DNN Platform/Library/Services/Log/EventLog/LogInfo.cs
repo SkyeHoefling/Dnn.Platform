@@ -31,11 +31,11 @@ using DotNetNuke.Services.Exceptions;
 namespace DotNetNuke.Services.Log.EventLog
 {
     [Serializable]
-    public class LogInfo
+    public class LogInformation
     {
 		#region Constructors
 
-        public LogInfo()
+        public LogInformation()
         {
             LogGUID = Guid.NewGuid().ToString();
             BypassBuffering = false;
@@ -48,7 +48,7 @@ namespace DotNetNuke.Services.Log.EventLog
 			Exception = new ExceptionInfo();
         }
 
-        public LogInfo(string content) : this()
+        public LogInformation(string content) : this()
         {
             Deserialize(content);
         }

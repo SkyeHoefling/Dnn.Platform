@@ -25,7 +25,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
 using System.Xml;
 
 using DotNetNuke.Common;
@@ -33,14 +32,15 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
-using DotNetNuke.Security.Roles.Internal;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 
 #endregion
@@ -49,7 +49,7 @@ namespace DotNetNuke.Web.UI
 {
     public class RibbonBarManager
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (RibbonBarManager));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<RibbonBarManager>>();
         public static TabInfo InitTabInfoObject()
         {
             return InitTabInfoObject(null, TabRelativeLocation.AFTER);
@@ -386,7 +386,7 @@ namespace DotNetNuke.Web.UI
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
 
                 if (ex.Message.StartsWith("Page Exists"))
                 {

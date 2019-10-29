@@ -33,7 +33,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Membership;
 using DotNetNuke.Framework;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Localization;
@@ -45,11 +45,15 @@ using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using DotNetNuke.Web.UI.WebControls;
 
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+
 #endregion
 
 namespace DotNetNuke.Modules.Admin.Users
 {
     using Host = DotNetNuke.Entities.Host.Host;
+    using Globals = DotNetNuke.Common.Globals;
 
     /// -----------------------------------------------------------------------------
     /// <summary>
@@ -59,7 +63,7 @@ namespace DotNetNuke.Modules.Admin.Users
     /// </remarks>
     public partial class Password : UserModuleBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Password));
+    	private readonly ILogger _logger = Globals.DependencyProvider.GetService<ILogger<Password>>();
         protected bool UseCaptcha
         {
             get
@@ -379,12 +383,12 @@ namespace DotNetNuke.Modules.Admin.Users
             }
             catch (ArgumentException exc)
             {
-                Logger.Error(exc);
+                _logger.LogError(exc);
                 OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.InvalidPasswordAnswer));
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                _logger.LogError(exc);
                 OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.PasswordResetFailed));
             }
         }
@@ -415,12 +419,12 @@ namespace DotNetNuke.Modules.Admin.Users
             }
             catch (ArgumentException exc)
             {
-                Logger.Error(exc);
+                _logger.LogError(exc);
                 OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.InvalidPasswordAnswer));
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                _logger.LogError(exc);
                 OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.PasswordResetFailed));
             }
         }
@@ -439,7 +443,7 @@ namespace DotNetNuke.Modules.Admin.Users
         {
             var portalSecurity = PortalSecurity.Instance;
 
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogPortalID = PortalSettings.PortalId,
                 LogPortalName = PortalSettings.PortalName,
@@ -533,7 +537,7 @@ namespace DotNetNuke.Modules.Admin.Users
                     catch (MembershipPasswordException exc)
                     {
                         //Password Answer missing
-                        Logger.Error(exc);
+                        _logger.LogError(exc);
 
                         OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.InvalidPasswordAnswer));
                     }
@@ -544,7 +548,7 @@ namespace DotNetNuke.Modules.Admin.Users
                     catch (Exception exc)
                     {
                         //Fail
-                        Logger.Error(exc);
+                        _logger.LogError(exc);
 
                         OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.PasswordResetFailed));
                     }
@@ -560,7 +564,7 @@ namespace DotNetNuke.Modules.Admin.Users
                     catch (MembershipPasswordException exc)
                     {
                         //Password Answer missing
-                        Logger.Error(exc);
+                        _logger.LogError(exc);
 
                         OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.InvalidPasswordAnswer));
                     }
@@ -571,7 +575,7 @@ namespace DotNetNuke.Modules.Admin.Users
                     catch (Exception exc)
                     {
                         //Fail
-                        Logger.Error(exc);
+                        _logger.LogError(exc);
 
                         OnPasswordUpdated(new PasswordUpdatedEventArgs(PasswordUpdateStatus.PasswordResetFailed));
                     }

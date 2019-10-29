@@ -25,20 +25,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Security;
+using DotNetNuke.Logging;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     [DnnAuthorize]
     public class ModuleServiceController : DnnApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ModuleServiceController));
+        private readonly ILogger Logger;
         public class MoveModuleDTO
         {
             public int ModuleId { get; set; }
@@ -52,6 +51,11 @@ namespace DotNetNuke.Web.InternalServices
             public int ModuleId { get; set; }
             public int TabId { get; set; }
             public bool SoftDelete { get; set; }
+        }
+
+        public ModuleServiceController(Logger<ModuleServiceController> logger)
+        {
+            Logger = logger;
         }
 
         [HttpGet]
@@ -86,7 +90,7 @@ namespace DotNetNuke.Web.InternalServices
             if (desktopModule == null)
             {
                 var message = string.Format("Cannot find module ID {0} (tab ID {1}, portal ID {2})", moduleId, tabId, portalId);
-                Logger.Error(message);
+                Logger.LogError(message);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, message);
             }
 

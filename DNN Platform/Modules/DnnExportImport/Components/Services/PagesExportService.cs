@@ -43,13 +43,15 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Tabs.TabVersions;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Localization;
 using Newtonsoft.Json;
 using Util = Dnn.ExportImport.Components.Common.Util;
 using InstallerUtil = DotNetNuke.Services.Installer.Util;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable SuggestBaseTypeForParameter
 
@@ -82,7 +84,7 @@ namespace Dnn.ExportImport.Components.Services
 
         private IList<int> _exportedModuleDefinitions = new List<int>();
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ExportImportEngine));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ExportImportEngine>>();
         private Dictionary<int, int> _partialImportedTabs = new Dictionary<int, int>();
         private Dictionary<int, bool> _searchedParentTabs = new Dictionary<int, bool>();
         private IList<ImportModuleMapping> _importContentList = new List<ImportModuleMapping>(); // map the exported module and local module.
@@ -735,7 +737,7 @@ namespace Dnn.ExportImport.Components.Services
                         PortalID = _exportImportJob.PortalId
                     };
 
-                    //Logger.Error($"Local Tab ID={local.TabID}, ModuleID={local.ModuleID}, ModuleDefID={local.ModuleDefID}");
+                    //Logger.LogError($"Local Tab ID={local.TabID}, ModuleID={local.ModuleID}, ModuleDefID={local.ModuleDefID}");
                     try
                     {
                         //this will create up to 2 records:  Module (if it is not already there) and TabModule
@@ -779,7 +781,7 @@ namespace Dnn.ExportImport.Components.Services
                     catch (Exception ex)
                     {
                         Result.AddLogEntry("EXCEPTION importing tab module, Module ID=" + local.ModuleID, ex.Message, ReportLevel.Error);
-                        Logger.Error(ex);
+                        Logger.LogError(ex);
                     }
                 }
                 else
@@ -950,7 +952,7 @@ namespace Dnn.ExportImport.Components.Services
                         catch (Exception ex)
                         {
                             Result.AddLogEntry("EXCEPTION importing tab module, Module ID=" + local.ModuleID, ex.Message, ReportLevel.Error);
-                            Logger.Error(ex);
+                            Logger.LogError(ex);
                         }
                     }
                 }
@@ -969,7 +971,7 @@ namespace Dnn.ExportImport.Components.Services
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(new Exception($"Delete TabModule Failed: {moduleId}", ex));
+                        Logger.LogError(new Exception($"Delete TabModule Failed: {moduleId}", ex));
                     }
                     Result.AddLogEntry("Removed existing tab module", "Module ID=" + moduleId);
                 }
@@ -1221,7 +1223,7 @@ namespace Dnn.ExportImport.Components.Services
                                                 catch (Exception ex)
                                                 {
                                                     Result.AddLogEntry("Error importing module data, Module ID=" + localModule.ModuleID, ex.Message, ReportLevel.Error);
-                                                    Logger.ErrorFormat("ModuleContent: (Module ID={0}). Error: {1}{2}{3}",
+                                                    Logger.LogError("ModuleContent: (Module ID={0}). Error: {1}{2}{3}",
                                                         localModule.ModuleID, ex, Environment.NewLine, moduleContent.XmlContent);
                                                 }
                                             }
@@ -1240,7 +1242,7 @@ namespace Dnn.ExportImport.Components.Services
                     catch (Exception ex)
                     {
                         Result.AddLogEntry("Error cerating business class type", desktopModuleInfo.BusinessControllerClass, ReportLevel.Error);
-                        Logger.Error("Error cerating business class type. " + ex);
+                        Logger.LogError("Error cerating business class type. " + ex);
                     }
                 }
             }
@@ -1679,7 +1681,7 @@ namespace Dnn.ExportImport.Components.Services
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex);
                         return 0;
                     }
 
@@ -1750,7 +1752,7 @@ namespace Dnn.ExportImport.Components.Services
                     catch (Exception ex)
                     {
                         Result.AddLogEntry("Error cerating business class type", desktopModuleInfo.BusinessControllerClass, ReportLevel.Error);
-                        Logger.Error("Error cerating business class type. " + ex);
+                        Logger.LogError("Error cerating business class type. " + ex);
                     }
                 }
             }

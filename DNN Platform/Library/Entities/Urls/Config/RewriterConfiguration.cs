@@ -96,7 +96,7 @@ namespace DotNetNuke.Entities.Urls.Config
             catch (Exception ex)
             {
 				//log it
-                var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
+                var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
                 log.AddProperty("UrlRewriter.RewriterConfiguration", "GetConfig Failed");
                 log.AddProperty("FilePath", filePath);
                 log.AddProperty("ExceptionMessage", ex.Message);

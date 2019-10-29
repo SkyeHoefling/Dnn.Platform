@@ -43,7 +43,7 @@ using DotNetNuke.Common.Utils;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.FileSystem;
@@ -53,13 +53,14 @@ using DotNetNuke.Web.Api.Internal;
 using ContentDisposition = System.Net.Mime.ContentDisposition;
 using FileInfo = DotNetNuke.Services.FileSystem.FileInfo;
 using System.Web;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     [DnnAuthorize]
     public class FileUploadController : DnnApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(FileUploadController));
+        private static ILogger Logger;
         private static readonly Regex UserFolderEx = new Regex(@"users/\d+/\d+/(\d+)/", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         public class FolderItemDTO
@@ -73,6 +74,11 @@ namespace DotNetNuke.Web.InternalServices
         {
             public string FileId { get; set; }
             public string FilePath { get; set; }
+        }
+
+        public FileUploadController(ILogger<FileUploadController> logger)
+        {
+            Logger = logger;
         }
 
         [HttpPost]
@@ -309,7 +315,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 errorMessage = ex.Message;
                 return savedFileDto;
             }
@@ -488,7 +494,7 @@ namespace DotNetNuke.Web.InternalServices
                         }
                         catch (ArgumentException exc)
                         {
-                            Logger.Warn("Unable to get image dimensions for image file", exc);
+                            Logger.LogWarning("Unable to get image dimensions for image file", exc);
                             size = new Size(32, 32);
                         }
                     }
@@ -517,7 +523,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (Exception exe)
             {
-                Logger.Error(exe);
+                Logger.LogError(exe);
                 result.Message = exe.Message;
                 return result;
             }

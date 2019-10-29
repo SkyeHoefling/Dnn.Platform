@@ -32,13 +32,14 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem.Internal;
 using DotNetNuke.Services.Installer;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.Modules;
 using DotNetNuke.UI.Skins.Controls;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -47,7 +48,7 @@ namespace DotNetNuke.Modules.RazorHost
     [Obsolete("Deprecated in 9.3.2, will be removed in 11.0.0, use Razor Pages instead")]
     public partial class CreateModule : ModuleUserControlBase
     {
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CreateModule));
+		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<CreateModule>>();
         private readonly INavigationManager _navigationManager;
 
         private string razorScriptFileFormatString = "~/DesktopModules/RazorModules/RazorHost/Scripts/{0}";
@@ -157,7 +158,7 @@ namespace DotNetNuke.Modules.RazorHost
 	        }
 	        catch (Exception ex)
 	        {
-				Logger.Error(ex);
+				Logger.LogError(ex);
 	        }
 
 

@@ -36,22 +36,26 @@ using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Membership;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Mail;
 using DotNetNuke.Web.Api;
 using System.Collections.Generic;
-using System.IO;
 using DotNetNuke.Entities.Portals;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Users.Services
 {
     [MenuPermission(MenuName = "Dnn.Users")]
     public class UsersController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(UsersController));
+        private readonly ILogger Logger;
+        public UsersController(ILogger<UsersController> logger)
+        {
+            Logger = logger;
+        }
 
         #region Users API
 
@@ -88,7 +92,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -133,7 +137,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -148,7 +152,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -183,7 +187,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -209,7 +213,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -236,7 +240,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -277,12 +281,12 @@ namespace Dnn.PersonaBar.Users.Services
                     }
                     catch (ArgumentException exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc);
                         errorMessage = Localization.GetString("InvalidPasswordAnswer", Components.Constants.LocalResourcesFile);
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc);
                         errorMessage = Localization.GetString("PasswordResetFailed", Components.Constants.LocalResourcesFile);
                     }
                 }
@@ -291,7 +295,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -318,7 +322,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -343,7 +347,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -367,7 +371,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -411,7 +415,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -438,7 +442,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -462,13 +466,13 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (SqlException ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
                     Localization.GetString("UsernameNotUnique", Components.Constants.LocalResourcesFile));
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -496,7 +500,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -536,7 +540,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -559,7 +563,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -585,7 +589,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -610,7 +614,7 @@ namespace Dnn.PersonaBar.Users.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
         }

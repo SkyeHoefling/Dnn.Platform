@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using DotNetNuke.Common;
 using DotNetNuke.Abstractions;
 using DotNetNuke.Common.Utilities;
@@ -19,7 +20,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 
@@ -30,7 +31,7 @@ namespace DotNetNuke.UI.Skins.Controls
     public partial class Toast : SkinObjectBase
     {
         private readonly INavigationManager _navigationManager;
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Toast));
+        private readonly ILogger _logger;
         private static readonly string ToastCacheKey = "DNN_Toast_Config";
 
         private const string MyFileName = "Toast.ascx";
@@ -42,6 +43,7 @@ namespace DotNetNuke.UI.Skins.Controls
         public Toast()
         {
             _navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = Globals.DependencyProvider.GetService<ILogger<Toast>>();
         }
 
         public bool IsOnline()
@@ -192,7 +194,7 @@ namespace DotNetNuke.UI.Skins.Controls
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                _logger.LogError(ex);
             }
         }
     }

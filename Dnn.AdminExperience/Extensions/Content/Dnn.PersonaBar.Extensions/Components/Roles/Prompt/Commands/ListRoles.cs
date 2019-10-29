@@ -5,9 +5,12 @@ using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
 using Dnn.PersonaBar.Roles.Components.Prompt.Models;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
 {
@@ -16,7 +19,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
     {
         public override string LocalResourceFile => Constants.LocalResourcesFile;
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ListRoles));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ListRoles>>();
 
         [FlagParameter("page", "Prompt_ListRoles_FlagPage", "Integer", "1")]
         private const string FlagPage = "page";
@@ -62,7 +65,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return new ConsoleErrorResultModel(LocalizeString("Prompt_ListRolesFailed"));
             }
         }

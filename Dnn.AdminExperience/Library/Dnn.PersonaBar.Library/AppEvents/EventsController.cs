@@ -24,17 +24,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Dnn.PersonaBar.Library.AppEvents.Attributes;
-using Dnn.PersonaBar.Library.Common;
+using DotNetNuke.Common;
 using DotNetNuke.Collections;
 using DotNetNuke.Framework;
 using DotNetNuke.Framework.Reflections;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Library.AppEvents
 {
     public class EventsController : ServiceLocator<IEventsController, EventsController>, IEventsController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (EventsController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<EventsController>>();
 
         private static readonly object LockThis = new object();
         private static bool _isInitialized;
@@ -70,7 +72,7 @@ namespace Dnn.PersonaBar.Library.AppEvents
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("{0}.ApplicationStart threw an exception.  {1}\r\n{2}",
+                    Logger.LogError("{0}.ApplicationStart threw an exception.  {1}\r\n{2}",
                         instance.GetType().FullName, e.Message, e.StackTrace);
                 }
             });
@@ -86,7 +88,7 @@ namespace Dnn.PersonaBar.Library.AppEvents
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("{0}.ApplicationEnd threw an exception.  {1}\r\n{2}",
+                    Logger.LogError("{0}.ApplicationEnd threw an exception.  {1}\r\n{2}",
                         instance.GetType().FullName, e.Message, e.StackTrace);
                 }
             });
@@ -109,7 +111,7 @@ namespace Dnn.PersonaBar.Library.AppEvents
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("Unable to create {0} while calling Application start implementors.  {1}",
+                    Logger.LogError("Unable to create {0} while calling Application start implementors.  {1}",
                                        type.FullName, e.Message);
                     appEventHandler = null;
                 }
@@ -149,7 +151,7 @@ namespace Dnn.PersonaBar.Library.AppEvents
 
             if (!matched)
             {
-                Logger.InfoFormat("Type \"{0}\"'s version ({1}) doesn't match current version({2}) so ignored", 
+                Logger.LogInformation("Type \"{0}\"'s version ({1}) doesn't match current version({2}) so ignored", 
                     t.FullName, typeVersion, currentVersion);
             }
 

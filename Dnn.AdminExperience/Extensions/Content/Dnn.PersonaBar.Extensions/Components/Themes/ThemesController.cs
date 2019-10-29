@@ -31,16 +31,18 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.Skins;
 using Image = System.Drawing.Image;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Themes.Components
 {
     public class ThemesController : ServiceLocator<IThemesController, ThemesController>, IThemesController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ThemesController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ThemesController>>();
 
         internal static readonly IList<string> ImageExtensions = new List<string>() {".jpg", ".png", ".jpeg"};
         internal static readonly IList<string> DefaultLayoutNames = new List<string>() {"Default", "2-Col", "Home", "Index", "Main"};
@@ -490,7 +492,7 @@ namespace Dnn.PersonaBar.Themes.Components
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                 }
             }
 
@@ -629,7 +631,7 @@ namespace Dnn.PersonaBar.Themes.Components
                         }
                         catch (Exception ex) //problem creating thumbnail
                         {
-                            Logger.Error(ex);
+                            Logger.LogError(ex);
                         }
                     }
                 }

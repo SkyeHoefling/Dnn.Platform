@@ -27,6 +27,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using DotNetNuke.Common;
 using DotNetNuke.Abstractions;
@@ -34,7 +35,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
@@ -61,10 +62,11 @@ namespace DotNetNuke.Modules.Admin.FileManager
     /// -----------------------------------------------------------------------------
     public partial class WebUpload : PortalModuleBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (WebUpload));
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
         public WebUpload()
         {
+            _logger = DependencyProvider.GetService<ILogger<WebUpload>>();
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
         }
 		#region "Members"
@@ -348,22 +350,22 @@ namespace DotNetNuke.Modules.Admin.FileManager
                             }
                             catch (PermissionsNotMetException exc)
                             {
-                                Logger.Warn(exc);
+                                _logger.LogWarning(exc);
                                 strMessage += "<br />" + string.Format(Localization.GetString("InsufficientFolderPermission"), ddlFolders.SelectedItemValueAsInt);
                             }
                             catch (NoSpaceAvailableException exc)
                             {
-                                Logger.Warn(exc);
+                                _logger.LogWarning(exc);
                                 strMessage += "<br />" + string.Format(Localization.GetString("DiskSpaceExceeded"), strFileName);
                             }
                             catch (InvalidFileExtensionException exc)
                             {
-                                Logger.Warn(exc);
+                                _logger.LogWarning(exc);
                                 strMessage += "<br />" + string.Format(Localization.GetString("RestrictedFileType"), strFileName, Host.AllowedExtensionWhitelist.ToDisplayString());
                             }
                             catch (Exception exc)
                             {
-                                Logger.Error(exc);
+                                _logger.LogError(exc);
                                 strMessage += "<br />" + string.Format(Localization.GetString("SaveFileError"), strFileName);
                             }
                             break;

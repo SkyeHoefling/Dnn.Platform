@@ -30,7 +30,8 @@ using Dnn.PersonaBar.Library.Attributes;
 using DotNetNuke.Application;
 using DotNetNuke.Framework;
 using DotNetNuke.Framework.Providers;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 
 namespace Dnn.PersonaBar.Servers.Services
@@ -38,7 +39,11 @@ namespace Dnn.PersonaBar.Servers.Services
     [MenuPermission(Scope = ServiceScope.Admin)]
     public class SystemInfoApplicationAdminController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SystemInfoApplicationAdminController));
+        private readonly ILogger Logger;
+        public SystemInfoApplicationAdminController(ILogger<SystemInfoApplicationAdminController> logger)
+        {
+            Logger = logger;
+        }
 
         [HttpGet]
         public HttpResponseMessage GetApplicationInfo()
@@ -64,7 +69,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

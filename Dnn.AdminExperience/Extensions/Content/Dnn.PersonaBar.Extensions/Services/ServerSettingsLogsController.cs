@@ -30,15 +30,21 @@ using Dnn.PersonaBar.Library.Attributes;
 using Dnn.PersonaBar.Servers.Components.Log;
 using DotNetNuke.Common;
 using DotNetNuke.Data;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Servers.Services
 {
     [MenuPermission(Scope = ServiceScope.Host)]
     public class ServerSettingsLogsController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ServerSettingsLogsController));
+        private readonly ILogger Logger;
         private readonly LogController _logController = new LogController();
+
+        public ServerSettingsLogsController(ILogger<ServerSettingsLogsController> logger)
+        {
+            Logger = logger;
+        }
 
         [HttpGet]
         public HttpResponseMessage GetLogs()
@@ -59,7 +65,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -85,7 +91,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -119,7 +125,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

@@ -8,16 +8,18 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using Dnn.ExportImport.Dto.Pages;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Installer;
 using DotNetNuke.Services.Installer.Packages;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
 namespace Dnn.ExportImport.Components.Services
 {
     public class PackagesExportService : BasePortableService
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(PackagesExportService));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PackagesExportService>>();
 
         private static readonly Regex ExtensionPackageFilesRegex = new Regex(@"^(.+?)_(.+?)_(\d+\.\d+\.\d+).resources$", RegexOptions.Compiled);
 
@@ -203,7 +205,7 @@ namespace Dnn.ExportImport.Components.Services
                             {
                                 Result.AddLogEntry("Import Package error",
                                     $"{exportPackage.PackageName} : {exportPackage.Version} - {ex.Message}");
-                                Logger.Error(ex);
+                                Logger.LogError(ex);
                             }
                         }
                         CheckPoint.Stage++;
@@ -257,7 +259,7 @@ namespace Dnn.ExportImport.Components.Services
                 catch (Exception ex)
                 {
                     Result.AddLogEntry("Import Package error", $"{filePath}. ERROR: {ex.Message}");
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                 }
             }
         }

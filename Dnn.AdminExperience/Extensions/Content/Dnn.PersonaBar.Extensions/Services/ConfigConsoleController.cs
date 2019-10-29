@@ -27,16 +27,22 @@ using System.Web.Http;
 using Dnn.PersonaBar.ConfigConsole.Services.Dto;
 using Dnn.PersonaBar.Library;
 using Dnn.PersonaBar.Library.Attributes;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Web.Api;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.ConfigConsole.Services
 {
     [MenuPermission(Scope = ServiceScope.Host)]
     public class ConfigConsoleController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ConfigConsoleController));
+        private readonly ILogger Logger;
         private Components.ConfigConsoleController _controller = new Components.ConfigConsoleController();
+
+        public ConfigConsoleController(ILogger<ConfigConsoleController> logger)
+        {
+            Logger = logger;
+        }
 
         /// GET: api/ConfigConsole/GetConfigFilesList
         /// <summary>
@@ -62,7 +68,7 @@ namespace Dnn.PersonaBar.ConfigConsole.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -94,7 +100,7 @@ namespace Dnn.PersonaBar.ConfigConsole.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -120,7 +126,7 @@ namespace Dnn.PersonaBar.ConfigConsole.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -142,7 +148,7 @@ namespace Dnn.PersonaBar.ConfigConsole.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

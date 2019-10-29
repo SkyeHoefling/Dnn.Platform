@@ -867,7 +867,7 @@ namespace DotNetNuke.Services.FileSystem
             }
 
             //log the folder moved event.
-            var log = new LogInfo();
+            var log = new LogInformation();
             log.AddProperty("Old Folder Path", currentFolderPath);
             log.AddProperty("New Folder Path", newFolderPath);
             log.AddProperty("Home Directory", folder.PortalID == Null.NullInteger ? Globals.HostPath : PortalSettings.Current.HomeDirectory);

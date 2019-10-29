@@ -4,17 +4,20 @@ using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
 using Dnn.PersonaBar.TaskScheduler.Components.Prompt.Models;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Scheduling;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.TaskScheduler.Components.Prompt.Commands
 {
     [ConsoleCommand("get-task", Constants.SchedulerCategory, "Prompt_GetTask_Description")]
     public class GetTask : ConsoleCommandBase
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(GetTask));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<GetTask>>();
 
         [FlagParameter("id", "Prompt_GetTask_FlagId", "Integer", true)]
         private const string FlagId = "id";
@@ -39,7 +42,7 @@ namespace Dnn.PersonaBar.TaskScheduler.Components.Prompt.Commands
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return new ConsoleErrorResultModel(LocalizeString("Prompt_FetchTaskFailed"));
             }
         }

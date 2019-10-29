@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Localization;
 using Dnn.PersonaBar.Prompt.Common;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Prompt.Components
 {
     [Obsolete("9.2.1 has been moved to Dnn.PersonaBar.Library.Controllers because of multiple dependency", false)]
     public class ModulesController : ServiceLocator<IModulesController, ModulesController>, IModulesController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ModulesController));        
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ModulesController>>();        
 
         protected override Func<IModulesController> GetFactory()
         {
@@ -132,7 +135,7 @@ namespace Dnn.PersonaBar.Prompt.Components
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                     message = new KeyValuePair<HttpStatusCode, string>(HttpStatusCode.InternalServerError, Localization.GetString(moveBahaviour ? "Prompt_ErrorWhileMoving" : "Prompt_ErrorWhileCopying"));
                 }
                 // get the new module
@@ -158,7 +161,7 @@ namespace Dnn.PersonaBar.Prompt.Components
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex);
                         message = new KeyValuePair<HttpStatusCode, string>(HttpStatusCode.InternalServerError, string.Format(Localization.GetString("Prompt_FailedtoDeleteModule", Constants.LocalResourcesFile), moduleId));
                     }             
             }           

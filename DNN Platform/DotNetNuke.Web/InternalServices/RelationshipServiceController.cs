@@ -27,18 +27,23 @@ using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Social;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Social.Messaging.Internal;
 using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Web.Api;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     [DnnAuthorize]
     public class RelationshipServiceController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (RelationshipServiceController));
+        private readonly ILogger Logger;
+        public RelationshipServiceController(ILogger<RelationshipServiceController> logger)
+        {
+            Logger = logger;
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,7 +72,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
             }
             
             if(success)
@@ -115,7 +120,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (UserRelationshipExistsException exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 var response = new
                 {
                     Message = Localization.GetExceptionMessage("AlreadyFollowingUser",
@@ -125,7 +130,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
 

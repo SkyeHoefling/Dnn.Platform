@@ -29,9 +29,12 @@ using System.Web.UI.WebControls;
 
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.WebControls;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 using Telerik.Web.UI;
 
@@ -56,7 +59,7 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
 	[ToolboxData("<{0}:DateTimeEditControl runat=server></{0}:DateTimeEditControl>")]
 	public class DateTimeEditControl : EditControl
 	{
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DateTimeEditControl));
+		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DateTimeEditControl>>();
 		private DnnDateTimePicker _dateControl;
 
 		#region "Protected Properties"
@@ -79,7 +82,7 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
 				}
 				catch (Exception exc)
 				{
-					Logger.Error(exc);
+					Logger.LogError(exc);
 
 				}
 				return dteValue;
@@ -152,7 +155,7 @@ namespace DotNetNuke.Web.UI.WebControls.PropertyEditorControls
 				}
 				catch (Exception exc)
 				{
-					Logger.Error(exc);
+					Logger.LogError(exc);
 
 				}
 				return dteValue;

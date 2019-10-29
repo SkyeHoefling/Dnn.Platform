@@ -25,12 +25,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Modules.DigitalAssets.Components.Controllers;
 using DotNetNuke.Modules.DigitalAssets.Services.Models;
 using DotNetNuke.Security;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Web.Api;
+
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Modules.DigitalAssets.Services
 {
@@ -39,10 +40,11 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
     [DamExceptionFilter]
     public class ContentServiceController : DnnApiController
     {
-        protected static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ContentServiceController));
+        protected readonly ILogger Logger;
 
-        public ContentServiceController()
+        public ContentServiceController(ILogger<ContentServiceController> logger)
         {
+            Logger = logger;
             var f = new Factory();
             DigitalAssetsController = f.DigitalAssetsController;
         }

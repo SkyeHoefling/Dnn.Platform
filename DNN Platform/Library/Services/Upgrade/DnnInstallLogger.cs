@@ -54,7 +54,7 @@ namespace DotNetNuke.Services.Upgrade
 			LogInstaller("[ERROR]", message.ToString(CultureInfo.InvariantCulture) + " : " + exception);
 		}
 
-		public static void InstallLogInfo(object message)
+		public static void InstallLogInformation(object message)
 		{
 			LogInstaller("[INFO]", message.ToString());
 		}

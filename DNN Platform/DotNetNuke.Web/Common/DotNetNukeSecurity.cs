@@ -39,7 +39,7 @@ namespace DotNetNuke.Web.Common.Internal
 {
     internal static class DotNetNukeSecurity
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DotNetNukeSecurity));
+        private static readonly ILog Logger = Globals.DependencyProvider.GetService<ILogger<DotNetNukeSecurity>>();
         private static FileSystemWatcher _fileWatcher;
         private static DateTime _lastRead;
         private static Globals.UpgradeStatus _appStatus = Globals.UpgradeStatus.None;
@@ -81,7 +81,7 @@ namespace DotNetNuke.Web.Common.Internal
                         }
                         catch (Exception e)
                         {
-                            Logger.Error(e);
+                            Logger.LogError(e);
                         }
                     }
                 }
@@ -155,7 +155,7 @@ namespace DotNetNuke.Web.Common.Internal
 
         private static void LogException(Exception ex)
         {
-            Logger.Error("Watcher Activity Error: " + ex?.Message);
+            Logger.LogError("Watcher Activity Error: " + ex?.Message);
         }
 
         private static void CheckFile(string path)
@@ -240,7 +240,7 @@ namespace DotNetNuke.Web.Common.Internal
         {
             try
             {
-                var log = new LogInfo
+                var log = new LogInformation
                 {
                     LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString(),
                 };

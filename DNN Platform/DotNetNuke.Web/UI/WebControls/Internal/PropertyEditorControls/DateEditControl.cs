@@ -25,9 +25,12 @@ using System.Collections.Specialized;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Web.UI;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.UI.WebControls;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -45,7 +48,7 @@ namespace DotNetNuke.Web.UI.WebControls.Internal.PropertyEditorControls
     [ToolboxData("<{0}:DateEditControl runat=server></{0}:DateEditControl>")]
     public class DateEditControl : EditControl
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DateEditControl));
+    	private readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DateEditControl>>();
 		private DnnDatePicker _dateControl;
 
 		#region Protected Properties
@@ -68,7 +71,7 @@ namespace DotNetNuke.Web.UI.WebControls.Internal.PropertyEditorControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc);
 
                 }
                 return dteValue;
@@ -141,7 +144,7 @@ namespace DotNetNuke.Web.UI.WebControls.Internal.PropertyEditorControls
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc);
 
                 }
                 return dteValue;

@@ -81,7 +81,7 @@ namespace DotNetNuke.Entities.Modules
 						//call the IUpgradeable interface for the module/version
                         string Results = ((IUpgradeable) controller).UpgradeModule(Version);
                         //log the upgrade results
-                        var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.MODULE_UPDATED.ToString()};
+                        var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.MODULE_UPDATED.ToString()};
                         log.AddProperty("Module Upgraded", BusinessControllerClass);
                         log.AddProperty("Version", Version);
                         if (!string.IsNullOrEmpty(Results))

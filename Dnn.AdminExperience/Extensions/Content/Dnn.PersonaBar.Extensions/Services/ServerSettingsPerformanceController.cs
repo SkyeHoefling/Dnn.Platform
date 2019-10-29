@@ -35,10 +35,11 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Client;
 using static System.Boolean;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Servers.Services
 {
@@ -46,8 +47,13 @@ namespace Dnn.PersonaBar.Servers.Services
     public class ServerSettingsPerformanceController : PersonaBarApiController
     {
         private const string UseSSLKey = "UseSSLForCacheSync";
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ServerSettingsPerformanceController));
+        private readonly ILogger Logger;
         private readonly PerformanceController _performanceController = new PerformanceController();
+
+        public ServerSettingsPerformanceController(ILogger<ServerSettingsPerformanceController> logger)
+        {
+            Logger = logger;
+        }
 
         /// GET: api/Servers/GetPerformanceSettings
         /// <summary>
@@ -97,7 +103,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -138,7 +144,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -163,7 +169,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
 }
@@ -222,7 +228,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

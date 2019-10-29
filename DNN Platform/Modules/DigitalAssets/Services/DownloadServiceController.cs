@@ -19,16 +19,16 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
 
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Modules.DigitalAssets.Components.Controllers;
 using DotNetNuke.Security;
 using DotNetNuke.Web.Api;
+
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Modules.DigitalAssets.Services
 {
@@ -37,10 +37,11 @@ namespace DotNetNuke.Modules.DigitalAssets.Services
     [DamExceptionFilter]
     public class DownloadServiceController : DnnApiController
     {
-        protected static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ContentServiceController));
+        protected readonly ILogger Logger;
 
-        public DownloadServiceController()
+        public DownloadServiceController(ILogger<DownloadServiceController> logger)
         {
+            Logger = logger;
             var f = new Factory();
             DigitalAssetsController = f.DigitalAssetsController;
         }

@@ -29,10 +29,13 @@ using DotNetNuke.Common.Lists;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Security.Roles.Internal;
 using DotNetNuke.Services.Exceptions;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -40,7 +43,7 @@ namespace DotNetNuke.Modules.Admin.Sales
 {
     public partial class PayPalSubscription : PageBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PayPalSubscription));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PayPalSubscription>>();
         private void InitializeComponent()
         {
         }
@@ -174,7 +177,7 @@ namespace DotNetNuke.Modules.Admin.Sales
 						catch (Exception ex)
 						{
 							//issue getting user address
-							Logger.Error(ex);
+							Logger.LogError(ex);
 						}
 						
                         //Return URL

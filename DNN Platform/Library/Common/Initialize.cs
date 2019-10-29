@@ -293,7 +293,7 @@ namespace DotNetNuke.Common
         /// -----------------------------------------------------------------------------
         public static void LogStart()
         {
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 BypassBuffering = true,
                 LogTypeKey = EventLogController.EventLogType.APPLICATION_START.ToString()
@@ -360,7 +360,7 @@ namespace DotNetNuke.Common
                         shutdownDetail = "Shutdown reason: " + shutdownReason;
                         break;
                 }
-                var log = new LogInfo
+                var log = new LogInformation
                 {
                     BypassBuffering = true,
                     LogTypeKey = EventLogController.EventLogType.APPLICATION_SHUTTING_DOWN.ToString()

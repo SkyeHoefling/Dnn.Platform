@@ -164,7 +164,7 @@ namespace Dnn.PersonaBar.SqlConsole.Services
             var props = new LogProperties { new LogDetailInfo("User", UserInfo.Username), new LogDetailInfo("SQL Query", query) };
 
             //Add the event log with host portal id.
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogUserID = UserInfo.UserID,
                 LogTypeKey = EventLogController.EventLogType.HOST_SQL_EXECUTED.ToString(),

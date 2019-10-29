@@ -9,14 +9,16 @@ using System.IO;
 using System.Linq;
 using Dnn.ExportImport.Dto.Pages;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.UI.Skins;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.ExportImport.Components.Services
 {
     public class ThemesExportService : BasePortableService
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ThemesExportService));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ThemesExportService>>();
 
         private ExportImportJob _exportImportJob;
         private PortalSettings _portalSettings;
@@ -159,7 +161,7 @@ namespace Dnn.ExportImport.Components.Services
                             catch (Exception ex)
                             {
                                 Result.AddLogEntry("Import Theme error", file);
-                                Logger.Error(ex);
+                                Logger.LogError(ex);
                             }
                         }
                         CheckPoint.Stage++;

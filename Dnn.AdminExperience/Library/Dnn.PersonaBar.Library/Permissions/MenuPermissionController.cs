@@ -30,10 +30,12 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Roles;
 using PermissionInfo = Dnn.PersonaBar.Library.Model.PermissionInfo;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 #endregion
 
 namespace Dnn.PersonaBar.Library.Permissions
@@ -42,7 +44,7 @@ namespace Dnn.PersonaBar.Library.Permissions
     {
         #region Private Members
 
-        private static readonly DnnLogger Logger = DnnLogger.GetClassLogger(typeof(MenuPermissionController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<MenuPermissionController>>();
 
         private static readonly IDataService DataService = new DataService();
         private static readonly object ThreadLocker = new object();
@@ -95,7 +97,7 @@ namespace Dnn.PersonaBar.Library.Permissions
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error(ex);
+                            Logger.LogError(ex);
                         }
                         finally
                         {
@@ -262,7 +264,7 @@ namespace Dnn.PersonaBar.Library.Permissions
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
             }
 
         }
@@ -302,7 +304,7 @@ namespace Dnn.PersonaBar.Library.Permissions
                         }
                         else if (role != null)
                         {
-                            Logger.Error($"Role \"{roleName}\" in portal \"{portalId}\" doesn't marked as system role, will ignore add this default permission to {menuItem.Identifier}.");
+                            Logger.LogError($"Role \"{roleName}\" in portal \"{portalId}\" doesn't marked as system role, will ignore add this default permission to {menuItem.Identifier}.");
                         }
                         break;
                 }
@@ -336,7 +338,7 @@ namespace Dnn.PersonaBar.Library.Permissions
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
             }
         }
 

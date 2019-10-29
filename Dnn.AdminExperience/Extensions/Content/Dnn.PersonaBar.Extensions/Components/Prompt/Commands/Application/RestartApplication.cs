@@ -2,21 +2,24 @@
 using Dnn.PersonaBar.Library.Prompt;
 using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Log.EventLog;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Prompt.Components.Commands.Application
 {
     [ConsoleCommand("restart-application", Constants.HostCategory, "Prompt_RestartApplication_Description")]
     public class RestartApplication : ConsoleCommandBase
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(RestartApplication));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<RestartApplication>>();
 
         public override ConsoleResultModel Run()
         {
             try
             {
-                var log = new LogInfo
+                var log = new LogInformation
                 {
                     BypassBuffering = true,
                     LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()
@@ -27,7 +30,7 @@ namespace Dnn.PersonaBar.Prompt.Components.Commands.Application
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return new ConsoleErrorResultModel(LocalizeString("Prompt_UserRestart_Error"));
             }
             return new ConsoleResultModel(LocalizeString("Prompt_UserRestart_Success")) { MustReload = true };

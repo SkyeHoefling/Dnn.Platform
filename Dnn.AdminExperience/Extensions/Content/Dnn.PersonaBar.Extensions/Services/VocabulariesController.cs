@@ -31,20 +31,26 @@ using Dnn.PersonaBar.Vocabularies.Exceptions;
 using Dnn.PersonaBar.Vocabularies.Services.Dto;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
 using Constants = Dnn.PersonaBar.Vocabularies.Components.Constants;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Vocabularies.Services
 {
     [MenuPermission(MenuName = Constants.MenuIdentifier)]
     public class VocabulariesController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(VocabulariesController));
+        private readonly ILogger Logger;
         private Components.VocabulariesController _controller = new Components.VocabulariesController();
         private static string LocalResourcesFile => Path.Combine(Library.Constants.PersonaBarRelativePath, "Modules/Dnn.Vocabularies/App_LocalResources/Vocabularies.resx");
         private const string AuthFailureMessage = "Authorization has been denied for this request.";
+
+        public VocabulariesController(ILogger<VocabulariesController> logger)
+        {
+            Logger = logger;
+        }
 
         /// GET: api/Vocabularies/GetVocabularies
         /// <summary>
@@ -80,7 +86,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }
@@ -113,7 +119,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }
@@ -150,7 +156,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }
@@ -177,7 +183,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }
@@ -212,7 +218,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }
@@ -242,7 +248,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }
@@ -278,7 +284,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -315,7 +321,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }
@@ -343,7 +349,7 @@ namespace Dnn.PersonaBar.Vocabularies.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc.Message);
             }
         }

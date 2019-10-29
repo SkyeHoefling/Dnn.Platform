@@ -26,14 +26,19 @@ using System.Web.Http;
 using Dnn.PersonaBar.Library;
 using Dnn.PersonaBar.Library.Attributes;
 using DotNetNuke.Application;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Licensing.Services
 {
     [MenuPermission(Scope = ServiceScope.Host)]
     public class LicensingController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(LicensingController));
+        private readonly ILogger Logger;
+        public LicensingController(ILogger<LicensingController> logger)
+        {
+            Logger = logger;
+        }
 
         /// GET: api/Licensing/GetProduct
         /// <summary>
@@ -61,7 +66,7 @@ namespace Dnn.PersonaBar.Licensing.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

@@ -28,7 +28,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Modules.Admin.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
@@ -57,6 +57,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using DotNetNuke.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 #endregion
 
@@ -71,7 +72,7 @@ namespace DotNetNuke.Modules.Admin.Authentication
     /// </remarks>
     public partial class Login : UserModuleBase
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Login));
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
 
         private static readonly Regex UserLanguageRegex = new Regex("(.*)(&|\\?)(language=)([^&\\?]+)(.*)",
@@ -80,6 +81,7 @@ namespace DotNetNuke.Modules.Admin.Authentication
         public Login()
         {
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = DependencyProvider.GetService<ILogger<Login>>();
         }
 
         #region Private Members
@@ -1090,7 +1092,7 @@ namespace DotNetNuke.Modules.Admin.Authentication
                 catch (Exception ex)
                 {
                     //control not there
-                    Logger.Error(ex);
+                    _logger.LogError(ex);
                 }
             }
             if (!Request.IsAuthenticated || UserNeedsVerification())
@@ -1418,7 +1420,7 @@ namespace DotNetNuke.Modules.Admin.Authentication
 
         private void AddEventLog(int userId, string username, int portalId, string propertyName, string propertyValue)
         {
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogUserID = userId,
                 LogUserName = username,

@@ -22,13 +22,16 @@
 using System;
 using System.Collections.Generic;
 using DotNetNuke.ComponentModel;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Library.Common
 {
     public class IocUtil
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (IocUtil));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<IocUtil>>();
 
         #region IOC helpers
 
@@ -65,7 +68,7 @@ namespace Dnn.PersonaBar.Library.Common
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                Logger.LogError(e);
                 return false;
             }
         }
@@ -100,7 +103,7 @@ namespace Dnn.PersonaBar.Library.Common
             }
             catch (Exception e)
             {
-                Logger.Error(e);
+                Logger.LogError(e);
                 return false;
             }
         }
@@ -116,7 +119,7 @@ namespace Dnn.PersonaBar.Library.Common
             var instance = GetInstanceLocal<TContract>(name);
             if (instance == null)
             {
-                Logger.WarnFormat("No instance of type '{0}' and name '{1}' is registered in the IOC container.",
+                Logger.LogWarning("No instance of type '{0}' and name '{1}' is registered in the IOC container.",
                                   typeof (TContract).FullName, name ?? "<empty>");
             }
 

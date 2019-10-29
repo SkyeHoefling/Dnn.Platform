@@ -917,7 +917,7 @@ namespace DotNetNuke.Entities.Modules
             {
                 //delete the module instance for the tab
                 dataProvider.DeleteTabModule(moduleInfo.TabID, moduleInfo.ModuleID, softDelete, UserController.Instance.GetCurrentUserInfo().UserID);
-                var log = new LogInfo { LogTypeKey = EventLogController.EventLogType.TABMODULE_DELETED.ToString() };
+                var log = new LogInformation { LogTypeKey = EventLogController.EventLogType.TABMODULE_DELETED.ToString() };
                 log.LogProperties.Add(new LogDetailInfo("tabId", moduleInfo.TabID.ToString(CultureInfo.InvariantCulture)));
                 log.LogProperties.Add(new LogDetailInfo("moduleId", moduleInfo.ModuleID.ToString(CultureInfo.InvariantCulture)));
                 LogController.Instance.AddLog(log);
@@ -1051,7 +1051,7 @@ namespace DotNetNuke.Entities.Modules
                                           module.CultureCode,
                                           currentUser.UserID);
 
-                var log = new LogInfo
+                var log = new LogInformation
                 {
                     LogTypeKey = EventLogController.EventLogType.TABMODULE_CREATED.ToString(),
                     LogPortalID = module.PortalID
@@ -1363,7 +1363,7 @@ namespace DotNetNuke.Entities.Modules
         public void DeleteModuleSetting(int moduleId, string settingName)
         {
             dataProvider.DeleteModuleSetting(moduleId, settingName);
-            var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.MODULE_SETTING_DELETED.ToString()};
+            var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.MODULE_SETTING_DELETED.ToString()};
             log.LogProperties.Add(new LogDetailInfo("ModuleId", moduleId.ToString(CultureInfo.InvariantCulture)));
             log.LogProperties.Add(new LogDetailInfo("SettingName", settingName));
             LogController.Instance.AddLog(log);
@@ -1398,7 +1398,7 @@ namespace DotNetNuke.Entities.Modules
         {
             dataProvider.DeleteTabModuleSetting(tabModuleId, settingName);
             UpdateTabModuleVersion(tabModuleId);
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogTypeKey = EventLogController.EventLogType.TABMODULE_SETTING_DELETED.ToString()
             };

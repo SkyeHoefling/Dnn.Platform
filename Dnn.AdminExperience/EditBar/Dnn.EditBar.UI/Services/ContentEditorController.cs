@@ -32,12 +32,12 @@ using DotNetNuke.Collections;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Instrumentation;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using DotNetNuke.Web.InternalServices;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.EditBar.UI.Services
 {
@@ -45,13 +45,13 @@ namespace Dnn.EditBar.UI.Services
     [DnnPageEditor]
     public class ContentEditorController : DnnApiController
     {
-        #region Fields
-
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ContentEditorController));
-
+        private readonly ILogger Logger;
         private const string DefaultExtensionImage = "icon_extensions_32px.png";
 
-        #endregion
+        public ContentEditorController(ILogger<ContentEditorController> logger)
+        {
+            Logger = logger;
+        }
 
         #region Properties
 

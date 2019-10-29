@@ -204,7 +204,7 @@ namespace DotNetNuke.Common.Utilities
                 }
                 catch (Exception)
                 {
-                    //Logger.Error(ex); /*Ignore Log because if failed on profile this will log on every request.*/
+                    //Logger.LogError(ex); /*Ignore Log because if failed on profile this will log on every request.*/
                 }
             }
 

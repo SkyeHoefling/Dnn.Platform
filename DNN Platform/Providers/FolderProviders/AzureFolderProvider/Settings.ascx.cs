@@ -9,12 +9,14 @@ using System;
 using System.Collections;
 using System.Linq;
 using System.Web.UI.WebControls;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Localization;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
 {
@@ -23,7 +25,11 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
     ///</summary>
     public partial class Settings : FolderMappingSettingsControlBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Settings));
+        private readonly ILogger Logger;
+        public Settings()
+        {
+            Logger = DependencyProvider.GetService<ILogger<Settings>>();
+        }
 
         #region Overrided Methods
 
@@ -178,7 +184,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
 
                 valContainerName.ErrorMessage = Localization.GetString("AuthenticationFailure.ErrorMessage", LocalResourceFile);
                 valContainerName.IsValid = false;
@@ -222,7 +228,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
                         case "ContainerAlreadyExists":
                             return true;
                         default:
-                            Logger.Error(ex);
+                            Logger.LogError(ex);
                             valContainerName.ErrorMessage = Localization.GetString("NewContainer.ErrorMessage",
                                 LocalResourceFile);
                             break;
@@ -235,7 +241,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 valContainerName.ErrorMessage = Localization.GetString("NewContainer.ErrorMessage", LocalResourceFile);
             }
 
@@ -277,7 +283,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
 
                 valContainerName.ErrorMessage = Localization.GetString("AuthenticationFailure.ErrorMessage", LocalResourceFile);
                 valContainerName.IsValid = false;
@@ -305,7 +311,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
                             valContainerName.ErrorMessage = Localization.GetString("AuthenticationFailure.ErrorMessage", LocalResourceFile);
                             break;
                         default:
-                            Logger.Error(ex);
+                            Logger.LogError(ex);
                             valContainerName.ErrorMessage = Localization.GetString("ListContainers.ErrorMessage", LocalResourceFile);
                             break;
                     }
@@ -319,7 +325,7 @@ namespace DotNetNuke.Providers.FolderProviders.AzureFolderProvider
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 valContainerName.ErrorMessage = Localization.GetString("ListContainers.ErrorMessage", LocalResourceFile);
                 valContainerName.IsValid = false;
             }

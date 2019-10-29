@@ -31,6 +31,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using DotNetNuke.Abstractions;
 
@@ -41,7 +42,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
@@ -76,16 +77,17 @@ namespace DotNetNuke.Framework
     /// -----------------------------------------------------------------------------
     public partial class DefaultPage : CDefault, IClientAPICallbackEventHandler
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (DefaultPage));
+        private readonly ILogger _logger;
 
         private static readonly Regex HeaderTextRegex = new Regex("<meta([^>])+name=('|\")robots('|\")",
             RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Compiled);
 
-        protected INavigationManager NavigationManager { get; }
+        private readonly INavigationManager _navigationManager;
 
         public DefaultPage()
         {
-            NavigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            _navigationManager = Globals.DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = Globals.DependencyProvider.GetService<ILogger<DefaultPage>>();
         }
 
         #region Properties
@@ -231,7 +233,7 @@ namespace DotNetNuke.Framework
                                 break;
                         }
                     }
-                    Response.Redirect(NavigationManager.NavigateURL(tab.TabID, Null.NullString, parameters.ToArray()), true);
+                    Response.Redirect(_navigationManager.NavigateURL(tab.TabID, Null.NullString, parameters.ToArray()), true);
                 }
                 else
                 {
@@ -649,7 +651,7 @@ namespace DotNetNuke.Framework
                 {
                     if (PortalSettings.HomeTabId > 0)
                     {
-                        Response.Redirect(NavigationManager.NavigateURL(PortalSettings.HomeTabId), true);
+                        Response.Redirect(_navigationManager.NavigateURL(PortalSettings.HomeTabId), true);
                     }
                     else
                     {

@@ -31,11 +31,11 @@ using System.Web.Http;
 using Dnn.PersonaBar.UI.Services.DTO;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Localization;
-using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.UI.Services
 {
@@ -45,8 +45,13 @@ namespace Dnn.PersonaBar.UI.Services
     [MenuPermission(Scope = ServiceScope.Regular)]
     public class ComponentsController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ComponentsController));
+        private readonly ILogger Logger;
         public string LocalResourcesFile => Path.Combine("~/DesktopModules/admin/Dnn.PersonaBar/App_LocalResources/SharedResources.resx");
+
+        public ComponentsController(ILogger<ComponentsController> logger)
+        {
+            Logger = logger;
+        }
 
         #region API in Admin Level
 
@@ -73,7 +78,7 @@ namespace Dnn.PersonaBar.UI.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Error = ex.Message });
             }
         }
@@ -111,7 +116,7 @@ namespace Dnn.PersonaBar.UI.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Error = ex.Message });
             }
 
@@ -140,7 +145,7 @@ namespace Dnn.PersonaBar.UI.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Error = ex.Message });
             }
 

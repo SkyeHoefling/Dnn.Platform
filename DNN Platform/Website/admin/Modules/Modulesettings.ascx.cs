@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading;
 using System.Web.UI;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
@@ -44,7 +45,7 @@ using DotNetNuke.UI.Modules;
 using DotNetNuke.UI.Skins;
 using DotNetNuke.UI.Skins.Controls;
 using Globals = DotNetNuke.Common.Globals;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Abstractions;
 
 #endregion
@@ -62,11 +63,12 @@ namespace DotNetNuke.Modules.Admin.Modules
     /// </remarks>
     public partial class ModuleSettingsPage : PortalModuleBase
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ModuleSettingsPage));
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
         public ModuleSettingsPage()
         {
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = DependencyProvider.GetService<ILogger<ModuleSettingsPage>>();
         }
 
         #region Private Members
@@ -658,7 +660,7 @@ namespace DotNetNuke.Modules.Admin.Modules
                         }
                         catch (ThreadAbortException exc)
                         {
-                            Logger.Debug(exc);
+                            _logger.LogDebug(exc);
 
                             Thread.ResetAbort(); //necessary
                         }

@@ -33,16 +33,18 @@ using DotNetNuke.Services.Log.EventLog;
 using Dnn.ExportImport.Components.Entities;
 using Dnn.ExportImport.Interfaces;
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Services.Localization;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.ExportImport.Components.Controllers
 {
     public class BaseController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(BaseController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<BaseController>>();
 
         public static readonly string ExportFolder;
 
@@ -63,7 +65,7 @@ namespace Dnn.ExportImport.Components.Controllers
             var username = objSecurity.InputFilter(userInfo.Username,
                 PortalSecurity.FilterFlag.NoScripting | PortalSecurity.FilterFlag.NoAngleBrackets | PortalSecurity.FilterFlag.NoMarkup);
 
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogTypeKey = logTypeKey,
                 LogPortalID = portalId,
@@ -270,7 +272,7 @@ namespace Dnn.ExportImport.Components.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Error(
+                Logger.LogError(
                     $"Failed to delete the job data. Error:{ex.Message}. It will need to be deleted manually. Folder Path:{jobFolder}");
             }
         }

@@ -28,6 +28,7 @@ using System.Threading;
 using System.Web;
 using System.Web.UI.WebControls;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 using DotNetNuke.Abstractions;
 using DotNetNuke.Common.Utilities;
@@ -38,7 +39,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
@@ -61,7 +62,7 @@ namespace DotNetNuke.UI.ControlPanel
 	public partial class AddModule : UserControlBase, IDnnRibbonBarTool
 	{
         private readonly INavigationManager _navigationManager;
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (AddModule));
+		private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AddModule>>();
         private bool _enabled = true;
 
         public AddModule()
@@ -221,7 +222,7 @@ namespace DotNetNuke.UI.ControlPanel
 				}
 				catch (Exception exc)
 				{
-					Logger.Error(exc);
+					Logger.LogError(exc);
 
 					permissionType = 0;
 				}
@@ -241,7 +242,7 @@ namespace DotNetNuke.UI.ControlPanel
 							}
 							catch (Exception exc)
 							{
-								Logger.Error(exc);
+								Logger.LogError(exc);
 
 								position = -1;
 							}
@@ -260,7 +261,7 @@ namespace DotNetNuke.UI.ControlPanel
 							}
 							catch (Exception exc)
 							{
-								Logger.Error(exc);
+								Logger.LogError(exc);
 
 								position = -1;
 							}
@@ -282,7 +283,7 @@ namespace DotNetNuke.UI.ControlPanel
 				}
 				catch (Exception exc)
 				{
-					Logger.Error(exc);
+					Logger.LogError(exc);
 
 					moduleLstID = -1;
 				}
@@ -298,7 +299,7 @@ namespace DotNetNuke.UI.ControlPanel
 						}
 						catch (Exception exc)
 						{
-							Logger.Error(exc);
+							Logger.LogError(exc);
 
 							pageID = -1;
 						}

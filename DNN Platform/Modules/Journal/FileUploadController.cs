@@ -26,18 +26,23 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Journal;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Modules.Journal
 {
     public class FileUploadController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (FileUploadController));
+        private readonly ILogger Logger;
+        public FileUploadController(ILogger<FileUploadController> logger)
+        {
+            Logger = logger;
+        }
 
         [DnnAuthorize]
         [HttpPost]
@@ -52,7 +57,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
             }
 
             return IframeSafeJson(statuses);

@@ -34,17 +34,19 @@ using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Installer;
 using DotNetNuke.Services.Installer.Installers;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Localization;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.UI.Components
 {
     public class BusinessController : IUpgradeable
     {
-        private static readonly DnnLogger Logger = DnnLogger.GetClassLogger(typeof(BusinessController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<BusinessController>>();
         private static readonly DotNetNuke.Services.Installer.Log.Logger InstallLogger = new DotNetNuke.Services.Installer.Log.Logger();
 
         public string UpgradeModule(string version)
@@ -176,7 +178,8 @@ namespace Dnn.PersonaBar.UI.Components
         
         private static void RemoveAssembly(string assemblyName)
         {
-            Logger.InstallLogInfo(string.Concat(Localization.GetString("LogStart", Localization.GlobalResourceFile), "Removal of assembly:", assemblyName));
+            // todo - AH 10/28/19 : Need to add extension methods to use InstallLog
+            Logger.LogInformation(string.Concat(Localization.GetString("LogStart", Localization.GlobalResourceFile), "Removal of assembly:", assemblyName));
 
             var packageInfo = PackageController.Instance.GetExtensionPackage(Null.NullInteger, p =>
                 p.Name.Equals(assemblyName, StringComparison.OrdinalIgnoreCase)
@@ -186,12 +189,12 @@ namespace Dnn.PersonaBar.UI.Components
                 var fileName = assemblyName + ".dll";
                 if (DataProvider.Instance().UnRegisterAssembly(packageInfo.PackageID, fileName))
                 {
-                    Logger.InstallLogInfo(Util.ASSEMBLY_UnRegistered + " - " + fileName);
+                    Logger.LogInformation(Util.ASSEMBLY_UnRegistered + " - " + fileName);
                 }
             }
             else
             {
-                Logger.InstallLogInfo(Util.ASSEMBLY_InUse + " - " + assemblyName);
+                Logger.LogInformation(Util.ASSEMBLY_InUse + " - " + assemblyName);
             }
         }
     }

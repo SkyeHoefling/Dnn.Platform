@@ -80,7 +80,7 @@ namespace DotNetNuke.Entities.Modules
         public void DeleteModuleSettings(int moduleId)
         {
             dataProvider.DeleteModuleSettings(moduleId);
-            var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.MODULE_SETTING_DELETED.ToString()};
+            var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.MODULE_SETTING_DELETED.ToString()};
             log.LogProperties.Add(new LogDetailInfo("ModuleId", moduleId.ToString()));
             LogController.Instance.AddLog(log);
             UpdateTabModuleVersionsByModuleID(moduleId);

@@ -18,19 +18,24 @@ using Dnn.PersonaBar.Library.Attributes;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Controllers;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Client;
 using DotNetNuke.Web.Client.ClientResourceManagement;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.CssEditor.Services
 {
     [MenuPermission(Scope = ServiceScope.Admin)]
     public class CssEditorController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CssEditorController));
+        private readonly ILogger Logger;
+        public CssEditorController(ILogger<CssEditorController> logger)
+        {
+            Logger = logger;
+        }
 
         /// GET: api/CssEditor/GetStyleSheet
         /// <summary>
@@ -73,7 +78,7 @@ namespace Dnn.PersonaBar.CssEditor.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -143,7 +148,7 @@ namespace Dnn.PersonaBar.CssEditor.Services
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc);
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
                 }
             }
@@ -191,7 +196,7 @@ namespace Dnn.PersonaBar.CssEditor.Services
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc);
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
                 }
             }

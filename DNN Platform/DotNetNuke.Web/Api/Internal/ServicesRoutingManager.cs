@@ -30,17 +30,19 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Framework;
 using DotNetNuke.Framework.Reflections;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api.Auth;
 using DotNetNuke.Web.Api.Internal.Auth;
 using DotNetNuke.Web.ConfigSection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Web.Api.Internal
 {
     public sealed class ServicesRoutingManager : IMapRoute
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ServicesRoutingManager));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ServicesRoutingManager>>();
         private readonly Dictionary<string, int> _moduleUsage = new Dictionary<string, int>();
         private readonly RouteCollection _routes;
         private readonly PortalAliasRouteManager _portalAliasRouteManager;
@@ -82,16 +84,16 @@ namespace DotNetNuke.Web.Api.Internal
                 string routeUrl = _portalAliasRouteManager.GetRouteUrl(moduleFolderName, url, count);
                 Route route = MapHttpRouteWithNamespace(fullRouteName, routeUrl, defaults, constraints, namespaces);
                 routes.Add(route);
-                if (Logger.IsTraceEnabled)
-                    Logger.Trace("Mapping route: " + fullRouteName + " @ " + routeUrl);
+                if (Logger.IsEnabled(LogLevel.Trace))
+                    Logger.LogTrace("Mapping route: " + fullRouteName + " @ " + routeUrl);
 
                 //compatible with old service path: DesktopModules/{namespace}/API/{controller}/{action}.
                 var oldRouteName = $"{fullRouteName}-old";
                 var oldRouteUrl = PortalAliasRouteManager.GetOldRouteUrl(moduleFolderName, url, count);
                 var oldRoute = MapHttpRouteWithNamespace(oldRouteName, oldRouteUrl, defaults, constraints, namespaces);
                 routes.Add(oldRoute);
-                if (Logger.IsTraceEnabled)
-                    Logger.Trace("Mapping route: " + oldRouteName + " @ " + oldRouteUrl);
+                if (Logger.IsEnabled(LogLevel.Trace))
+                    Logger.LogTrace("Mapping route: " + oldRouteName + " @ " + oldRouteUrl);
             }
 
             return routes;
@@ -154,7 +156,7 @@ namespace DotNetNuke.Web.Api.Internal
                 _routes.Clear();
                 LocateServicesAndMapRoutes();
             }
-            Logger.TraceFormat("Registered a total of {0} routes", _routes.Count);
+            Logger.LogTrace("Registered a total of {0} routes", _routes.Count);
         }
 
         private static void RegisterAuthenticationHandlers()
@@ -169,7 +171,7 @@ namespace DotNetNuke.Web.Api.Internal
             {
                 if (!handlerEntry.Enabled)
                 {
-                    Logger.Trace("The following handler is disabled " + handlerEntry.ClassName);
+                    Logger.LogTrace("The following handler is disabled " + handlerEntry.ClassName);
                     continue;
                 }
 
@@ -185,13 +187,13 @@ namespace DotNetNuke.Web.Api.Internal
                     var schemeName = handler.AuthScheme.ToUpperInvariant();
                     if (registeredSchemes.Contains(schemeName))
                     {
-                        Logger.Trace($"The following handler scheme '{handlerEntry.ClassName}' is already added and will be skipped");
+                        Logger.LogTrace($"The following handler scheme '{handlerEntry.ClassName}' is already added and will be skipped");
                         continue;
                     }
 
                     GlobalConfiguration.Configuration.MessageHandlers.Add(handler);
                     registeredSchemes.Add(schemeName);
-                    Logger.Trace($"Instantiated/Activated instance of {handler.AuthScheme}, class: {handler.GetType().FullName}");
+                    Logger.LogTrace($"Instantiated/Activated instance of {handler.AuthScheme}, class: {handler.GetType().FullName}");
 
                     if (handlerEntry.DefaultInclude)
                     {
@@ -204,7 +206,7 @@ namespace DotNetNuke.Web.Api.Internal
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error("Cannot instantiate/activate instance of " + handlerEntry.ClassName + Environment.NewLine + ex);
+                    Logger.LogError("Cannot instantiate/activate instance of " + handlerEntry.ClassName + Environment.NewLine + ex);
                 }
             }
         }
@@ -235,7 +237,7 @@ namespace DotNetNuke.Web.Api.Internal
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("{0}.RegisterRoutes threw an exception.  {1}\r\n{2}", routeMapper.GetType().FullName,
+                    Logger.LogError("{0}.RegisterRoutes threw an exception.  {1}\r\n{2}", routeMapper.GetType().FullName,
                                  e.Message, e.StackTrace);
                 }
             }
@@ -264,7 +266,7 @@ namespace DotNetNuke.Web.Api.Internal
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("Unable to create {0} while registering service routes.  {1}", routeMapperType.FullName,
+                    Logger.LogError("Unable to create {0} while registering service routes.  {1}", routeMapperType.FullName,
                                  e.Message);
                     routeMapper = null;
                 }

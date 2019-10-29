@@ -33,14 +33,16 @@ using System.Web;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
-using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Urls;
 using DotNetNuke.Entities.Urls.Config;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.EventQueue;
 using DotNetNuke.Services.Localization;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -48,7 +50,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
 {
     internal class BasicUrlRewriter : UrlRewriterBase
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(BasicUrlRewriter));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<BasicUrlRewriter>>();
 
         public static readonly Regex TabIdRegex = new Regex("&?tabid=\\d+", RegexOptions.IgnoreCase | RegexOptions.Compiled);
         public static readonly Regex PortalIdRegex = new Regex("&?portalid=\\d+", RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -98,7 +100,7 @@ namespace DotNetNuke.HttpModules.UrlRewrite
                 //DNN 5479
                 //request.physicalPath throws an exception when the path of the request exceeds 248 chars.
                 //example to test: http://localhost/dotnetnuke_2/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/default.aspx
-                Logger.Error(exc);
+                Logger.LogError(exc);
             }
 
 
@@ -249,12 +251,12 @@ namespace DotNetNuke.HttpModules.UrlRewrite
             catch (ThreadAbortException exc)
             {
                 //Do nothing if Thread is being aborted - there are two response.redirect calls in the Try block
-                Logger.Debug(exc);
+                Logger.LogDebug(exc);
             }
             catch (Exception ex)
             {
                 //500 Error - Redirect to ErrorPage
-                Logger.Error(ex);
+                Logger.LogError(ex);
 
                 strURL = "~/ErrorPage.aspx?status=500&error=" + server.UrlEncode(ex.Message);
                 HttpContext.Current.Response.Clear();

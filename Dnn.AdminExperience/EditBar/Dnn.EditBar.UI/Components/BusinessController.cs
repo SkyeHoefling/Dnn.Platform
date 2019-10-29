@@ -1,13 +1,9 @@
-﻿using System;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Instrumentation;
+﻿using DotNetNuke.Entities.Modules;
 
 namespace Dnn.EditBar.UI.Components
 {
     public class BusinessController : IUpgradeable
     {
-        private static readonly DnnLogger Logger = DnnLogger.GetClassLogger(typeof(BusinessController));
-
         public string UpgradeModule(string version)
         {
             switch (version)

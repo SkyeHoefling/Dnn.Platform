@@ -29,7 +29,7 @@ using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Urls;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Modules.Admin.Security;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
@@ -42,6 +42,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MembershipProvider = DotNetNuke.Security.Membership.MembershipProvider;
 
 #endregion
@@ -56,12 +57,13 @@ namespace DotNetNuke.Modules.Admin.Users
     /// </remarks>
     public partial class EditUser : UserModuleBase
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(EditUser));
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
 
         public EditUser()
         {
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = DependencyProvider.GetService<ILogger<EditUser>>();
         }
 
         #region Protected Members
@@ -532,7 +534,7 @@ namespace DotNetNuke.Modules.Admin.Users
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    _logger.LogError(exc);
                     if (exc.Message == "Display Name must be unique")
                     {
                         AddModuleMessage("DisplayNameNotUnique", ModuleMessage.ModuleMessageType.RedError, true);

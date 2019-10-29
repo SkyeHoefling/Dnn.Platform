@@ -22,11 +22,13 @@
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Journal;
 using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Web.Api;
+
+using Microsoft.Extensions.Logging;
 
 using System;
 using System.Net;
@@ -39,11 +41,16 @@ namespace DotNetNuke.Modules.Journal
     [ValidateAntiForgeryToken]
     public class NotificationServicesController : DnnApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(NotificationServicesController));
+        private readonly ILogger Logger;
 
         public class NotificationDTO
         {
             public int NotificationId { get; set; }
+        }
+
+        public NotificationServicesController(ILogger<NotificationServicesController> logger)
+        {
+            Logger = logger;
         }
 
         [HttpPost]
@@ -73,7 +80,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
             }
 
             return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "unable to process notification");

@@ -1,8 +1,9 @@
 ﻿using DotNetNuke.DependencyInjection;
 using DotNetNuke.DependencyInjection.Extensions;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Web.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -11,9 +12,10 @@ namespace DotNetNuke.Web
 {
     public class Startup : IDnnStartup
     {
-        private static readonly ILog _logger = LoggerSource.Instance.GetLogger(typeof(Startup));
-        public Startup()
+        private readonly ILogger _logger;
+        public Startup(ILogger<Startup> logger)
         {
+            _logger = logger;
             Configure();
         }
 
@@ -47,7 +49,7 @@ namespace DotNetNuke.Web
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error($"Unable to configure services for {typeof(Startup).FullName}, see exception for details", ex);
+                    _logger.LogError($"Unable to configure services for {typeof(Startup).FullName}, see exception for details", ex);
                 }
             }
 
@@ -63,7 +65,7 @@ namespace DotNetNuke.Web
             }
             catch (Exception ex)
             {
-                _logger.Error($"Unable to instantiate startup code for {startupType.FullName}", ex);
+                _logger.LogError($"Unable to instantiate startup code for {startupType.FullName}", ex);
             }
 
             return startup;

@@ -7,7 +7,9 @@ using Dnn.PersonaBar.Library.Prompt.Models;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
 {
@@ -16,7 +18,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
     {
         public override string LocalResourceFile => Constants.LocalResourcesFile;
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DeleteRole));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<DeleteRole>>();
         [FlagParameter("id", "Prompt_DeleteRole_FlagId", "Integer", true)]
         private const string FlagId = "id";
 
@@ -40,7 +42,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return new ConsoleErrorResultModel(LocalizeString("DeleteRole.Error"));
             }
         }

@@ -167,7 +167,7 @@ namespace DotNetNuke.Services.Exceptions
             var notFoundErrorString = Localization.Localization.GetString("ResourceNotFound", Localization.Localization.SharedResourceFile);
             Logger.LogError(notFoundErrorString + ": - " + URL, exc);
 
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 BypassBuffering = true,
                 LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()

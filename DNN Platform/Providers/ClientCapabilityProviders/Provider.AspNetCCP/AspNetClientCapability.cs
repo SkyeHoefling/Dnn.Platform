@@ -26,8 +26,12 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Configuration;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
+using DotNetNuke.Logging;
 using DotNetNuke.Providers.AspNetClientCapabilityProvider.Properties;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace DotNetNuke.Providers.AspNetClientCapabilityProvider
 {
@@ -36,7 +40,7 @@ namespace DotNetNuke.Providers.AspNetClientCapabilityProvider
     /// </summary>
     public class AspNetClientCapability : Services.ClientCapability.ClientCapability
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(AspNetClientCapability));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AspNetClientCapability>>();
         private readonly IDictionary<string, string> _properties;
 
         public override string this[string name]
@@ -95,7 +99,7 @@ namespace DotNetNuke.Providers.AspNetClientCapabilityProvider
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                 }
             }
         }

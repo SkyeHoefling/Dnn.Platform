@@ -24,9 +24,11 @@ using System.Net.Http;
 using System.Security.Principal;
 using System.Threading;
 using Dnn.AuthServices.Jwt.Components.Common.Controllers;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
+using DotNetNuke.Logging;
 using DotNetNuke.Web.Api.Auth;
-using DotNetNuke.Web.ConfigSection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.AuthServices.Jwt.Auth
 {
@@ -40,7 +42,7 @@ namespace Dnn.AuthServices.Jwt.Auth
     {
         #region constants, properties, etc.
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(JwtAuthMessageHandler));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<JwtAuthMessageHandler>>();
 
         public override string AuthScheme => _jwtController.SchemeType;
         public override bool BypassAntiForgeryToken => true;
@@ -82,13 +84,13 @@ namespace Dnn.AuthServices.Jwt.Auth
                 var username = _jwtController.ValidateToken(request);
                 if (!string.IsNullOrEmpty(username))
                 {
-                    if (Logger.IsTraceEnabled) Logger.Trace($"Authenticated user '{username}'");
+                    if (Logger.IsEnabled(LogLevel.Trace)) Logger.LogTrace($"Authenticated user '{username}'");
                     SetCurrentPrincipal(new GenericPrincipal(new GenericIdentity(username, AuthScheme), null), request);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error("Unexpected error in authenticating the user. " + ex);
+                Logger.LogError("Unexpected error in authenticating the user. " + ex);
             }
         }
 

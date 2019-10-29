@@ -95,7 +95,7 @@ namespace DotNetNuke.Entities.Users
         {
             //initialize log record
             var objSecurity = PortalSecurity.Instance;
-            var log = new LogInfo
+            var log = new LogInformation
             {
                 LogTypeKey = loginStatus.ToString(),
                 LogPortalID = portalId,

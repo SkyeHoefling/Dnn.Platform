@@ -59,12 +59,12 @@ namespace DotNetNuke.Services.Log.EventLog
 
         #region Private Methods
 
-        private static void AddLogToFile(LogInfo logInfo)
+        private static void AddLogToFile(LogInformation LogInformation)
         {
             try
             {
                 var f = Globals.HostMapPath + "\\Logs\\LogFailures.xml.resources";
-                WriteLog(f, logInfo.Serialize());
+                WriteLog(f, LogInformation.Serialize());
             }
             // ReSharper disable EmptyGeneralCatchClause
             catch (Exception exc) // ReSharper restore EmptyGeneralCatchClause
@@ -177,47 +177,47 @@ namespace DotNetNuke.Services.Log.EventLog
 
         #region Public Methods
 
-        public void AddLog(LogInfo logInfo)
+        public void AddLog(LogInformation LogInformation)
         {
             if (Globals.Status == Globals.UpgradeStatus.Install)
             {
-                Logger.LogInformation(logInfo.ToString());
+                Logger.LogInformation(LogInformation.ToString());
             }
             else
             {
                 try
                 {
-                    logInfo.LogCreateDate = DateTime.Now;
-                    logInfo.LogServerName = Globals.ServerName;
-                    if (string.IsNullOrEmpty(logInfo.LogServerName))
+                    LogInformation.LogCreateDate = DateTime.Now;
+                    LogInformation.LogServerName = Globals.ServerName;
+                    if (string.IsNullOrEmpty(LogInformation.LogServerName))
                     {
-                        logInfo.LogServerName = "NA";
+                        LogInformation.LogServerName = "NA";
                     }
-                    if (String.IsNullOrEmpty(logInfo.LogUserName))
+                    if (String.IsNullOrEmpty(LogInformation.LogUserName))
                     {
                         if (HttpContext.Current != null)
                         {
                             if (HttpContext.Current.Request.IsAuthenticated)
                             {
-                                logInfo.LogUserName = UserController.Instance.GetCurrentUserInfo().Username;
+                                LogInformation.LogUserName = UserController.Instance.GetCurrentUserInfo().Username;
                             }
                         }
                     }
                     
                     //Get portal name if name isn't set
-                    if (logInfo.LogPortalID != Null.NullInteger && String.IsNullOrEmpty(logInfo.LogPortalName))
+                    if (LogInformation.LogPortalID != Null.NullInteger && String.IsNullOrEmpty(LogInformation.LogPortalName))
                     {
-                        logInfo.LogPortalName = PortalController.Instance.GetPortal(logInfo.LogPortalID).PortalName;
+                        LogInformation.LogPortalName = PortalController.Instance.GetPortal(LogInformation.LogPortalID).PortalName;
                     }
 
                     //Check if Log Type exists
-                    if (!GetLogTypeInfoDictionary().ContainsKey(logInfo.LogTypeKey))
+                    if (!GetLogTypeInfoDictionary().ContainsKey(LogInformation.LogTypeKey))
                     {
                         //Add new Log Type
                         var logType = new LogTypeInfo()
                                             {
-                                                LogTypeKey = logInfo.LogTypeKey,
-                                                LogTypeFriendlyName = logInfo.LogTypeKey,
+                                                LogTypeKey = LogInformation.LogTypeKey,
+                                                LogTypeFriendlyName = LogInformation.LogTypeKey,
                                                 LogTypeOwner = "DotNetNuke.Logging.EventLogType",
                                                 LogTypeCSSClass = "GeneralAdminOperation",
                                                 LogTypeDescription = string.Empty
@@ -226,7 +226,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
                         var logTypeConfigInfo = new LogTypeConfigInfo()
                                             {
-                                                LogTypeKey =  logInfo.LogTypeKey,
+                                                LogTypeKey =  LogInformation.LogTypeKey,
                                                 LogTypePortalID = "*",
                                                 LoggingIsActive = false,
                                                 KeepMostRecent = "-1",
@@ -244,7 +244,7 @@ namespace DotNetNuke.Services.Log.EventLog
 	                {
 		                try
 		                {
-							LoggingProvider.Instance().AddLog(logInfo);
+							LoggingProvider.Instance().AddLog(LogInformation);
 		                }
 		                catch (Exception)
 		                {
@@ -260,7 +260,7 @@ namespace DotNetNuke.Services.Log.EventLog
                 {
                     Logger.LogError(exc, string.Empty);
 
-                    AddLogToFile(logInfo);
+                    AddLogToFile(LogInformation);
                 }
             }
         }
@@ -352,9 +352,9 @@ namespace DotNetNuke.Services.Log.EventLog
             LoggingProvider.Instance().ClearLog();
         }
 
-        public void DeleteLog(LogInfo logInfo)
+        public void DeleteLog(LogInformation LogInformation)
         {
-            LoggingProvider.Instance().DeleteLog(logInfo);
+            LoggingProvider.Instance().DeleteLog(LogInformation);
         }
 
         public virtual void DeleteLogType(LogTypeInfo logType)
@@ -367,7 +367,7 @@ namespace DotNetNuke.Services.Log.EventLog
             LoggingProvider.Instance().DeleteLogTypeConfigInfo(logTypeConfig.ID);
         }
 
-        public virtual List<LogInfo> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
+        public virtual List<LogInformation> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
         {
             return LoggingProvider.Instance().GetLogs(portalID, logType, pageSize, pageIndex, ref totalRecords);
         }
@@ -387,7 +387,7 @@ namespace DotNetNuke.Services.Log.EventLog
             return LoggingProvider.Instance().GetLogTypeInfo().Cast<LogTypeInfo>().ToDictionary(logTypeInfo => logTypeInfo.LogTypeKey);
         }
 
-        public virtual object GetSingleLog(LogInfo log, LoggingProvider.ReturnType returnType)
+        public virtual object GetSingleLog(LogInformation log, LoggingProvider.ReturnType returnType)
         {
             return LoggingProvider.Instance().GetSingleLog(log, returnType);
         }

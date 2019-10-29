@@ -20,24 +20,26 @@ using DotNetNuke.Common;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Abstractions;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.SiteSettings.Services
 {
     [MenuPermission(Scope = ServiceScope.Admin)]
     public class LanguagesController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(LanguagesController));
+        private readonly ILogger Logger;
         private const string LocalResourcesFile = "~/DesktopModules/admin/Dnn.PersonaBar/Modules/Dnn.SiteSettings/App_LocalResources/SiteSettings.resx";
         private const string AuthFailureMessage = "Authorization has been denied for this request.";
         protected INavigationManager NavigationManager { get; }
-        public LanguagesController(INavigationManager navigationManager)
+        public LanguagesController(INavigationManager navigationManager, ILogger<LanguagesController> logger)
         {
             NavigationManager = navigationManager;
+            Logger = logger;
         }
 
         // Sample matches:
@@ -76,7 +78,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -102,7 +104,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -177,7 +179,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -251,7 +253,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
                     }
                     if (toBeDeleted.Count > 0)
                     {
-                        Logger.Warn(LocalizeString("Obsolete"));
+                        Logger.LogWarning(LocalizeString("Obsolete"));
                         foreach (string key in toBeDeleted)
                         {
                             editTable.Remove(key);
@@ -285,7 +287,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -341,7 +343,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -368,7 +370,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -395,7 +397,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -411,7 +413,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -448,7 +450,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -492,7 +494,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -526,7 +528,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -560,7 +562,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -598,7 +600,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.ToString());
             }
         }
@@ -757,7 +759,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
         ///   Second=>default value
         /// </remarks>
         /// -----------------------------------------------------------------------------
-        private static void LoadResource(IDictionary ht, string filepath)
+        private void LoadResource(IDictionary ht, string filepath)
         {
             var d = new XmlDocument { XmlResolver = null };
             bool xmlLoaded;
@@ -768,7 +770,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger.LogError(ex.Message);
                 xmlLoaded = false;
             }
             if (xmlLoaded)
@@ -936,7 +938,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             if (changedResources.Count > 0)
             {
                 var values = string.Join("; ", changedResources.Select(x => x.Key + "=" + x.Value));
-                var log = new LogInfo { LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString() };
+                var log = new LogInformation { LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString() };
                 log.LogProperties.Add(new LogDetailInfo(LocalizeString("ResourceUpdated"), ResourceFile(portalId, locale, mode)));
                 log.LogProperties.Add(new LogDetailInfo("Updated Values", values));
                 LogController.Instance.AddLog(log);

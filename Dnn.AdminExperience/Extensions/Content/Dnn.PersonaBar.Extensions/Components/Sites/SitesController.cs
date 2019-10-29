@@ -52,7 +52,7 @@ using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Urls;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.FileSystem;
@@ -62,12 +62,14 @@ using DotNetNuke.Services.Mail;
 using ICSharpCode.SharpZipLib;
 using ICSharpCode.SharpZipLib.Zip;
 using FileInfo = DotNetNuke.Services.FileSystem.FileInfo;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Sites.Components
 {
     public class SitesController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SitesController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SitesController>>();
         private readonly TabsController _tabsController = new TabsController();
         internal static readonly IList<string> ImageExtensions = new List<string>() { ".png", ".jpg", ".jpeg" };
 
@@ -517,7 +519,7 @@ namespace Dnn.PersonaBar.Sites.Components
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
 
                     intPortalId = Null.NullInteger;
                     message = ex.Message;
@@ -565,7 +567,7 @@ namespace Dnn.PersonaBar.Sites.Components
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc);
                         message = string.Format(Localization.GetString("UnknownSendMail.Error", LocalResourcesFile), webUrl, closePopUpStr);
                     }
                     EventLogController.Instance.AddLog(PortalController.Instance.GetPortal(intPortalId), PortalSettings, PortalSettings.UserId,
@@ -1155,7 +1157,7 @@ namespace Dnn.PersonaBar.Sites.Components
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
             }
         }
 
@@ -1196,7 +1198,7 @@ namespace Dnn.PersonaBar.Sites.Components
         //    }
         //    catch (Exception ex)
         //    {
-        //        Logger.Error(ex);
+        //        Logger.LogError(ex);
         //    }
         //}
 

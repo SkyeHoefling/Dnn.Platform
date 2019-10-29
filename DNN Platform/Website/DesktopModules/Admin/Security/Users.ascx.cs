@@ -34,7 +34,6 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
 
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Localization;

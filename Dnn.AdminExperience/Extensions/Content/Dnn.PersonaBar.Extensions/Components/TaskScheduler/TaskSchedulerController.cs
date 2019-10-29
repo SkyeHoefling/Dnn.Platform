@@ -31,16 +31,19 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Scheduling;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.TaskScheduler.Components
 {
     public class TaskSchedulerController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(TaskSchedulerController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<TaskSchedulerController>>();
 
         private string LocalResourcesFile
         {
@@ -163,7 +166,7 @@ namespace Dnn.PersonaBar.TaskScheduler.Components
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return null;
             }
         }

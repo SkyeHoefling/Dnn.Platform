@@ -23,7 +23,6 @@
 using System;
 using System.Collections;
 using System.Web;
-using Microsoft.Extensions.DependencyInjection;
 
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
@@ -32,7 +31,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Membership;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Localization;
@@ -41,6 +40,9 @@ using DotNetNuke.Services.Mail;
 using DotNetNuke.UI.Skins.Controls;
 using DotNetNuke.Services.UserRequest;
 using DotNetNuke.Abstractions;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -56,11 +58,12 @@ namespace DotNetNuke.Modules.Admin.Security
     /// </remarks>
     public partial class SendPassword : UserModuleBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (SendPassword));
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
         public SendPassword()
         {
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = DependencyProvider.GetService<ILogger<SendPassword>>();
         }
 
         #region Private Members
@@ -369,7 +372,7 @@ namespace DotNetNuke.Modules.Admin.Security
         {
             var portalSecurity = PortalSecurity.Instance;
 
-			var log = new LogInfo
+			var log = new LogInformation
             {
                 LogPortalID = PortalSettings.PortalId,
                 LogPortalName = PortalSettings.PortalName,

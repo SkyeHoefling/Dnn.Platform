@@ -77,10 +77,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\HttpModules\bin\DotNetNuke.HttpModules.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetNuke.Instrumentation">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DotNetNuke.Instrumentation\bin\DotNetNuke.Instrumentation.dll</HintPath>
-    </Reference>
     <Reference Include="DotNetNuke.Modules.CoreMessaging">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Modules\CoreMessaging\bin\DotNetNuke.Modules.CoreMessaging.dll</HintPath>
@@ -3366,9 +3362,13 @@
       <Project>{6928a9b1-f88a-4581-a132-d3eb38669bb0}</Project>
       <Name>DotNetNuke.Abstractions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DNN Platform\DotNetNuke.Instrumentation\DotNetNuke.Instrumentation.csproj">
+    <ProjectReference Include="..\DotNetNuke.Instrumentation\DotNetNuke.Instrumentation.csproj">
       <Project>{3cd5f6b8-8360-4862-80b6-f402892db7dd}</Project>
       <Name>DotNetNuke.Instrumentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetNuke.Logging\DotNetNuke.Logging.csproj">
+      <Project>{73739bf3-13f6-4d01-9652-c37bb8971148}</Project>
+      <Name>DotNetNuke.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\DotNetNuke.Web.Client\DotNetNuke.Web.Client.csproj">
       <Project>{03e3afa5-ddc9-48fb-a839-ad4282ce237e}</Project>

@@ -24,19 +24,23 @@
 using System;
 using System.Collections.Generic;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Application;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Upgrade;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Modules.CoreMessaging.Components
 {
     public class CoreMessagingBusinessController : IUpgradeable
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (CoreMessagingBusinessController));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<CoreMessagingBusinessController>>();
         #region Implementation of IUpgradeable
 
         public string UpgradeModule(string Version)
@@ -81,7 +85,7 @@ namespace DotNetNuke.Modules.CoreMessaging.Components
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
 
                 return "Failed";
             }

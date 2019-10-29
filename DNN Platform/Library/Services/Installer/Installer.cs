@@ -247,7 +247,7 @@ namespace DotNetNuke.Services.Installer
         {
             try
             {
-                var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
+                var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString()};
 
                 if (InstallerInfo.ManifestFile != null)
 	            {

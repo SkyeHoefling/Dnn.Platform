@@ -33,15 +33,20 @@ using Dnn.PersonaBar.Library.Controllers;
 using Dnn.PersonaBar.Library.Model;
 using Dnn.PersonaBar.Library.Repository;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.UI.Services
 {
     [MenuPermission(Scope = ServiceScope.Regular)]
     public class MenuExtensionsController : PersonaBarApiController
     {
-        private static readonly DnnLogger Logger = DnnLogger.GetClassLogger(typeof(MenuExtensionsController));
+        private readonly ILogger Logger;
+        public MenuExtensionsController(ILogger<MenuExtensionsController> logger)
+        {
+            Logger = logger;
+        }
 
         #region Public API methods
 
@@ -125,7 +130,7 @@ namespace Dnn.PersonaBar.UI.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return null;
             }
 

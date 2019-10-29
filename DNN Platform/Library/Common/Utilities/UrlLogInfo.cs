@@ -26,7 +26,7 @@ using System;
 
 namespace DotNetNuke.Common.Utilities
 {
-    public class UrlLogInfo
+    public class UrlLogInformation
     {
         public int UrlLogID { get; set; }
 

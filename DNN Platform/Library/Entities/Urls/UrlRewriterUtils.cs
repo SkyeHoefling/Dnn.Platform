@@ -97,7 +97,7 @@ namespace DotNetNuke.Entities.Urls
         /// <param name="result"></param>
         public static void Log404(HttpRequest request, FriendlyUrlSettings settings, UrlAction result)
         {
-            var log = new LogInfo
+            var log = new LogInformation
                 {
                     LogTypeKey = EventLogController.EventLogType.PAGE_NOT_FOUND_404.ToString(),
                     LogPortalID = (result.PortalAlias != null) ? result.PortalId : -1
@@ -145,7 +145,7 @@ namespace DotNetNuke.Entities.Urls
                     DataCache.SetCache(cacheKey, cacheKey, expire);
                     //just store the cache key - it doesn't really matter
                     //create a log event
-                    var log = new LogInfo { LogTypeKey = "GENERAL_EXCEPTION" };
+                    var log = new LogInformation { LogTypeKey = "GENERAL_EXCEPTION" };
                     log.AddProperty("Url Processing Exception", "Exception in Url Rewriting Process");
                     log.AddProperty("Http Status", status);
                     if (result != null)

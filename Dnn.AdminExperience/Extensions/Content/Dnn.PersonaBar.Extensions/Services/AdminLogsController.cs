@@ -31,20 +31,25 @@ using Dnn.PersonaBar.Library;
 using Dnn.PersonaBar.Library.Attributes;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
-using DotNetNuke.Security.Roles;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Web.Api;
 using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.AdminLogs.Services
 {
     [MenuPermission(MenuName = Components.Constants.MenuName)]
     public class AdminLogsController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(AdminLogsController));
+        private readonly ILogger Logger;
         private readonly Components.AdminLogsController _controller = new Components.AdminLogsController();
+
+        public AdminLogsController(ILogger<AdminLogsController> logger)
+        {
+            Logger = logger;
+        }
 
         /// GET: api/AdminLogs/GetLogTypes
         /// <summary>
@@ -86,7 +91,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -138,7 +143,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -158,14 +163,14 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             {
                 foreach (var logId in logIds)
                 {
-                    var objLogInfo = new LogInfo { LogGUID = logId };
-                    LogController.Instance.DeleteLog(objLogInfo);
+                    var objLogInformation = new LogInformation { LogGUID = logId };
+                    LogController.Instance.DeleteLog(objLogInformation);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, new { Success = true });
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -185,9 +190,9 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             {
                 if (!UserInfo.IsSuperUser && request.LogIds.Any(
                     x =>
-                        ((LogInfo)
-                            LogController.Instance.GetSingleLog(new LogInfo { LogGUID = x },
-                                LoggingProvider.ReturnType.LogInfoObjects))?.LogPortalID != PortalId))
+                        ((LogInformation)
+                            LogController.Instance.GetSingleLog(new LogInformation { LogGUID = x },
+                                LoggingProvider.ReturnType.LogInformationObjects))?.LogPortalID != PortalId))
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.Unauthorized,
                         Localization.GetString("UnAuthorizedToSendLog", Components.Constants.LocalResourcesFile));
@@ -212,7 +217,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -235,7 +240,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -269,7 +274,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -302,7 +307,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -349,7 +354,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -394,7 +399,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -425,7 +430,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -459,7 +464,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -488,7 +493,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -539,7 +544,7 @@ namespace Dnn.PersonaBar.AdminLogs.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

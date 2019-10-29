@@ -28,7 +28,7 @@ namespace DotNetNuke.Services.Log.EventLog
 {
     public interface ILogController
     {
-        void AddLog(LogInfo logInfo);
+        void AddLog(LogInformation LogInformation);
 
         void AddLogType(string configFile, string fallbackConfigFile);
 
@@ -38,13 +38,13 @@ namespace DotNetNuke.Services.Log.EventLog
 
         void ClearLog();
 
-        void DeleteLog(LogInfo logInfo);
+        void DeleteLog(LogInformation LogInformation);
 
         void DeleteLogType(LogTypeInfo logType);
 
         void DeleteLogTypeConfigInfo(LogTypeConfigInfo logTypeConfig);
 
-        List<LogInfo> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords);
+        List<LogInformation> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords);
 
         ArrayList GetLogTypeConfigInfo();
 
@@ -52,7 +52,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
         Dictionary<string, LogTypeInfo> GetLogTypeInfoDictionary();
 
-        object GetSingleLog(LogInfo log, LoggingProvider.ReturnType returnType);
+        object GetSingleLog(LogInformation log, LoggingProvider.ReturnType returnType);
 
         void PurgeLogBuffer();
 

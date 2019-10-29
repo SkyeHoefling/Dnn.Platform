@@ -23,13 +23,16 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http.Tracing;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Web.Api
 {
     internal sealed class TraceWriter : ITraceWriter
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (TraceWriter));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<TraceWriter>>();
         private readonly bool _enabled;
 
         public TraceWriter(bool isTracingEnabled)
@@ -83,19 +86,19 @@ namespace DotNetNuke.Web.Api
                 switch (rec.Level)
                 {
                     case TraceLevel.Debug:
-                        Logger.Debug(output);
+                        Logger.LogDebug(output);
                         break;
                     case TraceLevel.Info:
-                        Logger.Info(output);
+                        Logger.LogInformation(output);
                         break;
                     case TraceLevel.Warn:
-                        Logger.Warn(output);
+                        Logger.LogWarning(output);
                         break;
                     case TraceLevel.Error:
-                        Logger.Error(output);
+                        Logger.LogError(output);
                         break;
                     case TraceLevel.Fatal:
-                        Logger.Fatal(output);
+                        Logger.LogCritical(output);
                         break;
                 }
             }

@@ -32,12 +32,13 @@ using System.Threading;
 using System.Web.Security;
 using Dnn.PersonaBar.Users.Components.Contracts;
 using Dnn.PersonaBar.Users.Components.Dto;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Membership;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Common;
@@ -48,12 +49,14 @@ using System.Net;
 using DotNetNuke.Services.Mail;
 using Dnn.PersonaBar.Users.Components.Helpers;
 using System.Data;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Users.Components
 {
     public class UsersController : ServiceLocator<IUsersController, UsersController>, IUsersController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Services.UsersController));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<UsersController>>();
 
         private PortalSettings PortalSettings => PortalController.Instance.GetCurrentPortalSettings();
 
@@ -147,7 +150,7 @@ namespace Dnn.PersonaBar.Users.Components
             catch (MembershipPasswordException exc)
             {
                 //Password Answer missing
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 throw new Exception(Localization.GetString("PasswordInvalid", Constants.LocalResourcesFile));
             }
             catch (ThreadAbortException)
@@ -157,7 +160,7 @@ namespace Dnn.PersonaBar.Users.Components
             catch (Exception exc)
             {
                 //Fail
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 throw new Exception(Localization.GetString("PasswordResetFailed", Constants.LocalResourcesFile));
             }
         }

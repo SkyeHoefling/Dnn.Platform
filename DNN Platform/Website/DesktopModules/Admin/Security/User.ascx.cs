@@ -27,6 +27,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Modules;
@@ -34,7 +35,7 @@ using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Localization;
@@ -48,6 +49,9 @@ using System.Web.UI.WebControls;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Services.Cache;
 using DotNetNuke.Web.Client;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -63,7 +67,7 @@ namespace DotNetNuke.Modules.Admin.Users
     /// </remarks>
     public partial class User : UserUserControlBase
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (User));
+    	private readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<User>>();
 		#region Public Properties
 
         public UserCreateStatus CreateStatus { get; set; }
@@ -624,7 +628,7 @@ namespace DotNetNuke.Modules.Admin.Users
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc);
 
                         var args = new UserUpdateErrorArgs(User.UserID, User.Username, "EmailError");
                         OnUserUpdateError(args);

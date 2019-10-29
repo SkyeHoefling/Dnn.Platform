@@ -62,13 +62,15 @@ using System.Web;
 using System.Web.Http;
 using FileInfo = System.IO.FileInfo;
 using Constants = Dnn.PersonaBar.Library.Constants;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.SiteSettings.Services
 {
     [MenuPermission(MenuName = Components.Constants.Constants.MenuName)]
     public class SiteSettingsController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SiteSettingsController));
+        private readonly ILogger Logger;
         private readonly Components.SiteSettingsController _controller = new Components.SiteSettingsController();
         private const string AuthFailureMessage = "Authorization has been denied for this request.";
 
@@ -89,9 +91,10 @@ namespace Dnn.PersonaBar.SiteSettings.Services
         private const double DefaultMessagingThrottlingInterval = 0.5; // set default MessagingThrottlingInterval value to 30 seconds.
 
         protected INavigationManager NavigationManager { get; }
-        public SiteSettingsController(INavigationManager navigationManager)
+        public SiteSettingsController(INavigationManager navigationManager, ILogger<SiteSettingsController> logger)
         {
             NavigationManager = navigationManager;
+            Logger = logger;
         }
 
         #region Site Info API
@@ -171,7 +174,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -218,7 +221,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -282,7 +285,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -356,7 +359,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -407,7 +410,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -451,7 +454,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -490,7 +493,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -536,7 +539,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -574,7 +577,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -617,7 +620,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -690,7 +693,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -743,7 +746,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -782,7 +785,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -844,7 +847,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -908,7 +911,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -947,7 +950,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -985,7 +988,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1046,7 +1049,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1079,7 +1082,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1132,7 +1135,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1173,7 +1176,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1236,7 +1239,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1301,7 +1304,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1331,7 +1334,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1368,7 +1371,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1410,7 +1413,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1459,7 +1462,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1491,7 +1494,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1552,7 +1555,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1601,7 +1604,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1641,7 +1644,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1670,7 +1673,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1721,7 +1724,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1787,7 +1790,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1809,7 +1812,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1831,7 +1834,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1860,7 +1863,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1896,7 +1899,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1943,7 +1946,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -1993,7 +1996,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2053,7 +2056,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2089,7 +2092,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2133,7 +2136,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2173,7 +2176,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2213,7 +2216,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2245,7 +2248,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2315,7 +2318,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2391,7 +2394,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2465,7 +2468,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2556,7 +2559,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2601,7 +2604,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2643,7 +2646,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2673,7 +2676,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2771,7 +2774,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2921,7 +2924,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -2975,7 +2978,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -3044,7 +3047,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -3093,7 +3096,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -3130,7 +3133,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -3159,7 +3162,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -3182,7 +3185,7 @@ namespace Dnn.PersonaBar.SiteSettings.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

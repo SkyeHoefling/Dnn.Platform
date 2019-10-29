@@ -550,7 +550,7 @@ namespace DotNetNuke.Entities.Urls
             if (settings.LogCacheMessages)
             {
 
-                var log = new LogInfo { LogTypeKey = "HOST_ALERT" };
+                var log = new LogInformation { LogTypeKey = "HOST_ALERT" };
                 log.AddProperty("Url Rewriting Caching Message", "Friendly Url Index built and Stored in Cache.");
                 log.AddProperty("Build Reason", reason);
                 log.AddProperty("Cache Key", UrlDictKey);
@@ -624,7 +624,7 @@ namespace DotNetNuke.Entities.Urls
             SetPageCache(key, providersWithTabs.ToArray(), settings);
             if (settings.LogCacheMessages)
             {
-                var log = new LogInfo { LogTypeKey = "HOST_ALERT" };
+                var log = new LogInformation { LogTypeKey = "HOST_ALERT" };
                 log.AddProperty("Url Rewriting Caching Message", "Portal Module Providers Tab List stored in cache");
                 log.AddProperty("Cache Item Key", key);
                 log.AddProperty("PortalId", portalId.ToString());
@@ -707,7 +707,7 @@ namespace DotNetNuke.Entities.Urls
 
             if (settings.LogCacheMessages)
             {
-                var log = new LogInfo { LogTypeKey = "HOST_ALERT" };
+                var log = new LogInformation { LogTypeKey = "HOST_ALERT" };
                 log.AddProperty("Url Rewriting Caching Message", "Extension Url Providers stored in cache");
                 log.AddProperty("PortalId/TabIds", portalId.ToString() + "/" + string.Join(",", tabIdStr.ToArray()));
                 log.AddProperty("All Tabs Providers Count", allTabsProviders.Count.ToString());
@@ -741,7 +741,7 @@ namespace DotNetNuke.Entities.Urls
 
             if (settings.LogCacheMessages)
             {
-                var log = new LogInfo {LogTypeKey = "HOST_ALERT"};
+                var log = new LogInformation {LogTypeKey = "HOST_ALERT"};
 
                 log.AddProperty("Url Rewriting Caching Message", "Page Index built and Stored in Cache");
                 log.AddProperty("Reason", reason);
@@ -879,7 +879,7 @@ namespace DotNetNuke.Entities.Urls
 #if (DEBUG)
             if (LogRemovedReason)
             {
-                var log = new LogInfo { LogTypeKey = "HOST_ALERT" };
+                var log = new LogInformation { LogTypeKey = "HOST_ALERT" };
 
                 string itemName;
                 string count;

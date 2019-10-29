@@ -2,16 +2,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.Mvc
 {
     public sealed class StandardTabAndModuleInfoProvider : ITabAndModuleInfoProvider
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(StandardTabAndModuleInfoProvider));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<StandardTabAndModuleInfoProvider>>();
 
         private const string ModuleIdKey = "ModuleId";
         private const string TabIdKey = "TabId";
@@ -148,9 +151,9 @@ namespace DotNetNuke.Web.Mvc
                 }
             }
 
-            if (Logger.IsWarnEnabled)
+            if (Logger.IsEnabled(LogLevel.Warning))
             {
-                Logger.WarnFormat("The specified moniker ({0}) is not defined in the system", monikerValue);
+                Logger.LogWarning("The specified moniker ({0}) is not defined in the system", monikerValue);
             }
 
             return Null.NullInteger;

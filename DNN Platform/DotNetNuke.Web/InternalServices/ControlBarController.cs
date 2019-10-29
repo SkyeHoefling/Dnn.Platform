@@ -38,7 +38,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Definitions;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.Exceptions;
@@ -48,19 +48,21 @@ using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Api.Internal;
 using DotNetNuke.Web.Client.ClientResourceManagement;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     [DnnAuthorize]
     public class ControlBarController : DnnApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ControlBarController));
+        private readonly ILogger Logger;
         private const string DefaultExtensionImage = "icon_extensions_32px.png";
         private readonly Components.Controllers.IControlBarController Controller;
         private IDictionary<string, string> _nameDics;
 
-        public ControlBarController()
+        public ControlBarController(ILogger<ControlBarController> logger)
         {
+            Logger = logger;
             Controller = Components.Controllers.ControlBarController.Instance;
         }
 
@@ -265,7 +267,7 @@ namespace DotNetNuke.Web.InternalServices
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc);
                     permissionType = 0;
                 }
 
@@ -281,7 +283,7 @@ namespace DotNetNuke.Web.InternalServices
                     }
                     catch (Exception exc)
                     {
-                        Logger.Error(exc);
+                        Logger.LogError(exc);
                     }
                 }
 
@@ -307,7 +309,7 @@ namespace DotNetNuke.Web.InternalServices
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    Logger.LogError(exc);
                     moduleLstID = -1;
                 }
 
@@ -326,7 +328,7 @@ namespace DotNetNuke.Web.InternalServices
                             }
                             catch (Exception exc)
                             {
-                                Logger.Error(exc);
+                                Logger.LogError(exc);
                                 pageID = -1;
                             }
 
@@ -345,7 +347,7 @@ namespace DotNetNuke.Web.InternalServices
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                 }
             }
 
@@ -374,7 +376,7 @@ namespace DotNetNuke.Web.InternalServices
         {
             if (UserController.Instance.GetCurrentUserInfo().IsSuperUser)
             {
-                var log = new LogInfo { BypassBuffering = true, LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString() };
+                var log = new LogInformation { BypassBuffering = true, LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString() };
                 log.AddProperty("Message", "UserRestart");
                 LogController.Instance.AddLog(log);
                 Config.Touch();

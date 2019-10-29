@@ -56,7 +56,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
 		public void AddLog(BasePortalException objBasePortalException)
 		{
-			var log = new LogInfo
+			var log = new LogInformation
 			{
 				Exception = Exceptions.Exceptions.GetExceptionInfo(objBasePortalException),
 			};
@@ -95,11 +95,11 @@ namespace DotNetNuke.Services.Log.EventLog
 
 		public void AddLog(Exception objException, ExceptionLogType logType)
 		{
-			var log = new LogInfo { Exception = new ExceptionInfo(objException) };
+			var log = new LogInformation { Exception = new ExceptionInfo(objException) };
 			AddLog(objException, log, logType);
 		}
 
-		public void AddLog(Exception objException, LogInfo log, ExceptionLogType logType)
+		public void AddLog(Exception objException, LogInformation log, ExceptionLogType logType)
 		{
 			log.LogTypeKey = logType.ToString();
 			if (logType == ExceptionLogType.SEARCH_INDEXER_EXCEPTION)

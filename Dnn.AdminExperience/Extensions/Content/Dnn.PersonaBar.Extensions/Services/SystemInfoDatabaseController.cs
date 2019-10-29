@@ -28,16 +28,22 @@ using System.Web.Http;
 using Dnn.PersonaBar.Library;
 using Dnn.PersonaBar.Library.Attributes;
 using Dnn.PersonaBar.Servers.Components.DatabaseServer;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Servers.Services
 {
     [MenuPermission(Scope = ServiceScope.Host)]
     public class SystemInfoDatabaseController : PersonaBarApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SystemInfoDatabaseController));
+        private readonly ILogger Logger;
         private readonly DatabaseController _databaseController = new DatabaseController();
         
+        public SystemInfoDatabaseController(ILogger<SystemInfoDatabaseController> logger)
+        {
+            Logger = logger;
+        }
+
         [HttpGet]
         public HttpResponseMessage GetDatabaseServerInfo()
         {
@@ -72,7 +78,7 @@ namespace Dnn.PersonaBar.Servers.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

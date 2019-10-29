@@ -28,17 +28,24 @@ using System.Web;
 using System.Web.Http;
 
 
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Web.Api;
+
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     [DnnAuthorize]
     public class EventLogServiceController : DnnApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(EventLogServiceController));
+        private readonly ILogger Logger;
+
+        public EventLogServiceController(ILogger<EventLogServiceController> logger)
+        {
+            Logger = logger;
+        }
 
         [HttpGet]
         [DnnAuthorize(StaticRoles = "Administrators")]
@@ -52,9 +59,9 @@ namespace DotNetNuke.Web.InternalServices
 
             try
             {
-                var logInfo = new LogInfo {LogGUID = guid};
-                logInfo = EventLogController.Instance.GetSingleLog(logInfo, LoggingProvider.ReturnType.LogInfoObjects) as LogInfo;
-                if (logInfo == null)
+                var LogInformation = new LogInformation {LogGUID = guid};
+                LogInformation = EventLogController.Instance.GetSingleLog(LogInformation, LoggingProvider.ReturnType.LogInformationObjects) as LogInformation;
+                if (LogInformation == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest);
                 }
@@ -62,19 +69,19 @@ namespace DotNetNuke.Web.InternalServices
                 return Request.CreateResponse(HttpStatusCode.OK, new
                                                                      {
                                                                          Title = Localization.GetSafeJSString("CriticalError.Error", Localization.SharedResourceFile),
-                                                                         Content = GetPropertiesText(logInfo)
+                                                                         Content = GetPropertiesText(LogInformation)
                                                                      });
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
 
-        private string GetPropertiesText(LogInfo logInfo)
+        private string GetPropertiesText(LogInformation LogInformation)
         {
-            var objLogProperties = logInfo.LogProperties;
+            var objLogProperties = LogInformation.LogProperties;
             var str = new StringBuilder();
             int i;
             for (i = 0; i <= objLogProperties.Count - 1; i++)
@@ -90,7 +97,7 @@ namespace DotNetNuke.Web.InternalServices
                     str.Append("<p><strong>" + ldi.PropertyName + "</strong>:" + HttpUtility.HtmlEncode(ldi.PropertyValue) + "</p>");
                 }
             }
-            str.Append("<p><b>Server Name</b>: " + HttpUtility.HtmlEncode(logInfo.LogServerName) + "</p>");
+            str.Append("<p><b>Server Name</b>: " + HttpUtility.HtmlEncode(LogInformation.LogServerName) + "</p>");
             return str.ToString();
         }
     }

@@ -7,10 +7,13 @@ using Dnn.PersonaBar.Library.Prompt.Models;
 using Dnn.PersonaBar.Roles.Components.Prompt.Models;
 using Dnn.PersonaBar.Roles.Components.Prompt.Exceptions;
 using Dnn.PersonaBar.Roles.Services.DTO;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Roles;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
 {
@@ -19,7 +22,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
     {
         public override string LocalResourceFile => Constants.LocalResourcesFile;
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(SetRole));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<SetRole>>();
         [FlagParameter("id", "Prompt_SetRole_FlagId", "Integer", true)]
         private const string FlagId = "id";
         [FlagParameter("public", "Prompt_SetRole_FlagIsPublic", "Boolean")]
@@ -107,12 +110,12 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
             }
             catch (SetRoleException se)
             {
-                Logger.Error(se);
+                Logger.LogError(se);
                 return new ConsoleErrorResultModel(LocalizeString("RoleUpdated.SystemRoleError"));
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return new ConsoleErrorResultModel(LocalizeString("RoleUpdated.Error"));
             }
         }

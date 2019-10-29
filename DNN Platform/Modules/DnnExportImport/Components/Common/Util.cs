@@ -27,7 +27,7 @@ using Dnn.ExportImport.Components.Services;
 using DotNetNuke.Entities.Profile;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.Reflections;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using System.Text;
 using System.IO;
 using System.Threading;
@@ -37,12 +37,14 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules.Definitions;
 using Newtonsoft.Json;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.ExportImport.Components.Common
 {
     public static class Util
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Util));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(Util));
         private static int _noRole = Convert.ToInt32(Globals.glbRoleNothing);
         // some string extension helpers
         public static bool IsNullOrEmpty(this string s) => string.IsNullOrEmpty(s);
@@ -65,7 +67,7 @@ namespace Dnn.ExportImport.Components.Common
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("Unable to create {0} while calling BasePortableService implementors. {1}",
+                    Logger.LogError("Unable to create {0} while calling BasePortableService implementors. {1}",
                         type.FullName, e.Message);
                     portable2Type = null;
                 }

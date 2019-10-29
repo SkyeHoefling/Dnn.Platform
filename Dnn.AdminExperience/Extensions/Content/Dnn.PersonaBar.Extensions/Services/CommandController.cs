@@ -12,11 +12,12 @@ using Dnn.PersonaBar.Prompt.Components;
 using Dnn.PersonaBar.Prompt.Components.Models;
 using Dnn.PersonaBar.Prompt.Components.Repositories;
 using DotNetNuke.Entities.Controllers;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Entities.Portals;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Prompt.Services
 {
@@ -24,7 +25,7 @@ namespace Dnn.PersonaBar.Prompt.Services
     [RequireHost]
     public class CommandController : ControllerBase, IServiceRouteMapper
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(CommandController));
+        private readonly ILogger Logger;
         private static readonly string[] BlackList = { "smtppassword", "password", "pwd", "pass", "apikey" };
 
         private int _portalId = -1;
@@ -60,6 +61,11 @@ namespace Dnn.PersonaBar.Prompt.Services
             }
         }
 
+        public CommandController(ILogger<CommandController> logger)
+        {
+            Logger = logger;
+        }
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public HttpResponseMessage Cmd(int portalId, [FromBody] CommandInputModel command)
@@ -69,7 +75,7 @@ namespace Dnn.PersonaBar.Prompt.Services
             if (portal == null)
             {
                 var errorMessage = string.Format(Localization.GetString("Prompt_GetPortal_NotFound", Constants.LocalResourcesFile), portalId);
-                Logger.Error(errorMessage);
+                Logger.LogError(errorMessage);
                 return AddLogAndReturnResponse(null, null, command, DateTime.Now, errorMessage);
             }
 
@@ -134,13 +140,13 @@ namespace Dnn.PersonaBar.Prompt.Services
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                     return AddLogAndReturnResponse(null, null, command, startTime, ex.Message);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return AddLogAndReturnResponse(null, null, command, startTime, ex.Message);
             }
         }
@@ -159,17 +165,17 @@ namespace Dnn.PersonaBar.Prompt.Services
         {
             HttpResponseMessage message;
             var isValid = consoleCommand?.IsValid() ?? false;
-            var logInfo = new LogInfo
+            var LogInformation = new LogInformation
             {
                 LogTypeKey = "PROMPT_ALERT"
             };
-            logInfo.LogProperties.Add(new LogDetailInfo("Command", FilterCommand(command.CmdLine)));
-            logInfo.LogProperties.Add(new LogDetailInfo("IsValid", isValid.ToString()));
+            LogInformation.LogProperties.Add(new LogDetailInfo("Command", FilterCommand(command.CmdLine)));
+            LogInformation.LogProperties.Add(new LogDetailInfo("IsValid", isValid.ToString()));
 
             try
             {
                 if (cmdTypeToRun != null)
-                    logInfo.LogProperties.Add(new LogDetailInfo("TypeFullName", cmdTypeToRun.FullName));
+                    LogInformation.LogProperties.Add(new LogDetailInfo("TypeFullName", cmdTypeToRun.FullName));
                 if (isValid)
                 {
                     var result = consoleCommand.Run();
@@ -202,22 +208,22 @@ namespace Dnn.PersonaBar.Prompt.Services
                         }
                     }
                     message = Request.CreateResponse(HttpStatusCode.OK, result);
-                    logInfo.LogProperties.Add(new LogDetailInfo("RecordsAffected", result.Records.ToString()));
-                    logInfo.LogProperties.Add(new LogDetailInfo("Output", result.Output));
+                    LogInformation.LogProperties.Add(new LogDetailInfo("RecordsAffected", result.Records.ToString()));
+                    LogInformation.LogProperties.Add(new LogDetailInfo("Output", result.Output));
                 }
                 else
                 {
-                    logInfo.LogProperties.Add(new LogDetailInfo("Output", consoleCommand?.ValidationMessage ?? error));
+                    LogInformation.LogProperties.Add(new LogDetailInfo("Output", consoleCommand?.ValidationMessage ?? error));
                     message = BadRequestResponse(consoleCommand?.ValidationMessage ?? error);
                 }
             }
             catch (Exception ex)
             {
-                logInfo.Exception = new ExceptionInfo(ex);
+                LogInformation.Exception = new ExceptionInfo(ex);
                 message = BadRequestResponse(ex.Message);
             }
-            logInfo.LogProperties.Add(new LogDetailInfo("ExecutionTime(hh:mm:ss)", TimeSpan.FromMilliseconds(DateTime.Now.Subtract(startTime).TotalMilliseconds).ToString(@"hh\:mm\:ss\.ffffff")));
-            LogController.Instance.AddLog(logInfo);
+            LogInformation.LogProperties.Add(new LogDetailInfo("ExecutionTime(hh:mm:ss)", TimeSpan.FromMilliseconds(DateTime.Now.Subtract(startTime).TotalMilliseconds).ToString(@"hh\:mm\:ss\.ffffff")));
+            LogController.Instance.AddLog(LogInformation);
             return message;
         }
 

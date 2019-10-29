@@ -31,7 +31,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Modules.Groups.Components;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
@@ -40,6 +40,7 @@ using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Security;
 using DotNetNuke.Abstractions;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Modules.Groups
 {
@@ -47,16 +48,17 @@ namespace DotNetNuke.Modules.Groups
     public class ModerationServiceController : DnnApiController
     {
         protected INavigationManager NavigationManager { get; }
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ModerationServiceController));
+    	protected ILogger Logger { get; }
         private int _tabId;
         private int _moduleId;
         private int _roleId;
         private int _memberId;
         private RoleInfo _roleInfo;
 
-        public ModerationServiceController(INavigationManager navigationManager)
+        public ModerationServiceController(INavigationManager navigationManager, ILogger<ModerationServiceController> logger)
         {
             NavigationManager = navigationManager;
+            Logger = logger;
         }
 
         public class NotificationDTO
@@ -99,7 +101,7 @@ namespace DotNetNuke.Modules.Groups
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -135,7 +137,7 @@ namespace DotNetNuke.Modules.Groups
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -181,7 +183,7 @@ namespace DotNetNuke.Modules.Groups
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
 
@@ -220,7 +222,7 @@ namespace DotNetNuke.Modules.Groups
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
 
@@ -270,7 +272,7 @@ namespace DotNetNuke.Modules.Groups
                 }
             } catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
 
@@ -312,7 +314,7 @@ namespace DotNetNuke.Modules.Groups
                 }
             } catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
 

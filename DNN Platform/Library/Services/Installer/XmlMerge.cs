@@ -191,7 +191,7 @@ namespace DotNetNuke.Services.Installer
                 if (child.NodeType == XmlNodeType.Element || child.NodeType == XmlNodeType.Comment)
                 {
                     rootNode.AppendChild(TargetConfig.ImportNode(child, true));
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "AddNode:" + child.InnerXml.ToString());
+					DnnInstallLogger.InstallLogInformation(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "AddNode:" + child.InnerXml.ToString());
                     changedNode = true;
                 }
             }
@@ -207,7 +207,7 @@ namespace DotNetNuke.Services.Installer
                 if (child.NodeType == XmlNodeType.Element || child.NodeType == XmlNodeType.Comment)
                 {
                     rootNode.PrependChild(TargetConfig.ImportNode(child, true));
-                    DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "PrependNode:" + child.InnerXml.ToString());
+                    DnnInstallLogger.InstallLogInformation(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "PrependNode:" + child.InnerXml.ToString());
                     changedNode = true;
                 }
             }
@@ -225,7 +225,7 @@ namespace DotNetNuke.Services.Installer
             {
                 if (child.NodeType == XmlNodeType.Element || child.NodeType == XmlNodeType.Comment)
                 {
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "InsertNode:" + child.InnerXml.ToString());
+					DnnInstallLogger.InstallLogInformation(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "InsertNode:" + child.InnerXml.ToString());
                     switch (mode)
                     {
                         case NodeInsertType.Before:
@@ -440,7 +440,7 @@ namespace DotNetNuke.Services.Installer
                     if (rootNode.Attributes[attributeName] != null)
                     {
                         rootNode.Attributes.Remove(rootNode.Attributes[attributeName]);
-						DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveAttribute:attributeName=" + attributeName.ToString());
+						DnnInstallLogger.InstallLogInformation(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveAttribute:attributeName=" + attributeName.ToString());
                         changedNode = true;
                     }
                 }
@@ -461,7 +461,7 @@ namespace DotNetNuke.Services.Installer
                 if (parentNode != null)
                 {
                     parentNode.RemoveChild(node);
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveNode:" + node.InnerXml.ToString());
+					DnnInstallLogger.InstallLogInformation(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "RemoveNode:" + node.InnerXml.ToString());
                     changedNode = true;
                 }
             }
@@ -481,7 +481,7 @@ namespace DotNetNuke.Services.Installer
                 string attributeValue = actionNode.Attributes["value"].Value;
                 if (!string.IsNullOrEmpty(attributeName))
                 {
-					DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateAttribute:attributeName=" + attributeName.ToString());
+					DnnInstallLogger.InstallLogInformation(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateAttribute:attributeName=" + attributeName.ToString());
                     if (rootNode.Attributes[attributeName] == null)
                     {
                         rootNode.Attributes.Append(TargetConfig.CreateAttribute(attributeName));
@@ -509,7 +509,7 @@ namespace DotNetNuke.Services.Installer
             if (actionNode.Attributes["key"] != null)
             {
                 keyAttribute = actionNode.Attributes["key"].Value;
-				DnnInstallLogger.InstallLogInfo(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateNode: keyAttribute=" + keyAttribute.ToString());
+				DnnInstallLogger.InstallLogInformation(Localization.Localization.GetString("LogStart", Localization.Localization.GlobalResourceFile) + "UpdateNode: keyAttribute=" + keyAttribute.ToString());
             }
             foreach (XmlNode child in actionNode.ChildNodes)
             {
@@ -680,7 +680,7 @@ namespace DotNetNuke.Services.Installer
 
                     if (!File.Exists(Globals.ApplicationMapPath + "\\" + TargetFileName))
                     {
-                        DnnInstallLogger.InstallLogInfo($"Target File {TargetFileName} doesn't exist, ignore the merge process");
+                        DnnInstallLogger.InstallLogInformation($"Target File {TargetFileName} doesn't exist, ignore the merge process");
                         return;
                     }
 

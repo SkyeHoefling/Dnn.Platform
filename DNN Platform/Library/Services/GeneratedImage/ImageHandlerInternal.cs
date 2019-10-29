@@ -154,15 +154,15 @@ namespace DotNetNuke.Services.GeneratedImage
                 if (LogSecurity)
                 {
                     EventLogController logController = new EventLogController();
-                    var logInfo = new LogInfo
+                    var LogInformation = new LogInformation
                     {
                         LogUserID = PortalSettings.Current.UserId,
                         LogPortalID = PortalSettings.Current.PortalId,
                         LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString()
                     };
-                    logInfo.AddProperty("DnnImageHandler", message);
-                    logInfo.AddProperty("IP", ipAddress);
-                    logController.AddLog(logInfo);
+                    LogInformation.AddProperty("DnnImageHandler", message);
+                    LogInformation.AddProperty("IP", ipAddress);
+                    logController.AddLog(LogInformation);
                 }
                 context.Response.StatusCode = 403;
                 context.Response.StatusDescription = message;
@@ -193,16 +193,16 @@ namespace DotNetNuke.Services.GeneratedImage
                     if (LogSecurity)
                     {
                         EventLogController logController = new EventLogController();
-                        var logInfo = new LogInfo
+                        var LogInformation = new LogInformation
                         {
                             LogUserID = PortalSettings.Current.UserId,
                             LogPortalID = PortalSettings.Current.PortalId,
                             LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString()
                         };
-                        logInfo.AddProperty("DnnImageHandler", message);
-                        logInfo.AddProperty("IP", ipAddress);
-                        logInfo.AddProperty("AllowedDomains", allowedDomains);
-                        logController.AddLog(logInfo);
+                        LogInformation.AddProperty("DnnImageHandler", message);
+                        LogInformation.AddProperty("IP", ipAddress);
+                        LogInformation.AddProperty("AllowedDomains", allowedDomains);
+                        logController.AddLog(LogInformation);
                     }
 
                     context.Response.StatusCode = 403;
@@ -286,15 +286,15 @@ namespace DotNetNuke.Services.GeneratedImage
                     if (LogSecurity)
                     {
                         EventLogController logController = new EventLogController();
-                        var logInfo = new LogInfo
+                        var LogInformation = new LogInformation
                         {
                             LogUserID = PortalSettings.Current.UserId,
                             LogPortalID = PortalSettings.Current.PortalId,
                             LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString()
                         };
-                        logInfo.AddProperty("DnnImageHandler", message);
-                        logInfo.AddProperty("IP", ipAddress);
-                        logController.AddLog(logInfo);
+                        LogInformation.AddProperty("DnnImageHandler", message);
+                        LogInformation.AddProperty("IP", ipAddress);
+                        logController.AddLog(LogInformation);
                     }
                     context.Response.StatusCode = 429;
                     context.Response.StatusDescription = message;

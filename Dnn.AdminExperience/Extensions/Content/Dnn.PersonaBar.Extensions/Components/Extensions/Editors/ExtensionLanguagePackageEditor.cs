@@ -5,16 +5,17 @@ using DotNetNuke.Common;
 using DotNetNuke.Abstractions;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Installer.Packages;
 using DotNetNuke.Services.Localization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Extensions.Components.Editors
 {
     public class ExtensionLanguagePackageEditor : IPackageEditor
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(JsLibraryPackageEditor));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<JsLibraryPackageEditor>>();
         protected INavigationManager NavigationManager { get; }
 
         public ExtensionLanguagePackageEditor()
@@ -72,7 +73,7 @@ namespace Dnn.PersonaBar.Extensions.Components.Editors
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 errorMessage = ex.Message;
                 return false;
             }

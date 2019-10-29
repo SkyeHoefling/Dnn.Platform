@@ -30,13 +30,14 @@ using System.Net.Http;
 using System.Web.Http;
 using DotNetNuke.Common.Lists;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Security.Roles.Internal;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Entities.Users.Social;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Modules.MemberDirectory.Services
 {
@@ -44,7 +45,12 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
     [DnnModuleAuthorize(AccessLevel = SecurityAccessLevel.View)]
     public class MemberDirectoryController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (MemberDirectoryController));
+        private readonly ILogger Logger;
+        public MemberDirectoryController(ILogger<MemberDirectoryController> logger)
+        {
+            Logger = logger;
+        }
+
         #region Private Methods
 
         private static void AddSearchTerm(ref string propertyNames, ref string propertyValues, string name, string value)
@@ -232,7 +238,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -247,7 +253,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -265,7 +271,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -283,7 +289,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -300,7 +306,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -317,7 +323,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -334,7 +340,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -351,7 +357,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -368,7 +374,7 @@ namespace DotNetNuke.Modules.MemberDirectory.Services
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

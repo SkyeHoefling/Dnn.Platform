@@ -32,7 +32,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Entities.Users.Social;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Modules.Journal.Components;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Roles;
@@ -41,6 +41,7 @@ using DotNetNuke.Services.Journal;
 using DotNetNuke.Services.Journal.Internal;
 using DotNetNuke.Services.Social.Notifications;
 using DotNetNuke.Web.Api;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Modules.Journal
 {
@@ -48,13 +49,18 @@ namespace DotNetNuke.Modules.Journal
     [SupportedModules("Journal")]
     public class ServicesController : DnnApiController
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ServicesController));
+        private readonly ILogger Logger;
 
         private const int MentionNotificationLength = 100;
         private const string MentionNotificationSuffix = "...";
         private const string MentionIdentityChar = "@";
 
         private static readonly string [] AcceptedFileExtensions = { "jpg", "png", "gif", "jpe", "jpeg", "tiff", "bmp" };
+
+        public ServicesController(ILogger<ServicesController> logger)
+        {
+            Logger = logger;
+        }
 
         #region Public Methods
         public class CreateDTO
@@ -128,7 +134,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -290,7 +296,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -320,7 +326,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -343,7 +349,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -368,7 +374,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 throw new HttpException(500, exc.Message);
             }
         }
@@ -390,7 +396,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -428,7 +434,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -469,7 +475,7 @@ namespace DotNetNuke.Modules.Journal
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }
@@ -519,7 +525,7 @@ namespace DotNetNuke.Modules.Journal
 			}
 			catch (Exception exc)
 			{
-				Logger.Error(exc);
+				Logger.LogError(exc);
 				return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
 			}
         }

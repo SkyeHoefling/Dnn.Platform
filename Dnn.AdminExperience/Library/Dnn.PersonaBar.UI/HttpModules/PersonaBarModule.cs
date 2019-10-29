@@ -23,16 +23,19 @@ using System;
 using System.Web;
 using Dnn.PersonaBar.Library.AppEvents;
 using Dnn.PersonaBar.Library.Common;
+using DotNetNuke.Common;
 using DotNetNuke.Application;
 using DotNetNuke.Collections;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.UI.Skins.EventListeners;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.UI.HttpModules
 {
     public class PersonaBarModule : IHttpModule
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(PersonaBarModule));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<PersonaBarModule>>();
 
         private static readonly object LockAppStarted = new object();
         private static bool _hasAppStarted = false;
@@ -81,7 +84,7 @@ namespace Dnn.PersonaBar.UI.HttpModules
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorFormat("{0}.Init threw an exception.  {1}\r\n{2}",
+                    Logger.LogError("{0}.Init threw an exception.  {1}\r\n{2}",
                         instance.GetType().FullName, ex.Message, ex.StackTrace);
                 }
             });
@@ -97,7 +100,7 @@ namespace Dnn.PersonaBar.UI.HttpModules
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorFormat("{0}.Load threw an exception.  {1}\r\n{2}",
+                    Logger.LogError("{0}.Load threw an exception.  {1}\r\n{2}",
                         instance.GetType().FullName, ex.Message, ex.StackTrace);
                 }
             });
@@ -112,7 +115,7 @@ namespace Dnn.PersonaBar.UI.HttpModules
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorFormat("{0}.PreRender threw an exception.  {1}\r\n{2}",
+                    Logger.LogError("{0}.PreRender threw an exception.  {1}\r\n{2}",
                         instance.GetType().FullName, ex.Message, ex.StackTrace);
                 }
             });
@@ -128,7 +131,7 @@ namespace Dnn.PersonaBar.UI.HttpModules
                 }
                 catch (Exception ex)
                 {
-                    Logger.ErrorFormat("{0}.UnLoad threw an exception.  {1}\r\n{2}",
+                    Logger.LogError("{0}.UnLoad threw an exception.  {1}\r\n{2}",
                         instance.GetType().FullName, ex.Message, ex.StackTrace);
                 }
             });

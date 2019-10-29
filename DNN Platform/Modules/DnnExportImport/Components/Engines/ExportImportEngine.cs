@@ -47,13 +47,15 @@ using Newtonsoft.Json;
 using PlatformDataProvider = DotNetNuke.Data.DataProvider;
 using DotNetNuke.Framework.Reflections;
 using Dnn.ExportImport.Dto.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dnn.ExportImport.Components.Engines
 {
     public class ExportImportEngine
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ExportImportEngine));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ExportImportEngine>>();
 
         private const StringComparison IgnoreCaseComp = StringComparison.InvariantCultureIgnoreCase;
 
@@ -639,7 +641,7 @@ namespace Dnn.ExportImport.Components.Engines
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("Unable to clear {0} while calling CleanupDatabaseIfDirty. Error: {1}",
+                    Logger.LogError("Unable to clear {0} while calling CleanupDatabaseIfDirty. Error: {1}",
                         type.Name,
                         e.Message);
                 }

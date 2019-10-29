@@ -25,13 +25,15 @@ using System.Reflection;
 using System.Threading;
 using System.Web;
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Web.Common.Internal
 {
     internal static class DotNetNukeShutdownOverload
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(DotNetNukeShutdownOverload));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILoggerFactory>().CreateLogger(typeof(DotNetNukeShutdownOverload));
 
         private static Timer _shutDownDelayTimer;
         private static bool _handleShutdowns;
@@ -51,7 +53,7 @@ namespace DotNetNuke.Web.Common.Internal
 
                 if (fileChangesMonitor == null)
                 {
-                    Logger.Info("fileChangesMonitor is null");
+                    Logger.LogInformation("fileChangesMonitor is null");
                     //AddSiteFilesMonitoring(true);
                 }
                 else
@@ -61,13 +63,13 @@ namespace DotNetNuke.Web.Common.Internal
                         .GetField("_FCNMode", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.IgnoreCase)
                         .GetValue(fileChangesMonitor);
 
-                    Logger.Info("FCNMode = " + fcnVal + " (Modes: NotSet/Default=0, Disabled=1, Single=2)");
+                    Logger.LogInformation("FCNMode = " + fcnVal + " (Modes: NotSet/Default=0, Disabled=1, Single=2)");
 
                     var dirMonCompletion = typeof(HttpRuntime).Assembly.GetType("System.Web.DirMonCompletion");
                     var dirMonCount = (int)dirMonCompletion.InvokeMember("_activeDirMonCompletions",
                         BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetField,
                         null, null, null);
-                    Logger.Trace("DirMonCompletion count: " + dirMonCount);
+                    Logger.LogTrace("DirMonCompletion count: " + dirMonCount);
                     // enable our monitor only when fcnMode="Disabled"
                     //AddSiteFilesMonitoring(fcnVal.ToString() == "1");
                 }
@@ -77,7 +79,7 @@ namespace DotNetNuke.Web.Common.Internal
             }
             catch (Exception e)
             {
-                Logger.Info(e);
+                Logger.LogInformation(e);
             }
         }
 
@@ -112,11 +114,11 @@ namespace DotNetNuke.Web.Common.Internal
 
                             // begin watching;
                             _binOrRootWatcher.EnableRaisingEvents = true;
-                            Logger.Trace("Added watcher for: " + _binOrRootWatcher.Path + "\\" + _binOrRootWatcher.Filter);
+                            Logger.LogTrace("Added watcher for: " + _binOrRootWatcher.Path + "\\" + _binOrRootWatcher.Filter);
                         }
                         catch (Exception ex)
                         {
-                            Logger.Trace("Error adding our own file monitoring object. " + ex);
+                            Logger.LogTrace("Error adding our own file monitoring object. " + ex);
                         }
                     }
                 }
@@ -133,7 +135,7 @@ namespace DotNetNuke.Web.Common.Internal
             catch (Exception ex)
             {
                 _shutdownInprogress = false;
-                Logger.Error(ex);
+                Logger.LogError(ex);
             }
         }
 
@@ -150,8 +152,8 @@ namespace DotNetNuke.Web.Common.Internal
 
         private static void WatcherOnChanged(object sender, FileSystemEventArgs e)
         {
-            if (Logger.IsInfoEnabled && !e.FullPath.EndsWith(".log.resources"))
-                Logger.Info($"Watcher Activity: {e.ChangeType}. Path: {e.FullPath}");
+            if (Logger.IsEnabled(LogLevel.Information) && !e.FullPath.EndsWith(".log.resources"))
+                Logger.LogInformation($"Watcher Activity: {e.ChangeType}. Path: {e.FullPath}");
 
             if (_handleShutdowns && !_shutdownInprogress && (e.FullPath ?? "").StartsWith(_binFolder, StringComparison.InvariantCultureIgnoreCase))
             {
@@ -161,8 +163,8 @@ namespace DotNetNuke.Web.Common.Internal
 
         private static void WatcherOnCreated(object sender, FileSystemEventArgs e)
         {
-            if (Logger.IsInfoEnabled && !e.FullPath.EndsWith(".log.resources"))
-                Logger.Info($"Watcher Activity: {e.ChangeType}. Path: {e.FullPath}");
+            if (Logger.IsEnabled(LogLevel.Information) && !e.FullPath.EndsWith(".log.resources"))
+                Logger.LogInformation($"Watcher Activity: {e.ChangeType}. Path: {e.FullPath}");
 
             if (_handleShutdowns && !_shutdownInprogress && (e.FullPath ?? "").StartsWith(_binFolder, StringComparison.InvariantCultureIgnoreCase))
                 ShceduleShutdown();
@@ -170,8 +172,8 @@ namespace DotNetNuke.Web.Common.Internal
 
         private static void WatcherOnRenamed(object sender, RenamedEventArgs e)
         {
-            if (Logger.IsInfoEnabled && !e.FullPath.EndsWith(".log.resources"))
-                Logger.Info($"Watcher Activity: {e.ChangeType}. New Path: {e.FullPath}. Old Path: {e.OldFullPath}");
+            if (Logger.IsEnabled(LogLevel.Information) && !e.FullPath.EndsWith(".log.resources"))
+                Logger.LogInformation($"Watcher Activity: {e.ChangeType}. New Path: {e.FullPath}. Old Path: {e.OldFullPath}");
 
             if (_handleShutdowns && !_shutdownInprogress && (e.FullPath ?? "").StartsWith(_binFolder, StringComparison.InvariantCultureIgnoreCase))
                 ShceduleShutdown();
@@ -179,8 +181,8 @@ namespace DotNetNuke.Web.Common.Internal
 
         private static void WatcherOnDeleted(object sender, FileSystemEventArgs e)
         {
-            if (Logger.IsInfoEnabled && !e.FullPath.EndsWith(".log.resources"))
-                Logger.Info($"Watcher Activity: {e.ChangeType}. Path: {e.FullPath}");
+            if (Logger.IsEnabled(LogLevel.Information) && !e.FullPath.EndsWith(".log.resources"))
+                Logger.LogInformation($"Watcher Activity: {e.ChangeType}. Path: {e.FullPath}");
 
             if (_handleShutdowns && !_shutdownInprogress && (e.FullPath ?? "").StartsWith(_binFolder, StringComparison.InvariantCultureIgnoreCase))
                 ShceduleShutdown();
@@ -188,8 +190,8 @@ namespace DotNetNuke.Web.Common.Internal
 
         private static void WatcherOnError(object sender, ErrorEventArgs e)
         {
-            if (Logger.IsInfoEnabled)
-                Logger.Info("Watcher Activity: N/A. Error: " + e.GetException());
+            if (Logger.IsEnabled(LogLevel.Information))
+                Logger.LogInformation("Watcher Activity: N/A. Error: " + e.GetException());
         }
     }
 }

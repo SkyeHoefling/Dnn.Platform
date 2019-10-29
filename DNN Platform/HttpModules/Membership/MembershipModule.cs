@@ -21,13 +21,11 @@
 #region Usings
 
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Security;
-using DotNetNuke.Application;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Controllers;
@@ -35,15 +33,15 @@ using DotNetNuke.Entities.Host;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.HttpModules.Services;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Localization;
-using DotNetNuke.Services.Personalization;
 using DotNetNuke.UI.Skins.Controls;
 using DotNetNuke.UI.Skins.EventListeners;
-using DotNetNuke.Security.Roles.Internal;
 using DotNetNuke.Services.UserRequest;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -54,7 +52,7 @@ namespace DotNetNuke.HttpModules.Membership
     /// </summary>
     public class MembershipModule : IHttpModule
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(MembershipModule));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<MembershipModule>>();
 
         private static readonly Regex NameRegex = new Regex(@"\w+[\\]+(?=)", RegexOptions.Compiled);
 
@@ -282,7 +280,7 @@ namespace DotNetNuke.HttpModules.Membership
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return true;
             }
         }

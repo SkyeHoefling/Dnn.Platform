@@ -9,15 +9,17 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Localization;
 using Newtonsoft.Json;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.SiteSettings.Components
 {
     internal class LanguagesControllerTasks
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(LanguagesControllerTasks));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<LanguagesControllerTasks>>();
         private const string LocalResourcesFile = "~/DesktopModules/admin/Dnn.PersonaBar/Modules/Dnn.SiteSettings/App_LocalResources/SiteSettings.resx";
         private const string LocalizationProgressFile = "PersonaBarLocalizationProgress.txt";
 
@@ -71,7 +73,7 @@ namespace Dnn.PersonaBar.SiteSettings.Components
                 {
                     try
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex);
                         progress.Reset().Error = ex.ToString();
                         SaveProgressToFile(progress);
                     }
@@ -110,7 +112,7 @@ namespace Dnn.PersonaBar.SiteSettings.Components
                 {
                     try
                     {
-                        Logger.Error(ex);
+                        Logger.LogError(ex);
                         progress.Reset().Error = ex.ToString();
                         SaveProgressToFile(progress);
                     }

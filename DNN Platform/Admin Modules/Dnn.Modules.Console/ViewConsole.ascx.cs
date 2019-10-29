@@ -31,6 +31,7 @@ using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Dnn.Modules.Console.Components;
 using DotNetNuke.Abstractions;
 using DotNetNuke.Common.Utilities;
@@ -38,7 +39,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Framework.JavaScriptLibraries;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Permissions;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Exceptions;
@@ -53,7 +54,7 @@ namespace Dnn.Modules.Console
 	public partial class ViewConsole : PortalModuleBase
 	{
         private readonly INavigationManager _navigationManager;
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ViewConsole));
+        private readonly ILogger _logger;
 	    private ConsoleController _consoleCtrl;
 		private string _defaultSize = string.Empty;
 		private string _defaultView = string.Empty;
@@ -63,6 +64,7 @@ namespace Dnn.Modules.Console
         public ViewConsole()
         {
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = DependencyProvider.GetService<ILogger<ViewConsole>>();
         }
 
         #region Public Properties
@@ -308,7 +310,7 @@ namespace Dnn.Modules.Console
                 }
                 catch (Exception exc)
                 {
-                    Logger.Error(exc);
+                    _logger.LogError(exc);
 
                     consoleModuleID = -1;
                 }

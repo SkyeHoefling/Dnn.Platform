@@ -20,20 +20,23 @@
 #endregion
 
 using System;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Content.Workflow;
 using DotNetNuke.Entities.Content.Workflow.Entities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Entities.Tabs
 {
     class TabWorkflowTracker : ServiceLocator<ITabChangeTracker, TabWorkflowTracker>, ITabChangeTracker
     {
-        private static readonly DnnLogger Logger = DnnLogger.GetClassLogger(typeof(TabWorkflowTracker));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<TabWorkflowTracker>>();
        
         #region Members
         private readonly ITabController _tabController;
@@ -126,7 +129,7 @@ namespace DotNetNuke.Entities.Tabs
                     var workflow = GetCurrentOrDefaultWorkflow(tabInfo, portalId);
                     if (workflow == null)
                     {
-                        Logger.Warn("Current Workflow and Default workflow are not found on NotifyWorkflowAboutChanges");
+                        Logger.LogWarning("Current Workflow and Default workflow are not found on NotifyWorkflowAboutChanges");
                         return;
                     }
 

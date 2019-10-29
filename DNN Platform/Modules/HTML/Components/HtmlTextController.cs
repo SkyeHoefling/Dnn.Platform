@@ -604,13 +604,13 @@ namespace DotNetNuke.Modules.Html
             }
 
             // add log history
-            var logInfo = new HtmlTextLogInfo();
-            logInfo.ItemID = htmlContent.ItemID;
-            logInfo.StateID = htmlContent.StateID;
-            logInfo.Approved = htmlContent.Approved;
-            logInfo.Comment = htmlContent.Comment;
+            var LogInformation = new HtmlTextLogInformation();
+            LogInformation.ItemID = htmlContent.ItemID;
+            LogInformation.StateID = htmlContent.StateID;
+            LogInformation.Approved = htmlContent.Approved;
+            LogInformation.Comment = htmlContent.Comment;
             var objLogs = new HtmlTextLogController();
-            objLogs.AddHtmlTextLog(logInfo);
+            objLogs.AddHtmlTextLog(LogInformation);
 
             // create user notifications
             CreateUserNotifications(htmlContent);

@@ -77,10 +77,10 @@ namespace Dnn.PersonaBar.AdminLogs.Components
         public string GetPropertiesText(object obj)
         {
             var str = new StringBuilder();
-            var objLogInfo = (LogInfo)obj;
-            if (objLogInfo != null)
+            var objLogInformation = (LogInformation)obj;
+            if (objLogInformation != null)
             {
-                var objLogProperties = objLogInfo.LogProperties;
+                var objLogProperties = objLogInformation.LogProperties;
                 int i;
                 for (i = 0; i <= objLogProperties.Count - 1; i++)
                 {
@@ -97,12 +97,12 @@ namespace Dnn.PersonaBar.AdminLogs.Components
                                    HttpUtility.HtmlEncode(ldi.PropertyValue) + "</p>");
                     }
                 }
-                if (!string.IsNullOrEmpty(objLogInfo.Exception.ExceptionHash))
+                if (!string.IsNullOrEmpty(objLogInformation.Exception.ExceptionHash))
                 {
-                    str.Append(objLogInfo.Exception);
+                    str.Append(objLogInformation.Exception);
                 }
                 str.Append("<p>" + Localization.GetString("ServerName",Constants.LocalResourcesFile) +
-                           HttpUtility.HtmlEncode(objLogInfo.LogServerName) + "</p>");
+                           HttpUtility.HtmlEncode(objLogInformation.LogServerName) + "</p>");
             }
             return str.ToString();
         }
@@ -277,8 +277,8 @@ namespace Dnn.PersonaBar.AdminLogs.Components
             objXml.LoadXml("<LogEntries></LogEntries>");
             foreach (var logId in logIds)
             {
-                var objLogInfo = new LogInfo { LogGUID = logId };
-                var objNode = objXml.ImportNode((XmlNode)LogController.Instance.GetSingleLog(objLogInfo, LoggingProvider.ReturnType.XML), true);
+                var objLogInformation = new LogInformation { LogGUID = logId };
+                var objNode = objXml.ImportNode((XmlNode)LogController.Instance.GetSingleLog(objLogInformation, LoggingProvider.ReturnType.XML), true);
                 if (objXml.DocumentElement != null)
                 {
                     objXml.DocumentElement.AppendChild(objNode);

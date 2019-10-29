@@ -26,13 +26,16 @@ using System.Net.Http;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Common;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.Web.Api.Auth
 {
     public abstract class AuthMessageHandlerBase : DelegatingHandler
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(AuthMessageHandlerBase));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<AuthMessageHandlerBase>>();
 
         public abstract string AuthScheme { get; }
         public virtual bool BypassAntiForgeryToken => false;
@@ -86,9 +89,9 @@ namespace DotNetNuke.Web.Api.Auth
                 return !Thread.CurrentPrincipal.Identity.IsAuthenticated;
             }
 
-            if (Logger.IsTraceEnabled)
+            if (Logger.IsEnabled(LogLevel.Trace))
             {
-                Logger.Trace($"{AuthScheme}: Validating request vs. SSL mode ({ForceSsl}) failed. ");
+                Logger.LogTrace($"{AuthScheme}: Validating request vs. SSL mode ({ForceSsl}) failed. ");
             }
 
             // will let callers to return without authenticating the user

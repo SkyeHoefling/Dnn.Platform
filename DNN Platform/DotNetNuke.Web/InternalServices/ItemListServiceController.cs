@@ -40,19 +40,24 @@ using DotNetNuke.Security.Permissions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Web.Common;
-using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Common;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.InternalServices
 {
     [DnnAuthorize]
     public class ItemListServiceController : DnnApiController
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ItemListServiceController));
+        private readonly ILogger Logger;
 
         private const string PortalPrefix = "P-";
         private const string RootKey = "Root";
+
+        public ItemListServiceController(ILogger<ItemListServiceController> logger)
+        {
+            Logger = logger;
+        }
 
         #region Dtos
 
@@ -1353,7 +1358,7 @@ namespace DotNetNuke.Web.InternalServices
             }
             catch (Exception exc)
             {
-                Logger.Error(exc);
+                Logger.LogError(exc);
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, exc);
             }
         }

@@ -6,11 +6,14 @@ using Dnn.PersonaBar.Library.Prompt.Attributes;
 using Dnn.PersonaBar.Library.Prompt.Models;
 using Dnn.PersonaBar.Roles.Components.Prompt.Models;
 using Dnn.PersonaBar.Roles.Services.DTO;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Roles;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
 {
@@ -19,7 +22,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
     {
         public override string LocalResourceFile => Constants.LocalResourcesFile;
 
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(NewRole));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<NewRole>>();
 
         [FlagParameter("public", "Prompt_NewRole_FlagIsPublic", "Boolean", "false")]
         private const string FlagIsPublic = "public";
@@ -91,7 +94,7 @@ namespace Dnn.PersonaBar.Roles.Components.Prompt.Commands
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return new ConsoleErrorResultModel(LocalizeString("RoleAdded.Error"));
             }
 

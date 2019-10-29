@@ -23,8 +23,10 @@
 using System;
 using System.Web;
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Log.EventLog;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 #endregion
 
@@ -35,7 +37,7 @@ namespace DotNetNuke.HttpModules.Exceptions
     /// </summary>
     public class ExceptionModule : IHttpModule
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (ExceptionModule));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<ExceptionModule>>();
         /// <summary>
         /// Gets the name of the module.
         /// </summary>
@@ -103,7 +105,7 @@ namespace DotNetNuke.HttpModules.Exceptions
                     }
 					catch (Exception ex)
 					{
-						Logger.Error(ex);
+						Logger.LogError(ex);
 					}
                 }
             }
@@ -111,7 +113,7 @@ namespace DotNetNuke.HttpModules.Exceptions
             {
                 //it is possible when terminating the request for the context not to exist
                 //in this case we just want to exit since there is nothing else we can do
-				Logger.Error(exc);
+				Logger.LogError(exc);
             }
         }
     }

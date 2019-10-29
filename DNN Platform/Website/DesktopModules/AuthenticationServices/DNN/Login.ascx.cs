@@ -23,11 +23,12 @@
 using System;
 using System.Web;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using DotNetNuke.Abstractions;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Membership;
 using DotNetNuke.Services.Authentication;
@@ -50,12 +51,13 @@ namespace DotNetNuke.Modules.Admin.Authentication.DNN
 	/// </remarks>
 	public partial class Login : AuthenticationLoginBase
 	{
-		private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (Login));
+        private readonly ILogger _logger;
         private readonly INavigationManager _navigationManager;
 
         public Login()
         {
             _navigationManager = DependencyProvider.GetRequiredService<INavigationManager>();
+            _logger = DependencyProvider.GetService<ILogger<Login>>();
         }
 
 		#region Protected Properties
@@ -225,7 +227,7 @@ namespace DotNetNuke.Modules.Admin.Authentication.DNN
 					catch (Exception ex)
 					{
 						//control not there
-						Logger.Error(ex);
+						_logger.LogError(ex);
 					}
 				}
 				try
@@ -236,7 +238,7 @@ namespace DotNetNuke.Modules.Admin.Authentication.DNN
 				{
 					//Not sure why this Try/Catch may be necessary, logic was there in old setFormFocus location stating the following
 					//control not there or error setting focus
-					Logger.Error(ex);
+					_logger.LogError(ex);
 				}
 			}
 

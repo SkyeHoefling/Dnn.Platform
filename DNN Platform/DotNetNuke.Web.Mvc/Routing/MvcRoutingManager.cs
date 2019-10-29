@@ -25,15 +25,18 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Framework.Reflections;
 using DotNetNuke.Services.Localization;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Web.Mvc.Common;
 using System.Web.Http;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace DotNetNuke.Web.Mvc.Routing
 {
     public sealed class MvcRoutingManager : IMapRoute
     {
-    	private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (MvcRoutingManager));
+    	private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<MvcRoutingManager>>();
         private readonly Dictionary<string, int> _moduleUsage = new Dictionary<string, int>();
         private readonly RouteCollection _routes;
         private readonly PortalAliasMvcRouteManager _portalAliasMvcRouteManager;
@@ -88,7 +91,7 @@ namespace DotNetNuke.Web.Mvc.Routing
                 var routeUrl = _portalAliasMvcRouteManager.GetRouteUrl(moduleFolderName, url, count);
                 route = MapRouteWithNamespace(fullRouteName, routeUrl, defaults, constraints, namespaces);
                 _routes.Add(route);
-                Logger.Trace("Mapping route: " + fullRouteName + " @ " + routeUrl);
+                Logger.LogTrace("Mapping route: " + fullRouteName + " @ " + routeUrl);
             }
 
             return route;
@@ -105,7 +108,7 @@ namespace DotNetNuke.Web.Mvc.Routing
                 //_routes.Clear(); -- don't use; it will remove original WEP API maps
                 LocateServicesAndMapRoutes();
             }
-            Logger.TraceFormat("Registered a total of {0} routes", _routes.Count);
+            Logger.LogTrace("Registered a total of {0} routes", _routes.Count);
         }
 
         private static bool IsTracingEnabled()
@@ -129,7 +132,7 @@ namespace DotNetNuke.Web.Mvc.Routing
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("{0}.RegisterRoutes threw an exception.  {1}\r\n{2}", routeMapper.GetType().FullName,
+                    Logger.LogError("{0}.RegisterRoutes threw an exception.  {1}\r\n{2}", routeMapper.GetType().FullName,
                                  e.Message, e.StackTrace);
                 }
             }
@@ -158,7 +161,7 @@ namespace DotNetNuke.Web.Mvc.Routing
                 }
                 catch (Exception e)
                 {
-                    Logger.ErrorFormat("Unable to create {0} while registering service routes.  {1}", routeMapperType.FullName,
+                    Logger.LogError("Unable to create {0} while registering service routes.  {1}", routeMapperType.FullName,
                                  e.Message);
                     routeMapper = null;
                 }

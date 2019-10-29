@@ -228,7 +228,7 @@ namespace DotNetNuke.Services.Log.EventLog
         public void AddLog(LogProperties properties, PortalSettings portalSettings, int userID, string logTypeKey, bool bypassBuffering)
         {
             //supports adding a custom string for LogType
-            var log = new LogInfo
+            var log = new LogInformation
                 {
                     LogUserID = userID,
                     LogTypeKey = logTypeKey,
@@ -255,7 +255,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
         public void AddLog(object businessObject, PortalSettings portalSettings, int userID, string userName, string logType)
         {
-            var log = new LogInfo { LogUserID = userID, LogTypeKey = logType };
+            var log = new LogInformation { LogUserID = userID, LogTypeKey = logType };
             if (portalSettings != null)
             {
                 log.LogPortalID = portalSettings.PortalId;
@@ -363,9 +363,9 @@ namespace DotNetNuke.Services.Log.EventLog
 
         #region ILogController Members
 
-        public void AddLog(LogInfo logInfo)
+        public void AddLog(LogInformation LogInformation)
         {
-            LogController.Instance.AddLog(logInfo);
+            LogController.Instance.AddLog(LogInformation);
         }
 
         public void AddLogType(string configFile, string fallbackConfigFile)
@@ -388,9 +388,9 @@ namespace DotNetNuke.Services.Log.EventLog
             LogController.Instance.ClearLog();
         }
 
-        public void DeleteLog(LogInfo logInfo)
+        public void DeleteLog(LogInformation LogInformation)
         {
-            LogController.Instance.DeleteLog(logInfo);
+            LogController.Instance.DeleteLog(LogInformation);
         }
 
         public void DeleteLogType(LogTypeInfo logType)
@@ -403,7 +403,7 @@ namespace DotNetNuke.Services.Log.EventLog
             LogController.Instance.DeleteLogTypeConfigInfo(logTypeConfig);
         }
 
-        public List<LogInfo> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
+        public List<LogInformation> GetLogs(int portalID, string logType, int pageSize, int pageIndex, ref int totalRecords)
         {
             return LogController.Instance.GetLogs(portalID, logType, pageSize, pageIndex, ref totalRecords);
         }
@@ -423,7 +423,7 @@ namespace DotNetNuke.Services.Log.EventLog
             return LogController.Instance.GetLogTypeInfoDictionary();
         }
 
-        public object GetSingleLog(LogInfo log, LoggingProvider.ReturnType returnType)
+        public object GetSingleLog(LogInformation log, LoggingProvider.ReturnType returnType)
         {
             return LogController.Instance.GetSingleLog(log, returnType);
         }
@@ -450,7 +450,7 @@ namespace DotNetNuke.Services.Log.EventLog
 
         public static void AddSettingLog(EventLogType logTypeKey, string idFieldName, int idValue, string settingName, string settingValue, int userId)
         {
-            var log = new LogInfo() { LogUserID = userId, LogTypeKey = logTypeKey.ToString() };
+            var log = new LogInformation() { LogUserID = userId, LogTypeKey = logTypeKey.ToString() };
             log.LogProperties.Add(new LogDetailInfo(idFieldName, idValue.ToString()));
             log.LogProperties.Add(new LogDetailInfo("SettingName", settingName));
             log.LogProperties.Add(new LogDetailInfo("SettingValue", settingValue));

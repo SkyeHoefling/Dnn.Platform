@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Users;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Security.Roles;
 using DotNetNuke.Services.Localization;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Prompt.Components
 {
     public class Utilities
     {
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(Utilities));
+        private static readonly ILogger Logger = Globals.DependencyProvider.GetService<ILogger<Utilities>>();
 
         public static RoleInfo CreateRole(string roleName, int portalId, RoleStatus status, string description = "", bool isPublic = false, bool autoAssign = false, int roleGroupId = -1)
         {

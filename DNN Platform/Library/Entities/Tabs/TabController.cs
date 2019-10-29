@@ -1171,7 +1171,7 @@ namespace DotNetNuke.Entities.Tabs
         public void DeleteTabSetting(int tabId, string settingName)
         {
             _dataProvider.DeleteTabSetting(tabId, settingName);
-            var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.TAB_SETTING_DELETED.ToString()};
+            var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.TAB_SETTING_DELETED.ToString()};
             log.LogProperties.Add(new LogDetailInfo("TabID", tabId.ToString()));
             log.LogProperties.Add(new LogDetailInfo("SettingName", settingName));
             LogController.Instance.AddLog(log);
@@ -1187,7 +1187,7 @@ namespace DotNetNuke.Entities.Tabs
         public void DeleteTabSettings(int tabId)
         {
             _dataProvider.DeleteTabSettings(tabId);
-            var log = new LogInfo {LogTypeKey = EventLogController.EventLogType.TAB_SETTING_DELETED.ToString()};
+            var log = new LogInformation {LogTypeKey = EventLogController.EventLogType.TAB_SETTING_DELETED.ToString()};
             log.LogProperties.Add(new LogDetailInfo("TabId", tabId.ToString()));
             LogController.Instance.AddLog(log);
             UpdateTabVersion(tabId);

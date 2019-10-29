@@ -31,21 +31,22 @@ using Dnn.PersonaBar.Library;
 using Dnn.PersonaBar.Library.Attributes;
 using DotNetNuke.Collections;
 using DotNetNuke.Common;
-using DotNetNuke.Instrumentation;
+using DotNetNuke.Logging;
 using DotNetNuke.Services.Connections;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Web.Api;
+using Microsoft.Extensions.Logging;
 
 namespace Dnn.PersonaBar.Connectors.Services
 {
     [MenuPermission(MenuName = "Dnn.Connectors")]
     public class ConnectorsController : PersonaBarApiController
     {
-        #region Properties
-
-        private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ConnectorsController));
-
-        #endregion
+        private readonly ILogger Logger;
+        public ConnectorsController(ILogger<ConnectorsController> logger)
+        {
+            Logger = logger;
+        }
 
         #region Public Methods
 
@@ -148,11 +149,11 @@ namespace Dnn.PersonaBar.Connectors.Services
             {
                 if (ex is ConnectorArgumentException)
                 {
-                    Logger.Warn(ex);
+                    Logger.LogWarning(ex);
                 }
                 else
                 {
-                    Logger.Error(ex);
+                    Logger.LogError(ex);
                 }
                 return Request.CreateResponse(HttpStatusCode.InternalServerError,
                     new {Success = false, Message = ex.Message});
@@ -209,7 +210,7 @@ namespace Dnn.PersonaBar.Connectors.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 return Request.CreateResponse(HttpStatusCode.InternalServerError,
                     new { Success = false, Message = ex.Message });
             }
@@ -238,7 +239,7 @@ namespace Dnn.PersonaBar.Connectors.Services
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger.LogError(ex);
                 localizedStrings = new Dictionary<string, string>();
             }
 
