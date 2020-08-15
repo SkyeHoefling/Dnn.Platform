@@ -7,11 +7,12 @@ using System.Web.UI;
 namespace DotNetNuke.Web.Client.ClientResourceManagement
 {
     using ClientDependency.Core.Controls;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
 
     /// <summary>
     /// Registers a CSS resource
     /// </summary>
-    public class DnnCssInclude : CssInclude
+    public class DnnCssInclude : CssInclude, IDnnInclude
     {
         public DnnCssInclude()
         {

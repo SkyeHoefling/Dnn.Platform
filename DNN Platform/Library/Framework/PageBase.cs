@@ -14,7 +14,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-
+using DotNetNuke.Abstractions;
+using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
@@ -41,7 +42,7 @@ namespace DotNetNuke.Framework
     /// PageBase provides a custom DotNetNuke base class for pages
     /// </summary>
     /// -----------------------------------------------------------------------------
-    public abstract class PageBase : Page
+    public abstract class PageBase : Page, IDnnPage
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof (PageBase));
         private readonly ILog _tracelLogger = LoggerSource.Instance.GetLogger("DNN.Trace");
@@ -216,6 +217,31 @@ namespace DotNetNuke.Framework
                 _tracelLogger.Debug($"{origin} {action} (TabId:{tabId},{message})");
         }
 
+        #endregion
+
+        #region IDnnPage Implementation
+        IDnnServer _server;
+        IDnnServer IDnnPage.Server
+        {
+            get
+            {
+                if (_server != null)
+                    return _server;
+
+                _server = new DnnServer(Server);
+                return _server;
+            }
+        }
+
+        void IDnnPage.AddInclude(string name, IDnnInclude include)
+        {
+            if (include is Control legacyInclude)
+            {
+                var loader = FindControl(name);
+                if (loader != null)
+                    loader.Controls.Add(legacyInclude);
+            }
+        }
         #endregion
 
         #region Protected Methods

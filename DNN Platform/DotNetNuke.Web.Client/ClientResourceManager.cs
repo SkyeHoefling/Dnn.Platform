@@ -2,35 +2,30 @@
 // Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the MIT License. See LICENSE file in the project root for full license information.
 // 
-using System;
-using System.Configuration;
-using System.Web;
-using System.Web.Configuration;
-using System.Web.Hosting;
-using System.Xml;
-using System.Xml.XPath;
-
-using ClientDependency.Core.CompositeFiles.Providers;
-
-using DotNetNuke;
-
-using ClientDependency.Core.Config;
-
-using DotNetNuke.Instrumentation;
-
-
 namespace DotNetNuke.Web.Client.ClientResourceManagement
 {
-    using System.IO;
-    using System.Web.UI;
-    using ClientDependency.Core;
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Xml;
 
+    using ClientDependency.Core;
+    using ClientDependency.Core.CompositeFiles.Providers;
+    using ClientDependency.Core.Config;
+
+    using DotNetNuke.Abstractions;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Instrumentation;
+
+    using FileOrder = DotNetNuke.Abstractions.Clients.FileOrder;
+    
     /// <summary>
     /// Provides the ability to request that client resources (JavaScript and CSS) be loaded on the client browser.
     /// </summary>
-    public class ClientResourceManager
+    public partial class ClientResourceManager : IClientResourceManager
     {
         private static readonly ILog Logger = LoggerSource.Instance.GetLogger(typeof(ClientResourceManager));
         internal const string DefaultCssProvider = "DnnPageHeaderProvider";
@@ -41,7 +36,7 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
 
         #region Private Methods
 
-        private static bool FileExists(Page page, string filePath)
+        private bool FileExists(IDnnPage page, string filePath)
         {
             // remove query string for the file exists check, won't impact the absoluteness, so just do it either way.
             filePath = RemoveQueryString(filePath);
@@ -73,13 +68,13 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
             }
         }
 
-        private static bool IsAbsoluteUrl(string url)
+        private bool IsAbsoluteUrl(string url)
         {
             Uri result;
             return Uri.TryCreate(url, UriKind.Absolute, out result);
         }
 
-        private static string RemoveQueryString(string filePath)
+        private string RemoveQueryString(string filePath)
         {
             var queryStringPosition = filePath.IndexOf("?", StringComparison.Ordinal);
             return queryStringPosition != -1 ? filePath.Substring(0, queryStringPosition) : filePath;
@@ -88,11 +83,8 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
         #endregion
 
         #region Public Methods
-
-        /// <summary>
-        /// Adds the neccessary configuration to website root web.config to use the Client Depenedecny componenet.
-        /// </summary>
-        public static void AddConfiguration()
+        /// <inheritdoc />
+        void IClientResourceManager.AddConfiguration()
         {
             var configPath = HostingEnvironment.MapPath("~/web.config");
             if (!String.IsNullOrEmpty(configPath))
@@ -196,7 +188,8 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
             }
         }
 
-        public static bool IsInstalled()
+        /// <inheritdoc />
+        bool IClientResourceManager.IsInstalled()
         {
             var configPath = HostingEnvironment.MapPath("~/web.config");
             var installed = false;
@@ -218,163 +211,101 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
             return installed;
         }
 
-        public static void RegisterAdminStylesheet(Page page, string filePath)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterAdminStylesheet(IDnnPage page, string filePath)
         {
-            RegisterStyleSheet(page, filePath, FileOrder.Css.AdminCss);
+            (this as IClientResourceManager).RegisterStyleSheet(page, filePath, FileOrder.Css.AdminCss);
         }
 
-        public static void RegisterDefaultStylesheet(Page page, string filePath)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterDefaultStylesheet(IDnnPage page, string filePath)
         {
-            RegisterStyleSheet(page, filePath, (int)FileOrder.Css.DefaultCss, DefaultCssProvider, "dnndefault", "7.0.0");
+            (this as IClientResourceManager).RegisterStyleSheet(page, filePath, (int)FileOrder.Css.DefaultCss, DefaultCssProvider, "dnndefault", "7.0.0");
         }
 
-        public static void RegisterFeatureStylesheet(Page page, string filePath)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterFeatureStylesheet(IDnnPage page, string filePath)
         {
-            RegisterStyleSheet(page, filePath, FileOrder.Css.FeatureCss);
+            (this as IClientResourceManager).RegisterStyleSheet(page, filePath, FileOrder.Css.FeatureCss);
         }
 
-        public static void RegisterIEStylesheet(Page page, string filePath)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterIEStylesheet(IDnnPage page, string filePath)
         {
             var browser = HttpContext.Current.Request.Browser;
             if (browser.Browser == "Internet Explorer" || browser.Browser == "IE")
             {
-                RegisterStyleSheet(page, filePath, FileOrder.Css.IeCss);
+                (this as IClientResourceManager).RegisterStyleSheet(page, filePath, FileOrder.Css.IeCss);
             }
         }
 
-        /// <summary>
-        /// Requests that a JavaScript file be registered on the client browser
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the JavaScript resource.</param>
-        public static void RegisterScript(Page page, string filePath)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterScript(IDnnPage page, string filePath)
         {
-            RegisterScript(page, filePath, FileOrder.Js.DefaultPriority);
+            (this as IClientResourceManager).RegisterScript(page, filePath, FileOrder.Js.DefaultPriority);
         }
 
-        /// <summary>
-        /// Requests that a JavaScript file be registered on the client browser
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the JavaScript resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        public static void RegisterScript(Page page, string filePath, int priority)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterScript(IDnnPage page, string filePath, int priority)
         {
-            RegisterScript(page, filePath, priority, DefaultJsProvider);
+            (this as IClientResourceManager).RegisterScript(page, filePath, priority, DefaultJsProvider);
         }
 
-        /// <summary>
-        /// Requests that a JavaScript file be registered on the client browser
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the JavaScript resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        public static void RegisterScript(Page page, string filePath, FileOrder.Js priority)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterScript(IDnnPage page, string filePath, FileOrder.Js priority)
         {
-            RegisterScript(page, filePath, (int)priority, DefaultJsProvider);
+            (this as IClientResourceManager).RegisterScript(page, filePath, (int)priority, DefaultJsProvider);
         }
 
-        /// <summary>
-        /// Requests that a JavaScript file be registered on the client browser
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the JavaScript resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        /// <param name="provider">The name of the provider responsible for rendering the script output.</param>
-        public static void RegisterScript(Page page, string filePath, FileOrder.Js priority, string provider)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterScript(IDnnPage page, string filePath, FileOrder.Js priority, string provider)
         {
-            RegisterScript(page, filePath, (int)priority, provider);
+            (this as IClientResourceManager).RegisterScript(page, filePath, (int)priority, provider);
         }
 
-        /// <summary>
-        /// Requests that a JavaScript file be registered on the client browser
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the JavaScript resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        /// <param name="provider">The name of the provider responsible for rendering the script output.</param>
-        public static void RegisterScript(Page page, string filePath, int priority, string provider)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterScript(IDnnPage page, string filePath, int priority, string provider)
         {
-            RegisterScript(page, filePath, priority, provider, "", "");
+            (this as IClientResourceManager).RegisterScript(page, filePath, priority, provider, "", "");
         }
 
-        /// <summary>
-        /// Requests that a JavaScript file be registered on the client browser
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the JavaScript resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        /// <param name="provider">The name of the provider responsible for rendering the script output.</param>
-        /// <param name="name">Name of framework like Bootstrap, Angular, etc</param>
-        /// <param name="version">Version nr of framework</param>
-        public static void RegisterScript(Page page, string filePath, int priority, string provider, string name, string version)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterScript(IDnnPage page, string filePath, int priority, string provider, string name, string version)
         {
             var include = new DnnJsInclude { ForceProvider = provider, Priority = priority, FilePath = filePath, Name = name, Version = version };
-            var loader = page.FindControl("ClientResourceIncludes");
-            if (loader != null)
-            {
-                loader.Controls.Add(include);
-            }
+            page.AddInclude("ClientResourceIncludes", include);
         }
 
-        /// <summary>
-        /// Requests that a CSS file be registered on the client browser
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the CSS resource.</param>
-        public static void RegisterStyleSheet(Page page, string filePath)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterStyleSheet(IDnnPage page, string filePath)
         {
-            RegisterStyleSheet(page, filePath, Constants.DefaultPriority, DefaultCssProvider);
+            (this as IClientResourceManager).RegisterStyleSheet(page, filePath, Constants.DefaultPriority, DefaultCssProvider);
         }
 
-        /// <summary>
-        /// Requests that a CSS file be registered on the client browser. Defaults to rendering in the page header.
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the CSS resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        public static void RegisterStyleSheet(Page page, string filePath, int priority)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterStyleSheet(IDnnPage page, string filePath, int priority)
         {
-            RegisterStyleSheet(page, filePath, priority, DefaultCssProvider);
+            (this as IClientResourceManager).RegisterStyleSheet(page, filePath, priority, DefaultCssProvider);
         }
 
-        /// <summary>
-        /// Requests that a CSS file be registered on the client browser. Defaults to rendering in the page header.
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the CSS resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        public static void RegisterStyleSheet(Page page, string filePath, FileOrder.Css priority)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterStyleSheet(IDnnPage page, string filePath, FileOrder.Css priority)
         {
-            RegisterStyleSheet(page, filePath, (int)priority, DefaultCssProvider);
+            (this as IClientResourceManager).RegisterStyleSheet(page, filePath, (int)priority, DefaultCssProvider);
         }
 
-        /// <summary>
-        /// Requests that a CSS file be registered on the client browser. Allows for overriding the default provider.
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the CSS resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        /// <param name="provider">The provider name to be used to render the css file on the page.</param>
-        public static void RegisterStyleSheet(Page page, string filePath, int priority, string provider)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterStyleSheet(IDnnPage page, string filePath, int priority, string provider)
         {
-            RegisterStyleSheet(page, filePath, priority, provider, "", "");
+            (this as IClientResourceManager).RegisterStyleSheet(page, filePath, priority, provider, "", "");
         }
 
-        /// <summary>
-        /// Requests that a CSS file be registered on the client browser. Allows for overriding the default provider.
-        /// </summary>
-        /// <param name="page">The current page. Used to get a reference to the client resource loader.</param>
-        /// <param name="filePath">The relative file path to the CSS resource.</param>
-        /// <param name="priority">The relative priority in which the file should be loaded.</param>
-        /// <param name="provider">The provider name to be used to render the css file on the page.</param>
-        /// <param name="name">Name of framework like Bootstrap, Angular, etc</param>
-        /// <param name="version">Version nr of framework</param>
-        public static void RegisterStyleSheet(Page page, string filePath, int priority, string provider, string name, string version)
+        /// <inheritdoc />
+        void IClientResourceManager.RegisterStyleSheet(IDnnPage page, string filePath, int priority, string provider, string name, string version)
         {
             var fileExists = false;
 
-            // Some "legacy URLs" could be using their own query string versioning scheme (and we've forced them to use the new API through re-routing PageBase.RegisterStyleSheet
+            // Some "legacy URLs" could be using their own query string versioning scheme (and we've forced them to use the new API through re-routing PageBase.(this as IClientResourceManager).RegisterStyleSheet
             // Ensure that physical CSS files with query strings have their query strings removed
             if (filePath.Contains(".css?"))
             {
@@ -387,34 +318,19 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
             }
             else if (filePath.Contains("WebResource.axd"))
             {
+                // here if we add async it should work
                 fileExists = true;
             }
 
             if (fileExists || FileExists(page, filePath))
             {
                 var include = new DnnCssInclude { ForceProvider = provider, Priority = priority, FilePath = filePath, Name = name, Version = version };
-                var loader = page.FindControl("ClientResourceIncludes");
-
-                if (loader != null)
-                {
-                    loader.Controls.Add(include);
-                }
+                page.AddInclude("ClientResourceIncludes", include);
             }
         }
 
-        /// <summary>
-        /// This is a utility method that can be called to update the version of the composite files.
-        /// </summary>
-        [Obsolete("This method is not required anymore. The CRM vesion is now managed in host settings and site settings.. Scheduled removal in v11.0.0.")]
-        public static void UpdateVersion()
-        {
-            
-        }
-
-        /// <summary>
-        /// Clear the default compisite files so that it can be generated next time.
-        /// </summary>
-        public static void ClearCache()
+        /// <inheritdoc />
+        void IClientResourceManager.ClearCache()
         {
             var provider = ClientDependencySettings.Instance.DefaultCompositeFileProcessingProvider;
             if (provider is CompositeFileProcessingProvider)
@@ -439,7 +355,8 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
             }
         }
 
-        public static void ClearFileExistsCache(string path)
+        /// <inheritdoc />
+        void IClientResourceManager.ClearFileExistsCache(string path)
         {
             _lockFileExistsCache.EnterWriteLock();
             try
@@ -459,14 +376,14 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
             }
         }
 
-        public static void EnableAsyncPostBackHandler()
+        /// <inheritdoc />
+        void IClientResourceManager.EnableAsyncPostBackHandler()
         {
             if (HttpContext.Current != null && !HttpContext.Current.Items.Contains("AsyncPostBackHandlerEnabled"))
             {
                 HttpContext.Current.Items.Add("AsyncPostBackHandlerEnabled", true);
             }
         }
-
         #endregion
 
     }

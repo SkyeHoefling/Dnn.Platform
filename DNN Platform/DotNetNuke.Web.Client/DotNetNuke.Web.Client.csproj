@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DotNetNuke.Instrumentation\bin\DotNetNuke.Instrumentation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -72,17 +75,29 @@
     <Compile Include="Controls\DnnJsInclude.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="ClientResourceSettings.cs" />
+    <Compile Include="Obsolete\ClientResourceManager.cs" />
     <Compile Include="Providers\DnnCompositeFileProcessingProvider.cs" />
     <Compile Include="Providers\DnnFileRegistrationProvider.cs" />
     <Compile Include="Providers\DnnPageHeaderProvider.cs" />
     <Compile Include="Providers\DnnFormBottomRenderProvider.cs" />
     <Compile Include="Providers\DnnBodyRenderProvider.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetNuke.Abstractions\DotNetNuke.Abstractions.csproj">
+      <Project>{6928a9b1-f88a-4581-a132-d3eb38669bb0}</Project>
+      <Name>DotNetNuke.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetNuke.DependencyInjection\DotNetNuke.DependencyInjection.csproj">
+      <Project>{0fca217a-5f9a-4f5b-a31b-86d64ae65198}</Project>
+      <Name>DotNetNuke.DependencyInjection</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

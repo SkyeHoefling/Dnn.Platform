@@ -7,11 +7,12 @@ using System.Web.UI;
 namespace DotNetNuke.Web.Client.ClientResourceManagement
 {
     using ClientDependency.Core.Controls;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
 
     /// <summary>
     /// Registers a JavaScript resource
     /// </summary>
-    public class DnnJsInclude : JsInclude
+    public class DnnJsInclude : JsInclude, IDnnInclude
     {
         /// <summary>
         /// Sets up default settings for the control
