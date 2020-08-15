@@ -12,12 +12,14 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
     /// <summary>
     /// Registers a CSS resource
     /// </summary>
-    public class DnnCssInclude : CssInclude, IDnnInclude
+    public class DnnCssInclude : CssInclude, IDnnInclude, IClientDependencyFile
     {
         public DnnCssInclude()
         {
             ForceProvider = ClientResourceManager.DefaultCssProvider;
         }
+
+        ClientDependencyType IClientDependencyFile.DependencyType => (ClientDependencyType)DependencyType;
 
         protected override void OnLoad(System.EventArgs e)
         {

@@ -12,7 +12,7 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
     /// <summary>
     /// Registers a JavaScript resource
     /// </summary>
-    public class DnnJsInclude : JsInclude, IDnnInclude
+    public class DnnJsInclude : JsInclude, IDnnInclude, IClientDependencyFile
     {
         /// <summary>
         /// Sets up default settings for the control
@@ -21,6 +21,8 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
         {
             ForceProvider = ClientResourceManager.DefaultJsProvider;
         }
+
+        ClientDependencyType IClientDependencyFile.DependencyType => (ClientDependencyType)DependencyType;
 
         protected override void OnLoad(System.EventArgs e)
         {

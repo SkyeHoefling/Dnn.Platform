@@ -60,6 +60,7 @@
     <Compile Include="..\..\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="ClientDependencySettings.cs" />
     <Compile Include="Controls\ClientResourceExclude.cs" />
     <Compile Include="Controls\DnnJsExclude.cs" />
     <Compile Include="Controls\DnnCssExclude.cs" />

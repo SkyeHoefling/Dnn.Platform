@@ -13,7 +13,12 @@ namespace DotNetNuke.Web.Client.Providers
     using ClientDependency.Core.Config;
     using System.Web;
     using ClientDependency.Core.FileRegistration.Providers;
+
     using DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+
+    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.ClientResourceManagement.IClientDependencyFile;
+    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientResourceManagement.ClientDependencyType;
 
     /// <summary>
     /// Registers resources at the top of the body on default.aspx
@@ -31,6 +36,11 @@ namespace DotNetNuke.Web.Client.Providers
         public const string CssPlaceHolderName = "ClientDependencyHeadCss";
         public const string JsPlaceHolderName = "ClientDependencyHeadJs";
 
+        readonly IClientDependencySettings _clientDependencySettings;
+        public DnnPageHeaderProvider(IClientDependencySettings clientDependencySettings)
+        {
+            _clientDependencySettings = clientDependencySettings;
+        }
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         {
@@ -41,23 +51,24 @@ namespace DotNetNuke.Web.Client.Providers
             base.Initialize(name, config);
         }
 
-        protected override string RenderJsDependencies(IEnumerable<IClientDependencyFile> jsDependencies, HttpContextBase http, IDictionary<string, string> htmlAttributes)
+        protected override string RenderJsDependencies(IEnumerable<ClientDependency.Core.IClientDependencyFile> jsDependencies, HttpContextBase http, IDictionary<string, string> htmlAttributes)
         {
-            if (!jsDependencies.Any())
+            var dnnJsDependencies = jsDependencies?.Where(dependency => dependency is IDnnClientDependencyFile).Cast<IDnnClientDependencyFile>();
+            if (dnnJsDependencies == null || !dnnJsDependencies.Any())
                 return string.Empty;
 
             var sb = new StringBuilder();
 
             if (http.IsDebuggingEnabled || !EnableCompositeFiles)
             {
-                foreach (var dependency in jsDependencies)
+                foreach (var dependency in dnnJsDependencies)
                 {
                     sb.Append(RenderSingleJsFile(dependency.FilePath, htmlAttributes));
                 }
             }
             else
             {
-                var comp = ClientDependencySettings.Instance.DefaultCompositeFileProcessingProvider.ProcessCompositeList(jsDependencies, ClientDependencyType.Javascript, http);
+                var comp = _clientDependencySettings.DefaultCompositeFileProcessingProvider.ProcessCompositeList(dnnJsDependencies, DnnClientDependencyType.Javascript, http);
                 foreach (var s in comp)
                 {
                     sb.Append(RenderSingleJsFile(s, htmlAttributes));
@@ -72,23 +83,24 @@ namespace DotNetNuke.Web.Client.Providers
             return string.Format(HtmlEmbedContants.ScriptEmbedWithSource, js, htmlAttributes.ToHtmlAttributes());
         }
 
-        protected override string RenderCssDependencies(IEnumerable<IClientDependencyFile> cssDependencies, HttpContextBase http, IDictionary<string, string> htmlAttributes)
+        protected override string RenderCssDependencies(IEnumerable<ClientDependency.Core.IClientDependencyFile> cssDependencies, HttpContextBase http, IDictionary<string, string> htmlAttributes)
         {
-            if (!cssDependencies.Any())
+            var dnnCssDependencies = cssDependencies?.Where(dependency => dependency is IDnnClientDependencyFile).Cast<IDnnClientDependencyFile>();
+            if (dnnCssDependencies == null || !dnnCssDependencies.Any())
                 return string.Empty;
 
             var sb = new StringBuilder();
 
             if (http.IsDebuggingEnabled || !EnableCompositeFiles)
             {
-                foreach (var dependency in cssDependencies)
+                foreach (var dependency in dnnCssDependencies)
                 {
                     sb.Append(RenderSingleCssFile(dependency.FilePath, htmlAttributes));
                 }
             }
             else
             {
-                var comp = ClientDependencySettings.Instance.DefaultCompositeFileProcessingProvider.ProcessCompositeList(cssDependencies, ClientDependencyType.Css, http);
+                var comp = _clientDependencySettings.DefaultCompositeFileProcessingProvider.ProcessCompositeList(dnnCssDependencies, DnnClientDependencyType.Css, http);
                 foreach (var s in comp)
                 {
                     sb.Append(RenderSingleCssFile(s, htmlAttributes));

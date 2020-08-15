@@ -5,11 +5,13 @@
 namespace DotNetNuke.Web.Client.ClientResourceManagement
 {
     using ClientDependency.Core.Controls;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
 
     /// <summary>
     /// Represents an included client resource
     /// </summary>
-    public class ClientResourceInclude : ClientDependencyInclude
+    public class ClientResourceInclude : ClientDependencyInclude, IDnnInclude, IClientDependencyFile
     {
+        ClientDependencyType IClientDependencyFile.DependencyType => (ClientDependencyType)DependencyType;
     }
 }

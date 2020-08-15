@@ -14,7 +14,6 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
 
     using ClientDependency.Core;
     using ClientDependency.Core.CompositeFiles.Providers;
-    using ClientDependency.Core.Config;
 
     using DotNetNuke.Abstractions;
     using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
@@ -33,6 +32,17 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
 
         static Dictionary<string, bool> _fileExistsCache = new Dictionary<string, bool>();
         static ReaderWriterLockSlim _lockFileExistsCache = new ReaderWriterLockSlim();
+
+        readonly IClientDependencySettings _clientDependencySettings;
+        public ClientResourceManager()
+        {
+            _clientDependencySettings = new ClientDependencySettings();
+        }
+
+        public ClientResourceManager(IClientDependencySettings clientDependencySettings)
+        {
+            _clientDependencySettings = clientDependencySettings;
+        }
 
         #region Private Methods
 
@@ -332,7 +342,7 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
         /// <inheritdoc />
         void IClientResourceManager.ClearCache()
         {
-            var provider = ClientDependencySettings.Instance.DefaultCompositeFileProcessingProvider;
+            var provider = _clientDependencySettings.DefaultCompositeFileProcessingProvider;
             if (provider is CompositeFileProcessingProvider)
             {
                 try

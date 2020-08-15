@@ -2,6 +2,7 @@
 using DotNetNuke.DependencyInjection;
 using DotNetNuke.Web.Client.ClientResourceManagement;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace DotNetNuke.Web.Client
 {
