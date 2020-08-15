@@ -19,6 +19,7 @@ namespace DotNetNuke.Web.Client.Providers
 
     using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.ClientResourceManagement.IClientDependencyFile;
     using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientResourceManagement.ClientDependencyType;
+    using DnnClientDependencySettings = DotNetNuke.Web.Client.ClientDependencySettings;
 
     /// <summary>
     /// Registers resources at the top of the body on default.aspx
@@ -37,6 +38,11 @@ namespace DotNetNuke.Web.Client.Providers
         public const string JsPlaceHolderName = "ClientDependencyHeadJs";
 
         readonly IClientDependencySettings _clientDependencySettings;
+        public DnnPageHeaderProvider()
+        {
+            _clientDependencySettings = new DnnClientDependencySettings();
+        }
+
         public DnnPageHeaderProvider(IClientDependencySettings clientDependencySettings)
         {
             _clientDependencySettings = clientDependencySettings;
