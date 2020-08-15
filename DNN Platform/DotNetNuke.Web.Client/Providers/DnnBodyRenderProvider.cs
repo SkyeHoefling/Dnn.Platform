@@ -15,11 +15,12 @@ namespace DotNetNuke.Web.Client.Providers
     using ClientDependency.Core.Config;
     using System.Web;
     using ClientDependency.Core.FileRegistration.Providers;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers;
 
     /// <summary>
     /// Registers resources at the top of the body on default.aspx
     /// </summary>
-    public class DnnBodyProvider : DnnFileRegistrationProvider
+    public class DnnBodyProvider : DnnFileRegistrationProvider, IDnnFileRegistrationProvider
     {
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace DotNetNuke.Web.Client.Providers
         /// The name of the placeholder in which the controls will be rendered
         /// </summary>
         public const string DnnBodyPlaceHolderName = "BodySCRIPTS";
+
 
         /// <summary>
         /// Initializes the provider.
@@ -156,5 +158,19 @@ namespace DotNetNuke.Web.Client.Providers
                 scriptManager.RegisterDataItem(holderControl, string.Format("{0}{1}", jsScriptBlock.Text, cssStyleBlock.Text));
             }
         }
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.DefaultName => DefaultName;
+
+        /// <inheritdoc />
+        bool IDnnFileRegistrationProvider.EnableCompositeFiles => EnableCompositeFiles;
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.RenderSingleJsFile(string js, IDictionary<string, string> htmlAttributes) =>
+            RenderSingleJsFile(js, htmlAttributes);
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.RenderSingleCssFile(string css, IDictionary<string, string> htmlAttributes) =>
+            RenderSingleCssFile(css, htmlAttributes);
     }
 }

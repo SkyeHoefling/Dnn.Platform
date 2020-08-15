@@ -13,13 +13,13 @@ namespace DotNetNuke.Web.Client.Providers
     using ClientDependency.Core.Config;
     using System.Web;
     using ClientDependency.Core.FileRegistration.Providers;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers;
 
     /// <summary>
     /// Registers resources at the top of the body on default.aspx
     /// </summary>
-    public class DnnFormBottomProvider : DnnFileRegistrationProvider
+    public class DnnFormBottomProvider : DnnFileRegistrationProvider, IDnnFileRegistrationProvider
     {
-
         /// <summary>
         /// The default name of the provider
         /// </summary>
@@ -29,7 +29,6 @@ namespace DotNetNuke.Web.Client.Providers
         /// The name of the placeholder in which the controls will be rendered
         /// </summary>
         public const string DnnFormBottomPlaceHolderName = "ClientResourcesFormBottom";
-
 
         public override void Initialize(string name, System.Collections.Specialized.NameValueCollection config)
         {
@@ -129,5 +128,19 @@ namespace DotNetNuke.Web.Client.Providers
             page.FindControl(DnnFormBottomPlaceHolderName).Controls.Add(jsScriptBlock);
             page.FindControl(DnnFormBottomPlaceHolderName).Controls.Add(cssStyleBlock);
         }
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.DefaultName => DefaultName;
+
+        /// <inheritdoc />
+        bool IDnnFileRegistrationProvider.EnableCompositeFiles => EnableCompositeFiles;
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.RenderSingleJsFile(string js, IDictionary<string, string> htmlAttributes) =>
+            RenderSingleJsFile(js, htmlAttributes);
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.RenderSingleCssFile(string css, IDictionary<string, string> htmlAttributes) =>
+            RenderSingleCssFile(css, htmlAttributes);
     }
 }

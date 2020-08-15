@@ -13,13 +13,13 @@ namespace DotNetNuke.Web.Client.Providers
     using ClientDependency.Core.Config;
     using System.Web;
     using ClientDependency.Core.FileRegistration.Providers;
+    using DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers;
 
     /// <summary>
     /// Registers resources at the top of the body on default.aspx
     /// </summary>
-    public class DnnPageHeaderProvider : DnnFileRegistrationProvider
+    public class DnnPageHeaderProvider : DnnFileRegistrationProvider, IDnnFileRegistrationProvider
     {
-
         /// <summary>
         /// The default name of the provider
         /// </summary>
@@ -138,5 +138,19 @@ namespace DotNetNuke.Web.Client.Providers
                 scriptManager.RegisterDataItem(jsHolder, string.Format("{0}{1}", jsScriptBlock.Text, cssStyleBlock.Text));
             }
         }
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.DefaultName => DefaultName;
+
+        /// <inheritdoc />
+        bool IDnnFileRegistrationProvider.EnableCompositeFiles => EnableCompositeFiles;
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.RenderSingleCssFile(string css, IDictionary<string, string> htmlAttributes) =>
+            RenderSingleCssFile(css, htmlAttributes);
+
+        /// <inheritdoc />
+        string IDnnFileRegistrationProvider.RenderSingleJsFile(string js, IDictionary<string, string> htmlAttributes) =>
+            RenderSingleJsFile(js, htmlAttributes);
     }
 }
