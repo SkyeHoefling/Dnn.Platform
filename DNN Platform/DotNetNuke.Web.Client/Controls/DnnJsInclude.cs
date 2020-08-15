@@ -7,7 +7,7 @@ using System.Web.UI;
 namespace DotNetNuke.Web.Client.ClientResourceManagement
 {
     using ClientDependency.Core.Controls;
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients;
 
     /// <summary>
     /// Registers a JavaScript resource

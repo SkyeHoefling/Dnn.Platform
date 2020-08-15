@@ -17,11 +17,11 @@ namespace DotNetNuke.Web.Client.Providers
     using ClientDependency.Core;
     using ClientDependency.Core.FileRegistration.Providers;
     
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers;
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients.Providers;
+    using DotNetNuke.Abstractions.Clients;
 
-    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.ClientResourceManagement.IClientDependencyFile;
-    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientResourceManagement.ClientDependencyType;
+    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.IClientDependencyFile;
+    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientDependencyType;
 
     /// <summary>
     /// Registers resources at the top of the body on default.aspx

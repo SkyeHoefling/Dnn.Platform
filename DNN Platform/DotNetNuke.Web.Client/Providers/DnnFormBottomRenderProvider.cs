@@ -10,15 +10,14 @@ namespace DotNetNuke.Web.Client.Providers
     using System.Web.UI;
     using System.Linq;
     using ClientDependency.Core;
-    using ClientDependency.Core.Config;
     using System.Web;
     using ClientDependency.Core.FileRegistration.Providers;
 
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers;
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients.Providers;
+    using DotNetNuke.Abstractions.Clients;
     
-    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.ClientResourceManagement.IClientDependencyFile;
-    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientResourceManagement.ClientDependencyType;
+    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.IClientDependencyFile;
+    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientDependencyType;
     using DnnClientDependencySettings = DotNetNuke.Web.Client.ClientDependencySettings;
 
 

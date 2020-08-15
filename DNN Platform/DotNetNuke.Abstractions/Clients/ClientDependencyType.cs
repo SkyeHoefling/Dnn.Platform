@@ -1,4 +1,4 @@
-﻿namespace DotNetNuke.Abstractions.Clients.ClientResourceManagement
+﻿namespace DotNetNuke.Abstractions.Clients
 {
     public enum ClientDependencyType
     {

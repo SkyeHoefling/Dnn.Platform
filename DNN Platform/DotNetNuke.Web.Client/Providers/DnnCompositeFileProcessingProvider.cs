@@ -12,9 +12,9 @@ namespace DotNetNuke.Web.Client.Providers
     using ClientDependency.Core.CompositeFiles.Providers;
     using System.Collections.Generic;
     
-    using IDnnCompositeFileProcessingProvider = DotNetNuke.Abstractions.Clients.ClientResourceManagement.ICompositeFileProcessingProvider;
-    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.ClientResourceManagement.IClientDependencyFile;
-    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientResourceManagement.ClientDependencyType;
+    using IDnnCompositeFileProcessingProvider = DotNetNuke.Abstractions.Clients.Providers.ICompositeFileProcessingProvider;
+    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.IClientDependencyFile;
+    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientDependencyType;
     using System.Linq;
     using System.Web;
 

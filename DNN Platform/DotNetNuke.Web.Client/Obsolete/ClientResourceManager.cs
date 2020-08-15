@@ -4,9 +4,10 @@
     using System.Web.UI;
 
     using DotNetNuke.Abstractions;
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients;
 
     using NewFileOrder = DotNetNuke.Abstractions.Clients.FileOrder;
+    using FileOrder = DotNetNuke.Web.Client.FileOrder;
 
     public partial class ClientResourceManager : IClientResourceManager
     {

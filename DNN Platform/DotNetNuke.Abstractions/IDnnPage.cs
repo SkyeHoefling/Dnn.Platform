@@ -1,7 +1,7 @@
-﻿using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
-
-namespace DotNetNuke.Abstractions
+﻿namespace DotNetNuke.Abstractions
 {
+    using DotNetNuke.Abstractions.Clients;
+
     public interface IDnnPage
     {
         IDnnServer Server { get; }

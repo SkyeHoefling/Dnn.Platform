@@ -5,7 +5,7 @@
 namespace DotNetNuke.Web.Client.ClientResourceManagement
 {
     using ClientDependency.Core.Controls;
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients;
 
     /// <summary>
     /// Represents an included client resource

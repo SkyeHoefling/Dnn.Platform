@@ -1,6 +1,7 @@
 ﻿namespace DotNetNuke.Web.Client
 {
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients;
+    using DotNetNuke.Abstractions.Clients.Providers;
     using DotNetNuke.Instrumentation;
 
     public class ClientDependencySettings : IClientDependencySettings

@@ -1,6 +1,5 @@
-﻿namespace DotNetNuke.Abstractions.Clients.ClientResourceManagement
+﻿namespace DotNetNuke.Abstractions.Clients.Providers
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     

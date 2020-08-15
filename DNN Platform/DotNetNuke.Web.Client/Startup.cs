@@ -1,6 +1,6 @@
 ﻿namespace DotNetNuke.Web.Client
 {
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients;
     using DotNetNuke.DependencyInjection;
     using DotNetNuke.Web.Client.ClientResourceManagement;
     using Microsoft.Extensions.DependencyInjection;

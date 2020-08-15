@@ -6,19 +6,19 @@ namespace DotNetNuke.Web.Client.Providers
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Web.UI;
     using System.Linq;
-    using ClientDependency.Core;
-    using ClientDependency.Core.Config;
     using System.Web;
+    using System.Web.UI;
+    using System.Text;
+    
+    using ClientDependency.Core;
     using ClientDependency.Core.FileRegistration.Providers;
 
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers;
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients.Providers;
+    using DotNetNuke.Abstractions.Clients;
 
-    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.ClientResourceManagement.IClientDependencyFile;
-    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientResourceManagement.ClientDependencyType;
+    using IDnnClientDependencyFile = DotNetNuke.Abstractions.Clients.IClientDependencyFile;
+    using DnnClientDependencyType = DotNetNuke.Abstractions.Clients.ClientDependencyType;
     using DnnClientDependencySettings = DotNetNuke.Web.Client.ClientDependencySettings;
 
     /// <summary>

@@ -15,7 +15,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using DotNetNuke.Abstractions;
-using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+using DotNetNuke.Abstractions.Clients;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Host;
@@ -241,6 +241,8 @@ namespace DotNetNuke.Framework
                 if (loader != null)
                     loader.Controls.Add(legacyInclude);
             }
+            else
+                Logger.Error($"Ignoring include: '{include}' -> Unable to add '{typeof(IDnnInclude).FullName}' to page as it is not an instance of '{typeof(Control).FullName}'!");
         }
         #endregion
 

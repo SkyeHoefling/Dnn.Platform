@@ -1,4 +1,4 @@
-﻿namespace DotNetNuke.Abstractions.Clients.ClientResourceManagement.Providers
+﻿namespace DotNetNuke.Abstractions.Clients.Providers
 {
     using System.Collections.Generic;
     

@@ -16,10 +16,10 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
     using ClientDependency.Core.CompositeFiles.Providers;
 
     using DotNetNuke.Abstractions;
-    using DotNetNuke.Abstractions.Clients.ClientResourceManagement;
+    using DotNetNuke.Abstractions.Clients;
     using DotNetNuke.Instrumentation;
 
-    using FileOrder = DotNetNuke.Abstractions.Clients.FileOrder;
+    using DnnClientDependencySettings = DotNetNuke.Web.Client.ClientDependencySettings;
     
     /// <summary>
     /// Provides the ability to request that client resources (JavaScript and CSS) be loaded on the client browser.
@@ -36,7 +36,7 @@ namespace DotNetNuke.Web.Client.ClientResourceManagement
         readonly IClientDependencySettings _clientDependencySettings;
         public ClientResourceManager()
         {
-            _clientDependencySettings = new ClientDependencySettings();
+            _clientDependencySettings = new DnnClientDependencySettings();
         }
 
         public ClientResourceManager(IClientDependencySettings clientDependencySettings)

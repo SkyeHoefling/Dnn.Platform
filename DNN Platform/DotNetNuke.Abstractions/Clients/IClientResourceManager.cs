@@ -1,4 +1,4 @@
-﻿namespace DotNetNuke.Abstractions.Clients.ClientResourceManagement
+﻿namespace DotNetNuke.Abstractions.Clients
 {
     /// <summary>
     /// Provides the ability to request that client resources (JavaScript and CSS) be loaded on the client browser.
